@@ -1,7 +1,5 @@
-import 'package:Perso/app/home_details_screen.dart';
-import 'package:Perso/app/home_screen.dart';
-import 'package:Perso/app/training_detils_screen.dart';
-import 'package:Perso/app/trainings_screen.dart';
+import 'package:Perso/app/home/home_screen.dart';
+import 'package:Perso/app/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -25,24 +23,24 @@ final goRouter = GoRouter(
           pageBuilder: (context, state) => const NoTransitionPage(
             child: HomeScreen(),
           ),
-          routes: [
-            GoRoute(
-              path: 'home_details',
-              builder: (context, state) => const HomeDetailsScreen(),
-            ),
-          ],
+          // routes: [
+          //   GoRoute(
+          //     path: 'home_details',
+          //     builder: (context, state) => const HomeDetailsScreen(),
+          //   ),
+          // ],
         ),
         GoRoute(
           path: '/trainings',
           pageBuilder: (context, state) => const NoTransitionPage(
             child: TrainingScreen(),
           ),
-          routes: [
-            GoRoute(
-              path: 'training_details',
-              builder: (context, state) => const TrainingDetailsScreen(),
-            ),
-          ],
+          // routes: [
+          //   GoRoute(
+          //     path: 'training_details',
+          //     builder: (context, state) => const TrainingDetailsScreen(),
+          //   ),
+          // ],
         ),
       ]
     )
