@@ -36,17 +36,27 @@ class HomeScreen extends StatelessWidget {
                 .map((category) =>
                     CategoryWidget(picture: category.icon, text: category.text))
                 .toList()),
-        Container(
-          height: 320,
-          width: 300,
+        SizedBox(
+          height: 300,
           child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 2,
+              itemCount: 3,
+              padEnds: false,
+              controller: PageController(viewportFraction: 0.8),
               pageSnapping: true,
               itemBuilder: (context, pagePosition) {
                 return Container(
-                    margin: EdgeInsets.all(10),
-                    child: Image.network(images[pagePosition]));
+                    width: 320,
+                    margin: getPageViewCardMargin(pagePosition),
+                    child: Card(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Image(image: AssetImage('assets/dummy_category_2.png')),
+                          Text("YOGA TRAINERS"),
+                        ],
+                      ),
+                    ));
               }),
         )
       ])),
@@ -54,9 +64,21 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+//     Image(
+//                           image: AssetImage('assets/dummy_category_1.png')),
+
+EdgeInsets getPageViewCardMargin(int position) {
+  if (position == images.length - 1) {
+    return const EdgeInsets.only(left: 8.0, right: 8.0);
+  } else {
+    return const EdgeInsets.only(left: 8.0);
+  }
+}
+
 List<String> images = [
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTIZccfNPnqalhrWev-Xo7uBhkor57_rKbkw&usqp=CAU",
-  "https://wallpaperaccess.com/full/2637581.jpg"
+  "assets/dummy_category_image.png",
+  "assets/dummy_category_image.png",
+  "assets/dummy_category_image.png"
 ];
 
 class MySearchDelegate extends SearchDelegate {
