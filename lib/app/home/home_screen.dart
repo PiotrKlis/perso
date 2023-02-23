@@ -1,5 +1,7 @@
+import 'package:Perso/app/home/widget/perso_account_icon.dart';
 import 'package:Perso/app/model/training_category/category_widget.dart';
 import 'package:Perso/app/model/training_category/training_category.dart';
+import 'package:Perso/app/util/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -8,59 +10,56 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: Colors.white,
+        appBar: AppBar(
+          elevation: Dimens.noElevation,
+          backgroundColor: Colors.white,
+          leading: const PersoAccountIcon()
+        ),
+        body: SingleChildScrollView(
           child: Column(children: [
-        Row(
-          children: const [
-            Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 32.0),
-              child: Icon(
-                Icons.account_circle_rounded,
-                size: 40.0,
-              ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              PlatformText("Explore"),
+              PlatformElevatedButton(child: const Text("For trainers")),
+            ]),
+            PlatformTextField(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [Text("Categories"), Text("See All")],
             ),
-          ],
-        ),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          PlatformText("Explore"),
-          PlatformElevatedButton(child: const Text("For trainers")),
-        ]),
-        PlatformTextField(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [Text("Categories"), Text("See All")],
-        ),
-        Column(
-            children: categoriesShortList
-                .map((category) =>
-                    CategoryWidget(picture: category.icon, text: category.text))
-                .toList()),
-        SizedBox(
-          height: 300,
-          child: PageView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 3,
-              padEnds: false,
-              controller: PageController(viewportFraction: 0.8),
-              pageSnapping: true,
-              itemBuilder: (context, pagePosition) {
-                return Container(
-                    width: 320,
-                    margin: getPageViewCardMargin(pagePosition),
-                    child: Card(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Image(image: AssetImage('assets/dummy_category_2.png')),
-                          Text("YOGA TRAINERS"),
-                        ],
-                      ),
-                    ));
-              }),
-        )
-      ])),
-    );
+            Column(
+                children: categoriesShortList
+                    .map((category) => CategoryWidget(
+                        picture: category.icon, text: category.text))
+                    .toList()),
+            SizedBox(
+              height: 300,
+              child: PageView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  padEnds: false,
+                  controller: PageController(viewportFraction: 0.8),
+                  pageSnapping: true,
+                  itemBuilder: (context, pagePosition) {
+                    return Container(
+                        width: 320,
+                        margin: getPageViewCardMargin(pagePosition),
+                        child: Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Image(
+                                  image: AssetImage(
+                                      'assets/dummy_category_2.png')),
+                              Text("YOGA TRAINERS"),
+                            ],
+                          ),
+                        ));
+                  }),
+            )
+          ]),
+        ));
   }
 }
 
