@@ -1,84 +1,93 @@
-import 'package:Perso/app/home/widget/perso_account_icon.dart';
-import 'package:Perso/app/model/training_category/category_widget.dart';
-import 'package:Perso/app/model/training_category/training_category.dart';
+import 'package:Perso/app/home/widgets/perso_account_icon.dart';
+import 'package:Perso/app/utils/constants.dart';
 import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/app/widgets/perso_big_header.dart';
+import 'package:Perso/app/widgets/perso_button.dart';
+import 'package:Perso/app/widgets/perso_clickable_text.dart';
+import 'package:Perso/app/widgets/perso_header.dart';
+import 'package:Perso/app/widgets/perso_search.dart';
+import 'package:Perso/app/widgets/perso_training_category_list.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            elevation: Dimens.noElevation,
-            backgroundColor: Colors.white,
-            leading: const PersoAccountIcon()),
-        body: SingleChildScrollView(
-          child: Column(children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Container(
-                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
-                  child: Text("Explore", style: ThemeText.largerTitleBold)),
-              Container(
-                  margin: const EdgeInsets.only(right: Dimens.normalMargin),
-                  width: 128,
-                  height: 50,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(48.0))),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(shape: const StadiumBorder(), backgroundColor: Colors.black),
-                      onPressed: () {},
-                      child: Text(
-                        "For trainers",
-                        style: ThemeText.bodyBoldWhiteText,
-                      ))),
-            ]),
-            PlatformTextField(),
-            Row(
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(children: [
+          const PersoAccountIcon(),
+          Container(
+            margin: const EdgeInsets.only(
+                top: Dimens.normalMargin,
+                left: Dimens.normalMargin,
+                right: Dimens.normalMargin),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PersoBigHeader(
+                    title: AppLocalizations.of(context)!.home_main_header,
+                  ),
+                  PersoButton(
+                      title:
+                          AppLocalizations.of(context)!.trainers_section_button,
+                      width: Dimens.smallButtonWidth)
+                ]),
+          ),
+          Container(
+              margin: const EdgeInsets.only(
+                  left: Dimens.normalMargin,
+                  top: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
+              child: const PersoSearch()),
+          Container(
+            margin: const EdgeInsets.only(
+                top: Dimens.bigMargin,
+                left: Dimens.normalMargin,
+                right: Dimens.normalMargin),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [Text("Categories"), Text("See All")],
+              children: [
+                PersoHeader(
+                    title: AppLocalizations.of(context).category_header),
+                PersoClickableText(
+                    title: AppLocalizations.of(context).see_all_categories)
+              ],
             ),
-            Column(
-                children: categoriesShortList
-                    .map((category) => CategoryWidget(
-                        picture: category.icon, text: category.text))
-                    .toList()),
-            SizedBox(
-              height: 300,
-              child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 3,
-                  padEnds: false,
-                  controller: PageController(viewportFraction: 0.8),
-                  pageSnapping: true,
-                  itemBuilder: (context, pagePosition) {
-                    return Container(
-                        width: 320,
-                        margin: getPageViewCardMargin(pagePosition),
-                        child: Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Image(
-                                  image: AssetImage(
-                                      'assets/dummy_category_2.png')),
-                              Text("YOGA TRAINERS"),
-                            ],
-                          ),
-                        ));
-                  }),
-            )
-          ]),
-        ));
+          ),
+          Container(
+              margin: const EdgeInsets.only(left: Dimens.normalMargin),
+              child: const PersoTrainingCategoryList(rowNumber: Constants.trainingCategoryShortListNumber)),
+          SizedBox(
+            height: 300,
+            child: PageView.builder(
+                itemCount: 3,
+                padEnds: false,
+                controller: PageController(viewportFraction: 0.8),
+                itemBuilder: (context, pagePosition) {
+                  return Container(
+                      width: 320,
+                      margin: getPageViewCardMargin(pagePosition),
+                      child: Card(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Image(
+                                image:
+                                    AssetImage('assets/dummy_category_2.png')),
+                            Text("YOGA TRAINERS"),
+                          ],
+                        ),
+                      ));
+                }),
+          ),
+        ]),
+      ),
+    );
   }
 }
-
-//     Image(
-//                           image: AssetImage('assets/dummy_category_1.png')),
 
 EdgeInsets getPageViewCardMargin(int position) {
   if (position == images.length - 1) {

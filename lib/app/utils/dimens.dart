@@ -6,4 +6,13 @@ class Dimens {
 
   static const double accountIconSize = 40.0;
   static const double noElevation = 0.0;
+
+  static const double buttonBorderRadius = 48.0;
+  static const double buttonHeight = 50.0;
+  static const double smallButtonWidth = 128.0;
+
+  static const double searchHeight = 42.0;
+  static const double searchRadius = 12.0;
+
+  static const double trainingCategoryRowHeight = 60.0;
 }

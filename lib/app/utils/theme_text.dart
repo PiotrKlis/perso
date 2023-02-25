@@ -1,3 +1,4 @@
+import 'package:Perso/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class ThemeText {
@@ -6,7 +7,7 @@ class ThemeText {
   static TextStyle largerTitleBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
-      fontSize: 41.0,
+      fontSize: 34.0,
       height: 1.21,
       letterSpacing: -1.0,
       fontWeight: FontWeight.w700);
@@ -67,9 +68,17 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle calloutBold = TextStyle(
+  static TextStyle calloutBoldBlackText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
+      fontSize: 16.0,
+      height: 1.31,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w600);
+
+  static TextStyle calloutBoldWhiteText = TextStyle(
+      fontFamily: fontFamilyName,
+      color: Colors.white,
       fontSize: 16.0,
       height: 1.31,
       letterSpacing: -0.4,
@@ -129,19 +138,19 @@ class ThemeText {
       letterSpacing: -0.7,
       fontWeight: FontWeight.w400);
 
-  static TextStyle headingRegular = TextStyle(
-      fontFamily: fontFamilyName,
-      color: Colors.black,
-      fontSize: 17.0,
-      height: 1.35,
-      letterSpacing: -0.4,
-      fontWeight: FontWeight.w400);
-
   static TextStyle subHeadingRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 15.0,
       height: 1.33,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w400);
+
+  static TextStyle bodyRegularBlue = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.blue,
+      fontSize: 17.0,
+      height: 1.35,
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
