@@ -1,4 +1,4 @@
-import 'package:Perso/app/util/dimens.dart';
+import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
 class PersoAccountIcon extends StatelessWidget {

@@ -1,7 +1,8 @@
 import 'package:Perso/app/home/widget/perso_account_icon.dart';
 import 'package:Perso/app/model/training_category/category_widget.dart';
 import 'package:Perso/app/model/training_category/training_category.dart';
-import 'package:Perso/app/util/dimens.dart';
+import 'package:Perso/app/utils/dimens.dart';
+import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
@@ -11,17 +12,30 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          elevation: Dimens.noElevation,
-          backgroundColor: Colors.white,
-          leading: const PersoAccountIcon()
-        ),
+            elevation: Dimens.noElevation,
+            backgroundColor: Colors.white,
+            leading: const PersoAccountIcon()),
         body: SingleChildScrollView(
           child: Column(children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              PlatformText("Explore"),
-              PlatformElevatedButton(child: const Text("For trainers")),
+              Container(
+                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                  child: Text("Explore", style: ThemeText.largerTitleBold)),
+              Container(
+                  margin: const EdgeInsets.only(right: Dimens.normalMargin),
+                  width: 128,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(48.0))),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(shape: const StadiumBorder(), backgroundColor: Colors.black),
+                      onPressed: () {},
+                      child: Text(
+                        "For trainers",
+                        style: ThemeText.bodyBoldWhiteText,
+                      ))),
             ]),
             PlatformTextField(),
             Row(

@@ -26,6 +26,15 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.3.3
 flutter:
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
   assets:
     - assets/
   uses-material-design: true
