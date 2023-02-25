@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TrainingCategory {
-  TrainingIcon get trainingIcon => throw _privateConstructorUsedError;
+  PersoTrainingCategoryIcon get persoCategoryIcon =>
+      throw _privateConstructorUsedError;
   Text get text => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,9 +31,7 @@ abstract class $TrainingCategoryCopyWith<$Res> {
           TrainingCategory value, $Res Function(TrainingCategory) then) =
       _$TrainingCategoryCopyWithImpl<$Res, TrainingCategory>;
   @useResult
-  $Res call({TrainingIcon trainingIcon, Text text});
-
-  $TrainingIconCopyWith<$Res> get trainingIcon;
+  $Res call({PersoTrainingCategoryIcon persoCategoryIcon, Text text});
 }
 
 /// @nodoc
@@ -48,27 +47,19 @@ class _$TrainingCategoryCopyWithImpl<$Res, $Val extends TrainingCategory>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? trainingIcon = null,
+    Object? persoCategoryIcon = null,
     Object? text = null,
   }) {
     return _then(_value.copyWith(
-      trainingIcon: null == trainingIcon
-          ? _value.trainingIcon
-          : trainingIcon // ignore: cast_nullable_to_non_nullable
-              as TrainingIcon,
+      persoCategoryIcon: null == persoCategoryIcon
+          ? _value.persoCategoryIcon
+          : persoCategoryIcon // ignore: cast_nullable_to_non_nullable
+              as PersoTrainingCategoryIcon,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
               as Text,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TrainingIconCopyWith<$Res> get trainingIcon {
-    return $TrainingIconCopyWith<$Res>(_value.trainingIcon, (value) {
-      return _then(_value.copyWith(trainingIcon: value) as $Val);
-    });
   }
 }
 
@@ -80,10 +71,7 @@ abstract class _$$_TrainingCategoryCopyWith<$Res>
       __$$_TrainingCategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({TrainingIcon trainingIcon, Text text});
-
-  @override
-  $TrainingIconCopyWith<$Res> get trainingIcon;
+  $Res call({PersoTrainingCategoryIcon persoCategoryIcon, Text text});
 }
 
 /// @nodoc
@@ -97,14 +85,14 @@ class __$$_TrainingCategoryCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? trainingIcon = null,
+    Object? persoCategoryIcon = null,
     Object? text = null,
   }) {
     return _then(_$_TrainingCategory(
-      trainingIcon: null == trainingIcon
-          ? _value.trainingIcon
-          : trainingIcon // ignore: cast_nullable_to_non_nullable
-              as TrainingIcon,
+      persoCategoryIcon: null == persoCategoryIcon
+          ? _value.persoCategoryIcon
+          : persoCategoryIcon // ignore: cast_nullable_to_non_nullable
+              as PersoTrainingCategoryIcon,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -116,16 +104,17 @@ class __$$_TrainingCategoryCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TrainingCategory implements _TrainingCategory {
-  const _$_TrainingCategory({required this.trainingIcon, required this.text});
+  const _$_TrainingCategory(
+      {required this.persoCategoryIcon, required this.text});
 
   @override
-  final TrainingIcon trainingIcon;
+  final PersoTrainingCategoryIcon persoCategoryIcon;
   @override
   final Text text;
 
   @override
   String toString() {
-    return 'TrainingCategory(trainingIcon: $trainingIcon, text: $text)';
+    return 'TrainingCategory(persoCategoryIcon: $persoCategoryIcon, text: $text)';
   }
 
   @override
@@ -133,13 +122,13 @@ class _$_TrainingCategory implements _TrainingCategory {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TrainingCategory &&
-            (identical(other.trainingIcon, trainingIcon) ||
-                other.trainingIcon == trainingIcon) &&
+            (identical(other.persoCategoryIcon, persoCategoryIcon) ||
+                other.persoCategoryIcon == persoCategoryIcon) &&
             (identical(other.text, text) || other.text == text));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, trainingIcon, text);
+  int get hashCode => Object.hash(runtimeType, persoCategoryIcon, text);
 
   @JsonKey(ignore: true)
   @override
@@ -150,11 +139,11 @@ class _$_TrainingCategory implements _TrainingCategory {
 
 abstract class _TrainingCategory implements TrainingCategory {
   const factory _TrainingCategory(
-      {required final TrainingIcon trainingIcon,
+      {required final PersoTrainingCategoryIcon persoCategoryIcon,
       required final Text text}) = _$_TrainingCategory;
 
   @override
-  TrainingIcon get trainingIcon;
+  PersoTrainingCategoryIcon get persoCategoryIcon;
   @override
   Text get text;
   @override

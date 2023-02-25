@@ -1,4 +1,4 @@
-part of 'training_icon.dart';
+part of 'training_category_icon.dart';
 
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -15,28 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TrainingIcon {
+mixin _$TrainingCategoryIcon {
   SvgPicture get icon => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TrainingIconCopyWith<TrainingIcon> get copyWith =>
+  $TrainingCategoryIconCopyWith<TrainingCategoryIcon> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TrainingIconCopyWith<$Res> {
-  factory $TrainingIconCopyWith(
-          TrainingIcon value, $Res Function(TrainingIcon) then) =
-      _$TrainingIconCopyWithImpl<$Res, TrainingIcon>;
+abstract class $TrainingCategoryIconCopyWith<$Res> {
+  factory $TrainingCategoryIconCopyWith(TrainingCategoryIcon value,
+          $Res Function(TrainingCategoryIcon) then) =
+      _$TrainingCategoryIconCopyWithImpl<$Res, TrainingCategoryIcon>;
   @useResult
   $Res call({SvgPicture icon, Color color});
 }
 
 /// @nodoc
-class _$TrainingIconCopyWithImpl<$Res, $Val extends TrainingIcon>
-    implements $TrainingIconCopyWith<$Res> {
-  _$TrainingIconCopyWithImpl(this._value, this._then);
+class _$TrainingCategoryIconCopyWithImpl<$Res,
+        $Val extends TrainingCategoryIcon>
+    implements $TrainingCategoryIconCopyWith<$Res> {
+  _$TrainingCategoryIconCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -63,22 +64,22 @@ class _$TrainingIconCopyWithImpl<$Res, $Val extends TrainingIcon>
 }
 
 /// @nodoc
-abstract class _$$_TrainingCategoryCopyWith<$Res>
-    implements $TrainingIconCopyWith<$Res> {
-  factory _$$_TrainingCategoryCopyWith(
-          _$_TrainingCategory value, $Res Function(_$_TrainingCategory) then) =
-      __$$_TrainingCategoryCopyWithImpl<$Res>;
+abstract class _$$_TrainingCategoryIconCopyWith<$Res>
+    implements $TrainingCategoryIconCopyWith<$Res> {
+  factory _$$_TrainingCategoryIconCopyWith(_$_TrainingCategoryIcon value,
+          $Res Function(_$_TrainingCategoryIcon) then) =
+      __$$_TrainingCategoryIconCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({SvgPicture icon, Color color});
 }
 
 /// @nodoc
-class __$$_TrainingCategoryCopyWithImpl<$Res>
-    extends _$TrainingIconCopyWithImpl<$Res, _$_TrainingCategory>
-    implements _$$_TrainingCategoryCopyWith<$Res> {
-  __$$_TrainingCategoryCopyWithImpl(
-      _$_TrainingCategory _value, $Res Function(_$_TrainingCategory) _then)
+class __$$_TrainingCategoryIconCopyWithImpl<$Res>
+    extends _$TrainingCategoryIconCopyWithImpl<$Res, _$_TrainingCategoryIcon>
+    implements _$$_TrainingCategoryIconCopyWith<$Res> {
+  __$$_TrainingCategoryIconCopyWithImpl(_$_TrainingCategoryIcon _value,
+      $Res Function(_$_TrainingCategoryIcon) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +88,7 @@ class __$$_TrainingCategoryCopyWithImpl<$Res>
     Object? icon = null,
     Object? color = null,
   }) {
-    return _then(_$_TrainingCategory(
+    return _then(_$_TrainingCategoryIcon(
       icon: null == icon
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
@@ -102,8 +103,8 @@ class __$$_TrainingCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TrainingCategory implements _TrainingCategory {
-  const _$_TrainingCategory({required this.icon, required this.color});
+class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
+  const _$_TrainingCategoryIcon({required this.icon, required this.color});
 
   @override
   final SvgPicture icon;
@@ -112,14 +113,14 @@ class _$_TrainingCategory implements _TrainingCategory {
 
   @override
   String toString() {
-    return 'TrainingIcon(icon: $icon, color: $color)';
+    return 'TrainingCategoryIcon(icon: $icon, color: $color)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrainingCategory &&
+            other is _$_TrainingCategoryIcon &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.color, color) || other.color == color));
   }
@@ -130,14 +131,15 @@ class _$_TrainingCategory implements _TrainingCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrainingCategoryCopyWith<_$_TrainingCategory> get copyWith =>
-      __$$_TrainingCategoryCopyWithImpl<_$_TrainingCategory>(this, _$identity);
+  _$$_TrainingCategoryIconCopyWith<_$_TrainingCategoryIcon> get copyWith =>
+      __$$_TrainingCategoryIconCopyWithImpl<_$_TrainingCategoryIcon>(
+          this, _$identity);
 }
 
-abstract class _TrainingCategory implements TrainingIcon {
-  const factory _TrainingCategory(
+abstract class _TrainingCategoryIcon implements TrainingCategoryIcon {
+  const factory _TrainingCategoryIcon(
       {required final SvgPicture icon,
-      required final Color color}) = _$_TrainingCategory;
+      required final Color color}) = _$_TrainingCategoryIcon;
 
   @override
   SvgPicture get icon;
@@ -145,6 +147,6 @@ abstract class _TrainingCategory implements TrainingIcon {
   Color get color;
   @override
   @JsonKey(ignore: true)
-  _$$_TrainingCategoryCopyWith<_$_TrainingCategory> get copyWith =>
+  _$$_TrainingCategoryIconCopyWith<_$_TrainingCategoryIcon> get copyWith =>
       throw _privateConstructorUsedError;
 }

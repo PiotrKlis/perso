@@ -51,9 +51,9 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 PersoHeader(
-                    title: AppLocalizations.of(context).category_header),
+                    title: AppLocalizations.of(context)!.category_header),
                 PersoClickableText(
-                    title: AppLocalizations.of(context).see_all_categories)
+                    title: AppLocalizations.of(context)!.see_all_categories)
               ],
             ),
           ),

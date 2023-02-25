@@ -9,21 +9,20 @@ class PersoTrainingCategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-    // return Column(
-    //     children: dummyTrainingCategories
-    //         .take(rowNumber)
-    //         .map((category) => SizedBox(
-    //               height: Dimens.trainingCategoryRowHeight,
-    //               child: Row(
-    //                 children: [
-    //                   category.icon,
-    //                   Container(
-    //                       margin: const EdgeInsets.only(left: Dimens.normalMargin),
-    //                       child: category.text)
-    //                 ],
-    //               ),
-    //             ))
-    //         .toList());
+    return Column(
+        children: dummyTrainingCategories
+            .take(rowNumber)
+            .map((category) => SizedBox(
+                  height: Dimens.trainingCategoryRowHeight,
+                  child: Row(
+                    children: [
+                      category.persoCategoryIcon,
+                      Container(
+                          margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                          child: category.text)
+                    ],
+                  ),
+                ))
+            .toList());
   }
 }

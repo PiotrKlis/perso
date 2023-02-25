@@ -3,5 +3,12 @@
   "home_main_header": "Odkrywaj",
   "trainers_section_button": "Dla trenerów",
   "category_header": "Kategorie",
-  "see_all_categories": "Wszystkie"
+  "see_all_categories": "Wszystkie",
+  "bodybuilding": "Kulturystyka",
+  "yoga": "Joga",
+  "calisthenics": "Kalistenika",
+  "cardio": "Cardio",
+  "endurance": "Trening wytrzymałościowy",
+  "gymnastics": "Gimnastyka",
+  "crossfit": "Crossfit"
 }
