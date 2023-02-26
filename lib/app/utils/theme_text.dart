@@ -191,4 +191,12 @@ class ThemeText {
       height: 1.27,
       letterSpacing: 0.1,
       fontWeight: FontWeight.w400);
+
+  static TextStyle captionSmallRegularGrey = TextStyle(
+      fontFamily: fontFamilyName,
+      color: Colors.grey,
+      fontSize: 11.0,
+      height: 1.27,
+      letterSpacing: 0.1,
+      fontWeight: FontWeight.w600);
 }

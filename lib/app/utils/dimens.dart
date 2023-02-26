@@ -19,4 +19,8 @@ class Dimens {
   static const double trainingCategoryIconHeight = 40.0;
   static const double trainingCategoryIconWidth = 40.0;
 
+  static const double carouselCardHeight = 320.0;
+  static const double carouselCardWidth = 300.0;
+  static const double carouselViewportFraction = 0.8;
+
 }
