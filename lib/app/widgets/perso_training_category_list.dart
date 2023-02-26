@@ -14,12 +14,20 @@ class PersoTrainingCategoryList extends StatelessWidget {
             .take(rowNumber)
             .map((category) => SizedBox(
                   height: Dimens.trainingCategoryRowHeight,
-                  child: Row(
+                  child: Column(
                     children: [
-                      category.persoCategoryIcon,
+                      Row(
+                        children: [
+                          category.persoCategoryIcon,
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  left: Dimens.normalMargin),
+                              child: category.text)
+                        ],
+                      ),
                       Container(
-                          margin: const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: category.text)
+                          margin: const EdgeInsets.only(left: Dimens.hugeMargin),
+                          child: const Divider())
                     ],
                   ),
                 ))

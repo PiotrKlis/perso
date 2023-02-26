@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-              margin: const EdgeInsets.only(left: Dimens.normalMargin),
+              margin: const EdgeInsets.only(left: Dimens.normalMargin, top: Dimens.bigMargin),
               child: const PersoTrainingCategoryList(rowNumber: Constants.trainingCategoryShortListNumber)),
           SizedBox(
             height: 300,

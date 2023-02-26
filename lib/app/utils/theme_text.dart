@@ -36,14 +36,6 @@ class ThemeText {
       letterSpacing: -0.7,
       fontWeight: FontWeight.w700);
 
-  static TextStyle headingBold = TextStyle(
-      fontFamily: fontFamilyName,
-      color: Colors.black,
-      fontSize: 17.0,
-      height: 1.35,
-      letterSpacing: -0.4,
-      fontWeight: FontWeight.w600);
-
   static TextStyle subHeadingBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,

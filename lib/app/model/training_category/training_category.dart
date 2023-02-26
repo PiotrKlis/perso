@@ -1,4 +1,5 @@
 import 'package:Perso/app/model/training_category/training_category_icon.dart';
+import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_training_category_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,43 +18,50 @@ List<TrainingCategory> dummyTrainingCategories = [
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/bodybuilding.svg"),
+              icon: SvgPicture.asset("assets/images/bodybuilding.svg",
+                  fit: BoxFit.none),
               color: Colors.deepPurpleAccent)),
-      text: const Text("Bodybuilding")),
+      text: Text("Bodybuilding", style: ThemeText.bodyBoldBlackText)),
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/yoga.svg", fit: BoxFit.none),
+              icon:
+                  SvgPicture.asset("assets/images/yoga.svg", fit: BoxFit.none),
               color: Colors.green)),
-      text: const Text("Yoga")),
+      text: Text("Yoga", style: ThemeText.bodyBoldBlackText)),
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/calisthenics.svg"),
+              icon: SvgPicture.asset("assets/images/calisthenics.svg",
+                  fit: BoxFit.none),
               color: Colors.greenAccent)),
-      text: const Text("Calisthenics")),
+      text: Text("Calisthenics", style: ThemeText.bodyBoldBlackText)),
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/cardio.svg"),
+              icon: SvgPicture.asset("assets/images/cardio.svg",
+                  fit: BoxFit.none),
               color: Colors.blue)),
-      text: const Text("Cardio")),
+      text: Text("Cardio", style: ThemeText.bodyBoldBlackText)),
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/endurance.svg"),
+              icon: SvgPicture.asset("assets/images/endurance.svg",
+                  fit: BoxFit.none),
               color: Colors.orange)),
-      text: const Text("Endurance")),
+      text: Text("Endurance", style: ThemeText.bodyBoldBlackText)),
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/gymnastics.svg"),
+              icon: SvgPicture.asset("assets/images/gymnastics.svg",
+                  fit: BoxFit.none),
               color: Colors.yellow)),
-      text: const Text("Gymnastics")),
+      text: Text("Gymnastics", style: ThemeText.bodyBoldBlackText)),
   TrainingCategory(
       persoCategoryIcon: PersoTrainingCategoryIcon(
           trainingCategoryIcon: TrainingCategoryIcon(
-              icon: SvgPicture.asset("assets/images/crossfit.svg"),
+              icon: SvgPicture.asset("assets/images/crossfit.svg",
+                  fit: BoxFit.none),
               color: Colors.pinkAccent)),
-      text: const Text("Crossfit")),
+      text: Text("Crossfit", style: ThemeText.bodyBoldBlackText)),
 ];
