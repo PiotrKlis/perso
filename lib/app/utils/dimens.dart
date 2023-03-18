@@ -17,7 +17,7 @@ class Dimens {
   static const double searchHeight = 42.0;
   static const double searchRadius = 12.0;
 
-  static const double trainingCategoryRowHeight = 60.0;
+  static const double trainingCategoryRowHeight = 56.0;
   static const double trainingCategoryIconHeight = 40.0;
   static const double trainingCategoryIconWidth = 40.0;
 

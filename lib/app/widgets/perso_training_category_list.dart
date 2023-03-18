@@ -12,7 +12,9 @@ class PersoTrainingCategoryList extends StatelessWidget {
     return Column(
         children: dummyTrainingCategories
             .take(rowNumber)
-            .map((category) => SizedBox(
+            .map((category) {
+              var shouldDividerBeVisible = dummyTrainingCategories.indexOf(category) != rowNumber - 1;
+              return SizedBox(
                   height: Dimens.trainingCategoryRowHeight,
                   child: Column(
                     children: [
@@ -25,12 +27,16 @@ class PersoTrainingCategoryList extends StatelessWidget {
                               child: category.text)
                         ],
                       ),
-                      Container(
-                          margin: const EdgeInsets.only(left: Dimens.hugeMargin),
-                          child: const Divider())
+                      Visibility(
+                        visible: shouldDividerBeVisible,
+                        child: Container(
+                            margin: const EdgeInsets.only(left: Dimens.hugeMargin),
+                            child: const Divider()),
+                      )
                     ],
                   ),
-                ))
+                );
+            })
             .toList());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:Perso/app/home/widgets/perso_account_icon.dart';
+import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/constants.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/widgets/perso_big_header.dart';
@@ -64,22 +65,32 @@ class HomeScreen extends StatelessWidget {
                   left: Dimens.normalMargin, top: Dimens.bigMargin),
               child: const PersoTrainingCategoryList(
                   rowNumber: Constants.trainingCategoryShortListNumber)),
-          PersoTrainersSearchCarousel(),
           Container(
-            margin: const EdgeInsets.only(
-                top: Dimens.bigMargin,
-                left: Dimens.normalMargin,
-                right: Dimens.normalMargin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            color: PersoColors.light_blue,
+            child: Column(
               children: [
-                PersoHeader(title: AppLocalizations.of(context)!.near_you),
-                PersoClickableText(
-                    title: AppLocalizations.of(context)!.see_all_categories)
+                Container(
+                  margin: EdgeInsets.only(top: Dimens.bigMargin),
+                    child: PersoTrainersSearchCarousel()),
+                Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.bigMargin,
+                      left: Dimens.normalMargin,
+                      right: Dimens.normalMargin),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PersoHeader(title: AppLocalizations.of(context)!.near_you),
+                      PersoClickableText(
+                          title: AppLocalizations.of(context)!.see_all_categories)
+                    ],
+                  ),
+                ),
+                const PersoTrainersList()
               ],
             ),
-          ),
-          PersoTrainersList()
+          )
+
         ]),
       ),
     );
