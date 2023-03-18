@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "15043104813",
+    "project_id": "perso-67a40",
+    "storage_bucket": "perso-67a40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15043104813:android:8c0ad82b6ac3a0d29ce8a4",
+        "android_client_info": {
+          "package_name": "mobile.apps.perso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15043104813-5okukb2rdhd4n21u1ssiiuqbolml5met.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0hgzH-s46gWKk_RQhWF4Q8tVx6tG_72M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15043104813-5okukb2rdhd4n21u1ssiiuqbolml5met.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

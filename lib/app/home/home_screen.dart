@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: Dimens.bigMargin),
+                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: PersoTrainersSearchCarousel()),
                 Container(
                   margin: const EdgeInsets.only(
@@ -80,9 +80,11 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      PersoHeader(title: AppLocalizations.of(context)!.near_you),
+                      PersoHeader(
+                          title: AppLocalizations.of(context)!.near_you),
                       PersoClickableText(
-                          title: AppLocalizations.of(context)!.see_all_categories)
+                          title:
+                              AppLocalizations.of(context)!.see_all_categories)
                     ],
                   ),
                 ),
@@ -90,7 +92,6 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           )
-
         ]),
       ),
     );
