@@ -2,6 +2,7 @@ class Dimens {
   static const double noMargin = 0.0;
   static const double smallerMargin = 4.0;
   static const double smallMargin = 8.0;
+  static const double mediumMargin = 12.0;
   static const double normalMargin = 16.0;
   static const double bigMargin = 24.0;
   static const double hugeMargin = 52.0;
@@ -24,4 +25,12 @@ class Dimens {
   static const double carouselCardWidth = 300.0;
   static const double carouselViewportFraction = 0.8;
 
+  static const double trainerCardWidth = 400.0;
+  static const double trainerCardHeight = 158.0;
+  static const double trainerCardBorderRadius = 10.0;
+  static const double trainerImageWidth = 80.0;
+  static const double trainerImageHeight = 80.0;
+
+  static const double ratingBarSize = 16.0;
+  static const double ratingBarItemCount = 5;
 }

@@ -44,6 +44,14 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
+  static TextStyle subHeadingBoldGrey = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.grey,
+      fontSize: 15.0,
+      height: 1.33,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w600);
+
   static TextStyle bodyBoldBlackText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
@@ -133,6 +141,22 @@ class ThemeText {
   static TextStyle subHeadingRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
+      fontSize: 15.0,
+      height: 1.33,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w400);
+
+  static TextStyle subHeadingRegularBlue = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.blue,
+      fontSize: 15.0,
+      height: 1.33,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w400);
+
+  static TextStyle subHeadingRegularGrey = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.grey,
       fontSize: 15.0,
       height: 1.33,
       letterSpacing: -0.4,

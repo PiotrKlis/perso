@@ -6,6 +6,7 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_clickable_text.dart';
 import 'package:Perso/app/widgets/perso_header.dart';
 import 'package:Perso/app/widgets/perso_search.dart';
+import 'package:Perso/app/widgets/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/perso_training_category_list.dart';
 import 'package:flutter/material.dart';
@@ -59,9 +60,26 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Container(
-              margin: const EdgeInsets.only(left: Dimens.normalMargin, top: Dimens.bigMargin),
-              child: const PersoTrainingCategoryList(rowNumber: Constants.trainingCategoryShortListNumber)),
+              margin: const EdgeInsets.only(
+                  left: Dimens.normalMargin, top: Dimens.bigMargin),
+              child: const PersoTrainingCategoryList(
+                  rowNumber: Constants.trainingCategoryShortListNumber)),
           PersoTrainersSearchCarousel(),
+          Container(
+            margin: const EdgeInsets.only(
+                top: Dimens.bigMargin,
+                left: Dimens.normalMargin,
+                right: Dimens.normalMargin),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                PersoHeader(title: AppLocalizations.of(context)!.near_you),
+                PersoClickableText(
+                    title: AppLocalizations.of(context)!.see_all_categories)
+              ],
+            ),
+          ),
+          PersoTrainersList()
         ]),
       ),
     );

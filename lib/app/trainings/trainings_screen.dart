@@ -10,7 +10,7 @@ class TrainingScreen extends StatelessWidget {
         appBar: AppBar(title: const Text("training screen")),
         body: ElevatedButton(
           onPressed: () {
-            context.go('/trainings/training_details');
+            // context.go('/trainings/training_details');
           },
           child: Text("I am training body"),
         )
