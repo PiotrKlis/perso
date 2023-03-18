@@ -1,6 +1,7 @@
-import 'package:Perso/app/home/bloc/home_bloc.dart';
-import 'package:Perso/app/home/state/home_state.dart';
-import 'package:Perso/app/home/widgets/perso_account_icon.dart';
+
+import 'package:Perso/app/screens/home/bloc/home_bloc.dart';
+import 'package:Perso/app/screens/home/state/home_state.dart';
+import 'package:Perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/constants.dart';
 import 'package:Perso/app/utils/dimens.dart';

@@ -1,4 +1,4 @@
-import 'package:Perso/app/model/trainer_card/trainer_card.dart';
+import 'package:Perso/app/models/trainer_card/trainer_card.dart';
 import 'package:Perso/app/utils/constants.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';

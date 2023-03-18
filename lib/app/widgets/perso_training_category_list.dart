@@ -1,6 +1,6 @@
-import 'package:Perso/app/home/bloc/home_bloc.dart';
-import 'package:Perso/app/home/event/home_event.dart';
-import 'package:Perso/app/model/training_category/training_category.dart';
+import 'package:Perso/app/models/training_category/training_category.dart';
+import 'package:Perso/app/screens/home/bloc/home_bloc.dart';
+import 'package:Perso/app/screens/home/event/home_event.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

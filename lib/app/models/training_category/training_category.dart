@@ -1,4 +1,4 @@
-import 'package:Perso/app/model/training_category/training_category_icon.dart';
+import 'package:Perso/app/models/training_category/training_category_icon.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_training_category_icon.dart';
 import 'package:flutter/material.dart';

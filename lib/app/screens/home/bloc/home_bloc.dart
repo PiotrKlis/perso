@@ -1,7 +1,5 @@
-
-
-import 'package:Perso/app/home/event/home_event.dart';
-import 'package:Perso/app/home/state/home_state.dart';
+import 'package:Perso/app/screens/home/event/home_event.dart';
+import 'package:Perso/app/screens/home/state/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {

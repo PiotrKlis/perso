@@ -1,4 +1,4 @@
-import 'package:Perso/app/model/trainers_search_carousel_data/trainers_search_carousel_card_data.dart';
+import 'package:Perso/app/models/trainers_search_carousel_data/trainers_search_carousel_card_data.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/widgets/perso_trainers_search_carousel_card.dart';
 import 'package:flutter/material.dart';

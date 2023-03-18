@@ -1,5 +1,5 @@
-import 'package:Perso/app/home/home_screen.dart';
-import 'package:Perso/app/trainings/trainings_screen.dart';
+import 'package:Perso/app/screens/home/home_screen.dart';
+import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
