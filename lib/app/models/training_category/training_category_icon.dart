@@ -7,5 +7,5 @@ part 'training_category_icon.freezed.dart';
 @freezed
 class TrainingCategoryIcon with _$TrainingCategoryIcon {
   const factory TrainingCategoryIcon(
-      {required SvgPicture icon, required Color color}) = _TrainingCategoryIcon;
+      {required String path, required Color color}) = _TrainingCategoryIcon;
 }

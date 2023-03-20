@@ -1,22 +1,22 @@
-import 'package:Perso/app/models/training_category/training_category_icon.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PersoTrainingCategoryIcon extends StatelessWidget {
-  const PersoTrainingCategoryIcon(
-      {Key? key, required this.trainingCategoryIcon})
-      : super(key: key);
-  final TrainingCategoryIcon trainingCategoryIcon;
+  final String path;
+  final Color color;
+
+  const PersoTrainingCategoryIcon({super.key, required this.path, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return ClipOval(
       child: Material(
-        color: trainingCategoryIcon.color, // Button color
+        color: color, // Button color
         child: SizedBox(
             width: Dimens.trainingCategoryIconWidth,
             height: Dimens.trainingCategoryIconHeight,
-            child: trainingCategoryIcon.icon),
+            child: SvgPicture.asset(path, fit: BoxFit.none)),
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:Perso/app/models/trainers_search_carousel_data/trainers_search_carousel_card_data.dart';
+import 'package:Perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +6,13 @@ import 'package:flutter/material.dart';
 class PersoTrainersSearchCarouselCard extends StatelessWidget {
   final int position;
   final TrainersSearchCarouselCardData cardData;
+  final bool isLastCard;
 
   const PersoTrainersSearchCarouselCard(
-      {super.key, required this.position, required this.cardData});
+      {super.key,
+      required this.position,
+      required this.cardData,
+      required this.isLastCard});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +86,7 @@ class PersoTrainersSearchCarouselCard extends StatelessWidget {
   }
 
   EdgeInsets getMargin(int position) {
-    if (position == dummyCards.length - 1) {
+    if (isLastCard) {
       return const EdgeInsets.only(left: 8.0, right: 8.0);
     } else {
       return const EdgeInsets.only(left: 8.0);

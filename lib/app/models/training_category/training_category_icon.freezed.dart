@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TrainingCategoryIcon {
-  SvgPicture get icon => throw _privateConstructorUsedError;
+  String get path => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $TrainingCategoryIconCopyWith<$Res> {
           $Res Function(TrainingCategoryIcon) then) =
       _$TrainingCategoryIconCopyWithImpl<$Res, TrainingCategoryIcon>;
   @useResult
-  $Res call({SvgPicture icon, Color color});
+  $Res call({String path, Color color});
 }
 
 /// @nodoc
@@ -47,14 +47,14 @@ class _$TrainingCategoryIconCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? icon = null,
+    Object? path = null,
     Object? color = null,
   }) {
     return _then(_value.copyWith(
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as SvgPicture,
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -71,7 +71,7 @@ abstract class _$$_TrainingCategoryIconCopyWith<$Res>
       __$$_TrainingCategoryIconCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({SvgPicture icon, Color color});
+  $Res call({String path, Color color});
 }
 
 /// @nodoc
@@ -85,14 +85,14 @@ class __$$_TrainingCategoryIconCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? icon = null,
+    Object? path = null,
     Object? color = null,
   }) {
     return _then(_$_TrainingCategoryIcon(
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as SvgPicture,
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
+              as String,
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -104,16 +104,16 @@ class __$$_TrainingCategoryIconCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
-  const _$_TrainingCategoryIcon({required this.icon, required this.color});
+  const _$_TrainingCategoryIcon({required this.path, required this.color});
 
   @override
-  final SvgPicture icon;
+  final String path;
   @override
   final Color color;
 
   @override
   String toString() {
-    return 'TrainingCategoryIcon(icon: $icon, color: $color)';
+    return 'TrainingCategoryIcon(path: $path, color: $color)';
   }
 
   @override
@@ -121,12 +121,12 @@ class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TrainingCategoryIcon &&
-            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.path, path) || other.path == path) &&
             (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, icon, color);
+  int get hashCode => Object.hash(runtimeType, path, color);
 
   @JsonKey(ignore: true)
   @override
@@ -138,11 +138,11 @@ class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
 
 abstract class _TrainingCategoryIcon implements TrainingCategoryIcon {
   const factory _TrainingCategoryIcon(
-      {required final SvgPicture icon,
+      {required final String path,
       required final Color color}) = _$_TrainingCategoryIcon;
 
   @override
-  SvgPicture get icon;
+  String get path;
   @override
   Color get color;
   @override

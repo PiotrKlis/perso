@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 //   final RegisterProvider registerProvider = GetIt.I.get<RegisterProvider>();
 //
 //   EmptyBloc(EmptyState initialState) : super(initialState) {
-//     on<Init>((state, emit) async {
+//     on<Init>((event, emitter) async {
 //
 //     });
 //   }

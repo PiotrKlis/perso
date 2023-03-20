@@ -4,4 +4,6 @@ part 'empty_state.freezed.dart';
 @freezed
 class EmptyState with _$EmptyState {
   const factory EmptyState.initial() = Initial;
+  const factory EmptyState.content() = Content;
+  const factory EmptyState.error() = Error;
 }

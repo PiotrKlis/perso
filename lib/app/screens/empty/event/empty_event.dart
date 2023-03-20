@@ -3,5 +3,5 @@ part 'empty_event.freezed.dart';
 
 @freezed
 class EmptyEvent with _$EmptyEvent {
-  const factory EmptyEvent.init() = Init;
+  const factory EmptyEvent.loadData() = LoadData;
 }

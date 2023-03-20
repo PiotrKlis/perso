@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'empty_event.dart';
+part of 'trainer_search_carousel_event.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$EmptyEvent {
+mixin _$TrainerSearchCarouselEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadData,
@@ -51,16 +51,18 @@ mixin _$EmptyEvent {
 }
 
 /// @nodoc
-abstract class $EmptyEventCopyWith<$Res> {
-  factory $EmptyEventCopyWith(
-          EmptyEvent value, $Res Function(EmptyEvent) then) =
-      _$EmptyEventCopyWithImpl<$Res, EmptyEvent>;
+abstract class $TrainerSearchCarouselEventCopyWith<$Res> {
+  factory $TrainerSearchCarouselEventCopyWith(TrainerSearchCarouselEvent value,
+          $Res Function(TrainerSearchCarouselEvent) then) =
+      _$TrainerSearchCarouselEventCopyWithImpl<$Res,
+          TrainerSearchCarouselEvent>;
 }
 
 /// @nodoc
-class _$EmptyEventCopyWithImpl<$Res, $Val extends EmptyEvent>
-    implements $EmptyEventCopyWith<$Res> {
-  _$EmptyEventCopyWithImpl(this._value, this._then);
+class _$TrainerSearchCarouselEventCopyWithImpl<$Res,
+        $Val extends TrainerSearchCarouselEvent>
+    implements $TrainerSearchCarouselEventCopyWith<$Res> {
+  _$TrainerSearchCarouselEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -77,7 +79,7 @@ abstract class _$$LoadDataCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadDataCopyWithImpl<$Res>
-    extends _$EmptyEventCopyWithImpl<$Res, _$LoadData>
+    extends _$TrainerSearchCarouselEventCopyWithImpl<$Res, _$LoadData>
     implements _$$LoadDataCopyWith<$Res> {
   __$$LoadDataCopyWithImpl(_$LoadData _value, $Res Function(_$LoadData) _then)
       : super(_value, _then);
@@ -90,7 +92,7 @@ class _$LoadData implements LoadData {
 
   @override
   String toString() {
-    return 'EmptyEvent.loadData()';
+    return 'TrainerSearchCarouselEvent.loadData()';
   }
 
   @override
@@ -159,6 +161,6 @@ class _$LoadData implements LoadData {
   }
 }
 
-abstract class LoadData implements EmptyEvent {
+abstract class LoadData implements TrainerSearchCarouselEvent {
   const factory LoadData() = _$LoadData;
 }
