@@ -1,7 +1,9 @@
 import 'package:Perso/app/models/trainer_card/trainer_card.dart';
-import 'package:Perso/data/repositories/trainer_cards/trainer_card_repository.dart';
+import 'package:Perso/data/repositories/trainers/trainers_repository.dart';
+import 'package:injectable/injectable.dart';
 
-class TestTrainerCardRepository implements TrainerCardRepository {
+@injectable
+class TestTrainersRepository implements TrainersRepository {
   @override
   Future<List<TrainerCard>> getTrainerCards() {
     return Future.value(_dummyTrainerCards);

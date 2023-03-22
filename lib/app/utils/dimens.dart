@@ -25,7 +25,7 @@ class Dimens {
   static const double carouselCardWidth = 300.0;
   static const double carouselViewportFraction = 0.8;
 
-  static const double trainerCardWidth = 400.0;
+  static const double trainerCardWidth = 380.0;
   static const double trainerCardHeight = 158.0;
   static const double trainerCardBorderRadius = 10.0;
   static const double trainerImageWidth = 80.0;

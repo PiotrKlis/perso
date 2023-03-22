@@ -1,5 +1,5 @@
 import 'package:Perso/app/models/trainer_card/trainer_card.dart';
 
-abstract class TrainerCardRepository {
+abstract class TrainersRepository {
   Future<List<TrainerCard>> getTrainerCards();
 }
