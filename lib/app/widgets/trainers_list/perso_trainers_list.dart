@@ -52,8 +52,8 @@ class PersoTrainersList extends StatelessWidget {
                         children: [
                           Container(
                             margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin,
-                                top: Dimens.normalMargin),
+                                left: Dimens.mediumMargin,
+                                top: Dimens.mediumMargin),
                             child: Column(
                               children: [
                                 Image.asset(trainerData.icon,
@@ -65,7 +65,7 @@ class PersoTrainersList extends StatelessWidget {
                           Expanded(
                             child: Container(
                               margin: const EdgeInsets.only(
-                                  top: Dimens.normalMargin,
+                                  top: Dimens.mediumMargin,
                                   left: Dimens.mediumMargin),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
