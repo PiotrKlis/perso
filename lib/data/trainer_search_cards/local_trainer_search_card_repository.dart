@@ -1,9 +1,9 @@
 import 'package:Perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
-import 'package:Perso/data/repositories/trainer_search_cards/trainer_search_card_repository.dart';
+import 'package:Perso/data/trainer_search_cards/trainer_search_card_source.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class LocalTrainerSearchCardRepository implements TrainerSearchCardRepository {
+class LocalTrainerSearchCardRepository implements TrainerSearchCardSource {
   @override
   Future<List<TrainersSearchCarouselCardData>> getAllCards() {
     return Future.value(_dummyCards);

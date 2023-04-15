@@ -1,4 +1,4 @@
-import 'package:Perso/app/models/trainer_card/trainer_card.dart';
+import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/utils/constants.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
@@ -33,7 +33,7 @@ class PersoTrainersList extends StatelessWidget {
         ));
   }
 
-  Widget getTrainersList(List<TrainerCard> trainers) {
+  Widget getTrainersList(List<TrainerEntity> trainers) {
     return Column(
       children: trainers
           .map((trainerData) => Row(
@@ -79,7 +79,7 @@ class PersoTrainersList extends StatelessWidget {
                                       margin: const EdgeInsets.only(
                                           top: Dimens.smallMargin),
                                       child: Text(
-                                        trainerData.description,
+                                        trainerData.shortBio,
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                         style: ThemeText.subHeadingRegularGrey,
@@ -89,7 +89,7 @@ class PersoTrainersList extends StatelessWidget {
                                       margin: const EdgeInsets.only(
                                           top: Dimens.smallMargin),
                                       child: Row(children: [
-                                        Text(trainerData.ratingScore.toString(),
+                                        Text(trainerData.rating.toString(),
                                             style:
                                                 ThemeText.subHeadingBoldGrey),
                                         Container(
@@ -111,8 +111,7 @@ class PersoTrainersList extends StatelessWidget {
                                                   Icons.star_rate_outlined,
                                                   color: Colors.yellow),
                                             ),
-                                            initialRating:
-                                                trainerData.ratingScore,
+                                            initialRating: trainerData.rating,
                                             onRatingUpdate: (double value) {
                                               //no-op
                                             },
