@@ -1,15 +1,16 @@
-import 'package:Perso/core/navigation/bottom_nav_bar_tab.dart';
+import 'package:Perso/core/navigation/bottom_nav_bar_tab_item.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final tabs = [
   const ScaffoldWithNavBarTabItem(
-    initialLocation: '/home',
+    initialLocation: ScreenNavigationKey.home,
     icon: Icon(Icons.home),
     label: 'Trainers',
   ),
   const ScaffoldWithNavBarTabItem(
-    initialLocation: '/trainings',
+    initialLocation: ScreenNavigationKey.trainings,
     icon: Icon(Icons.settings),
     label: 'Trainings',
   ),

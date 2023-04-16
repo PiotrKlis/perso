@@ -3,19 +3,19 @@ class CollectionName {
 }
 
 class TrainerDocumentFields {
-  static String email = "email";
-  static String fullBio = "fullBio";
-  static String languages = "languages";
-  static String location = "location";
-  static String name = "name";
-  static String surname = "surname";
-  static String nickname = "nickname";
-  static String phoneNumber = "phoneNumber";
-  static String rating = "rating";
-  static String reviews = "reviews";
-  static String shortBio = "shortBio";
-  static String trainingTypes = "trainingTypes";
-  static String votesNumber = "votesNumber";
-  static String icon = "icon";
-  static String description = "description";
+  static const String email = "email";
+  static const String fullBio = "fullBio";
+  static const String languages = "languages";
+  static const String location = "location";
+  static const String name = "name";
+  static const String surname = "surname";
+  static const String nickname = "nickname";
+  static const String phoneNumber = "phoneNumber";
+  static const String rating = "rating";
+  static const String reviews = "reviews";
+  static const String shortBio = "shortBio";
+  static const String trainingTypes = "trainingTypes";
+  static const String votesNumber = "votesNumber";
+  static const String icon = "icon";
+  static const String description = "description";
 }

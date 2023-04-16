@@ -11,9 +11,11 @@ import 'package:Perso/app/widgets/perso_search.dart';
 import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,7 +27,11 @@ class HomeScreen extends StatelessWidget {
       child: SafeArea(
         child: SingleChildScrollView(
           child: Column(children: [
-            const PersoAccountIcon(),
+            GestureDetector(
+                onTap: () {
+                  context.push(ScreenNavigationKey.signIn);
+                },
+                child: const PersoAccountIcon()),
             Container(
               margin: const EdgeInsets.only(
                   top: Dimens.normalMargin,

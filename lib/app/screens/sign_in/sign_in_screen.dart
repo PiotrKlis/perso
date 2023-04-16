@@ -1,0 +1,55 @@
+import 'package:Perso/app/utils/colors.dart';
+import 'package:Perso/app/utils/dimens.dart';
+import 'package:Perso/app/utils/theme_text.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: PersoColors.light_blue,
+      child: SafeArea(
+          child: Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Stack(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                      child: const Align(
+                        alignment: Alignment.center,
+                        child: Text("PERSO"),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.pop();
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.cancel_outlined),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+          Center(
+            child: Container(
+                margin: const EdgeInsets.only(top: Dimens.hugeMargin),
+                child: Text("Sign In", style: ThemeText.largerTitleBold)),
+          ),
+        ],
+      )),
+    );
+  }
+}
