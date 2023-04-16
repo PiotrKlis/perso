@@ -24,7 +24,7 @@ class SignInScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(top: Dimens.normalMargin),
                       child: const Align(
                         alignment: Alignment.center,
-                        child: Text("PERSO"),
+                        child: Text("PERSO LOGO"),
                       ),
                     ),
                     Align(
