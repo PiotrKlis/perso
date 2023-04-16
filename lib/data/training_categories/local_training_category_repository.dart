@@ -28,26 +28,26 @@ class LocalTrainingCategoryRepository implements TrainingCategorySource {
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(
             path: "assets/images/yoga.svg", color: Colors.green),
-        name: "Bodybuilding"),
+        name: "Yoga"),
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(
             path: "assets/images/calisthenics.svg", color: Colors.greenAccent),
-        name: "Bodybuilding"),
+        name: "Calisthenics"),
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(
             path: "assets/images/cardio.svg", color: Colors.blue),
-        name: "Bodybuilding"),
+        name: "Cardio"),
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(
             path: "assets/images/endurance.svg", color: Colors.orange),
-        name: "Bodybuilding"),
+        name: "Endurance"),
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(
             path: "assets/images/gymnastics.svg", color: Colors.yellow),
-        name: "Bodybuilding"),
+        name: "Gymnastics"),
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(
             path: "assets/images/crossfit.svg", color: Colors.pinkAccent),
-        name: "Bodybuilding"),
+        name: "Crossfit"),
   ];
 }
