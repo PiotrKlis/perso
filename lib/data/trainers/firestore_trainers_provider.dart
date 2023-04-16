@@ -15,29 +15,30 @@ class FirestoreTrainersProvider implements TrainersSource {
     return trainersSnapshot.docs.map((data) {
       return TrainerEntity(
           id: data.id,
-          icon: "",
           name: data[TrainerDocumentFields.name],
           surname: data[TrainerDocumentFields.surname],
           nickname: data[TrainerDocumentFields.nickname],
           votesNumber: data[TrainerDocumentFields.votesNumber],
           fullBio: data[TrainerDocumentFields.fullBio],
           shortBio: data[TrainerDocumentFields.shortBio],
-          email: data[TrainerDocumentFields.email],
-          rating: data[TrainerDocumentFields.rating].toDouble(),
+          icon: "assets/images/trainer3.png",
+          email: "",
+          rating: 2.3,
           location: data[TrainerDocumentFields.location],
           phoneNumber: data[TrainerDocumentFields.phoneNumber],
           languages:
               data[TrainerDocumentFields.languages].toString().split(", "),
-          reviews: [ReviewEntity(rating: 2.3, description: "description")],
-          // reviews: data[TrainerDocumentFields.reviews].map((review) {
-          //   double rating =
-          //       review.values.firstWhere((element) => element.key == "rating");
-          //   String description = review.values
-          //       .firstWhere((element) => element.key == "description");
-          //   return ReviewEntity(rating: rating, description: description);
-          // }).toList(),
+          reviews: getReviews(data),
           trainingTypes:
               data[TrainerDocumentFields.trainingTypes].toString().split(", "));
+    }).toList();
+  }
+
+  List<ReviewEntity> getReviews(QueryDocumentSnapshot<Object?> data) {
+    return data[TrainerDocumentFields.reviews].map<ReviewEntity>((review) {
+      return ReviewEntity(
+          rating: review[TrainerDocumentFields.rating],
+          description: review[TrainerDocumentFields.description]);
     }).toList();
   }
 }

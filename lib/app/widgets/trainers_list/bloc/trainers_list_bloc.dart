@@ -9,7 +9,7 @@ import 'package:get_it/get_it.dart';
 
 class TrainersListBloc extends Bloc<TrainersListEvent, TrainersListState> {
   final TrainersSource trainersSource =
-      GetIt.I.get<TestTrainersRepository>();
+      GetIt.I.get<FirestoreTrainersProvider>();
 
   TrainersListBloc(TrainersListState initialState) : super(initialState) {
     on<LoadData>((event, emitter) async {
