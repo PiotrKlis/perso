@@ -1,6 +1,7 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -48,6 +49,12 @@ class SignInScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(top: Dimens.hugeMargin),
                 child: Text("Sign In", style: ThemeText.largerTitleBold)),
           ),
+          Container(
+              margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+              child: const PersoTextField(title: "Login")),
+          Container(
+              margin: const EdgeInsets.only(top: Dimens.smallMargin),
+              child: const PersoTextField(title: "Password")),
         ],
       )),
     );

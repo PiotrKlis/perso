@@ -186,6 +186,14 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
+  static TextStyle bodyRegularGreyText = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.grey,
+      fontSize: 17.0,
+      height: 1.35,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w400);
+
   static TextStyle calloutRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,

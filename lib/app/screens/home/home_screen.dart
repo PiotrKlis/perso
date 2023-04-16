@@ -8,6 +8,7 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_clickable_text.dart';
 import 'package:Perso/app/widgets/perso_header.dart';
 import 'package:Perso/app/widgets/perso_search.dart';
+import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';

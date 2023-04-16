@@ -5,6 +5,7 @@ class Dimens {
   static const double mediumMargin = 12.0;
   static const double normalMargin = 16.0;
   static const double bigMargin = 24.0;
+  static const double biggerMargin = 32.0;
   static const double hugeMargin = 52.0;
 
   static const double accountIconSize = 40.0;
@@ -33,4 +34,7 @@ class Dimens {
 
   static const double ratingBarSize = 16.0;
   static const double ratingBarItemCount = 5;
+
+  static const double textFieldHeight = 48.0;
+  static const double textFieldBorderRadius = 48.0;
 }
