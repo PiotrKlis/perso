@@ -1,6 +1,8 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/app/widgets/perso_button.dart';
+import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +13,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: PersoColors.light_blue,
+      color: PersoColors.lightBlue,
       child: SafeArea(
           child: Column(
         children: [
@@ -55,6 +57,53 @@ class SignInScreen extends StatelessWidget {
           Container(
               margin: const EdgeInsets.only(top: Dimens.smallMargin),
               child: const PersoTextField(title: "Password")),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: Dimens.bigMargin),
+              child: Text(
+                "Forgot password?",
+                style: ThemeText.calloutBoldBlueText,
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: Dimens.bigMargin),
+              child: const PersoButton(
+                width: Dimens.bigButtonWidth,
+                title: "Sign In",
+              ),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      child: Container(
+                    margin: const EdgeInsets.only(
+                        left: Dimens.biggerMargin, right: Dimens.normalMargin),
+                    child: const Divider(
+                      color: PersoColors.lightGrey,
+                    ),
+                  )),
+                  Text("OR", style: ThemeText.footnoteRegularGrey),
+                  Expanded(
+                      child: Container(
+                          margin: const EdgeInsets.only(
+                              left: Dimens.normalMargin,
+                              right: Dimens.biggerMargin),
+                          child: const Divider(color: PersoColors.lightGrey)))
+                ]),
+          ),
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.biggerMargin,
+                  left: Dimens.bigMargin,
+                  right: Dimens.bigMargin),
+              child: const Center(
+                  child: PersoLoginButton(loginType: LoginType.Google))),
         ],
       )),
     );

@@ -46,7 +46,7 @@ class ThemeText {
 
   static TextStyle subHeadingBoldGrey = TextStyle(
       fontFamily: fontFamilyName,
-      color: PersoColors.grey,
+      color: PersoColors.lightGrey,
       fontSize: 15.0,
       height: 1.33,
       letterSpacing: -0.4,
@@ -68,6 +68,14 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
+  static TextStyle bodyBoldGreyText = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.lightGrey,
+      fontSize: 17.0,
+      height: 1.35,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w600);
+
   static TextStyle calloutBoldBlackText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
@@ -79,6 +87,14 @@ class ThemeText {
   static TextStyle calloutBoldWhiteText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.white,
+      fontSize: 16.0,
+      height: 1.31,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w600);
+
+  static TextStyle calloutBoldBlueText = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.blue,
       fontSize: 16.0,
       height: 1.31,
       letterSpacing: -0.4,
@@ -156,7 +172,7 @@ class ThemeText {
 
   static TextStyle subHeadingRegularGrey = TextStyle(
       fontFamily: fontFamilyName,
-      color: PersoColors.grey,
+      color: PersoColors.lightGrey,
       fontSize: 15.0,
       height: 1.33,
       letterSpacing: -0.4,
@@ -188,7 +204,7 @@ class ThemeText {
 
   static TextStyle bodyRegularGreyText = TextStyle(
       fontFamily: fontFamilyName,
-      color: PersoColors.grey,
+      color: PersoColors.lightGrey,
       fontSize: 17.0,
       height: 1.35,
       letterSpacing: -0.4,
@@ -205,6 +221,13 @@ class ThemeText {
   static TextStyle footnoteRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
+      fontSize: 13.0,
+      height: 1.38,
+      fontWeight: FontWeight.w400);
+
+  static TextStyle footnoteRegularGrey = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.lightGrey,
       fontSize: 13.0,
       height: 1.38,
       fontWeight: FontWeight.w400);

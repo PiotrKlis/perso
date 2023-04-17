@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                     left: Dimens.normalMargin, top: Dimens.bigMargin),
                 child: PersoTrainingCategoryList(isShortList: true)),
             Container(
-              color: PersoColors.light_blue,
+              color: PersoColors.lightBlue,
               child: Column(
                 children: [
                   Container(
