@@ -103,7 +103,14 @@ class SignInScreen extends StatelessWidget {
                   left: Dimens.bigMargin,
                   right: Dimens.bigMargin),
               child: const Center(
-                  child: PersoLoginButton(loginType: LoginType.Google))),
+                  child: PersoLoginButton(loginType: LoginType.google))),
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.mediumMargin,
+                  left: Dimens.bigMargin,
+                  right: Dimens.bigMargin),
+              child: const Center(
+                  child: PersoLoginButton(loginType: LoginType.apple))),
         ],
       )),
     );

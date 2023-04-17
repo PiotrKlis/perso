@@ -70,7 +70,7 @@ class ThemeText {
 
   static TextStyle bodyBoldGreyText = TextStyle(
       fontFamily: fontFamilyName,
-      color: PersoColors.lightGrey,
+      color: PersoColors.grey,
       fontSize: 17.0,
       height: 1.35,
       letterSpacing: -0.4,

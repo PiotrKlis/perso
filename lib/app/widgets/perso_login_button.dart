@@ -9,20 +9,45 @@ class PersoLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: Dimens.loginButtonHeight,
-        decoration: const BoxDecoration(
-            color: PersoColors.lightWhite,
-            borderRadius:
-                BorderRadius.all(Radius.circular(Dimens.buttonBorderRadius))),
+    return SizedBox(
+        height: Dimens.loginButtonHeight, child: getButton(loginType));
+  }
+
+  ElevatedButton getButton(LoginType loginType) {
+    return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            elevation: 0,
+            backgroundColor: PersoColors.lightWhite,
+            shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(Dimens.buttonBorderRadius))),
+        onPressed: () {},
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.g_mobiledata, color: PersoColors.lightGrey),
-            Text("Sign in with Google", style: ThemeText.bodyBoldGreyText,)
+            getIcon(loginType),
+            getTitle(loginType),
           ],
         ));
   }
+
+  Icon getIcon(LoginType loginType) {
+    switch (loginType) {
+      case LoginType.google:
+        return const Icon(Icons.g_mobiledata, color: PersoColors.lightGrey);
+      case LoginType.apple:
+        return const Icon(Icons.apple, color: PersoColors.lightGrey);
+    }
+  }
+
+  Text getTitle(LoginType loginType) {
+    switch (loginType) {
+      case LoginType.google:
+        return Text("Sign in with Google", style: ThemeText.bodyBoldGreyText);
+      case LoginType.apple:
+        return Text("Sign in with Apple", style: ThemeText.bodyBoldGreyText);
+    }
+  }
 }
 
-enum LoginType { Google, Facebook, Apple }
+enum LoginType { google, apple }
