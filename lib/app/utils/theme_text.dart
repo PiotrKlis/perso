@@ -107,6 +107,20 @@ class ThemeText {
       height: 1.38,
       fontWeight: FontWeight.w600);
 
+  static TextStyle footnoteBoldBlue = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.blue,
+      fontSize: 13.0,
+      height: 1.38,
+      fontWeight: FontWeight.w600);
+
+  static TextStyle footnoteBoldGrey = TextStyle(
+      fontFamily: fontFamilyName,
+      color: PersoColors.lightGrey,
+      fontSize: 13.0,
+      height: 1.38,
+      fontWeight: FontWeight.w600);
+
   static TextStyle captionMediumBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,

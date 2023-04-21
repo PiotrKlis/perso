@@ -111,6 +111,30 @@ class SignInScreen extends StatelessWidget {
                   right: Dimens.bigMargin),
               child: const Center(
                   child: PersoLoginButton(loginType: LoginType.apple))),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.hugeMargin),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Don't have an account?",
+                  style: ThemeText.footnoteBoldGrey,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: Dimens.smallerMargin),
+                  child: GestureDetector(
+                    onTap: () {
+                      // context.push("/sign-up");
+                    },
+                    child: Text(
+                      "Sign Up",
+                      style: ThemeText.footnoteBoldBlue,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       )),
     );

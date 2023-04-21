@@ -10,25 +10,22 @@ class PersoLoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: Dimens.loginButtonHeight, child: getButton(loginType));
-  }
-
-  ElevatedButton getButton(LoginType loginType) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            elevation: 0,
-            backgroundColor: PersoColors.lightWhite,
-            shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(Dimens.buttonBorderRadius))),
-        onPressed: () {},
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            getIcon(loginType),
-            getTitle(loginType),
-          ],
-        ));
+        height: Dimens.loginButtonHeight,
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                elevation: 0,
+                backgroundColor: PersoColors.lightWhite,
+                shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(Dimens.buttonBorderRadius))),
+            onPressed: () {},
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                getIcon(loginType),
+                getTitle(loginType),
+              ],
+            )));
   }
 
   Icon getIcon(LoginType loginType) {
