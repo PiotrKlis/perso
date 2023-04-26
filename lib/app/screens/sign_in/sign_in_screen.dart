@@ -4,6 +4,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,10 +13,10 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: PersoColors.lightBlue,
-      child: SafeArea(
-          child: Column(
+    return SafeArea(
+        child: Scaffold(
+      backgroundColor: PersoColors.lightBlue,
+      body: Column(
         children: [
           Row(
             children: [
@@ -103,14 +104,14 @@ class SignInScreen extends StatelessWidget {
                   left: Dimens.bigMargin,
                   right: Dimens.bigMargin),
               child: const Center(
-                  child: PersoLoginButton(loginType: LoginType.google))),
+                  child: PersoRegisterButton(registerType: RegisterType.client))),
           Container(
               margin: const EdgeInsets.only(
                   top: Dimens.mediumMargin,
                   left: Dimens.bigMargin,
                   right: Dimens.bigMargin),
               child: const Center(
-                  child: PersoLoginButton(loginType: LoginType.apple))),
+                  child: PersoRegisterButton(registerType: RegisterType.trainer))),
           Container(
             margin: const EdgeInsets.only(top: Dimens.hugeMargin),
             child: Row(
@@ -124,7 +125,7 @@ class SignInScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(left: Dimens.smallerMargin),
                   child: GestureDetector(
                     onTap: () {
-                      // context.push("/sign-up");
+                      context.go(ScreenNavigationKey.signUp);
                     },
                     child: Text(
                       "Sign Up",
@@ -136,7 +137,7 @@ class SignInScreen extends StatelessWidget {
             ),
           )
         ],
-      )),
-    );
+      ),
+    ));
   }
 }

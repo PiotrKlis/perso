@@ -3,9 +3,9 @@ import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
 
-class PersoLoginButton extends StatelessWidget {
-  const PersoLoginButton({Key? key, required this.loginType}) : super(key: key);
-  final LoginType loginType;
+class PersoRegisterButton extends StatelessWidget {
+  const PersoRegisterButton({Key? key, required this.registerType}) : super(key: key);
+  final RegisterType registerType;
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +22,29 @@ class PersoLoginButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                getIcon(loginType),
-                getTitle(loginType),
+                getIcon(registerType),
+                getTitle(registerType),
               ],
             )));
   }
 
-  Icon getIcon(LoginType loginType) {
+  Icon getIcon(RegisterType loginType) {
     switch (loginType) {
-      case LoginType.google:
-        return const Icon(Icons.g_mobiledata, color: PersoColors.lightGrey);
-      case LoginType.apple:
-        return const Icon(Icons.apple, color: PersoColors.lightGrey);
+      case RegisterType.client:
+        return const Icon(Icons.fitness_center, color: PersoColors.lightGrey);
+      case RegisterType.trainer:
+        return const Icon(Icons.work, color: PersoColors.lightGrey);
     }
   }
 
-  Text getTitle(LoginType loginType) {
+  Text getTitle(RegisterType loginType) {
     switch (loginType) {
-      case LoginType.google:
-        return Text("Sign in with Google", style: ThemeText.bodyBoldGreyText);
-      case LoginType.apple:
-        return Text("Sign in with Apple", style: ThemeText.bodyBoldGreyText);
+      case RegisterType.client:
+        return Text("Register as a Client", style: ThemeText.bodyBoldGreyText);
+      case RegisterType.trainer:
+        return Text("Register as a Trainer", style: ThemeText.bodyBoldGreyText);
     }
   }
 }
 
-enum LoginType { google, apple }
+enum RegisterType { client, trainer }
