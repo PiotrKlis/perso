@@ -125,7 +125,7 @@ class SignInScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(left: Dimens.smallerMargin),
                   child: GestureDetector(
                     onTap: () {
-                      context.go(ScreenNavigationKey.signUp);
+                      context.push(ScreenNavigationKey.trainerSignUp);
                     },
                     child: Text(
                       "Sign Up",

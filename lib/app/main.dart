@@ -1,6 +1,6 @@
 import 'package:Perso/app/utils/localisation_keys.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/core/navigation/router_config.dart';
+import 'package:Perso/core/navigation/navigation_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
               buttonColor: Colors.black, textTheme: ButtonTextTheme.primary),
           fontFamily: "Inter"),
       child: PlatformProvider(
-        builder: (context) => PlatformApp.router(
+        builder: (context) => MaterialApp.router(
           routerConfig: goRouter,
           title: "Perso",
           localizationsDelegates: const [

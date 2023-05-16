@@ -28,7 +28,6 @@ class ScaffoldWithBottomNavBar extends StatefulWidget {
 
 class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
 
-
   // using the helper method below
   int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
 
@@ -41,10 +40,10 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
 
   // callback used to navigate to the desired tab
   void _onItemTapped(BuildContext context, int tabIndex) {
-    if (tabIndex != _currentIndex) {
-      // go to the initial location of the selected tab (by index)
+    // if (tabIndex != _currentIndex) {
+    //   // go to the initial location of the selected tab (by index)
       context.go(tabs[tabIndex].initialLocation);
-    }
+    // }
   }
 
   @override

@@ -30,7 +30,8 @@ class HomeScreen extends StatelessWidget {
             child: Column(children: [
               GestureDetector(
                   onTap: () {
-                    context.push(ScreenNavigationKey.signIn);
+                    context.push(
+                        "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}");
                   },
                   child: const PersoAccountIcon()),
               Container(
