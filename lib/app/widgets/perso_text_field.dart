@@ -12,24 +12,24 @@ class PersoTextField extends StatelessWidget {
       height: Dimens.textFieldHeight,
       margin: const EdgeInsets.only(
           left: Dimens.biggerMargin, right: Dimens.biggerMargin),
-      child: Card(
-        elevation: 1.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(Dimens.textFieldBorderRadius)
-        ),
-        child: TextFormField(
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              contentPadding: EdgeInsets.zero,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(Dimens.textFieldBorderRadius),
-                borderSide: BorderSide.none,
-              ),
-              labelText: title,
-              labelStyle: ThemeText.bodyRegularGreyText),
-        ),
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter some text';
+          }
+          return null;
+        },
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: EdgeInsets.zero,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Dimens.textFieldBorderRadius),
+              borderSide: BorderSide.none,
+            ),
+            hintText: title,
+            labelStyle: ThemeText.bodyRegularBlackText),
       ),
     );
   }

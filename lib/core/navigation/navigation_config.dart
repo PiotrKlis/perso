@@ -13,7 +13,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final GoRouter goRouter = GoRouter(
-    initialLocation: ScreenNavigationKey.home,
+    initialLocation: "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}",
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [

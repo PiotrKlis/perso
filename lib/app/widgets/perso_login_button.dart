@@ -23,7 +23,8 @@ class PersoRegisterButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 getIcon(registerType),
-                getTitle(registerType),
+                Container(margin: const EdgeInsets.only(left: Dimens.normalMargin), child: getTitle(registerType)),
+                Container(margin: const EdgeInsets.only(left: Dimens.normalMargin), child: getIcon(registerType)),
               ],
             )));
   }
