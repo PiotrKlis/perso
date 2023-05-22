@@ -1,10 +1,12 @@
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
+// import 'package:form_field_validator/form_field_validator.dart';
 
 class PersoTextField extends StatelessWidget {
-  const PersoTextField({Key? key, required this.title}) : super(key: key);
+  const PersoTextField({Key? key, required this.title, required this.isRequired}) : super(key: key);
   final String title;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +15,9 @@ class PersoTextField extends StatelessWidget {
       margin: const EdgeInsets.only(
           left: Dimens.biggerMargin, right: Dimens.biggerMargin),
       child: TextFormField(
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
+        // validator: RequiredValidator(
+        //       errorText: "Field is required");
+        // },
         textAlign: TextAlign.center,
         decoration: InputDecoration(
             filled: true,

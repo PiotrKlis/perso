@@ -4,6 +4,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -54,10 +55,10 @@ class SignInScreen extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                child: const PersoTextField(title: "Login")),
+                child: const PersoTextField(title: "Login", isRequired: true)),
             Container(
                 margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                child: const PersoTextField(title: "Password")),
+                child: const PersoTextField(title: "Password", isRequired: true)),
             Center(
               child: Container(
                 margin: const EdgeInsets.only(top: Dimens.bigMargin),
@@ -104,17 +105,23 @@ class SignInScreen extends StatelessWidget {
                     top: Dimens.biggerMargin,
                     left: Dimens.bigMargin,
                     right: Dimens.bigMargin),
-                child: const Center(
-                    child: PersoRegisterButton(
-                        registerType: RegisterType.client))),
+                child: const PersoRegisterButton(
+                    registerType: RegisterType.client)),
             Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.mediumMargin,
+                    top: Dimens.normalMargin,
                     left: Dimens.bigMargin,
                     right: Dimens.bigMargin),
-                child: const Center(
+                child: GestureDetector(
+                  onTap: () {
+                    context.push(
+                        "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}/${ScreenNavigationKey.trainerSignUp}");
+                  },
+                  child: const AbsorbPointer(
                     child: PersoRegisterButton(
-                        registerType: RegisterType.trainer))),
+                        registerType: RegisterType.trainer),
+                  ),
+                )),
           ],
         ),
       ),
