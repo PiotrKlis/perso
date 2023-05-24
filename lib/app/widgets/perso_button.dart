@@ -3,10 +3,11 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
 
 class PersoButton extends StatelessWidget {
-  const PersoButton({super.key, required this.width, required this.title});
+  const PersoButton({super.key, required this.width, required this.title, this.onTap});
 
   final String title;
   final double width;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,9 @@ class PersoButton extends StatelessWidget {
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(), backgroundColor: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              onTap?.call();
+            },
             child: Text(
               title,
               style: ThemeText.calloutBoldWhiteText,

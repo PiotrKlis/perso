@@ -1,0 +1,8 @@
+=== BACKLOG ===
+
+- Hide password on input
+- Send user data to firestore
+
+
+- Create proper nickname validator
+- Image upload

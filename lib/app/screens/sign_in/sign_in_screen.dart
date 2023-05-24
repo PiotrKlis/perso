@@ -55,10 +55,10 @@ class SignInScreen extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                child: const PersoTextField(title: "Login", isRequired: true)),
+                child: const PersoTextField(title: "Login")),
             Container(
                 margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                child: const PersoTextField(title: "Password", isRequired: true)),
+                child: const PersoTextField(title: "Password")),
             Center(
               child: Container(
                 margin: const EdgeInsets.only(top: Dimens.bigMargin),
