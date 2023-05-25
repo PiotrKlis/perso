@@ -44,7 +44,7 @@ final GoRouter goRouter = GoRouter(
                     GoRoute(
                       path: ScreenNavigationKey.trainerSignUp,
                       pageBuilder: (context, state) {
-                        return const NoTransitionPage(child: TrainerSignUpScreen());
+                        return NoTransitionPage(child: TrainerSignUpScreen());
                       },
                     ),
                   ])

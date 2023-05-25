@@ -6,14 +6,9 @@ import 'package:flutter/material.dart';
 
 import '../../utils/validators.dart';
 
-class TrainerSignUpScreen extends StatefulWidget {
-  const TrainerSignUpScreen({Key? key}) : super(key: key);
+class TrainerSignUpScreen extends StatelessWidget {
+  TrainerSignUpScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TrainerSignUpScreen> createState() => _TrainerSignUpScreenState();
-}
-
-class _TrainerSignUpScreenState extends State<TrainerSignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -40,23 +35,35 @@ class _TrainerSignUpScreenState extends State<TrainerSignUpScreen> {
                   )),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                  child: const PersoTextField(title: "Email", customValidator: TextFieldValidator.validateEmail)),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                  child: const PersoTextField(title: "Password", customValidator: TextFieldValidator.validatePassword)),
+                  child: const PersoTextField(
+                      title: "Email",
+                      customValidator: TextFieldValidator.validateEmail)),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.normalMargin),
                   child: const PersoTextField(
-                      title: "Name", customValidator: TextFieldValidator.validateName)),
+                    title: "Password",
+                    customValidator: TextFieldValidator.validatePassword,
+                    isPassword: true,
+                  )),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                  child: const PersoTextField(title: "Surname", customValidator: TextFieldValidator.validateName)),
+                  child: const PersoTextField(
+                      title: "Name",
+                      customValidator: TextFieldValidator.validateName)),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                  child: const PersoTextField(title: "Nickname", customValidator: TextFieldValidator.validateNickname)),
+                  child: const PersoTextField(
+                      title: "Surname",
+                      customValidator: TextFieldValidator.validateName)),
+              Container(
+                  margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                  child: const PersoTextField(
+                      title: "Nickname",
+                      customValidator: TextFieldValidator.validateNickname)),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                  child: PersoButton(width: 160.0, title: "Next", onTap: onTapLogic))
+                  child: PersoButton(
+                      width: 160.0, title: "Next", onTap: onTapLogic))
             ],
           ),
         ),
@@ -65,7 +72,7 @@ class _TrainerSignUpScreenState extends State<TrainerSignUpScreen> {
   }
 
   void onTapLogic() {
-    if(_formKey.currentState?.validate() == true){
+    if (_formKey.currentState?.validate() == true) {
       print("PKPK validated!");
     }
   }

@@ -3,13 +3,15 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
 
 class PersoTextField extends StatelessWidget {
-  const PersoTextField({
-    required this.title,
-    this.customValidator,
-    Key? key,
-  }) : super(key: key);
+  const PersoTextField(
+      {super.key,
+      required this.title,
+      this.customValidator,
+      this.isPassword = false});
+
   final String title;
   final String? Function(String value)? customValidator;
+  final bool isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class PersoTextField extends StatelessWidget {
       margin: const EdgeInsets.only(
           left: Dimens.biggerMargin, right: Dimens.biggerMargin),
       child: TextFormField(
+        obscureText: isPassword,
         validator: (value) {
           return customValidator?.call(value ?? "");
         },
