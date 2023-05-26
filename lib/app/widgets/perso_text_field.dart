@@ -24,18 +24,18 @@ class PersoTextField extends StatelessWidget {
         validator: (value) {
           return customValidator?.call(value ?? "");
         },
-        textAlign: TextAlign.center,
         decoration: InputDecoration(
             filled: true,
-            fillColor: PersoColors.lightWhite,
+            fillColor: Colors.white,
             errorMaxLines: 2,
             focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: PersoColors.grey)),
-            border: const OutlineInputBorder(
-              borderSide: BorderSide(color: PersoColors.grey),
+                borderSide:
+                    BorderSide(width: 0.5, color: PersoColors.lightGrey)),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
             ),
             labelText: title,
-            labelStyle: ThemeText.bodyRegularBlackText),
+            labelStyle: ThemeText.bodyRegularGreyText),
       ),
     );
   }

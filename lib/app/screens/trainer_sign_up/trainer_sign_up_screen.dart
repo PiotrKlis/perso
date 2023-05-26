@@ -159,7 +159,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                       customValidator: TextFieldValidator.validateNickname)),
               Center(
                 child: Container(
-                    margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                    margin: const EdgeInsets.only(top: Dimens.biggerMargin, bottom: Dimens.biggerMargin),
                     child: PersoButton(
                         width: 160.0, title: "Next", onTap: onTapLogic)),
               )
