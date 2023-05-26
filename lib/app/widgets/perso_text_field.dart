@@ -1,3 +1,4 @@
+import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ class PersoTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-          left: Dimens.biggerMargin, right: Dimens.biggerMargin),
+      width: 320,
+      margin: const EdgeInsets.only(left: Dimens.normalMargin),
       child: TextFormField(
         obscureText: isPassword,
         validator: (value) {
@@ -26,14 +27,14 @@ class PersoTextField extends StatelessWidget {
         textAlign: TextAlign.center,
         decoration: InputDecoration(
             filled: true,
-            fillColor: Colors.white,
-            contentPadding: EdgeInsets.zero,
+            fillColor: PersoColors.lightWhite,
             errorMaxLines: 2,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimens.textFieldBorderRadius),
-              borderSide: BorderSide.none,
+            focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: PersoColors.grey)),
+            border: const OutlineInputBorder(
+              borderSide: BorderSide(color: PersoColors.grey),
             ),
-            hintText: title,
+            labelText: title,
             labelStyle: ThemeText.bodyRegularBlackText),
       ),
     );

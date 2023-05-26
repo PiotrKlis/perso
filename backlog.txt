@@ -1,8 +1,6 @@
 === BACKLOG ===
-
-- Hide password on input
+- Finish trainer sign up screen
+- clck anywhere should close the keyboard
 - Send user data to firestore
-
-
 - Create proper nickname validator
 - Image upload

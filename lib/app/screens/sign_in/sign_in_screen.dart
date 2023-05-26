@@ -2,6 +2,7 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
+import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
@@ -82,22 +83,9 @@ class SignInScreen extends StatelessWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                        child: Container(
-                      margin: const EdgeInsets.only(
-                          left: Dimens.biggerMargin,
-                          right: Dimens.normalMargin),
-                      child: const Divider(
-                        color: PersoColors.lightGrey,
-                      ),
-                    )),
+                    const Expanded(child: PersoDivider()),
                     Text("OR", style: ThemeText.footnoteRegularGrey),
-                    Expanded(
-                        child: Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin,
-                                right: Dimens.biggerMargin),
-                            child: const Divider(color: PersoColors.lightGrey)))
+                    const Expanded(child: PersoDivider()),
                   ]),
             ),
             Container(
@@ -118,8 +106,8 @@ class SignInScreen extends StatelessWidget {
                         "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}/${ScreenNavigationKey.trainerSignUp}");
                   },
                   child: const AbsorbPointer(
-                    child: PersoRegisterButton(
-                        registerType: RegisterType.trainer),
+                    child:
+                        PersoRegisterButton(registerType: RegisterType.trainer),
                   ),
                 )),
           ],
