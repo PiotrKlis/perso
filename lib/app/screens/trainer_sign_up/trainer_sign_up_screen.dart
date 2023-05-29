@@ -27,11 +27,32 @@ class TrainerSignUpScreen extends StatelessWidget {
             children: [
               Center(
                 child: Container(
-                    margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: const Icon(
                       Icons.photo,
                       size: 96.0,
                     )),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: Dimens.normalMargin),
+                child: Row(
+                  children: [
+                    Container(
+                        margin:
+                            const EdgeInsets.only(left: Dimens.normalMargin),
+                        child: const Icon(Icons.email, size: 24.0)),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            left: Dimens.normalMargin,
+                            right: Dimens.normalMargin),
+                        child: const PersoTextField(
+                            title: "Email",
+                            customValidator: TextFieldValidator.validateEmail),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
@@ -41,34 +62,18 @@ class TrainerSignUpScreen extends StatelessWidget {
                       Container(
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.email, size: 24.0)),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
-                        child: const PersoTextField(
-                            title: "Email",
-                            customValidator: TextFieldValidator.validateEmail),
-                      ),
-                    ],
-                  )),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.password, size: 24.0)),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
-                        child: const PersoTextField(
-                          title: "Password",
-                          customValidator: TextFieldValidator.validatePassword,
-                          shouldObscureText: true,
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: const PersoTextField(
+                            title: "Password",
+                            customValidator:
+                                TextFieldValidator.validatePassword,
+                            shouldObscureText: true,
+                          ),
                         ),
                       ),
                     ],
@@ -85,13 +90,15 @@ class TrainerSignUpScreen extends StatelessWidget {
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.person, size: 24.0)),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
-                        child: const PersoTextField(
-                            title: "Name",
-                            customValidator: TextFieldValidator.validateName),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: const PersoTextField(
+                              title: "Name",
+                              customValidator: TextFieldValidator.validateName),
+                        ),
                       ),
                     ],
                   )),
@@ -124,14 +131,20 @@ class TrainerSignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                          margin:
+                              const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.pin_drop, size: 24.0)),
-                      const PersoTextField(
-                          // TODO: Add location autocomplete https://medium.com/@yshean/location-search-autocomplete-in-flutter-84f155d44721
-                          title: "Location",
-                          customValidator: TextFieldValidator.validateNickname),
+                      Expanded(
+                        child: Container(
+                          margin:
+                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          child: const PersoTextField(
+                              // TODO: Add location autocomplete https://medium.com/@yshean/location-search-autocomplete-in-flutter-84f155d44721
+                              title: "Location",
+                              customValidator:
+                                  TextFieldValidator.validateNickname),
+                        ),
+                      ),
                     ],
                   )),
               Container(
@@ -141,14 +154,20 @@ class TrainerSignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                          margin:
+                              const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.phone, size: 24.0)),
-                      const PersoTextField(
-                        title: "Phone number",
-                        customValidator: TextFieldValidator.validateNickname,
-                        textInputType: TextInputType.phone,
+                      Expanded(
+                        child: Container(
+                          margin:
+                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          child: const PersoTextField(
+                            title: "Phone number",
+                            customValidator:
+                                TextFieldValidator.validateNickname,
+                            textInputType: TextInputType.phone,
+                          ),
+                        ),
                       ),
                     ],
                   )),
@@ -166,14 +185,17 @@ class TrainerSignUpScreen extends StatelessWidget {
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.text_snippet, size: 24.0)),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(left: Dimens.normalMargin),
-                        child: const PersoTextField(
-                          //TODO: Create slightly larger TextField and validator with max characeters.
-                          title: "Short Bio",
-                          customValidator: TextFieldValidator.validateNickname,
-                          // isMultiLine: true,
+                      Expanded(
+                        child: Container(
+                          margin:
+                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          child: const PersoTextField(
+                            //TODO: Create slightly larger TextField and validator with max characeters.
+                            title: "Short Bio",
+                            customValidator:
+                                TextFieldValidator.validateNickname,
+                            // isMultiLine: true,
+                          ),
                         ),
                       ),
                     ],
