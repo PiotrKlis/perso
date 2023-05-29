@@ -8,22 +8,26 @@ class PersoTextField extends StatelessWidget {
       {super.key,
       required this.title,
       this.customValidator,
-      this.isPassword = false});
+      this.shouldObscureText = false,
+      this.textInputType = TextInputType.text,
+      this.isMultiLine = false});
 
   final String title;
   final String? Function(String value)? customValidator;
-  final bool isPassword;
+  final bool shouldObscureText;
+  final TextInputType textInputType;
+  final bool isMultiLine;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 320,
-      margin: const EdgeInsets.only(left: Dimens.normalMargin),
+      width: 300.0,
       child: TextFormField(
-        obscureText: isPassword,
-        validator: (value) {
-          return customValidator?.call(value ?? "");
-        },
+        obscureText: shouldObscureText,
+        keyboardType: isMultiLine ? TextInputType.multiline : textInputType,
+        expands: isMultiLine ? true : false,
+        maxLines: isMultiLine ? null : 1,
+        validator: (value) => customValidator?.call(value ?? ""),
         decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white,
@@ -32,7 +36,8 @@ class PersoTextField extends StatelessWidget {
                 borderSide:
                     BorderSide(width: 0.5, color: PersoColors.lightGrey)),
             enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
+              borderSide:
+                  BorderSide(width: 0.5, color: PersoColors.lightGrey),
             ),
             labelText: title,
             labelStyle: ThemeText.bodyRegularGreyText),
