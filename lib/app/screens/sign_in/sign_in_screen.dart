@@ -55,10 +55,16 @@ class SignInScreen extends StatelessWidget {
                   child: Text("Sign In", style: ThemeText.largerTitleBold)),
             ),
             Container(
-                margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                margin: const EdgeInsets.only(
+                    top: Dimens.biggerMargin,
+                    left: Dimens.normalMargin,
+                    right: Dimens.normalMargin),
                 child: const PersoTextField(title: "Login")),
             Container(
-                margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                margin: const EdgeInsets.only(
+                    top: Dimens.normalMargin,
+                    left: Dimens.normalMargin,
+                    right: Dimens.normalMargin),
                 child: const PersoTextField(title: "Password")),
             Center(
               child: Container(
