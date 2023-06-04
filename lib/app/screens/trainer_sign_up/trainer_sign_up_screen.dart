@@ -187,6 +187,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                           child: const Icon(Icons.text_snippet, size: 24.0)),
                       Expanded(
                         child: Container(
+                          height: 140.0,
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const PersoTextField(
@@ -194,13 +195,15 @@ class TrainerSignUpScreen extends StatelessWidget {
                             title: "Short Bio",
                             customValidator:
                                 TextFieldValidator.validateNickname,
-                            // isMultiLine: true,
+                            isMultiLine: true,
+                            maxLength: 150,
                           ),
                         ),
                       ),
                     ],
                   )),
               Container(
+                  height: 340.0,
                   margin: const EdgeInsets.only(
                       left: Dimens.substantialMargin,
                       top: Dimens.normalMargin,
@@ -208,6 +211,8 @@ class TrainerSignUpScreen extends StatelessWidget {
                   child: const PersoTextField(
                       //TODO: Create larger TextField and validator with max characeters.
                       title: "Long bio",
+                      isMultiLine: true,
+                      maxLength: 500,
                       customValidator: TextFieldValidator.validateNickname)),
               Container(
                   margin: const EdgeInsets.only(
