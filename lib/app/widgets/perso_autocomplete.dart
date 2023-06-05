@@ -1,18 +1,14 @@
 import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/data/google/place_service.dart';
+import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/data/address_provider/address_provider.dart';
+import 'package:Perso/data/address_provider/google_address_provider.dart';
 import 'package:flutter/material.dart';
-
-import '../utils/theme_text.dart';
+import 'package:get_it/get_it.dart';
 
 class PersoAutocomplete extends StatelessWidget {
   PersoAutocomplete({Key? key}) : super(key: key);
-  static const List<String> _kOptions = <String>[
-    'aardvark',
-    'bobcat',
-    'chameleon',
-  ];
 
-  final PlaceApiProvider _placeApiProvider = PlaceApiProvider();
+  final AddressProvider _addressProvider = GetIt.I.get<GoogleAddressProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +33,17 @@ class PersoAutocomplete extends StatelessWidget {
               labelStyle: ThemeText.bodyRegularGreyText),
         );
       },
-      optionsBuilder: (TextEditingValue textEditingValue) {
-        if (textEditingValue.text == '') {
+      optionsBuilder: (TextEditingValue textEditingValue) async {
+        String input = textEditingValue.text;
+        if (input == "") {
           return const Iterable<String>.empty();
         }
-        return _kOptions.where((String option) {
-          return option.contains(textEditingValue.text.toLowerCase());
-        });
+        List<String> suggestions =
+            await _addressProvider.fetchSuggestions(input);
+        return suggestions;
       },
       onSelected: (String selection) {
-        debugPrint('You just selected $selection');
+        //no-op
       },
     );
   }

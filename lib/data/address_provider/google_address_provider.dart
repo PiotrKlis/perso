@@ -1,0 +1,36 @@
+import 'dart:convert';
+
+import 'package:Perso/data/address_provider/address_provider.dart';
+import 'package:http/http.dart';
+import 'package:injectable/injectable.dart';
+import 'package:uuid/uuid.dart';
+
+@injectable
+class GoogleAddressProvider implements AddressProvider {
+  final client = Client();
+  final sessionToken = const Uuid().v4();
+
+  final String apiKey = "AIzaSyAFu6Z8q4klRZddcUjXZSAqluMZW8hcP1Q";
+
+  @override
+  Future<List<String>> fetchSuggestions(String input) async {
+    final Uri request = Uri.parse(
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&components=country:pl&key=$apiKey&sessiontoken=$sessionToken');
+    final response = await client.get(request);
+
+    if (response.statusCode == 200) {
+      final result = json.decode(response.body);
+      if (result['status'] == 'OK') {
+        return result['predictions']
+            .map<String>((prediction) => prediction['description'] as String)
+            .toList();
+      }
+      if (result['status'] == 'ZERO_RESULTS') {
+        return [];
+      }
+      throw Exception(result['error_message']);
+    } else {
+      throw Exception('Failed to fetch suggestion');
+    }
+  }
+}

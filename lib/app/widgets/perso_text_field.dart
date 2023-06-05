@@ -1,6 +1,5 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/data/google/place_service.dart';
 import 'package:flutter/material.dart';
 
 class PersoTextField extends StatefulWidget {
@@ -26,7 +25,6 @@ class PersoTextField extends StatefulWidget {
 
 class _PersoTextFieldState extends State<PersoTextField> {
   final _controller = TextEditingController();
-  final _placeApiProvider = PlaceApiProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +37,6 @@ class _PersoTextFieldState extends State<PersoTextField> {
       expands: widget.isMultiLine ? true : false,
       textAlignVertical: TextAlignVertical.top,
       validator: (value) => widget.customValidator?.call(value ?? ""),
-      onChanged: (input) {
-        if (input.isNotEmpty) {
-          _placeApiProvider.fetchSuggestions(input);
-          setState(() {});
-        }
-      },
       decoration: InputDecoration(
           counterText: widget.isMultiLine ? null : "",
           filled: true,
