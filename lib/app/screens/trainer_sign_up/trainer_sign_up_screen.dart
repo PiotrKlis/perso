@@ -1,6 +1,7 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
@@ -34,7 +35,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                     )),
               ),
               Container(
-                margin: EdgeInsets.only(top: Dimens.normalMargin),
+                margin: const EdgeInsets.only(top: Dimens.normalMargin),
                 child: Row(
                   children: [
                     Container(
@@ -136,14 +137,9 @@ class TrainerSignUpScreen extends StatelessWidget {
                           child: const Icon(Icons.pin_drop, size: 24.0)),
                       Expanded(
                         child: Container(
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const PersoTextField(
-                              // TODO: Add location autocomplete https://medium.com/@yshean/location-search-autocomplete-in-flutter-84f155d44721
-                              title: "Location",
-                              customValidator:
-                                  TextFieldValidator.validateNickname),
-                        ),
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin),
+                            child: PersoAutocomplete()),
                       ),
                     ],
                   )),
@@ -191,7 +187,6 @@ class TrainerSignUpScreen extends StatelessWidget {
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const PersoTextField(
-                            //TODO: Create slightly larger TextField and validator with max characeters.
                             title: "Short Bio",
                             customValidator:
                                 TextFieldValidator.validateNickname,
@@ -209,7 +204,6 @@ class TrainerSignUpScreen extends StatelessWidget {
                       top: Dimens.normalMargin,
                       right: Dimens.normalMargin),
                   child: const PersoTextField(
-                      //TODO: Create larger TextField and validator with max characeters.
                       title: "Long bio",
                       isMultiLine: true,
                       maxLength: 500,
