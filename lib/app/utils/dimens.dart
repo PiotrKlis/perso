@@ -41,4 +41,6 @@ class Dimens {
   static const double textFieldBorderRadius = 48.0;
 
   static const double loginButtonHeight = 48.0;
+  static const double smallButtonHeight = 40.0;
+  static const double smallerButtonWidth = 60.0;
 }

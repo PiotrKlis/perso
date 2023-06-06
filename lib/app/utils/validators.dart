@@ -46,4 +46,17 @@ class TextFieldValidator {
       return null;
     }
   }
+
+  static String? validateDigits(String value) {
+    if (value.isEmpty) {
+      return 'Field is required';
+    }
+
+    final RegExp digitsRegex = RegExp(r'^[0-9]+$');
+    if (!digitsRegex.hasMatch(value)) {
+      return 'Only digits are allowed';
+    }
+
+    return null;
+  }
 }

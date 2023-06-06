@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 
-@injectable
+@singleton
 class GoogleAddressProvider implements AddressProvider {
   final client = Client();
   final sessionToken = const Uuid().v4();

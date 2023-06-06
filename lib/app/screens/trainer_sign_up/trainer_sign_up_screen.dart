@@ -4,8 +4,11 @@ import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_small_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:country_picker/country_picker.dart';
 
 class TrainerSignUpScreen extends StatelessWidget {
   TrainerSignUpScreen({Key? key}) : super(key: key);
@@ -160,7 +163,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                           child: const PersoTextField(
                             title: "Phone number",
                             customValidator:
-                                TextFieldValidator.validateNickname,
+                                TextFieldValidator.validateDigits,
                             textInputType: TextInputType.phone,
                           ),
                         ),
@@ -211,10 +214,20 @@ class TrainerSignUpScreen extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.only(
                       top: Dimens.normalMargin, right: Dimens.normalMargin),
-                  child: const PersoTextField(
-                      //TODO: implement https://github.com/Daniel-Ioannou/flutter_country_picker
-                      title: "Languages TODO",
-                      customValidator: TextFieldValidator.validateNickname)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                          margin:
+                          const EdgeInsets.only(left: Dimens.normalMargin),
+                          child: const Icon(Icons.flag, size: 24.0)),
+                      Container(
+                        margin:
+                        const EdgeInsets.only(left: Dimens.normalMargin),
+                        child: PersoSmallButton()
+                      ),
+                    ],
+                  )),
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(
