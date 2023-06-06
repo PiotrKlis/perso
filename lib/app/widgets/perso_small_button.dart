@@ -18,9 +18,11 @@ class PersoSmallButton extends StatelessWidget {
                     borderRadius:
                         BorderRadius.circular(Dimens.buttonBorderRadius))),
             onPressed: () {
-                showCountryPicker(context: context, onSelect: (value) {
-                  // Add new country chip
-                });
+              showCountryPicker(
+                  context: context,
+                  onSelect: (value) {
+                    // Add new country chip
+                  });
             },
             child: Text(
               "Add",
