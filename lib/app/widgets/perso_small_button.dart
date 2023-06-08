@@ -7,33 +7,46 @@ class PersoSmallButton extends StatelessWidget {
   const PersoSmallButton(
       {Key? key,
       required this.text,
-      required this.addLanguage})
+      required this.addLanguage,
+      required this.customValidator})
       : super(key: key);
 
   final String text;
   final void Function(String value) addLanguage;
+  final String? Function() customValidator;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: Dimens.loginButtonHeight,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(Dimens.buttonBorderRadius))),
-            onPressed: () {
-              showCountryPicker(
-                  useSafeArea: true,
-                  favorite: ["PL", "GB", "UA"],
-                  context: context,
-                  onSelect: (value) {
-                    String emoji = value.flagEmoji;
-                   addLanguage.call(emoji);
-                  });
+      width: 200.0,
+      child: TextFormField(
+        validator: (_) => customValidator.call(),
+        readOnly: true,
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          hintText: text,
+          hintStyle: ThemeText.bodyRegularBlue,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),
+              borderSide: BorderSide.none),
+        ),
+        onTap: () {
+          showCountryPicker(
+            onClosed: () {
+
             },
-            child: Text(text, style: ThemeText.bodyRegularBlue)));
+            useSafeArea: true,
+            favorite: ["PL", "GB", "UA"],
+            context: context,
+            onSelect: (value) {
+              String emoji = value.flagEmoji;
+              addLanguage.call(emoji);
+            },
+          );
+        },
+      ),
+    );
   }
 }

@@ -5,7 +5,7 @@ class TextFieldValidator {
     );
 
     if (value.isEmpty) {
-      return '*Required Field';
+      return 'Required Field';
     } else if (!emailRegex.hasMatch(value)) {
       return "Please enter a valid email address";
     } else {
@@ -20,7 +20,7 @@ class TextFieldValidator {
     final hasDigit = RegExp(r'\d').hasMatch(value);
 
     if (value.isEmpty) {
-      return '*Required Field';
+      return 'Required Field';
     } else if (value.length >= minLength &&
         hasUppercase &&
         hasLowercase &&
@@ -33,7 +33,7 @@ class TextFieldValidator {
 
   static String? validateName(String value) {
     if (value.isEmpty) {
-      return '*Required Field';
+      return 'Required Field';
     } else {
       return null;
     }
@@ -41,7 +41,7 @@ class TextFieldValidator {
 
   static String? validateNickname(String value) {
     if (value.isEmpty) {
-      return '*Required Field';
+      return 'Required Field';
     } else {
       return null;
     }
@@ -49,7 +49,7 @@ class TextFieldValidator {
 
   static String? validateDigits(String value) {
     if (value.isEmpty) {
-      return 'Field is required';
+      return null;
     }
 
     final RegExp digitsRegex = RegExp(r'^[0-9]+$');

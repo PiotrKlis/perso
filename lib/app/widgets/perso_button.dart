@@ -3,7 +3,11 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
 
 class PersoButton extends StatelessWidget {
-  const PersoButton({super.key, required this.width, required this.title, this.onTap});
+  const PersoButton(
+      {super.key,
+      required this.title,
+      this.width = Dimens.bigButtonWidth,
+      this.onTap});
 
   final String title;
   final double width;

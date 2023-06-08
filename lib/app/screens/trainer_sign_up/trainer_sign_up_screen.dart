@@ -1,11 +1,10 @@
+import 'package:Perso/app/screens/trainer_sign_up/spoken_language_row.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
-import 'package:Perso/app/widgets/perso_flag_button.dart';
-import 'package:Perso/app/widgets/perso_small_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -32,10 +31,19 @@ class TrainerSignUpScreen extends StatelessWidget {
                 child: Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: const Icon(
-                      Icons.photo,
-                      size: 96.0,
+                      Icons.account_circle,
+                      size: 160.0,
                     )),
               ),
+              //TODO: Add image upload functionality
+              const Center(child: PersoButton(title: "Upload image")),
+              Container(
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: const SpokenLanguageRowWidget()),
+              Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.normalMargin, right: Dimens.normalMargin),
+                  child: const PersoDivider()),
               Container(
                 margin: const EdgeInsets.only(top: Dimens.normalMargin),
                 child: Row(
@@ -209,7 +217,6 @@ class TrainerSignUpScreen extends StatelessWidget {
                       isMultiLine: true,
                       maxLength: 500,
                       customValidator: TextFieldValidator.validateNickname)),
-              LanguageRow(),
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(
@@ -228,61 +235,8 @@ class TrainerSignUpScreen extends StatelessWidget {
 
   void onTapLogic() {
     if (_formKey.currentState?.validate() == true) {
+      //TODO: Send data to firestore
       print("PKPK validated!");
     }
-  }
-}
-
-class LanguageRow extends StatefulWidget {
-  const LanguageRow({Key? key}) : super(key: key);
-
-  @override
-  State<LanguageRow> createState() => _LanguageRowState();
-}
-
-class _LanguageRowState extends State<LanguageRow> {
-  List<Map<String, Widget>> listOfLanguages = [];
-
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> languageWidgets = listOfLanguages
-        .map((map) => map.values.toList())
-        .expand((list) => list)
-        .toList();
-
-    return Container(
-        margin: const EdgeInsets.only(
-            top: Dimens.normalMargin, right: Dimens.normalMargin),
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
-                  child: const Icon(Icons.flag, size: 24.0)),
-              Container(
-                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
-                  child: PersoSmallButton(text: "Add spoken language", addLanguage: addSpokenLanguage)),
-              ...languageWidgets
-            ],
-          ),
-        ));
-  }
-
-  void addSpokenLanguage(String languageEmoji) {
-    Widget languageChip = Container(
-        margin: const EdgeInsets.only(left: Dimens.normalMargin),
-        child: PersoFlagButton(flagEmoji: languageEmoji, onRemoveTap: removeSpokenLanguage));
-    setState(() {
-      listOfLanguages.add({languageEmoji: languageChip});
-    });
-  }
-
-  void removeSpokenLanguage(String languageEmoji) {
-    setState(() {
-      listOfLanguages
-          .removeWhere((element) => element.containsKey(languageEmoji));
-    });
   }
 }
