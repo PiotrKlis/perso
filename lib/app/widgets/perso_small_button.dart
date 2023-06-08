@@ -4,7 +4,14 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 class PersoSmallButton extends StatelessWidget {
-  const PersoSmallButton({Key? key}) : super(key: key);
+  const PersoSmallButton(
+      {Key? key,
+      required this.text,
+      required this.addLanguage})
+      : super(key: key);
+
+  final String text;
+  final void Function(String value) addLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +26,14 @@ class PersoSmallButton extends StatelessWidget {
                         BorderRadius.circular(Dimens.buttonBorderRadius))),
             onPressed: () {
               showCountryPicker(
+                  useSafeArea: true,
+                  favorite: ["PL", "GB", "UA"],
                   context: context,
                   onSelect: (value) {
-                    // Add new country chip
+                    String emoji = value.flagEmoji;
+                   addLanguage.call(emoji);
                   });
             },
-            child: Text(
-              "Add",
-              style: ThemeText.bodyRegularBlue,
-            )));
+            child: Text(text, style: ThemeText.bodyRegularBlue)));
   }
 }

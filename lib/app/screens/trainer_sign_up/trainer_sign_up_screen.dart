@@ -4,11 +4,10 @@ import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_flag_button.dart';
 import 'package:Perso/app/widgets/perso_small_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
-import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:country_picker/country_picker.dart';
 
 class TrainerSignUpScreen extends StatelessWidget {
   TrainerSignUpScreen({Key? key}) : super(key: key);
@@ -162,8 +161,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                               const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const PersoTextField(
                             title: "Phone number",
-                            customValidator:
-                                TextFieldValidator.validateDigits,
+                            customValidator: TextFieldValidator.validateDigits,
                             textInputType: TextInputType.phone,
                           ),
                         ),
@@ -211,23 +209,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                       isMultiLine: true,
                       maxLength: 500,
                       customValidator: TextFieldValidator.validateNickname)),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, right: Dimens.normalMargin),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin:
-                          const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.flag, size: 24.0)),
-                      Container(
-                        margin:
-                        const EdgeInsets.only(left: Dimens.normalMargin),
-                        child: PersoSmallButton()
-                      ),
-                    ],
-                  )),
+              LanguageRow(),
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(
@@ -248,5 +230,59 @@ class TrainerSignUpScreen extends StatelessWidget {
     if (_formKey.currentState?.validate() == true) {
       print("PKPK validated!");
     }
+  }
+}
+
+class LanguageRow extends StatefulWidget {
+  const LanguageRow({Key? key}) : super(key: key);
+
+  @override
+  State<LanguageRow> createState() => _LanguageRowState();
+}
+
+class _LanguageRowState extends State<LanguageRow> {
+  List<Map<String, Widget>> listOfLanguages = [];
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> languageWidgets = listOfLanguages
+        .map((map) => map.values.toList())
+        .expand((list) => list)
+        .toList();
+
+    return Container(
+        margin: const EdgeInsets.only(
+            top: Dimens.normalMargin, right: Dimens.normalMargin),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                  child: const Icon(Icons.flag, size: 24.0)),
+              Container(
+                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                  child: PersoSmallButton(text: "Add spoken language", addLanguage: addSpokenLanguage)),
+              ...languageWidgets
+            ],
+          ),
+        ));
+  }
+
+  void addSpokenLanguage(String languageEmoji) {
+    Widget languageChip = Container(
+        margin: const EdgeInsets.only(left: Dimens.normalMargin),
+        child: PersoFlagButton(flagEmoji: languageEmoji));
+    setState(() {
+      listOfLanguages.add({languageEmoji: languageChip});
+    });
+  }
+
+  void removeSpokenLanguage(String languageEmoji) {
+    setState(() {
+      listOfLanguages
+          .removeWhere((element) => element.containsKey(languageEmoji));
+    });
   }
 }
