@@ -273,7 +273,7 @@ class _LanguageRowState extends State<LanguageRow> {
   void addSpokenLanguage(String languageEmoji) {
     Widget languageChip = Container(
         margin: const EdgeInsets.only(left: Dimens.normalMargin),
-        child: PersoFlagButton(flagEmoji: languageEmoji));
+        child: PersoFlagButton(flagEmoji: languageEmoji, onRemoveTap: removeSpokenLanguage));
     setState(() {
       listOfLanguages.add({languageEmoji: languageChip});
     });

@@ -2,9 +2,14 @@ import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
 class PersoFlagButton extends StatelessWidget {
-  const PersoFlagButton({Key? key, required this.flagEmoji}) : super(key: key);
+  const PersoFlagButton(
+      {Key? key,
+      required this.flagEmoji,
+      required void Function(String languageEmoji) this.onRemoveTap})
+      : super(key: key);
 
   final String flagEmoji;
+  final Function(String languageEmoji) onRemoveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +25,18 @@ class PersoFlagButton extends StatelessWidget {
             onPressed: () {},
             child: Row(
               children: [
-                Text(flagEmoji),
+                Text(flagEmoji, style: TextStyle(fontSize: 24.0),),
                 Container(
-                    margin: EdgeInsets.only(left: Dimens.mediumMargin),
-                    child: Icon(
-                      Icons.cancel_outlined,
-                      size: 14.0,
-                      color: Colors.black,
+                    margin: const EdgeInsets.only(left: Dimens.mediumMargin),
+                    child: GestureDetector(
+                      onTap: () {
+                        onRemoveTap.call(flagEmoji);
+                      },
+                      child: const Icon(
+                        Icons.cancel_outlined,
+                        size: 20.0,
+                        color: Colors.black,
+                      ),
                     ))
               ],
             )));
