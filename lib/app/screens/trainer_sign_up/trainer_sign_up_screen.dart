@@ -36,6 +36,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                     )),
               ),
               //TODO: Add image upload functionality
+              // https://pub.dev/packages/image_picker
               const Center(child: PersoButton(title: "Upload image")),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
