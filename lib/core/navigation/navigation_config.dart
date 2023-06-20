@@ -1,7 +1,7 @@
-import 'package:Perso/app/screens/client_in_up/client_sign_up_screen.dart';
+import 'package:Perso/app/models/account_type.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
-import 'package:Perso/app/screens/trainer_sign_up/trainer_sign_up_screen.dart';
+import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
@@ -13,7 +13,8 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final GoRouter goRouter = GoRouter(
-    initialLocation: "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}",
+    initialLocation:
+        "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}",
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
@@ -24,39 +25,34 @@ final GoRouter goRouter = GoRouter(
         },
         routes: [
           GoRoute(
-            path: ScreenNavigationKey.home,
-            pageBuilder: (context, state) {
-              return const NoTransitionPage(child: HomeScreen());
-            },
-            routes: [
-              GoRoute(
-                  path: ScreenNavigationKey.signIn,
-                  pageBuilder: (context, state) {
-                    return const NoTransitionPage(child: SignInScreen());
-                  },
-                  routes: [
-                    GoRoute(
-                      path: ScreenNavigationKey.clientSignUp,
-                      pageBuilder: (context, state) {
-                        return const NoTransitionPage(child: ClientSignUpScreen());
-                      },
-                    ),
-                    GoRoute(
-                      path: ScreenNavigationKey.trainerSignUp,
-                      pageBuilder: (context, state) {
-                        return NoTransitionPage(child: TrainerSignUpScreen());
-                      },
-                    ),
-                  ])
-            ]
-          ),
+              path: ScreenNavigationKey.home,
+              pageBuilder: (context, state) {
+                return const NoTransitionPage(child: HomeScreen());
+              },
+              routes: [
+                GoRoute(
+                    path: ScreenNavigationKey.signIn,
+                    pageBuilder: (context, state) {
+                      return const NoTransitionPage(child: SignInScreen());
+                    },
+                    routes: [
+                      GoRoute(
+                        name: "sign_up",
+                        path: ScreenNavigationKey.signUp,
+                        pageBuilder: (context, state) {
+                          AccountType accountType = state.extra as AccountType;
+                          return NoTransitionPage(
+                              child: SignUpScreen(accountType: accountType));
+                        },
+                      ),
+                    ])
+              ]),
           GoRoute(
             path: ScreenNavigationKey.trainings,
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage(child: TrainingScreen());
             },
           ),
-
         ],
       ),
     ]);

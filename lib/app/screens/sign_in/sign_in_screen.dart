@@ -1,3 +1,4 @@
+import 'package:Perso/app/models/account_type.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
@@ -5,7 +6,6 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -99,8 +99,15 @@ class SignInScreen extends StatelessWidget {
                     top: Dimens.biggerMargin,
                     left: Dimens.bigMargin,
                     right: Dimens.bigMargin),
-                child: const PersoRegisterButton(
-                    registerType: RegisterType.client)),
+                child: GestureDetector(
+                  onTap: () {
+                    context.pushNamed("sign_up", extra: AccountType.client);
+                  },
+                  child: const AbsorbPointer(
+                    child:
+                        PersoRegisterButton(registerType: AccountType.client),
+                  ),
+                )),
             Container(
                 margin: const EdgeInsets.only(
                     top: Dimens.normalMargin,
@@ -108,12 +115,11 @@ class SignInScreen extends StatelessWidget {
                     right: Dimens.bigMargin),
                 child: GestureDetector(
                   onTap: () {
-                    context.push(
-                        "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}/${ScreenNavigationKey.trainerSignUp}");
+                    context.pushNamed("sign_up", extra: AccountType.trainer);
                   },
                   child: const AbsorbPointer(
                     child:
-                        PersoRegisterButton(registerType: RegisterType.trainer),
+                        PersoRegisterButton(registerType: AccountType.trainer),
                   ),
                 )),
           ],
