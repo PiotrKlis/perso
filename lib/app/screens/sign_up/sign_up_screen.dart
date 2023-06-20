@@ -13,7 +13,8 @@ class SignUpScreen extends StatelessWidget {
 
   final AccountType accountType;
   final _formKey = GlobalKey<FormState>();
-
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class SignUpScreen extends StatelessWidget {
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: PersoColors.lightWhite,
-        title: Text("Sign Up ${accountType.name.toUpperCase()}", style: ThemeText.bodyBoldBlackText,),
+        title: Text("Sign up new ${accountType.name}", style: ThemeText.bodyBoldBlackText,),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -70,11 +71,12 @@ class SignUpScreen extends StatelessWidget {
                           margin: const EdgeInsets.only(
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoTextField(
+                          child: PersoTextField(
                             title: "Password",
                             customValidator:
                                 TextFieldValidator.validatePassword,
                             shouldObscureText: true,
+                            passwordController: _passwordController,
                           ),
                         ),
                       ),
@@ -90,10 +92,10 @@ class SignUpScreen extends StatelessWidget {
                           margin: const EdgeInsets.only(
                               left: Dimens.substantialMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoTextField(
+                          child: PersoTextField(
                             title: "Confirm password",
-                            customValidator:
-                                TextFieldValidator.validatePassword,
+                            passwordController: _passwordController,
+                            confirmPasswordController: _confirmPasswordController,
                             shouldObscureText: true,
                           ),
                         ),

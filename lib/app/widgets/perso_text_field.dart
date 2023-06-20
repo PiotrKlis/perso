@@ -1,5 +1,6 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/app/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 class PersoTextField extends StatefulWidget {
@@ -10,7 +11,9 @@ class PersoTextField extends StatefulWidget {
       this.shouldObscureText = false,
       this.textInputType = TextInputType.text,
       this.isMultiLine = false,
-      this.maxLength = 60});
+      this.maxLength = 60,
+      this.passwordController,
+      this.confirmPasswordController});
 
   final String title;
   final String? Function(String value)? customValidator;
@@ -18,17 +21,18 @@ class PersoTextField extends StatefulWidget {
   final TextInputType textInputType;
   final bool isMultiLine;
   final int? maxLength;
+  final TextEditingController? passwordController;
+  final TextEditingController? confirmPasswordController;
 
   @override
   State<PersoTextField> createState() => _PersoTextFieldState();
 }
 
 class _PersoTextFieldState extends State<PersoTextField> {
-  final _controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: widget.confirmPasswordController ?? widget.passwordController,
       maxLength: widget.maxLength,
       obscureText: widget.shouldObscureText,
       keyboardType:
@@ -36,7 +40,14 @@ class _PersoTextFieldState extends State<PersoTextField> {
       maxLines: widget.isMultiLine ? null : 1,
       expands: widget.isMultiLine ? true : false,
       textAlignVertical: TextAlignVertical.top,
-      validator: (value) => widget.customValidator?.call(value ?? ""),
+      validator: (value) {
+        if (widget.confirmPasswordController != null) {
+          return TextFieldValidator.validateSameText(
+              value ?? "", widget.passwordController?.text ?? "");
+        } else {
+          return widget.customValidator?.call(value ?? "");
+        }
+      },
       decoration: InputDecoration(
           counterText: widget.isMultiLine ? null : "",
           filled: true,
@@ -54,7 +65,7 @@ class _PersoTextFieldState extends State<PersoTextField> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.passwordController?.dispose();
     super.dispose();
   }
 }

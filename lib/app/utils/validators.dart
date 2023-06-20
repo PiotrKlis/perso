@@ -31,6 +31,16 @@ class TextFieldValidator {
     }
   }
 
+  static String? validateSameText(String input, String valueToCompare) {
+    if (input.isEmpty) {
+      return 'Required Field';
+    } else if (input != valueToCompare) {
+      return "Passwords do not match";
+    } else {
+      return null;
+    }
+  }
+
   static String? validateName(String value) {
     if (value.isEmpty) {
       return 'Required Field';
