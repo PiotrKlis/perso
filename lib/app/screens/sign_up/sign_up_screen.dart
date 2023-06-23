@@ -6,7 +6,9 @@ import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key, required this.accountType}) : super(key: key);
@@ -133,19 +135,10 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Icon _getIcon() {
-    switch (accountType) {
-      case AccountType.client:
-        return const Icon(Icons.fitness_center, size: 160);
-      case AccountType.trainer:
-        return const Icon(Icons.work, size: 160);
-    }
-  }
-
-  void _onTapLogic() {
+  void _onTapLogic(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
       //TODO: Send data to firestore
-      print("PKPK validated!");
+      context.replaceNamed(ScreenNavigationKey.registrationSuccess);
     }
   }
 }

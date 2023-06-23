@@ -11,7 +11,7 @@ class PersoButton extends StatelessWidget {
 
   final String title;
   final double width;
-  final void Function()? onTap;
+  final void Function(BuildContext context)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class PersoButton extends StatelessWidget {
             style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(), backgroundColor: Colors.black),
             onPressed: () {
-              onTap?.call();
+              onTap?.call(context);
             },
             child: Text(
               title,

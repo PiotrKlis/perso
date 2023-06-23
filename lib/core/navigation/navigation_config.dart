@@ -1,5 +1,6 @@
 import 'package:Perso/app/models/account_type.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
+import 'package:Perso/app/screens/register_success/register_success_screen.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
@@ -37,14 +38,23 @@ final GoRouter goRouter = GoRouter(
                     },
                     routes: [
                       GoRoute(
-                        name: "sign_up",
-                        path: ScreenNavigationKey.signUp,
-                        pageBuilder: (context, state) {
-                          AccountType accountType = state.extra as AccountType;
-                          return NoTransitionPage(
-                              child: SignUpScreen(accountType: accountType));
-                        },
-                      ),
+                          name: ScreenNavigationKey.signUp,
+                          path: ScreenNavigationKey.signUp,
+                          pageBuilder: (context, state) {
+                            AccountType accountType =
+                                state.extra as AccountType;
+                            return NoTransitionPage(
+                                child: SignUpScreen(accountType: accountType));
+                          },
+                          routes: [
+                            GoRoute(
+                                name: ScreenNavigationKey.registrationSuccess,
+                                path: ScreenNavigationKey.registrationSuccess,
+                                pageBuilder: (context, state) {
+                                  return const NoTransitionPage(
+                                      child: RegisterSuccessScreen());
+                                })
+                          ]),
                     ])
               ]),
           GoRoute(

@@ -73,11 +73,4 @@ class _PersoTextFieldState extends State<PersoTextField> {
       return widget._customValidator?.call(value ?? "");
     }
   }
-
-  @override
-  void dispose() {
-    widget._passwordController?.dispose();
-    widget._confirmPasswordController?.dispose();
-    super.dispose();
-  }
 }

@@ -235,7 +235,7 @@ class TrainerSignUpScreen extends StatelessWidget {
     );
   }
 
-  void onTapLogic() {
+  void onTapLogic(BuildContext _) {
     if (_formKey.currentState?.validate() == true) {
       //TODO: Send data to firestore
       print("PKPK validated!");
