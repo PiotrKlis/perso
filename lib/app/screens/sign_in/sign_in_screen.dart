@@ -18,6 +18,7 @@ class SignInScreen extends StatelessWidget {
         child: Scaffold(
       backgroundColor: PersoColors.lightBlue,
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
             Row(

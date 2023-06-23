@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(children: [
               GestureDetector(
                   onTap: () {

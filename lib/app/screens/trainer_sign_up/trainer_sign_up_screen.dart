@@ -22,6 +22,7 @@ class TrainerSignUpScreen extends StatelessWidget {
         title: const Text('Sign Up'),
       ),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Form(
           key: _formKey,
           child: Column(
