@@ -6,23 +6,31 @@ import 'package:flutter/material.dart';
 class PersoTextField extends StatefulWidget {
   const PersoTextField(
       {super.key,
-      required this.title,
-      this.customValidator,
-      this.shouldObscureText = false,
-      this.textInputType = TextInputType.text,
-      this.isMultiLine = false,
-      this.maxLength = 60,
-      this.passwordController,
-      this.confirmPasswordController});
+      required String title,
+      String? Function(String)? customValidator,
+      bool shouldObscureText = false,
+      TextInputType textInputType = TextInputType.text,
+      bool isMultiLine = false,
+      int? maxLength = 60,
+      TextEditingController? passwordController,
+      TextEditingController? confirmPasswordController})
+      : _confirmPasswordController = confirmPasswordController,
+        _passwordController = passwordController,
+        _maxLength = maxLength,
+        _isMultiLine = isMultiLine,
+        _textInputType = textInputType,
+        _shouldObscureText = shouldObscureText,
+        _customValidator = customValidator,
+        _title = title;
 
-  final String title;
-  final String? Function(String value)? customValidator;
-  final bool shouldObscureText;
-  final TextInputType textInputType;
-  final bool isMultiLine;
-  final int? maxLength;
-  final TextEditingController? passwordController;
-  final TextEditingController? confirmPasswordController;
+  final String _title;
+  final String? Function(String value)? _customValidator;
+  final bool _shouldObscureText;
+  final TextInputType _textInputType;
+  final bool _isMultiLine;
+  final int? _maxLength;
+  final TextEditingController? _passwordController;
+  final TextEditingController? _confirmPasswordController;
 
   @override
   State<PersoTextField> createState() => _PersoTextFieldState();
@@ -32,24 +40,18 @@ class _PersoTextFieldState extends State<PersoTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.confirmPasswordController ?? widget.passwordController,
-      maxLength: widget.maxLength,
-      obscureText: widget.shouldObscureText,
+      controller:
+          widget._confirmPasswordController ?? widget._passwordController,
+      maxLength: widget._maxLength,
+      obscureText: widget._shouldObscureText,
       keyboardType:
-          widget.isMultiLine ? TextInputType.multiline : widget.textInputType,
-      maxLines: widget.isMultiLine ? null : 1,
-      expands: widget.isMultiLine ? true : false,
+          widget._isMultiLine ? TextInputType.multiline : widget._textInputType,
+      maxLines: widget._isMultiLine ? null : 1,
+      expands: widget._isMultiLine ? true : false,
       textAlignVertical: TextAlignVertical.top,
-      validator: (value) {
-        if (widget.confirmPasswordController != null) {
-          return TextFieldValidator.validateSameText(
-              value ?? "", widget.passwordController?.text ?? "");
-        } else {
-          return widget.customValidator?.call(value ?? "");
-        }
-      },
+      validator: (value) => _handleValidation(value),
       decoration: InputDecoration(
-          counterText: widget.isMultiLine ? null : "",
+          counterText: widget._isMultiLine ? null : "",
           filled: true,
           fillColor: Colors.white,
           errorMaxLines: 2,
@@ -58,14 +60,24 @@ class _PersoTextFieldState extends State<PersoTextField> {
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
           ),
-          labelText: widget.title,
+          labelText: widget._title,
           labelStyle: ThemeText.bodyRegularGreyText),
     );
   }
 
+  String? _handleValidation(String? value) {
+    if (widget._confirmPasswordController != null) {
+      return TextFieldValidator.validateSameText(
+          value ?? "", widget._passwordController?.text ?? "");
+    } else {
+      return widget._customValidator?.call(value ?? "");
+    }
+  }
+
   @override
   void dispose() {
-    widget.passwordController?.dispose();
+    widget._passwordController?.dispose();
+    widget._confirmPasswordController?.dispose();
     super.dispose();
   }
 }

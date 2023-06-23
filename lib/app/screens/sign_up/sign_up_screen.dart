@@ -15,16 +15,19 @@ class SignUpScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: PersoColors.lightBlue,
       appBar: AppBar(
         elevation: 0.0,
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: PersoColors.lightWhite,
-        title: Text("Sign up new ${accountType.name}", style: ThemeText.bodyBoldBlackText,),
+        title: Text(
+          "Sign up new ${accountType.name}",
+          style: ThemeText.bodyBoldBlackText,
+        ),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -32,6 +35,16 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.biggerMargin, left: Dimens.normalMargin),
+                  child: Text("Create your account",
+                      style: ThemeText.largerTitleBold)),
+              Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.normalMargin, left: Dimens.normalMargin),
+                  child: Text("We are glad that you join us.",
+                      style: ThemeText.bodyRegularBlackText)),
               Container(
                 margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                 child: Row(
@@ -95,7 +108,8 @@ class SignUpScreen extends StatelessWidget {
                           child: PersoTextField(
                             title: "Confirm password",
                             passwordController: _passwordController,
-                            confirmPasswordController: _confirmPasswordController,
+                            confirmPasswordController:
+                                _confirmPasswordController,
                             shouldObscureText: true,
                           ),
                         ),
@@ -110,7 +124,8 @@ class SignUpScreen extends StatelessWidget {
                         right: Dimens.normalMargin),
                     child: PersoButton(
                         width: 160.0, title: "Register", onTap: _onTapLogic)),
-              )            ],
+              )
+            ],
           ),
         ),
       ),
