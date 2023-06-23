@@ -42,8 +42,8 @@ class SignUpScreen extends StatelessWidget {
                       style: ThemeText.largerTitleBold)),
               Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, left: Dimens.normalMargin),
-                  child: Text("We are glad that you join us.",
+                      top: Dimens.mediumMargin, left: Dimens.normalMargin),
+                  child: Text("We are glad that you join us",
                       style: ThemeText.bodyRegularBlackText)),
               Container(
                 margin: const EdgeInsets.only(top: Dimens.biggerMargin),
