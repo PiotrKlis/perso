@@ -5,8 +5,8 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class RegisterSuccessScreen extends StatelessWidget {
-  const RegisterSuccessScreen({super.key});
+class SignUpSuccessScreen extends StatelessWidget {
+  const SignUpSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class RegisterSuccessScreen extends StatelessWidget {
                   top: Dimens.biggerMargin,
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
-              child: Center(child: const Icon(Icons.email, size: 160)),
+              child: const Center(child: Icon(Icons.email, size: 160)),
             ),
             Container(
               margin: const EdgeInsets.only(

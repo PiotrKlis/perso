@@ -52,7 +52,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                   children: [
                     Container(
                         margin:
-                            const EdgeInsets.only(left: Dimens.normalMargin),
+                        const EdgeInsets.only(left: Dimens.normalMargin),
                         child: const Icon(Icons.email, size: 24.0)),
                     Expanded(
                       child: Container(
@@ -74,7 +74,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                     children: [
                       Container(
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.password, size: 24.0)),
                       Expanded(
                         child: Container(
@@ -84,7 +84,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                           child: const PersoTextField(
                             title: "Password",
                             customValidator:
-                                TextFieldValidator.validatePassword,
+                            TextFieldValidator.validatePassword,
                             shouldObscureText: true,
                           ),
                         ),
@@ -101,7 +101,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                     children: [
                       Container(
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.person, size: 24.0)),
                       Expanded(
                         child: Container(
@@ -130,7 +130,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                       top: Dimens.bigMargin,
                       right: Dimens.normalMargin),
                   child: const PersoTextField(
-                      // TODO: Combine name & surname by default
+                    // TODO: Combine name & surname by default
                       title: "Nickname",
                       customValidator: TextFieldValidator.validateNickname)),
               Container(
@@ -145,7 +145,7 @@ class TrainerSignUpScreen extends StatelessWidget {
                     children: [
                       Container(
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.pin_drop, size: 24.0)),
                       Expanded(
                         child: Container(
@@ -163,12 +163,12 @@ class TrainerSignUpScreen extends StatelessWidget {
                     children: [
                       Container(
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.phone, size: 24.0)),
                       Expanded(
                         child: Container(
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const PersoTextField(
                             title: "Phone number",
                             customValidator: TextFieldValidator.validateDigits,
@@ -190,17 +190,17 @@ class TrainerSignUpScreen extends StatelessWidget {
                     children: [
                       Container(
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const Icon(Icons.text_snippet, size: 24.0)),
                       Expanded(
                         child: Container(
                           height: 140.0,
                           margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
+                          const EdgeInsets.only(left: Dimens.normalMargin),
                           child: const PersoTextField(
                             title: "Short Bio",
                             customValidator:
-                                TextFieldValidator.validateNickname,
+                            TextFieldValidator.validateNickname,
                             isMultiLine: true,
                             maxLength: 150,
                           ),
@@ -227,6 +227,12 @@ class TrainerSignUpScreen extends StatelessWidget {
                         right: Dimens.normalMargin),
                     child: PersoButton(
                         width: 160.0, title: "Next", onTap: onTapLogic)),
+              ),
+              SizedBox(
+                  width: 300,
+                  height: 300,
+                  child: Image.asset("assets/images/trainer3.png"),
+                  //Image(image: AssetImage("assets/images/screenshot.png")
               )
             ],
           ),

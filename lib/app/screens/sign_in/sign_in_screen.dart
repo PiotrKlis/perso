@@ -6,6 +6,7 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -70,9 +71,13 @@ class SignInScreen extends StatelessWidget {
             Center(
               child: Container(
                 margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                child: Text(
-                  "Forgot password?",
-                  style: ThemeText.calloutBoldBlueText,
+                child: GestureDetector(
+                  onTap: () =>
+                      context.pushNamed(ScreenNavigationKey.passwordRecovery),
+                  child: Text(
+                    "Forgot password?",
+                    style: ThemeText.calloutBoldBlueText,
+                  ),
                 ),
               ),
             ),

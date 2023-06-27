@@ -1,8 +1,9 @@
 import 'package:Perso/app/models/account_type.dart';
+import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
-import 'package:Perso/app/screens/register_success/register_success_screen.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
+import 'package:Perso/app/screens/sign_up_success/sign_up_success_screen.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
@@ -38,6 +39,13 @@ final GoRouter goRouter = GoRouter(
                     },
                     routes: [
                       GoRoute(
+                          path: ScreenNavigationKey.passwordRecovery,
+                          name: ScreenNavigationKey.passwordRecovery,
+                        pageBuilder: (context, state) {
+                            return NoTransitionPage(child: PasswordRecoveryScreen());
+                        }
+                      ),
+                      GoRoute(
                           name: ScreenNavigationKey.signUp,
                           path: ScreenNavigationKey.signUp,
                           pageBuilder: (context, state) {
@@ -48,11 +56,11 @@ final GoRouter goRouter = GoRouter(
                           },
                           routes: [
                             GoRoute(
-                                name: ScreenNavigationKey.registrationSuccess,
-                                path: ScreenNavigationKey.registrationSuccess,
+                                name: ScreenNavigationKey.signUpSuccess,
+                                path: ScreenNavigationKey.signUpSuccess,
                                 pageBuilder: (context, state) {
                                   return const NoTransitionPage(
-                                      child: RegisterSuccessScreen());
+                                      child: SignUpSuccessScreen());
                                 })
                           ]),
                     ])

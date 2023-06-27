@@ -12,10 +12,12 @@ class PersoTextField extends StatefulWidget {
       TextInputType textInputType = TextInputType.text,
       bool isMultiLine = false,
       int? maxLength = 60,
+      TextEditingController? loginController,
       TextEditingController? passwordController,
       TextEditingController? confirmPasswordController})
       : _confirmPasswordController = confirmPasswordController,
         _passwordController = passwordController,
+        _loginController = loginController,
         _maxLength = maxLength,
         _isMultiLine = isMultiLine,
         _textInputType = textInputType,
@@ -31,6 +33,7 @@ class PersoTextField extends StatefulWidget {
   final int? _maxLength;
   final TextEditingController? _passwordController;
   final TextEditingController? _confirmPasswordController;
+  final TextEditingController? _loginController;
 
   @override
   State<PersoTextField> createState() => _PersoTextFieldState();

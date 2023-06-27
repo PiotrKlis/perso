@@ -7,12 +7,12 @@ final tabs = [
   const ScaffoldWithNavBarTabItem(
     initialLocation: ScreenNavigationKey.home,
     icon: Icon(Icons.home),
-    label: 'Trainers',
+    label: 'Home',
   ),
   const ScaffoldWithNavBarTabItem(
     initialLocation: ScreenNavigationKey.trainings,
-    icon: Icon(Icons.settings),
-    label: 'Trainings',
+    icon: Icon(Icons.sports_gymnastics),
+    label: 'Training',
   ),
 ];
 
