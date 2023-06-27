@@ -6,6 +6,7 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/PersoAppBar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
@@ -32,14 +33,8 @@ class SignUpScreen extends StatelessWidget {
   Widget _signUpScreenView() {
     return Scaffold(
       backgroundColor: PersoColors.lightBlue,
-      appBar: AppBar(
-        elevation: 0.0,
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: PersoColors.lightWhite,
-        title: Text(
-          "Sign up new ${accountType.name}",
-          style: ThemeText.bodyBoldBlackText,
-        ),
+      appBar: const PersoAppBar(
+        title: "Sign Up",
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -50,8 +45,8 @@ class SignUpScreen extends StatelessWidget {
             children: [
               BlocListener<SignUpBloc, SignUpState>(
                   listener: (context, state) {
-                    if (state == SignUpState.loading()) {
-                      CircularProgressIndicator();
+                    if (state == const SignUpState.loading()) {
+                      const CircularProgressIndicator();
                     }
                   },
                   child: Container()),

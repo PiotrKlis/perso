@@ -43,8 +43,9 @@ class _PersoTextFieldState extends State<PersoTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller:
-          widget._confirmPasswordController ?? widget._passwordController,
+      controller: widget._confirmPasswordController ??
+          widget._passwordController ??
+          widget._loginController,
       maxLength: widget._maxLength,
       obscureText: widget._shouldObscureText,
       keyboardType:

@@ -1,5 +1,7 @@
 import 'package:Perso/app/utils/dimens.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PersoSearch extends StatelessWidget {
   const PersoSearch({Key? key}) : super(key: key);
@@ -9,6 +11,9 @@ class PersoSearch extends StatelessWidget {
     return SizedBox(
       height: Dimens.searchHeight,
       child: TextField(
+        readOnly: true,
+        onChanged: (value) =>
+            context.pushNamed(ScreenNavigationKey.searchResults),
         maxLines: 1,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(

@@ -46,7 +46,10 @@ class HomeScreen extends StatelessWidget {
                       PersoBigHeader(
                         title: AppLocalizations.of(context)!.home_main_header,
                       ),
+                      //TODO: Make this button invisible if user is logged in
                       PersoButton(
+                          onTap: (context) =>
+                              context.pushNamed(ScreenNavigationKey.signIn),
                           title: AppLocalizations.of(context)!
                               .trainers_section_button,
                           width: Dimens.smallButtonWidth)
@@ -57,7 +60,10 @@ class HomeScreen extends StatelessWidget {
                       left: Dimens.normalMargin,
                       top: Dimens.normalMargin,
                       right: Dimens.normalMargin),
-                  child: const PersoSearch()),
+                  child: GestureDetector(
+                      onTap: () =>
+                          context.pushNamed(ScreenNavigationKey.search),
+                      child: const AbsorbPointer(child: PersoSearch()))),
               Container(
                 margin: const EdgeInsets.only(
                     top: Dimens.bigMargin,
@@ -68,8 +74,13 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     PersoHeader(
                         title: AppLocalizations.of(context)!.category_header),
-                    PersoClickableText(
-                        title: AppLocalizations.of(context)!.see_all_categories)
+                    GestureDetector(
+                      onTap: () => context
+                          .pushNamed(ScreenNavigationKey.trainingCategories),
+                      child: PersoClickableText(
+                          title:
+                              AppLocalizations.of(context)!.see_all_categories),
+                    )
                   ],
                 ),
               ),

@@ -1,9 +1,12 @@
 import 'package:Perso/app/models/account_type.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
+import 'package:Perso/app/screens/search/search_screen.dart';
+import 'package:Perso/app/screens/search_results/search_results.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:Perso/app/screens/sign_up_success/sign_up_success_screen.dart';
+import 'package:Perso/app/screens/training_categories/training_categories.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
@@ -15,8 +18,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final GoRouter goRouter = GoRouter(
-    initialLocation:
-        "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}",
+    initialLocation: ScreenNavigationKey.home,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
@@ -33,6 +35,31 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
+                  name: ScreenNavigationKey.search,
+                  path: "ScreenNavigationKey.search",
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(child: SearchScreen());
+                  },
+                ),
+                GoRoute(
+                  name: ScreenNavigationKey.searchResults,
+                  path: "${ScreenNavigationKey.searchResults}/:input",
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage(
+                        child: SearchResultsScreen(
+                            input: state.pathParameters["input"]));
+                  },
+                ),
+                GoRoute(
+                  name: ScreenNavigationKey.trainingCategories,
+                  path: ScreenNavigationKey.trainingCategories,
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(
+                        child: TrainingCategoriesScreen());
+                  },
+                ),
+                GoRoute(
+                    name: ScreenNavigationKey.signIn,
                     path: ScreenNavigationKey.signIn,
                     pageBuilder: (context, state) {
                       return const NoTransitionPage(child: SignInScreen());
@@ -41,10 +68,10 @@ final GoRouter goRouter = GoRouter(
                       GoRoute(
                           path: ScreenNavigationKey.passwordRecovery,
                           name: ScreenNavigationKey.passwordRecovery,
-                        pageBuilder: (context, state) {
-                            return NoTransitionPage(child: PasswordRecoveryScreen());
-                        }
-                      ),
+                          pageBuilder: (context, state) {
+                            return const NoTransitionPage(
+                                child: PasswordRecoveryScreen());
+                          }),
                       GoRoute(
                           name: ScreenNavigationKey.signUp,
                           path: ScreenNavigationKey.signUp,

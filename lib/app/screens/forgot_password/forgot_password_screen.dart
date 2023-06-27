@@ -13,6 +13,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: PersoColors.lightBlue,
       appBar: AppBar(
+
         title: const Text('Password recovery'),
       ),
       body: SingleChildScrollView(

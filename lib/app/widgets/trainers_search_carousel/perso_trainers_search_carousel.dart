@@ -4,8 +4,10 @@ import 'package:Perso/app/widgets/trainers_search_carousel/bloc/trainer_search_c
 import 'package:Perso/app/widgets/trainers_search_carousel/event/trainer_search_carousel_event.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel_card.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/state/trainer_search_carousel_state.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class PersoTrainersSearchCarousel extends StatelessWidget {
   PersoTrainersSearchCarousel({super.key});
@@ -23,10 +25,15 @@ class PersoTrainersSearchCarousel extends StatelessWidget {
                 viewportFraction: Dimens.carouselViewportFraction),
             itemBuilder: (context, pagePosition) {
               bool isLastCard = pagePosition == cardsData.length - 1;
-              return PersoTrainersSearchCarouselCard(
-                  position: pagePosition,
-                  cardData: cardsData[pagePosition],
-                  isLastCard: isLastCard);
+              return GestureDetector(
+                onTap: () => context.pushNamed(
+                    ScreenNavigationKey.searchResults,
+                    pathParameters: {"input": cardsData[pagePosition].title}),
+                child: PersoTrainersSearchCarouselCard(
+                    position: pagePosition,
+                    cardData: cardsData[pagePosition],
+                    isLastCard: isLastCard),
+              );
             }),
       );
     }
