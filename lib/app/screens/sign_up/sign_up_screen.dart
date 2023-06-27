@@ -33,9 +33,7 @@ class SignUpScreen extends StatelessWidget {
   Widget _signUpScreenView() {
     return Scaffold(
       backgroundColor: PersoColors.lightBlue,
-      appBar: const PersoAppBar(
-        title: "Sign Up",
-      ),
+      appBar: PersoAppBar(title: "Sign up new ${accountType.name}"),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Form(
