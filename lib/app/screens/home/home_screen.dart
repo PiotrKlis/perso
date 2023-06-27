@@ -105,9 +105,16 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           PersoHeader(
                               title: AppLocalizations.of(context)!.near_you),
-                          PersoClickableText(
-                              title: AppLocalizations.of(context)!
-                                  .see_all_categories)
+                          GestureDetector(
+                            onTap: () => context.pushNamed(
+                                ScreenNavigationKey.searchResults,
+                                pathParameters: {
+                                  "input": "see all trainers near my location"
+                                }),
+                            child: PersoClickableText(
+                                title: AppLocalizations.of(context)!
+                                    .see_all_categories),
+                          )
                         ],
                       ),
                     ),
