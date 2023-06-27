@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.only(
                       left: Dimens.normalMargin, top: Dimens.bigMargin),
-                  child: PersoTrainingCategoryList(isShortList: true)),
+                  child: const PersoTrainingCategoryList(isShortList: true)),
               Container(
                 color: PersoColors.lightBlue,
                 child: Column(

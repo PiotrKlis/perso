@@ -1,4 +1,5 @@
 import 'package:Perso/app/models/account_type.dart';
+import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
 import 'package:Perso/app/screens/search/search_screen.dart';
@@ -6,6 +7,7 @@ import 'package:Perso/app/screens/search_results/search_results.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:Perso/app/screens/sign_up_success/sign_up_success_screen.dart';
+import 'package:Perso/app/screens/trainer_details/trainer_details_screen.dart';
 import 'package:Perso/app/screens/training_categories/training_categories.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
@@ -35,8 +37,17 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
+                  name: ScreenNavigationKey.trainerDetails,
+                  path: ScreenNavigationKey.trainerDetails,
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage(
+                        child: TrainerDetailsScreen(
+                            trainerEntity: state.extra as TrainerEntity));
+                  },
+                ),
+                GoRoute(
                   name: ScreenNavigationKey.search,
-                  path: "ScreenNavigationKey.search",
+                  path: ScreenNavigationKey.search,
                   pageBuilder: (context, state) {
                     return const NoTransitionPage(child: SearchScreen());
                   },

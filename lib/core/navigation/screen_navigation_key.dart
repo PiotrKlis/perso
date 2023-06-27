@@ -8,4 +8,5 @@ class ScreenNavigationKey {
   static const String trainingCategories = "training_categories";
   static const String searchResults = "search_results";
   static const String search = "search";
+  static const String trainerDetails = "trainer_details";
 }
