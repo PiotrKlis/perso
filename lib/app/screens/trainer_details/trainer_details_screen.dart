@@ -4,11 +4,12 @@ import 'package:Perso/app/widgets/PersoAppBar.dart';
 import 'package:flutter/material.dart';
 
 class TrainerDetailsScreen extends StatelessWidget {
-  const TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})
+  TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})
       : _trainerEntity = trainerEntity,
         super();
 
   final TrainerEntity _trainerEntity;
+  final List<bool> _selectedFruits = <bool>[true, false];
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,9 @@ class TrainerDetailsScreen extends StatelessWidget {
         appBar: PersoAppBar(
             isTitleCentered: true, title: "@${_trainerEntity.nickname}"),
         body: Center(
-            child: Text(
-                "Trainer details screen, trainer entity ${_trainerEntity.toString()}")));
+            child: ToggleButtons(
+          isSelected: _selectedFruits,
+          children: [Text("About"), Text("Reviews")],
+        )));
   }
 }
