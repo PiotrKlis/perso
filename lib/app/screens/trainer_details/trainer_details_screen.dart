@@ -14,7 +14,8 @@ class TrainerDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(title: "Trainer details screen"),
+        appBar: PersoAppBar(
+            isTitleCentered: true, title: "@${_trainerEntity.nickname}"),
         body: Center(
             child: Text(
                 "Trainer details screen, trainer entity ${_trainerEntity.toString()}")));
