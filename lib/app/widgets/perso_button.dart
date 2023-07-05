@@ -7,11 +7,13 @@ class PersoButton extends StatelessWidget {
       {super.key,
       required this.title,
       this.width = Dimens.bigButtonWidth,
+      this.whiteBlackTheme = false,
       this.onTap});
 
   final String title;
   final double width;
   final void Function(BuildContext context)? onTap;
+  final bool whiteBlackTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,16 @@ class PersoButton extends StatelessWidget {
                 BorderRadius.all(Radius.circular(Dimens.buttonBorderRadius))),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                shape: const StadiumBorder(), backgroundColor: Colors.black),
+                shape: const StadiumBorder(),
+                backgroundColor: whiteBlackTheme ? Colors.white : Colors.black),
             onPressed: () {
               onTap?.call(context);
             },
             child: Text(
               title,
-              style: ThemeText.calloutBoldWhiteText,
+              style: whiteBlackTheme
+                  ? ThemeText.calloutBoldBlackText
+                  : ThemeText.calloutBoldWhiteText,
             )));
   }
 }
