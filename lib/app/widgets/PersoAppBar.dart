@@ -7,23 +7,28 @@ import 'package:go_router/go_router.dart';
 class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PersoAppBar({
     super.key,
+    bool shouldShowFilterIcon = false,
     bool isTitleCentered = false,
     required String title,
   })  : _title = title,
-        _isTitleCentered = isTitleCentered;
+        _isTitleCentered = isTitleCentered,
+        _shouldShowFilterIcon = shouldShowFilterIcon;
 
   final String _title;
   final bool _isTitleCentered;
+  final bool _shouldShowFilterIcon;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.filter_list),
-          onPressed: () => context.pushNamed(ScreenNavigationKey.filters),
-        ),
-      ],
+      actions: _shouldShowFilterIcon
+          ? [
+              IconButton(
+                icon: const Icon(Icons.filter_list),
+                onPressed: () => context.pushNamed(ScreenNavigationKey.filters),
+              ),
+            ]
+          : [],
       centerTitle: _isTitleCentered,
       elevation: 0.0,
       iconTheme: const IconThemeData(color: Colors.black),

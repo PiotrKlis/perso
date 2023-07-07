@@ -10,7 +10,7 @@ class SearchResultsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: const PersoAppBar(title: "Search results"),
+        appBar: const PersoAppBar(title: "Search results", shouldShowFilterIcon: true,),
         body: Center(child: Text("Search results screen, input: $_input")));
   }
 }
