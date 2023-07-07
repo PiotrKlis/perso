@@ -1,6 +1,8 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PersoAppBar({
@@ -16,6 +18,12 @@ class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.filter_list),
+          onPressed: () => context.pushNamed(ScreenNavigationKey.filters),
+        ),
+      ],
       centerTitle: _isTitleCentered,
       elevation: 0.0,
       iconTheme: const IconThemeData(color: Colors.black),
