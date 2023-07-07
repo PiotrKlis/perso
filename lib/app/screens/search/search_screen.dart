@@ -1,12 +1,20 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/PersoAppBar.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  SearchScreen({super.key});
+
+  final List<String> _emptySearch = [
+    "Best Yoga trainers",
+    "Best trainers in your area",
+    "Calisthenics",
+    "No equipment",
+    "Bodybuilding"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -21,29 +29,31 @@ class SearchScreen extends StatelessWidget {
                     left: Dimens.normalMargin,
                     right: Dimens.normalMargin),
                 child: SearchBar()),
-            Container(
-                margin: EdgeInsets.only(top: Dimens.bigMargin),
-                child: Divider()),
             Expanded(
-              child: ListView.separated(
-                itemCount: 3,
-                itemBuilder: (BuildContext context, int index) {
-                  // Build your list item widget here
-                  return ListTile(
-                      title: Text(
-                    "[$index])",
-                    // Other ListTile properties...
-                  ));
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  // Build your separator widget here
-                  return Divider(
-                    color: Colors.grey,
-                    thickness: 1.0,
-                  );
-                },
+              child: Container(
+                margin: EdgeInsets.only(top: Dimens.bigMargin),
+                color: Colors.white,
+                child: ListView.separated(
+                  itemCount: _emptySearch.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                        onTap: () => context.pushNamed(
+                            ScreenNavigationKey.searchResults,
+                            pathParameters: {"input": _emptySearch[index]}),
+                        title: Text(
+                          _emptySearch[index],
+                        ));
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    // Build your separator widget here
+                    return Divider(
+                      color: Colors.grey,
+                      thickness: 1.0,
+                    );
+                  },
+                ),
               ),
-            )
+            ),
           ],
         ));
   }

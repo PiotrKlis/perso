@@ -49,7 +49,7 @@ final GoRouter goRouter = GoRouter(
                   name: ScreenNavigationKey.search,
                   path: ScreenNavigationKey.search,
                   pageBuilder: (context, state) {
-                    return const NoTransitionPage(child: SearchScreen());
+                    return NoTransitionPage(child: SearchScreen());
                   },
                 ),
                 GoRoute(
