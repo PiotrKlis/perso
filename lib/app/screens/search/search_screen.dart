@@ -20,15 +20,6 @@ class SearchScreen extends StatelessWidget {
                     top: Dimens.bigMargin,
                     left: Dimens.normalMargin,
                     right: Dimens.normalMargin),
-                child: Text(
-                  "Znajdź swojego wymarzonego trenera",
-                  style: ThemeText.smallTitleBold,
-                )),
-            Container(
-                margin: EdgeInsets.only(
-                    top: Dimens.bigMargin,
-                    left: Dimens.normalMargin,
-                    right: Dimens.normalMargin),
                 child: SearchBar()),
             Container(
                 margin: EdgeInsets.only(top: Dimens.bigMargin),
