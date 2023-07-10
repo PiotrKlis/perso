@@ -33,14 +33,21 @@ class SearchResultsScreen extends StatelessWidget {
                       top: Dimens.normalMargin, left: Dimens.normalMargin),
                   child: Row(
                     children: [
-                      Text(
-                        "\"$_input\"" ?? "",
-                        style: ThemeText.mediumTitleBold,
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                              text: "\"$_input\"",
+                              style: ThemeText.mediumTitleBold,
+                              children: [
+                                TextSpan(
+                                  text: " (1)",
+                                  style: ThemeText.mediumTitleRegular,
+                                )
+                              ]),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      Text(
-                        "(1)",
-                        style: ThemeText.mediumTitleRegular,
-                      )
                     ],
                   ),
                 ),
@@ -55,7 +62,9 @@ class SearchResultsScreen extends StatelessWidget {
                     style: ThemeText.mediumTitleBold,
                   ),
                 ),
-                Container(margin: EdgeInsets.only(top: Dimens.normalMargin), child: PersoTrainersSearchCarousel())
+                Container(
+                    margin: EdgeInsets.only(top: Dimens.normalMargin),
+                    child: PersoTrainersSearchCarousel())
               ],
             ),
           ),
