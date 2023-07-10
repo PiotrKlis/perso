@@ -41,8 +41,7 @@ class PersoTrainersList extends StatelessWidget {
           .map((trainerData) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: Dimens.smallMargin),
+                  SizedBox(
                     width: Dimens.trainerCardWidth,
                     height: Dimens.trainerCardHeight,
                     child: GestureDetector(

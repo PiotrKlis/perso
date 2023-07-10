@@ -1,5 +1,9 @@
 import 'package:Perso/app/utils/colors.dart';
+import 'package:Perso/app/utils/dimens.dart';
+import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/PersoAppBar.dart';
+import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
+import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +21,45 @@ class SearchResultsScreen extends StatelessWidget {
           actionIcon: Icons.filter_list,
           onActionIconClick: onActionClick,
         ),
-        body: Center(child: Text("Search results screen, input: $_input")));
+        body: SingleChildScrollView(
+          child: Container(
+            // margin: EdgeInsets.all(Dimens.normalMargin),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // TODO: Show 10 trainers, then load another 10 more on scroll
+                Container(
+                  margin: EdgeInsets.only(
+                      top: Dimens.normalMargin, left: Dimens.normalMargin),
+                  child: Row(
+                    children: [
+                      Text(
+                        "\"$_input\"" ?? "",
+                        style: ThemeText.mediumTitleBold,
+                      ),
+                      Text(
+                        "(1)",
+                        style: ThemeText.mediumTitleRegular,
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                    margin: EdgeInsets.only(top: Dimens.normalMargin),
+                    child: PersoTrainersList()),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: Dimens.normalMargin, left: Dimens.normalMargin),
+                  child: Text(
+                    "Similar trainers",
+                    style: ThemeText.mediumTitleBold,
+                  ),
+                ),
+                Container(margin: EdgeInsets.only(top: Dimens.normalMargin), child: PersoTrainersSearchCarousel())
+              ],
+            ),
+          ),
+        ));
   }
 
   void onActionClick(BuildContext context) {
