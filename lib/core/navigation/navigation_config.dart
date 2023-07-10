@@ -3,6 +3,7 @@ import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
 import 'package:Perso/app/screens/search/search_screen.dart';
+import 'package:Perso/app/screens/search_filters/search_filter.dart';
 import 'package:Perso/app/screens/search_results/search_results.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
@@ -60,6 +61,16 @@ final GoRouter goRouter = GoRouter(
                         child: SearchResultsScreen(
                             input: state.pathParameters["input"]));
                   },
+                  routes: [
+                    GoRoute(
+                      name: ScreenNavigationKey.searchFilter,
+                      path: ScreenNavigationKey.searchFilter,
+                      pageBuilder: (context, state) {
+                        return const NoTransitionPage(
+                            child: SearchFilterScreen());
+                      },
+                    ),
+                  ]
                 ),
                 GoRoute(
                   name: ScreenNavigationKey.trainingCategories,

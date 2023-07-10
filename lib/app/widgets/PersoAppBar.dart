@@ -1,34 +1,31 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const PersoAppBar({
-    super.key,
-    bool shouldShowFilterIcon = false,
-    bool isTitleCentered = false,
-    required String title,
-  })  : _title = title,
+  const PersoAppBar(
+      {super.key,
+      IconData? actionIcon,
+      bool isTitleCentered = false,
+      required String title,
+      void Function(BuildContext context)? onActionIconClick})
+      : _title = title,
         _isTitleCentered = isTitleCentered,
-        _shouldShowFilterIcon = shouldShowFilterIcon;
+        _onActionIconClick = onActionIconClick,
+        _actionIcon = actionIcon;
 
   final String _title;
   final bool _isTitleCentered;
-  final bool _shouldShowFilterIcon;
+  final IconData? _actionIcon;
+  final void Function(BuildContext context)? _onActionIconClick;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: _shouldShowFilterIcon
-          ? [
-              IconButton(
-                icon: const Icon(Icons.filter_list),
-                onPressed: () => context.pushNamed(ScreenNavigationKey.filters),
-              ),
-            ]
-          : [],
+      actions: _getActionIcon(
+          actionIcon: _actionIcon,
+          onActionIconClick: _onActionIconClick,
+          context: context),
       centerTitle: _isTitleCentered,
       elevation: 0.0,
       iconTheme: const IconThemeData(color: Colors.black),
@@ -42,4 +39,19 @@ class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  List<IconButton> _getActionIcon(
+      {required IconData? actionIcon,
+      required Function(BuildContext context)? onActionIconClick,
+      required BuildContext context}) {
+    if (actionIcon != null) {
+      return [
+        IconButton(
+            icon: Icon(actionIcon),
+            onPressed: () => onActionIconClick?.call(context)),
+      ];
+    } else {
+      return [];
+    }
+  }
 }
