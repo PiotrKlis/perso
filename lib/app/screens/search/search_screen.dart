@@ -13,25 +13,56 @@ class SearchScreen extends StatelessWidget {
     "Best trainers in your area",
     "Calisthenics",
     "No equipment",
+    "Bodybuilding",
+    "Best Yoga trainers",
+    "Best trainers in your area",
+    "Calisthenics",
+    "No equipment",
+    "Bodybuilding",
+    "Best Yoga trainers",
+    "Best trainers in your area",
+    "Calisthenics",
+    "No equipment",
     "Bodybuilding"
   ];
+
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(title: "Search screen"),
+        appBar: const PersoAppBar(title: "Search screen"),
         body: Column(
           children: [
             Container(
-                margin: EdgeInsets.only(
-                    top: Dimens.bigMargin,
-                    left: Dimens.normalMargin,
-                    right: Dimens.normalMargin),
-                child: SearchBar()),
+              margin: const EdgeInsets.only(
+                  top: Dimens.bigMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
+              //TODO: Probably will need to migrate to TextEdit to use onFieldSubmitted
+              child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Search",
+                    filled: true,
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(
+                            width: 0.2, color: PersoColors.lightGrey)),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide:
+                          BorderSide(width: 0.2, color: PersoColors.lightGrey),
+                    ),
+                  ),
+                  onSubmitted: (input) {
+                    //no-op
+                  }),
+            ),
             Expanded(
               child: Container(
-                margin: EdgeInsets.only(top: Dimens.bigMargin),
+                margin: const EdgeInsets.only(top: Dimens.bigMargin),
                 color: Colors.white,
                 child: ListView.separated(
                   itemCount: _emptySearch.length,
@@ -46,7 +77,7 @@ class SearchScreen extends StatelessWidget {
                   },
                   separatorBuilder: (BuildContext context, int index) {
                     // Build your separator widget here
-                    return Divider(
+                    return const Divider(
                       color: Colors.grey,
                       thickness: 1.0,
                     );
