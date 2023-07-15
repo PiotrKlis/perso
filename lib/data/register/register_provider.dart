@@ -5,7 +5,9 @@ import 'package:injectable/injectable.dart';
 class RegisterProvider {
   Future<UserCredential> register(
       {required String email, required String password}) async {
-    return await FirebaseAuth.instance
+    UserCredential userCredentials = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
+    await FirebaseAuth.instance.currentUser?.sendEmailVerification();
+    return userCredentials;
   }
 }

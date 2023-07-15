@@ -10,8 +10,10 @@ import 'package:Perso/app/widgets/PersoAppBar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key, required this.accountType}) : super(key: key);
@@ -25,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignUpBloc(const SignUpState.loading()),
+      create: (context) => SignUpBloc(const SignUpState.initial()),
       child: _signUpScreenView(),
     );
   }
@@ -41,13 +43,6 @@ class SignUpScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocListener<SignUpBloc, SignUpState>(
-                  listener: (context, state) {
-                    if (state == const SignUpState.loading()) {
-                      const CircularProgressIndicator();
-                    }
-                  },
-                  child: Container()),
               Container(
                   margin: const EdgeInsets.only(
                       top: Dimens.biggerMargin, left: Dimens.normalMargin),
@@ -71,8 +66,9 @@ class SignUpScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(
                             left: Dimens.normalMargin,
                             right: Dimens.normalMargin),
-                        child: const PersoTextField(
+                        child: PersoTextField(
                             title: "Email",
+                            loginController: _loginController,
                             customValidator: TextFieldValidator.validateEmail),
                       ),
                     ),
@@ -137,7 +133,23 @@ class SignUpScreen extends StatelessWidget {
                         right: Dimens.normalMargin),
                     child: PersoButton(
                         width: 160.0, title: "Register", onTap: _registerUser)),
-              )
+              ),
+              BlocConsumer<SignUpBloc, SignUpState>(
+                builder: (context, state) {
+                  if (state == SignUpState.loading()) {
+                    return Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ));
+                  }
+                  return Container();
+                },
+                listener: (context, state) {
+                  if (state == const SignUpState.success()) {
+                    context.replaceNamed(ScreenNavigationKey.signUpSuccess);
+                  }
+                },
+              ),
             ],
           ),
         ),
