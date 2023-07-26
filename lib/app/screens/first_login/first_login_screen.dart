@@ -1,3 +1,4 @@
+import 'package:Perso/app/widgets/PersoAppBar.dart';
 import 'package:flutter/material.dart';
 
 class FirstLoginScreen extends StatelessWidget {
@@ -5,8 +6,11 @@ class FirstLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder(
-      child: Text("First Login!"),
+    return const Scaffold(
+      appBar: PersoAppBar(title: "Welcome to PERSO"),
+      body: Center(
+        child: Text("Welcome to PERSO"),
+      ),
     );
   }
 }
