@@ -2,12 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class RegisterProvider {
+class AuthProvider {
   Future<UserCredential> register(
       {required String email, required String password}) async {
     UserCredential userCredentials = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
     await FirebaseAuth.instance.currentUser?.sendEmailVerification();
     return userCredentials;
+  }
+
+  Future<UserCredential> login({required String email, required String password}) async {
+    return await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
   }
 }

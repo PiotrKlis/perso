@@ -1,4 +1,3 @@
-import 'package:Perso/app/models/account_type.dart';
 import 'package:Perso/app/screens/sign_up/bloc/sign_up_bloc.dart';
 import 'package:Perso/app/screens/sign_up/event/sign_up_event.dart';
 import 'package:Perso/app/screens/sign_up/state/sign_up_state.dart';
@@ -16,9 +15,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key, required this.accountType}) : super(key: key);
+  SignUpScreen({Key? key}) : super(key: key);
 
-  final AccountType accountType;
   final _formKey = GlobalKey<FormState>();
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -35,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
   Widget _signUpScreenView() {
     return Scaffold(
       backgroundColor: PersoColors.lightBlue,
-      appBar: PersoAppBar(title: "Sign up new ${accountType.name}"),
+      appBar: const PersoAppBar(title: "Sign up new user"),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Form(
@@ -136,8 +134,8 @@ class SignUpScreen extends StatelessWidget {
               ),
               BlocConsumer<SignUpBloc, SignUpState>(
                 builder: (context, state) {
-                  if (state == SignUpState.loading()) {
-                    return Center(
+                  if (state == const SignUpState.loading()) {
+                    return const Center(
                         child: CircularProgressIndicator(
                       color: Colors.black,
                     ));

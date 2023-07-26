@@ -8,14 +8,15 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:Perso/data/address_provider/google_address_provider.dart'
-    as _i4;
-import 'package:Perso/data/register/register_provider.dart' as _i7;
-import 'package:Perso/data/trainer_search_cards/local_trainer_search_card_repository.dart'
     as _i5;
-import 'package:Perso/data/trainers/firestore_trainers_provider.dart' as _i3;
-import 'package:Perso/data/trainers/test_trainers_repository.dart' as _i8;
+import 'package:Perso/data/auth/auth_provider.dart' as _i3;
+import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart' as _i8;
+import 'package:Perso/data/trainer_search_cards/local_trainer_search_card_repository.dart'
+    as _i6;
+import 'package:Perso/data/trainers/firestore_trainers_provider.dart' as _i4;
+import 'package:Perso/data/trainers/test_trainers_repository.dart' as _i9;
 import 'package:Perso/data/training_categories/local_training_category_repository.dart'
-    as _i6; // ignore_for_file: unnecessary_lambdas
+    as _i7; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
@@ -29,15 +30,16 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.FirestoreTrainersProvider>(
-        () => _i3.FirestoreTrainersProvider());
-    gh.singleton<_i4.GoogleAddressProvider>(_i4.GoogleAddressProvider());
-    gh.factory<_i5.LocalTrainerSearchCardRepository>(
-        () => _i5.LocalTrainerSearchCardRepository());
-    gh.factory<_i6.LocalTrainingCategoryRepository>(
-        () => _i6.LocalTrainingCategoryRepository());
-    gh.factory<_i7.RegisterProvider>(() => _i7.RegisterProvider());
-    gh.factory<_i8.TestTrainersRepository>(() => _i8.TestTrainersRepository());
+    gh.factory<_i3.AuthProvider>(() => _i3.AuthProvider());
+    gh.factory<_i4.FirestoreTrainersProvider>(
+        () => _i4.FirestoreTrainersProvider());
+    gh.singleton<_i5.GoogleAddressProvider>(_i5.GoogleAddressProvider());
+    gh.factory<_i6.LocalTrainerSearchCardRepository>(
+        () => _i6.LocalTrainerSearchCardRepository());
+    gh.factory<_i7.LocalTrainingCategoryRepository>(
+        () => _i7.LocalTrainingCategoryRepository());
+    gh.singleton<_i8.PersoSharedPrefs>(_i8.PersoSharedPrefs());
+    gh.factory<_i9.TestTrainersRepository>(() => _i9.TestTrainersRepository());
     return this;
   }
 }

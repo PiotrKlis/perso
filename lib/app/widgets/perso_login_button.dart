@@ -5,8 +5,11 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
 
 class PersoRegisterButton extends StatelessWidget {
-  const PersoRegisterButton({Key? key, required this.registerType}) : super(key: key);
-  final AccountType registerType;
+  const PersoRegisterButton(
+      {super.key, AccountType registerType = AccountType.client})
+      : _registerType = registerType;
+
+  final AccountType _registerType;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +26,11 @@ class PersoRegisterButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                getIcon(registerType),
-                Container(margin: const EdgeInsets.only(left: Dimens.normalMargin), child: getTitle(registerType)),
-                Container(margin: const EdgeInsets.only(left: Dimens.normalMargin), child: getIcon(registerType)),
+                // getIcon(_registerType),
+                getTitle(_registerType),
+                // Container(
+                //     margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                //     child: getIcon(_registerType)),
               ],
             )));
   }
@@ -42,9 +47,9 @@ class PersoRegisterButton extends StatelessWidget {
   Text getTitle(AccountType loginType) {
     switch (loginType) {
       case AccountType.client:
-        return Text("Register as a Client", style: ThemeText.bodyBoldGreyText);
+        return Text("Sign Up", style: ThemeText.bodyBoldGreyText);
       case AccountType.trainer:
-        return Text("Register as a Trainer", style: ThemeText.bodyBoldGreyText);
+        return Text("Register", style: ThemeText.bodyBoldGreyText);
     }
   }
 }

@@ -1,12 +1,12 @@
 import 'package:Perso/app/screens/sign_up/event/sign_up_event.dart';
 import 'package:Perso/app/screens/sign_up/state/sign_up_state.dart';
-import 'package:Perso/data/register/register_provider.dart';
+import 'package:Perso/data/auth/auth_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  final RegisterProvider _registerProvider = GetIt.I.get<RegisterProvider>();
+  final AuthProvider _authProvider = GetIt.I.get<AuthProvider>();
 
   SignUpBloc(SignUpState initialState) : super(initialState) {
     on<Init>((state, emit) async {
@@ -16,7 +16,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<Register>((state, emit) async {
       try {
         emit(const SignUpState.loading());
-        await _registerProvider.register(
+        await _authProvider.register(
             email: state.email, password: state.password);
         emit(const SignUpState.success());
       } catch (error) {
@@ -24,8 +24,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       }
     });
   }
-
-
 
   void _handleRegistrationError(Object error, Emitter<SignUpState> emit) {
     String errorMessage = "Something went wrong";

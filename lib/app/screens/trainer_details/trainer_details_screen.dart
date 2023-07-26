@@ -1,5 +1,4 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
-import 'package:Perso/app/screens/trainer_sign_up/spoken_language_row.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';

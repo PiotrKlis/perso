@@ -232,6 +232,14 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
+  static TextStyle calloutRegularRed = TextStyle(
+      fontFamily: fontFamilyName,
+      color: Colors.red,
+      fontSize: 16.0,
+      height: 1.31,
+      letterSpacing: -0.4,
+      fontWeight: FontWeight.w400);
+
   static TextStyle footnoteRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,

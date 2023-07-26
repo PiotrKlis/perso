@@ -41,7 +41,7 @@ class TextFieldValidator {
     }
   }
 
-  static String? validateName(String value) {
+  static String? validateIsEmpty(String value) {
     if (value.isEmpty) {
       return 'Required Field';
     } else {
