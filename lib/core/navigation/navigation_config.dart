@@ -23,7 +23,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final GoRouter goRouter = GoRouter(
-    initialLocation: ScreenNavigationKey.home,
+    initialLocation: ScreenNavigationKey.firstLogin,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
@@ -95,12 +95,12 @@ final GoRouter goRouter = GoRouter(
                           pageBuilder: (context, state) {
                             return NoTransitionPage(child: ProfileEditScreen());
                           }),
-                      GoRoute(
-                          path: ScreenNavigationKey.firstLogin,
-                          name: ScreenNavigationKey.firstLogin,
-                          pageBuilder: (context, state) {
-                            return NoTransitionPage(child: FirstLoginScreen());
-                          }),
+                      // GoRoute(
+                      //     path: ScreenNavigationKey.firstLogin,
+                      //     name: ScreenNavigationKey.firstLogin,
+                      //     pageBuilder: (context, state) {
+                      //       return NoTransitionPage(child: FirstLoginScreen());
+                      //     }),
                       GoRoute(
                           path: ScreenNavigationKey.passwordRecovery,
                           name: ScreenNavigationKey.passwordRecovery,
@@ -134,6 +134,12 @@ final GoRouter goRouter = GoRouter(
               return const NoTransitionPage(child: TrainingScreen());
             },
           ),
+          GoRoute(
+              path: ScreenNavigationKey.firstLogin,
+              name: ScreenNavigationKey.firstLogin,
+              pageBuilder: (context, state) {
+                return NoTransitionPage(child: FirstLoginScreen());
+              }),
         ],
       ),
     ]);
