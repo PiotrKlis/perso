@@ -45,9 +45,9 @@ class FirstLoginScreen extends StatelessWidget {
                   PersoButton(
                       title: "I am a trainer",
                       whiteBlackTheme: true,
-                      onTap: _navigateClient),
+                      onTap: _navigateTrainer),
                   Container(
-                      margin: EdgeInsets.only(left: Dimens.normalMargin),
+                      // margin: EdgeInsets.only(left: Dimens.normalMargin),
                       child: PersoButton(
                         title: "I am a client",
                         onTap: _navigateClient,

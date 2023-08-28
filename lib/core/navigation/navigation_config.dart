@@ -23,7 +23,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final GoRouter goRouter = GoRouter(
-    initialLocation: ScreenNavigationKey.firstLogin,
+    initialLocation: ScreenNavigationKey.home,
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
@@ -89,12 +89,12 @@ final GoRouter goRouter = GoRouter(
                       return NoTransitionPage(child: SignInScreen());
                     },
                     routes: [
-                      GoRoute(
-                          path: ScreenNavigationKey.profileEdit,
-                          name: ScreenNavigationKey.profileEdit,
-                          pageBuilder: (context, state) {
-                            return NoTransitionPage(child: ProfileEditScreen());
-                          }),
+                      // GoRoute(
+                      //     path: ScreenNavigationKey.profileEdit,
+                      //     name: ScreenNavigationKey.profileEdit,
+                      //     pageBuilder: (context, state) {
+                      //       return NoTransitionPage(child: ProfileEditScreen());
+                      //     }),
                       // GoRoute(
                       //     path: ScreenNavigationKey.firstLogin,
                       //     name: ScreenNavigationKey.firstLogin,
@@ -138,8 +138,17 @@ final GoRouter goRouter = GoRouter(
               path: ScreenNavigationKey.firstLogin,
               name: ScreenNavigationKey.firstLogin,
               pageBuilder: (context, state) {
-                return NoTransitionPage(child: FirstLoginScreen());
-              }),
+                return const NoTransitionPage(child: FirstLoginScreen());
+              },
+              routes: [
+                GoRoute(
+                  path: ScreenNavigationKey.profileEdit,
+                  name: ScreenNavigationKey.profileEdit,
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage(child: ProfileEditScreen());
+                  },
+                )
+              ]),
         ],
       ),
     ]);

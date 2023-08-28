@@ -12,6 +12,7 @@ class ProfileEditScreen extends StatelessWidget {
   ProfileEditScreen({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+  //TODO: Add extra; UserType, add visiblity if client/trainer
 
   @override
   Widget build(BuildContext context) {
@@ -46,51 +47,6 @@ class ProfileEditScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       top: Dimens.normalMargin, right: Dimens.normalMargin),
                   child: const PersoDivider()),
-              Container(
-                margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                child: Row(
-                  children: [
-                    Container(
-                        margin:
-                            const EdgeInsets.only(left: Dimens.normalMargin),
-                        child: const Icon(Icons.email, size: 24.0)),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
-                        child: const PersoTextField(
-                            title: "Email",
-                            customValidator: TextFieldValidator.validateEmail),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.password, size: 24.0)),
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: const PersoTextField(
-                            title: "Password",
-                            customValidator:
-                                TextFieldValidator.validatePassword,
-                            shouldObscureText: true,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
               Container(
                   margin: const EdgeInsets.only(
                       top: Dimens.normalMargin, right: Dimens.normalMargin),
@@ -234,7 +190,31 @@ class ProfileEditScreen extends StatelessWidget {
                 height: 300,
                 child: Image.asset("assets/images/trainer3.png"),
                 //Image(image: AssetImage("assets/images/screenshot.png")
-              )
+              ),
+              Container(
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                          margin:
+                          const EdgeInsets.only(left: Dimens.normalMargin),
+                          child: const Icon(Icons.password, size: 24.0)),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: const PersoTextField(
+                            title: "Password",
+                            customValidator:
+                            TextFieldValidator.validatePassword,
+                            shouldObscureText: true,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
             ],
           ),
         ),
