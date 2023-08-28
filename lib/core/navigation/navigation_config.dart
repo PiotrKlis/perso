@@ -1,4 +1,3 @@
-import 'package:Perso/app/models/account_type.dart';
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/first_login/first_login_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
@@ -111,11 +110,8 @@ final GoRouter goRouter = GoRouter(
                       GoRoute(
                           name: ScreenNavigationKey.signUp,
                           path: ScreenNavigationKey.signUp,
-                          pageBuilder: (context, state) {
-                            AccountType accountType =
-                                state.extra as AccountType;
-                            return NoTransitionPage(child: SignUpScreen());
-                          },
+                          pageBuilder: (context, state) =>
+                              NoTransitionPage(child: SignUpScreen()),
                           routes: [
                             GoRoute(
                                 name: ScreenNavigationKey.signUpSuccess,

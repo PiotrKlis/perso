@@ -32,7 +32,7 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
           Container(
               margin: const EdgeInsets.only(left: Dimens.normalMargin),
               child: PersoSmallButton(
-                text: "Add spoken languages",
+                text: "Add language",
                 addLanguage: _addSpokenLanguage,
                 customValidator: _validateNumberOfLanguages,
               )),

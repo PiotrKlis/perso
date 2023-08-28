@@ -13,32 +13,32 @@ class FirstLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
             left: Dimens.normalMargin, right: Dimens.normalMargin),
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(top: Dimens.substantialMargin),
+              margin: const EdgeInsets.only(top: Dimens.substantialMargin),
               child: Text(
                 "Welcome to PERSO!",
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimens.biggerMargin),
+              margin: const EdgeInsets.only(top: Dimens.biggerMargin),
               child: Text(
                 "Thank you for logging in. We're thrilled to have you join our community 🎉",
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimens.normalMargin),
+              margin: const EdgeInsets.only(top: Dimens.normalMargin),
               child: Text(
                   "Get ready to embark on a journey of discovery and innovation",
                   style: ThemeText.bodyRegularBlackText),
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimens.substantialMargin),
+              margin: const EdgeInsets.only(top: Dimens.substantialMargin),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -62,10 +62,10 @@ class FirstLoginScreen extends StatelessWidget {
   }
 
   void _navigateClient(BuildContext context) {
-    context.replace(ScreenNavigationKey.profileEdit, );
+    context.replaceNamed(ScreenNavigationKey.profileEdit);
   }
 
   void _navigateTrainer(BuildContext context) {
-    context.replace(ScreenNavigationKey.profileEdit);
+    context.replaceNamed(ScreenNavigationKey.profileEdit);
   }
 }

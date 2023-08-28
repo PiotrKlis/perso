@@ -1,5 +1,7 @@
 === BACKLOG ===
--
+- Navigate to first login screen on first successful login
+- Check if you can navigate back from successful login screen
+- Navigate to first login screen if app is opened and user is logged in but profile is not created
 
 
 RRRRRRRR

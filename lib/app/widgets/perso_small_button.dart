@@ -1,3 +1,4 @@
+import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:country_picker/country_picker.dart';
@@ -18,12 +19,15 @@ class PersoSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200.0,
+      width: 170.0,
       child: TextFormField(
         validator: (_) => customValidator.call(),
         readOnly: true,
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.start,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(0.0),
+          prefixIcon: const Icon(Icons.add),
+          prefixIconColor: PersoColors.blue,
           filled: true,
           fillColor: Colors.white,
           hintText: text,

@@ -20,7 +20,7 @@ class ProfileEditScreen extends StatelessWidget {
       backgroundColor: PersoColors.lightBlue,
       appBar: AppBar(
         elevation: 0.0,
-        title: const Text('Sign Up'),
+        title: const Text('Profile edit'),
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -32,24 +32,26 @@ class ProfileEditScreen extends StatelessWidget {
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: const Icon(
-                      Icons.account_circle,
-                      size: 160.0,
-                    )),
+                    child:             SizedBox(
+                      width: 160,
+                      height: 160,
+                      child: Image.asset("assets/images/trainer3.png"),
+                      //Image(image: AssetImage("assets/images/screenshot.png")
+                    ),),
               ),
               //TODO: Add image upload functionality
               // https://pub.dev/packages/image_picker
-              const Center(child: PersoButton(title: "Upload image")),
+              Container(margin: EdgeInsets.only(top: Dimens.bigMargin), child: const Center(child: PersoButton(title: "Upload image"))),
               Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  margin: const EdgeInsets.only(
+                      top: Dimens.bigMargin, right: Dimens.normalMargin),
+                  child: const PersoDivider()),
+              Container(
+                  margin: const EdgeInsets.only(top: Dimens.normalMargin),
                   child: const SpokenLanguageRowWidget()),
               Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, right: Dimens.normalMargin),
-                  child: const PersoDivider()),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, right: Dimens.normalMargin),
+                      top: Dimens.bigMargin, right: Dimens.bigMargin),
                   child: const PersoDivider()),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
@@ -185,36 +187,6 @@ class ProfileEditScreen extends StatelessWidget {
                     child: PersoButton(
                         width: 160.0, title: "Next", onTap: onTapLogic)),
               ),
-              SizedBox(
-                width: 300,
-                height: 300,
-                child: Image.asset("assets/images/trainer3.png"),
-                //Image(image: AssetImage("assets/images/screenshot.png")
-              ),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin:
-                          const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.password, size: 24.0)),
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: const PersoTextField(
-                            title: "Password",
-                            customValidator:
-                            TextFieldValidator.validatePassword,
-                            shouldObscureText: true,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
             ],
           ),
         ),

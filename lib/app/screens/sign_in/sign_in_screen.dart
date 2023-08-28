@@ -7,7 +7,6 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
-import 'package:Perso/app/widgets/perso_login_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
@@ -110,6 +109,9 @@ class SignInScreen extends StatelessWidget {
                             child: Text(message,
                                 style: ThemeText.calloutRegularRed)),
                         success: () {
+                          context
+                              .read<SignInBloc>()
+                              .add(const SignInEvent.checkFirstLogin());
                           //TODO: Implement shared prefs in bloc
                           // PersoSharedPrefs sharedPrefs = PersoSharedPrefs();
                           // sharedPrefs.getBool("isFirstLogin")
@@ -117,10 +119,10 @@ class SignInScreen extends StatelessWidget {
                           //         sharedPrefs
                           //             .setBool("isFirstLogin", true)
                           //             .then((_) =>
-                          Future.delayed(Duration.zero, () {
-                            context
-                                .replaceNamed(ScreenNavigationKey.profileEdit);
-                          });
+                          // Future.delayed(Duration.zero, () {
+                          //   context
+                          //       .replaceNamed(ScreenNavigationKey.firstLogin);
+                          // });
                           // }
                           // : Future.delayed(Duration.zero, () {
                           //     context
@@ -185,7 +187,7 @@ class SignInScreen extends StatelessWidget {
                     left: Dimens.bigMargin,
                     right: Dimens.bigMargin),
                 child: GestureDetector(
-                  onTap: () => context.pushNamed("sign_up"),
+                  onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
                   child: const AbsorbPointer(
                     child: PersoButton(title: "Sign up", whiteBlackTheme: true),
                   ),
