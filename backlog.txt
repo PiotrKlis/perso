@@ -1,6 +1,28 @@
 === BACKLOG ===
-- Finish trainer sign up screen
-- clck anywhere should close the keyboard
-- Send user data to firestore
-- Create proper nickname validator
-- Image upload
+-
+
+
+RRRRRRRR
+- Sourcetree
+- Konto na githubie, pobranie repo https://github.com/PiotrKlis/perso/settings/access
+- Layouty - figma https://www.figma.com/file/DOQhwF2rVKO65KWPbfVgbW/Trainers-App---Piotr?type=design&node-id=66-166&mode=design
+- Onboarding
+  - firestore https://console.firebase.google.com/u/2/project/perso-67a40/settings/iam
+  - Screens graph
+- Navigation
+
+1. Dimens
+  Check app for fixed dimens values and reuse or extract those into Dimens.dart. Reuse margins, create new values for widget height/width. Remember about importing Dimens file.
+
+2. Languages
+  Check app for fixed strings and extract those into app_en.arb & app_pl.arb.
+
+  import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+  AppLocalizations.of(context)!.app_name
+
+  https://docs.flutter.dev/ui/accessibility-and-localization/internationalization
+
+  run flutter run and codegen takes place automatically. You should find generated files in ${FLUTTER_PROJECT}/.dart_tool/flutter_gen/gen_l10n.
+  Alternatively, you can also run flutter gen-l10n to generate the same files without running the app.
+
+3. Filter screen
