@@ -3,6 +3,7 @@ import 'package:Perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:Perso/app/screens/first_login/profile_creation_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
+import 'package:Perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:Perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:Perso/app/screens/search/search_screen.dart';
 import 'package:Perso/app/screens/search_filters/search_filter.dart';
@@ -139,7 +140,7 @@ final GoRouter goRouter = GoRouter(
               path: ScreenNavigationKey.profileCreation,
               name: ScreenNavigationKey.profileCreation,
               pageBuilder: (context, state) {
-                return const NoTransitionPage(child: FirstLoginScreen());
+                return const NoTransitionPage(child: ProfileCreationScreen());
               },
               routes: [
                 GoRoute(
