@@ -1,6 +1,5 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/client_profile/client_profile_screen.dart';
-import 'package:Perso/app/screens/first_login/profile_creation_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
 import 'package:Perso/app/screens/profile_creation/profile_creation_screen.dart';
