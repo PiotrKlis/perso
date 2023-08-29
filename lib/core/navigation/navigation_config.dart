@@ -16,6 +16,7 @@ import 'package:Perso/app/screens/training_categories/training_categories.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
+import 'package:Perso/core/user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,99 +36,99 @@ final GoRouter goRouter = GoRouter(
         },
         routes: [
           GoRoute(
-              name: ScreenNavigationKey.home,
-              path: ScreenNavigationKey.home,
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(child: HomeScreen());
-              },
-              routes: [
-                GoRoute(
-                  name: ScreenNavigationKey.trainerDetails,
-                  path: ScreenNavigationKey.trainerDetails,
+            name: ScreenNavigationKey.home,
+            path: ScreenNavigationKey.home,
+            pageBuilder: (context, state) {
+              return NoTransitionPage(child: HomeScreen());
+            },
+            routes: [
+              GoRoute(
+                name: ScreenNavigationKey.trainerDetails,
+                path: ScreenNavigationKey.trainerDetails,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                      child: TrainerDetailsScreen(
+                          trainerEntity: state.extra as TrainerEntity));
+                },
+              ),
+              GoRoute(
+                name: ScreenNavigationKey.search,
+                path: ScreenNavigationKey.search,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: SearchScreen());
+                },
+              ),
+              GoRoute(
+                  name: ScreenNavigationKey.searchResults,
+                  path: "${ScreenNavigationKey.searchResults}/:input",
                   pageBuilder: (context, state) {
                     return NoTransitionPage(
-                        child: TrainerDetailsScreen(
-                            trainerEntity: state.extra as TrainerEntity));
+                        child: SearchResultsScreen(
+                            input: state.pathParameters["input"]));
                   },
-                ),
-                GoRoute(
-                  name: ScreenNavigationKey.search,
-                  path: ScreenNavigationKey.search,
+                  routes: [
+                    GoRoute(
+                      name: ScreenNavigationKey.searchFilter,
+                      path: ScreenNavigationKey.searchFilter,
+                      pageBuilder: (context, state) {
+                        return const NoTransitionPage(
+                            child: SearchFilterScreen());
+                      },
+                    ),
+                  ]),
+              GoRoute(
+                name: ScreenNavigationKey.trainingCategories,
+                path: ScreenNavigationKey.trainingCategories,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(
+                      child: TrainingCategoriesScreen());
+                },
+              ),
+              GoRoute(
+                name: ScreenNavigationKey.clientProfile,
+                path: ScreenNavigationKey.clientProfile,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: ClientProfileScreen());
+                },
+              ),
+              GoRoute(
+                name: ScreenNavigationKey.trainerProfile,
+                path: ScreenNavigationKey.trainerProfile,
+                pageBuilder: (context, state) {
+                  return const NoTransitionPage(child: TrainerProfileScreen());
+                },
+              ),
+              GoRoute(
+                  name: ScreenNavigationKey.signIn,
+                  path: ScreenNavigationKey.signIn,
                   pageBuilder: (context, state) {
-                    return NoTransitionPage(child: SearchScreen());
+                    return NoTransitionPage(child: SignInScreen());
                   },
-                ),
-                GoRoute(
-                    name: ScreenNavigationKey.searchResults,
-                    path: "${ScreenNavigationKey.searchResults}/:input",
-                    pageBuilder: (context, state) {
-                      return NoTransitionPage(
-                          child: SearchResultsScreen(
-                              input: state.pathParameters["input"]));
-                    },
-                    routes: [
-                      GoRoute(
-                        name: ScreenNavigationKey.searchFilter,
-                        path: ScreenNavigationKey.searchFilter,
+                  routes: [
+                    GoRoute(
+                        path: ScreenNavigationKey.passwordRecovery,
+                        name: ScreenNavigationKey.passwordRecovery,
                         pageBuilder: (context, state) {
                           return const NoTransitionPage(
-                              child: SearchFilterScreen());
-                        },
-                      ),
-                    ]),
-                GoRoute(
-                  name: ScreenNavigationKey.trainingCategories,
-                  path: ScreenNavigationKey.trainingCategories,
-                  pageBuilder: (context, state) {
-                    return const NoTransitionPage(
-                        child: TrainingCategoriesScreen());
-                  },
-                ),
-                GoRoute(
-                  name: ScreenNavigationKey.clientProfile,
-                  path: ScreenNavigationKey.clientProfile,
-                  pageBuilder: (context, state) {
-                    return const NoTransitionPage(child: ClientProfileScreen());
-                  },
-                ),
-                GoRoute(
-                  name: ScreenNavigationKey.trainerProfile,
-                  path: ScreenNavigationKey.trainerProfile,
-                  pageBuilder: (context, state) {
-                    return const NoTransitionPage(
-                        child: TrainerProfileScreen());
-                  },
-                ),
-                GoRoute(
-                    name: ScreenNavigationKey.signIn,
-                    path: ScreenNavigationKey.signIn,
-                    pageBuilder: (context, state) {
-                      return NoTransitionPage(child: SignInScreen());
-                    },
-                    routes: [
-                      GoRoute(
-                          path: ScreenNavigationKey.passwordRecovery,
-                          name: ScreenNavigationKey.passwordRecovery,
-                          pageBuilder: (context, state) {
-                            return const NoTransitionPage(
-                                child: PasswordRecoveryScreen());
-                          }),
-                      GoRoute(
-                          name: ScreenNavigationKey.signUp,
-                          path: ScreenNavigationKey.signUp,
-                          pageBuilder: (context, state) =>
-                              NoTransitionPage(child: SignUpScreen()),
-                          routes: [
-                            GoRoute(
-                                name: ScreenNavigationKey.signUpSuccess,
-                                path: ScreenNavigationKey.signUpSuccess,
-                                pageBuilder: (context, state) {
-                                  return const NoTransitionPage(
-                                      child: SignUpSuccessScreen());
-                                })
-                          ]),
-                    ])
-              ]),
+                              child: PasswordRecoveryScreen());
+                        }),
+                    GoRoute(
+                        name: ScreenNavigationKey.signUp,
+                        path: ScreenNavigationKey.signUp,
+                        pageBuilder: (context, state) =>
+                            NoTransitionPage(child: SignUpScreen()),
+                        routes: [
+                          GoRoute(
+                              name: ScreenNavigationKey.signUpSuccess,
+                              path: ScreenNavigationKey.signUpSuccess,
+                              pageBuilder: (context, state) {
+                                return const NoTransitionPage(
+                                    child: SignUpSuccessScreen());
+                              })
+                        ]),
+                  ]),
+            ],
+          ),
           GoRoute(
             name: ScreenNavigationKey.trainings,
             path: ScreenNavigationKey.trainings,
@@ -146,7 +147,9 @@ final GoRouter goRouter = GoRouter(
                   path: ScreenNavigationKey.profileEdit,
                   name: ScreenNavigationKey.profileEdit,
                   pageBuilder: (context, state) {
-                    return NoTransitionPage(child: ProfileEditScreen());
+                    return NoTransitionPage(
+                        child: ProfileEditScreen(
+                            userType: state.extra as UserType));
                   },
                 )
               ]),

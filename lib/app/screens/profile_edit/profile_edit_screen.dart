@@ -6,12 +6,16 @@ import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/core/user_type.dart';
 import 'package:flutter/material.dart';
 
 class ProfileEditScreen extends StatelessWidget {
-  ProfileEditScreen({Key? key}) : super(key: key);
+  ProfileEditScreen({super.key, required UserType userType})
+      : _userType = userType;
 
   final _formKey = GlobalKey<FormState>();
+  final UserType _userType;
+
   //TODO: Add extra; UserType, add visiblity if client/trainer
 
   @override
@@ -20,7 +24,7 @@ class ProfileEditScreen extends StatelessWidget {
       backgroundColor: PersoColors.lightBlue,
       appBar: AppBar(
         elevation: 0.0,
-        title: const Text('Profile edit'),
+        title: Text("Edit ${_userType.name} profile"),
       ),
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -31,28 +35,40 @@ class ProfileEditScreen extends StatelessWidget {
             children: [
               Center(
                 child: Container(
-                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child:             SizedBox(
-                      width: 160,
-                      height: 160,
-                      child: Image.asset("assets/images/trainer3.png"),
-                      //Image(image: AssetImage("assets/images/screenshot.png")
-                    ),),
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: SizedBox(
+                    width: 160,
+                    height: 160,
+                    child: Image.asset("assets/images/trainer3.png"),
+                    //Image(image: AssetImage("assets/images/screenshot.png")
+                  ),
+                ),
               ),
               //TODO: Add image upload functionality
               // https://pub.dev/packages/image_picker
-              Container(margin: EdgeInsets.only(top: Dimens.bigMargin), child: const Center(child: PersoButton(title: "Upload image"))),
               Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.bigMargin, right: Dimens.normalMargin),
-                  child: const PersoDivider()),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                  child: const SpokenLanguageRowWidget()),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.bigMargin, right: Dimens.bigMargin),
-                  child: const PersoDivider()),
+                  margin: EdgeInsets.only(top: Dimens.bigMargin),
+                  child:
+                      const Center(child: PersoButton(title: "Upload image"))),
+              Visibility(
+                visible: _userType == UserType.trainer,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(
+                            top: Dimens.bigMargin, right: Dimens.normalMargin),
+                        child: const PersoDivider()),
+                    Container(
+                        margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                        child: const SpokenLanguageRowWidget()),
+                    Container(
+                        margin: const EdgeInsets.only(
+                            top: Dimens.bigMargin, right: Dimens.bigMargin),
+                        child: const PersoDivider()),
+                  ],
+                ),
+              ),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
                   child: Row(
@@ -137,47 +153,54 @@ class ProfileEditScreen extends StatelessWidget {
                       ),
                     ],
                   )),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, right: Dimens.normalMargin),
-                  child: const PersoDivider()),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, right: Dimens.normalMargin),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.text_snippet, size: 24.0)),
-                      Expanded(
-                        child: Container(
-                          height: 140.0,
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const PersoTextField(
-                            title: "Short Bio",
-                            customValidator:
-                                TextFieldValidator.validateNickname,
+              Visibility(
+                visible: _userType == UserType.trainer,
+                child: Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(
+                            top: Dimens.normalMargin, right: Dimens.normalMargin),
+                        child: const PersoDivider()),
+                    Container(
+                        margin: const EdgeInsets.only(
+                            top: Dimens.normalMargin, right: Dimens.normalMargin),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                                margin:
+                                const EdgeInsets.only(left: Dimens.normalMargin),
+                                child: const Icon(Icons.text_snippet, size: 24.0)),
+                            Expanded(
+                              child: Container(
+                                height: 140.0,
+                                margin:
+                                const EdgeInsets.only(left: Dimens.normalMargin),
+                                child: const PersoTextField(
+                                  title: "Short Bio",
+                                  customValidator:
+                                  TextFieldValidator.validateNickname,
+                                  isMultiLine: true,
+                                  maxLength: 150,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                    Container(
+                        height: 340.0,
+                        margin: const EdgeInsets.only(
+                            left: Dimens.substantialMargin,
+                            top: Dimens.normalMargin,
+                            right: Dimens.normalMargin),
+                        child: const PersoTextField(
+                            title: "Long bio",
                             isMultiLine: true,
-                            maxLength: 150,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
-              Container(
-                  height: 340.0,
-                  margin: const EdgeInsets.only(
-                      left: Dimens.substantialMargin,
-                      top: Dimens.normalMargin,
-                      right: Dimens.normalMargin),
-                  child: const PersoTextField(
-                      title: "Long bio",
-                      isMultiLine: true,
-                      maxLength: 500,
-                      customValidator: TextFieldValidator.validateNickname)),
+                            maxLength: 500,
+                            customValidator: TextFieldValidator.validateNickname)),
+                  ],
+                ),
+              ),
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(

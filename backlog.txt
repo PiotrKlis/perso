@@ -1,7 +1,6 @@
 === BACKLOG ===
-
-- Implement some mechanism that will watch if user is logged in & email confirmed and if not
-- Implement showing different screen for logged in user instead of sign in screen
+- Add extra info on UserType into ProfileEditScreen
+- Implement showing client/trainer profile for logged in user instead of sign in screen
 
 RRRRRRRR
 - Sourcetree

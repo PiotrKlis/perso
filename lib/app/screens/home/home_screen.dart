@@ -12,13 +12,16 @@ import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
+import 'package:Perso/data/auth/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  final AuthProvider _authProvider = GetIt.I.get<AuthProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +33,7 @@ class HomeScreen extends StatelessWidget {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(children: [
               GestureDetector(
-                  onTap: () {
-                    context.push(
-                        "${ScreenNavigationKey.home}/${ScreenNavigationKey.signIn}");
-                  },
+                  onTap: () => _handleAccountClick(context),
                   child: const PersoAccountIcon()),
               Container(
                 margin: const EdgeInsets.only(
@@ -48,8 +48,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       //TODO: Make this button invisible if user is logged in
                       PersoButton(
-                          onTap: (context) =>
-                              context.pushNamed(ScreenNavigationKey.signIn),
+                          onTap: (context) => _handleAccountClick(context),
                           title: AppLocalizations.of(context)!
                               .trainers_section_button,
                           width: Dimens.smallButtonWidth)
@@ -127,5 +126,18 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleAccountClick(BuildContext context) {
+      if (_authProvider.isUserLoggedIn()) {
+        _navigateToProfileScreen(context);
+      } else {
+        context.pushNamed(ScreenNavigationKey.signIn);
+      }
+  }
+
+  void _navigateToProfileScreen(BuildContext context) {
+    // TODO: If UserType is client or trainer
+    context.pushNamed(ScreenNavigationKey.trainerProfile);
   }
 }

@@ -1,8 +1,12 @@
+import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class AuthProvider {
+  final PersoSharedPrefs _sharedPrefs = GetIt.I.get<PersoSharedPrefs>();
+
   Future<UserCredential> register(
       {required String email, required String password}) async {
     UserCredential userCredentials = await FirebaseAuth.instance
@@ -18,9 +22,12 @@ class AuthProvider {
   }
 
   bool isUserLoggedIn() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      return FirebaseAuth.instance.currentUser!.emailVerified;
+    if (FirebaseAuth.instance.currentUser != null &&
+        FirebaseAuth.instance.currentUser!.emailVerified &&
+        _sharedPrefs.getBool(_sharedPrefs.isProfileCreatedKey)) {
+      return true;
+    } else {
+      return false;
     }
-    return false;
   }
 }

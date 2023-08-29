@@ -30,10 +30,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     });
 
     on<CheckIsProfileCreated>((state, emit) async {
-      if (_persoSharedPrefs.getBool("isFirstLogin", defaultValue: true)) {
-        emit(const SignInState.navigateToProfileCreationScreen());
-      } else {
+      if (_persoSharedPrefs.getBool(_persoSharedPrefs.isProfileCreatedKey,
+          defaultValue: false)) {
         emit(const SignInState.navigateToHomeScreen());
+      } else {
+        emit(const SignInState.navigateToProfileCreationScreen());
       }
     });
   }
