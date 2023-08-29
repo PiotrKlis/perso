@@ -1,8 +1,7 @@
 === BACKLOG ===
-- Navigate to first login screen on first successful login
-- Check if you can navigate back from successful login screen
-- Navigate to first login screen if app is opened and user is logged in but profile is not created
 
+- Implement some mechanism that will watch if user is logged in & email confirmed and if not
+- Implement showing different screen for logged in user instead of sign in screen
 
 RRRRRRRR
 - Sourcetree
