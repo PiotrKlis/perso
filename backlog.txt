@@ -1,5 +1,5 @@
 === BACKLOG ===
-- Add extra info on UserType into ProfileEditScreen
+- Add profile data into database
 - Implement showing client/trainer profile for logged in user instead of sign in screen
 
 RRRRRRRR

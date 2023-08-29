@@ -4,18 +4,20 @@ import 'package:Perso/app/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 class PersoTextField extends StatefulWidget {
-  const PersoTextField(
-      {super.key,
-      required String title,
-      String? Function(String)? customValidator,
-      bool shouldObscureText = false,
-      TextInputType textInputType = TextInputType.text,
-      bool isMultiLine = false,
-      int? maxLength = 60,
-      TextEditingController? loginController,
-      TextEditingController? passwordController,
-      TextEditingController? confirmPasswordController})
-      : _confirmPasswordController = confirmPasswordController,
+  const PersoTextField({
+    super.key,
+    required String title,
+    String? Function(String)? customValidator,
+    bool shouldObscureText = false,
+    TextInputType textInputType = TextInputType.text,
+    bool isMultiLine = false,
+    int? maxLength = 60,
+    TextEditingController? loginController,
+    TextEditingController? passwordController,
+    TextEditingController? confirmPasswordController,
+    TextEditingController? nameController,
+    TextEditingController? surnameController,
+  })  : _confirmPasswordController = confirmPasswordController,
         _passwordController = passwordController,
         _loginController = loginController,
         _maxLength = maxLength,
@@ -23,7 +25,9 @@ class PersoTextField extends StatefulWidget {
         _textInputType = textInputType,
         _shouldObscureText = shouldObscureText,
         _customValidator = customValidator,
-        _title = title;
+        _title = title,
+        _nameController = nameController,
+        _surnameController = surnameController;
 
   final String _title;
   final String? Function(String value)? _customValidator;
@@ -34,6 +38,8 @@ class PersoTextField extends StatefulWidget {
   final TextEditingController? _passwordController;
   final TextEditingController? _confirmPasswordController;
   final TextEditingController? _loginController;
+  final TextEditingController? _nameController;
+  final TextEditingController? _surnameController;
 
   @override
   State<PersoTextField> createState() => _PersoTextFieldState();
@@ -45,7 +51,9 @@ class _PersoTextFieldState extends State<PersoTextField> {
     return TextFormField(
       controller: widget._confirmPasswordController ??
           widget._passwordController ??
-          widget._loginController,
+          widget._loginController ??
+          widget._surnameController ??
+          widget._nameController,
       maxLength: widget._maxLength,
       obscureText: widget._shouldObscureText,
       keyboardType:
