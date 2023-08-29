@@ -11,8 +11,16 @@ class AuthProvider {
     return userCredentials;
   }
 
-  Future<UserCredential> login({required String email, required String password}) async {
+  Future<UserCredential> login(
+      {required String email, required String password}) async {
     return await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  bool isUserLoggedIn() {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return FirebaseAuth.instance.currentUser!.emailVerified;
+    }
+    return false;
   }
 }

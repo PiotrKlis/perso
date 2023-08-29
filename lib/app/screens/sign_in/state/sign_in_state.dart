@@ -7,6 +7,6 @@ class SignInState with _$SignInState {
   const factory SignInState.loading() = Loading;
   const factory SignInState.error({required String message}) = Error;
   const factory SignInState.success() = Success;
-  const factory SignInState.navigateToFirstLoginScreen() = NavigateToFirstLoginScreen;
+  const factory SignInState.navigateToProfileCreationScreen() = NavigateToProfileCreationScreen;
   const factory SignInState.navigateToHomeScreen() = NavigateToHomeScreen;
 }

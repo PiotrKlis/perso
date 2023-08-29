@@ -111,7 +111,7 @@ class SignInScreen extends StatelessWidget {
                         success: () {
                           context
                               .read<SignInBloc>()
-                              .add(const SignInEvent.checkFirstLogin());
+                              .add(const SignInEvent.checkIsProfileCreated());
                           //TODO: Implement shared prefs in bloc
                           // PersoSharedPrefs sharedPrefs = PersoSharedPrefs();
                           // sharedPrefs.getBool("isFirstLogin")
@@ -138,9 +138,9 @@ class SignInScreen extends StatelessWidget {
                 state.whenOrNull(
                     success: () => context
                         .read<SignInBloc>()
-                        .add(const SignInEvent.checkFirstLogin()),
-                    navigateToFirstLoginScreen: () =>
-                        context.replaceNamed(ScreenNavigationKey.firstLogin),
+                        .add(const SignInEvent.checkIsProfileCreated()),
+                    navigateToProfileCreationScreen: () =>
+                        context.replaceNamed(ScreenNavigationKey.profileCreation),
                     navigateToHomeScreen: () =>
                         context.replaceNamed(ScreenNavigationKey.home));
               },

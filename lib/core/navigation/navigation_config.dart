@@ -1,5 +1,6 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
-import 'package:Perso/app/screens/first_login/first_login_screen.dart';
+import 'package:Perso/app/screens/client_profile/client_profile_screen.dart';
+import 'package:Perso/app/screens/first_login/profile_creation_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
 import 'package:Perso/app/screens/profile_edit/profile_edit_screen.dart';
@@ -10,6 +11,7 @@ import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:Perso/app/screens/sign_up_success/sign_up_success_screen.dart';
 import 'package:Perso/app/screens/trainer_details/trainer_details_screen.dart';
+import 'package:Perso/app/screens/trainer_profile/trainer_profile_screen.dart';
 import 'package:Perso/app/screens/training_categories/training_categories.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
@@ -82,24 +84,27 @@ final GoRouter goRouter = GoRouter(
                   },
                 ),
                 GoRoute(
+                  name: ScreenNavigationKey.clientProfile,
+                  path: ScreenNavigationKey.clientProfile,
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(child: ClientProfileScreen());
+                  },
+                ),
+                GoRoute(
+                  name: ScreenNavigationKey.trainerProfile,
+                  path: ScreenNavigationKey.trainerProfile,
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(
+                        child: TrainerProfileScreen());
+                  },
+                ),
+                GoRoute(
                     name: ScreenNavigationKey.signIn,
                     path: ScreenNavigationKey.signIn,
                     pageBuilder: (context, state) {
                       return NoTransitionPage(child: SignInScreen());
                     },
                     routes: [
-                      // GoRoute(
-                      //     path: ScreenNavigationKey.profileEdit,
-                      //     name: ScreenNavigationKey.profileEdit,
-                      //     pageBuilder: (context, state) {
-                      //       return NoTransitionPage(child: ProfileEditScreen());
-                      //     }),
-                      // GoRoute(
-                      //     path: ScreenNavigationKey.firstLogin,
-                      //     name: ScreenNavigationKey.firstLogin,
-                      //     pageBuilder: (context, state) {
-                      //       return NoTransitionPage(child: FirstLoginScreen());
-                      //     }),
                       GoRoute(
                           path: ScreenNavigationKey.passwordRecovery,
                           name: ScreenNavigationKey.passwordRecovery,
@@ -131,8 +136,8 @@ final GoRouter goRouter = GoRouter(
             },
           ),
           GoRoute(
-              path: ScreenNavigationKey.firstLogin,
-              name: ScreenNavigationKey.firstLogin,
+              path: ScreenNavigationKey.profileCreation,
+              name: ScreenNavigationKey.profileCreation,
               pageBuilder: (context, state) {
                 return const NoTransitionPage(child: FirstLoginScreen());
               },

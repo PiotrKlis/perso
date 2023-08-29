@@ -29,9 +29,9 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       }
     });
 
-    on<CheckFirstLogin>((state, emit) async {
+    on<CheckIsProfileCreated>((state, emit) async {
       if (_persoSharedPrefs.getBool("isFirstLogin", defaultValue: true)) {
-        emit(const SignInState.navigateToFirstLoginScreen());
+        emit(const SignInState.navigateToProfileCreationScreen());
       } else {
         emit(const SignInState.navigateToHomeScreen());
       }

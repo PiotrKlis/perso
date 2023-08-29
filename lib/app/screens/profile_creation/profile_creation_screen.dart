@@ -5,8 +5,8 @@ import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class FirstLoginScreen extends StatelessWidget {
-  const FirstLoginScreen({super.key});
+class ProfileCreationScreen extends StatelessWidget {
+  const ProfileCreationScreen({super.key});
 
   //TODO: It should not be possible to leave this screen.
   @override

@@ -20,21 +20,21 @@ mixin _$SignInEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(String email, String password) login,
-    required TResult Function() checkFirstLogin,
+    required TResult Function() checkIsProfileCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function(String email, String password)? login,
-    TResult? Function()? checkFirstLogin,
+    TResult? Function()? checkIsProfileCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String email, String password)? login,
-    TResult Function()? checkFirstLogin,
+    TResult Function()? checkIsProfileCreated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +42,22 @@ mixin _$SignInEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
     required TResult Function(Login value) login,
-    required TResult Function(CheckFirstLogin value) checkFirstLogin,
+    required TResult Function(CheckIsProfileCreated value)
+        checkIsProfileCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
     TResult? Function(Login value)? login,
-    TResult? Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult? Function(CheckIsProfileCreated value)? checkIsProfileCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
     TResult Function(Login value)? login,
-    TResult Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult Function(CheckIsProfileCreated value)? checkIsProfileCreated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,7 +118,7 @@ class _$Init implements Init {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(String email, String password) login,
-    required TResult Function() checkFirstLogin,
+    required TResult Function() checkIsProfileCreated,
   }) {
     return init();
   }
@@ -127,7 +128,7 @@ class _$Init implements Init {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function(String email, String password)? login,
-    TResult? Function()? checkFirstLogin,
+    TResult? Function()? checkIsProfileCreated,
   }) {
     return init?.call();
   }
@@ -137,7 +138,7 @@ class _$Init implements Init {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String email, String password)? login,
-    TResult Function()? checkFirstLogin,
+    TResult Function()? checkIsProfileCreated,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -151,7 +152,8 @@ class _$Init implements Init {
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
     required TResult Function(Login value) login,
-    required TResult Function(CheckFirstLogin value) checkFirstLogin,
+    required TResult Function(CheckIsProfileCreated value)
+        checkIsProfileCreated,
   }) {
     return init(this);
   }
@@ -161,7 +163,7 @@ class _$Init implements Init {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
     TResult? Function(Login value)? login,
-    TResult? Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult? Function(CheckIsProfileCreated value)? checkIsProfileCreated,
   }) {
     return init?.call(this);
   }
@@ -171,7 +173,7 @@ class _$Init implements Init {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
     TResult Function(Login value)? login,
-    TResult Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult Function(CheckIsProfileCreated value)? checkIsProfileCreated,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -258,7 +260,7 @@ class _$Login implements Login {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(String email, String password) login,
-    required TResult Function() checkFirstLogin,
+    required TResult Function() checkIsProfileCreated,
   }) {
     return login(email, password);
   }
@@ -268,7 +270,7 @@ class _$Login implements Login {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function(String email, String password)? login,
-    TResult? Function()? checkFirstLogin,
+    TResult? Function()? checkIsProfileCreated,
   }) {
     return login?.call(email, password);
   }
@@ -278,7 +280,7 @@ class _$Login implements Login {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String email, String password)? login,
-    TResult Function()? checkFirstLogin,
+    TResult Function()? checkIsProfileCreated,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -292,7 +294,8 @@ class _$Login implements Login {
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
     required TResult Function(Login value) login,
-    required TResult Function(CheckFirstLogin value) checkFirstLogin,
+    required TResult Function(CheckIsProfileCreated value)
+        checkIsProfileCreated,
   }) {
     return login(this);
   }
@@ -302,7 +305,7 @@ class _$Login implements Login {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
     TResult? Function(Login value)? login,
-    TResult? Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult? Function(CheckIsProfileCreated value)? checkIsProfileCreated,
   }) {
     return login?.call(this);
   }
@@ -312,7 +315,7 @@ class _$Login implements Login {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
     TResult Function(Login value)? login,
-    TResult Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult Function(CheckIsProfileCreated value)? checkIsProfileCreated,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -333,35 +336,35 @@ abstract class Login implements SignInEvent {
 }
 
 /// @nodoc
-abstract class _$$CheckFirstLoginCopyWith<$Res> {
-  factory _$$CheckFirstLoginCopyWith(
-          _$CheckFirstLogin value, $Res Function(_$CheckFirstLogin) then) =
-      __$$CheckFirstLoginCopyWithImpl<$Res>;
+abstract class _$$CheckIsProfileCreatedCopyWith<$Res> {
+  factory _$$CheckIsProfileCreatedCopyWith(_$CheckIsProfileCreated value,
+          $Res Function(_$CheckIsProfileCreated) then) =
+      __$$CheckIsProfileCreatedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CheckFirstLoginCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res, _$CheckFirstLogin>
-    implements _$$CheckFirstLoginCopyWith<$Res> {
-  __$$CheckFirstLoginCopyWithImpl(
-      _$CheckFirstLogin _value, $Res Function(_$CheckFirstLogin) _then)
+class __$$CheckIsProfileCreatedCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res, _$CheckIsProfileCreated>
+    implements _$$CheckIsProfileCreatedCopyWith<$Res> {
+  __$$CheckIsProfileCreatedCopyWithImpl(_$CheckIsProfileCreated _value,
+      $Res Function(_$CheckIsProfileCreated) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CheckFirstLogin implements CheckFirstLogin {
-  const _$CheckFirstLogin();
+class _$CheckIsProfileCreated implements CheckIsProfileCreated {
+  const _$CheckIsProfileCreated();
 
   @override
   String toString() {
-    return 'SignInEvent.checkFirstLogin()';
+    return 'SignInEvent.checkIsProfileCreated()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckFirstLogin);
+        (other.runtimeType == runtimeType && other is _$CheckIsProfileCreated);
   }
 
   @override
@@ -372,9 +375,9 @@ class _$CheckFirstLogin implements CheckFirstLogin {
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function(String email, String password) login,
-    required TResult Function() checkFirstLogin,
+    required TResult Function() checkIsProfileCreated,
   }) {
-    return checkFirstLogin();
+    return checkIsProfileCreated();
   }
 
   @override
@@ -382,9 +385,9 @@ class _$CheckFirstLogin implements CheckFirstLogin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
     TResult? Function(String email, String password)? login,
-    TResult? Function()? checkFirstLogin,
+    TResult? Function()? checkIsProfileCreated,
   }) {
-    return checkFirstLogin?.call();
+    return checkIsProfileCreated?.call();
   }
 
   @override
@@ -392,11 +395,11 @@ class _$CheckFirstLogin implements CheckFirstLogin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
     TResult Function(String email, String password)? login,
-    TResult Function()? checkFirstLogin,
+    TResult Function()? checkIsProfileCreated,
     required TResult orElse(),
   }) {
-    if (checkFirstLogin != null) {
-      return checkFirstLogin();
+    if (checkIsProfileCreated != null) {
+      return checkIsProfileCreated();
     }
     return orElse();
   }
@@ -406,9 +409,10 @@ class _$CheckFirstLogin implements CheckFirstLogin {
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
     required TResult Function(Login value) login,
-    required TResult Function(CheckFirstLogin value) checkFirstLogin,
+    required TResult Function(CheckIsProfileCreated value)
+        checkIsProfileCreated,
   }) {
-    return checkFirstLogin(this);
+    return checkIsProfileCreated(this);
   }
 
   @override
@@ -416,9 +420,9 @@ class _$CheckFirstLogin implements CheckFirstLogin {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
     TResult? Function(Login value)? login,
-    TResult? Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult? Function(CheckIsProfileCreated value)? checkIsProfileCreated,
   }) {
-    return checkFirstLogin?.call(this);
+    return checkIsProfileCreated?.call(this);
   }
 
   @override
@@ -426,16 +430,16 @@ class _$CheckFirstLogin implements CheckFirstLogin {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
     TResult Function(Login value)? login,
-    TResult Function(CheckFirstLogin value)? checkFirstLogin,
+    TResult Function(CheckIsProfileCreated value)? checkIsProfileCreated,
     required TResult orElse(),
   }) {
-    if (checkFirstLogin != null) {
-      return checkFirstLogin(this);
+    if (checkIsProfileCreated != null) {
+      return checkIsProfileCreated(this);
     }
     return orElse();
   }
 }
 
-abstract class CheckFirstLogin implements SignInEvent {
-  const factory CheckFirstLogin() = _$CheckFirstLogin;
+abstract class CheckIsProfileCreated implements SignInEvent {
+  const factory CheckIsProfileCreated() = _$CheckIsProfileCreated;
 }

@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @singleton
 class PersoSharedPrefs {
+  final String isProfileCreatedKey = "is_profile_created";
+
   SharedPreferences? _prefs;
 
   Future<void> _init() async {
