@@ -4,6 +4,8 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PasswordRecoveryScreen extends StatelessWidget {
   const PasswordRecoveryScreen({super.key});
@@ -25,7 +27,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
             children: [
               Container(
                   margin: const EdgeInsets.only(top: Dimens.hugeMargin),
-                  child: const Icon(Icons.lock, size: 160.0, color: Colors.black)),
+                  child: const Icon(Icons.lock, size: Dimens.forgotPasswordIconSize, color: Colors.black)),
               Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: Text("Forgotten password?",
@@ -49,7 +51,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                 child: PersoButton(
-                  title: "Reset Password",
+                  title: AppLocalizations.of(context)!.reset_password,
                   onTap: (context) {
                     //TODO: Implement password recovery
                   },
