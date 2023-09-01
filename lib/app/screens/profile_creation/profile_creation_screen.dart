@@ -61,10 +61,12 @@ class ProfileCreationScreen extends StatelessWidget {
   }
 
   void _navigateClient(BuildContext context) {
-    context.replaceNamed(ScreenNavigationKey.profileEdit, extra: UserType.client);
+    context.replaceNamed(ScreenNavigationKey.profileEdit,
+        extra: UserType.client);
   }
 
   void _navigateTrainer(BuildContext context) {
-    context.replaceNamed(ScreenNavigationKey.profileEdit, extra: UserType.trainer);
+    context.replaceNamed(ScreenNavigationKey.profileEdit,
+        extra: UserType.trainer);
   }
 }

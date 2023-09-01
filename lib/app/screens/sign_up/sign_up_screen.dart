@@ -126,7 +126,7 @@ class SignUpScreen extends StatelessWidget {
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(
-                        top: Dimens.substantialMargin,
+                        top: Dimens.hugeMargin,
                         bottom: Dimens.biggerMargin,
                         right: Dimens.normalMargin),
                     child: PersoButton(
@@ -134,13 +134,17 @@ class SignUpScreen extends StatelessWidget {
               ),
               BlocConsumer<SignUpBloc, SignUpState>(
                 builder: (context, state) {
-                  if (state == const SignUpState.loading()) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                      color: Colors.black,
-                    ));
-                  }
-                  return Container();
+                  return state.whenOrNull(
+                          loading: () => const Center(
+                                  child: CircularProgressIndicator(
+                                color: Colors.black,
+                              )),
+                          error: (error) => Center(
+                                  child: Text(
+                                error,
+                                style: ThemeText.calloutRegularRed,
+                              ))) ??
+                      Container();
                 },
                 listener: (context, state) {
                   if (state == const SignUpState.success()) {
