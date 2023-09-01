@@ -109,8 +109,7 @@ final GoRouter goRouter = GoRouter(
                         path: ScreenNavigationKey.passwordRecovery,
                         name: ScreenNavigationKey.passwordRecovery,
                         pageBuilder: (context, state) {
-                          return const NoTransitionPage(
-                              child: PasswordRecoveryScreen());
+                          return NoTransitionPage(child: ForgotPasswordScreen());
                         }),
                     GoRoute(
                         name: ScreenNavigationKey.signUp,

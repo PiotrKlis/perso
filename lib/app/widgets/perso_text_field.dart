@@ -17,6 +17,7 @@ class PersoTextField extends StatefulWidget {
     TextEditingController? confirmPasswordController,
     TextEditingController? nameController,
     TextEditingController? surnameController,
+    TextEditingController? genericController,
   })  : _confirmPasswordController = confirmPasswordController,
         _passwordController = passwordController,
         _loginController = loginController,
@@ -27,7 +28,8 @@ class PersoTextField extends StatefulWidget {
         _customValidator = customValidator,
         _title = title,
         _nameController = nameController,
-        _surnameController = surnameController;
+        _surnameController = surnameController,
+        _genericController = genericController;
 
   final String _title;
   final String? Function(String value)? _customValidator;
@@ -40,6 +42,7 @@ class PersoTextField extends StatefulWidget {
   final TextEditingController? _loginController;
   final TextEditingController? _nameController;
   final TextEditingController? _surnameController;
+  final TextEditingController? _genericController;
 
   @override
   State<PersoTextField> createState() => _PersoTextFieldState();
@@ -53,7 +56,8 @@ class _PersoTextFieldState extends State<PersoTextField> {
           widget._passwordController ??
           widget._loginController ??
           widget._surnameController ??
-          widget._nameController,
+          widget._nameController ??
+          widget._genericController,
       maxLength: widget._maxLength,
       obscureText: widget._shouldObscureText,
       keyboardType:

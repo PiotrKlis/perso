@@ -30,4 +30,8 @@ class AuthProvider {
       return false;
     }
   }
+
+  Future resetPassword(String email) async {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 }
