@@ -51,7 +51,7 @@ class PasswordRecoveryScreen extends StatelessWidget {
                 child: PersoButton(
                   title: "Reset Password",
                   onTap: (context) {
-                    //TODO: Implement password recovery
+
                   },
                 ),
               ),

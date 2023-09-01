@@ -26,133 +26,132 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignUpBloc(const SignUpState.initial()),
-      child: _signUpScreenView(),
-    );
-  }
-
-  Widget _signUpScreenView() {
-    return Scaffold(
-      backgroundColor: PersoColors.lightBlue,
-      appBar: const PersoAppBar(title: "Sign up new user"),
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                  child: Text("Create your account",
-                      style: ThemeText.largerTitleBold)),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.mediumMargin, left: Dimens.normalMargin),
-                  child: Text("We are glad that you join us",
-                      style: ThemeText.bodyRegularBlackText)),
-              Container(
-                margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                child: Row(
-                  children: [
-                    Container(
-                        margin:
-                            const EdgeInsets.only(left: Dimens.normalMargin),
-                        child: const Icon(Icons.email, size: 24.0)),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
-                        child: PersoTextField(
-                            title: "Email",
-                            loginController: _loginController,
-                            customValidator: TextFieldValidator.validateEmail),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, right: Dimens.normalMargin),
-                  child: const PersoDivider()),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+      child: Scaffold(
+        backgroundColor: PersoColors.lightBlue,
+        appBar: const PersoAppBar(title: "Sign up new user"),
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(
+                        top: Dimens.biggerMargin, left: Dimens.normalMargin),
+                    child: Text("Create your account",
+                        style: ThemeText.largerTitleBold)),
+                Container(
+                    margin: const EdgeInsets.only(
+                        top: Dimens.mediumMargin, left: Dimens.normalMargin),
+                    child: Text("We are glad that you join us",
+                        style: ThemeText.bodyRegularBlackText)),
+                Container(
+                  margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.password, size: 24.0)),
+                          child: const Icon(Icons.email, size: 24.0)),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                            title: "Password",
-                            customValidator:
-                                TextFieldValidator.validatePassword,
-                            shouldObscureText: true,
-                            passwordController: _passwordController,
-                          ),
+                              title: "Email",
+                              loginController: _loginController,
+                              customValidator:
+                                  TextFieldValidator.validateEmail),
                         ),
                       ),
                     ],
-                  )),
-              Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.substantialMargin,
-                              right: Dimens.normalMargin),
-                          child: PersoTextField(
-                            title: "Confirm password",
-                            passwordController: _passwordController,
-                            confirmPasswordController:
-                                _confirmPasswordController,
-                            shouldObscureText: true,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
-              Center(
-                child: Container(
+                  ),
+                ),
+                Container(
                     margin: const EdgeInsets.only(
-                        top: Dimens.hugeMargin,
-                        bottom: Dimens.biggerMargin,
-                        right: Dimens.normalMargin),
-                    child: PersoButton(
-                        width: 160.0, title: "Register", onTap: _registerUser)),
-              ),
-              BlocConsumer<SignUpBloc, SignUpState>(
-                builder: (context, state) {
-                  return state.whenOrNull(
-                          loading: () => const Center(
-                                  child: CircularProgressIndicator(
-                                color: Colors.black,
-                              )),
-                          error: (error) => Center(
-                                  child: Text(
-                                error,
-                                style: ThemeText.calloutRegularRed,
-                              ))) ??
-                      Container();
-                },
-                listener: (context, state) {
-                  if (state == const SignUpState.success()) {
-                    context.replaceNamed(ScreenNavigationKey.signUpSuccess);
-                  }
-                },
-              ),
-            ],
+                        top: Dimens.normalMargin, right: Dimens.normalMargin),
+                    child: const PersoDivider()),
+                Container(
+                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin),
+                            child: const Icon(Icons.password, size: 24.0)),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin,
+                                right: Dimens.normalMargin),
+                            child: PersoTextField(
+                              title: "Password",
+                              customValidator:
+                                  TextFieldValidator.validatePassword,
+                              shouldObscureText: true,
+                              passwordController: _passwordController,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                Container(
+                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(
+                                left: Dimens.substantialMargin,
+                                right: Dimens.normalMargin),
+                            child: PersoTextField(
+                              title: "Confirm password",
+                              passwordController: _passwordController,
+                              confirmPasswordController:
+                                  _confirmPasswordController,
+                              shouldObscureText: true,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                Center(
+                  child: Container(
+                      margin: const EdgeInsets.only(
+                          top: Dimens.hugeMargin,
+                          bottom: Dimens.biggerMargin,
+                          right: Dimens.normalMargin),
+                      child: PersoButton(
+                          width: 160.0,
+                          title: "Register",
+                          onTap: _registerUser)),
+                ),
+                BlocConsumer<SignUpBloc, SignUpState>(
+                  builder: (context, state) {
+                    return state.whenOrNull(
+                            loading: () => const Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.black,
+                                )),
+                            error: (error) => Center(
+                                    child: Text(
+                                  error,
+                                  style: ThemeText.calloutRegularRed,
+                                ))) ??
+                        Container();
+                  },
+                  listener: (context, state) {
+                    if (state == const SignUpState.success()) {
+                      context.replaceNamed(ScreenNavigationKey.signUpSuccess);
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
