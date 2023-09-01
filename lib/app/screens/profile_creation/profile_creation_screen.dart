@@ -47,9 +47,12 @@ class ProfileCreationScreen extends StatelessWidget {
                       title: "I am a trainer",
                       whiteBlackTheme: true,
                       onTap: _navigateTrainer),
-                  PersoButton(
-                    title: "I am a client",
-                    onTap: _navigateClient,
+                  Container(
+                    margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                    child: PersoButton(
+                      title: "I am a client",
+                      onTap: _navigateClient,
+                    ),
                   ),
                 ],
               ),

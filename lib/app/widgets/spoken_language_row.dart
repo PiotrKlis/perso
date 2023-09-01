@@ -24,10 +24,11 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              margin: const EdgeInsets.only(left: Dimens.normalMargin),
+              margin: const EdgeInsets.only(left: Dimens.normalMargin, top: Dimens.smallMargin),
               child: const Icon(Icons.flag, size: 24.0)),
           Container(
               margin: const EdgeInsets.only(left: Dimens.normalMargin),
