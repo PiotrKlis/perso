@@ -13,8 +13,18 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       GetIt.I.get<FirestoreTrainersService>();
 
   ProfileEditBloc(ProfileEditState initialState) : super(initialState) {
-    on<UploadData>((event, emitter) async {
-      //TODO: Add logic for sending the data.
+    on<UploadTrainerData>((event, emitter) async {
+      try {
+        emitter.call(const ProfileEditState.loading());
+        await _trainersService.uploadData(event.trainerData);
+        emitter.call(const ProfileEditState.success());
+      } catch (error) {
+        emitter.call(ProfileEditState.error(error.toString()));
+      }
+    });
+
+    on<UploadClientData>((event, emitter) async {
+      event.clientData;
     });
   }
 }

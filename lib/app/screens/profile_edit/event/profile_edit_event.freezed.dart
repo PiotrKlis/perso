@@ -18,33 +18,39 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileEditEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() uploadData,
+    required TResult Function(TrainerData trainerData) uploadTrainerData,
+    required TResult Function(ClientData clientData) uploadClientData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? uploadData,
+    TResult? Function(TrainerData trainerData)? uploadTrainerData,
+    TResult? Function(ClientData clientData)? uploadClientData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? uploadData,
+    TResult Function(TrainerData trainerData)? uploadTrainerData,
+    TResult Function(ClientData clientData)? uploadClientData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UploadData value) uploadData,
+    required TResult Function(UploadTrainerData value) uploadTrainerData,
+    required TResult Function(UploadClientData value) uploadClientData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadData value)? uploadData,
+    TResult? Function(UploadTrainerData value)? uploadTrainerData,
+    TResult? Function(UploadClientData value)? uploadClientData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadData value)? uploadData,
+    TResult Function(UploadTrainerData value)? uploadTrainerData,
+    TResult Function(UploadClientData value)? uploadClientData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,64 +75,94 @@ class _$ProfileEditEventCopyWithImpl<$Res, $Val extends ProfileEditEvent>
 }
 
 /// @nodoc
-abstract class _$$UploadDataCopyWith<$Res> {
-  factory _$$UploadDataCopyWith(
-          _$UploadData value, $Res Function(_$UploadData) then) =
-      __$$UploadDataCopyWithImpl<$Res>;
+abstract class _$$UploadTrainerDataCopyWith<$Res> {
+  factory _$$UploadTrainerDataCopyWith(
+          _$UploadTrainerData value, $Res Function(_$UploadTrainerData) then) =
+      __$$UploadTrainerDataCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TrainerData trainerData});
 }
 
 /// @nodoc
-class __$$UploadDataCopyWithImpl<$Res>
-    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadData>
-    implements _$$UploadDataCopyWith<$Res> {
-  __$$UploadDataCopyWithImpl(
-      _$UploadData _value, $Res Function(_$UploadData) _then)
+class __$$UploadTrainerDataCopyWithImpl<$Res>
+    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadTrainerData>
+    implements _$$UploadTrainerDataCopyWith<$Res> {
+  __$$UploadTrainerDataCopyWithImpl(
+      _$UploadTrainerData _value, $Res Function(_$UploadTrainerData) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? trainerData = null,
+  }) {
+    return _then(_$UploadTrainerData(
+      null == trainerData
+          ? _value.trainerData
+          : trainerData // ignore: cast_nullable_to_non_nullable
+              as TrainerData,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$UploadData implements UploadData {
-  const _$UploadData();
+class _$UploadTrainerData implements UploadTrainerData {
+  const _$UploadTrainerData(this.trainerData);
+
+  @override
+  final TrainerData trainerData;
 
   @override
   String toString() {
-    return 'ProfileEditEvent.uploadData()';
+    return 'ProfileEditEvent.uploadTrainerData(trainerData: $trainerData)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UploadData);
+        (other.runtimeType == runtimeType &&
+            other is _$UploadTrainerData &&
+            (identical(other.trainerData, trainerData) ||
+                other.trainerData == trainerData));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, trainerData);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UploadTrainerDataCopyWith<_$UploadTrainerData> get copyWith =>
+      __$$UploadTrainerDataCopyWithImpl<_$UploadTrainerData>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() uploadData,
+    required TResult Function(TrainerData trainerData) uploadTrainerData,
+    required TResult Function(ClientData clientData) uploadClientData,
   }) {
-    return uploadData();
+    return uploadTrainerData(trainerData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? uploadData,
+    TResult? Function(TrainerData trainerData)? uploadTrainerData,
+    TResult? Function(ClientData clientData)? uploadClientData,
   }) {
-    return uploadData?.call();
+    return uploadTrainerData?.call(trainerData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? uploadData,
+    TResult Function(TrainerData trainerData)? uploadTrainerData,
+    TResult Function(ClientData clientData)? uploadClientData,
     required TResult orElse(),
   }) {
-    if (uploadData != null) {
-      return uploadData();
+    if (uploadTrainerData != null) {
+      return uploadTrainerData(trainerData);
     }
     return orElse();
   }
@@ -134,32 +170,176 @@ class _$UploadData implements UploadData {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UploadData value) uploadData,
+    required TResult Function(UploadTrainerData value) uploadTrainerData,
+    required TResult Function(UploadClientData value) uploadClientData,
   }) {
-    return uploadData(this);
+    return uploadTrainerData(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadData value)? uploadData,
+    TResult? Function(UploadTrainerData value)? uploadTrainerData,
+    TResult? Function(UploadClientData value)? uploadClientData,
   }) {
-    return uploadData?.call(this);
+    return uploadTrainerData?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadData value)? uploadData,
+    TResult Function(UploadTrainerData value)? uploadTrainerData,
+    TResult Function(UploadClientData value)? uploadClientData,
     required TResult orElse(),
   }) {
-    if (uploadData != null) {
-      return uploadData(this);
+    if (uploadTrainerData != null) {
+      return uploadTrainerData(this);
     }
     return orElse();
   }
 }
 
-abstract class UploadData implements ProfileEditEvent {
-  const factory UploadData() = _$UploadData;
+abstract class UploadTrainerData implements ProfileEditEvent {
+  const factory UploadTrainerData(final TrainerData trainerData) =
+      _$UploadTrainerData;
+
+  TrainerData get trainerData;
+  @JsonKey(ignore: true)
+  _$$UploadTrainerDataCopyWith<_$UploadTrainerData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UploadClientDataCopyWith<$Res> {
+  factory _$$UploadClientDataCopyWith(
+          _$UploadClientData value, $Res Function(_$UploadClientData) then) =
+      __$$UploadClientDataCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ClientData clientData});
+}
+
+/// @nodoc
+class __$$UploadClientDataCopyWithImpl<$Res>
+    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadClientData>
+    implements _$$UploadClientDataCopyWith<$Res> {
+  __$$UploadClientDataCopyWithImpl(
+      _$UploadClientData _value, $Res Function(_$UploadClientData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? clientData = null,
+  }) {
+    return _then(_$UploadClientData(
+      null == clientData
+          ? _value.clientData
+          : clientData // ignore: cast_nullable_to_non_nullable
+              as ClientData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UploadClientData implements UploadClientData {
+  const _$UploadClientData(this.clientData);
+
+  @override
+  final ClientData clientData;
+
+  @override
+  String toString() {
+    return 'ProfileEditEvent.uploadClientData(clientData: $clientData)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UploadClientData &&
+            (identical(other.clientData, clientData) ||
+                other.clientData == clientData));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, clientData);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UploadClientDataCopyWith<_$UploadClientData> get copyWith =>
+      __$$UploadClientDataCopyWithImpl<_$UploadClientData>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(TrainerData trainerData) uploadTrainerData,
+    required TResult Function(ClientData clientData) uploadClientData,
+  }) {
+    return uploadClientData(clientData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(TrainerData trainerData)? uploadTrainerData,
+    TResult? Function(ClientData clientData)? uploadClientData,
+  }) {
+    return uploadClientData?.call(clientData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(TrainerData trainerData)? uploadTrainerData,
+    TResult Function(ClientData clientData)? uploadClientData,
+    required TResult orElse(),
+  }) {
+    if (uploadClientData != null) {
+      return uploadClientData(clientData);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UploadTrainerData value) uploadTrainerData,
+    required TResult Function(UploadClientData value) uploadClientData,
+  }) {
+    return uploadClientData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UploadTrainerData value)? uploadTrainerData,
+    TResult? Function(UploadClientData value)? uploadClientData,
+  }) {
+    return uploadClientData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UploadTrainerData value)? uploadTrainerData,
+    TResult Function(UploadClientData value)? uploadClientData,
+    required TResult orElse(),
+  }) {
+    if (uploadClientData != null) {
+      return uploadClientData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UploadClientData implements ProfileEditEvent {
+  const factory UploadClientData(final ClientData clientData) =
+      _$UploadClientData;
+
+  ClientData get clientData;
+  @JsonKey(ignore: true)
+  _$$UploadClientDataCopyWith<_$UploadClientData> get copyWith =>
+      throw _privateConstructorUsedError;
 }

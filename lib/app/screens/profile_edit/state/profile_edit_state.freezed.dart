@@ -19,21 +19,24 @@ mixin _$ProfileEditState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function() loading,
+    required TResult Function(String error) error,
     required TResult Function() success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
     TResult? Function()? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function()? loading,
+    TResult Function(String error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) =>
@@ -41,6 +44,7 @@ mixin _$ProfileEditState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
   }) =>
@@ -48,6 +52,7 @@ mixin _$ProfileEditState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
     TResult? Function(Success value)? success,
   }) =>
@@ -55,6 +60,7 @@ mixin _$ProfileEditState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
     required TResult orElse(),
@@ -117,7 +123,8 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function() loading,
+    required TResult Function(String error) error,
     required TResult Function() success,
   }) {
     return initial();
@@ -127,7 +134,8 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
     TResult? Function()? success,
   }) {
     return initial?.call();
@@ -137,7 +145,8 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function()? loading,
+    TResult Function(String error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -151,6 +160,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
   }) {
@@ -161,6 +171,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
     TResult? Function(Success value)? success,
   }) {
@@ -171,6 +182,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
     required TResult orElse(),
@@ -187,33 +199,33 @@ abstract class Initial implements ProfileEditState {
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+abstract class _$$LoadingCopyWith<$Res> {
+  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
+      __$$LoadingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$ProfileEditStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$LoadingCopyWithImpl<$Res>
+    extends _$ProfileEditStateCopyWithImpl<$Res, _$Loading>
+    implements _$$LoadingCopyWith<$Res> {
+  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error();
+class _$Loading implements Loading {
+  const _$Loading();
 
   @override
   String toString() {
-    return 'ProfileEditState.error()';
+    return 'ProfileEditState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Error);
+        (other.runtimeType == runtimeType && other is _$Loading);
   }
 
   @override
@@ -223,32 +235,35 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function() loading,
+    required TResult Function(String error) error,
     required TResult Function() success,
   }) {
-    return error();
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
     TResult? Function()? success,
   }) {
-    return error?.call();
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function()? loading,
+    TResult Function(String error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
-    if (error != null) {
-      return error();
+    if (loading != null) {
+      return loading();
     }
     return orElse();
   }
@@ -257,6 +272,145 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Error value) error,
+    required TResult Function(Success value) success,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Error value)? error,
+    TResult? Function(Success value)? success,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Error value)? error,
+    TResult Function(Success value)? success,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Loading implements ProfileEditState {
+  const factory Loading() = _$Loading;
+}
+
+/// @nodoc
+abstract class _$$ErrorCopyWith<$Res> {
+  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
+      __$$ErrorCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$ErrorCopyWithImpl<$Res>
+    extends _$ProfileEditStateCopyWithImpl<$Res, _$Error>
+    implements _$$ErrorCopyWith<$Res> {
+  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$Error(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$Error implements Error {
+  const _$Error(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'ProfileEditState.error(error: $error)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Error &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorCopyWith<_$Error> get copyWith =>
+      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function() success,
+  }) {
+    return error(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function()? success,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function()? success,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this.error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
   }) {
@@ -267,6 +421,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
     TResult? Function(Success value)? success,
   }) {
@@ -277,6 +432,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
     required TResult orElse(),
@@ -289,7 +445,11 @@ class _$Error implements Error {
 }
 
 abstract class Error implements ProfileEditState {
-  const factory Error() = _$Error;
+  const factory Error(final String error) = _$Error;
+
+  String get error;
+  @JsonKey(ignore: true)
+  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -329,7 +489,8 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function() loading,
+    required TResult Function(String error) error,
     required TResult Function() success,
   }) {
     return success();
@@ -339,7 +500,8 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
     TResult? Function()? success,
   }) {
     return success?.call();
@@ -349,7 +511,8 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function()? loading,
+    TResult Function(String error)? error,
     TResult Function()? success,
     required TResult orElse(),
   }) {
@@ -363,6 +526,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
     required TResult Function(Success value) success,
   }) {
@@ -373,6 +537,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
     TResult? Function(Success value)? success,
   }) {
@@ -383,6 +548,7 @@ class _$Success implements Success {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
     TResult Function(Success value)? success,
     required TResult orElse(),

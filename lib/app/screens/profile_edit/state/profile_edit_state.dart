@@ -4,6 +4,7 @@ part 'profile_edit_state.freezed.dart';
 @freezed
 class ProfileEditState with _$ProfileEditState {
   const factory ProfileEditState.initial() = Initial;
-  const factory ProfileEditState.error() = Error;
+  const factory ProfileEditState.loading() = Loading;
+  const factory ProfileEditState.error(String error) = Error;
   const factory ProfileEditState.success() = Success;
 }

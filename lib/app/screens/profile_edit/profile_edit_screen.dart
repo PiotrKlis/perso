@@ -1,4 +1,7 @@
-import 'package:Perso/app/widgets/spoken_language_row.dart';
+import 'package:Perso/app/models/trainer_data.dart';
+import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
+import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
+import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/validators.dart';
@@ -6,6 +9,7 @@ import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
+import 'package:Perso/app/widgets/spoken_language_row.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +26,14 @@ class ProfileEditScreen extends StatefulWidget {
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final _nameController = TextEditingController();
   final _surnameController = TextEditingController();
   final _nicknameController = TextEditingController();
+  final _locationController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _shortBioController = TextEditingController();
+  final _longBioController = TextEditingController();
+  final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +68,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 // https://pub.dev/packages/image_picker
                 Container(
                     margin: EdgeInsets.only(top: Dimens.bigMargin),
-                    child:
-                        const Center(child: PersoButton(title: "Upload image"))),
+                    child: const Center(
+                        child: PersoButton(title: "Upload image"))),
                 Visibility(
                   visible: widget._userType == UserType.trainer,
                   child: Column(
@@ -69,14 +77,17 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     children: [
                       Container(
                           margin: const EdgeInsets.only(
-                              top: Dimens.bigMargin, right: Dimens.normalMargin),
+                              top: Dimens.bigMargin,
+                              right: Dimens.normalMargin),
                           child: const PersoDivider()),
                       Container(
-                          margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                          child: const SpokenLanguageRowWidget()),
+                          margin:
+                              const EdgeInsets.only(top: Dimens.normalMargin),
+                          child: _spokenLanguageRowWidget),
                       Container(
                           margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin, right: Dimens.bigMargin),
+                              top: Dimens.normalMargin,
+                              right: Dimens.bigMargin),
                           child: const PersoDivider()),
                     ],
                   ),
@@ -86,8 +97,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     child: Row(
                       children: [
                         Container(
-                            margin:
-                                const EdgeInsets.only(left: Dimens.normalMargin),
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin),
                             child: const Icon(Icons.person, size: 24.0)),
                         Expanded(
                           child: Container(
@@ -133,14 +144,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                            margin:
-                                const EdgeInsets.only(left: Dimens.normalMargin),
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin),
                             child: const Icon(Icons.pin_drop, size: 24.0)),
                         Expanded(
                           child: Container(
                               margin: const EdgeInsets.only(
                                   left: Dimens.normalMargin),
-                              child: PersoAutocomplete()),
+                              child: PersoAutocomplete(
+                                controller: _locationController,
+                              )),
                         ),
                       ],
                     )),
@@ -151,17 +164,19 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                            margin:
-                                const EdgeInsets.only(left: Dimens.normalMargin),
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin),
                             child: const Icon(Icons.phone, size: 24.0)),
                         Expanded(
                           child: Container(
-                            margin:
-                                const EdgeInsets.only(left: Dimens.normalMargin),
-                            child: const PersoTextField(
+                            margin: const EdgeInsets.only(
+                                left: Dimens.normalMargin),
+                            child: PersoTextField(
                               title: "Phone number",
-                              customValidator: TextFieldValidator.validateDigits,
+                              customValidator:
+                                  TextFieldValidator.validateDigits,
                               textInputType: TextInputType.phone,
+                              genericController: _phoneNumberController,
                             ),
                           ),
                         ),
@@ -186,19 +201,20 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               Container(
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
-                                  child:
-                                      const Icon(Icons.text_snippet, size: 24.0)),
+                                  child: const Icon(Icons.text_snippet,
+                                      size: 24.0)),
                               Expanded(
                                 child: Container(
                                   height: 140.0,
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
-                                  child: const PersoTextField(
+                                  child: PersoTextField(
                                     title: "Short Bio",
                                     customValidator:
                                         TextFieldValidator.validateIsEmpty,
                                     isMultiLine: true,
                                     maxLength: 150,
+                                    genericController: _shortBioController,
                                   ),
                                 ),
                               ),
@@ -210,12 +226,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               left: Dimens.substantialMargin,
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoTextField(
-                              title: "Long bio",
-                              isMultiLine: true,
-                              maxLength: 500,
-                              customValidator:
-                                  TextFieldValidator.validateIsEmpty)),
+                          child: PersoTextField(
+                            title: "Long bio",
+                            isMultiLine: true,
+                            maxLength: 500,
+                            customValidator: TextFieldValidator.validateIsEmpty,
+                            genericController: _longBioController,
+                          )),
                     ],
                   ),
                 ),
@@ -226,7 +243,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           bottom: Dimens.biggerMargin,
                           right: Dimens.normalMargin),
                       child: PersoButton(
-                          width: 160.0, title: "Next", onTap: _sendDataToDatabase)),
+                          width: 160.0, title: "Next", onTap: _uploadData)),
                 ),
               ],
             ),
@@ -236,10 +253,24 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
-  void _sendDataToDatabase(BuildContext _) {
+  void _uploadData(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      //TODO: Send data to firestore
-      print("PKPK validated!");
+      List<String> languages = _spokenLanguageRowWidget.listOfLanguages
+          .map((element) => element.keys)
+          .expand((element) => element)
+          .toList();
+
+      final trainerData = TrainerData(
+          "image",
+          languages,
+          _nameController.text,
+          _surnameController.text,
+          _nicknameController.text,
+          _locationController.text,
+          _phoneNumberController.text,
+          _shortBioController.text,
+          _longBioController.text);
+      context.read<ProfileEditBloc>().add(ProfileEditEvent.uploadTrainerData(trainerData));
     }
   }
 
