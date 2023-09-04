@@ -1,17 +1,17 @@
 class TrainerData {
   TrainerData(
-      this.image,
-      this.languageFlags,
-      this.name,
-      this.surname,
-      this.nickname,
-      this.location,
-      this.phoneNumber,
-      this.shortBio,
-      this.fullBio);
+      {required this.image,
+      required this.languages,
+      required this.name,
+      required this.surname,
+      required this.nickname,
+      required this.location,
+      required this.phoneNumber,
+      required this.shortBio,
+      required this.fullBio});
 
   final String image;
-  final List<String> languageFlags;
+  final List<String> languages;
   final String name;
   final String surname;
   final String nickname;

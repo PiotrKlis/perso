@@ -15,30 +15,30 @@ class FirestoreTrainersProvider implements TrainersSource {
     return trainersSnapshot.docs.map((data) {
       return TrainerEntity(
           id: data.id,
-          name: data[TrainerDocumentFields.name],
-          surname: data[TrainerDocumentFields.surname],
-          nickname: data[TrainerDocumentFields.nickname],
-          votesNumber: data[TrainerDocumentFields.votesNumber],
-          fullBio: data[TrainerDocumentFields.fullBio],
-          shortBio: data[TrainerDocumentFields.shortBio],
+          name: data[UserDocumentFields.name],
+          surname: data[UserDocumentFields.surname],
+          nickname: data[UserDocumentFields.nickname],
+          votesNumber: data[UserDocumentFields.votesNumber],
+          fullBio: data[UserDocumentFields.fullBio],
+          shortBio: data[UserDocumentFields.shortBio],
           icon: "assets/images/trainer3.png",
           email: "",
           rating: 2.3,
-          location: data[TrainerDocumentFields.location],
-          phoneNumber: data[TrainerDocumentFields.phoneNumber],
+          location: data[UserDocumentFields.location],
+          phoneNumber: data[UserDocumentFields.phoneNumber],
           languages:
-              data[TrainerDocumentFields.languages].toString().split(", "),
+              data[UserDocumentFields.languages].toString().split(", "),
           reviews: getReviews(data),
           trainingTypes:
-              data[TrainerDocumentFields.trainingTypes].toString().split(", "));
+              data[UserDocumentFields.trainingTypes].toString().split(", "));
     }).toList();
   }
 
   List<ReviewEntity> getReviews(QueryDocumentSnapshot<Object?> data) {
-    return data[TrainerDocumentFields.reviews].map<ReviewEntity>((review) {
+    return data[UserDocumentFields.reviews].map<ReviewEntity>((review) {
       return ReviewEntity(
-          rating: review[TrainerDocumentFields.rating],
-          description: review[TrainerDocumentFields.description]);
+          rating: review[UserDocumentFields.rating],
+          description: review[UserDocumentFields.description]);
     }).toList();
   }
 }

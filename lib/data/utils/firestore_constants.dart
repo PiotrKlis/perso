@@ -2,7 +2,7 @@ class CollectionName {
   static String trainers = "trainers";
 }
 
-class TrainerDocumentFields {
+class UserDocumentFields {
   static const String email = "email";
   static const String fullBio = "fullBio";
   static const String languages = "languages";

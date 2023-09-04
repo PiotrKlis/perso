@@ -24,7 +24,13 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
     });
 
     on<UploadClientData>((event, emitter) async {
-      event.clientData;
+      try {
+        emitter.call(const ProfileEditState.loading());
+        await _clientsService.uploadData(event.clientData);
+        emitter.call(const ProfileEditState.success());
+      } catch (error) {
+        emitter.call(ProfileEditState.error(error.toString()));
+      }
     });
   }
 }

@@ -1,3 +1,5 @@
+import 'package:Perso/app/models/client_data.dart';
+
 abstract class ClientsService {
-  Future<void> manageData();
+  Future<void> uploadData(ClientData clientData);
 }

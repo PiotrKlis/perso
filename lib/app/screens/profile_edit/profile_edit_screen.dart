@@ -1,3 +1,4 @@
+import 'package:Perso/app/models/client_data.dart';
 import 'package:Perso/app/models/trainer_data.dart';
 import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
@@ -32,7 +33,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _locationController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _shortBioController = TextEditingController();
-  final _longBioController = TextEditingController();
+  final _fullBioController = TextEditingController();
   final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
 
   @override
@@ -231,7 +232,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             isMultiLine: true,
                             maxLength: 500,
                             customValidator: TextFieldValidator.validateIsEmpty,
-                            genericController: _longBioController,
+                            genericController: _fullBioController,
                           )),
                     ],
                   ),
@@ -255,22 +256,38 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   void _uploadData(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      List<String> languages = _spokenLanguageRowWidget.listOfLanguages
-          .map((element) => element.keys)
-          .expand((element) => element)
-          .toList();
+      if (widget._userType == UserType.trainer) {
+        List<String> languages = _spokenLanguageRowWidget.listOfLanguages
+            .map((element) => element.keys)
+            .expand((element) => element)
+            .toList();
 
-      final trainerData = TrainerData(
-          "image",
-          languages,
-          _nameController.text,
-          _surnameController.text,
-          _nicknameController.text,
-          _locationController.text,
-          _phoneNumberController.text,
-          _shortBioController.text,
-          _longBioController.text);
-      context.read<ProfileEditBloc>().add(ProfileEditEvent.uploadTrainerData(trainerData));
+        final trainerData = TrainerData(
+            image: "image",
+            languages: languages,
+            name: _nameController.text,
+            surname: _surnameController.text,
+            nickname: _nicknameController.text,
+            location: _locationController.text,
+            phoneNumber: _phoneNumberController.text,
+            shortBio: _shortBioController.text,
+            fullBio: _fullBioController.text);
+        context
+            .read<ProfileEditBloc>()
+            .add(ProfileEditEvent.uploadTrainerData(trainerData));
+      } else {
+        final clientData = ClientData(
+            image: "image",
+            name: _nameController.text,
+            surname: _surnameController.text,
+            nickname: _nicknameController.text,
+            location: _locationController.text,
+            phoneNumber: _phoneNumberController.text);
+
+        context
+            .read<ProfileEditBloc>()
+            .add(ProfileEditEvent.uploadClientData(clientData));
+      }
     }
   }
 

@@ -8,20 +8,20 @@ import 'package:injectable/injectable.dart';
 @injectable
 class FirestoreTrainersService implements TrainersService {
   @override
-  Future<void> uploadData(TrainerData trainerData) {
-    FirebaseFirestore.instance
+  Future<void> uploadData(TrainerData trainerData) async {
+    await FirebaseFirestore.instance
         .collection(CollectionName.trainers)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
-      "email": FirebaseAuth.instance.currentUser?.email,
-      "fullBio": trainerData.fullBio,
-      "languages": trainerData.languageFlags,
-      "location": trainerData.location,
-      "name": trainerData.name,
-      "nickname": trainerData.nickname,
-      "phoneNumber": trainerData.phoneNumber,
-      "shortBio": trainerData.shortBio,
-      "surname": trainerData.surname,
+      UserDocumentFields.email: FirebaseAuth.instance.currentUser?.email,
+      UserDocumentFields.fullBio: trainerData.fullBio,
+      UserDocumentFields.languages: trainerData.languages,
+      UserDocumentFields.location: trainerData.location,
+      UserDocumentFields.name: trainerData.name,
+      UserDocumentFields.nickname: trainerData.nickname,
+      UserDocumentFields.phoneNumber: trainerData.phoneNumber,
+      UserDocumentFields.shortBio: trainerData.shortBio,
+      UserDocumentFields.surname: trainerData.surname,
     });
     return Future.value();
   }
