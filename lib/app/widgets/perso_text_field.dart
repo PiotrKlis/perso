@@ -12,24 +12,18 @@ class PersoTextField extends StatefulWidget {
     TextInputType textInputType = TextInputType.text,
     bool isMultiLine = false,
     int? maxLength = 60,
-    TextEditingController? loginController,
     TextEditingController? passwordController,
     TextEditingController? confirmPasswordController,
-    TextEditingController? nameController,
-    TextEditingController? surnameController,
-    TextEditingController? genericController,
-  })  : _confirmPasswordController = confirmPasswordController,
-        _passwordController = passwordController,
-        _loginController = loginController,
-        _maxLength = maxLength,
+    TextEditingController? textEditingController,
+  })  : _maxLength = maxLength,
         _isMultiLine = isMultiLine,
         _textInputType = textInputType,
         _shouldObscureText = shouldObscureText,
         _customValidator = customValidator,
         _title = title,
-        _nameController = nameController,
-        _surnameController = surnameController,
-        _genericController = genericController;
+        _textEditingController = textEditingController,
+        _confirmPasswordController = confirmPasswordController,
+        _passwordController = passwordController;
 
   final String _title;
   final String? Function(String value)? _customValidator;
@@ -37,12 +31,9 @@ class PersoTextField extends StatefulWidget {
   final TextInputType _textInputType;
   final bool _isMultiLine;
   final int? _maxLength;
+  final TextEditingController? _textEditingController;
   final TextEditingController? _passwordController;
   final TextEditingController? _confirmPasswordController;
-  final TextEditingController? _loginController;
-  final TextEditingController? _nameController;
-  final TextEditingController? _surnameController;
-  final TextEditingController? _genericController;
 
   @override
   State<PersoTextField> createState() => _PersoTextFieldState();
@@ -52,12 +43,7 @@ class _PersoTextFieldState extends State<PersoTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget._confirmPasswordController ??
-          widget._passwordController ??
-          widget._loginController ??
-          widget._surnameController ??
-          widget._nameController ??
-          widget._genericController,
+      controller: widget._textEditingController,
       maxLength: widget._maxLength,
       obscureText: widget._shouldObscureText,
       keyboardType:

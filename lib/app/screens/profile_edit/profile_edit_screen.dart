@@ -30,11 +30,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _nameController = TextEditingController();
   final _surnameController = TextEditingController();
   final _nicknameController = TextEditingController();
-  final _locationController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _shortBioController = TextEditingController();
   final _fullBioController = TextEditingController();
   final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
+  final _addressWidget = PersoAutocomplete();
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
                                 title: "Name",
-                                nameController: _nameController,
+                                textEditingController: _nameController,
                                 customValidator:
                                     TextFieldValidator.validateIsEmpty),
                           ),
@@ -121,7 +121,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       top: Dimens.bigMargin,
                       right: Dimens.normalMargin),
                   child: PersoTextField(
-                      surnameController: _surnameController,
+                      textEditingController: _surnameController,
                       title: "Surname",
                       customValidator: TextFieldValidator.validateIsEmpty),
                 ),
@@ -132,7 +132,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         right: Dimens.normalMargin),
                     child: PersoTextField(
                         title: "Nickname",
-                        genericController: _nicknameController,
+                        textEditingController: _nicknameController,
                         customValidator: TextFieldValidator.validateNickname)),
                 Container(
                     margin: const EdgeInsets.only(
@@ -152,9 +152,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           child: Container(
                               margin: const EdgeInsets.only(
                                   left: Dimens.normalMargin),
-                              child: PersoAutocomplete(
-                                controller: _locationController,
-                              )),
+                              child: _addressWidget),
                         ),
                       ],
                     )),
@@ -177,7 +175,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               customValidator:
                                   TextFieldValidator.validateDigits,
                               textInputType: TextInputType.phone,
-                              genericController: _phoneNumberController,
+                              textEditingController: _phoneNumberController,
                             ),
                           ),
                         ),
@@ -215,7 +213,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                         TextFieldValidator.validateIsEmpty,
                                     isMultiLine: true,
                                     maxLength: 150,
-                                    genericController: _shortBioController,
+                                    textEditingController: _shortBioController,
                                   ),
                                 ),
                               ),
@@ -232,7 +230,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             isMultiLine: true,
                             maxLength: 500,
                             customValidator: TextFieldValidator.validateIsEmpty,
-                            genericController: _fullBioController,
+                            textEditingController: _fullBioController,
                           )),
                     ],
                   ),
@@ -256,6 +254,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   void _uploadData(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
+      // Address doesn't work, it's empty even if filled in the app
+      String location = _addressWidget.autocompleteController?.text ?? "";
       if (widget._userType == UserType.trainer) {
         List<String> languages = _spokenLanguageRowWidget.listOfLanguages
             .map((element) => element.keys)
@@ -268,7 +268,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             name: _nameController.text,
             surname: _surnameController.text,
             nickname: _nicknameController.text,
-            location: _locationController.text,
+            location: location,
             phoneNumber: _phoneNumberController.text,
             shortBio: _shortBioController.text,
             fullBio: _fullBioController.text);
@@ -281,7 +281,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             name: _nameController.text,
             surname: _surnameController.text,
             nickname: _nicknameController.text,
-            location: _locationController.text,
+            location: location,
             phoneNumber: _phoneNumberController.text);
 
         context

@@ -81,7 +81,7 @@ class SignInScreen extends StatelessWidget {
                             right: Dimens.normalMargin),
                         child: PersoTextField(
                           title: "Login",
-                          loginController: _loginController,
+                          textEditingController: _loginController,
                           customValidator: TextFieldValidator.validateIsEmpty,
                         )),
                     Container(
@@ -92,7 +92,7 @@ class SignInScreen extends StatelessWidget {
                         child: PersoTextField(
                           title: "Password",
                           shouldObscureText: true,
-                          passwordController: _passwordController,
+                          textEditingController: _passwordController,
                           customValidator: TextFieldValidator.validateIsEmpty,
                         )),
                   ],

@@ -56,7 +56,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: PersoTextField(
                       title: "Email",
-                      genericController: _textEditingController,
+                      textEditingController: _textEditingController,
                     )),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
