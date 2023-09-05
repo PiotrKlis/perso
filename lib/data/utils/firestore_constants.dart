@@ -16,6 +16,7 @@ class UserDocumentFields {
   static const String shortBio = "shortBio";
   static const String trainingTypes = "trainingTypes";
   static const String votesNumber = "votesNumber";
-  static const String icon = "icon";
+  static const String image = "image";
+  static const String id = "id";
   static const String description = "description";
 }

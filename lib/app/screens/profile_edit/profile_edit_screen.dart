@@ -257,38 +257,47 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       // Address doesn't work, it's empty even if filled in the app
       String location = _addressWidget.autocompleteController?.text ?? "";
       if (widget._userType == UserType.trainer) {
-        List<String> languages = _spokenLanguageRowWidget.listOfLanguages
-            .map((element) => element.keys)
-            .expand((element) => element)
-            .toList();
-
-        final trainerData = TrainerData(
-            image: "image",
-            languages: languages,
-            name: _nameController.text,
-            surname: _surnameController.text,
-            nickname: _nicknameController.text,
-            location: location,
-            phoneNumber: _phoneNumberController.text,
-            shortBio: _shortBioController.text,
-            fullBio: _fullBioController.text);
-        context
-            .read<ProfileEditBloc>()
-            .add(ProfileEditEvent.uploadTrainerData(trainerData));
+        _addTrainerData(location, context);
       } else {
-        final clientData = ClientData(
-            image: "image",
-            name: _nameController.text,
-            surname: _surnameController.text,
-            nickname: _nicknameController.text,
-            location: location,
-            phoneNumber: _phoneNumberController.text);
-
-        context
-            .read<ProfileEditBloc>()
-            .add(ProfileEditEvent.uploadClientData(clientData));
+        _addClientData(location, context);
       }
     }
+  }
+
+  void _addClientData(String location, BuildContext context) {
+    final clientData = ClientData(
+        image: "image",
+        name: _nameController.text,
+        surname: _surnameController.text,
+        nickname: _nicknameController.text,
+        location: location,
+        phoneNumber: _phoneNumberController.text);
+
+    context
+        .read<ProfileEditBloc>()
+        .add(ProfileEditEvent.uploadClientData(clientData));
+  }
+
+  void _addTrainerData(String location, BuildContext context) {
+         List<String> languages = _spokenLanguageRowWidget.listOfLanguages
+        .map((element) => element.keys)
+        .expand((element) => element)
+        .toList();
+
+    final trainerData = TrainerData(
+        image: "image",
+        languages: languages,
+        name: _nameController.text,
+        surname: _surnameController.text,
+        nickname: _nicknameController.text,
+        location: location,
+        phoneNumber: _phoneNumberController.text,
+        shortBio: _shortBioController.text,
+        fullBio: _fullBioController.text);
+
+    context
+        .read<ProfileEditBloc>()
+        .add(ProfileEditEvent.uploadTrainerData(trainerData));
   }
 
   void _addNicknameListener() {

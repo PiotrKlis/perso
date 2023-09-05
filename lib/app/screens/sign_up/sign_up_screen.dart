@@ -61,7 +61,7 @@ class SignUpScreen extends StatelessWidget {
                               right: Dimens.normalMargin),
                           child: PersoTextField(
                               title: "Email",
-                              loginController: _loginController,
+                              textEditingController: _loginController,
                               customValidator:
                                   TextFieldValidator.validateEmail),
                         ),

@@ -62,7 +62,7 @@ class PersoTrainersList extends StatelessWidget {
                                   top: Dimens.mediumMargin),
                               child: Column(
                                 children: [
-                                  Image.asset(trainerData.icon,
+                                  Image.asset(trainerData.image,
                                       width: Dimens.trainerImageWidth,
                                       height: Dimens.trainerImageHeight),
                                 ],

@@ -21,7 +21,7 @@ class FirestoreTrainersProvider implements TrainersSource {
           votesNumber: data[UserDocumentFields.votesNumber],
           fullBio: data[UserDocumentFields.fullBio],
           shortBio: data[UserDocumentFields.shortBio],
-          icon: "assets/images/trainer3.png",
+          image: "assets/images/trainer3.png",
           email: "",
           rating: 2.3,
           location: data[UserDocumentFields.location],
