@@ -124,7 +124,7 @@ class SignInScreen extends StatelessWidget {
                         .read<SignInBloc>()
                         .add(const SignInEvent.checkIsProfileCreated()),
                     navigateToProfileCreationScreen: () =>
-                        context.replaceNamed(ScreenNavigationKey.profileCreation),
+                        context.pushNamed(ScreenNavigationKey.profileCreation),
                     navigateToHomeScreen: () =>
                         context.replaceNamed(ScreenNavigationKey.home));
               },

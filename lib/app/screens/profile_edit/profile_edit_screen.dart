@@ -5,15 +5,19 @@ import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
+import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
+import 'package:Perso/core/navigation/screen_navigation_key.dart';
+import 'package:Perso/core/string_extensions.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -235,15 +239,46 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     ],
                   ),
                 ),
+
                 Center(
-                  child: Container(
-                      margin: const EdgeInsets.only(
-                          top: Dimens.biggerMargin,
-                          bottom: Dimens.biggerMargin,
-                          right: Dimens.normalMargin),
-                      child: PersoButton(
-                          width: 160.0, title: "Next", onTap: _uploadData)),
-                ),
+                    child: Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.biggerMargin,
+                      bottom: Dimens.biggerMargin,
+                      right: Dimens.normalMargin),
+                  child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
+                    builder: (context, state) {
+                      return state.whenOrNull(
+                            loading: () => Center(
+                                child: Container(
+                                    margin: const EdgeInsets.only(
+                                        bottom: Dimens.normalMargin),
+                                    child: const CircularProgressIndicator())),
+                          ) ??
+                          PersoButton(
+                              width: 160.0, title: "Next", onTap: _uploadData);
+                    },
+                    listener: (context, state) {
+                      state.whenOrNull(
+                          success: () =>
+                              context.replaceNamed(ScreenNavigationKey.home));
+                    },
+                  ),
+                )),
+                Center(
+                    child: Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.normalMargin,),
+                  child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
+                    builder: (context, state) {
+                      return state.whenOrNull(
+                              error: (error) => Text(
+                                  "Something went wrong - $error",
+                                  style: ThemeText.calloutRegularRed)) ??
+                          Container();
+                    },
+                  ),
+                ))
               ],
             ),
           ),
@@ -279,7 +314,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   void _addTrainerData(String location, BuildContext context) {
-         List<String> languages = _spokenLanguageRowWidget.listOfLanguages
+    List<String> languages = _spokenLanguageRowWidget.listOfLanguages
         .map((element) => element.keys)
         .expand((element) => element)
         .toList();
@@ -304,13 +339,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     _nameController.addListener(() {
       setState(() {
         _nicknameController.text =
-            _nameController.text + _surnameController.text.toUpperCase();
+            _nameController.text + _surnameController.text.capitalizeFirstLetter();
       });
     });
     _surnameController.addListener(() {
       setState(() {
         _nicknameController.text =
-            _nameController.text + _surnameController.text.toUpperCase();
+            _nameController.text + _surnameController.text.capitalizeFirstLetter();
       });
     });
   }

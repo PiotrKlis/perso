@@ -20,36 +20,14 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
     on<UploadTrainerData>((event, emitter) async {
       try {
         emitter.call(const ProfileEditState.loading());
-        var isFirstProfileCreation =
-            !_sharedPrefs.getBool(_sharedPrefs.isProfileCreatedKey);
-        if (isFirstProfileCreation) {
-          TrainerEntity trainerEntity = TrainerEntity(
-              id: FirebaseAuth.instance.currentUser?.uid ?? "",
-              image: "",
-              name: event.trainerData.name,
-              surname: event.trainerData.surname,
-              nickname: event.trainerData.nickname,
-              votesNumber: 0,
-              fullBio: event.trainerData.fullBio,
-              shortBio: event.trainerData.shortBio,
-              email: FirebaseAuth.instance.currentUser?.email ?? "",
-              languages: event.trainerData.languages,
-              rating: 0.0,
-              location: event.trainerData.location,
-              phoneNumber: event.trainerData.phoneNumber,
-              reviews: List.empty(),
-              trainingTypes: List.empty());
-          await _trainersService.setData(trainerEntity);
-        } else {
-          await _trainersService.updateData(event.trainerData);
-        }
-        _sharedPrefs.setBool(_sharedPrefs.isProfileCreatedKey, true);
+        await _sendTrainerData(event);
         emitter.call(const ProfileEditState.success());
       } catch (error) {
         emitter.call(ProfileEditState.error(error.toString()));
       }
     });
 
+    //TODO: Upload client data properly
     on<UploadClientData>((event, emitter) async {
       try {
         emitter.call(const ProfileEditState.loading());
@@ -59,5 +37,36 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         emitter.call(ProfileEditState.error(error.toString()));
       }
     });
+  }
+
+  Future<void> _sendTrainerData(UploadTrainerData event) async {
+    var isFirstProfileCreation =
+        !_sharedPrefs.getBool(_sharedPrefs.isProfileCreatedKey);
+    if (isFirstProfileCreation) {
+      await _handleFirstProfileCreation(event);
+      _sharedPrefs.setBool(_sharedPrefs.isProfileCreatedKey, true);
+    } else {
+      await _trainersService.updateData(event.trainerData);
+    }
+  }
+
+  Future<void> _handleFirstProfileCreation(UploadTrainerData event) async {
+    TrainerEntity trainerEntity = TrainerEntity(
+        id: FirebaseAuth.instance.currentUser?.uid ?? "",
+        image: "",
+        name: event.trainerData.name,
+        surname: event.trainerData.surname,
+        nickname: event.trainerData.nickname,
+        votesNumber: 0,
+        fullBio: event.trainerData.fullBio,
+        shortBio: event.trainerData.shortBio,
+        email: FirebaseAuth.instance.currentUser?.email ?? "",
+        languages: event.trainerData.languages,
+        rating: 0.0,
+        location: event.trainerData.location,
+        phoneNumber: event.trainerData.phoneNumber,
+        reviews: List.empty(),
+        trainingTypes: List.empty());
+    await _trainersService.setData(trainerEntity);
   }
 }

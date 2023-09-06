@@ -9,7 +9,6 @@ import 'package:go_router/go_router.dart';
 class ProfileCreationScreen extends StatelessWidget {
   const ProfileCreationScreen({super.key});
 
-  //TODO: It should not be possible to leave this screen.
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -64,12 +63,12 @@ class ProfileCreationScreen extends StatelessWidget {
   }
 
   void _navigateClient(BuildContext context) {
-    context.replaceNamed(ScreenNavigationKey.profileEdit,
+    context.pushNamed(ScreenNavigationKey.profileEdit,
         extra: UserType.client);
   }
 
   void _navigateTrainer(BuildContext context) {
-    context.replaceNamed(ScreenNavigationKey.profileEdit,
+    context.pushNamed(ScreenNavigationKey.profileEdit,
         extra: UserType.trainer);
   }
 }
