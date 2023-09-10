@@ -9,6 +9,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
+import 'package:Perso/app/widgets/perso_chips_list.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
@@ -39,6 +40,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _fullBioController = TextEditingController();
   final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final _addressWidget = PersoAutocomplete();
+  final _persoChipsList = PersoChipsList();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 //TODO: Add image upload functionality
                 // https://pub.dev/packages/image_picker
                 Container(
-                    margin: EdgeInsets.only(top: Dimens.bigMargin),
+                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: const Center(
                         child: PersoButton(title: "Upload image"))),
                 Visibility(
@@ -188,6 +190,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 Visibility(
                   visible: widget._userType == UserType.trainer,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                           margin: const EdgeInsets.only(
@@ -236,10 +239,26 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             customValidator: TextFieldValidator.validateIsEmpty,
                             textEditingController: _fullBioController,
                           )),
+                      Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: const PersoDivider()),
+                      Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.normalMargin,
+                              left: Dimens.normalMargin),
+                          child: Text(
+                            "Select your specialities",
+                            style: ThemeText.bodyBoldBlackText,
+                          )),
+                      Container(
+                        margin: const EdgeInsets.only(top: Dimens.smallMargin),
+                        child: _persoChipsList,
+                      ),
                     ],
                   ),
                 ),
-
                 Center(
                     child: Container(
                   margin: const EdgeInsets.only(
@@ -268,7 +287,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 Center(
                     child: Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin,),
+                    top: Dimens.normalMargin,
+                  ),
                   child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
                     builder: (context, state) {
                       return state.whenOrNull(
@@ -328,7 +348,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         location: location,
         phoneNumber: _phoneNumberController.text,
         shortBio: _shortBioController.text,
-        fullBio: _fullBioController.text);
+        fullBio: _fullBioController.text,
+        categories: _persoChipsList.categories);
 
     context
         .read<ProfileEditBloc>()
@@ -338,14 +359,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   void _addNicknameListener() {
     _nameController.addListener(() {
       setState(() {
-        _nicknameController.text =
-            _nameController.text + _surnameController.text.capitalizeFirstLetter();
+        _nicknameController.text = _nameController.text +
+            _surnameController.text.capitalizeFirstLetter();
       });
     });
     _surnameController.addListener(() {
       setState(() {
-        _nicknameController.text =
-            _nameController.text + _surnameController.text.capitalizeFirstLetter();
+        _nicknameController.text = _nameController.text +
+            _surnameController.text.capitalizeFirstLetter();
       });
     });
   }

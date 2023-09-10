@@ -8,7 +8,8 @@ class TrainerData {
       required this.location,
       required this.phoneNumber,
       required this.shortBio,
-      required this.fullBio});
+      required this.fullBio,
+      required this.categories});
 
   final String image;
   final List<String> languages;
@@ -19,4 +20,5 @@ class TrainerData {
   final String phoneNumber;
   final String shortBio;
   final String fullBio;
+  final List<String> categories;
 }

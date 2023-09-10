@@ -30,7 +30,7 @@ mixin _$TrainerEntity {
   String get location => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
   List<ReviewEntity> get reviews => throw _privateConstructorUsedError;
-  List<String> get trainingTypes => throw _privateConstructorUsedError;
+  List<String> get categories => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrainerEntityCopyWith<TrainerEntity> get copyWith =>
@@ -58,7 +58,7 @@ abstract class $TrainerEntityCopyWith<$Res> {
       String location,
       String phoneNumber,
       List<ReviewEntity> reviews,
-      List<String> trainingTypes});
+      List<String> categories});
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? location = null,
     Object? phoneNumber = null,
     Object? reviews = null,
-    Object? trainingTypes = null,
+    Object? categories = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -147,9 +147,9 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<ReviewEntity>,
-      trainingTypes: null == trainingTypes
-          ? _value.trainingTypes
-          : trainingTypes // ignore: cast_nullable_to_non_nullable
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ) as $Val);
   }
@@ -178,7 +178,7 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
       String location,
       String phoneNumber,
       List<ReviewEntity> reviews,
-      List<String> trainingTypes});
+      List<String> categories});
 }
 
 /// @nodoc
@@ -206,7 +206,7 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? location = null,
     Object? phoneNumber = null,
     Object? reviews = null,
-    Object? trainingTypes = null,
+    Object? categories = null,
   }) {
     return _then(_$_TrainerEntity(
       id: null == id
@@ -265,9 +265,9 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
           ? _value._reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<ReviewEntity>,
-      trainingTypes: null == trainingTypes
-          ? _value._trainingTypes
-          : trainingTypes // ignore: cast_nullable_to_non_nullable
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -291,10 +291,10 @@ class _$_TrainerEntity implements _TrainerEntity {
       required this.location,
       required this.phoneNumber,
       required final List<ReviewEntity> reviews,
-      required final List<String> trainingTypes})
+      required final List<String> categories})
       : _languages = languages,
         _reviews = reviews,
-        _trainingTypes = trainingTypes;
+        _categories = categories;
 
   @override
   final String id;
@@ -336,17 +336,17 @@ class _$_TrainerEntity implements _TrainerEntity {
     return EqualUnmodifiableListView(_reviews);
   }
 
-  final List<String> _trainingTypes;
+  final List<String> _categories;
   @override
-  List<String> get trainingTypes {
-    if (_trainingTypes is EqualUnmodifiableListView) return _trainingTypes;
+  List<String> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_trainingTypes);
+    return EqualUnmodifiableListView(_categories);
   }
 
   @override
   String toString() {
-    return 'TrainerEntity(id: $id, image: $image, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, phoneNumber: $phoneNumber, reviews: $reviews, trainingTypes: $trainingTypes)';
+    return 'TrainerEntity(id: $id, image: $image, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, phoneNumber: $phoneNumber, reviews: $reviews, categories: $categories)';
   }
 
   @override
@@ -375,7 +375,7 @@ class _$_TrainerEntity implements _TrainerEntity {
                 other.phoneNumber == phoneNumber) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             const DeepCollectionEquality()
-                .equals(other._trainingTypes, _trainingTypes));
+                .equals(other._categories, _categories));
   }
 
   @override
@@ -395,7 +395,7 @@ class _$_TrainerEntity implements _TrainerEntity {
       location,
       phoneNumber,
       const DeepCollectionEquality().hash(_reviews),
-      const DeepCollectionEquality().hash(_trainingTypes));
+      const DeepCollectionEquality().hash(_categories));
 
   @JsonKey(ignore: true)
   @override
@@ -420,7 +420,7 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final String location,
       required final String phoneNumber,
       required final List<ReviewEntity> reviews,
-      required final List<String> trainingTypes}) = _$_TrainerEntity;
+      required final List<String> categories}) = _$_TrainerEntity;
 
   @override
   String get id;
@@ -451,7 +451,7 @@ abstract class _TrainerEntity implements TrainerEntity {
   @override
   List<ReviewEntity> get reviews;
   @override
-  List<String> get trainingTypes;
+  List<String> get categories;
   @override
   @JsonKey(ignore: true)
   _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>

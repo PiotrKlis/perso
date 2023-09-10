@@ -24,6 +24,7 @@ class FirestoreTrainersService implements TrainersService {
       UserDocumentFields.shortBio: trainerData.shortBio,
       UserDocumentFields.surname: trainerData.surname,
       UserDocumentFields.image: trainerData.image,
+      UserDocumentFields.categories: trainerData.categories
     });
     return Future.value();
   }
@@ -48,7 +49,7 @@ class FirestoreTrainersService implements TrainersService {
       UserDocumentFields.votesNumber: trainerEntity.votesNumber,
       UserDocumentFields.rating: trainerEntity.rating,
       UserDocumentFields.reviews: trainerEntity.reviews,
-      UserDocumentFields.trainingTypes: trainerEntity.trainingTypes,
+      UserDocumentFields.categories: trainerEntity.categories,
     });
     return Future.value();
   }

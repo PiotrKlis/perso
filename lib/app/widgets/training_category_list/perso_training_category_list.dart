@@ -18,44 +18,6 @@ class PersoTrainingCategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget getPersoCategoryList(List<TrainingCategory> categories) {
-      return Column(
-          children: categories.map((category) {
-        bool shouldDividerBeVisible =
-            categories.indexOf(category) != categories.length - 1;
-        return GestureDetector(
-          onTap: () => context.pushNamed(
-              ScreenNavigationKey.searchResults,
-              pathParameters: {"input": category.name}),
-          child: SizedBox(
-            height: Dimens.trainingCategoryRowHeight,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      PersoTrainingCategoryIcon(
-                          path: category.trainingCategoryIcon.path,
-                          color: category.trainingCategoryIcon.color),
-                      Container(
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: Text(category.name,
-                              style: ThemeText.bodyBoldBlackText))
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: shouldDividerBeVisible,
-                  child: const PersoDivider(),
-                )
-              ],
-            ),
-          ),
-        );
-      }).toList());
-    }
-
     return BlocProvider(
       create: (context) =>
           TrainingCategoryListBloc(const TrainingCategoryListState.initial()),
@@ -71,12 +33,50 @@ class PersoTrainingCategoryList extends StatelessWidget {
             }
             return Container();
           }, content: (List<TrainingCategory> categories) {
-            return getPersoCategoryList(categories);
+            return _getPersoCategoryList(categories, context);
           }, error: (String error) {
             return Text(error);
           });
         },
       ),
     );
+  }
+
+  Widget _getPersoCategoryList(
+      List<TrainingCategory> categories, BuildContext context) {
+    return Column(
+        children: categories.map((category) {
+      bool shouldDividerBeVisible =
+          categories.indexOf(category) != categories.length - 1;
+      return GestureDetector(
+        onTap: () => context.pushNamed(ScreenNavigationKey.searchResults,
+            pathParameters: {"input": category.name}),
+        child: SizedBox(
+          height: Dimens.trainingCategoryRowHeight,
+          child: Column(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    PersoTrainingCategoryIcon(
+                        path: category.trainingCategoryIcon.path,
+                        color: category.trainingCategoryIcon.color),
+                    Container(
+                        margin:
+                            const EdgeInsets.only(left: Dimens.normalMargin),
+                        child: Text(category.name,
+                            style: ThemeText.bodyBoldBlackText))
+                  ],
+                ),
+              ),
+              Visibility(
+                visible: shouldDividerBeVisible,
+                child: const PersoDivider(),
+              )
+            ],
+          ),
+        ),
+      );
+    }).toList());
   }
 }

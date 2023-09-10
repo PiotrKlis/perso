@@ -25,7 +25,7 @@ class TestTrainersRepository implements TrainersSource {
         location: 'Location',
         phoneNumber: 'Phone number',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
-        trainingTypes: ['Training type 1', 'Training type 2'],
+        categories: ['Training type 1', 'Training type 2'],
         rating: 5.0),
     TrainerEntity(
         id: '2',
@@ -41,7 +41,7 @@ class TestTrainersRepository implements TrainersSource {
         location: 'Location',
         phoneNumber: 'Phone number',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
-        trainingTypes: ['Training type 1', 'Training type 2'],
+        categories: ['Training type 1', 'Training type 2'],
         rating: 2.5),
     TrainerEntity(
         id: '3',
@@ -57,7 +57,7 @@ class TestTrainersRepository implements TrainersSource {
         location: 'Location',
         phoneNumber: 'Phone number',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
-        trainingTypes: ['Training type 1', 'Training type 2'],
+        categories: ['Training type 1', 'Training type 2'],
         rating: 4.5),
   ];
 }

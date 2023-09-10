@@ -29,8 +29,8 @@ class FirestoreTrainersProvider implements TrainersSource {
           languages:
               data[UserDocumentFields.languages].toString().split(", "),
           reviews: getReviews(data),
-          trainingTypes:
-              data[UserDocumentFields.trainingTypes].toString().split(", "));
+          categories:
+              data[UserDocumentFields.categories].toString().split(", "));
     }).toList();
   }
 

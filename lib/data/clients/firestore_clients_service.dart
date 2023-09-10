@@ -10,7 +10,7 @@ class FirestoreClientsService implements ClientsService {
   @override
   Future<void> uploadData(ClientData clientData) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.clients)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
       UserDocumentFields.email: FirebaseAuth.instance.currentUser?.email,

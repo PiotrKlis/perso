@@ -1,5 +1,6 @@
 class CollectionName {
   static String trainers = "trainers";
+  static String clients = "clients";
 }
 
 class UserDocumentFields {
@@ -14,9 +15,9 @@ class UserDocumentFields {
   static const String rating = "rating";
   static const String reviews = "reviews";
   static const String shortBio = "shortBio";
-  static const String trainingTypes = "trainingTypes";
   static const String votesNumber = "votesNumber";
   static const String image = "image";
   static const String id = "id";
   static const String description = "description";
+  static const String categories = "categories";
 }

@@ -27,7 +27,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       }
     });
 
-    //TODO: Upload client data properly
     on<UploadClientData>((event, emitter) async {
       try {
         emitter.call(const ProfileEditState.loading());
@@ -66,7 +65,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         location: event.trainerData.location,
         phoneNumber: event.trainerData.phoneNumber,
         reviews: List.empty(),
-        trainingTypes: List.empty());
+        categories: event.trainerData.categories);
     await _trainersService.setData(trainerEntity);
   }
 }
