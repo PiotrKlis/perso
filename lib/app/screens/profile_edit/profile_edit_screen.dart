@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Perso/app/models/client_data.dart';
 import 'package:Perso/app/models/trainer_data.dart';
 import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
@@ -19,6 +21,7 @@ import 'package:Perso/core/user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -42,6 +45,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _addressWidget = PersoAutocomplete();
   final _persoChipsList = PersoChipsList();
 
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
+
   @override
   Widget build(BuildContext context) {
     _addNicknameListener();
@@ -62,21 +68,38 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               children: [
                 Center(
                   child: Container(
-                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: SizedBox(
-                      width: 160,
-                      height: 160,
-                      child: Image.asset("assets/images/trainer3.png"),
-                      //Image(image: AssetImage("assets/images/screenshot.png")
+                    width: 200.0,
+                    height: 200.0,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black
                     ),
+                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                    child: _image == null
+                        ? const Icon(
+                            Icons.camera_alt,
+                            color: Colors.white,
+                            size: 120.0,
+                          )
+                        : ClipOval(
+                          child: Image.file(
+                              File(_image!.path),
+                              width: 200.0,
+                              height: 200.0,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                   ),
                 ),
-                //TODO: Add image upload functionality
-                // https://pub.dev/packages/image_picker
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: const Center(
-                        child: PersoButton(title: "Upload image"))),
+                    child: Center(
+                        child: PersoButton(
+                      title: "Upload image",
+                      onTap: (context) {
+                        _getImage();
+                      },
+                    ))),
                 Visibility(
                   visible: widget._userType == UserType.trainer,
                   child: Column(
@@ -307,6 +330,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
+  Future<void> _getImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
   void _uploadData(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
       // Address doesn't work, it's empty even if filled in the app
@@ -340,7 +371,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         .toList();
 
     final trainerData = TrainerData(
-        image: "image",
+        imagePath: _image?.path,
         languages: languages,
         name: _nameController.text,
         surname: _surnameController.text,

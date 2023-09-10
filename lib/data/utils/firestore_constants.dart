@@ -1,6 +1,7 @@
 class CollectionName {
   static String trainers = "trainers";
   static String clients = "clients";
+  static String images = "images";
 }
 
 class UserDocumentFields {

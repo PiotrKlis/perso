@@ -1,6 +1,7 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
+import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/clients/clients_service.dart';
 import 'package:Perso/data/clients/firestore_clients_service.dart';
 import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
@@ -30,6 +31,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
     on<UploadClientData>((event, emitter) async {
       try {
         emitter.call(const ProfileEditState.loading());
+        await _handleClientImageUpload(event.clientData.image);
         await _clientsService.uploadData(event.clientData);
         emitter.call(const ProfileEditState.success());
       } catch (error) {
@@ -39,6 +41,11 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   }
 
   Future<void> _sendTrainerData(UploadTrainerData event) async {
+    await _handleTrainerImageUpload(event.trainerData.imagePath);
+    await _handleTrainerDataUpload(event);
+  }
+
+  Future<void> _handleTrainerDataUpload(UploadTrainerData event) async {
     var isFirstProfileCreation =
         !_sharedPrefs.getBool(_sharedPrefs.isProfileCreatedKey);
     if (isFirstProfileCreation) {
@@ -46,6 +53,20 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       _sharedPrefs.setBool(_sharedPrefs.isProfileCreatedKey, true);
     } else {
       await _trainersService.updateData(event.trainerData);
+    }
+  }
+
+  Future<void> _handleClientImageUpload(String? imagePath) async {
+    String path = imagePath ?? "";
+    if (path.isNotEmpty) {
+      await _clientsService.uploadPhoto(path);
+    }
+  }
+
+  Future<void> _handleTrainerImageUpload(String? imagePath) async {
+    String path = imagePath ?? "";
+    if (path.isNotEmpty) {
+      await _trainersService.uploadPhoto(path);
     }
   }
 

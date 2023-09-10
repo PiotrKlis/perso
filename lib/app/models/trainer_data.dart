@@ -1,6 +1,6 @@
 class TrainerData {
   TrainerData(
-      {required this.image,
+      {required this.imagePath,
       required this.languages,
       required this.name,
       required this.surname,
@@ -11,7 +11,7 @@ class TrainerData {
       required this.fullBio,
       required this.categories});
 
-  final String image;
+  final String? imagePath;
   final List<String> languages;
   final String name;
   final String surname;

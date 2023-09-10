@@ -4,4 +4,5 @@ import 'package:Perso/app/models/trainer_data.dart';
 abstract class TrainersService {
   Future<void> updateData(TrainerData trainerData);
   Future<void> setData(TrainerEntity trainerEntity);
+  Future<void> uploadPhoto(String path);
 }
