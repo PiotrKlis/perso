@@ -303,7 +303,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     listener: (context, state) {
                       state.whenOrNull(
                           success: () =>
-                              context.replaceNamed(ScreenNavigationKey.home));
+                              context.replaceNamed(ScreenNavigationKey.profileCreationSuccess));
                     },
                   ),
                 )),
@@ -332,7 +332,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   Future<void> _getImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-
     setState(() {
       _image = image;
     });
