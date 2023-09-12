@@ -30,7 +30,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     });
 
     on<CheckIsProfileCreated>((state, emit) async {
-      if (_persoSharedPrefs.getBool(_persoSharedPrefs.isProfileCreatedKey,
+      if (_persoSharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey,
           defaultValue: false)) {
         emit(const SignInState.navigateToHomeScreen());
       } else {

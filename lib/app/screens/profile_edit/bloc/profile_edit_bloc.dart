@@ -47,10 +47,10 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
 
   Future<void> _handleTrainerDataUpload(UploadTrainerData event) async {
     var isFirstProfileCreation =
-        !_sharedPrefs.getBool(_sharedPrefs.isProfileCreatedKey);
+        !_sharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey);
     if (isFirstProfileCreation) {
       await _handleFirstProfileCreation(event);
-      _sharedPrefs.setBool(_sharedPrefs.isProfileCreatedKey, true);
+      _sharedPrefs.setBool(PersoSharedPrefs.isProfileCreatedKey, true);
     } else {
       await _trainersService.updateData(event.trainerData);
     }
