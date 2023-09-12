@@ -55,8 +55,8 @@ class SignInScreen extends StatelessWidget {
                             context.pop();
                           },
                           child: const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Icon(Icons.cancel_outlined, size: 32.0),
+                            padding: EdgeInsets.all(Dimens.signInScreenPadding,),
+                            child: Icon(Icons.cancel_outlined, size: Dimens.iconCancelOutlinedSize,),
                           ),
                         ),
                       )
