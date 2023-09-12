@@ -3,6 +3,7 @@ import 'package:Perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
 import 'package:Perso/app/screens/profile_creation/profile_creation_screen.dart';
+import 'package:Perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:Perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:Perso/app/screens/search/search_screen.dart';
 import 'package:Perso/app/screens/search_filters/search_filter.dart';
@@ -109,8 +110,8 @@ final GoRouter goRouter = GoRouter(
                         path: ScreenNavigationKey.passwordRecovery,
                         name: ScreenNavigationKey.passwordRecovery,
                         pageBuilder: (context, state) {
-                          return const NoTransitionPage(
-                              child: PasswordRecoveryScreen());
+                          return NoTransitionPage(
+                              child: ForgotPasswordScreen());
                         }),
                     GoRoute(
                         name: ScreenNavigationKey.signUp,
@@ -126,6 +127,31 @@ final GoRouter goRouter = GoRouter(
                                     child: SignUpSuccessScreen());
                               })
                         ]),
+                    GoRoute(
+                        path: ScreenNavigationKey.profileCreation,
+                        name: ScreenNavigationKey.profileCreation,
+                        pageBuilder: (context, state) => const NoTransitionPage(
+                            child: ProfileCreationScreen()),
+                        routes: [
+                          GoRoute(
+                              path: ScreenNavigationKey.profileEdit,
+                              name: ScreenNavigationKey.profileEdit,
+                              pageBuilder: (context, state) => NoTransitionPage(
+                                  child: ProfileEditScreen(
+                                      userType: state.extra as UserType)),
+                              routes: [
+                                GoRoute(
+                                    path: ScreenNavigationKey
+                                        .profileCreationSuccess,
+                                    name: ScreenNavigationKey
+                                        .profileCreationSuccess,
+                                    pageBuilder: (context, state) {
+                                      return const NoTransitionPage(
+                                          child:
+                                              ProfileCreationSuccessScreen());
+                                    }),
+                              ])
+                        ]),
                   ]),
             ],
           ),
@@ -136,23 +162,6 @@ final GoRouter goRouter = GoRouter(
               return const NoTransitionPage(child: TrainingScreen());
             },
           ),
-          GoRoute(
-              path: ScreenNavigationKey.profileCreation,
-              name: ScreenNavigationKey.profileCreation,
-              pageBuilder: (context, state) {
-                return const NoTransitionPage(child: ProfileCreationScreen());
-              },
-              routes: [
-                GoRoute(
-                  path: ScreenNavigationKey.profileEdit,
-                  name: ScreenNavigationKey.profileEdit,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(
-                        child: ProfileEditScreen(
-                            userType: state.extra as UserType));
-                  },
-                )
-              ]),
         ],
       ),
     ]);

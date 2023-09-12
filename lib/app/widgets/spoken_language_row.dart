@@ -4,7 +4,8 @@ import 'package:Perso/app/widgets/perso_small_button.dart';
 import 'package:flutter/material.dart';
 
 class SpokenLanguageRowWidget extends StatefulWidget {
-  const SpokenLanguageRowWidget({Key? key}) : super(key: key);
+  SpokenLanguageRowWidget({Key? key}) : super(key: key);
+  List<Map<String, Widget>> listOfLanguages = [];
 
   @override
   State<SpokenLanguageRowWidget> createState() =>
@@ -12,11 +13,9 @@ class SpokenLanguageRowWidget extends StatefulWidget {
 }
 
 class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
-  List<Map<String, Widget>> listOfLanguages = [];
-
   @override
   Widget build(BuildContext context) {
-    List<Widget> languageWidgets = listOfLanguages
+    List<Widget> languageWidgets = widget.listOfLanguages
         .map((map) => map.values.toList())
         .expand((list) => list)
         .toList();
@@ -24,10 +23,12 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              margin: const EdgeInsets.only(left: Dimens.normalMargin),
+              margin: const EdgeInsets.only(
+                  left: Dimens.normalMargin, top: Dimens.smallMargin),
               child: const Icon(Icons.flag, size: 24.0)),
           Container(
               margin: const EdgeInsets.only(left: Dimens.normalMargin),
@@ -43,7 +44,7 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
   }
 
   String? _validateNumberOfLanguages() =>
-      listOfLanguages.isEmpty ? "Add at least one language" : null;
+      widget.listOfLanguages.isEmpty ? "Add at least one language" : null;
 
   void _addSpokenLanguage(String languageEmoji) {
     Widget languageChip = Container(
@@ -51,13 +52,13 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
         child: PersoFlagButton(
             flagEmoji: languageEmoji, onRemoveTap: _removeSpokenLanguage));
     setState(() {
-      listOfLanguages.add({languageEmoji: languageChip});
+      widget.listOfLanguages.add({languageEmoji: languageChip});
     });
   }
 
   void _removeSpokenLanguage(String languageEmoji) {
     setState(() {
-      listOfLanguages
+      widget.listOfLanguages
           .removeWhere((element) => element.containsKey(languageEmoji));
     });
   }

@@ -14,7 +14,7 @@ class PersoFlagButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: Dimens.loginButtonHeight,
+        height: 48.0,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 elevation: 0,
@@ -25,7 +25,10 @@ class PersoFlagButton extends StatelessWidget {
             onPressed: () {},
             child: Row(
               children: [
-                Text(flagEmoji, style: TextStyle(fontSize: 24.0),),
+                Text(
+                  flagEmoji,
+                  style: TextStyle(fontSize: 24.0),
+                ),
                 Container(
                     margin: const EdgeInsets.only(left: Dimens.mediumMargin),
                     child: GestureDetector(

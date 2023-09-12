@@ -2,12 +2,13 @@ import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/core/user_type.dart';
+import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileCreationScreen extends StatelessWidget {
-  const ProfileCreationScreen({super.key});
+class ProfileCreationSuccessScreen extends StatelessWidget {
+  const ProfileCreationSuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +21,21 @@ class ProfileCreationScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: Dimens.substantialMargin),
               child: Text(
-                "Welcome to PERSO!",
+                "Amazing success!",
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.biggerMargin),
               child: Text(
-                "Thank you for logging in. We're thrilled to have you join our community 🎉",
+                "Your account creation has been completed. Now you can enjoy all the benefits of being a member.",
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
               child: Text(
-                  "Get ready to embark on a journey of discovery and innovation",
+                  "If you have any questions or need assistance, don't hesitate to reach out to our support team. We hope you have a fantastic time using our app!",
                   style: ThemeText.bodyRegularBlackText),
             ),
             Container(
@@ -43,15 +44,13 @@ class ProfileCreationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PersoButton(
-                      title: "I am a trainer",
-                      whiteBlackTheme: true,
-                      onTap: _navigateTrainer),
-                  Container(
-                    margin: const EdgeInsets.only(left: Dimens.normalMargin),
-                    child: PersoButton(
-                      title: "I am a client",
-                      onTap: _navigateClient,
-                    ),
+                    title: "FINISH",
+                    onTap: (context) {
+                      //TODO: Move setting isProfileCreatedKey to bloc layer
+                      PersoSharedPrefs prefs = GetIt.instance.get<PersoSharedPrefs>();
+                      prefs.setBool(PersoSharedPrefs.isProfileCreatedKey, true);
+                      _navigateHome(context);
+                    },
                   ),
                 ],
               ),
@@ -62,13 +61,7 @@ class ProfileCreationScreen extends StatelessWidget {
     );
   }
 
-  void _navigateClient(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.profileEdit,
-        extra: UserType.client);
-  }
-
-  void _navigateTrainer(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.profileEdit,
-        extra: UserType.trainer);
+  void _navigateHome(BuildContext context) {
+    context.replaceNamed(ScreenNavigationKey.home);
   }
 }

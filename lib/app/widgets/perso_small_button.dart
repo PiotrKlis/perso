@@ -25,7 +25,7 @@ class PersoSmallButton extends StatelessWidget {
         readOnly: true,
         textAlign: TextAlign.start,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(0.0),
+          contentPadding: const EdgeInsets.all(0.0),
           prefixIcon: const Icon(Icons.add),
           prefixIconColor: PersoColors.blue,
           filled: true,

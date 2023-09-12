@@ -3,12 +3,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'trainer_entity.freezed.dart';
 
-//TODO: Handle icon
 @freezed
 class TrainerEntity with _$TrainerEntity {
   const factory TrainerEntity({
     required final String id,
-    required final String icon,
+    required final String image,
     required final String name,
     required final String surname,
     required final String nickname,
@@ -21,6 +20,6 @@ class TrainerEntity with _$TrainerEntity {
     required final String location,
     required final String phoneNumber,
     required final List<ReviewEntity> reviews,
-    required final List<String> trainingTypes
+    required final List<String> categories
   }) = _TrainerEntity;
 }

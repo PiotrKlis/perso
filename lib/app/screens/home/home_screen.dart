@@ -129,15 +129,15 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _handleAccountClick(BuildContext context) {
-      if (_authProvider.isUserLoggedIn()) {
-        _navigateToProfileScreen(context);
-      } else {
-        context.pushNamed(ScreenNavigationKey.signIn);
-      }
+    if (_authProvider.isUserLoggedIn()) {
+      _navigateToProfileScreen(context);
+    } else {
+      context.pushNamed(ScreenNavigationKey.signIn);
+    }
   }
 
   void _navigateToProfileScreen(BuildContext context) {
-    // TODO: If UserType is client or trainer
+    //TODO: navigate to trainer screen if userType is Trainer and to client screen if userType is Client
     context.pushNamed(ScreenNavigationKey.trainerProfile);
   }
 }

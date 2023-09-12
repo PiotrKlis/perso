@@ -6,17 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class PersoAutocomplete extends StatelessWidget {
-  PersoAutocomplete({Key? key}) : super(key: key);
+  PersoAutocomplete({super.key});
 
   final AddressProvider _addressProvider = GetIt.I.get<GoogleAddressProvider>();
+  TextEditingController? autocompleteController;
 
   @override
   Widget build(BuildContext context) {
     return Autocomplete<String>(
-      fieldViewBuilder:
-          (context, textEditingController, focusNode, onFieldSubmitted) {
+      fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
+        autocompleteController = controller;
         return TextFormField(
-          controller: textEditingController,
+          controller: controller,
           focusNode: focusNode,
           decoration: InputDecoration(
               filled: true,

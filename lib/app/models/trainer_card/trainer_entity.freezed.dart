@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TrainerEntity {
   String get id => throw _privateConstructorUsedError;
-  String get icon => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get surname => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$TrainerEntity {
   String get location => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
   List<ReviewEntity> get reviews => throw _privateConstructorUsedError;
-  List<String> get trainingTypes => throw _privateConstructorUsedError;
+  List<String> get categories => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrainerEntityCopyWith<TrainerEntity> get copyWith =>
@@ -45,7 +45,7 @@ abstract class $TrainerEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String icon,
+      String image,
       String name,
       String surname,
       String nickname,
@@ -58,7 +58,7 @@ abstract class $TrainerEntityCopyWith<$Res> {
       String location,
       String phoneNumber,
       List<ReviewEntity> reviews,
-      List<String> trainingTypes});
+      List<String> categories});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
   @override
   $Res call({
     Object? id = null,
-    Object? icon = null,
+    Object? image = null,
     Object? name = null,
     Object? surname = null,
     Object? nickname = null,
@@ -88,16 +88,16 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? location = null,
     Object? phoneNumber = null,
     Object? reviews = null,
-    Object? trainingTypes = null,
+    Object? categories = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -147,9 +147,9 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<ReviewEntity>,
-      trainingTypes: null == trainingTypes
-          ? _value.trainingTypes
-          : trainingTypes // ignore: cast_nullable_to_non_nullable
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ) as $Val);
   }
@@ -165,7 +165,7 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String icon,
+      String image,
       String name,
       String surname,
       String nickname,
@@ -178,7 +178,7 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
       String location,
       String phoneNumber,
       List<ReviewEntity> reviews,
-      List<String> trainingTypes});
+      List<String> categories});
 }
 
 /// @nodoc
@@ -193,7 +193,7 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? icon = null,
+    Object? image = null,
     Object? name = null,
     Object? surname = null,
     Object? nickname = null,
@@ -206,16 +206,16 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? location = null,
     Object? phoneNumber = null,
     Object? reviews = null,
-    Object? trainingTypes = null,
+    Object? categories = null,
   }) {
     return _then(_$_TrainerEntity(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      icon: null == icon
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -265,9 +265,9 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
           ? _value._reviews
           : reviews // ignore: cast_nullable_to_non_nullable
               as List<ReviewEntity>,
-      trainingTypes: null == trainingTypes
-          ? _value._trainingTypes
-          : trainingTypes // ignore: cast_nullable_to_non_nullable
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -278,7 +278,7 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
 class _$_TrainerEntity implements _TrainerEntity {
   const _$_TrainerEntity(
       {required this.id,
-      required this.icon,
+      required this.image,
       required this.name,
       required this.surname,
       required this.nickname,
@@ -291,15 +291,15 @@ class _$_TrainerEntity implements _TrainerEntity {
       required this.location,
       required this.phoneNumber,
       required final List<ReviewEntity> reviews,
-      required final List<String> trainingTypes})
+      required final List<String> categories})
       : _languages = languages,
         _reviews = reviews,
-        _trainingTypes = trainingTypes;
+        _categories = categories;
 
   @override
   final String id;
   @override
-  final String icon;
+  final String image;
   @override
   final String name;
   @override
@@ -336,17 +336,17 @@ class _$_TrainerEntity implements _TrainerEntity {
     return EqualUnmodifiableListView(_reviews);
   }
 
-  final List<String> _trainingTypes;
+  final List<String> _categories;
   @override
-  List<String> get trainingTypes {
-    if (_trainingTypes is EqualUnmodifiableListView) return _trainingTypes;
+  List<String> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_trainingTypes);
+    return EqualUnmodifiableListView(_categories);
   }
 
   @override
   String toString() {
-    return 'TrainerEntity(id: $id, icon: $icon, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, phoneNumber: $phoneNumber, reviews: $reviews, trainingTypes: $trainingTypes)';
+    return 'TrainerEntity(id: $id, image: $image, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, phoneNumber: $phoneNumber, reviews: $reviews, categories: $categories)';
   }
 
   @override
@@ -355,7 +355,7 @@ class _$_TrainerEntity implements _TrainerEntity {
         (other.runtimeType == runtimeType &&
             other is _$_TrainerEntity &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.surname, surname) || other.surname == surname) &&
             (identical(other.nickname, nickname) ||
@@ -375,14 +375,14 @@ class _$_TrainerEntity implements _TrainerEntity {
                 other.phoneNumber == phoneNumber) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             const DeepCollectionEquality()
-                .equals(other._trainingTypes, _trainingTypes));
+                .equals(other._categories, _categories));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      icon,
+      image,
       name,
       surname,
       nickname,
@@ -395,7 +395,7 @@ class _$_TrainerEntity implements _TrainerEntity {
       location,
       phoneNumber,
       const DeepCollectionEquality().hash(_reviews),
-      const DeepCollectionEquality().hash(_trainingTypes));
+      const DeepCollectionEquality().hash(_categories));
 
   @JsonKey(ignore: true)
   @override
@@ -407,7 +407,7 @@ class _$_TrainerEntity implements _TrainerEntity {
 abstract class _TrainerEntity implements TrainerEntity {
   const factory _TrainerEntity(
       {required final String id,
-      required final String icon,
+      required final String image,
       required final String name,
       required final String surname,
       required final String nickname,
@@ -420,12 +420,12 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final String location,
       required final String phoneNumber,
       required final List<ReviewEntity> reviews,
-      required final List<String> trainingTypes}) = _$_TrainerEntity;
+      required final List<String> categories}) = _$_TrainerEntity;
 
   @override
   String get id;
   @override
-  String get icon;
+  String get image;
   @override
   String get name;
   @override
@@ -451,7 +451,7 @@ abstract class _TrainerEntity implements TrainerEntity {
   @override
   List<ReviewEntity> get reviews;
   @override
-  List<String> get trainingTypes;
+  List<String> get categories;
   @override
   @JsonKey(ignore: true)
   _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>
