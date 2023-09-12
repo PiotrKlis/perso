@@ -24,7 +24,7 @@ class AuthProvider {
   bool isUserLoggedIn() {
     if (FirebaseAuth.instance.currentUser != null &&
         FirebaseAuth.instance.currentUser!.emailVerified &&
-        _sharedPrefs.getBool(_sharedPrefs.isProfileCreatedKey)) {
+        _sharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey)) {
       return true;
     } else {
       return false;

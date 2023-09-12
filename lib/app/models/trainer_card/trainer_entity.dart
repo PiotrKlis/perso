@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'trainer_entity.freezed.dart';
 
-//TODO: Handle icon
 @freezed
 class TrainerEntity with _$TrainerEntity {
   const factory TrainerEntity({
