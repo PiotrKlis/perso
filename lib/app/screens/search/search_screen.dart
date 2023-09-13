@@ -66,7 +66,7 @@ class SearchScreen extends StatelessWidget {
                           left: Dimens.normalMargin,
                           right: Dimens.normalMargin),
                       child: const Divider(
-                        thickness: Dimens.searchScreenThickness,
+                        thickness: Dimens.dividerThickness,
                       ),
                     );
                   },
