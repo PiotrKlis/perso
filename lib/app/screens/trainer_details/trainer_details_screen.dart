@@ -79,14 +79,14 @@ class TrainerDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: Dimens.bigMargin, left: Dimens.normalMargin),
                         child: Text(
                           "Biography",
                           style: ThemeText.bodyBoldBlackText,
                         )),
                     Container(
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                           top: Dimens.smallMargin,
                           left: Dimens.normalMargin),
                       child: Text(

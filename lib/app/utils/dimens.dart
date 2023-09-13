@@ -43,4 +43,27 @@ class Dimens {
   static const double loginButtonHeight = 48.0;
   static const double smallButtonHeight = 40.0;
   static const double smallerButtonWidth = 60.0;
+
+  static const double lockIconSize = 160.0;
+
+  static const double scrollViewKeyboardWidth = 200.0;
+  static const double scrollViewKeyboardHeight = 200.0;
+
+  static const double profileEditBlocElevation = 0.0;
+
+  static const double iconsCameraAltSize = 120.0;
+
+  static const double imageFileWidth =200.0;
+  static const double imageFileHeight = 200.0;
+
+  static const double iconProfileSize = 24.0;
+  static const double persoTextHeightShortBio = 140.0;
+  static const double persoTextHeightLongBio = 340.0;
+  static const double persoButtonWidth = 160.0;
+
+  static const double searchScreenThickness = 1.0;
+
+  static const double signInScreenPadding = 16.0;
+  static const double iconCancelOutlinedSize = 32.0;
+
 }
