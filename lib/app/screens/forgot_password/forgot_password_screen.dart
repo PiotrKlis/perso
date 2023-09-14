@@ -34,7 +34,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.hugeMargin),
                     child: const Icon(Icons.lock,
-                        size: Dimens.lockIconSize, color: Colors.black)),
+                        size: Dimens.iconSizeLarge, color: Colors.black)),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                     child: Text("Forgotten password?",

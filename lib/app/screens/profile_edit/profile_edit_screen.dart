@@ -9,6 +9,7 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/PersoAppBar.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_chips_list.dart';
@@ -55,10 +56,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       create: (context) => ProfileEditBloc(const ProfileEditState.initial()),
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: AppBar(
-          elevation: Dimens.appBarElevation,
-          title: Text("Edit ${widget._userType.name} profile"),
-        ),
+        appBar: PersoAppBar(title: "Edit ${widget._userType.name} profile"),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Form(
@@ -129,7 +127,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.person, size: Dimens.iconSize,)),
+                            child: const Icon(Icons.person, size: Dimens.iconSize)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(

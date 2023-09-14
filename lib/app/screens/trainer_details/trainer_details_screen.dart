@@ -36,7 +36,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                       child: const Icon(
                         Icons.account_circle,
-                        size: 88.0,
+                        size: Dimens.iconSizeMedium,
                       )),
                   Container(
                     margin: const EdgeInsets.only(top: Dimens.biggerMargin),
@@ -60,14 +60,14 @@ class TrainerDetailsScreen extends StatelessWidget {
                   Container(
                       margin: const EdgeInsets.only(top: Dimens.mediumMargin),
                       child: const PersoButton(
-                          title: "Request for training", width: 280.0)),
+                          title: "Request for training", width: Dimens.largeButtonWidth)),
                   Container(
                       margin: const EdgeInsets.only(
                           top: Dimens.mediumMargin,
                           bottom: Dimens.biggerMargin),
                       child: const PersoButton(
                         title: "Contact",
-                        width: 280.0,
+                        width: Dimens.largeButtonWidth,
                         whiteBlackTheme: true,
                       )),
                   // setState() {}

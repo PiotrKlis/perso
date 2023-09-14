@@ -16,6 +16,7 @@ class Dimens {
   static const double buttonHeight = 50.0;
   static const double smallButtonWidth = 128.0;
   static const double bigButtonWidth = 160.0;
+  static const double largeButtonWidth = 280.0;
 
   static const double searchHeight = 42.0;
   static const double searchRadius = 12.0;
@@ -44,13 +45,10 @@ class Dimens {
   static const double smallButtonHeight = 40.0;
   static const double smallerButtonWidth = 60.0;
 
-  static const double lockIconSize = 160.0;
-
   static const double imagePlaceholderBackgroundWidth = 200.0;
   static const double imagePlaceholderBackgroundHeight = 200.0;
 
   static const double appBarElevation = 0.0;
-
   static const double placeholderIconSize = 120.0;
 
   static const double profileImageWidth =200.0;
@@ -62,6 +60,8 @@ class Dimens {
   static const double persoButtonWidth = 160.0;
 
   static const double dividerThickness = 1.0;
+  static const double iconSizeLarge = 160.0;
+  static const double iconSizeMedium = 88.0;
 
   
 

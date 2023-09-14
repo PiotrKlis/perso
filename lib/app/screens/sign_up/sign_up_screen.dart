@@ -53,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.email, size: 24.0)),
+                          child: const Icon(Icons.email, size: Dimens.iconSize)),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
@@ -81,7 +81,7 @@ class SignUpScreen extends StatelessWidget {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.password, size: 24.0)),
+                            child: const Icon(Icons.password, size: Dimens.iconSize)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
@@ -126,7 +126,7 @@ class SignUpScreen extends StatelessWidget {
                           bottom: Dimens.biggerMargin,
                           right: Dimens.normalMargin),
                       child: PersoButton(
-                          width: 160.0,
+                          width: Dimens.persoButtonWidth,
                           title: "Register",
                           onTap: _registerUser)),
                 ),
