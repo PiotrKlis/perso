@@ -8,6 +8,9 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'
+;
+
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -22,7 +25,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
-          title: const Text('Password recovery'),
+          title: Text(AppLocalizations.of(context)!.password_recovery),
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
