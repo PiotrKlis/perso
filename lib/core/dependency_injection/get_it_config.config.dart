@@ -18,7 +18,9 @@ import 'package:Perso/data/trainers/firestore_trainers_provider.dart' as _i5;
 import 'package:Perso/data/trainers/firestore_trainers_service.dart' as _i6;
 import 'package:Perso/data/trainers/test_trainers_repository.dart' as _i11;
 import 'package:Perso/data/training_categories/local_training_category_repository.dart'
-    as _i9; // ignore_for_file: unnecessary_lambdas
+    as _i9;
+import 'package:Perso/data/user_info/user_info_provider.dart'
+    as _i12; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 extension GetItInjectableX on _i1.GetIt {
@@ -47,6 +49,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i10.PersoSharedPrefs>(_i10.PersoSharedPrefs());
     gh.factory<_i11.TestTrainersRepository>(
         () => _i11.TestTrainersRepository());
+    gh.factory<_i12.UserInfoProvider>(() => _i12.UserInfoProvider());
     return this;
   }
 }
