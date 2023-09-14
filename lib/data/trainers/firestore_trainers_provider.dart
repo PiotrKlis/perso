@@ -1,5 +1,6 @@
 import 'package:Perso/app/models/trainer_card/review_entity.dart';
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
+import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/trainers/trainers_source.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +11,8 @@ class FirestoreTrainersProvider implements TrainersSource {
   @override
   Future<List<TrainerEntity>> getTrainers() async {
     final QuerySnapshot trainersSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.userType, isEqualTo: UserType.trainer.name)
         .get();
     return trainersSnapshot.docs.map((data) {
       return TrainerEntity(
@@ -26,8 +28,7 @@ class FirestoreTrainersProvider implements TrainersSource {
           rating: 2.3,
           location: data[UserDocumentFields.location],
           phoneNumber: data[UserDocumentFields.phoneNumber],
-          languages:
-              data[UserDocumentFields.languages].toString().split(", "),
+          languages: data[UserDocumentFields.languages].toString().split(", "),
           reviews: getReviews(data),
           categories:
               data[UserDocumentFields.categories].toString().split(", "));

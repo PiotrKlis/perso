@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:Perso/app/models/client_data.dart';
+import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/clients/clients_service.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -13,7 +14,7 @@ class FirestoreClientsService implements ClientsService {
   @override
   Future<void> uploadData(ClientData clientData) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+        .collection(CollectionName.users)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
       UserDocumentFields.email: FirebaseAuth.instance.currentUser?.email,
@@ -22,21 +23,23 @@ class FirestoreClientsService implements ClientsService {
       UserDocumentFields.nickname: clientData.nickname,
       UserDocumentFields.phoneNumber: clientData.phoneNumber,
       UserDocumentFields.surname: clientData.surname,
+      UserDocumentFields.userType: UserType.client.name
     });
     return Future.value();
   }
 
-  //TODO: Restrict weight of the photo on the firestore storage side
+  //TODO: Restrict weight of the photo on the firebase storage side
   @override
   Future<void> uploadPhoto(String path) async {
     final String? id = FirebaseAuth.instance.currentUser?.uid;
-    final Reference storageReference =
-        FirebaseStorage.instance.ref().child('images/$id/$path}');
+    final Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child('${CollectionName.images}/$id/$path}');
     try {
       final TaskSnapshot snapshot = await storageReference.putFile(File(path));
       final String url = await snapshot.ref.getDownloadURL();
       await FirebaseFirestore.instance
-          .collection(CollectionName.trainers)
+          .collection(CollectionName.users)
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .set({UserDocumentFields.image: url});
     } catch (error) {

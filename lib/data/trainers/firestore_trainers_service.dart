@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/models/trainer_data.dart';
+import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/trainers/trainers_service.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,7 +15,7 @@ class FirestoreTrainersService implements TrainersService {
   @override
   Future<void> updateData(TrainerData trainerData) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
       UserDocumentFields.email: FirebaseAuth.instance.currentUser?.email,
@@ -35,7 +36,7 @@ class FirestoreTrainersService implements TrainersService {
   @override
   Future<void> setData(TrainerEntity trainerEntity) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
       UserDocumentFields.email: trainerEntity.email,
@@ -53,6 +54,7 @@ class FirestoreTrainersService implements TrainersService {
       UserDocumentFields.rating: trainerEntity.rating,
       UserDocumentFields.reviews: trainerEntity.reviews,
       UserDocumentFields.categories: trainerEntity.categories,
+      UserDocumentFields.userType: UserType.trainer.name
     });
     return Future.value();
   }
@@ -67,7 +69,7 @@ class FirestoreTrainersService implements TrainersService {
       final TaskSnapshot snapshot = await storageReference.putFile(File(path));
       final String url = await snapshot.ref.getDownloadURL();
       await FirebaseFirestore.instance
-          .collection(CollectionName.trainers)
+          .collection(CollectionName.users)
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .set({UserDocumentFields.image: url});
     } catch (error) {
