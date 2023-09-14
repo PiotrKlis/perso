@@ -12,7 +12,9 @@ import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/data/auth/auth_provider.dart';
+import 'package:Perso/core/user_type.dart';
+import 'package:Perso/data/auth/auth_service.dart';
+import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,7 +23,8 @@ import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  final AuthProvider _authProvider = GetIt.I.get<AuthProvider>();
+  final AuthService _authProvider = GetIt.I.get<AuthService>();
+  final UserInfoProvider _userInfoProvider = GetIt.I.get<UserInfoProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -128,16 +131,25 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  // TODO: Use bloc to handle all below logic
   void _handleAccountClick(BuildContext context) {
-    if (_authProvider.isUserLoggedIn()) {
-      _navigateToProfileScreen(context);
-    } else {
+    // if (_userInfoProvider.isUserLoggedIn()) {
+    //   _navigateToProfileScreen(context);
+    // } else {
+    //   context.pushNamed(ScreenNavigationKey.signIn);
+    // }
       context.pushNamed(ScreenNavigationKey.signIn);
-    }
   }
 
-  void _navigateToProfileScreen(BuildContext context) {
-    //TODO: navigate to trainer screen if userType is Trainer and to client screen if userType is Client
-    context.pushNamed(ScreenNavigationKey.trainerProfile);
+  Future<void> _navigateToProfileScreen(BuildContext context) async {
+    UserType userType = await _userInfoProvider.getUserType();
+    switch (userType) {
+      case UserType.trainer:
+        context.pushNamed(ScreenNavigationKey.trainerProfile);
+        break;
+      case UserType.client:
+        context.pushNamed(ScreenNavigationKey.clientProfile);
+        break;
+    }
   }
 }

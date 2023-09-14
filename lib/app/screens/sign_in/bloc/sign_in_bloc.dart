@@ -1,13 +1,13 @@
 import 'package:Perso/app/screens/sign_in/event/sign_in_event.dart';
 import 'package:Perso/app/screens/sign_in/state/sign_in_state.dart';
-import 'package:Perso/data/auth/auth_provider.dart';
+import 'package:Perso/data/auth/auth_service.dart';
 import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final AuthProvider _authProvider = GetIt.I.get<AuthProvider>();
+  final AuthService _authProvider = GetIt.I.get<AuthService>();
   final PersoSharedPrefs _persoSharedPrefs = GetIt.I.get<PersoSharedPrefs>();
 
   SignInBloc(SignInState initialState) : super(initialState) {

@@ -9,7 +9,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:Perso/data/address_provider/google_address_provider.dart'
     as _i7;
-import 'package:Perso/data/auth/auth_provider.dart' as _i3;
+import 'package:Perso/data/auth/auth_service.dart' as _i3;
 import 'package:Perso/data/clients/firestore_clients_service.dart' as _i4;
 import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart' as _i10;
 import 'package:Perso/data/trainer_search_cards/local_trainer_search_card_repository.dart'
@@ -32,7 +32,7 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.factory<_i3.AuthProvider>(() => _i3.AuthProvider());
+    gh.factory<_i3.AuthService>(() => _i3.AuthService());
     gh.factory<_i4.FirestoreClientsService>(
         () => _i4.FirestoreClientsService());
     gh.factory<_i5.FirestoreTrainersProvider>(
