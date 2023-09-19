@@ -337,7 +337,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   void _uploadData(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      // Address doesn't work, it's empty even if filled in the app
       String location = _addressWidget.autocompleteController?.text ?? "";
       if (widget._userType == UserType.trainer) {
         _addTrainerData(location, context);

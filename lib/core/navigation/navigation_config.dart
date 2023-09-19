@@ -1,4 +1,5 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
+import 'package:Perso/app/screens/chat/chat_screen.dart';
 import 'package:Perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:Perso/app/screens/home/home_screen.dart';
@@ -160,6 +161,13 @@ final GoRouter goRouter = GoRouter(
             path: ScreenNavigationKey.trainings,
             pageBuilder: (BuildContext context, GoRouterState state) {
               return const NoTransitionPage(child: TrainingScreen());
+            },
+          ),
+          GoRoute(
+            name: ScreenNavigationKey.chat,
+            path: ScreenNavigationKey.chat,
+            pageBuilder: (BuildContext context, GoRouterState state) {
+              return const NoTransitionPage(child: ChatScreen());
             },
           ),
         ],
