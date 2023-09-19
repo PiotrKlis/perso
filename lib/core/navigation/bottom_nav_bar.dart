@@ -14,6 +14,11 @@ final tabs = [
     icon: Icon(Icons.sports_gymnastics),
     label: 'Training',
   ),
+  const ScaffoldWithNavBarTabItem(
+    initialLocation: ScreenNavigationKey.chat,
+    icon: Icon(Icons.chat),
+    label: 'Chat',
+  ),
 ];
 
 class ScaffoldWithBottomNavBar extends StatefulWidget {
