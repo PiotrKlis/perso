@@ -6,12 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+@singleton
 @injectable
 class UserInfoProvider {
+  User? user;
   final PersoSharedPrefs _sharedPrefs = GetIt.I.get<PersoSharedPrefs>();
 
   bool isUserLoggedIn() {
-    if (FirebaseAuth.instance.currentUser != null &&
+    if (user?.uid != null &&
         FirebaseAuth.instance.currentUser!.emailVerified &&
         _sharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey)) {
       return true;
@@ -21,12 +23,17 @@ class UserInfoProvider {
   }
 
   Future<UserType> getUserType() async {
-    String userId = FirebaseAuth.instance.currentUser?.uid ?? "";
     final DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
-        .doc(userId)
+        .doc(user?.uid)
         .get();
     String userType = snapshot.get(UserDocumentFields.userType);
     return userType.toUserType();
+  }
+
+  void listenForFirebaseUserChange() {
+    FirebaseAuth.instance.authStateChanges().listen((User? firebaseUser) {
+      user = firebaseUser;
+    });
   }
 }
