@@ -1,6 +1,6 @@
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/PersoAppBar.dart';
+import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
 import 'package:flutter/material.dart';
 

@@ -1,13 +1,13 @@
 class ClientData {
   ClientData(
-      {required this.image,
+      {required this.imagePath,
       required this.name,
       required this.surname,
       required this.nickname,
       required this.location,
       required this.phoneNumber});
 
-  final String image;
+  final String? imagePath;
   final String name;
   final String surname;
   final String nickname;

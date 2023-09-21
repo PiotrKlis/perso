@@ -2,18 +2,18 @@ import 'dart:io';
 
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/models/trainer_data.dart';
+import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/trainers/trainers_service.dart';
 import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class FirestoreTrainersService implements TrainersService {
-  final UserInfoProvider _userInfoProvider = GetIt.I.get<UserInfoProvider>();
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   @override
   Future<void> updateData(TrainerData trainerData) async {
@@ -73,7 +73,7 @@ class FirestoreTrainersService implements TrainersService {
       final String url = await snapshot.ref.getDownloadURL();
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
-          .doc(_userInfoProvider.user?.uid)
+          .doc(id)
           .set({UserDocumentFields.image: url});
     } catch (error) {
       //TODO: Add error handling

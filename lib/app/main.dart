@@ -1,24 +1,32 @@
 import 'package:Perso/app/utils/localisation_keys.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/navigation_config.dart';
+import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
+import 'package:Perso/data/user_info/user_info_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   configureDependencies("debug");
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
+  final PersoSharedPrefs _persoSharedPrefs = getIt.get<PersoSharedPrefs>();
 
   @override
   Widget build(BuildContext context) {
+    _userInfoProvider.listenForFirebaseUserChange();
+    _persoSharedPrefs.init();
+
     return Theme(
       data: ThemeData(
           primaryColor: Colors.white,

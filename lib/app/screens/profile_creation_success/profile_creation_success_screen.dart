@@ -1,10 +1,10 @@
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
+import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileCreationSuccessScreen extends StatelessWidget {
@@ -47,7 +47,7 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
                     title: "FINISH",
                     onTap: (context) {
                       //TODO: Move setting isProfileCreatedKey to bloc layer
-                      PersoSharedPrefs prefs = GetIt.instance.get<PersoSharedPrefs>();
+                      PersoSharedPrefs prefs = getIt.get<PersoSharedPrefs>();
                       prefs.setBool(PersoSharedPrefs.isProfileCreatedKey, true);
                       _navigateHome(context);
                     },
