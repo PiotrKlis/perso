@@ -1,13 +1,12 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
-import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/clients/clients_service.dart';
 import 'package:Perso/data/clients/firestore_clients_service.dart';
 import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:Perso/data/trainers/firestore_trainers_service.dart';
 import 'package:Perso/data/trainers/trainers_service.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -16,6 +15,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   final TrainersService _trainersService =
       GetIt.I.get<FirestoreTrainersService>();
   final _sharedPrefs = GetIt.I.get<PersoSharedPrefs>();
+  final UserInfoProvider _userInfoProvider = GetIt.I.get<UserInfoProvider>();
 
   ProfileEditBloc(ProfileEditState initialState) : super(initialState) {
     on<UploadTrainerData>((event, emitter) async {
@@ -72,7 +72,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
 
   Future<void> _handleFirstProfileCreation(UploadTrainerData event) async {
     TrainerEntity trainerEntity = TrainerEntity(
-        id: FirebaseAuth.instance.currentUser?.uid ?? "",
+        id: _userInfoProvider.user?.uid ?? "",
         image: "",
         name: event.trainerData.name,
         surname: event.trainerData.surname,
@@ -80,7 +80,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         votesNumber: 0,
         fullBio: event.trainerData.fullBio,
         shortBio: event.trainerData.shortBio,
-        email: FirebaseAuth.instance.currentUser?.email ?? "",
+        email: _userInfoProvider.user?.email ?? "",
         languages: event.trainerData.languages,
         rating: 0.0,
         location: event.trainerData.location,
