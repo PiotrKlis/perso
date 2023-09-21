@@ -11,6 +11,15 @@
   "endurance": "Trening wytrzymałościowy",
   "gymnastics": "Gimnastyka",
   "crossfit": "Crossfit",
-  "near_you": "Obok Ciebie"
-
+  "near_you": "Obok Ciebie",
+  "chat_screen": "Ekran czatu",
+  "chat_body": "Jestem Twoim czatem",
+  "client_profile_screen": "Profil klienta",
+  "password_recovery" : "Odzyskiwanie hasła",
+  "forgotten_password": "Zapomniałeś hasła?",
+  "no_worries_forgotten_password": "Nie martw się, pomożemy Ci odzyskać hasło",
+  "enter_email_forgotten_password": "Wpisz swój adres e-mail, aby zresetować hasło",
+  "email": "Email",
+  "reset_password": "Zresetuj hasło",
+  "password_reset_success": "Wiadomość z instrukcją resetowania hasła została wysłana na podany przez Ciebie e-mail. Do zobaczenia wkrótce!"
 }

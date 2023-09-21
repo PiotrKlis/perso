@@ -11,6 +11,15 @@
   "endurance": "Endurance",
   "gymnastics": "Gymnastics",
   "crossfit": "Crossfit",
-  "near_you": "Near you"
-
+  "near_you": "Near you",
+  "chat_screen": "Chat screen",
+  "chat_body": "I am chat body",
+  "client_profile_screen": "Client profile screen",
+  "password_recovery" : "Password recovery",
+  "forgotten_password": "Forgotten password?",
+  "no_worries_forgotten_password": "No worries, we have got you covered",
+  "enter_email_forgotten_password": "Enter your email address to reset your password",
+  "email": "Email",
+  "reset_password": "Reset Password",
+  "password_reset_success": "Email with password reset instructions has been sent to an email you have provided. See you soon!"
 }

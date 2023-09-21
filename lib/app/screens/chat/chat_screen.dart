@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -6,10 +7,10 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("Chat screen")),
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.chat_screen),),
         body: ElevatedButton(
           onPressed: () {},
-          child: Text("I am chat body"),
+          child: Text(AppLocalizations.of(context)!.chat_body),
         )
     );
   }
