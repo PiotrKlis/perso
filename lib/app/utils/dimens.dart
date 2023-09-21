@@ -62,27 +62,4 @@ class Dimens {
   static const double dividerThickness = 1.0;
   static const double iconSizeLarge = 160.0;
   static const double iconSizeMedium = 88.0;
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
- 
-
-
-
-
-
-  
-
-
-
 }
