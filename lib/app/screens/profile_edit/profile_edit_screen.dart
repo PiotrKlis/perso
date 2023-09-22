@@ -18,7 +18,6 @@ import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/core/string_extensions.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _addNicknameListener();
     return BlocProvider(
       create: (context) => ProfileEditBloc(const ProfileEditState.initial()),
       child: Scaffold(
@@ -163,20 +161,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       right: Dimens.normalMargin),
                   //TODO: Find different, non-hacky way of async validation way
                   child: PersoAsyncTextFormField(
-                    hintText: "Nickname",
-                      validator: (value) => widget._userInfoProvider.isNicknameUnique(value),
+                      hintText: "Nickname",
+                      validator: (value) =>
+                          widget._userInfoProvider.isNicknameUnique(value),
                       validationDebounce: const Duration(milliseconds: 500),
                       controller: _nicknameController),
                 ),
-                // Container(
-                //     margin: const EdgeInsets.only(
-                //         left: Dimens.substantialMargin,
-                //         top: Dimens.bigMargin,
-                //         right: Dimens.normalMargin),
-                //     child: PersoTextField(
-                //         title: "Nickname",
-                //         textEditingController: _nicknameController,
-                //         customValidator: TextFieldValidator.validateNickname)),
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
@@ -397,20 +387,5 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     context
         .read<ProfileEditBloc>()
         .add(ProfileEditEvent.uploadTrainerData(trainerData));
-  }
-
-  void _addNicknameListener() {
-    _nameController.addListener(() {
-      setState(() {
-        _nicknameController.text = _nameController.text +
-            _surnameController.text.capitalizeFirstLetter();
-      });
-    });
-    _surnameController.addListener(() {
-      setState(() {
-        _nicknameController.text = _nameController.text +
-            _surnameController.text.capitalizeFirstLetter();
-      });
-    });
   }
 }

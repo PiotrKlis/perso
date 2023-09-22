@@ -38,7 +38,6 @@ class UserInfoProvider {
   }
 
   Future<bool> isNicknameUnique(String nickname) async {
-    //check if it validates every time
     DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(nickname)

@@ -3,8 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 @singleton
 class PersoSharedPrefs {
-  static const String isProfileCreatedKey = "is_profile_created";
-
+  static const String isProfileCreatedKey = "is_profile_created_key";
+  static const String userNicknameKey = "user_nickname_key";
   SharedPreferences? _prefs;
 
   Future<void> init() async {
@@ -15,7 +15,7 @@ class PersoSharedPrefs {
     await _prefs?.setString(key, value);
   }
 
-  Future<String> getString(String key, {String defaultValue = ""}) async {
+  String getString(String key, {String defaultValue = ""}) {
     return _prefs?.getString(key) ?? defaultValue;
   }
 
@@ -39,7 +39,7 @@ class PersoSharedPrefs {
     await _prefs?.setDouble(key, value);
   }
 
-  Future<double> getDouble(String key, {double defaultValue = 0.0}) async {
+  double getDouble(String key, {double defaultValue = 0.0}) {
     return _prefs?.getDouble(key) ?? defaultValue;
   }
 
