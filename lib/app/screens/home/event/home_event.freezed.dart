@@ -19,32 +19,38 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() accountNavigation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? accountNavigation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? accountNavigation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(AccountNavigation value) accountNavigation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
+    TResult? Function(AccountNavigation value)? accountNavigation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(AccountNavigation value)? accountNavigation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -103,6 +109,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() accountNavigation,
   }) {
     return init();
   }
@@ -111,6 +118,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? accountNavigation,
   }) {
     return init?.call();
   }
@@ -119,6 +127,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? accountNavigation,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -131,6 +140,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Init value) init,
+    required TResult Function(AccountNavigation value) accountNavigation,
   }) {
     return init(this);
   }
@@ -139,6 +149,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Init value)? init,
+    TResult? Function(AccountNavigation value)? accountNavigation,
   }) {
     return init?.call(this);
   }
@@ -147,6 +158,7 @@ class _$Init implements Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Init value)? init,
+    TResult Function(AccountNavigation value)? accountNavigation,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -158,4 +170,106 @@ class _$Init implements Init {
 
 abstract class Init implements HomeEvent {
   const factory Init() = _$Init;
+}
+
+/// @nodoc
+abstract class _$$AccountNavigationCopyWith<$Res> {
+  factory _$$AccountNavigationCopyWith(
+          _$AccountNavigation value, $Res Function(_$AccountNavigation) then) =
+      __$$AccountNavigationCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AccountNavigationCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$AccountNavigation>
+    implements _$$AccountNavigationCopyWith<$Res> {
+  __$$AccountNavigationCopyWithImpl(
+      _$AccountNavigation _value, $Res Function(_$AccountNavigation) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AccountNavigation implements AccountNavigation {
+  const _$AccountNavigation();
+
+  @override
+  String toString() {
+    return 'HomeEvent.accountNavigation()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AccountNavigation);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() accountNavigation,
+  }) {
+    return accountNavigation();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? accountNavigation,
+  }) {
+    return accountNavigation?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? accountNavigation,
+    required TResult orElse(),
+  }) {
+    if (accountNavigation != null) {
+      return accountNavigation();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(AccountNavigation value) accountNavigation,
+  }) {
+    return accountNavigation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(AccountNavigation value)? accountNavigation,
+  }) {
+    return accountNavigation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(AccountNavigation value)? accountNavigation,
+    required TResult orElse(),
+  }) {
+    if (accountNavigation != null) {
+      return accountNavigation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AccountNavigation implements HomeEvent {
+  const factory AccountNavigation() = _$AccountNavigation;
 }

@@ -1,4 +1,5 @@
 import 'package:Perso/app/screens/home/bloc/home_bloc.dart';
+import 'package:Perso/app/screens/home/event/home_event.dart';
 import 'package:Perso/app/screens/home/state/home_state.dart';
 import 'package:Perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:Perso/app/utils/colors.dart';
@@ -14,17 +15,14 @@ import 'package:Perso/app/widgets/training_category_list/perso_training_category
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/auth/auth_service.dart';
 import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  final AuthService _authProvider = getIt.get<AuthService>();
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   @override
@@ -37,7 +35,7 @@ class HomeScreen extends StatelessWidget {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(children: [
               GestureDetector(
-                  onTap: () => _handleAccountClick(context),
+                  onTap: () => _handleAccountClick,
                   child: const PersoAccountIcon()),
               Container(
                 margin: const EdgeInsets.only(
@@ -52,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       //TODO: Make this button invisible if user is logged in
                       PersoButton(
-                          onTap: (context) => _handleAccountClick(context),
+                          onTap: (context) => _handleAccountClick,
                           title: AppLocalizations.of(context)!
                               .trainers_section_button,
                           width: Dimens.smallButtonWidth)
@@ -129,28 +127,18 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
+      BlocListener<HomeBloc, HomeState>(
+        listener: (context, state) {
+          if (state is HomeStateAccountNavigation) {
+            context.goNamed(ScreenNavigationKey.account);
+          }
+        },
+        child: Container(),
+      ),
     );
   }
 
-  // TODO: Use bloc to handle all below logic
   void _handleAccountClick(BuildContext context) {
-    // if (_userInfoProvider.isUserLoggedIn()) {
-    //   _navigateToProfileScreen(context);
-    // } else {
-    //   context.pushNamed(ScreenNavigationKey.signIn);
-    // }
-      context.pushNamed(ScreenNavigationKey.signIn);
-  }
-
-  Future<void> _navigateToProfileScreen(BuildContext context) async {
-    UserType userType = await _userInfoProvider.getUserType();
-    switch (userType) {
-      case UserType.trainer:
-        context.pushNamed(ScreenNavigationKey.trainerProfile);
-        break;
-      case UserType.client:
-        context.pushNamed(ScreenNavigationKey.clientProfile);
-        break;
-    }
+    context.read<HomeBloc>().add(const HomeEvent.accountNavigation());
   }
 }

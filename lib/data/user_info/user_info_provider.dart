@@ -33,16 +33,35 @@ class UserInfoProvider {
   void listenForFirebaseUserChange() {
     FirebaseAuth.instance.authStateChanges().listen((User? firebaseUser) {
       user = firebaseUser;
-      print("PKPK $user");
+      if (user == null) {
+        _sharedPrefs.setString(PersoSharedPrefs.userNicknameKey, "");
+      }
     });
   }
 
   Future<bool> isNicknameUnique(String nickname) async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(nickname)
         .get();
     bool doesNicknameExist = snapshot.exists;
     return !doesNicknameExist;
+  }
+
+  Future<bool> isProfileCreated(String nickname) async {
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(nickname)
+        .get();
+    return snapshot.exists;
+  }
+
+  Future<bool> getUserNickname(String login) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.email, isEqualTo: login)
+        .get();
+
+    return snapshot.docs.first.get(UserDocumentFields.nickname);
   }
 }
