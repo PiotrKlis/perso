@@ -6,6 +6,7 @@ import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileCreationSuccessScreen extends StatelessWidget {
   const ProfileCreationSuccessScreen({super.key});
@@ -20,22 +21,22 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: Dimens.substantialMargin),
-              child: Text(
-                "Amazing success!",
+              child: Text(AppLocalizations.of(context)!.amazing_success,
+                
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-              child: Text(
-                "Your account creation has been completed. Now you can enjoy all the benefits of being a member.",
+              child: Text(AppLocalizations.of(context)!.account_creation_completed,
+                
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
-              child: Text(
-                  "If you have any questions or need assistance, don't hesitate to reach out to our support team. We hope you have a fantastic time using our app!",
+              child: Text(AppLocalizations.of(context)!.questions_or_need_assistance,
+                  
                   style: ThemeText.bodyRegularBlackText),
             ),
             Container(
@@ -44,7 +45,7 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PersoButton(
-                    title: "FINISH",
+                    title: AppLocalizations.of(context)!.finish,
                     onTap: (context) {
                       //TODO: Move setting isProfileCreatedKey to bloc layer
                       PersoSharedPrefs prefs = getIt.get<PersoSharedPrefs>();
