@@ -1,5 +1,5 @@
 import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/widgets/PersoAppBar.dart';
+import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class SearchFilterScreen extends StatelessWidget {

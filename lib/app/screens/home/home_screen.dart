@@ -11,6 +11,7 @@ import 'package:Perso/app/widgets/perso_search.dart';
 import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
+import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/auth/auth_service.dart';
@@ -18,13 +19,13 @@ import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get_it/get_it.dart';
+
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  final AuthService _authProvider = GetIt.I.get<AuthService>();
-  final UserInfoProvider _userInfoProvider = GetIt.I.get<UserInfoProvider>();
+  final AuthService _authProvider = getIt.get<AuthService>();
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   @override
   Widget build(BuildContext context) {

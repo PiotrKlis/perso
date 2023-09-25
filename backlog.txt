@@ -1,4 +1,5 @@
 === BACKLOG ===
-- Add user authentication listener
+- Fix UserInfoProvider listenForFirebaseUserChange
+- Fix images - do not upload same picture again on profile edit and remove old if new one is uploaded
 - Unique nickname search
 - Implement showing client/trainer profile for logged in user instead of sign in screen

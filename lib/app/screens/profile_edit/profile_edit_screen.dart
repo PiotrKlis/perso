@@ -9,15 +9,17 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/perso_async_text_field.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_chips_list.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
+import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/core/string_extensions.dart';
 import 'package:Perso/core/user_type.dart';
+import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +30,7 @@ class ProfileEditScreen extends StatefulWidget {
       : _userType = userType;
 
   final UserType _userType;
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   @override
   State<ProfileEditScreen> createState() => _ProfileEditScreenState();
@@ -50,7 +53,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _addNicknameListener();
     return BlocProvider(
       create: (context) => ProfileEditBloc(const ProfileEditState.initial()),
       child: Scaffold(
@@ -71,9 +73,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     width: 200.0,
                     height: 200.0,
                     decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black
-                    ),
+                        shape: BoxShape.circle, color: Colors.black),
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: _image == null
                         ? const Icon(
@@ -82,13 +82,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             size: 120.0,
                           )
                         : ClipOval(
-                          child: Image.file(
+                            child: Image.file(
                               File(_image!.path),
                               width: 200.0,
                               height: 200.0,
-                            fit: BoxFit.cover,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
                   ),
                 ),
                 Container(
@@ -155,14 +155,18 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       customValidator: TextFieldValidator.validateIsEmpty),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(
-                        left: Dimens.substantialMargin,
-                        top: Dimens.bigMargin,
-                        right: Dimens.normalMargin),
-                    child: PersoTextField(
-                        title: "Nickname",
-                        textEditingController: _nicknameController,
-                        customValidator: TextFieldValidator.validateNickname)),
+                  margin: const EdgeInsets.only(
+                      left: Dimens.substantialMargin,
+                      top: Dimens.bigMargin,
+                      right: Dimens.normalMargin),
+                  //TODO: Find different, non-hacky way of async validation way
+                  child: PersoAsyncTextFormField(
+                      hintText: "Nickname",
+                      validator: (value) =>
+                          widget._userInfoProvider.isNicknameUnique(value),
+                      validationDebounce: const Duration(milliseconds: 500),
+                      controller: _nicknameController),
+                ),
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
@@ -302,8 +306,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     },
                     listener: (context, state) {
                       state.whenOrNull(
-                          success: () =>
-                              context.replaceNamed(ScreenNavigationKey.profileCreationSuccess));
+                          success: () => context.replaceNamed(
+                              ScreenNavigationKey.profileCreationSuccess));
                     },
                   ),
                 )),
@@ -350,7 +354,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   void _addClientData(String location, BuildContext context) {
     final clientData = ClientData(
-        image: "image",
+        imagePath: _image?.path,
         name: _nameController.text,
         surname: _surnameController.text,
         nickname: _nicknameController.text,
@@ -383,20 +387,5 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     context
         .read<ProfileEditBloc>()
         .add(ProfileEditEvent.uploadTrainerData(trainerData));
-  }
-
-  void _addNicknameListener() {
-    _nameController.addListener(() {
-      setState(() {
-        _nicknameController.text = _nameController.text +
-            _surnameController.text.capitalizeFirstLetter();
-      });
-    });
-    _surnameController.addListener(() {
-      setState(() {
-        _nicknameController.text = _nameController.text +
-            _surnameController.text.capitalizeFirstLetter();
-      });
-    });
   }
 }

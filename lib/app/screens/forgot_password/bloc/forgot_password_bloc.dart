@@ -1,13 +1,13 @@
 import 'package:Perso/app/screens/forgot_password/event/forgot_password_event.dart';
 import 'package:Perso/app/screens/forgot_password/state/forgot_password_state.dart';
+import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/data/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
-  final _authProvider = GetIt.I.get<AuthService>();
+  final _authProvider = getIt.get<AuthService>();
 
   ForgotPasswordBloc(ForgotPasswordState initialState) : super(initialState) {
     on<ResetPassword>((event, emitter) async {

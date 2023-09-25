@@ -29,13 +29,13 @@ class FirestoreTrainersProvider implements TrainersSource {
           location: data[UserDocumentFields.location],
           phoneNumber: data[UserDocumentFields.phoneNumber],
           languages: data[UserDocumentFields.languages].toString().split(", "),
-          reviews: getReviews(data),
+          reviews: _getReviews(data),
           categories:
               data[UserDocumentFields.categories].toString().split(", "));
     }).toList();
   }
 
-  List<ReviewEntity> getReviews(QueryDocumentSnapshot<Object?> data) {
+  List<ReviewEntity> _getReviews(QueryDocumentSnapshot<Object?> data) {
     return data[UserDocumentFields.reviews].map<ReviewEntity>((review) {
       return ReviewEntity(
           rating: review[UserDocumentFields.rating],
