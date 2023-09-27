@@ -38,11 +38,11 @@ class ForgotPasswordScreen extends StatelessWidget {
                         size: 160.0, color: Colors.black)),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                    child: Text(AppLocalizations.of(context)!.forgotten_password,
+                    child: Text(AppLocalizations.of(context)!.forgotten_password_title,
                         style: ThemeText.largeTitleBold)),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                  child: Text(AppLocalizations.of(context)!.no_worries_forgotten_password,
+                  child: Text(AppLocalizations.of(context)!.forgotten_password_subtitle,
                       style: ThemeText.bodyBoldBlackText),
                 ),
                 Container(

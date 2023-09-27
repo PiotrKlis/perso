@@ -16,7 +16,7 @@ class ForgotPasswordBloc
         await _authProvider.resetPassword(event.email);
         emitter.call(const ForgotPasswordState.passwordResetSuccess());
       } catch (error) {
-        String errorMessage = AppLocalizations.of(context)!.something_went_wrong;
+        String errorMessage = AppLocalizations.of(context)!.generic_error_message;
         if (error is FirebaseAuthException) {
           switch (error.code) {
             case 'email-already-in-use':

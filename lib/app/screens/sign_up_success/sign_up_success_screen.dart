@@ -4,6 +4,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpSuccessScreen extends StatelessWidget {
   const SignUpSuccessScreen({super.key});
@@ -30,7 +31,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
-                "Thank you for registering!",
+                AppLocalizations.of(context)!.sign_up_succes_title,
                 style: ThemeText.largerTitleBold,
               ),
             ),
@@ -40,7 +41,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
-                "Please check you email to confirm your account.",
+                AppLocalizations.of(context)!.sign_up_succes_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
@@ -50,7 +51,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
-                "If you don't receive any email, please check your spam folder.",
+                AppLocalizations.of(context)!.sign_up_succes_body_2,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
@@ -60,13 +61,13 @@ class SignUpSuccessScreen extends StatelessWidget {
                     left: Dimens.normalMargin,
                     right: Dimens.normalMargin),
                 child:
-                    Text("See you soon!", style: ThemeText.bodyBoldBlackText)),
+                    Text(AppLocalizations.of(context)!.sign_up_succes_body_3, style: ThemeText.bodyBoldBlackText)),
             Container(
                 margin: const EdgeInsets.only(
                     top: Dimens.biggerMargin, left: Dimens.normalMargin),
                 child: Center(
                     child: PersoButton(
-                  title: "Confirm",
+                  title: AppLocalizations.of(context)!.confirm,
                   onTap: _onConfirm,
                 )))
           ],

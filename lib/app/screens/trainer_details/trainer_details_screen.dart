@@ -5,6 +5,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TrainerDetailsScreen extends StatelessWidget {
   TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})
@@ -29,7 +30,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: ToggleButtons(
                       isSelected: _selectedFruits,
-                      children: const [Text("About"), Text("Reviews")],
+                      children:  [Text(AppLocalizations.of(context)!.about), Text(AppLocalizations.of(context)!.reviews)],
                     ),
                   ),
                   Container(
@@ -59,14 +60,14 @@ class TrainerDetailsScreen extends StatelessWidget {
                   ),
                   Container(
                       margin: const EdgeInsets.only(top: Dimens.mediumMargin),
-                      child: const PersoButton(
-                          title: "Request for training", width: 280.0)),
+                      child: PersoButton(
+                          title: AppLocalizations.of(context)!.trainer_details_request, width: 280.0)),
                   Container(
                       margin: const EdgeInsets.only(
                           top: Dimens.mediumMargin,
                           bottom: Dimens.biggerMargin),
-                      child: const PersoButton(
-                        title: "Contact",
+                      child:  PersoButton(
+                        title: AppLocalizations.of(context)!.contact,
                         width: 280.0,
                         whiteBlackTheme: true,
                       )),
@@ -82,7 +83,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                         margin: EdgeInsets.only(
                             top: Dimens.bigMargin, left: Dimens.normalMargin),
                         child: Text(
-                          "Biography",
+                          AppLocalizations.of(context)!.biography,
                           style: ThemeText.bodyBoldBlackText,
                         )),
                     Container(
@@ -99,7 +100,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                             top: Dimens.biggerMargin,
                             left: Dimens.normalMargin),
                         child: Text(
-                          "Contact",
+                          AppLocalizations.of(context)!.contact,
                           style: ThemeText.bodyBoldBlackText,
                         )),
                     Container(
@@ -143,7 +144,7 @@ class TrainerDetailsScreen extends StatelessWidget {
                     ),
                     Container(
                       margin: EdgeInsets.only(top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                      child: Text("Languages"),
+                      child: Text(AppLocalizations.of(context)!.languages),
                     ),
                     Container(
                       margin: EdgeInsets.only(top: Dimens.mediumMargin, left: Dimens.normalMargin),
