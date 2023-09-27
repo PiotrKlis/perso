@@ -49,7 +49,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i10.PersoSharedPrefs>(_i10.PersoSharedPrefs());
     gh.factory<_i11.TestTrainersRepository>(
         () => _i11.TestTrainersRepository());
-    gh.factory<_i12.UserInfoProvider>(() => _i12.UserInfoProvider());
+    gh.singleton<_i12.UserInfoProvider>(_i12.UserInfoProvider());
     return this;
   }
 }

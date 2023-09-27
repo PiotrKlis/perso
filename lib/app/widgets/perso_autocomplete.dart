@@ -1,14 +1,15 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/theme_text.dart';
+import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/data/address_provider/address_provider.dart';
 import 'package:Perso/data/address_provider/google_address_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+
 
 class PersoAutocomplete extends StatelessWidget {
   PersoAutocomplete({super.key});
 
-  final AddressProvider _addressProvider = GetIt.I.get<GoogleAddressProvider>();
+  final AddressProvider _addressProvider = getIt.get<GoogleAddressProvider>();
   TextEditingController? autocompleteController;
 
   @override

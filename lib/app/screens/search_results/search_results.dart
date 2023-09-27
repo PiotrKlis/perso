@@ -1,7 +1,7 @@
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/PersoAppBar.dart';
+import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
@@ -23,7 +23,6 @@ class SearchResultsScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Container(
-            // margin: EdgeInsets.all(Dimens.normalMargin),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

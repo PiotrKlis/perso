@@ -5,6 +5,7 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
@@ -31,43 +32,16 @@ class SignInScreen extends StatelessWidget {
   SafeArea _signInScreenView(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      appBar: PersoAppBar(title: "Sign In"),
       backgroundColor: PersoColors.lightBlue,
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                        child: const Align(
-                          alignment: Alignment.center,
-                          child: Text("PERSO LOGO"),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            context.pop();
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(16.0,),
-                            child: Icon(Icons.cancel_outlined, size: 32.0,),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
+            const Icon(Icons.logo_dev, size: 160.0),
             Center(
               child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.hugeMargin),
+                  margin: const EdgeInsets.only(top: Dimens.normalMargin),
                   child: Text("Sign In", style: ThemeText.largerTitleBold)),
             ),
             Form(
@@ -100,29 +74,21 @@ class SignInScreen extends StatelessWidget {
             BlocBuilder<SignInBloc, SignInState>(
               builder: (context, state) {
                 return state.whenOrNull(
-                        loading: () => Container(
-                            margin: const EdgeInsets.all(Dimens.normalMargin),
-                            child: const LinearProgressIndicator()),
-                        error: (message) => Container(
-                            margin:
-                                const EdgeInsets.only(top: Dimens.smallMargin),
-                            child: Text(message,
-                                style: ThemeText.calloutRegularRed)),
-                        success: () {
-                          context
-                              .read<SignInBloc>()
-                              .add(const SignInEvent.checkIsProfileCreated());
-                          return Container();
-                        }) ??
+                      loading: () => Container(
+                          margin: const EdgeInsets.all(Dimens.normalMargin),
+                          child: const LinearProgressIndicator()),
+                      error: (message) => Container(
+                          margin:
+                              const EdgeInsets.only(top: Dimens.smallMargin),
+                          child: Text(message,
+                              style: ThemeText.calloutRegularRed)),
+                    ) ??
                     Container();
               },
             ),
             BlocListener<SignInBloc, SignInState>(
               listener: (context, state) {
                 state.whenOrNull(
-                    success: () => context
-                        .read<SignInBloc>()
-                        .add(const SignInEvent.checkIsProfileCreated()),
                     navigateToProfileCreationScreen: () =>
                         context.pushNamed(ScreenNavigationKey.profileCreation),
                     navigateToHomeScreen: () =>

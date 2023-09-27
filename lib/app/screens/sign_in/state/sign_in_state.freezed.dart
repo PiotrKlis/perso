@@ -21,7 +21,6 @@ mixin _$SignInState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function() success,
     required TResult Function() navigateToProfileCreationScreen,
     required TResult Function() navigateToHomeScreen,
   }) =>
@@ -31,7 +30,6 @@ mixin _$SignInState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function()? success,
     TResult? Function()? navigateToProfileCreationScreen,
     TResult? Function()? navigateToHomeScreen,
   }) =>
@@ -41,7 +39,6 @@ mixin _$SignInState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function()? success,
     TResult Function()? navigateToProfileCreationScreen,
     TResult Function()? navigateToHomeScreen,
     required TResult orElse(),
@@ -52,7 +49,6 @@ mixin _$SignInState {
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
     required TResult Function(NavigateToProfileCreationScreen value)
         navigateToProfileCreationScreen,
     required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
@@ -63,7 +59,6 @@ mixin _$SignInState {
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
     TResult? Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -74,7 +69,6 @@ mixin _$SignInState {
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
     TResult Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -140,7 +134,6 @@ class _$Initial implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function() success,
     required TResult Function() navigateToProfileCreationScreen,
     required TResult Function() navigateToHomeScreen,
   }) {
@@ -153,7 +146,6 @@ class _$Initial implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function()? success,
     TResult? Function()? navigateToProfileCreationScreen,
     TResult? Function()? navigateToHomeScreen,
   }) {
@@ -166,7 +158,6 @@ class _$Initial implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function()? success,
     TResult Function()? navigateToProfileCreationScreen,
     TResult Function()? navigateToHomeScreen,
     required TResult orElse(),
@@ -183,7 +174,6 @@ class _$Initial implements Initial {
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
     required TResult Function(NavigateToProfileCreationScreen value)
         navigateToProfileCreationScreen,
     required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
@@ -197,7 +187,6 @@ class _$Initial implements Initial {
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
     TResult? Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -211,7 +200,6 @@ class _$Initial implements Initial {
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
     TResult Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -267,7 +255,6 @@ class _$Loading implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function() success,
     required TResult Function() navigateToProfileCreationScreen,
     required TResult Function() navigateToHomeScreen,
   }) {
@@ -280,7 +267,6 @@ class _$Loading implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function()? success,
     TResult? Function()? navigateToProfileCreationScreen,
     TResult? Function()? navigateToHomeScreen,
   }) {
@@ -293,7 +279,6 @@ class _$Loading implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function()? success,
     TResult Function()? navigateToProfileCreationScreen,
     TResult Function()? navigateToHomeScreen,
     required TResult orElse(),
@@ -310,7 +295,6 @@ class _$Loading implements Loading {
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
     required TResult Function(NavigateToProfileCreationScreen value)
         navigateToProfileCreationScreen,
     required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
@@ -324,7 +308,6 @@ class _$Loading implements Loading {
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
     TResult? Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -338,7 +321,6 @@ class _$Loading implements Loading {
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
     TResult Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -420,7 +402,6 @@ class _$Error implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function() success,
     required TResult Function() navigateToProfileCreationScreen,
     required TResult Function() navigateToHomeScreen,
   }) {
@@ -433,7 +414,6 @@ class _$Error implements Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function()? success,
     TResult? Function()? navigateToProfileCreationScreen,
     TResult? Function()? navigateToHomeScreen,
   }) {
@@ -446,7 +426,6 @@ class _$Error implements Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function()? success,
     TResult Function()? navigateToProfileCreationScreen,
     TResult Function()? navigateToHomeScreen,
     required TResult orElse(),
@@ -463,7 +442,6 @@ class _$Error implements Error {
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
     required TResult Function(NavigateToProfileCreationScreen value)
         navigateToProfileCreationScreen,
     required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
@@ -477,7 +455,6 @@ class _$Error implements Error {
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
     TResult? Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -491,7 +468,6 @@ class _$Error implements Error {
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
     TResult Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -510,133 +486,6 @@ abstract class Error implements SignInState {
   String get message;
   @JsonKey(ignore: true)
   _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SuccessCopyWith<$Res> {
-  factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
-      __$$SuccessCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SuccessCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$Success>
-    implements _$$SuccessCopyWith<$Res> {
-  __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Success implements Success {
-  const _$Success();
-
-  @override
-  String toString() {
-    return 'SignInState.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Success);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) error,
-    required TResult Function() success,
-    required TResult Function() navigateToProfileCreationScreen,
-    required TResult Function() navigateToHomeScreen,
-  }) {
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? error,
-    TResult? Function()? success,
-    TResult? Function()? navigateToProfileCreationScreen,
-    TResult? Function()? navigateToHomeScreen,
-  }) {
-    return success?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? error,
-    TResult Function()? success,
-    TResult Function()? navigateToProfileCreationScreen,
-    TResult Function()? navigateToHomeScreen,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
-    required TResult Function(NavigateToProfileCreationScreen value)
-        navigateToProfileCreationScreen,
-    required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
-    TResult? Function(NavigateToProfileCreationScreen value)?
-        navigateToProfileCreationScreen,
-    TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
-    TResult Function(NavigateToProfileCreationScreen value)?
-        navigateToProfileCreationScreen,
-    TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Success implements SignInState {
-  const factory Success() = _$Success;
 }
 
 /// @nodoc
@@ -684,7 +533,6 @@ class _$NavigateToProfileCreationScreen
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function() success,
     required TResult Function() navigateToProfileCreationScreen,
     required TResult Function() navigateToHomeScreen,
   }) {
@@ -697,7 +545,6 @@ class _$NavigateToProfileCreationScreen
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function()? success,
     TResult? Function()? navigateToProfileCreationScreen,
     TResult? Function()? navigateToHomeScreen,
   }) {
@@ -710,7 +557,6 @@ class _$NavigateToProfileCreationScreen
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function()? success,
     TResult Function()? navigateToProfileCreationScreen,
     TResult Function()? navigateToHomeScreen,
     required TResult orElse(),
@@ -727,7 +573,6 @@ class _$NavigateToProfileCreationScreen
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
     required TResult Function(NavigateToProfileCreationScreen value)
         navigateToProfileCreationScreen,
     required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
@@ -741,7 +586,6 @@ class _$NavigateToProfileCreationScreen
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
     TResult? Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -755,7 +599,6 @@ class _$NavigateToProfileCreationScreen
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
     TResult Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -814,7 +657,6 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String message) error,
-    required TResult Function() success,
     required TResult Function() navigateToProfileCreationScreen,
     required TResult Function() navigateToHomeScreen,
   }) {
@@ -827,7 +669,6 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String message)? error,
-    TResult? Function()? success,
     TResult? Function()? navigateToProfileCreationScreen,
     TResult? Function()? navigateToHomeScreen,
   }) {
@@ -840,7 +681,6 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function()? success,
     TResult Function()? navigateToProfileCreationScreen,
     TResult Function()? navigateToHomeScreen,
     required TResult orElse(),
@@ -857,7 +697,6 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
     required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Error value) error,
-    required TResult Function(Success value) success,
     required TResult Function(NavigateToProfileCreationScreen value)
         navigateToProfileCreationScreen,
     required TResult Function(NavigateToHomeScreen value) navigateToHomeScreen,
@@ -871,7 +710,6 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
     TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Error value)? error,
-    TResult? Function(Success value)? success,
     TResult? Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult? Function(NavigateToHomeScreen value)? navigateToHomeScreen,
@@ -885,7 +723,6 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
     TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Error value)? error,
-    TResult Function(Success value)? success,
     TResult Function(NavigateToProfileCreationScreen value)?
         navigateToProfileCreationScreen,
     TResult Function(NavigateToHomeScreen value)? navigateToHomeScreen,

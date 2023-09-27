@@ -1,25 +1,32 @@
 import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
-@injectable
 class UserInfoProvider {
   User? user;
-  final PersoSharedPrefs _sharedPrefs = GetIt.I.get<PersoSharedPrefs>();
 
-  bool isUserLoggedIn() {
-    if (user?.uid != null &&
-        FirebaseAuth.instance.currentUser!.emailVerified &&
-        _sharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey)) {
-      return true;
-    } else {
-      return false;
+  //TODO: Fix me, this doesn't seem to work
+  Future<bool> isProfileCreated() async {
+    final String? id = FirebaseAuth.instance.currentUser?.uid;
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(id)
+        .get();
+    return snapshot.exists;
+  }
+
+  Future<bool> isUserLoggedIn() async {
+    if (user != null) {
+      final bool doesProfileExist = await isProfileCreated();
+      final bool isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      if (doesProfileExist && isEmailVerified) {
+        return true;
+      }
     }
+    return false;
   }
 
   Future<UserType> getUserType() async {
@@ -35,5 +42,13 @@ class UserInfoProvider {
     FirebaseAuth.instance.authStateChanges().listen((User? firebaseUser) {
       user = firebaseUser;
     });
+  }
+
+  Future<bool> isNicknameUnique(String nickname) async {
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.nickname, isEqualTo: nickname)
+        .get();
+    return snapshot.docs.isEmpty;
   }
 }
