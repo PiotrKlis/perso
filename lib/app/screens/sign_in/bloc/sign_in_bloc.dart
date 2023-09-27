@@ -2,14 +2,14 @@ import 'package:Perso/app/screens/sign_in/event/sign_in_event.dart';
 import 'package:Perso/app/screens/sign_in/state/sign_in_state.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/data/auth/auth_service.dart';
-import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
+import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthService _authProvider = getIt.get<AuthService>();
-  final PersoSharedPrefs _persoSharedPrefs = getIt.get<PersoSharedPrefs>();
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   SignInBloc(SignInState initialState) : super(initialState) {
     on<Init>((state, emit) async {
@@ -22,22 +22,23 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         UserCredential userCredential = await _authProvider.login(
             email: state.email, password: state.password);
         if (userCredential.user!.emailVerified) {
+          await _handleSuccessfulLogin(emit);
+        } else {
           emit(const SignInState.error(message: "Email not verified"));
         }
-        emit(const SignInState.success());
       } catch (error) {
         _handleLoginError(error, emit);
       }
     });
+  }
 
-    on<CheckIsProfileCreated>((state, emit) async {
-      if (_persoSharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey,
-          defaultValue: false)) {
-        emit(const SignInState.navigateToHomeScreen());
-      } else {
-        emit(const SignInState.navigateToProfileCreationScreen());
-      }
-    });
+  Future<void> _handleSuccessfulLogin(Emitter<SignInState> emit) async {
+    final bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
+    if (isUserLoggedIn) {
+      emit(const SignInState.navigateToHomeScreen());
+    } else {
+      emit(const SignInState.navigateToProfileCreationScreen());
+    }
   }
 
   void _handleLoginError(Object error, Emitter<SignInState> emit) {

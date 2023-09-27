@@ -4,25 +4,25 @@ import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/models/trainer_data.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:Perso/data/trainers/trainers_service.dart';
 import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class FirestoreTrainersService implements TrainersService {
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
-  final PersoSharedPrefs _persoSharedPrefs = getIt.get<PersoSharedPrefs>();
 
   @override
   Future<void> updateData(TrainerData trainerData) async {
     try {
+      final String? id = FirebaseAuth.instance.currentUser?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
-          .doc(trainerData.nickname)
+          .doc(id)
           .set({
         UserDocumentFields.email: _userInfoProvider.user?.email,
         UserDocumentFields.fullBio: trainerData.fullBio,
@@ -33,11 +33,9 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.phoneNumber: trainerData.phoneNumber,
         UserDocumentFields.shortBio: trainerData.shortBio,
         UserDocumentFields.surname: trainerData.surname,
-        UserDocumentFields.image: trainerData.imagePath,
-        UserDocumentFields.categories: trainerData.categories
+        UserDocumentFields.categories: trainerData.categories,
+        UserDocumentFields.userType: UserType.trainer.name,
       });
-      await _persoSharedPrefs.setString(
-          PersoSharedPrefs.userNicknameKey, trainerData.nickname);
       return Future.value();
     } catch (error) {
       //TODO: Add error handling
@@ -48,9 +46,10 @@ class FirestoreTrainersService implements TrainersService {
   @override
   Future<void> setData(TrainerEntity trainerEntity) async {
     try {
+      final String? id = FirebaseAuth.instance.currentUser?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
-          .doc(trainerEntity.nickname)
+          .doc(id)
           .set({
         UserDocumentFields.email: trainerEntity.email,
         UserDocumentFields.fullBio: trainerEntity.fullBio,
@@ -62,7 +61,6 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.shortBio: trainerEntity.shortBio,
         UserDocumentFields.surname: trainerEntity.surname,
         UserDocumentFields.id: trainerEntity.id,
-        UserDocumentFields.image: trainerEntity.image,
         UserDocumentFields.votesNumber: trainerEntity.votesNumber,
         UserDocumentFields.rating: trainerEntity.rating,
         UserDocumentFields.reviews: trainerEntity.reviews,
@@ -79,11 +77,10 @@ class FirestoreTrainersService implements TrainersService {
   @override
   Future<void> uploadPhoto(String path) async {
     try {
-      final String nickname =
-          _persoSharedPrefs.getString(PersoSharedPrefs.userNicknameKey);
+      final String? id = FirebaseAuth.instance.currentUser?.uid;
       final Reference storageReference = FirebaseStorage.instance
           .ref()
-          .child('${CollectionName.images}/$nickname/}');
+          .child('${CollectionName.images}/$id/}');
       await deleteAlreadyPresentImage(storageReference);
       await storageReference.putFile(File(path));
     } catch (error) {

@@ -24,7 +24,6 @@ class SearchResultsScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Container(
-            // margin: EdgeInsets.all(Dimens.normalMargin),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

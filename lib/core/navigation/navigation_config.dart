@@ -90,14 +90,14 @@ final GoRouter goRouter = GoRouter(
                 name: ScreenNavigationKey.clientProfile,
                 path: ScreenNavigationKey.clientProfile,
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: ClientProfileScreen());
+                  return NoTransitionPage(child: ClientProfileScreen());
                 },
               ),
               GoRoute(
                 name: ScreenNavigationKey.trainerProfile,
                 path: ScreenNavigationKey.trainerProfile,
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: TrainerProfileScreen());
+                  return NoTransitionPage(child: TrainerProfileScreen());
                 },
               ),
               GoRoute(

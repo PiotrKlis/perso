@@ -47,10 +47,7 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
                   PersoButton(
                     title: AppLocalizations.of(context)!.finish,
                     onTap: (context) {
-                      //TODO: Move setting isProfileCreatedKey to bloc layer
-                      PersoSharedPrefs prefs = getIt.get<PersoSharedPrefs>();
-                      prefs.setBool(PersoSharedPrefs.isProfileCreatedKey, true);
-                      _navigateHome(context);
+                      context.replaceNamed(ScreenNavigationKey.home);
                     },
                   ),
                 ],
@@ -60,9 +57,5 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _navigateHome(BuildContext context) {
-    context.replaceNamed(ScreenNavigationKey.home);
   }
 }

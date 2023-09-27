@@ -18,8 +18,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ForgotPasswordBloc(const ForgotPasswordState.initial()),
+      create: (context) => ForgotPasswordBloc(),
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
