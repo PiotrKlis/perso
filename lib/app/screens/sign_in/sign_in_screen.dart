@@ -74,29 +74,21 @@ class SignInScreen extends StatelessWidget {
             BlocBuilder<SignInBloc, SignInState>(
               builder: (context, state) {
                 return state.whenOrNull(
-                        loading: () => Container(
-                            margin: const EdgeInsets.all(Dimens.normalMargin),
-                            child: const LinearProgressIndicator()),
-                        error: (message) => Container(
-                            margin:
-                                const EdgeInsets.only(top: Dimens.smallMargin),
-                            child: Text(message,
-                                style: ThemeText.calloutRegularRed)),
-                        success: () {
-                          context
-                              .read<SignInBloc>()
-                              .add(const SignInEvent.checkIsProfileCreated());
-                          return Container();
-                        }) ??
+                      loading: () => Container(
+                          margin: const EdgeInsets.all(Dimens.normalMargin),
+                          child: const LinearProgressIndicator()),
+                      error: (message) => Container(
+                          margin:
+                              const EdgeInsets.only(top: Dimens.smallMargin),
+                          child: Text(message,
+                              style: ThemeText.calloutRegularRed)),
+                    ) ??
                     Container();
               },
             ),
             BlocListener<SignInBloc, SignInState>(
               listener: (context, state) {
                 state.whenOrNull(
-                    success: () => context
-                        .read<SignInBloc>()
-                        .add(const SignInEvent.checkIsProfileCreated()),
                     navigateToProfileCreationScreen: () =>
                         context.pushNamed(ScreenNavigationKey.profileCreation),
                     navigateToHomeScreen: () =>

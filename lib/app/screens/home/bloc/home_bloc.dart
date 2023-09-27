@@ -8,27 +8,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
-  HomeBloc(HomeState initialState) : super(initialState) {
+  HomeBloc() : super(const HomeState.initial()) {
     on<Init>((state, emit) async {
       //no-op
     });
 
     on<AccountNavigation>((state, emit) async {
-      UserType userType = await _userInfoProvider.getUserType();
-      bool isUserLoggedIn = _userInfoProvider.isUserLoggedIn();
+      bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
       if (isUserLoggedIn) {
-        _navigateLoggedIn(userType, emit);
+        await _navigateLoggedIn(emit);
       } else {
-        emit.call(const HomeState.navigateToSignIn());
+        emit(const HomeState.navigateToSignIn());
+        emit.call(const HomeState.initial());
       }
     });
   }
 
-  void _navigateLoggedIn(UserType userType, Emitter<HomeState> emit) {
+  Future<void> _navigateLoggedIn(Emitter<HomeState> emit) async {
+    UserType userType = await _userInfoProvider.getUserType();
     if (userType == UserType.trainer) {
-      emit.call(const HomeState.navigateToTrainerDetails());
+      emit(const HomeState.navigateToTrainerProfile());
+      emit.call(const HomeState.initial());
     } else {
-      emit.call(const HomeState.navigateToClientDetails());
+      emit(const HomeState.navigateToClientProfile());
+      emit.call(const HomeState.initial());
     }
   }
 }

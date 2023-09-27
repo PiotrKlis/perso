@@ -5,6 +5,6 @@ part 'home_state.freezed.dart';
 class HomeState with _$HomeState {
   const factory HomeState.initial() = Initial;
   const factory HomeState.navigateToSignIn() = NavigateToSignIn;
-  const factory HomeState.navigateToClientDetails() = NavigateToClientDetails;
-  const factory HomeState.navigateToTrainerDetails() = NaviagteToTrainerDetails;
+  const factory HomeState.navigateToClientProfile() = NavigateToClientProfile;
+  const factory HomeState.navigateToTrainerProfile() = NaviagteToTrainerProfile;
 }

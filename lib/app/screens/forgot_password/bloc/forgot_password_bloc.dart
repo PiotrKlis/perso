@@ -9,7 +9,7 @@ class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
   final _authProvider = getIt.get<AuthService>();
 
-  ForgotPasswordBloc(ForgotPasswordState initialState) : super(initialState) {
+  ForgotPasswordBloc() : super(const ForgotPasswordState.initial()) {
     on<ResetPassword>((event, emitter) async {
       try {
         await _authProvider.resetPassword(event.email);

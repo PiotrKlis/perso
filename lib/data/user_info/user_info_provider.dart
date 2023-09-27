@@ -1,6 +1,4 @@
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,16 +7,26 @@ import 'package:injectable/injectable.dart';
 @singleton
 class UserInfoProvider {
   User? user;
-  final PersoSharedPrefs _sharedPrefs = getIt.get<PersoSharedPrefs>();
 
-  bool isUserLoggedIn() {
-    if (user?.uid != null &&
-        FirebaseAuth.instance.currentUser!.emailVerified &&
-        _sharedPrefs.getBool(PersoSharedPrefs.isProfileCreatedKey)) {
-      return true;
-    } else {
-      return false;
+  //TODO: Fix me, this doesn't seem to work
+  Future<bool> isProfileCreated() async {
+    final String? id = FirebaseAuth.instance.currentUser?.uid;
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(id)
+        .get();
+    return snapshot.exists;
+  }
+
+  Future<bool> isUserLoggedIn() async {
+    if (user != null) {
+      final bool doesProfileExist = await isProfileCreated();
+      final bool isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      if (doesProfileExist && isEmailVerified) {
+        return true;
+      }
     }
+    return false;
   }
 
   Future<UserType> getUserType() async {
@@ -33,35 +41,14 @@ class UserInfoProvider {
   void listenForFirebaseUserChange() {
     FirebaseAuth.instance.authStateChanges().listen((User? firebaseUser) {
       user = firebaseUser;
-      if (user == null) {
-        _sharedPrefs.setString(PersoSharedPrefs.userNicknameKey, "");
-      }
     });
   }
 
   Future<bool> isNicknameUnique(String nickname) async {
-    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
-        .doc(nickname)
+        .where(UserDocumentFields.nickname, isEqualTo: nickname)
         .get();
-    bool doesNicknameExist = snapshot.exists;
-    return !doesNicknameExist;
-  }
-
-  Future<bool> isProfileCreated(String nickname) async {
-    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(nickname)
-        .get();
-    return snapshot.exists;
-  }
-
-  Future<bool> getUserNickname(String login) async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .where(UserDocumentFields.email, isEqualTo: login)
-        .get();
-
-    return snapshot.docs.first.get(UserDocumentFields.nickname);
+    return snapshot.docs.isEmpty;
   }
 }

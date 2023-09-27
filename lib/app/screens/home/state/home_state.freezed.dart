@@ -20,24 +20,24 @@ mixin _$HomeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() navigateToSignIn,
-    required TResult Function() navigateToClientDetails,
-    required TResult Function() naviagteToTrainerDetails,
+    required TResult Function() navigateToClientProfile,
+    required TResult Function() navigateToTrainerProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? navigateToSignIn,
-    TResult? Function()? navigateToClientDetails,
-    TResult? Function()? naviagteToTrainerDetails,
+    TResult? Function()? navigateToClientProfile,
+    TResult? Function()? navigateToTrainerProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? navigateToSignIn,
-    TResult Function()? navigateToClientDetails,
-    TResult Function()? naviagteToTrainerDetails,
+    TResult Function()? navigateToClientProfile,
+    TResult Function()? navigateToTrainerProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,26 +45,26 @@ mixin _$HomeState {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(NavigateToSignIn value) navigateToSignIn,
-    required TResult Function(NavigateToClientDetails value)
-        navigateToClientDetails,
-    required TResult Function(NaviagteToTrainerDetails value)
-        naviagteToTrainerDetails,
+    required TResult Function(NavigateToClientProfile value)
+        navigateToClientProfile,
+    required TResult Function(NaviagteToTrainerProfile value)
+        navigateToTrainerProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult? Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult? Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult? Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult? Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,8 +125,8 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() navigateToSignIn,
-    required TResult Function() navigateToClientDetails,
-    required TResult Function() naviagteToTrainerDetails,
+    required TResult Function() navigateToClientProfile,
+    required TResult Function() navigateToTrainerProfile,
   }) {
     return initial();
   }
@@ -136,8 +136,8 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? navigateToSignIn,
-    TResult? Function()? navigateToClientDetails,
-    TResult? Function()? naviagteToTrainerDetails,
+    TResult? Function()? navigateToClientProfile,
+    TResult? Function()? navigateToTrainerProfile,
   }) {
     return initial?.call();
   }
@@ -147,8 +147,8 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? navigateToSignIn,
-    TResult Function()? navigateToClientDetails,
-    TResult Function()? naviagteToTrainerDetails,
+    TResult Function()? navigateToClientProfile,
+    TResult Function()? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -162,10 +162,10 @@ class _$Initial implements Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(NavigateToSignIn value) navigateToSignIn,
-    required TResult Function(NavigateToClientDetails value)
-        navigateToClientDetails,
-    required TResult Function(NaviagteToTrainerDetails value)
-        naviagteToTrainerDetails,
+    required TResult Function(NavigateToClientProfile value)
+        navigateToClientProfile,
+    required TResult Function(NaviagteToTrainerProfile value)
+        navigateToTrainerProfile,
   }) {
     return initial(this);
   }
@@ -175,8 +175,8 @@ class _$Initial implements Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult? Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult? Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult? Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult? Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
   }) {
     return initial?.call(this);
   }
@@ -186,8 +186,8 @@ class _$Initial implements Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -241,8 +241,8 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() navigateToSignIn,
-    required TResult Function() navigateToClientDetails,
-    required TResult Function() naviagteToTrainerDetails,
+    required TResult Function() navigateToClientProfile,
+    required TResult Function() navigateToTrainerProfile,
   }) {
     return navigateToSignIn();
   }
@@ -252,8 +252,8 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? navigateToSignIn,
-    TResult? Function()? navigateToClientDetails,
-    TResult? Function()? naviagteToTrainerDetails,
+    TResult? Function()? navigateToClientProfile,
+    TResult? Function()? navigateToTrainerProfile,
   }) {
     return navigateToSignIn?.call();
   }
@@ -263,8 +263,8 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? navigateToSignIn,
-    TResult Function()? navigateToClientDetails,
-    TResult Function()? naviagteToTrainerDetails,
+    TResult Function()? navigateToClientProfile,
+    TResult Function()? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
     if (navigateToSignIn != null) {
@@ -278,10 +278,10 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(NavigateToSignIn value) navigateToSignIn,
-    required TResult Function(NavigateToClientDetails value)
-        navigateToClientDetails,
-    required TResult Function(NaviagteToTrainerDetails value)
-        naviagteToTrainerDetails,
+    required TResult Function(NavigateToClientProfile value)
+        navigateToClientProfile,
+    required TResult Function(NaviagteToTrainerProfile value)
+        navigateToTrainerProfile,
   }) {
     return navigateToSignIn(this);
   }
@@ -291,8 +291,8 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult? Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult? Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult? Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult? Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
   }) {
     return navigateToSignIn?.call(this);
   }
@@ -302,8 +302,8 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
     if (navigateToSignIn != null) {
@@ -318,36 +318,36 @@ abstract class NavigateToSignIn implements HomeState {
 }
 
 /// @nodoc
-abstract class _$$NavigateToClientDetailsCopyWith<$Res> {
-  factory _$$NavigateToClientDetailsCopyWith(_$NavigateToClientDetails value,
-          $Res Function(_$NavigateToClientDetails) then) =
-      __$$NavigateToClientDetailsCopyWithImpl<$Res>;
+abstract class _$$NavigateToClientProfileCopyWith<$Res> {
+  factory _$$NavigateToClientProfileCopyWith(_$NavigateToClientProfile value,
+          $Res Function(_$NavigateToClientProfile) then) =
+      __$$NavigateToClientProfileCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NavigateToClientDetailsCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$NavigateToClientDetails>
-    implements _$$NavigateToClientDetailsCopyWith<$Res> {
-  __$$NavigateToClientDetailsCopyWithImpl(_$NavigateToClientDetails _value,
-      $Res Function(_$NavigateToClientDetails) _then)
+class __$$NavigateToClientProfileCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$NavigateToClientProfile>
+    implements _$$NavigateToClientProfileCopyWith<$Res> {
+  __$$NavigateToClientProfileCopyWithImpl(_$NavigateToClientProfile _value,
+      $Res Function(_$NavigateToClientProfile) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NavigateToClientDetails implements NavigateToClientDetails {
-  const _$NavigateToClientDetails();
+class _$NavigateToClientProfile implements NavigateToClientProfile {
+  const _$NavigateToClientProfile();
 
   @override
   String toString() {
-    return 'HomeState.navigateToClientDetails()';
+    return 'HomeState.navigateToClientProfile()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NavigateToClientDetails);
+            other is _$NavigateToClientProfile);
   }
 
   @override
@@ -358,10 +358,10 @@ class _$NavigateToClientDetails implements NavigateToClientDetails {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() navigateToSignIn,
-    required TResult Function() navigateToClientDetails,
-    required TResult Function() naviagteToTrainerDetails,
+    required TResult Function() navigateToClientProfile,
+    required TResult Function() navigateToTrainerProfile,
   }) {
-    return navigateToClientDetails();
+    return navigateToClientProfile();
   }
 
   @override
@@ -369,10 +369,10 @@ class _$NavigateToClientDetails implements NavigateToClientDetails {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? navigateToSignIn,
-    TResult? Function()? navigateToClientDetails,
-    TResult? Function()? naviagteToTrainerDetails,
+    TResult? Function()? navigateToClientProfile,
+    TResult? Function()? navigateToTrainerProfile,
   }) {
-    return navigateToClientDetails?.call();
+    return navigateToClientProfile?.call();
   }
 
   @override
@@ -380,12 +380,12 @@ class _$NavigateToClientDetails implements NavigateToClientDetails {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? navigateToSignIn,
-    TResult Function()? navigateToClientDetails,
-    TResult Function()? naviagteToTrainerDetails,
+    TResult Function()? navigateToClientProfile,
+    TResult Function()? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
-    if (navigateToClientDetails != null) {
-      return navigateToClientDetails();
+    if (navigateToClientProfile != null) {
+      return navigateToClientProfile();
     }
     return orElse();
   }
@@ -395,12 +395,12 @@ class _$NavigateToClientDetails implements NavigateToClientDetails {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(NavigateToSignIn value) navigateToSignIn,
-    required TResult Function(NavigateToClientDetails value)
-        navigateToClientDetails,
-    required TResult Function(NaviagteToTrainerDetails value)
-        naviagteToTrainerDetails,
+    required TResult Function(NavigateToClientProfile value)
+        navigateToClientProfile,
+    required TResult Function(NaviagteToTrainerProfile value)
+        navigateToTrainerProfile,
   }) {
-    return navigateToClientDetails(this);
+    return navigateToClientProfile(this);
   }
 
   @override
@@ -408,10 +408,10 @@ class _$NavigateToClientDetails implements NavigateToClientDetails {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult? Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult? Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult? Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult? Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
   }) {
-    return navigateToClientDetails?.call(this);
+    return navigateToClientProfile?.call(this);
   }
 
   @override
@@ -419,52 +419,52 @@ class _$NavigateToClientDetails implements NavigateToClientDetails {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
-    if (navigateToClientDetails != null) {
-      return navigateToClientDetails(this);
+    if (navigateToClientProfile != null) {
+      return navigateToClientProfile(this);
     }
     return orElse();
   }
 }
 
-abstract class NavigateToClientDetails implements HomeState {
-  const factory NavigateToClientDetails() = _$NavigateToClientDetails;
+abstract class NavigateToClientProfile implements HomeState {
+  const factory NavigateToClientProfile() = _$NavigateToClientProfile;
 }
 
 /// @nodoc
-abstract class _$$NaviagteToTrainerDetailsCopyWith<$Res> {
-  factory _$$NaviagteToTrainerDetailsCopyWith(_$NaviagteToTrainerDetails value,
-          $Res Function(_$NaviagteToTrainerDetails) then) =
-      __$$NaviagteToTrainerDetailsCopyWithImpl<$Res>;
+abstract class _$$NaviagteToTrainerProfileCopyWith<$Res> {
+  factory _$$NaviagteToTrainerProfileCopyWith(_$NaviagteToTrainerProfile value,
+          $Res Function(_$NaviagteToTrainerProfile) then) =
+      __$$NaviagteToTrainerProfileCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NaviagteToTrainerDetailsCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$NaviagteToTrainerDetails>
-    implements _$$NaviagteToTrainerDetailsCopyWith<$Res> {
-  __$$NaviagteToTrainerDetailsCopyWithImpl(_$NaviagteToTrainerDetails _value,
-      $Res Function(_$NaviagteToTrainerDetails) _then)
+class __$$NaviagteToTrainerProfileCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$NaviagteToTrainerProfile>
+    implements _$$NaviagteToTrainerProfileCopyWith<$Res> {
+  __$$NaviagteToTrainerProfileCopyWithImpl(_$NaviagteToTrainerProfile _value,
+      $Res Function(_$NaviagteToTrainerProfile) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
-  const _$NaviagteToTrainerDetails();
+class _$NaviagteToTrainerProfile implements NaviagteToTrainerProfile {
+  const _$NaviagteToTrainerProfile();
 
   @override
   String toString() {
-    return 'HomeState.naviagteToTrainerDetails()';
+    return 'HomeState.navigateToTrainerProfile()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NaviagteToTrainerDetails);
+            other is _$NaviagteToTrainerProfile);
   }
 
   @override
@@ -475,10 +475,10 @@ class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() navigateToSignIn,
-    required TResult Function() navigateToClientDetails,
-    required TResult Function() naviagteToTrainerDetails,
+    required TResult Function() navigateToClientProfile,
+    required TResult Function() navigateToTrainerProfile,
   }) {
-    return naviagteToTrainerDetails();
+    return navigateToTrainerProfile();
   }
 
   @override
@@ -486,10 +486,10 @@ class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? navigateToSignIn,
-    TResult? Function()? navigateToClientDetails,
-    TResult? Function()? naviagteToTrainerDetails,
+    TResult? Function()? navigateToClientProfile,
+    TResult? Function()? navigateToTrainerProfile,
   }) {
-    return naviagteToTrainerDetails?.call();
+    return navigateToTrainerProfile?.call();
   }
 
   @override
@@ -497,12 +497,12 @@ class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? navigateToSignIn,
-    TResult Function()? navigateToClientDetails,
-    TResult Function()? naviagteToTrainerDetails,
+    TResult Function()? navigateToClientProfile,
+    TResult Function()? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
-    if (naviagteToTrainerDetails != null) {
-      return naviagteToTrainerDetails();
+    if (navigateToTrainerProfile != null) {
+      return navigateToTrainerProfile();
     }
     return orElse();
   }
@@ -512,12 +512,12 @@ class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
     required TResult Function(NavigateToSignIn value) navigateToSignIn,
-    required TResult Function(NavigateToClientDetails value)
-        navigateToClientDetails,
-    required TResult Function(NaviagteToTrainerDetails value)
-        naviagteToTrainerDetails,
+    required TResult Function(NavigateToClientProfile value)
+        navigateToClientProfile,
+    required TResult Function(NaviagteToTrainerProfile value)
+        navigateToTrainerProfile,
   }) {
-    return naviagteToTrainerDetails(this);
+    return navigateToTrainerProfile(this);
   }
 
   @override
@@ -525,10 +525,10 @@ class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
     TResult? Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult? Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult? Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult? Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult? Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
   }) {
-    return naviagteToTrainerDetails?.call(this);
+    return navigateToTrainerProfile?.call(this);
   }
 
   @override
@@ -536,17 +536,17 @@ class _$NaviagteToTrainerDetails implements NaviagteToTrainerDetails {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(NavigateToSignIn value)? navigateToSignIn,
-    TResult Function(NavigateToClientDetails value)? navigateToClientDetails,
-    TResult Function(NaviagteToTrainerDetails value)? naviagteToTrainerDetails,
+    TResult Function(NavigateToClientProfile value)? navigateToClientProfile,
+    TResult Function(NaviagteToTrainerProfile value)? navigateToTrainerProfile,
     required TResult orElse(),
   }) {
-    if (naviagteToTrainerDetails != null) {
-      return naviagteToTrainerDetails(this);
+    if (navigateToTrainerProfile != null) {
+      return navigateToTrainerProfile(this);
     }
     return orElse();
   }
 }
 
-abstract class NaviagteToTrainerDetails implements HomeState {
-  const factory NaviagteToTrainerDetails() = _$NaviagteToTrainerDetails;
+abstract class NaviagteToTrainerProfile implements HomeState {
+  const factory NaviagteToTrainerProfile() = _$NaviagteToTrainerProfile;
 }
