@@ -25,14 +25,130 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignInBloc(const SignInState.initial()),
-      child: _signInScreenView(context),
+      child: SafeArea(
+          child: Scaffold(
+        appBar: const PersoAppBar(title: "Sign In"),
+        backgroundColor: PersoColors.lightBlue,
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            children: [
+              const Icon(Icons.logo_dev, size: 160.0),
+              Center(
+                child: Container(
+                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                    child: Text("Sign In", style: ThemeText.largerTitleBold)),
+              ),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.biggerMargin,
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: PersoTextField(
+                            title: "Login",
+                            textEditingController: _loginController,
+                            customValidator: TextFieldValidator.validateIsEmpty,
+                          )),
+                      Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.normalMargin,
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: PersoTextField(
+                            title: "Password",
+                            shouldObscureText: true,
+                            textEditingController: _passwordController,
+                            customValidator: TextFieldValidator.validateIsEmpty,
+                          )),
+                    ],
+                  )),
+              BlocBuilder<SignInBloc, SignInState>(
+                builder: (context, state) {
+                  return state.whenOrNull(
+                        loading: () => Container(
+                            margin: const EdgeInsets.all(Dimens.normalMargin),
+                            child: const LinearProgressIndicator()),
+                        error: (message) => Container(
+                            margin:
+                                const EdgeInsets.only(top: Dimens.smallMargin),
+                            child: Text(message,
+                                style: ThemeText.calloutRegularRed)),
+                      ) ??
+                      Container();
+                },
+              ),
+              BlocListener<SignInBloc, SignInState>(
+                listener: (context, state) {
+                  state.whenOrNull(
+                      navigateToProfileCreationScreen: () => context
+                          .pushNamed(ScreenNavigationKey.profileCreation),
+                      navigateToHomeScreen: () =>
+                          context.replaceNamed(ScreenNavigationKey.home));
+                },
+                child: Container(),
+              ),
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: GestureDetector(
+                    onTap: () =>
+                        context.pushNamed(ScreenNavigationKey.passwordRecovery),
+                    child: Text(
+                      "Forgot password?",
+                      style: ThemeText.calloutBoldBlueText,
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                child: Container(
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: PersoButton(
+                    width: Dimens.bigButtonWidth,
+                    title: "Sign In",
+                    onTap: (context) {
+                      _loginUser(context);
+                    },
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Expanded(child: PersoDivider()),
+                      Text("OR", style: ThemeText.footnoteRegularGrey),
+                      const Expanded(child: PersoDivider()),
+                    ]),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.bigMargin,
+                      left: Dimens.bigMargin,
+                      right: Dimens.bigMargin),
+                  child: GestureDetector(
+                    onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
+                    child: const AbsorbPointer(
+                      child:
+                          PersoButton(title: "Sign up", whiteBlackTheme: true),
+                    ),
+                  )),
+            ],
+          ),
+        ),
+      )),
     );
   }
 
   SafeArea _signInScreenView(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: PersoAppBar(title: "Sign In"),
+      appBar: const PersoAppBar(title: "Sign In"),
       backgroundColor: PersoColors.lightBlue,
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

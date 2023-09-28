@@ -12,9 +12,7 @@ import 'package:Perso/app/widgets/perso_search.dart';
 import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,76 +23,48 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: Column(children: [
-            GestureDetector(
-                onTap: () {
-                  _handleAccountClick(context);
-                },
-                child: const PersoAccountIcon()),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: Dimens.normalMargin,
-                  left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PersoBigHeader(
-                      title: AppLocalizations.of(context)!.home_main_header,
-                    ),
-                    //TODO: Make this button invisible if user is logged in
-                    PersoButton(
-                        onTap: (context) {
-                          _handleAccountClick(context);
-                        },
-                        title: AppLocalizations.of(context)!
-                            .trainers_section_button,
-                        width: Dimens.smallButtonWidth)
-                  ]),
-            ),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: Dimens.normalMargin,
-                    top: Dimens.normalMargin,
-                    right: Dimens.normalMargin),
-                child: GestureDetector(
-                    onTap: () => context.pushNamed(ScreenNavigationKey.search),
-                    child: const AbsorbPointer(child: PersoSearch()))),
-            Container(
-              margin: const EdgeInsets.only(
-                  top: Dimens.bigMargin,
-                  left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  PersoHeader(
-                      title: AppLocalizations.of(context)!.category_header),
+    return BlocProvider(
+      create: (context) => HomeBloc(),
+      child: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          return SafeArea(
+            child: Scaffold(
+              body: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
+                child: Column(children: [
                   GestureDetector(
-                    onTap: () => context
-                        .pushNamed(ScreenNavigationKey.trainingCategories),
-                    child: PersoClickableText(
-                        title:
-                            AppLocalizations.of(context)!.see_all_categories),
-                  )
-                ],
-              ),
-            ),
-            Container(
-                margin: const EdgeInsets.only(
-                    left: Dimens.normalMargin, top: Dimens.bigMargin),
-                child: const PersoTrainingCategoryList(isShortList: true)),
-            Container(
-              color: PersoColors.lightBlue,
-              child: Column(
-                children: [
+                      onTap: () => _handleAccountClick(context),
+                      child: const PersoAccountIcon()),
                   Container(
-                      margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                      child: PersoTrainersSearchCarousel()),
+                    margin: const EdgeInsets.only(
+                        top: Dimens.normalMargin,
+                        left: Dimens.normalMargin,
+                        right: Dimens.normalMargin),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PersoBigHeader(
+                            title:
+                                AppLocalizations.of(context)!.home_main_header,
+                          ),
+                          //TODO: Make this button invisible if user is logged in
+                          PersoButton(
+                              onTap: (context) => _handleAccountClick(context),
+                              title: AppLocalizations.of(context)!
+                                  .trainers_section_button,
+                              width: Dimens.smallButtonWidth)
+                        ]),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.only(
+                          left: Dimens.normalMargin,
+                          top: Dimens.normalMargin,
+                          right: Dimens.normalMargin),
+                      child: GestureDetector(
+                          onTap: () =>
+                              context.pushNamed(ScreenNavigationKey.search),
+                          child: const AbsorbPointer(child: PersoSearch()))),
                   Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.bigMargin,
@@ -104,13 +74,11 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         PersoHeader(
-                            title: AppLocalizations.of(context)!.near_you),
+                            title:
+                                AppLocalizations.of(context)!.category_header),
                         GestureDetector(
                           onTap: () => context.pushNamed(
-                              ScreenNavigationKey.searchResults,
-                              pathParameters: {
-                                "input": "see all trainers near my location"
-                              }),
+                              ScreenNavigationKey.trainingCategories),
                           child: PersoClickableText(
                               title: AppLocalizations.of(context)!
                                   .see_all_categories),
@@ -118,25 +86,66 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const PersoTrainersList()
-                ],
+                  Container(
+                      margin: const EdgeInsets.only(
+                          left: Dimens.normalMargin, top: Dimens.bigMargin),
+                      child:
+                          const PersoTrainingCategoryList(isShortList: true)),
+                  Container(
+                    color: PersoColors.lightBlue,
+                    child: Column(
+                      children: [
+                        Container(
+                            margin:
+                                const EdgeInsets.only(top: Dimens.bigMargin),
+                            child: PersoTrainersSearchCarousel()),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.bigMargin,
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              PersoHeader(
+                                  title:
+                                      AppLocalizations.of(context)!.near_you),
+                              GestureDetector(
+                                onTap: () => context.pushNamed(
+                                    ScreenNavigationKey.searchResults,
+                                    pathParameters: {
+                                      "input":
+                                          "see all trainers near my location"
+                                    }),
+                                child: PersoClickableText(
+                                    title: AppLocalizations.of(context)!
+                                        .see_all_categories),
+                              )
+                            ],
+                          ),
+                        ),
+                        const PersoTrainersList()
+                      ],
+                    ),
+                  ),
+                  BlocListener<HomeBloc, HomeState>(
+                    listener: (context, state) {
+                      state.whenOrNull(
+                        navigateToClientProfile: () => context
+                            .pushNamed(ScreenNavigationKey.clientProfile),
+                        navigateToSignIn: () =>
+                            context.pushNamed(ScreenNavigationKey.signIn),
+                        navigateToTrainerProfile: () => context
+                            .pushNamed(ScreenNavigationKey.trainerProfile),
+                      );
+                    },
+                    child: Container(),
+                  )
+                ]),
               ),
             ),
-            BlocListener<HomeBloc, HomeState>(
-              listener: (context, state) {
-                state.whenOrNull(
-                  navigateToClientProfile: () =>
-                      context.pushNamed(ScreenNavigationKey.clientProfile),
-                  navigateToSignIn: () =>
-                      context.pushNamed(ScreenNavigationKey.signIn),
-                  navigateToTrainerProfile: () =>
-                      context.pushNamed(ScreenNavigationKey.trainerProfile),
-                );
-              },
-              child: Container(),
-            )
-          ]),
-        ),
+          );
+        },
       ),
     );
   }

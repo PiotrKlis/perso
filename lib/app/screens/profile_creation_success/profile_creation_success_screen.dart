@@ -1,9 +1,7 @@
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
