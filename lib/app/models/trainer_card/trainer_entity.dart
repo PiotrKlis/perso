@@ -7,7 +7,6 @@ part 'trainer_entity.freezed.dart';
 class TrainerEntity with _$TrainerEntity {
   const factory TrainerEntity({
     required final String id,
-    required final String image,
     required final String name,
     required final String surname,
     required final String nickname,

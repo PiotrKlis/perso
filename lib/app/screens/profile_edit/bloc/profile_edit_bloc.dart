@@ -48,11 +48,11 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   }
 
   Future<void> _handleTrainerDataUpload(UploadTrainerData event) async {
-    var isFirstProfileCreation = await _userInfoProvider.isProfileCreated();
-    if (isFirstProfileCreation) {
-      await _handleFirstProfileCreation(event);
-    } else {
+    var isProfileCreated = await _userInfoProvider.isProfileCreated();
+    if (isProfileCreated) {
       await _trainersService.updateData(event.trainerData);
+    } else {
+      await _handleFirstProfileCreation(event);
     }
   }
 
@@ -71,7 +71,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   Future<void> _handleFirstProfileCreation(UploadTrainerData event) async {
     TrainerEntity trainerEntity = TrainerEntity(
         id: _userInfoProvider.user?.uid ?? "",
-        image: "",
         name: event.trainerData.name,
         surname: event.trainerData.surname,
         nickname: event.trainerData.nickname,

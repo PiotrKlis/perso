@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TrainerEntity {
   String get id => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get surname => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
@@ -44,7 +43,6 @@ abstract class $TrainerEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String image,
       String name,
       String surname,
       String nickname,
@@ -73,7 +71,6 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
   @override
   $Res call({
     Object? id = null,
-    Object? image = null,
     Object? name = null,
     Object? surname = null,
     Object? nickname = null,
@@ -91,10 +88,6 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -158,7 +151,6 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String image,
       String name,
       String surname,
       String nickname,
@@ -185,7 +177,6 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? image = null,
     Object? name = null,
     Object? surname = null,
     Object? nickname = null,
@@ -203,10 +194,6 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -265,7 +252,6 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
 class _$_TrainerEntity implements _TrainerEntity {
   const _$_TrainerEntity(
       {required this.id,
-      required this.image,
       required this.name,
       required this.surname,
       required this.nickname,
@@ -284,8 +270,6 @@ class _$_TrainerEntity implements _TrainerEntity {
 
   @override
   final String id;
-  @override
-  final String image;
   @override
   final String name;
   @override
@@ -330,7 +314,7 @@ class _$_TrainerEntity implements _TrainerEntity {
 
   @override
   String toString() {
-    return 'TrainerEntity(id: $id, image: $image, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories)';
+    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories)';
   }
 
   @override
@@ -339,7 +323,6 @@ class _$_TrainerEntity implements _TrainerEntity {
         (other.runtimeType == runtimeType &&
             other is _$_TrainerEntity &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.image, image) || other.image == image) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.surname, surname) || other.surname == surname) &&
             (identical(other.nickname, nickname) ||
@@ -364,7 +347,6 @@ class _$_TrainerEntity implements _TrainerEntity {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      image,
       name,
       surname,
       nickname,
@@ -388,7 +370,6 @@ class _$_TrainerEntity implements _TrainerEntity {
 abstract class _TrainerEntity implements TrainerEntity {
   const factory _TrainerEntity(
       {required final String id,
-      required final String image,
       required final String name,
       required final String surname,
       required final String nickname,
@@ -404,8 +385,6 @@ abstract class _TrainerEntity implements TrainerEntity {
 
   @override
   String get id;
-  @override
-  String get image;
   @override
   String get name;
   @override
