@@ -11,7 +11,6 @@ class UserDocumentFields {
   static const String name = "name";
   static const String surname = "surname";
   static const String nickname = "nickname";
-  static const String phoneNumber = "phoneNumber";
   static const String rating = "rating";
   static const String reviews = "reviews";
   static const String shortBio = "shortBio";

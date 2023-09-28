@@ -18,7 +18,6 @@ class TrainerEntity with _$TrainerEntity {
     required final List<String> languages,
     required final double rating,
     required final String location,
-    required final String phoneNumber,
     required final List<ReviewEntity> reviews,
     required final List<String> categories
   }) = _TrainerEntity;

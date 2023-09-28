@@ -189,31 +189,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         ),
                       ],
                     )),
-                Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin),
-                            child: const Icon(Icons.phone, size: 24.0)),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin),
-                            child: PersoTextField(
-                              title: "Phone number",
-                              customValidator:
-                                  TextFieldValidator.validateDigits,
-                              textInputType: TextInputType.phone,
-                              textEditingController: _phoneNumberController,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
                 Visibility(
                   visible: widget._userType == UserType.trainer,
                   child: Column(

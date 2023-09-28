@@ -28,7 +28,6 @@ mixin _$TrainerEntity {
   List<String> get languages => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
   List<ReviewEntity> get reviews => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
 
@@ -56,7 +55,6 @@ abstract class $TrainerEntityCopyWith<$Res> {
       List<String> languages,
       double rating,
       String location,
-      String phoneNumber,
       List<ReviewEntity> reviews,
       List<String> categories});
 }
@@ -86,7 +84,6 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? languages = null,
     Object? rating = null,
     Object? location = null,
-    Object? phoneNumber = null,
     Object? reviews = null,
     Object? categories = null,
   }) {
@@ -139,10 +136,6 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       reviews: null == reviews
           ? _value.reviews
           : reviews // ignore: cast_nullable_to_non_nullable
@@ -176,7 +169,6 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
       List<String> languages,
       double rating,
       String location,
-      String phoneNumber,
       List<ReviewEntity> reviews,
       List<String> categories});
 }
@@ -204,7 +196,6 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? languages = null,
     Object? rating = null,
     Object? location = null,
-    Object? phoneNumber = null,
     Object? reviews = null,
     Object? categories = null,
   }) {
@@ -257,10 +248,6 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
       reviews: null == reviews
           ? _value._reviews
           : reviews // ignore: cast_nullable_to_non_nullable
@@ -289,7 +276,6 @@ class _$_TrainerEntity implements _TrainerEntity {
       required final List<String> languages,
       required this.rating,
       required this.location,
-      required this.phoneNumber,
       required final List<ReviewEntity> reviews,
       required final List<String> categories})
       : _languages = languages,
@@ -326,8 +312,6 @@ class _$_TrainerEntity implements _TrainerEntity {
   final double rating;
   @override
   final String location;
-  @override
-  final String phoneNumber;
   final List<ReviewEntity> _reviews;
   @override
   List<ReviewEntity> get reviews {
@@ -346,7 +330,7 @@ class _$_TrainerEntity implements _TrainerEntity {
 
   @override
   String toString() {
-    return 'TrainerEntity(id: $id, image: $image, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, phoneNumber: $phoneNumber, reviews: $reviews, categories: $categories)';
+    return 'TrainerEntity(id: $id, image: $image, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories)';
   }
 
   @override
@@ -371,8 +355,6 @@ class _$_TrainerEntity implements _TrainerEntity {
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories));
@@ -393,7 +375,6 @@ class _$_TrainerEntity implements _TrainerEntity {
       const DeepCollectionEquality().hash(_languages),
       rating,
       location,
-      phoneNumber,
       const DeepCollectionEquality().hash(_reviews),
       const DeepCollectionEquality().hash(_categories));
 
@@ -418,7 +399,6 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final List<String> languages,
       required final double rating,
       required final String location,
-      required final String phoneNumber,
       required final List<ReviewEntity> reviews,
       required final List<String> categories}) = _$_TrainerEntity;
 
@@ -446,8 +426,6 @@ abstract class _TrainerEntity implements TrainerEntity {
   double get rating;
   @override
   String get location;
-  @override
-  String get phoneNumber;
   @override
   List<ReviewEntity> get reviews;
   @override

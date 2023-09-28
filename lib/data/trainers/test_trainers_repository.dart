@@ -11,7 +11,7 @@ class TestTrainersRepository implements TrainersSource {
   }
 
   final List<TrainerEntity> _dummyTrainerCards = [
-    TrainerEntity(
+    const TrainerEntity(
         id: '1',
         image: "assets/images/trainer3.png",
         name: "Son goku",
@@ -23,11 +23,10 @@ class TestTrainersRepository implements TrainersSource {
         email: 'Email',
         languages: ['Polish', 'English'],
         location: 'Location',
-        phoneNumber: 'Phone number',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
         categories: ['Training type 1', 'Training type 2'],
         rating: 5.0),
-    TrainerEntity(
+    const TrainerEntity(
         id: '2',
         image: "assets/images/trainer1.png",
         name: "Piccolo",
@@ -39,11 +38,10 @@ class TestTrainersRepository implements TrainersSource {
         email: 'Email',
         languages: ['Polish', 'English'],
         location: 'Location',
-        phoneNumber: 'Phone number',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
         categories: ['Training type 1', 'Training type 2'],
         rating: 2.5),
-    TrainerEntity(
+    const TrainerEntity(
         id: '3',
         image: "assets/images/trainer2.png",
         name: "Son gohan",
@@ -55,7 +53,6 @@ class TestTrainersRepository implements TrainersSource {
         email: 'Email',
         languages: ['Polish', 'English'],
         location: 'Location',
-        phoneNumber: 'Phone number',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
         categories: ['Training type 1', 'Training type 2'],
         rating: 4.5),

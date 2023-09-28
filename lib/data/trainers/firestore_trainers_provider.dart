@@ -27,7 +27,6 @@ class FirestoreTrainersProvider implements TrainersSource {
           email: "",
           rating: 2.3,
           location: data[UserDocumentFields.location],
-          phoneNumber: data[UserDocumentFields.phoneNumber],
           languages: data[UserDocumentFields.languages].toString().split(", "),
           reviews: _getReviews(data),
           categories:

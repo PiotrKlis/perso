@@ -120,19 +120,6 @@ class TrainerDetailsScreen extends StatelessWidget {
                           left: Dimens.normalMargin, top: Dimens.mediumMargin),
                       child: Row(
                         children: [
-                          Icon(Icons.phone),
-                          Container(
-                              margin:
-                                  EdgeInsets.only(left: Dimens.normalMargin),
-                              child: Text(_trainerEntity.phoneNumber))
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: Dimens.normalMargin, top: Dimens.mediumMargin),
-                      child: Row(
-                        children: [
                           Icon(Icons.pin_drop),
                           Container(
                               margin:

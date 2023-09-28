@@ -4,7 +4,6 @@ import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/data/clients/clients_service.dart';
 import 'package:Perso/data/clients/firestore_clients_service.dart';
-import 'package:Perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:Perso/data/trainers/firestore_trainers_service.dart';
 import 'package:Perso/data/trainers/trainers_service.dart';
 import 'package:Perso/data/user_info/user_info_provider.dart';
@@ -14,7 +13,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   final ClientsService _clientsService = getIt.get<FirestoreClientsService>();
   final TrainersService _trainersService =
       getIt.get<FirestoreTrainersService>();
-  final _sharedPrefs = getIt.get<PersoSharedPrefs>();
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   ProfileEditBloc(ProfileEditState initialState) : super(initialState) {
@@ -84,7 +82,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         languages: event.trainerData.languages,
         rating: 0.0,
         location: event.trainerData.location,
-        phoneNumber: event.trainerData.phoneNumber,
         reviews: List.empty(),
         categories: event.trainerData.categories);
     await _trainersService.setData(trainerEntity);
