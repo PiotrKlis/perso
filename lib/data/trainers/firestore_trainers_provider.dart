@@ -23,11 +23,9 @@ class FirestoreTrainersProvider implements TrainersSource {
           votesNumber: data[UserDocumentFields.votesNumber],
           fullBio: data[UserDocumentFields.fullBio],
           shortBio: data[UserDocumentFields.shortBio],
-          image: "assets/images/trainer3.png",
-          email: "",
-          rating: 2.3,
+          email: data[UserDocumentFields.email],
+          rating: data[UserDocumentFields.rating],
           location: data[UserDocumentFields.location],
-          phoneNumber: data[UserDocumentFields.phoneNumber],
           languages: data[UserDocumentFields.languages].toString().split(", "),
           reviews: _getReviews(data),
           categories:

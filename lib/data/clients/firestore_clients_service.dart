@@ -26,7 +26,6 @@ class FirestoreClientsService implements ClientsService {
         UserDocumentFields.location: clientData.location,
         UserDocumentFields.name: clientData.name,
         UserDocumentFields.nickname: clientData.nickname,
-        UserDocumentFields.phoneNumber: clientData.phoneNumber,
         UserDocumentFields.surname: clientData.surname,
         UserDocumentFields.userType: UserType.client.name,
       });

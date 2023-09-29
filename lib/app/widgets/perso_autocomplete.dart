@@ -5,7 +5,6 @@ import 'package:Perso/data/address_provider/address_provider.dart';
 import 'package:Perso/data/address_provider/google_address_provider.dart';
 import 'package:flutter/material.dart';
 
-
 class PersoAutocomplete extends StatelessWidget {
   PersoAutocomplete({super.key});
 
