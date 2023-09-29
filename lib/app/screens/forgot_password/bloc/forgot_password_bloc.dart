@@ -4,7 +4,6 @@ import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/data/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
@@ -16,7 +15,7 @@ class ForgotPasswordBloc
         await _authProvider.resetPassword(event.email);
         emitter.call(const ForgotPasswordState.passwordResetSuccess());
       } catch (error) {
-        String errorMessage = AppLocalizations.of(context)!.generic_error_message;
+        String errorMessage = "Something went wrong";
         if (error is FirebaseAuthException) {
           switch (error.code) {
             case 'email-already-in-use':
