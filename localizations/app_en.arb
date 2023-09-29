@@ -66,5 +66,12 @@
   "biography": "Biography",
   "languages": "Languages",
   "training_categories": "Training categories",
-  "categories": "Categories"
+  "categories": "Categories",
+  "edit_profile": "Edit profil {userType}!",
+    "@edit_profile": {
+        "placeholders": {
+            "userType": {
+                "type": "String"
+            }}},
+  "logout": "Logout"
 }

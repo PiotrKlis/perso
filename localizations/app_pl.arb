@@ -66,5 +66,12 @@
   "biography": "Biografia",
   "languages": "Języki",
   "training_categories": "Kategorie treningów",
-  "categories": "Kategorie"
+  "categories": "Kategorie",
+  "edit_profile": "Edytuj profil {userType}!",
+  "@edit_profile": {
+      "placeholders": {
+          "userType": {
+              "type": "String"
+          }}},
+  "logout": "Wyloguj się"
 }

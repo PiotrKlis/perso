@@ -60,7 +60,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
           elevation: 0.0,
-          title: Text("Edit ${widget._userType.name} profile"),
+          title: Text(AppLocalizations.of(context)!.edit_profile("userType")),
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
