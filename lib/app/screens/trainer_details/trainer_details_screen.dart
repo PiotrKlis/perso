@@ -125,72 +125,122 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                   // setState() {}
                 ],
               ),
-              Container(
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(
-                            top: Dimens.bigMargin, left: Dimens.normalMargin),
-                        child: Text(
-                          "Biography",
-                          style: ThemeText.bodyBoldBlackText,
-                        )),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          top: Dimens.smallMargin,
-                          left: Dimens.normalMargin,
-                          right: Dimens.normalMargin),
-                      child: Text(
-                        "Hello! I have been doing Yoga training for over 8 years and I’m pleased to present you my teachings. Below are my contact details.",
-                        style: ThemeText.subHeadingRegularGrey,
-                      ),
-                    ),
-                    Container(
-                        margin: const EdgeInsets.only(
-                            top: Dimens.biggerMargin,
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
-                        child: Text(
-                          "Location",
-                          style: ThemeText.bodyBoldBlackText,
-                        )),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin,
-                          top: Dimens.mediumMargin,
-                          right: Dimens.normalMargin),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.pin_drop),
-                          Container(
-                              margin: const EdgeInsets.only(
-                                  left: Dimens.normalMargin,
-                                  right: Dimens.normalMargin),
-                              child: Text(widget._trainerEntity.location))
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                      child: Text(
-                        "Languages",
-                        style: ThemeText.bodyBoldBlackText,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          top: Dimens.mediumMargin, left: Dimens.normalMargin, right: Dimens.normalMargin, bottom: Dimens.normalMargin),
-                      child: _getLanguages(),
-                    ),
-                  ],
-                ),
+              Visibility(
+                visible: _segmentSelected.contains("About"),
+                child: _aboutSection(),
+              ),
+              Visibility(
+                visible: _segmentSelected.contains("Reviews"),
+                child: _reviewsSection(),
               )
             ],
           ),
         ));
+  }
+
+  Container _aboutSection() {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.bigMargin, left: Dimens.normalMargin),
+              child: Text(
+                "Biography",
+                style: ThemeText.bodyBoldBlackText,
+              )),
+          Container(
+            margin: const EdgeInsets.only(
+                top: Dimens.smallMargin,
+                left: Dimens.normalMargin,
+                right: Dimens.normalMargin),
+            child: Text(
+              "Hello! I have been doing Yoga training for over 8 years and I’m pleased to present you my teachings. Below are my contact details.",
+              style: ThemeText.subHeadingRegularGrey,
+            ),
+          ),
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.biggerMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
+              child: Text(
+                "Location",
+                style: ThemeText.bodyBoldBlackText,
+              )),
+          Container(
+            margin: const EdgeInsets.only(
+                left: Dimens.normalMargin,
+                top: Dimens.mediumMargin,
+                right: Dimens.normalMargin),
+            child: Row(
+              children: [
+                const Icon(Icons.pin_drop),
+                Container(
+                    margin: const EdgeInsets.only(
+                        left: Dimens.normalMargin, right: Dimens.normalMargin),
+                    child: Text(widget._trainerEntity.location))
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+                top: Dimens.biggerMargin, left: Dimens.normalMargin),
+            child: Text(
+              "Languages",
+              style: ThemeText.bodyBoldBlackText,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+                top: Dimens.mediumMargin,
+                left: Dimens.normalMargin,
+                right: Dimens.normalMargin,
+                bottom: Dimens.normalMargin),
+            child: _getLanguages(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _reviewsSection() {
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: EdgeInsets.all(Dimens.normalMargin),
+                child: Text("Based on 142 reviews", style: ThemeText.bodyRegularBlackText),
+              ),
+              Container(
+                margin: EdgeInsets.only(right: Dimens.normalMargin),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                      size: 40.0,
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(left: Dimens.smallMargin),
+                        child: Text(
+                          "5.0",
+                          style: ThemeText.largerTitleBold,
+                        )),
+                  ],
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   Row _getLanguages() {
