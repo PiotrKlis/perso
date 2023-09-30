@@ -32,20 +32,57 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
               Column(
                 children: [
                   Container(
-                      margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                      child: SegmentedButton(
-                          selected: _segmentSelected,
-                          segments: const [
-                            ButtonSegment<String>(
-                                value: "About", label: Text('About')),
-                            ButtonSegment<String>(
-                                value: "Reviews", label: Text('Reviews')),
-                          ],
-                          onSelectionChanged: (selectedSet) {
-                            setState(() {
-                              _segmentSelected = selectedSet;
-                            });
-                          })),
+                    margin: const EdgeInsets.only(
+                        top: Dimens.normalMargin,
+                        left: Dimens.hugeMargin,
+                        right: Dimens.hugeMargin),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: SegmentedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Colors.black;
+                                    } else {
+                                      return Colors.white;
+                                    }
+                                  },
+                                ),
+                                textStyle: MaterialStateProperty.resolveWith<
+                                    TextStyle>(
+                                  (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return ThemeText.bodyBoldWhiteText;
+                                    } else {
+                                      return ThemeText.bodyBoldBlackText;
+                                    }
+                                  },
+                                ),
+                              ),
+                              showSelectedIcon: false,
+                              selected: _segmentSelected,
+                              segments: const [
+                                ButtonSegment<String>(
+                                    value: "About", label: Text('About')),
+                                ButtonSegment<String>(
+                                    value: "Reviews", label: Text('Reviews')),
+                              ],
+                              onSelectionChanged: (selectedSet) {
+                                setState(() {
+                                  _segmentSelected = selectedSet;
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                       margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                       child: const Icon(
@@ -122,8 +159,8 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                         children: [
                           const Icon(Icons.mail),
                           Container(
-                              margin:
-                                  const EdgeInsets.only(left: Dimens.normalMargin),
+                              margin: const EdgeInsets.only(
+                                  left: Dimens.normalMargin),
                               child: Text(widget._trainerEntity.email))
                         ],
                       ),
@@ -135,8 +172,8 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                         children: [
                           const Icon(Icons.pin_drop),
                           Container(
-                              margin:
-                                  const EdgeInsets.only(left: Dimens.normalMargin),
+                              margin: const EdgeInsets.only(
+                                  left: Dimens.normalMargin),
                               child: Text(widget._trainerEntity.location))
                         ],
                       ),
