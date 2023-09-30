@@ -4,6 +4,7 @@ import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
+import 'package:Perso/core/string_extensions.dart';
 import 'package:flutter/material.dart';
 
 class TrainerDetailsScreen extends StatefulWidget {
@@ -138,7 +139,9 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                         )),
                     Container(
                       margin: const EdgeInsets.only(
-                          top: Dimens.smallMargin, left: Dimens.normalMargin),
+                          top: Dimens.smallMargin,
+                          left: Dimens.normalMargin,
+                          right: Dimens.normalMargin),
                       child: Text(
                         "Hello! I have been doing Yoga training for over 8 years and I’m pleased to present you my teachings. Below are my contact details.",
                         style: ThemeText.subHeadingRegularGrey,
@@ -147,33 +150,24 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     Container(
                         margin: const EdgeInsets.only(
                             top: Dimens.biggerMargin,
-                            left: Dimens.normalMargin),
+                            left: Dimens.normalMargin,
+                            right: Dimens.normalMargin),
                         child: Text(
-                          "Contact",
+                          "Location",
                           style: ThemeText.bodyBoldBlackText,
                         )),
                     Container(
                       margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin, top: Dimens.mediumMargin),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.mail),
-                          Container(
-                              margin: const EdgeInsets.only(
-                                  left: Dimens.normalMargin),
-                              child: Text(widget._trainerEntity.email))
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin, top: Dimens.mediumMargin),
+                          left: Dimens.normalMargin,
+                          top: Dimens.mediumMargin,
+                          right: Dimens.normalMargin),
                       child: Row(
                         children: [
                           const Icon(Icons.pin_drop),
                           Container(
                               margin: const EdgeInsets.only(
-                                  left: Dimens.normalMargin),
+                                  left: Dimens.normalMargin,
+                                  right: Dimens.normalMargin),
                               child: Text(widget._trainerEntity.location))
                         ],
                       ),
@@ -181,12 +175,15 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     Container(
                       margin: const EdgeInsets.only(
                           top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                      child: const Text("Languages"),
+                      child: Text(
+                        "Languages",
+                        style: ThemeText.bodyBoldBlackText,
+                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(
-                          top: Dimens.mediumMargin, left: Dimens.normalMargin),
-                      child: Text(widget._trainerEntity.languages.first),
+                          top: Dimens.mediumMargin, left: Dimens.normalMargin, right: Dimens.normalMargin, bottom: Dimens.normalMargin),
+                      child: _getLanguages(),
                     ),
                   ],
                 ),
@@ -194,5 +191,18 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
             ],
           ),
         ));
+  }
+
+  Row _getLanguages() {
+    List<Text> languages = widget._trainerEntity.languages.map((element) {
+      String language = element.removeBrackets();
+      return Text(
+        language,
+        style: const TextStyle(fontSize: 24.0),
+      );
+    }).toList();
+    return Row(
+      children: languages,
+    );
   }
 }
