@@ -294,12 +294,58 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
           ),
           const PersoDivider(),
           Container(
-            margin: const EdgeInsets.all(Dimens.mediumMargin),
+            margin: const EdgeInsets.only(
+                top: Dimens.mediumMargin, left: Dimens.mediumMargin),
             child: Text(
               "Reviews",
               style: ThemeText.bodyBoldBlackText,
             ),
           ),
+          _review()
+        ],
+      ),
+    );
+  }
+
+  Container _review() {
+    return Container(
+      margin: const EdgeInsets.all(Dimens.mediumMargin),
+      child: Column(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Row(
+              children: [
+                const Icon(Icons.account_circle, size: 48.0),
+                Container(
+                  margin: const EdgeInsets.only(left: Dimens.smallMargin),
+                  child: Column(
+                    children: [
+                      Text("John Wick", style: ThemeText.bodyBoldBlackText),
+                      RatingBar(
+                        itemSize: 20.0,
+                        allowHalfRating: true,
+                        ratingWidget: RatingWidget(
+                            full: const Icon(Icons.star, color: Colors.yellow),
+                            half: const Icon(Icons.star_half,
+                                color: Colors.yellow),
+                            empty: const Icon(Icons.star_border,
+                                color: Colors.yellow)),
+                        onRatingUpdate: (value) {
+                          //no-op
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Text("1 month ago", style: ThemeText.bodyRegularBlackText)
+          ]),
+          Container(
+              margin: const EdgeInsets.only(top: Dimens.smallMargin),
+              child: Text(
+                  "Let me put it this way! Andrew went out of his way to in our journey together. I wasn’t sure about things in the beginning, Lol.",
+                  style: ThemeText.bodyRegularBlackText)),
         ],
       ),
     );
