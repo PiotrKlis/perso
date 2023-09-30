@@ -6,32 +6,46 @@ import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:flutter/material.dart';
 
-class TrainerDetailsScreen extends StatelessWidget {
-  TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})
+class TrainerDetailsScreen extends StatefulWidget {
+  const TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})
       : _trainerEntity = trainerEntity,
         super();
 
   final TrainerEntity _trainerEntity;
-  final List<bool> _selectedFruits = <bool>[true, false];
+
+  @override
+  State<TrainerDetailsScreen> createState() => _TrainerDetailsScreenState();
+}
+
+class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
+  Set<String> _segmentSelected = Set.from({"About"});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: PersoAppBar(
-            isTitleCentered: true, title: "@${_trainerEntity.nickname}"),
+            isTitleCentered: true, title: "@${widget._trainerEntity.nickname}"),
         body: SingleChildScrollView(
           child: Column(
             children: [
               Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: ToggleButtons(
-                      isSelected: _selectedFruits,
-                      children: const [Text("About"), Text("Reviews")],
-                    ),
-                  ),
+                      margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                      child: SegmentedButton(
+                          selected: _segmentSelected,
+                          segments: const [
+                            ButtonSegment<String>(
+                                value: "About", label: Text('About')),
+                            ButtonSegment<String>(
+                                value: "Reviews", label: Text('Reviews')),
+                          ],
+                          onSelectionChanged: (selectedSet) {
+                            setState(() {
+                              _segmentSelected = selectedSet;
+                            });
+                          })),
                   Container(
                       margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                       child: const Icon(
@@ -79,23 +93,22 @@ class TrainerDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: Dimens.bigMargin, left: Dimens.normalMargin),
                         child: Text(
                           "Biography",
                           style: ThemeText.bodyBoldBlackText,
                         )),
                     Container(
-                      margin: EdgeInsets.only(
-                          top: Dimens.smallMargin,
-                          left: Dimens.normalMargin),
+                      margin: const EdgeInsets.only(
+                          top: Dimens.smallMargin, left: Dimens.normalMargin),
                       child: Text(
                         "Hello! I have been doing Yoga training for over 8 years and I’m pleased to present you my teachings. Below are my contact details.",
                         style: ThemeText.subHeadingRegularGrey,
                       ),
                     ),
                     Container(
-                        margin: EdgeInsets.only(
+                        margin: const EdgeInsets.only(
                             top: Dimens.biggerMargin,
                             left: Dimens.normalMargin),
                         child: Text(
@@ -103,38 +116,40 @@ class TrainerDetailsScreen extends StatelessWidget {
                           style: ThemeText.bodyBoldBlackText,
                         )),
                     Container(
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                           left: Dimens.normalMargin, top: Dimens.mediumMargin),
                       child: Row(
                         children: [
-                          Icon(Icons.mail),
+                          const Icon(Icons.mail),
                           Container(
                               margin:
-                                  EdgeInsets.only(left: Dimens.normalMargin),
-                              child: Text(_trainerEntity.email))
+                                  const EdgeInsets.only(left: Dimens.normalMargin),
+                              child: Text(widget._trainerEntity.email))
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(
+                      margin: const EdgeInsets.only(
                           left: Dimens.normalMargin, top: Dimens.mediumMargin),
                       child: Row(
                         children: [
-                          Icon(Icons.pin_drop),
+                          const Icon(Icons.pin_drop),
                           Container(
                               margin:
-                                  EdgeInsets.only(left: Dimens.normalMargin),
-                              child: Text(_trainerEntity.location))
+                                  const EdgeInsets.only(left: Dimens.normalMargin),
+                              child: Text(widget._trainerEntity.location))
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                      child: Text("Languages"),
+                      margin: const EdgeInsets.only(
+                          top: Dimens.biggerMargin, left: Dimens.normalMargin),
+                      child: const Text("Languages"),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: Dimens.mediumMargin, left: Dimens.normalMargin),
-                      child: Text(_trainerEntity.languages.first),
+                      margin: const EdgeInsets.only(
+                          top: Dimens.mediumMargin, left: Dimens.normalMargin),
+                      child: Text(widget._trainerEntity.languages.first),
                     ),
                   ],
                 ),
