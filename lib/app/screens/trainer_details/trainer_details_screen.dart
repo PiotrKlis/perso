@@ -21,7 +21,7 @@ class TrainerDetailsScreen extends StatefulWidget {
 }
 
 class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
-  Set<String> _segmentSelected = Set.from({"About"});
+  Set<String> _segmentSelected = Set.from({_Segments.about.name});
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +71,13 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                               ),
                               showSelectedIcon: false,
                               selected: _segmentSelected,
-                              segments: const [
+                              segments: [
                                 ButtonSegment<String>(
-                                    value: "About", label: Text('About')),
+                                    value: _Segments.about.name,
+                                    label: const Text('About')),
                                 ButtonSegment<String>(
-                                    value: "Reviews", label: Text('Reviews')),
+                                    value: _Segments.reviews.name,
+                                    label: const Text('Reviews')),
                               ],
                               onSelectionChanged: (selectedSet) {
                                 setState(() {
@@ -128,11 +130,11 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                 ],
               ),
               Visibility(
-                visible: _segmentSelected.contains("About"),
+                visible: _segmentSelected.contains(_Segments.about.name),
                 child: _aboutSection(),
               ),
               Visibility(
-                visible: _segmentSelected.contains("Reviews"),
+                visible: _segmentSelected.contains(_Segments.reviews.name),
                 child: _reviewsSection(),
               )
             ],
@@ -183,7 +185,8 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                 Flexible(
                   child: Container(
                       margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin, right: Dimens.normalMargin),
+                          left: Dimens.normalMargin,
+                          right: Dimens.normalMargin),
                       child: Text(
                         widget._trainerEntity.location,
                         style: ThemeText.bodyRegularBlackText,
@@ -211,6 +214,19 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Row _getLanguages() {
+    List<Text> languages = widget._trainerEntity.languages.map((element) {
+      String language = element.removeBrackets();
+      return Text(
+        language,
+        style: const TextStyle(fontSize: 24.0),
+      );
+    }).toList();
+    return Row(
+      children: languages,
     );
   }
 
@@ -356,17 +372,6 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
       ),
     );
   }
-
-  Row _getLanguages() {
-    List<Text> languages = widget._trainerEntity.languages.map((element) {
-      String language = element.removeBrackets();
-      return Text(
-        language,
-        style: const TextStyle(fontSize: 24.0),
-      );
-    }).toList();
-    return Row(
-      children: languages,
-    );
-  }
 }
+
+enum _Segments { about, reviews }

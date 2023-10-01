@@ -2,8 +2,8 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
-class PersoSmallDivider extends StatelessWidget {
-  const PersoSmallDivider({super.key});
+class PersoIndentedDivider extends StatelessWidget {
+  const PersoIndentedDivider({super.key});
 
   @override
   Widget build(BuildContext context) {
