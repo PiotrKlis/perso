@@ -165,7 +165,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
           ),
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.biggerMargin,
+                  top: Dimens.bigMargin,
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
@@ -180,16 +180,22 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
             child: Row(
               children: [
                 const Icon(Icons.pin_drop),
-                Container(
-                    margin: const EdgeInsets.only(
-                        left: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: Text(widget._trainerEntity.location))
+                Flexible(
+                  child: Container(
+                      margin: const EdgeInsets.only(
+                          left: Dimens.normalMargin, right: Dimens.normalMargin),
+                      child: Text(
+                        widget._trainerEntity.location,
+                        style: ThemeText.bodyRegularBlackText,
+                        softWrap: true,
+                      )),
+                )
               ],
             ),
           ),
           Container(
             margin: const EdgeInsets.only(
-                top: Dimens.biggerMargin, left: Dimens.normalMargin),
+                top: Dimens.bigMargin, left: Dimens.normalMargin),
             child: Text(
               "Languages",
               style: ThemeText.bodyBoldBlackText,
