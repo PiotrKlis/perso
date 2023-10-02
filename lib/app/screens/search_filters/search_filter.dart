@@ -38,7 +38,10 @@ class SearchFilterScreen extends StatelessWidget {
               letterSpacing: -0.4,
             ),
           ),
-          Text(
+          
+           Row(
+            children: <Widget>[
+          Expanded(child: Text(
             "Rating",
             style: TextStyle(
               fontSize: 17,
@@ -46,23 +49,23 @@ class SearchFilterScreen extends StatelessWidget {
               fontWeight: FontWeight.w600,
               letterSpacing: -0.4,
             ),
-          ),
-          RatingBar.builder(
+          )),
+         Expanded( child: RatingBar.builder(
               initialRating: 0,
               minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
-              itemPadding: EdgeInsets.symmetric(horizontal: 4),
+              itemPadding: EdgeInsets.symmetric(horizontal: 0), itemSize: 30,
               itemBuilder: (context, _) => Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
               onRatingUpdate: (rating) {
                 print(rating);
-              }),
+              }))]),
           PersoButton(title: "Apply Filtres")
-        ],
+        ]
       ),
     );
   }
