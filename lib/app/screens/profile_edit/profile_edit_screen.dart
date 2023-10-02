@@ -9,6 +9,7 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_async_text_field.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
@@ -24,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -57,10 +59,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       create: (context) => ProfileEditBloc(const ProfileEditState.initial()),
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: AppBar(
-          elevation: 0.0,
-          title: Text("Edit ${widget._userType.name} profile"),
-        ),
+        appBar: PersoAppBar(title: "Edit ${widget._userType.name} profile"),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Form(
@@ -70,8 +69,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               children: [
                 Center(
                   child: Container(
-                    width: 200.0,
-                    height: 200.0,
+                    width: Dimens.imagePlaceholderBackgroundWidth,
+                    height: Dimens.imagePlaceholderBackgroundHeight,
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.black),
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
@@ -79,13 +78,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         ? const Icon(
                             Icons.camera_alt,
                             color: Colors.white,
-                            size: 120.0,
+                            size: Dimens.placeholderIconSize,
                           )
                         : ClipOval(
                             child: Image.file(
                               File(_image!.path),
-                              width: 200.0,
-                              height: 200.0,
+                              width: Dimens.profileImageWidth, 
+                              height: Dimens.profileImageHeight, 
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -129,7 +128,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.person, size: 24.0)),
+                            child: const Icon(Icons.person, size: Dimens.iconSize)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
@@ -180,7 +179,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.pin_drop, size: 24.0)),
+                            child: const Icon(Icons.pin_drop, size: Dimens.iconSize,)),
                         Expanded(
                           child: Container(
                               margin: const EdgeInsets.only(
@@ -210,10 +209,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
                                   child: const Icon(Icons.text_snippet,
-                                      size: 24.0)),
+                                      size: Dimens.iconSize)),
                               Expanded(
                                 child: Container(
-                                  height: 140.0,
+                                  height: Dimens.shortBioHeight,
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
                                   child: PersoTextField(
@@ -229,7 +228,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             ],
                           )),
                       Container(
-                          height: 340.0,
+                          height: Dimens.longBioHeight,
                           margin: const EdgeInsets.only(
                               left: Dimens.substantialMargin,
                               top: Dimens.normalMargin,
@@ -277,7 +276,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                     child: const CircularProgressIndicator())),
                           ) ??
                           PersoButton(
-                              width: 160.0, title: "Next", onTap: _uploadData);
+                              width: Dimens.bigButtonWidth, title: "Next", onTap: _uploadData);
                     },
                     listener: (context, state) {
                       state.whenOrNull(
