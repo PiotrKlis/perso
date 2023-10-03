@@ -13,94 +13,79 @@ class SearchFilterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: PersoColors.lightBlue,
+        backgroundColor: Colors.white,
         appBar: PersoAppBar(
           title: "Filters", 
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: [
             Container(
-              color: Colors.white,
-              child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 82,
-                      left: 24,
-                    ),
-                    child: Text(
-                      "Spoken Languages",
-                      style: ThemeText.bodyBoldBlackText, 
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: Dimens.smallMargin, left: Dimens.normalMargin),
-                    child: SpokenLanguageRowWidget(), alignment: Alignment.bottomCenter,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 82, left: 24),
-                    child: Text(
-                      "Location",
-                      style: ThemeText.bodyBoldBlackText,
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 24, top: 2),
-                    child: Row(
-                      children: [Text("By default it is set to My country")],
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 82, left: 24, bottom: 82),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Expanded(
-                            child: Text(
-                          "Rating",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontStyle: FontStyle.normal,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: -0.4,
-                          ),
-                        )),
-                        Expanded(
-                          child: RatingBar.builder(
-                            initialRating: 0,
-                            minRating: 1,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            itemCount: 5,
-                            itemPadding: EdgeInsets.symmetric(horizontal: 0),
-                            itemSize: 30,
-                            itemBuilder: (context, _) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
-                            onRatingUpdate: (rating) {
-                              print(rating);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              margin: EdgeInsets.only(
+                top: 32,
+                left: 24,
+              ),
+              child: Text(
+                "Spoken Languages",
+                style: ThemeText.bodyBoldBlackText, 
               ),
             ),
             Container(
-                margin: EdgeInsets.only(
-                  top: Dimens.hugeMargin,
+              margin: EdgeInsets.only(
+                  top: Dimens.smallMargin, left: Dimens.normalMargin),
+              child: SpokenLanguageRowWidget(), 
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 56, left: 24),
+              child: Text(
+                "Location",
+                style: ThemeText.bodyBoldBlackText,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 24, top: 2),
+              child: Row(
+                children: [Text("By default it is set to My country")],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 58, left: 24),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    "Rating",
+                    style: ThemeText.bodyBoldBlackText
+                    ),
+                  Container(
+                    margin: EdgeInsets.only(left: Dimens.bigMargin),
+                    child: RatingBar(
+                                allowHalfRating: true,
+                                  ratingWidget: RatingWidget(
+                      full: const Icon(Icons.star, color: Colors.yellow),
+                      half: const Icon(Icons.star_half, color: Colors.yellow),
+                      empty:
+                          const Icon(Icons.star_border, color: Colors.yellow)),
+                                  onRatingUpdate: (value) {
+                     //no-op
+                                  },
+                                 ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 40),
+                  child: PersoButton(
+                    width: Dimens.bigButtonWidth,
+                    title: "Apply Filtres",
+                  ),
                 ),
-                child: PersoButton(
-                  title: "Apply Filtres",
-                ))
+              ),
+            )
           ],
         ));
   }
