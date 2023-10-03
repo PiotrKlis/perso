@@ -20,21 +20,18 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: Dimens.substantialMargin),
               child: Text(AppLocalizations.of(context)!.succes_message_title,
-                
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.biggerMargin),
               child: Text(AppLocalizations.of(context)!.succes_message_body_1,
-                
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
               child: Text(AppLocalizations.of(context)!.succes_message_body_2,
-                  
                   style: ThemeText.bodyRegularBlackText),
             ),
             Container(

@@ -6,7 +6,6 @@ import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
   final AuthService _authProvider = getIt.get<AuthService>();
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();

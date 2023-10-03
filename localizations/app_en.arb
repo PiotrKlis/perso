@@ -67,7 +67,7 @@
   "languages": "Languages",
   "training_categories": "Training categories",
   "categories": "Categories",
-  "edit_profile": "Edit profil {userType}!",
+  "edit_profile": "Edit profile {userType}!",
     "@edit_profile": {
         "placeholders": {
             "userType": {
