@@ -19,7 +19,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await _navigateLoggedIn(emit);
       } else {
         emit(const HomeState.navigateToSignIn());
-        emit.call(const HomeState.initial());
       }
     });
   }
@@ -28,10 +27,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     UserType userType = await _userInfoProvider.getUserType();
     if (userType == UserType.trainer) {
       emit(const HomeState.navigateToTrainerProfile());
-      emit.call(const HomeState.initial());
     } else {
       emit(const HomeState.navigateToClientProfile());
-      emit.call(const HomeState.initial());
     }
   }
 }
