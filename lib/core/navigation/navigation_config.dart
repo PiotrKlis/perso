@@ -45,7 +45,7 @@ final GoRouter goRouter = GoRouter(
             routes: [
               GoRoute(
                 name: ScreenNavigationKey.trainerDetails,
-                path: "${ScreenNavigationKey.searchResults}/:trainerId",
+                path: "${ScreenNavigationKey.trainerDetails}/:trainerId",
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: TrainerDetailsScreen(
