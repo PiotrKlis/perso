@@ -19,8 +19,7 @@ class PersoTrainingCategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          TrainingCategoryListBloc(const TrainingCategoryListState.initial()),
+      create: (context) => TrainingCategoryListBloc(),
       child: BlocBuilder<TrainingCategoryListBloc, TrainingCategoryListState>(
         builder: (context, state) {
           return state.when(initial: () {

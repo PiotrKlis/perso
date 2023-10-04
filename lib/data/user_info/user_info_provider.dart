@@ -8,7 +8,6 @@ import 'package:injectable/injectable.dart';
 class UserInfoProvider {
   User? user;
 
-  //TODO: Fix me, this doesn't seem to work
   Future<bool> isProfileCreated() async {
     final String? id = FirebaseAuth.instance.currentUser?.uid;
     final DocumentSnapshot snapshot = await FirebaseFirestore.instance
@@ -21,7 +20,8 @@ class UserInfoProvider {
   Future<bool> isUserLoggedIn() async {
     if (user != null) {
       final bool doesProfileExist = await isProfileCreated();
-      final bool isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      final bool isEmailVerified =
+          FirebaseAuth.instance.currentUser!.emailVerified;
       if (doesProfileExist && isEmailVerified) {
         return true;
       }
@@ -29,13 +29,18 @@ class UserInfoProvider {
     return false;
   }
 
-  Future<UserType> getUserType() async {
-    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(user?.uid)
-        .get();
-    String userType = snapshot.get(UserDocumentFields.userType);
-    return userType.toUserType();
+  Future<UserType?> getUserType() async {
+    final bool isLoggedIn = await isUserLoggedIn();
+    if (isLoggedIn) {
+      final DocumentSnapshot snapshot = await FirebaseFirestore.instance
+          .collection(CollectionName.users)
+          .doc(user?.uid)
+          .get();
+      String userType = snapshot.get(UserDocumentFields.userType);
+      return userType.toUserType();
+    } else {
+      return null;
+    }
   }
 
   void listenForFirebaseUserChange() {

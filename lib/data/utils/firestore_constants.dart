@@ -4,7 +4,6 @@ class CollectionName {
 }
 
 class UserDocumentFields {
-  static const String email = "email";
   static const String fullBio = "fullBio";
   static const String languages = "languages";
   static const String location = "location";
@@ -22,5 +21,8 @@ class UserDocumentFields {
   static const String userType = "userType";
   static const String pendingRequests = "pendingRequests";
   static const String activeClients = "activeClients";
-  static const String inactiveClient = "inactiveClient";
+  static const String inactiveClients = "inactiveClients";
+  static const String imagePath = "imagePath";
+  static const String activeTrainers = "activeTrainers";
+  static const String inactiveTrainers = "inactiveTrainers";
 }

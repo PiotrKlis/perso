@@ -18,23 +18,23 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TrainerDetailsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadData,
+    required TResult Function(String trainerId) loadData,
     required TResult Function() addReview,
-    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
+    required TResult Function(String trainerId) trainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadData,
+    TResult? Function(String trainerId)? loadData,
     TResult? Function()? addReview,
-    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult? Function(String trainerId)? trainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadData,
+    TResult Function(String trainerId)? loadData,
     TResult Function()? addReview,
-    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult Function(String trainerId)? trainingRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -85,6 +85,8 @@ abstract class _$$LoadDataCopyWith<$Res> {
   factory _$$LoadDataCopyWith(
           _$LoadData value, $Res Function(_$LoadData) then) =
       __$$LoadDataCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String trainerId});
 }
 
 /// @nodoc
@@ -93,57 +95,82 @@ class __$$LoadDataCopyWithImpl<$Res>
     implements _$$LoadDataCopyWith<$Res> {
   __$$LoadDataCopyWithImpl(_$LoadData _value, $Res Function(_$LoadData) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? trainerId = null,
+  }) {
+    return _then(_$LoadData(
+      null == trainerId
+          ? _value.trainerId
+          : trainerId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LoadData implements LoadData {
-  const _$LoadData();
+  const _$LoadData(this.trainerId);
+
+  @override
+  final String trainerId;
 
   @override
   String toString() {
-    return 'TrainerDetailsEvent.loadData()';
+    return 'TrainerDetailsEvent.loadData(trainerId: $trainerId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadData);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadData &&
+            (identical(other.trainerId, trainerId) ||
+                other.trainerId == trainerId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, trainerId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadDataCopyWith<_$LoadData> get copyWith =>
+      __$$LoadDataCopyWithImpl<_$LoadData>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadData,
+    required TResult Function(String trainerId) loadData,
     required TResult Function() addReview,
-    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
+    required TResult Function(String trainerId) trainingRequest,
   }) {
-    return loadData();
+    return loadData(trainerId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadData,
+    TResult? Function(String trainerId)? loadData,
     TResult? Function()? addReview,
-    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult? Function(String trainerId)? trainingRequest,
   }) {
-    return loadData?.call();
+    return loadData?.call(trainerId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadData,
+    TResult Function(String trainerId)? loadData,
     TResult Function()? addReview,
-    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult Function(String trainerId)? trainingRequest,
     required TResult orElse(),
   }) {
     if (loadData != null) {
-      return loadData();
+      return loadData(trainerId);
     }
     return orElse();
   }
@@ -184,7 +211,12 @@ class _$LoadData implements LoadData {
 }
 
 abstract class LoadData implements TrainerDetailsEvent {
-  const factory LoadData() = _$LoadData;
+  const factory LoadData(final String trainerId) = _$LoadData;
+
+  String get trainerId;
+  @JsonKey(ignore: true)
+  _$$LoadDataCopyWith<_$LoadData> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -225,9 +257,9 @@ class _$AddReview implements AddReview {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadData,
+    required TResult Function(String trainerId) loadData,
     required TResult Function() addReview,
-    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
+    required TResult Function(String trainerId) trainingRequest,
   }) {
     return addReview();
   }
@@ -235,9 +267,9 @@ class _$AddReview implements AddReview {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadData,
+    TResult? Function(String trainerId)? loadData,
     TResult? Function()? addReview,
-    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult? Function(String trainerId)? trainingRequest,
   }) {
     return addReview?.call();
   }
@@ -245,9 +277,9 @@ class _$AddReview implements AddReview {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadData,
+    TResult Function(String trainerId)? loadData,
     TResult Function()? addReview,
-    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult Function(String trainerId)? trainingRequest,
     required TResult orElse(),
   }) {
     if (addReview != null) {
@@ -301,9 +333,7 @@ abstract class _$$TrainingRequestCopyWith<$Res> {
           _$TrainingRequest value, $Res Function(_$TrainingRequest) then) =
       __$$TrainingRequestCopyWithImpl<$Res>;
   @useResult
-  $Res call({TrainerEntity trainerEntity});
-
-  $TrainerEntityCopyWith<$Res> get trainerEntity;
+  $Res call({String trainerId});
 }
 
 /// @nodoc
@@ -317,36 +347,28 @@ class __$$TrainingRequestCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? trainerEntity = null,
+    Object? trainerId = null,
   }) {
     return _then(_$TrainingRequest(
-      null == trainerEntity
-          ? _value.trainerEntity
-          : trainerEntity // ignore: cast_nullable_to_non_nullable
-              as TrainerEntity,
+      null == trainerId
+          ? _value.trainerId
+          : trainerId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TrainerEntityCopyWith<$Res> get trainerEntity {
-    return $TrainerEntityCopyWith<$Res>(_value.trainerEntity, (value) {
-      return _then(_value.copyWith(trainerEntity: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$TrainingRequest implements TrainingRequest {
-  const _$TrainingRequest(this.trainerEntity);
+  const _$TrainingRequest(this.trainerId);
 
   @override
-  final TrainerEntity trainerEntity;
+  final String trainerId;
 
   @override
   String toString() {
-    return 'TrainerDetailsEvent.trainingRequest(trainerEntity: $trainerEntity)';
+    return 'TrainerDetailsEvent.trainingRequest(trainerId: $trainerId)';
   }
 
   @override
@@ -354,12 +376,12 @@ class _$TrainingRequest implements TrainingRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TrainingRequest &&
-            (identical(other.trainerEntity, trainerEntity) ||
-                other.trainerEntity == trainerEntity));
+            (identical(other.trainerId, trainerId) ||
+                other.trainerId == trainerId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, trainerEntity);
+  int get hashCode => Object.hash(runtimeType, trainerId);
 
   @JsonKey(ignore: true)
   @override
@@ -370,33 +392,33 @@ class _$TrainingRequest implements TrainingRequest {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadData,
+    required TResult Function(String trainerId) loadData,
     required TResult Function() addReview,
-    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
+    required TResult Function(String trainerId) trainingRequest,
   }) {
-    return trainingRequest(trainerEntity);
+    return trainingRequest(trainerId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadData,
+    TResult? Function(String trainerId)? loadData,
     TResult? Function()? addReview,
-    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult? Function(String trainerId)? trainingRequest,
   }) {
-    return trainingRequest?.call(trainerEntity);
+    return trainingRequest?.call(trainerId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadData,
+    TResult Function(String trainerId)? loadData,
     TResult Function()? addReview,
-    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
+    TResult Function(String trainerId)? trainingRequest,
     required TResult orElse(),
   }) {
     if (trainingRequest != null) {
-      return trainingRequest(trainerEntity);
+      return trainingRequest(trainerId);
     }
     return orElse();
   }
@@ -437,10 +459,9 @@ class _$TrainingRequest implements TrainingRequest {
 }
 
 abstract class TrainingRequest implements TrainerDetailsEvent {
-  const factory TrainingRequest(final TrainerEntity trainerEntity) =
-      _$TrainingRequest;
+  const factory TrainingRequest(final String trainerId) = _$TrainingRequest;
 
-  TrainerEntity get trainerEntity;
+  String get trainerId;
   @JsonKey(ignore: true)
   _$$TrainingRequestCopyWith<_$TrainingRequest> get copyWith =>
       throw _privateConstructorUsedError;

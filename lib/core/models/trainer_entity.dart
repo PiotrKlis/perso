@@ -1,4 +1,4 @@
-import 'package:Perso/app/models/trainer_card/review_entity.dart';
+import 'package:Perso/core/models/review_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'trainer_entity.freezed.dart';
@@ -13,7 +13,7 @@ class TrainerEntity with _$TrainerEntity {
     required final int votesNumber,
     required final String fullBio,
     required final String shortBio,
-    required final String email,
+    required final String imagePath,
     required final List<String> languages,
     required final double rating,
     required final String location,

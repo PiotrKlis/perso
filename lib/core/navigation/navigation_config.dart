@@ -1,4 +1,3 @@
-import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/chat/chat_screen.dart';
 import 'package:Perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:Perso/app/screens/forgot_password/forgot_password_screen.dart';
@@ -41,16 +40,16 @@ final GoRouter goRouter = GoRouter(
             name: ScreenNavigationKey.home,
             path: ScreenNavigationKey.home,
             pageBuilder: (context, state) {
-              return NoTransitionPage(child: HomeScreen());
+              return const NoTransitionPage(child: HomeScreen());
             },
             routes: [
               GoRoute(
                 name: ScreenNavigationKey.trainerDetails,
-                path: ScreenNavigationKey.trainerDetails,
+                path: "${ScreenNavigationKey.searchResults}/:trainerId",
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: TrainerDetailsScreen(
-                          trainerEntity: state.extra as TrainerEntity));
+                          trainerId: state.pathParameters["trainerId"]!));
                 },
               ),
               GoRoute(

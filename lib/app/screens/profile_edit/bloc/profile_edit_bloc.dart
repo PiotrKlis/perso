@@ -1,7 +1,7 @@
-import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
+import 'package:Perso/core/models/trainer_entity.dart';
 import 'package:Perso/data/clients/clients_service.dart';
 import 'package:Perso/data/clients/firestore_clients_service.dart';
 import 'package:Perso/data/trainers/firestore_trainers_service.dart';
@@ -18,33 +18,23 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   ProfileEditBloc(ProfileEditState initialState) : super(initialState) {
     on<UploadTrainerData>((event, emitter) async {
       try {
-        emitter.call(const ProfileEditState.loading());
-        await _sendTrainerData(event);
-        emitter.call(const ProfileEditState.success());
+        emitter(const ProfileEditState.loading());
+        await _handleTrainerDataUpload(event);
+        emitter(const ProfileEditState.success());
       } catch (error) {
-        emitter.call(ProfileEditState.error(error.toString()));
+        emitter(ProfileEditState.error(error.toString()));
       }
     });
 
     on<UploadClientData>((event, emitter) async {
       try {
-        emitter.call(const ProfileEditState.loading());
-        await _sendClientData(event);
-        emitter.call(const ProfileEditState.success());
+        emitter(const ProfileEditState.loading());
+        await _clientsService.uploadData(event.clientData);
+        emitter(const ProfileEditState.success());
       } catch (error) {
-        emitter.call(ProfileEditState.error(error.toString()));
+        emitter(ProfileEditState.error(error.toString()));
       }
     });
-  }
-
-  Future<void> _sendClientData(UploadClientData event) async {
-    await _handleClientImageUpload(event.clientData.imagePath);
-    await _clientsService.uploadData(event.clientData);
-  }
-
-  Future<void> _sendTrainerData(UploadTrainerData event) async {
-    await _handleTrainerImageUpload(event.trainerData.imagePath);
-    await _handleTrainerDataUpload(event);
   }
 
   Future<void> _handleTrainerDataUpload(UploadTrainerData event) async {
@@ -53,18 +43,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       await _trainersService.updateData(event.trainerData);
     } else {
       await _handleFirstProfileCreation(event);
-    }
-  }
-
-  Future<void> _handleClientImageUpload(String? imagePath) async {
-    if (imagePath != null) {
-      await _clientsService.uploadPhoto(imagePath);
-    }
-  }
-
-  Future<void> _handleTrainerImageUpload(String? imagePath) async {
-    if (imagePath != null) {
-      await _trainersService.uploadPhoto(imagePath);
     }
   }
 
@@ -77,7 +55,6 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         votesNumber: 0,
         fullBio: event.trainerData.fullBio,
         shortBio: event.trainerData.shortBio,
-        email: _userInfoProvider.user?.email ?? "",
         languages: event.trainerData.languages,
         rating: 0.0,
         location: event.trainerData.location,
@@ -85,7 +62,8 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         reviews: List.empty(),
         pendingRequests: List.empty(),
         activeClients: List.empty(),
-        inactiveClients: List.empty());
+        inactiveClients: List.empty(),
+        imagePath: event.trainerData.imagePath);
     await _trainersService.setData(trainerEntity);
   }
 }

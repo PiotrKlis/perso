@@ -4,4 +4,6 @@ abstract class TrainingCategorySource {
   Future<List<TrainingCategory>> getCategoriesShortList();
 
   Future<List<TrainingCategory>> getAllCategories();
+
+  Future<List<String>> getAllCategoriesNames();
 }

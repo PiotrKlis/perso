@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:Perso/app/models/client_data.dart';
-import 'package:Perso/app/models/trainer_data.dart';
+import 'package:Perso/app/models/editable_client_data.dart';
+import 'package:Perso/app/models/editable_trainer_data.dart';
 import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
@@ -9,11 +9,11 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
-import 'package:Perso/app/widgets/perso_app_bar.dart';
+import 'package:Perso/app/widgets/category_chips/bloc/category_chips_bloc.dart';
+import 'package:Perso/app/widgets/category_chips/category_chips.dart';
 import 'package:Perso/app/widgets/perso_async_text_field.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_chips_list.dart';
 import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
@@ -25,7 +25,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -48,7 +47,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _fullBioController = TextEditingController();
   final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final _addressWidget = PersoAutocomplete();
-  final _persoChipsList = PersoChipsList();
+  final _persoChipsList = PersoCategoryChips();
 
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
@@ -59,7 +58,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       create: (context) => ProfileEditBloc(const ProfileEditState.initial()),
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(title: "Edit ${widget._userType.name} profile"),
+        appBar: AppBar(
+          elevation: 0.0,
+          title: Text("Edit ${widget._userType.name} profile"),
+        ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Form(
@@ -69,8 +71,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               children: [
                 Center(
                   child: Container(
-                    width: Dimens.imagePlaceholderBackgroundWidth,
-                    height: Dimens.imagePlaceholderBackgroundHeight,
+                    width: 200.0,
+                    height: 200.0,
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Colors.black),
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
@@ -78,13 +80,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         ? const Icon(
                             Icons.camera_alt,
                             color: Colors.white,
-                            size: Dimens.placeholderIconSize,
+                            size: 120.0,
                           )
                         : ClipOval(
                             child: Image.file(
                               File(_image!.path),
-                              width: Dimens.profileImageWidth, 
-                              height: Dimens.profileImageHeight, 
+                              width: 200.0,
+                              height: 200.0,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -128,7 +130,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.person, size: Dimens.iconSize)),
+                            child: const Icon(Icons.person, size: 24.0)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
@@ -179,7 +181,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.pin_drop, size: Dimens.iconSize,)),
+                            child: const Icon(Icons.pin_drop, size: 24.0)),
                         Expanded(
                           child: Container(
                               margin: const EdgeInsets.only(
@@ -209,10 +211,10 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
                                   child: const Icon(Icons.text_snippet,
-                                      size: Dimens.iconSize)),
+                                      size: 24.0)),
                               Expanded(
                                 child: Container(
-                                  height: Dimens.shortBioHeight,
+                                  height: 140.0,
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
                                   child: PersoTextField(
@@ -228,7 +230,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             ],
                           )),
                       Container(
-                          height: Dimens.longBioHeight,
+                          height: 340.0,
                           margin: const EdgeInsets.only(
                               left: Dimens.substantialMargin,
                               top: Dimens.normalMargin,
@@ -276,7 +278,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                     child: const CircularProgressIndicator())),
                           ) ??
                           PersoButton(
-                              width: Dimens.bigButtonWidth, title: "Next", onTap: _uploadData);
+                              width: 160.0, title: "Next", onTap: _uploadData);
                     },
                     listener: (context, state) {
                       state.whenOrNull(
@@ -327,8 +329,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   void _addClientData(String location, BuildContext context) {
-    final clientData = ClientData(
-        imagePath: _image?.path,
+    final clientData = EditableClientData(
+        imagePath: _image?.path ?? "",
         name: _nameController.text,
         surname: _surnameController.text,
         nickname: _nicknameController.text,
@@ -346,8 +348,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         .expand((element) => element)
         .toList();
 
-    final trainerData = TrainerData(
-        imagePath: _image?.path,
+    final trainerData = EditableTrainerData(
+        imagePath: _image?.path ?? "",
         languages: languages,
         name: _nameController.text,
         surname: _surnameController.text,
@@ -356,7 +358,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         phoneNumber: _phoneNumberController.text,
         shortBio: _shortBioController.text,
         fullBio: _fullBioController.text,
-        categories: _persoChipsList.categories);
+        categories: _persoChipsList.selectedCategories);
 
     context
         .read<ProfileEditBloc>()

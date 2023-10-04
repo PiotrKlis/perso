@@ -9,22 +9,41 @@ class TrainingRequestService {
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   Future<void> sendTrainingRequest(String trainerId) async {
-    try {
-      final clientId = _userInfoProvider.user?.uid;
-      await FirebaseFirestore.instance
-          .collection(CollectionName.users)
-          .doc(clientId)
-          .update({
-        UserDocumentFields.pendingRequests: FieldValue.arrayUnion([trainerId])
-      });
-      await FirebaseFirestore.instance
-          .collection(CollectionName.users)
-          .doc(trainerId)
-          .update({
-        UserDocumentFields.pendingRequests: FieldValue.arrayUnion([clientId])
-      });
-    } catch (error) {
-      Future.error(error);
+    final clientId = _userInfoProvider.user?.uid;
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(clientId)
+        .update({
+      UserDocumentFields.pendingRequests: FieldValue.arrayUnion([trainerId])
+    });
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .update({
+      UserDocumentFields.pendingRequests: FieldValue.arrayUnion([clientId])
+    });
+  }
+
+  Future<bool> checkIfUserHasAlreadySentRequest(String trainerId) async {
+    final clientId = _userInfoProvider.user?.uid;
+    final document = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(clientId)
+        .get();
+
+    final pendingRequests =
+        document.get(UserDocumentFields.pendingRequests);
+    final activeTrainers =
+        document.get(UserDocumentFields.activeTrainers);
+    final inactiveTrainers =
+        document.get(UserDocumentFields.inactiveTrainers);
+
+    if (pendingRequests.contains(trainerId) ||
+        activeTrainers.contains(trainerId) ||
+        inactiveTrainers.contains(trainerId)) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

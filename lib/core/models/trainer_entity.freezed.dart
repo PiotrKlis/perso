@@ -23,7 +23,7 @@ mixin _$TrainerEntity {
   int get votesNumber => throw _privateConstructorUsedError;
   String get fullBio => throw _privateConstructorUsedError;
   String get shortBio => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String get imagePath => throw _privateConstructorUsedError;
   List<String> get languages => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $TrainerEntityCopyWith<$Res> {
       int votesNumber,
       String fullBio,
       String shortBio,
-      String email,
+      String imagePath,
       List<String> languages,
       double rating,
       String location,
@@ -83,7 +83,7 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? votesNumber = null,
     Object? fullBio = null,
     Object? shortBio = null,
-    Object? email = null,
+    Object? imagePath = null,
     Object? languages = null,
     Object? rating = null,
     Object? location = null,
@@ -122,9 +122,9 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.shortBio
           : shortBio // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
       languages: null == languages
           ? _value.languages
@@ -178,7 +178,7 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
       int votesNumber,
       String fullBio,
       String shortBio,
-      String email,
+      String imagePath,
       List<String> languages,
       double rating,
       String location,
@@ -207,7 +207,7 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? votesNumber = null,
     Object? fullBio = null,
     Object? shortBio = null,
-    Object? email = null,
+    Object? imagePath = null,
     Object? languages = null,
     Object? rating = null,
     Object? location = null,
@@ -246,9 +246,9 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
           ? _value.shortBio
           : shortBio // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
               as String,
       languages: null == languages
           ? _value._languages
@@ -297,7 +297,7 @@ class _$_TrainerEntity implements _TrainerEntity {
       required this.votesNumber,
       required this.fullBio,
       required this.shortBio,
-      required this.email,
+      required this.imagePath,
       required final List<String> languages,
       required this.rating,
       required this.location,
@@ -328,7 +328,7 @@ class _$_TrainerEntity implements _TrainerEntity {
   @override
   final String shortBio;
   @override
-  final String email;
+  final String imagePath;
   final List<String> _languages;
   @override
   List<String> get languages {
@@ -383,7 +383,7 @@ class _$_TrainerEntity implements _TrainerEntity {
 
   @override
   String toString() {
-    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories, pendingRequests: $pendingRequests, activeClients: $activeClients, inactiveClients: $inactiveClients)';
+    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, imagePath: $imagePath, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories, pendingRequests: $pendingRequests, activeClients: $activeClients, inactiveClients: $inactiveClients)';
   }
 
   @override
@@ -401,7 +401,8 @@ class _$_TrainerEntity implements _TrainerEntity {
             (identical(other.fullBio, fullBio) || other.fullBio == fullBio) &&
             (identical(other.shortBio, shortBio) ||
                 other.shortBio == shortBio) &&
-            (identical(other.email, email) || other.email == email) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath) &&
             const DeepCollectionEquality()
                 .equals(other._languages, _languages) &&
             (identical(other.rating, rating) || other.rating == rating) &&
@@ -428,7 +429,7 @@ class _$_TrainerEntity implements _TrainerEntity {
       votesNumber,
       fullBio,
       shortBio,
-      email,
+      imagePath,
       const DeepCollectionEquality().hash(_languages),
       rating,
       location,
@@ -454,7 +455,7 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final int votesNumber,
       required final String fullBio,
       required final String shortBio,
-      required final String email,
+      required final String imagePath,
       required final List<String> languages,
       required final double rating,
       required final String location,
@@ -479,7 +480,7 @@ abstract class _TrainerEntity implements TrainerEntity {
   @override
   String get shortBio;
   @override
-  String get email;
+  String get imagePath;
   @override
   List<String> get languages;
   @override
