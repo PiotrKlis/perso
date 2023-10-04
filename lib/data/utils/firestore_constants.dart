@@ -20,4 +20,7 @@ class UserDocumentFields {
   static const String description = "description";
   static const String categories = "categories";
   static const String userType = "userType";
+  static const String pendingRequests = "pendingRequests";
+  static const String activeClients = "activeClients";
+  static const String inactiveClient = "inactiveClient";
 }

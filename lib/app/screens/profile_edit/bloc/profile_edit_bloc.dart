@@ -81,8 +81,11 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         languages: event.trainerData.languages,
         rating: 0.0,
         location: event.trainerData.location,
+        categories: event.trainerData.categories,
         reviews: List.empty(),
-        categories: event.trainerData.categories);
+        pendingRequests: List.empty(),
+        activeClients: List.empty(),
+        inactiveClients: List.empty());
     await _trainersService.setData(trainerEntity);
   }
 }

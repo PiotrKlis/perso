@@ -20,18 +20,21 @@ mixin _$TrainerDetailsEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() loadData,
     required TResult Function() addReview,
+    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadData,
     TResult? Function()? addReview,
+    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadData,
     TResult Function()? addReview,
+    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$TrainerDetailsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadData value) loadData,
     required TResult Function(AddReview value) addReview,
+    required TResult Function(TrainingRequest value) trainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadData value)? loadData,
     TResult? Function(AddReview value)? addReview,
+    TResult? Function(TrainingRequest value)? trainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadData value)? loadData,
     TResult Function(AddReview value)? addReview,
+    TResult Function(TrainingRequest value)? trainingRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$LoadData implements LoadData {
   TResult when<TResult extends Object?>({
     required TResult Function() loadData,
     required TResult Function() addReview,
+    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
   }) {
     return loadData();
   }
@@ -122,6 +129,7 @@ class _$LoadData implements LoadData {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadData,
     TResult? Function()? addReview,
+    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
   }) {
     return loadData?.call();
   }
@@ -131,6 +139,7 @@ class _$LoadData implements LoadData {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadData,
     TResult Function()? addReview,
+    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
     required TResult orElse(),
   }) {
     if (loadData != null) {
@@ -144,6 +153,7 @@ class _$LoadData implements LoadData {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadData value) loadData,
     required TResult Function(AddReview value) addReview,
+    required TResult Function(TrainingRequest value) trainingRequest,
   }) {
     return loadData(this);
   }
@@ -153,6 +163,7 @@ class _$LoadData implements LoadData {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadData value)? loadData,
     TResult? Function(AddReview value)? addReview,
+    TResult? Function(TrainingRequest value)? trainingRequest,
   }) {
     return loadData?.call(this);
   }
@@ -162,6 +173,7 @@ class _$LoadData implements LoadData {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadData value)? loadData,
     TResult Function(AddReview value)? addReview,
+    TResult Function(TrainingRequest value)? trainingRequest,
     required TResult orElse(),
   }) {
     if (loadData != null) {
@@ -215,6 +227,7 @@ class _$AddReview implements AddReview {
   TResult when<TResult extends Object?>({
     required TResult Function() loadData,
     required TResult Function() addReview,
+    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
   }) {
     return addReview();
   }
@@ -224,6 +237,7 @@ class _$AddReview implements AddReview {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadData,
     TResult? Function()? addReview,
+    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
   }) {
     return addReview?.call();
   }
@@ -233,6 +247,7 @@ class _$AddReview implements AddReview {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadData,
     TResult Function()? addReview,
+    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
     required TResult orElse(),
   }) {
     if (addReview != null) {
@@ -246,6 +261,7 @@ class _$AddReview implements AddReview {
   TResult map<TResult extends Object?>({
     required TResult Function(LoadData value) loadData,
     required TResult Function(AddReview value) addReview,
+    required TResult Function(TrainingRequest value) trainingRequest,
   }) {
     return addReview(this);
   }
@@ -255,6 +271,7 @@ class _$AddReview implements AddReview {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadData value)? loadData,
     TResult? Function(AddReview value)? addReview,
+    TResult? Function(TrainingRequest value)? trainingRequest,
   }) {
     return addReview?.call(this);
   }
@@ -264,6 +281,7 @@ class _$AddReview implements AddReview {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadData value)? loadData,
     TResult Function(AddReview value)? addReview,
+    TResult Function(TrainingRequest value)? trainingRequest,
     required TResult orElse(),
   }) {
     if (addReview != null) {
@@ -275,4 +293,155 @@ class _$AddReview implements AddReview {
 
 abstract class AddReview implements TrainerDetailsEvent {
   const factory AddReview() = _$AddReview;
+}
+
+/// @nodoc
+abstract class _$$TrainingRequestCopyWith<$Res> {
+  factory _$$TrainingRequestCopyWith(
+          _$TrainingRequest value, $Res Function(_$TrainingRequest) then) =
+      __$$TrainingRequestCopyWithImpl<$Res>;
+  @useResult
+  $Res call({TrainerEntity trainerEntity});
+
+  $TrainerEntityCopyWith<$Res> get trainerEntity;
+}
+
+/// @nodoc
+class __$$TrainingRequestCopyWithImpl<$Res>
+    extends _$TrainerDetailsEventCopyWithImpl<$Res, _$TrainingRequest>
+    implements _$$TrainingRequestCopyWith<$Res> {
+  __$$TrainingRequestCopyWithImpl(
+      _$TrainingRequest _value, $Res Function(_$TrainingRequest) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? trainerEntity = null,
+  }) {
+    return _then(_$TrainingRequest(
+      null == trainerEntity
+          ? _value.trainerEntity
+          : trainerEntity // ignore: cast_nullable_to_non_nullable
+              as TrainerEntity,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TrainerEntityCopyWith<$Res> get trainerEntity {
+    return $TrainerEntityCopyWith<$Res>(_value.trainerEntity, (value) {
+      return _then(_value.copyWith(trainerEntity: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$TrainingRequest implements TrainingRequest {
+  const _$TrainingRequest(this.trainerEntity);
+
+  @override
+  final TrainerEntity trainerEntity;
+
+  @override
+  String toString() {
+    return 'TrainerDetailsEvent.trainingRequest(trainerEntity: $trainerEntity)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TrainingRequest &&
+            (identical(other.trainerEntity, trainerEntity) ||
+                other.trainerEntity == trainerEntity));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, trainerEntity);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TrainingRequestCopyWith<_$TrainingRequest> get copyWith =>
+      __$$TrainingRequestCopyWithImpl<_$TrainingRequest>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadData,
+    required TResult Function() addReview,
+    required TResult Function(TrainerEntity trainerEntity) trainingRequest,
+  }) {
+    return trainingRequest(trainerEntity);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadData,
+    TResult? Function()? addReview,
+    TResult? Function(TrainerEntity trainerEntity)? trainingRequest,
+  }) {
+    return trainingRequest?.call(trainerEntity);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadData,
+    TResult Function()? addReview,
+    TResult Function(TrainerEntity trainerEntity)? trainingRequest,
+    required TResult orElse(),
+  }) {
+    if (trainingRequest != null) {
+      return trainingRequest(trainerEntity);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadData value) loadData,
+    required TResult Function(AddReview value) addReview,
+    required TResult Function(TrainingRequest value) trainingRequest,
+  }) {
+    return trainingRequest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadData value)? loadData,
+    TResult? Function(AddReview value)? addReview,
+    TResult? Function(TrainingRequest value)? trainingRequest,
+  }) {
+    return trainingRequest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadData value)? loadData,
+    TResult Function(AddReview value)? addReview,
+    TResult Function(TrainingRequest value)? trainingRequest,
+    required TResult orElse(),
+  }) {
+    if (trainingRequest != null) {
+      return trainingRequest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TrainingRequest implements TrainerDetailsEvent {
+  const factory TrainingRequest(final TrainerEntity trainerEntity) =
+      _$TrainingRequest;
+
+  TrainerEntity get trainerEntity;
+  @JsonKey(ignore: true)
+  _$$TrainingRequestCopyWith<_$TrainingRequest> get copyWith =>
+      throw _privateConstructorUsedError;
 }

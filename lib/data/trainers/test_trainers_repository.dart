@@ -24,7 +24,10 @@ class TestTrainersRepository implements TrainersSource {
         location: 'Location',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
         categories: ['Training type 1', 'Training type 2'],
-        rating: 5.0),
+        rating: 5.0,
+        pendingRequests: ['1', '2', '3'],
+        activeClients: ['1', '2', '3'],
+        inactiveClients: ['1', '2', '3']),
     const TrainerEntity(
         id: '2',
         name: "Piccolo",
@@ -38,7 +41,10 @@ class TestTrainersRepository implements TrainersSource {
         location: 'Location',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
         categories: ['Training type 1', 'Training type 2'],
-        rating: 2.5),
+        rating: 2.5,
+        pendingRequests: ['1', '2', '3'],
+        activeClients: ['1', '2', '3'],
+        inactiveClients: ['1', '2', '3']),
     const TrainerEntity(
         id: '3',
         name: "Son gohan",
@@ -52,6 +58,9 @@ class TestTrainersRepository implements TrainersSource {
         location: 'Location',
         reviews: [ReviewEntity(rating: 3.2, description: "description")],
         categories: ['Training type 1', 'Training type 2'],
-        rating: 4.5),
+        rating: 4.5,
+        pendingRequests: ['1', '2', '3'],
+        activeClients: ['1', '2', '3'],
+        inactiveClients: ['1', '2', '3']),
   ];
 }

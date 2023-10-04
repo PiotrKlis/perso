@@ -29,6 +29,9 @@ mixin _$TrainerEntity {
   String get location => throw _privateConstructorUsedError;
   List<ReviewEntity> get reviews => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
+  List<String> get pendingRequests => throw _privateConstructorUsedError;
+  List<String> get activeClients => throw _privateConstructorUsedError;
+  List<String> get inactiveClients => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrainerEntityCopyWith<TrainerEntity> get copyWith =>
@@ -54,7 +57,10 @@ abstract class $TrainerEntityCopyWith<$Res> {
       double rating,
       String location,
       List<ReviewEntity> reviews,
-      List<String> categories});
+      List<String> categories,
+      List<String> pendingRequests,
+      List<String> activeClients,
+      List<String> inactiveClients});
 }
 
 /// @nodoc
@@ -83,6 +89,9 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? location = null,
     Object? reviews = null,
     Object? categories = null,
+    Object? pendingRequests = null,
+    Object? activeClients = null,
+    Object? inactiveClients = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -137,6 +146,18 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      pendingRequests: null == pendingRequests
+          ? _value.pendingRequests
+          : pendingRequests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      activeClients: null == activeClients
+          ? _value.activeClients
+          : activeClients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      inactiveClients: null == inactiveClients
+          ? _value.inactiveClients
+          : inactiveClients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -162,7 +183,10 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
       double rating,
       String location,
       List<ReviewEntity> reviews,
-      List<String> categories});
+      List<String> categories,
+      List<String> pendingRequests,
+      List<String> activeClients,
+      List<String> inactiveClients});
 }
 
 /// @nodoc
@@ -189,6 +213,9 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? location = null,
     Object? reviews = null,
     Object? categories = null,
+    Object? pendingRequests = null,
+    Object? activeClients = null,
+    Object? inactiveClients = null,
   }) {
     return _then(_$_TrainerEntity(
       id: null == id
@@ -243,6 +270,18 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      pendingRequests: null == pendingRequests
+          ? _value._pendingRequests
+          : pendingRequests // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      activeClients: null == activeClients
+          ? _value._activeClients
+          : activeClients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      inactiveClients: null == inactiveClients
+          ? _value._inactiveClients
+          : inactiveClients // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -263,10 +302,16 @@ class _$_TrainerEntity implements _TrainerEntity {
       required this.rating,
       required this.location,
       required final List<ReviewEntity> reviews,
-      required final List<String> categories})
+      required final List<String> categories,
+      required final List<String> pendingRequests,
+      required final List<String> activeClients,
+      required final List<String> inactiveClients})
       : _languages = languages,
         _reviews = reviews,
-        _categories = categories;
+        _categories = categories,
+        _pendingRequests = pendingRequests,
+        _activeClients = activeClients,
+        _inactiveClients = inactiveClients;
 
   @override
   final String id;
@@ -312,9 +357,33 @@ class _$_TrainerEntity implements _TrainerEntity {
     return EqualUnmodifiableListView(_categories);
   }
 
+  final List<String> _pendingRequests;
+  @override
+  List<String> get pendingRequests {
+    if (_pendingRequests is EqualUnmodifiableListView) return _pendingRequests;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pendingRequests);
+  }
+
+  final List<String> _activeClients;
+  @override
+  List<String> get activeClients {
+    if (_activeClients is EqualUnmodifiableListView) return _activeClients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activeClients);
+  }
+
+  final List<String> _inactiveClients;
+  @override
+  List<String> get inactiveClients {
+    if (_inactiveClients is EqualUnmodifiableListView) return _inactiveClients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_inactiveClients);
+  }
+
   @override
   String toString() {
-    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories)';
+    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories, pendingRequests: $pendingRequests, activeClients: $activeClients, inactiveClients: $inactiveClients)';
   }
 
   @override
@@ -340,7 +409,13 @@ class _$_TrainerEntity implements _TrainerEntity {
                 other.location == location) &&
             const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality()
+                .equals(other._pendingRequests, _pendingRequests) &&
+            const DeepCollectionEquality()
+                .equals(other._activeClients, _activeClients) &&
+            const DeepCollectionEquality()
+                .equals(other._inactiveClients, _inactiveClients));
   }
 
   @override
@@ -358,7 +433,10 @@ class _$_TrainerEntity implements _TrainerEntity {
       rating,
       location,
       const DeepCollectionEquality().hash(_reviews),
-      const DeepCollectionEquality().hash(_categories));
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(_pendingRequests),
+      const DeepCollectionEquality().hash(_activeClients),
+      const DeepCollectionEquality().hash(_inactiveClients));
 
   @JsonKey(ignore: true)
   @override
@@ -381,7 +459,10 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final double rating,
       required final String location,
       required final List<ReviewEntity> reviews,
-      required final List<String> categories}) = _$_TrainerEntity;
+      required final List<String> categories,
+      required final List<String> pendingRequests,
+      required final List<String> activeClients,
+      required final List<String> inactiveClients}) = _$_TrainerEntity;
 
   @override
   String get id;
@@ -409,6 +490,12 @@ abstract class _TrainerEntity implements TrainerEntity {
   List<ReviewEntity> get reviews;
   @override
   List<String> get categories;
+  @override
+  List<String> get pendingRequests;
+  @override
+  List<String> get activeClients;
+  @override
+  List<String> get inactiveClients;
   @override
   @JsonKey(ignore: true)
   _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>

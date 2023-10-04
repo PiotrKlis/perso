@@ -63,7 +63,10 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.rating: trainerEntity.rating,
         UserDocumentFields.reviews: trainerEntity.reviews,
         UserDocumentFields.categories: trainerEntity.categories,
-        UserDocumentFields.userType: UserType.trainer.name
+        UserDocumentFields.userType: UserType.trainer.name,
+        UserDocumentFields.pendingRequests: trainerEntity.pendingRequests,
+        UserDocumentFields.activeClients: trainerEntity.activeClients,
+        UserDocumentFields.inactiveClient: trainerEntity.inactiveClients
       });
       return Future.value();
     } catch (error) {

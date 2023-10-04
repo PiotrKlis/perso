@@ -26,10 +26,16 @@ class FirestoreTrainersProvider implements TrainersSource {
           email: data[UserDocumentFields.email],
           rating: data[UserDocumentFields.rating],
           location: data[UserDocumentFields.location],
-          languages: data[UserDocumentFields.languages].toString().split(", "),
           reviews: _getReviews(data),
+          languages: data[UserDocumentFields.languages].toString().split(", "),
           categories:
-              data[UserDocumentFields.categories].toString().split(", "));
+              data[UserDocumentFields.categories].toString().split(", "),
+          pendingRequests:
+              data[UserDocumentFields.pendingRequests].toString().split(", "),
+          activeClients:
+              data[UserDocumentFields.activeClients].toString().split(", "),
+          inactiveClients:
+              data[UserDocumentFields.inactiveClient].toString().split(", "));
     }).toList();
   }
 

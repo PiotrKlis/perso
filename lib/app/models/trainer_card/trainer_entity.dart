@@ -18,6 +18,9 @@ class TrainerEntity with _$TrainerEntity {
     required final double rating,
     required final String location,
     required final List<ReviewEntity> reviews,
-    required final List<String> categories
+    required final List<String> categories,
+    required final List<String> pendingRequests,
+    required final List<String> activeClients,
+    required final List<String> inactiveClients,
   }) = _TrainerEntity;
 }

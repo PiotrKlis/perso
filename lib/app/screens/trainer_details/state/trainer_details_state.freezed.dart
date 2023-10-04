@@ -20,21 +20,27 @@ mixin _$TrainerDetailsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() content,
-    required TResult Function() error,
+    required TResult Function(String error) error,
+    required TResult Function() loadingTrainingRequest,
+    required TResult Function() successTrainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? content,
-    TResult? Function()? error,
+    TResult? Function(String error)? error,
+    TResult? Function()? loadingTrainingRequest,
+    TResult? Function()? successTrainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? content,
-    TResult Function()? error,
+    TResult Function(String error)? error,
+    TResult Function()? loadingTrainingRequest,
+    TResult Function()? successTrainingRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,10 @@ mixin _$TrainerDetailsState {
     required TResult Function(Initial value) initial,
     required TResult Function(Content value) content,
     required TResult Function(Error value) error,
+    required TResult Function(LoadingTrainingRequest value)
+        loadingTrainingRequest,
+    required TResult Function(SuccessTrainingRequest value)
+        successTrainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +60,8 @@ mixin _$TrainerDetailsState {
     TResult? Function(Initial value)? initial,
     TResult? Function(Content value)? content,
     TResult? Function(Error value)? error,
+    TResult? Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult? Function(SuccessTrainingRequest value)? successTrainingRequest,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +69,8 @@ mixin _$TrainerDetailsState {
     TResult Function(Initial value)? initial,
     TResult Function(Content value)? content,
     TResult Function(Error value)? error,
+    TResult Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult Function(SuccessTrainingRequest value)? successTrainingRequest,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,7 +132,9 @@ class _$Initial implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() content,
-    required TResult Function() error,
+    required TResult Function(String error) error,
+    required TResult Function() loadingTrainingRequest,
+    required TResult Function() successTrainingRequest,
   }) {
     return initial();
   }
@@ -128,7 +144,9 @@ class _$Initial implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? content,
-    TResult? Function()? error,
+    TResult? Function(String error)? error,
+    TResult? Function()? loadingTrainingRequest,
+    TResult? Function()? successTrainingRequest,
   }) {
     return initial?.call();
   }
@@ -138,7 +156,9 @@ class _$Initial implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? content,
-    TResult Function()? error,
+    TResult Function(String error)? error,
+    TResult Function()? loadingTrainingRequest,
+    TResult Function()? successTrainingRequest,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -153,6 +173,10 @@ class _$Initial implements Initial {
     required TResult Function(Initial value) initial,
     required TResult Function(Content value) content,
     required TResult Function(Error value) error,
+    required TResult Function(LoadingTrainingRequest value)
+        loadingTrainingRequest,
+    required TResult Function(SuccessTrainingRequest value)
+        successTrainingRequest,
   }) {
     return initial(this);
   }
@@ -163,6 +187,8 @@ class _$Initial implements Initial {
     TResult? Function(Initial value)? initial,
     TResult? Function(Content value)? content,
     TResult? Function(Error value)? error,
+    TResult? Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult? Function(SuccessTrainingRequest value)? successTrainingRequest,
   }) {
     return initial?.call(this);
   }
@@ -173,6 +199,8 @@ class _$Initial implements Initial {
     TResult Function(Initial value)? initial,
     TResult Function(Content value)? content,
     TResult Function(Error value)? error,
+    TResult Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult Function(SuccessTrainingRequest value)? successTrainingRequest,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -224,7 +252,9 @@ class _$Content implements Content {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() content,
-    required TResult Function() error,
+    required TResult Function(String error) error,
+    required TResult Function() loadingTrainingRequest,
+    required TResult Function() successTrainingRequest,
   }) {
     return content();
   }
@@ -234,7 +264,9 @@ class _$Content implements Content {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? content,
-    TResult? Function()? error,
+    TResult? Function(String error)? error,
+    TResult? Function()? loadingTrainingRequest,
+    TResult? Function()? successTrainingRequest,
   }) {
     return content?.call();
   }
@@ -244,7 +276,9 @@ class _$Content implements Content {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? content,
-    TResult Function()? error,
+    TResult Function(String error)? error,
+    TResult Function()? loadingTrainingRequest,
+    TResult Function()? successTrainingRequest,
     required TResult orElse(),
   }) {
     if (content != null) {
@@ -259,6 +293,10 @@ class _$Content implements Content {
     required TResult Function(Initial value) initial,
     required TResult Function(Content value) content,
     required TResult Function(Error value) error,
+    required TResult Function(LoadingTrainingRequest value)
+        loadingTrainingRequest,
+    required TResult Function(SuccessTrainingRequest value)
+        successTrainingRequest,
   }) {
     return content(this);
   }
@@ -269,6 +307,8 @@ class _$Content implements Content {
     TResult? Function(Initial value)? initial,
     TResult? Function(Content value)? content,
     TResult? Function(Error value)? error,
+    TResult? Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult? Function(SuccessTrainingRequest value)? successTrainingRequest,
   }) {
     return content?.call(this);
   }
@@ -279,6 +319,8 @@ class _$Content implements Content {
     TResult Function(Initial value)? initial,
     TResult Function(Content value)? content,
     TResult Function(Error value)? error,
+    TResult Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult Function(SuccessTrainingRequest value)? successTrainingRequest,
     required TResult orElse(),
   }) {
     if (content != null) {
@@ -296,6 +338,8 @@ abstract class Content implements TrainerDetailsState {
 abstract class _$$ErrorCopyWith<$Res> {
   factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
       __$$ErrorCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
 }
 
 /// @nodoc
@@ -304,35 +348,61 @@ class __$$ErrorCopyWithImpl<$Res>
     implements _$$ErrorCopyWith<$Res> {
   __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$Error(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Error implements Error {
-  const _$Error();
+  const _$Error(this.error);
+
+  @override
+  final String error;
 
   @override
   String toString() {
-    return 'TrainerDetailsState.error()';
+    return 'TrainerDetailsState.error(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Error);
+        (other.runtimeType == runtimeType &&
+            other is _$Error &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorCopyWith<_$Error> get copyWith =>
+      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() content,
-    required TResult Function() error,
+    required TResult Function(String error) error,
+    required TResult Function() loadingTrainingRequest,
+    required TResult Function() successTrainingRequest,
   }) {
-    return error();
+    return error(this.error);
   }
 
   @override
@@ -340,9 +410,11 @@ class _$Error implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? content,
-    TResult? Function()? error,
+    TResult? Function(String error)? error,
+    TResult? Function()? loadingTrainingRequest,
+    TResult? Function()? successTrainingRequest,
   }) {
-    return error?.call();
+    return error?.call(this.error);
   }
 
   @override
@@ -350,11 +422,13 @@ class _$Error implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? content,
-    TResult Function()? error,
+    TResult Function(String error)? error,
+    TResult Function()? loadingTrainingRequest,
+    TResult Function()? successTrainingRequest,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(this.error);
     }
     return orElse();
   }
@@ -365,6 +439,10 @@ class _$Error implements Error {
     required TResult Function(Initial value) initial,
     required TResult Function(Content value) content,
     required TResult Function(Error value) error,
+    required TResult Function(LoadingTrainingRequest value)
+        loadingTrainingRequest,
+    required TResult Function(SuccessTrainingRequest value)
+        successTrainingRequest,
   }) {
     return error(this);
   }
@@ -375,6 +453,8 @@ class _$Error implements Error {
     TResult? Function(Initial value)? initial,
     TResult? Function(Content value)? content,
     TResult? Function(Error value)? error,
+    TResult? Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult? Function(SuccessTrainingRequest value)? successTrainingRequest,
   }) {
     return error?.call(this);
   }
@@ -385,6 +465,8 @@ class _$Error implements Error {
     TResult Function(Initial value)? initial,
     TResult Function(Content value)? content,
     TResult Function(Error value)? error,
+    TResult Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult Function(SuccessTrainingRequest value)? successTrainingRequest,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -395,5 +477,253 @@ class _$Error implements Error {
 }
 
 abstract class Error implements TrainerDetailsState {
-  const factory Error() = _$Error;
+  const factory Error(final String error) = _$Error;
+
+  String get error;
+  @JsonKey(ignore: true)
+  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoadingTrainingRequestCopyWith<$Res> {
+  factory _$$LoadingTrainingRequestCopyWith(_$LoadingTrainingRequest value,
+          $Res Function(_$LoadingTrainingRequest) then) =
+      __$$LoadingTrainingRequestCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingTrainingRequestCopyWithImpl<$Res>
+    extends _$TrainerDetailsStateCopyWithImpl<$Res, _$LoadingTrainingRequest>
+    implements _$$LoadingTrainingRequestCopyWith<$Res> {
+  __$$LoadingTrainingRequestCopyWithImpl(_$LoadingTrainingRequest _value,
+      $Res Function(_$LoadingTrainingRequest) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingTrainingRequest implements LoadingTrainingRequest {
+  const _$LoadingTrainingRequest();
+
+  @override
+  String toString() {
+    return 'TrainerDetailsState.loadingTrainingRequest()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingTrainingRequest);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() content,
+    required TResult Function(String error) error,
+    required TResult Function() loadingTrainingRequest,
+    required TResult Function() successTrainingRequest,
+  }) {
+    return loadingTrainingRequest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? content,
+    TResult? Function(String error)? error,
+    TResult? Function()? loadingTrainingRequest,
+    TResult? Function()? successTrainingRequest,
+  }) {
+    return loadingTrainingRequest?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? content,
+    TResult Function(String error)? error,
+    TResult Function()? loadingTrainingRequest,
+    TResult Function()? successTrainingRequest,
+    required TResult orElse(),
+  }) {
+    if (loadingTrainingRequest != null) {
+      return loadingTrainingRequest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Content value) content,
+    required TResult Function(Error value) error,
+    required TResult Function(LoadingTrainingRequest value)
+        loadingTrainingRequest,
+    required TResult Function(SuccessTrainingRequest value)
+        successTrainingRequest,
+  }) {
+    return loadingTrainingRequest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Content value)? content,
+    TResult? Function(Error value)? error,
+    TResult? Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult? Function(SuccessTrainingRequest value)? successTrainingRequest,
+  }) {
+    return loadingTrainingRequest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Content value)? content,
+    TResult Function(Error value)? error,
+    TResult Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult Function(SuccessTrainingRequest value)? successTrainingRequest,
+    required TResult orElse(),
+  }) {
+    if (loadingTrainingRequest != null) {
+      return loadingTrainingRequest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadingTrainingRequest implements TrainerDetailsState {
+  const factory LoadingTrainingRequest() = _$LoadingTrainingRequest;
+}
+
+/// @nodoc
+abstract class _$$SuccessTrainingRequestCopyWith<$Res> {
+  factory _$$SuccessTrainingRequestCopyWith(_$SuccessTrainingRequest value,
+          $Res Function(_$SuccessTrainingRequest) then) =
+      __$$SuccessTrainingRequestCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SuccessTrainingRequestCopyWithImpl<$Res>
+    extends _$TrainerDetailsStateCopyWithImpl<$Res, _$SuccessTrainingRequest>
+    implements _$$SuccessTrainingRequestCopyWith<$Res> {
+  __$$SuccessTrainingRequestCopyWithImpl(_$SuccessTrainingRequest _value,
+      $Res Function(_$SuccessTrainingRequest) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SuccessTrainingRequest implements SuccessTrainingRequest {
+  const _$SuccessTrainingRequest();
+
+  @override
+  String toString() {
+    return 'TrainerDetailsState.successTrainingRequest()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SuccessTrainingRequest);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() content,
+    required TResult Function(String error) error,
+    required TResult Function() loadingTrainingRequest,
+    required TResult Function() successTrainingRequest,
+  }) {
+    return successTrainingRequest();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? content,
+    TResult? Function(String error)? error,
+    TResult? Function()? loadingTrainingRequest,
+    TResult? Function()? successTrainingRequest,
+  }) {
+    return successTrainingRequest?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? content,
+    TResult Function(String error)? error,
+    TResult Function()? loadingTrainingRequest,
+    TResult Function()? successTrainingRequest,
+    required TResult orElse(),
+  }) {
+    if (successTrainingRequest != null) {
+      return successTrainingRequest();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(Content value) content,
+    required TResult Function(Error value) error,
+    required TResult Function(LoadingTrainingRequest value)
+        loadingTrainingRequest,
+    required TResult Function(SuccessTrainingRequest value)
+        successTrainingRequest,
+  }) {
+    return successTrainingRequest(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(Content value)? content,
+    TResult? Function(Error value)? error,
+    TResult? Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult? Function(SuccessTrainingRequest value)? successTrainingRequest,
+  }) {
+    return successTrainingRequest?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(Content value)? content,
+    TResult Function(Error value)? error,
+    TResult Function(LoadingTrainingRequest value)? loadingTrainingRequest,
+    TResult Function(SuccessTrainingRequest value)? successTrainingRequest,
+    required TResult orElse(),
+  }) {
+    if (successTrainingRequest != null) {
+      return successTrainingRequest(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SuccessTrainingRequest implements TrainerDetailsState {
+  const factory SuccessTrainingRequest() = _$SuccessTrainingRequest;
 }

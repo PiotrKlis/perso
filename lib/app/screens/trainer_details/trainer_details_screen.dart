@@ -1,4 +1,7 @@
 import 'package:Perso/app/models/trainer_card/trainer_entity.dart';
+import 'package:Perso/app/screens/trainer_details/bloc/trainer_details_bloc.dart';
+import 'package:Perso/app/screens/trainer_details/event/trainer_details_event.dart';
+import 'package:Perso/app/screens/trainer_details/state/trainer_details_state.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
@@ -7,6 +10,7 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_divider.dart';
 import 'package:Perso/core/string_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class TrainerDetailsScreen extends StatefulWidget {
@@ -25,121 +29,147 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(
-            isTitleCentered: true, title: "@${widget._trainerEntity.nickname}"),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin,
-                        left: Dimens.hugeMargin,
-                        right: Dimens.hugeMargin),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: SegmentedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states
-                                        .contains(MaterialState.selected)) {
-                                      return Colors.black;
-                                    } else {
-                                      return Colors.white;
-                                    }
-                                  },
-                                ),
-                                textStyle: MaterialStateProperty.resolveWith<
-                                    TextStyle>(
-                                  (Set<MaterialState> states) {
-                                    if (states
-                                        .contains(MaterialState.selected)) {
-                                      return ThemeText.bodyBoldWhiteText;
-                                    } else {
-                                      return ThemeText.bodyBoldBlackText;
-                                    }
-                                  },
-                                ),
-                              ),
-                              showSelectedIcon: false,
-                              selected: _segmentSelected,
-                              segments: [
-                                ButtonSegment<String>(
-                                    value: _Segments.about.name,
-                                    label: const Text('About')),
-                                ButtonSegment<String>(
-                                    value: _Segments.reviews.name,
-                                    label: const Text('Reviews')),
-                              ],
-                              onSelectionChanged: (selectedSet) {
-                                setState(() {
-                                  _segmentSelected = selectedSet;
-                                });
-                              }),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                      child: const Icon(
-                        Icons.account_circle,
-                        size: Dimens.iconSizeMedium,
-                      )),
-                  Container(
-                    margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                    child: const Text("Andrew Parker"),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: Dimens.smallerMargin),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("5.0"),
-                        Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.smallerMargin,
-                                right: Dimens.smallerMargin),
-                            child: const Icon(Icons.star)),
-                        const Text("(142)")
-                      ],
-                    ),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.only(top: Dimens.mediumMargin),
-                      child: const PersoButton(
-                          title: "Request for training", width: Dimens.largeButtonWidth)),
-                  Container(
+    return BlocProvider(
+      create: (context) => TrainerDetailsBloc(),
+      child: Scaffold(
+          backgroundColor: PersoColors.lightBlue,
+          appBar: PersoAppBar(
+              isTitleCentered: true,
+              title: "@${widget._trainerEntity.nickname}"),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Container(
                       margin: const EdgeInsets.only(
-                          top: Dimens.mediumMargin,
-                          bottom: Dimens.biggerMargin),
-                      child: const PersoButton(
-                        title: "Contact",
-                        width: Dimens.largeButtonWidth,
-                        whiteBlackTheme: true,
-                      )),
-                  // setState() {}
-                ],
-              ),
-              Visibility(
-                visible: _segmentSelected.contains(_Segments.about.name),
-                child: _aboutSection(),
-              ),
-              Visibility(
-                visible: _segmentSelected.contains(_Segments.reviews.name),
-                child: _reviewsSection(),
-              )
-            ],
-          ),
-        ));
+                          top: Dimens.normalMargin,
+                          left: Dimens.hugeMargin,
+                          right: Dimens.hugeMargin),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: SegmentedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return Colors.black;
+                                      } else {
+                                        return Colors.white;
+                                      }
+                                    },
+                                  ),
+                                  textStyle: MaterialStateProperty.resolveWith<
+                                      TextStyle>(
+                                    (Set<MaterialState> states) {
+                                      if (states
+                                          .contains(MaterialState.selected)) {
+                                        return ThemeText.bodyBoldWhiteText;
+                                      } else {
+                                        return ThemeText.bodyBoldBlackText;
+                                      }
+                                    },
+                                  ),
+                                ),
+                                showSelectedIcon: false,
+                                selected: _segmentSelected,
+                                segments: [
+                                  ButtonSegment<String>(
+                                      value: _Segments.about.name,
+                                      label: const Text('About')),
+                                  ButtonSegment<String>(
+                                      value: _Segments.reviews.name,
+                                      label: const Text('Reviews')),
+                                ],
+                                onSelectionChanged: (selectedSet) {
+                                  setState(() {
+                                    _segmentSelected = selectedSet;
+                                  });
+                                }),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                        child: const Icon(
+                          Icons.account_circle,
+                          size: 88.0,
+                        )),
+                    Container(
+                      margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                      child: const Text("Andrew Parker"),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: Dimens.smallerMargin),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("5.0"),
+                          Container(
+                              margin: const EdgeInsets.only(
+                                  left: Dimens.smallerMargin,
+                                  right: Dimens.smallerMargin),
+                              child: const Icon(Icons.star)),
+                          const Text("(142)")
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: Dimens.mediumMargin),
+                      child:
+                          BlocBuilder<TrainerDetailsBloc, TrainerDetailsState>(
+                        builder: (context, state) {
+                          return state.whenOrNull(
+                                loadingTrainingRequest: () => const PersoButton(
+                                  isLoading: true,
+                                  width: Dimens.largeButtonWidth,
+                                ),
+                                successTrainingRequest: () => const PersoButton(
+                                  width: Dimens.largeButtonWidth,
+                                  title: "Request sent",
+                                ),
+                              ) ??
+                              PersoButton(
+                                title: "Request for training",
+                                width: Dimens.largeButtonWidth,
+                                onTap: (context) {
+                                  context.read<TrainerDetailsBloc>().add(
+                                      TrainerDetailsEvent.trainingRequest(
+                                          widget._trainerEntity));
+                                },
+                              );
+                        },
+                      ),
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(
+                            top: Dimens.mediumMargin,
+                            bottom: Dimens.biggerMargin),
+                        child: const PersoButton(
+                          title: "Contact",
+                          width: Dimens.largeButtonWidth,
+                          whiteBlackTheme: true,
+                        )),
+                  ],
+                ),
+                Visibility(
+                  visible: _segmentSelected.contains(_Segments.about.name),
+                  child: _aboutSection(),
+                ),
+                Visibility(
+                  visible: _segmentSelected.contains(_Segments.reviews.name),
+                  child: _reviewsSection(),
+                )
+              ],
+            ),
+          )),
+    );
   }
 
   Container _aboutSection() {
@@ -207,7 +237,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
           Container(
             margin: const EdgeInsets.only(
                 top: Dimens.mediumMargin,
-                left: Dimens.normalMargin,
+                left: Dimens.smallMargin,
                 right: Dimens.normalMargin,
                 bottom: Dimens.normalMargin),
             child: _getLanguages(),
@@ -218,11 +248,14 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
   }
 
   Row _getLanguages() {
-    List<Text> languages = widget._trainerEntity.languages.map((element) {
+    List<Container> languages = widget._trainerEntity.languages.map((element) {
       String language = element.removeBrackets();
-      return Text(
-        language,
-        style: const TextStyle(fontSize: 24.0),
+      return Container(
+        margin: const EdgeInsets.only(left: Dimens.smallMargin),
+        child: Text(
+          language,
+          style: const TextStyle(fontSize: 24.0),
+        ),
       );
     }).toList();
     return Row(
