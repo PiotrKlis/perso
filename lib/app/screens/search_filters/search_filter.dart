@@ -7,7 +7,7 @@ class SearchFilterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: PersoAppBar(
           title: "Search filter",
