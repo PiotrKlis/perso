@@ -7,7 +7,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
@@ -122,9 +122,9 @@ class SignInScreen extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(child: PersoDivider()),
+                      const Expanded(child: PersoIndentedDivider()),
                       Text(AppLocalizations.of(context)!.or, style: ThemeText.footnoteRegularGrey),
-                      const Expanded(child: PersoDivider()),
+                      const Expanded(child: PersoIndentedDivider()),
                     ]),
               ),
               Container(
@@ -243,9 +243,9 @@ class SignInScreen extends StatelessWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(child: PersoDivider()),
+                    const Expanded(child: PersoIndentedDivider()),
                     Text(AppLocalizations.of(context)!.or, style: ThemeText.footnoteRegularGrey),
-                    const Expanded(child: PersoDivider()),
+                    const Expanded(child: PersoIndentedDivider()),
                   ]),
             ),
             Container(

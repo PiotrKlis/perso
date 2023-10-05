@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:Perso/app/models/client_data.dart';
-import 'package:Perso/app/models/trainer_data.dart';
+import 'package:Perso/app/models/editable_client_data.dart';
+import 'package:Perso/app/models/editable_trainer_data.dart';
 import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
@@ -9,11 +9,12 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/category_chips/bloc/category_chips_bloc.dart';
+import 'package:Perso/app/widgets/category_chips/category_chips.dart';
 import 'package:Perso/app/widgets/perso_async_text_field.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_chips_list.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
@@ -47,7 +48,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _fullBioController = TextEditingController();
   final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final _addressWidget = PersoAutocomplete();
-  final _persoChipsList = PersoChipsList();
+  final _persoChipsList = PersoCategoryChips();
 
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
@@ -110,7 +111,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.bigMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                       Container(
                           margin:
                               const EdgeInsets.only(top: Dimens.normalMargin),
@@ -119,7 +120,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               right: Dimens.bigMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                     ],
                   ),
                 ),
@@ -171,7 +172,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: const PersoDivider()),
+                    child: const PersoIndentedDivider()),
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
@@ -199,7 +200,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                       Container(
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
@@ -246,7 +247,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                       Container(
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
@@ -329,8 +330,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   void _addClientData(String location, BuildContext context) {
-    final clientData = ClientData(
-        imagePath: _image?.path,
+    final clientData = EditableClientData(
+        imagePath: _image?.path ?? "",
         name: _nameController.text,
         surname: _surnameController.text,
         nickname: _nicknameController.text,
@@ -348,8 +349,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         .expand((element) => element)
         .toList();
 
-    final trainerData = TrainerData(
-        imagePath: _image?.path,
+    final trainerData = EditableTrainerData(
+        imagePath: _image?.path ?? "",
         languages: languages,
         name: _nameController.text,
         surname: _surnameController.text,
@@ -358,7 +359,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         phoneNumber: _phoneNumberController.text,
         shortBio: _shortBioController.text,
         fullBio: _fullBioController.text,
-        categories: _persoChipsList.categories);
+        categories: _persoChipsList.selectedCategories);
 
     context
         .read<ProfileEditBloc>()

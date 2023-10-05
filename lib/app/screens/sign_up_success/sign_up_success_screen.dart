@@ -23,7 +23,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   top: Dimens.biggerMargin,
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
-              child: const Center(child: Icon(Icons.email, size: 160)),
+              child: const Center(child: Icon(Icons.email, size: Dimens.iconSizeLarge,)),
             ),
             Container(
               margin: const EdgeInsets.only(

@@ -1,5 +1,0 @@
-=== BACKLOG ===
-- Implement logging out and saving nickname in sharedPrefs.
-- Fix first profile creation
-- Fix images - do not upload same picture again on profile edit
-- Implement showing client/trainer profile for logged in user instead of sign in screen

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'trainer_entity.dart';
+part of 'trainer_short_data.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,31 +15,28 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TrainerEntity {
+mixin _$TrainerShortData {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get surname => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   int get votesNumber => throw _privateConstructorUsedError;
-  String get fullBio => throw _privateConstructorUsedError;
-  String get shortBio => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  List<String> get languages => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
-  List<ReviewEntity> get reviews => throw _privateConstructorUsedError;
+  String get shortBio => throw _privateConstructorUsedError;
+  List<String> get languages => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
+  String get imagePath => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TrainerEntityCopyWith<TrainerEntity> get copyWith =>
+  $TrainerShortDataCopyWith<TrainerShortData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TrainerEntityCopyWith<$Res> {
-  factory $TrainerEntityCopyWith(
-          TrainerEntity value, $Res Function(TrainerEntity) then) =
-      _$TrainerEntityCopyWithImpl<$Res, TrainerEntity>;
+abstract class $TrainerShortDataCopyWith<$Res> {
+  factory $TrainerShortDataCopyWith(
+          TrainerShortData value, $Res Function(TrainerShortData) then) =
+      _$TrainerShortDataCopyWithImpl<$Res, TrainerShortData>;
   @useResult
   $Res call(
       {String id,
@@ -47,20 +44,17 @@ abstract class $TrainerEntityCopyWith<$Res> {
       String surname,
       String nickname,
       int votesNumber,
-      String fullBio,
-      String shortBio,
-      String email,
-      List<String> languages,
       double rating,
-      String location,
-      List<ReviewEntity> reviews,
-      List<String> categories});
+      String shortBio,
+      List<String> languages,
+      List<String> categories,
+      String imagePath});
 }
 
 /// @nodoc
-class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
-    implements $TrainerEntityCopyWith<$Res> {
-  _$TrainerEntityCopyWithImpl(this._value, this._then);
+class _$TrainerShortDataCopyWithImpl<$Res, $Val extends TrainerShortData>
+    implements $TrainerShortDataCopyWith<$Res> {
+  _$TrainerShortDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -75,14 +69,11 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? surname = null,
     Object? nickname = null,
     Object? votesNumber = null,
-    Object? fullBio = null,
-    Object? shortBio = null,
-    Object? email = null,
-    Object? languages = null,
     Object? rating = null,
-    Object? location = null,
-    Object? reviews = null,
+    Object? shortBio = null,
+    Object? languages = null,
     Object? categories = null,
+    Object? imagePath = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -105,48 +96,36 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.votesNumber
           : votesNumber // ignore: cast_nullable_to_non_nullable
               as int,
-      fullBio: null == fullBio
-          ? _value.fullBio
-          : fullBio // ignore: cast_nullable_to_non_nullable
-              as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
       shortBio: null == shortBio
           ? _value.shortBio
           : shortBio // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
       languages: null == languages
           ? _value.languages
           : languages // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
-      reviews: null == reviews
-          ? _value.reviews
-          : reviews // ignore: cast_nullable_to_non_nullable
-              as List<ReviewEntity>,
       categories: null == categories
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_TrainerEntityCopyWith<$Res>
-    implements $TrainerEntityCopyWith<$Res> {
-  factory _$$_TrainerEntityCopyWith(
-          _$_TrainerEntity value, $Res Function(_$_TrainerEntity) then) =
-      __$$_TrainerEntityCopyWithImpl<$Res>;
+abstract class _$$_TrainerShortDataCopyWith<$Res>
+    implements $TrainerShortDataCopyWith<$Res> {
+  factory _$$_TrainerShortDataCopyWith(
+          _$_TrainerShortData value, $Res Function(_$_TrainerShortData) then) =
+      __$$_TrainerShortDataCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -155,22 +134,19 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
       String surname,
       String nickname,
       int votesNumber,
-      String fullBio,
-      String shortBio,
-      String email,
-      List<String> languages,
       double rating,
-      String location,
-      List<ReviewEntity> reviews,
-      List<String> categories});
+      String shortBio,
+      List<String> languages,
+      List<String> categories,
+      String imagePath});
 }
 
 /// @nodoc
-class __$$_TrainerEntityCopyWithImpl<$Res>
-    extends _$TrainerEntityCopyWithImpl<$Res, _$_TrainerEntity>
-    implements _$$_TrainerEntityCopyWith<$Res> {
-  __$$_TrainerEntityCopyWithImpl(
-      _$_TrainerEntity _value, $Res Function(_$_TrainerEntity) _then)
+class __$$_TrainerShortDataCopyWithImpl<$Res>
+    extends _$TrainerShortDataCopyWithImpl<$Res, _$_TrainerShortData>
+    implements _$$_TrainerShortDataCopyWith<$Res> {
+  __$$_TrainerShortDataCopyWithImpl(
+      _$_TrainerShortData _value, $Res Function(_$_TrainerShortData) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -181,16 +157,13 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? surname = null,
     Object? nickname = null,
     Object? votesNumber = null,
-    Object? fullBio = null,
-    Object? shortBio = null,
-    Object? email = null,
-    Object? languages = null,
     Object? rating = null,
-    Object? location = null,
-    Object? reviews = null,
+    Object? shortBio = null,
+    Object? languages = null,
     Object? categories = null,
+    Object? imagePath = null,
   }) {
-    return _then(_$_TrainerEntity(
+    return _then(_$_TrainerShortData(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -211,61 +184,45 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
           ? _value.votesNumber
           : votesNumber // ignore: cast_nullable_to_non_nullable
               as int,
-      fullBio: null == fullBio
-          ? _value.fullBio
-          : fullBio // ignore: cast_nullable_to_non_nullable
-              as String,
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as double,
       shortBio: null == shortBio
           ? _value.shortBio
           : shortBio // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
               as String,
       languages: null == languages
           ? _value._languages
           : languages // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      location: null == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as String,
-      reviews: null == reviews
-          ? _value._reviews
-          : reviews // ignore: cast_nullable_to_non_nullable
-              as List<ReviewEntity>,
       categories: null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_TrainerEntity implements _TrainerEntity {
-  const _$_TrainerEntity(
+class _$_TrainerShortData implements _TrainerShortData {
+  const _$_TrainerShortData(
       {required this.id,
       required this.name,
       required this.surname,
       required this.nickname,
       required this.votesNumber,
-      required this.fullBio,
-      required this.shortBio,
-      required this.email,
-      required final List<String> languages,
       required this.rating,
-      required this.location,
-      required final List<ReviewEntity> reviews,
-      required final List<String> categories})
+      required this.shortBio,
+      required final List<String> languages,
+      required final List<String> categories,
+      required this.imagePath})
       : _languages = languages,
-        _reviews = reviews,
         _categories = categories;
 
   @override
@@ -279,29 +236,15 @@ class _$_TrainerEntity implements _TrainerEntity {
   @override
   final int votesNumber;
   @override
-  final String fullBio;
+  final double rating;
   @override
   final String shortBio;
-  @override
-  final String email;
   final List<String> _languages;
   @override
   List<String> get languages {
     if (_languages is EqualUnmodifiableListView) return _languages;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_languages);
-  }
-
-  @override
-  final double rating;
-  @override
-  final String location;
-  final List<ReviewEntity> _reviews;
-  @override
-  List<ReviewEntity> get reviews {
-    if (_reviews is EqualUnmodifiableListView) return _reviews;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reviews);
   }
 
   final List<String> _categories;
@@ -313,15 +256,18 @@ class _$_TrainerEntity implements _TrainerEntity {
   }
 
   @override
+  final String imagePath;
+
+  @override
   String toString() {
-    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, email: $email, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories)';
+    return 'TrainerShortData(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, rating: $rating, shortBio: $shortBio, languages: $languages, categories: $categories, imagePath: $imagePath)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrainerEntity &&
+            other is _$_TrainerShortData &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.surname, surname) || other.surname == surname) &&
@@ -329,18 +275,15 @@ class _$_TrainerEntity implements _TrainerEntity {
                 other.nickname == nickname) &&
             (identical(other.votesNumber, votesNumber) ||
                 other.votesNumber == votesNumber) &&
-            (identical(other.fullBio, fullBio) || other.fullBio == fullBio) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.shortBio, shortBio) ||
                 other.shortBio == shortBio) &&
-            (identical(other.email, email) || other.email == email) &&
             const DeepCollectionEquality()
                 .equals(other._languages, _languages) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
-            const DeepCollectionEquality().equals(other._reviews, _reviews) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath));
   }
 
   @override
@@ -351,37 +294,31 @@ class _$_TrainerEntity implements _TrainerEntity {
       surname,
       nickname,
       votesNumber,
-      fullBio,
-      shortBio,
-      email,
-      const DeepCollectionEquality().hash(_languages),
       rating,
-      location,
-      const DeepCollectionEquality().hash(_reviews),
-      const DeepCollectionEquality().hash(_categories));
+      shortBio,
+      const DeepCollectionEquality().hash(_languages),
+      const DeepCollectionEquality().hash(_categories),
+      imagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>
-      __$$_TrainerEntityCopyWithImpl<_$_TrainerEntity>(this, _$identity);
+  _$$_TrainerShortDataCopyWith<_$_TrainerShortData> get copyWith =>
+      __$$_TrainerShortDataCopyWithImpl<_$_TrainerShortData>(this, _$identity);
 }
 
-abstract class _TrainerEntity implements TrainerEntity {
-  const factory _TrainerEntity(
+abstract class _TrainerShortData implements TrainerShortData {
+  const factory _TrainerShortData(
       {required final String id,
       required final String name,
       required final String surname,
       required final String nickname,
       required final int votesNumber,
-      required final String fullBio,
-      required final String shortBio,
-      required final String email,
-      required final List<String> languages,
       required final double rating,
-      required final String location,
-      required final List<ReviewEntity> reviews,
-      required final List<String> categories}) = _$_TrainerEntity;
+      required final String shortBio,
+      required final List<String> languages,
+      required final List<String> categories,
+      required final String imagePath}) = _$_TrainerShortData;
 
   @override
   String get id;
@@ -394,23 +331,17 @@ abstract class _TrainerEntity implements TrainerEntity {
   @override
   int get votesNumber;
   @override
-  String get fullBio;
+  double get rating;
   @override
   String get shortBio;
   @override
-  String get email;
-  @override
   List<String> get languages;
-  @override
-  double get rating;
-  @override
-  String get location;
-  @override
-  List<ReviewEntity> get reviews;
   @override
   List<String> get categories;
   @override
+  String get imagePath;
+  @override
   @JsonKey(ignore: true)
-  _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>
+  _$$_TrainerShortDataCopyWith<_$_TrainerShortData> get copyWith =>
       throw _privateConstructorUsedError;
 }

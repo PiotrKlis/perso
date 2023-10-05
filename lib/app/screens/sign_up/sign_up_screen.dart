@@ -7,7 +7,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.email, size: 24.0)),
+                          child: const Icon(Icons.email, size: Dimens.iconSize)),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
@@ -73,7 +73,7 @@ class SignUpScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: const PersoDivider()),
+                    child: const PersoIndentedDivider()),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: Row(
@@ -82,7 +82,7 @@ class SignUpScreen extends StatelessWidget {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.password, size: 24.0)),
+                            child: const Icon(Icons.password, size: Dimens.iconSize)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
@@ -127,7 +127,7 @@ class SignUpScreen extends StatelessWidget {
                           bottom: Dimens.biggerMargin,
                           right: Dimens.normalMargin),
                       child: PersoButton(
-                          width: 160.0,
+                          width: Dimens.persoButtonWidth,
                           title: AppLocalizations.of(context)!.register,
                           onTap: _registerUser)),
                 ),

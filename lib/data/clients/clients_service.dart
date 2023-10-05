@@ -1,6 +1,5 @@
-import 'package:Perso/app/models/client_data.dart';
+import 'package:Perso/app/models/editable_client_data.dart';
 
 abstract class ClientsService {
-  Future<void> uploadData(ClientData clientData);
-  Future<void> uploadPhoto(String path);
+  Future<void> uploadData(EditableClientData clientData);
 }

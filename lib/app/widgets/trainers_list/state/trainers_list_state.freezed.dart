@@ -19,21 +19,21 @@ mixin _$TrainersListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerEntity> trainers) content,
+    required TResult Function(List<TrainerShortData> trainers) content,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerEntity> trainers)? content,
+    TResult? Function(List<TrainerShortData> trainers)? content,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerEntity> trainers)? content,
+    TResult Function(List<TrainerShortData> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -117,7 +117,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerEntity> trainers) content,
+    required TResult Function(List<TrainerShortData> trainers) content,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -127,7 +127,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerEntity> trainers)? content,
+    TResult? Function(List<TrainerShortData> trainers)? content,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -137,7 +137,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerEntity> trainers)? content,
+    TResult Function(List<TrainerShortData> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -191,7 +191,7 @@ abstract class _$$ContentCopyWith<$Res> {
   factory _$$ContentCopyWith(_$Content value, $Res Function(_$Content) then) =
       __$$ContentCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TrainerEntity> trainers});
+  $Res call({List<TrainerShortData> trainers});
 }
 
 /// @nodoc
@@ -210,7 +210,7 @@ class __$$ContentCopyWithImpl<$Res>
       trainers: null == trainers
           ? _value._trainers
           : trainers // ignore: cast_nullable_to_non_nullable
-              as List<TrainerEntity>,
+              as List<TrainerShortData>,
     ));
   }
 }
@@ -218,12 +218,12 @@ class __$$ContentCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Content implements Content {
-  const _$Content({required final List<TrainerEntity> trainers})
+  const _$Content({required final List<TrainerShortData> trainers})
       : _trainers = trainers;
 
-  final List<TrainerEntity> _trainers;
+  final List<TrainerShortData> _trainers;
   @override
-  List<TrainerEntity> get trainers {
+  List<TrainerShortData> get trainers {
     if (_trainers is EqualUnmodifiableListView) return _trainers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_trainers);
@@ -256,7 +256,7 @@ class _$Content implements Content {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerEntity> trainers) content,
+    required TResult Function(List<TrainerShortData> trainers) content,
     required TResult Function(String error) error,
   }) {
     return content(trainers);
@@ -266,7 +266,7 @@ class _$Content implements Content {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerEntity> trainers)? content,
+    TResult? Function(List<TrainerShortData> trainers)? content,
     TResult? Function(String error)? error,
   }) {
     return content?.call(trainers);
@@ -276,7 +276,7 @@ class _$Content implements Content {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerEntity> trainers)? content,
+    TResult Function(List<TrainerShortData> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -322,10 +322,10 @@ class _$Content implements Content {
 }
 
 abstract class Content implements TrainersListState {
-  const factory Content({required final List<TrainerEntity> trainers}) =
+  const factory Content({required final List<TrainerShortData> trainers}) =
       _$Content;
 
-  List<TrainerEntity> get trainers;
+  List<TrainerShortData> get trainers;
   @JsonKey(ignore: true)
   _$$ContentCopyWith<_$Content> get copyWith =>
       throw _privateConstructorUsedError;
@@ -394,7 +394,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerEntity> trainers) content,
+    required TResult Function(List<TrainerShortData> trainers) content,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -404,7 +404,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerEntity> trainers)? content,
+    TResult? Function(List<TrainerShortData> trainers)? content,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -414,7 +414,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerEntity> trainers)? content,
+    TResult Function(List<TrainerShortData> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

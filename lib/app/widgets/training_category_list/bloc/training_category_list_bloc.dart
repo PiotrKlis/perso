@@ -6,18 +6,17 @@ import 'package:Perso/data/training_categories/local_training_category_repositor
 import 'package:Perso/data/training_categories/training_category_source.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class TrainingCategoryListBloc
     extends Bloc<TrainingCategoryListEvent, TrainingCategoryListState> {
   final TrainingCategorySource _trainingCategoryRepository =
-  getIt.get<LocalTrainingCategoryRepository>();
+      getIt.get<LocalTrainingCategoryRepository>();
 
-  TrainingCategoryListBloc(TrainingCategoryListState initialState)
-      : super(initialState) {
+  TrainingCategoryListBloc()
+      : super(const TrainingCategoryListState.initial()) {
     on<LoadAll>((event, emitter) async {
       try {
         List<TrainingCategory> categories =
-        await _trainingCategoryRepository.getAllCategories();
+            await _trainingCategoryRepository.getAllCategories();
         emitter(TrainingCategoryListState.content(categories: categories));
       } catch (error) {
         emitter(TrainingCategoryListState.error(error: error.toString()));
@@ -27,7 +26,7 @@ class TrainingCategoryListBloc
     on<LoadShortList>((event, emitter) async {
       try {
         List<TrainingCategory> categories =
-        await _trainingCategoryRepository.getCategoriesShortList();
+            await _trainingCategoryRepository.getCategoriesShortList();
         emitter(TrainingCategoryListState.content(categories: categories));
       } catch (error) {
         emitter(TrainingCategoryListState.error(error: error.toString()));

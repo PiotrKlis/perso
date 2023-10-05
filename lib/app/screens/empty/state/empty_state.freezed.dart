@@ -19,44 +19,32 @@ mixin _$EmptyState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() content,
-    required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? content,
-    TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? content,
-    TResult Function()? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
-    required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
-    TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
-    TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,8 +105,6 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() content,
-    required TResult Function() error,
   }) {
     return initial();
   }
@@ -127,8 +113,6 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? content,
-    TResult? Function()? error,
   }) {
     return initial?.call();
   }
@@ -137,8 +121,6 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? content,
-    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -151,8 +133,6 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
-    required TResult Function(Error value) error,
   }) {
     return initial(this);
   }
@@ -161,8 +141,6 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
-    TResult? Function(Error value)? error,
   }) {
     return initial?.call(this);
   }
@@ -171,8 +149,6 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
-    TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -184,216 +160,4 @@ class _$Initial implements Initial {
 
 abstract class Initial implements EmptyState {
   const factory Initial() = _$Initial;
-}
-
-/// @nodoc
-abstract class _$$ContentCopyWith<$Res> {
-  factory _$$ContentCopyWith(_$Content value, $Res Function(_$Content) then) =
-      __$$ContentCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ContentCopyWithImpl<$Res>
-    extends _$EmptyStateCopyWithImpl<$Res, _$Content>
-    implements _$$ContentCopyWith<$Res> {
-  __$$ContentCopyWithImpl(_$Content _value, $Res Function(_$Content) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Content implements Content {
-  const _$Content();
-
-  @override
-  String toString() {
-    return 'EmptyState.content()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Content);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() content,
-    required TResult Function() error,
-  }) {
-    return content();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? content,
-    TResult? Function()? error,
-  }) {
-    return content?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? content,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (content != null) {
-      return content();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
-    required TResult Function(Error value) error,
-  }) {
-    return content(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
-    TResult? Function(Error value)? error,
-  }) {
-    return content?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (content != null) {
-      return content(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Content implements EmptyState {
-  const factory Content() = _$Content;
-}
-
-/// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$EmptyStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$Error implements Error {
-  const _$Error();
-
-  @override
-  String toString() {
-    return 'EmptyState.error()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Error);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() content,
-    required TResult Function() error,
-  }) {
-    return error();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? content,
-    TResult? Function()? error,
-  }) {
-    return error?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? content,
-    TResult Function()? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
-    required TResult Function(Error value) error,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
-    TResult? Function(Error value)? error,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
-    TResult Function(Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Error implements EmptyState {
-  const factory Error() = _$Error;
 }

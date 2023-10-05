@@ -1,0 +1,242 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'editable_client_data.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
+mixin _$EditableClientData {
+  String get imagePath => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get surname => throw _privateConstructorUsedError;
+  String get nickname => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $EditableClientDataCopyWith<EditableClientData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $EditableClientDataCopyWith<$Res> {
+  factory $EditableClientDataCopyWith(
+          EditableClientData value, $Res Function(EditableClientData) then) =
+      _$EditableClientDataCopyWithImpl<$Res, EditableClientData>;
+  @useResult
+  $Res call(
+      {String imagePath,
+      String name,
+      String surname,
+      String nickname,
+      String location,
+      String phoneNumber});
+}
+
+/// @nodoc
+class _$EditableClientDataCopyWithImpl<$Res, $Val extends EditableClientData>
+    implements $EditableClientDataCopyWith<$Res> {
+  _$EditableClientDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? imagePath = null,
+    Object? name = null,
+    Object? surname = null,
+    Object? nickname = null,
+    Object? location = null,
+    Object? phoneNumber = null,
+  }) {
+    return _then(_value.copyWith(
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      surname: null == surname
+          ? _value.surname
+          : surname // ignore: cast_nullable_to_non_nullable
+              as String,
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_EditableClientDataCopyWith<$Res>
+    implements $EditableClientDataCopyWith<$Res> {
+  factory _$$_EditableClientDataCopyWith(_$_EditableClientData value,
+          $Res Function(_$_EditableClientData) then) =
+      __$$_EditableClientDataCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String imagePath,
+      String name,
+      String surname,
+      String nickname,
+      String location,
+      String phoneNumber});
+}
+
+/// @nodoc
+class __$$_EditableClientDataCopyWithImpl<$Res>
+    extends _$EditableClientDataCopyWithImpl<$Res, _$_EditableClientData>
+    implements _$$_EditableClientDataCopyWith<$Res> {
+  __$$_EditableClientDataCopyWithImpl(
+      _$_EditableClientData _value, $Res Function(_$_EditableClientData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? imagePath = null,
+    Object? name = null,
+    Object? surname = null,
+    Object? nickname = null,
+    Object? location = null,
+    Object? phoneNumber = null,
+  }) {
+    return _then(_$_EditableClientData(
+      imagePath: null == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      surname: null == surname
+          ? _value.surname
+          : surname // ignore: cast_nullable_to_non_nullable
+              as String,
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_EditableClientData implements _EditableClientData {
+  const _$_EditableClientData(
+      {required this.imagePath,
+      required this.name,
+      required this.surname,
+      required this.nickname,
+      required this.location,
+      required this.phoneNumber});
+
+  @override
+  final String imagePath;
+  @override
+  final String name;
+  @override
+  final String surname;
+  @override
+  final String nickname;
+  @override
+  final String location;
+  @override
+  final String phoneNumber;
+
+  @override
+  String toString() {
+    return 'EditableClientData(imagePath: $imagePath, name: $name, surname: $surname, nickname: $nickname, location: $location, phoneNumber: $phoneNumber)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EditableClientData &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.surname, surname) || other.surname == surname) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, imagePath, name, surname, nickname, location, phoneNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EditableClientDataCopyWith<_$_EditableClientData> get copyWith =>
+      __$$_EditableClientDataCopyWithImpl<_$_EditableClientData>(
+          this, _$identity);
+}
+
+abstract class _EditableClientData implements EditableClientData {
+  const factory _EditableClientData(
+      {required final String imagePath,
+      required final String name,
+      required final String surname,
+      required final String nickname,
+      required final String location,
+      required final String phoneNumber}) = _$_EditableClientData;
+
+  @override
+  String get imagePath;
+  @override
+  String get name;
+  @override
+  String get surname;
+  @override
+  String get nickname;
+  @override
+  String get location;
+  @override
+  String get phoneNumber;
+  @override
+  @JsonKey(ignore: true)
+  _$$_EditableClientDataCopyWith<_$_EditableClientData> get copyWith =>
+      throw _privateConstructorUsedError;
+}

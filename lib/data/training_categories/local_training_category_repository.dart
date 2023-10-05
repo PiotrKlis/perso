@@ -19,6 +19,12 @@ class LocalTrainingCategoryRepository implements TrainingCategorySource {
     return Future.value(_dummyTrainingCategories);
   }
 
+  @override
+  Future<List<String>> getAllCategoriesNames() {
+    return Future.value(
+        _dummyTrainingCategories.map((element) => element.name).toList());
+  }
+
   final List<TrainingCategory> _dummyTrainingCategories = [
     const TrainingCategory(
         trainingCategoryIcon: TrainingCategoryIcon(

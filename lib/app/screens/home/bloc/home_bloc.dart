@@ -19,19 +19,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await _navigateLoggedIn(emit);
       } else {
         emit(const HomeState.navigateToSignIn());
-        emit.call(const HomeState.initial());
+        emit(const HomeState.initial());
       }
     });
   }
 
   Future<void> _navigateLoggedIn(Emitter<HomeState> emit) async {
-    UserType userType = await _userInfoProvider.getUserType();
-    if (userType == UserType.trainer) {
-      emit(const HomeState.navigateToTrainerProfile());
-      emit.call(const HomeState.initial());
-    } else {
-      emit(const HomeState.navigateToClientProfile());
-      emit.call(const HomeState.initial());
+    UserType? userType = await _userInfoProvider.getUserType();
+    switch (userType) {
+      case UserType.trainer:
+        emit(const HomeState.navigateToTrainerProfile());
+        emit(const HomeState.initial());
+        break;
+      case UserType.client:
+        emit(const HomeState.navigateToClientProfile());
+        emit(const HomeState.initial());
+        break;
+      case null:
+        emit(const HomeState.navigateToSignIn());
+        emit(const HomeState.initial());
     }
   }
 }
