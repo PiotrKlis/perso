@@ -4,19 +4,14 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:Perso/app/widgets/spoken_language_row.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-=======
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
->>>>>>> 1e3d8368917abe0e107168ded3690e32abd7df88
 
 class SearchFilterScreen extends StatelessWidget {
   const SearchFilterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PersoAppBar(
@@ -93,13 +88,5 @@ class SearchFilterScreen extends StatelessWidget {
             )
           ],
         ));
-=======
-    return  Scaffold(
-        backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(
-          title: AppLocalizations.of(context)!.search_filter,
-        ),
-        body: Center(child: Text(AppLocalizations.of(context)!.search_filter_screen)));
->>>>>>> 1e3d8368917abe0e107168ded3690e32abd7df88
   }
 }
