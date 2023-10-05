@@ -1,6 +1,6 @@
 import 'package:Perso/core/models/review_entity.dart';
 import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/core/models/trainer_short_data.dart';
+import 'package:Perso/core/string_extensions.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/trainers/trainers_source.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
@@ -10,14 +10,14 @@ import 'package:injectable/injectable.dart';
 @injectable
 class FirestoreTrainersProvider implements TrainersSource {
   @override
-  Future<List<TrainerShortData>> getAllTrainersShortData() async {
+  Future<List<TrainerEntity>> getAllTrainersData() async {
     final QuerySnapshot trainersSnapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .where(UserDocumentFields.userType, isEqualTo: UserType.trainer.name)
         .get();
 
     return trainersSnapshot.docs.map((data) {
-      return TrainerShortData(
+      return TrainerEntity(
           id: data.id,
           name: data[UserDocumentFields.name],
           surname: data[UserDocumentFields.surname],
@@ -28,12 +28,21 @@ class FirestoreTrainersProvider implements TrainersSource {
           languages: data[UserDocumentFields.languages].toString().split(", "),
           categories:
               data[UserDocumentFields.categories].toString().split(", "),
-          imagePath: data[UserDocumentFields.imagePath]);
+          imagePath: data[UserDocumentFields.imagePath],
+          fullBio: data[UserDocumentFields.fullBio],
+          location: data[UserDocumentFields.location],
+          reviews: _getReviews(data[UserDocumentFields.reviews]),
+          pendingRequests:
+              data[UserDocumentFields.pendingRequests].toString().split(", "),
+          activeClients:
+              data[UserDocumentFields.activeClients].toString().split(", "),
+          inactiveClients:
+              data[UserDocumentFields.inactiveClients].toString().split(", "));
     }).toList();
   }
 
-  List<ReviewEntity> _getReviews(QueryDocumentSnapshot<Object?> data) {
-    return data[UserDocumentFields.reviews].map<ReviewEntity>((review) {
+  List<ReviewEntity> _getReviews(List reviews) {
+    return reviews.map<ReviewEntity>((review) {
       return ReviewEntity(
           rating: review[UserDocumentFields.rating],
           description: review[UserDocumentFields.description]);
@@ -57,7 +66,7 @@ class FirestoreTrainersProvider implements TrainersSource {
         shortBio: data[UserDocumentFields.shortBio],
         rating: data[UserDocumentFields.rating],
         location: data[UserDocumentFields.location],
-        reviews: _getReviews(data),
+        reviews: _getReviews(data[UserDocumentFields.reviews]),
         languages: data[UserDocumentFields.languages].toString().split(", "),
         categories: data[UserDocumentFields.categories].toString().split(", "),
         pendingRequests:
@@ -67,5 +76,19 @@ class FirestoreTrainersProvider implements TrainersSource {
         inactiveClients:
             data[UserDocumentFields.inactiveClients].toString().split(", "),
         imagePath: data[UserDocumentFields.imagePath]);
+  }
+
+  @override
+  Future<List<String>> getSpecialities(String id) async {
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.id, isEqualTo: id)
+        .get();
+
+    final categories = snapshot.docs.first[UserDocumentFields.categories]
+        .toString()
+        .removeBrackets()
+        .split(", ");
+    return categories;
   }
 }

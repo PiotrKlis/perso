@@ -1,17 +1,16 @@
 import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/core/models/trainer_short_data.dart';
 import 'package:Perso/data/trainers/trainers_source.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class TestTrainersRepository implements TrainersSource {
   @override
-  Future<List<TrainerShortData>> getAllTrainersShortData() {
+  Future<List<TrainerEntity>> getAllTrainersData() {
     return Future.value(_dummyTrainerCards);
   }
 
-  final List<TrainerShortData> _dummyTrainerCards = [
-    const TrainerShortData(
+  final List<TrainerEntity> _dummyTrainerCards = [
+    const TrainerEntity(
         id: '1',
         name: "Son goku",
         surname: 'Surname',
@@ -21,34 +20,56 @@ class TestTrainersRepository implements TrainersSource {
         categories: ['Training type 1', 'Training type 2'],
         languages: ['Polish', 'English'],
         shortBio: "shortBio",
-        imagePath: ""),
-    const TrainerShortData(
+        imagePath: "",
+        fullBio: "fullBio",
+        location: "location",
+        reviews: [],
+        pendingRequests: [],
+        activeClients: [],
+        inactiveClients: []),
+    const TrainerEntity(
         id: '2',
         name: "Son gohan",
-        surname: 'Surnamenos',
+        surname: 'Surname',
         nickname: "@songohan",
         votesNumber: 13222,
         rating: 4.5,
         categories: ['Training type 1', 'Training type 2'],
         languages: ['Polish', 'English'],
         shortBio: "shortBio",
-        imagePath: ""),
-    const TrainerShortData(
-        id: '1',
+        imagePath: "",
+        fullBio: "fullBio",
+        location: "location",
+        reviews: [],
+        pendingRequests: [],
+        activeClients: [],
+        inactiveClients: []),
+    const TrainerEntity(
+        id: '3',
         name: "Son goten",
-        surname: 'Surnamini',
+        surname: 'Surname',
         nickname: "@songoten",
         votesNumber: 13222,
         rating: 4.5,
         categories: ['Training type 1', 'Training type 2'],
         languages: ['Polish', 'English'],
         shortBio: "shortBio",
-        imagePath: "")
+        imagePath: "",
+        fullBio: "fullBio",
+        location: "location",
+        reviews: [],
+        pendingRequests: [],
+        activeClients: [],
+        inactiveClients: []),
   ];
 
   @override
   Future<TrainerEntity> getTrainerData(String id) {
-    // TODO: implement getTrainerData
-    throw UnimplementedError();
+    return Future.value(_dummyTrainerCards.first);
+  }
+
+  @override
+  Future<List<String>> getSpecialities(String id) {
+    return Future.value(List.empty());
   }
 }

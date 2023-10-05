@@ -18,33 +18,40 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoryChipsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadData,
+    required TResult Function() loadAllCategories,
+    required TResult Function(String trainerId) loadCategoriesForTrainer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadData,
+    TResult? Function()? loadAllCategories,
+    TResult? Function(String trainerId)? loadCategoriesForTrainer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadData,
+    TResult Function()? loadAllCategories,
+    TResult Function(String trainerId)? loadCategoriesForTrainer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoadData value) loadData,
+    required TResult Function(LoadAllCategories value) loadAllCategories,
+    required TResult Function(LoadCategoriesForTrainer value)
+        loadCategoriesForTrainer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadData value)? loadData,
+    TResult? Function(LoadAllCategories value)? loadAllCategories,
+    TResult? Function(LoadCategoriesForTrainer value)? loadCategoriesForTrainer,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadData value)? loadData,
+    TResult Function(LoadAllCategories value)? loadAllCategories,
+    TResult Function(LoadCategoriesForTrainer value)? loadCategoriesForTrainer,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -69,34 +76,35 @@ class _$CategoryChipsEventCopyWithImpl<$Res, $Val extends CategoryChipsEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadDataCopyWith<$Res> {
-  factory _$$LoadDataCopyWith(
-          _$LoadData value, $Res Function(_$LoadData) then) =
-      __$$LoadDataCopyWithImpl<$Res>;
+abstract class _$$LoadAllCategoriesCopyWith<$Res> {
+  factory _$$LoadAllCategoriesCopyWith(
+          _$LoadAllCategories value, $Res Function(_$LoadAllCategories) then) =
+      __$$LoadAllCategoriesCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadDataCopyWithImpl<$Res>
-    extends _$CategoryChipsEventCopyWithImpl<$Res, _$LoadData>
-    implements _$$LoadDataCopyWith<$Res> {
-  __$$LoadDataCopyWithImpl(_$LoadData _value, $Res Function(_$LoadData) _then)
+class __$$LoadAllCategoriesCopyWithImpl<$Res>
+    extends _$CategoryChipsEventCopyWithImpl<$Res, _$LoadAllCategories>
+    implements _$$LoadAllCategoriesCopyWith<$Res> {
+  __$$LoadAllCategoriesCopyWithImpl(
+      _$LoadAllCategories _value, $Res Function(_$LoadAllCategories) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadData implements LoadData {
-  const _$LoadData();
+class _$LoadAllCategories implements LoadAllCategories {
+  const _$LoadAllCategories();
 
   @override
   String toString() {
-    return 'CategoryChipsEvent.loadData()';
+    return 'CategoryChipsEvent.loadAllCategories()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadData);
+        (other.runtimeType == runtimeType && other is _$LoadAllCategories);
   }
 
   @override
@@ -105,27 +113,30 @@ class _$LoadData implements LoadData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loadData,
+    required TResult Function() loadAllCategories,
+    required TResult Function(String trainerId) loadCategoriesForTrainer,
   }) {
-    return loadData();
+    return loadAllCategories();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loadData,
+    TResult? Function()? loadAllCategories,
+    TResult? Function(String trainerId)? loadCategoriesForTrainer,
   }) {
-    return loadData?.call();
+    return loadAllCategories?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loadData,
+    TResult Function()? loadAllCategories,
+    TResult Function(String trainerId)? loadCategoriesForTrainer,
     required TResult orElse(),
   }) {
-    if (loadData != null) {
-      return loadData();
+    if (loadAllCategories != null) {
+      return loadAllCategories();
     }
     return orElse();
   }
@@ -133,32 +144,174 @@ class _$LoadData implements LoadData {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoadData value) loadData,
+    required TResult Function(LoadAllCategories value) loadAllCategories,
+    required TResult Function(LoadCategoriesForTrainer value)
+        loadCategoriesForTrainer,
   }) {
-    return loadData(this);
+    return loadAllCategories(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoadData value)? loadData,
+    TResult? Function(LoadAllCategories value)? loadAllCategories,
+    TResult? Function(LoadCategoriesForTrainer value)? loadCategoriesForTrainer,
   }) {
-    return loadData?.call(this);
+    return loadAllCategories?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoadData value)? loadData,
+    TResult Function(LoadAllCategories value)? loadAllCategories,
+    TResult Function(LoadCategoriesForTrainer value)? loadCategoriesForTrainer,
     required TResult orElse(),
   }) {
-    if (loadData != null) {
-      return loadData(this);
+    if (loadAllCategories != null) {
+      return loadAllCategories(this);
     }
     return orElse();
   }
 }
 
-abstract class LoadData implements CategoryChipsEvent {
-  const factory LoadData() = _$LoadData;
+abstract class LoadAllCategories implements CategoryChipsEvent {
+  const factory LoadAllCategories() = _$LoadAllCategories;
+}
+
+/// @nodoc
+abstract class _$$LoadCategoriesForTrainerCopyWith<$Res> {
+  factory _$$LoadCategoriesForTrainerCopyWith(_$LoadCategoriesForTrainer value,
+          $Res Function(_$LoadCategoriesForTrainer) then) =
+      __$$LoadCategoriesForTrainerCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String trainerId});
+}
+
+/// @nodoc
+class __$$LoadCategoriesForTrainerCopyWithImpl<$Res>
+    extends _$CategoryChipsEventCopyWithImpl<$Res, _$LoadCategoriesForTrainer>
+    implements _$$LoadCategoriesForTrainerCopyWith<$Res> {
+  __$$LoadCategoriesForTrainerCopyWithImpl(_$LoadCategoriesForTrainer _value,
+      $Res Function(_$LoadCategoriesForTrainer) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? trainerId = null,
+  }) {
+    return _then(_$LoadCategoriesForTrainer(
+      null == trainerId
+          ? _value.trainerId
+          : trainerId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadCategoriesForTrainer implements LoadCategoriesForTrainer {
+  const _$LoadCategoriesForTrainer(this.trainerId);
+
+  @override
+  final String trainerId;
+
+  @override
+  String toString() {
+    return 'CategoryChipsEvent.loadCategoriesForTrainer(trainerId: $trainerId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadCategoriesForTrainer &&
+            (identical(other.trainerId, trainerId) ||
+                other.trainerId == trainerId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, trainerId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadCategoriesForTrainerCopyWith<_$LoadCategoriesForTrainer>
+      get copyWith =>
+          __$$LoadCategoriesForTrainerCopyWithImpl<_$LoadCategoriesForTrainer>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadAllCategories,
+    required TResult Function(String trainerId) loadCategoriesForTrainer,
+  }) {
+    return loadCategoriesForTrainer(trainerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadAllCategories,
+    TResult? Function(String trainerId)? loadCategoriesForTrainer,
+  }) {
+    return loadCategoriesForTrainer?.call(trainerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadAllCategories,
+    TResult Function(String trainerId)? loadCategoriesForTrainer,
+    required TResult orElse(),
+  }) {
+    if (loadCategoriesForTrainer != null) {
+      return loadCategoriesForTrainer(trainerId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadAllCategories value) loadAllCategories,
+    required TResult Function(LoadCategoriesForTrainer value)
+        loadCategoriesForTrainer,
+  }) {
+    return loadCategoriesForTrainer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadAllCategories value)? loadAllCategories,
+    TResult? Function(LoadCategoriesForTrainer value)? loadCategoriesForTrainer,
+  }) {
+    return loadCategoriesForTrainer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadAllCategories value)? loadAllCategories,
+    TResult Function(LoadCategoriesForTrainer value)? loadCategoriesForTrainer,
+    required TResult orElse(),
+  }) {
+    if (loadCategoriesForTrainer != null) {
+      return loadCategoriesForTrainer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadCategoriesForTrainer implements CategoryChipsEvent {
+  const factory LoadCategoriesForTrainer(final String trainerId) =
+      _$LoadCategoriesForTrainer;
+
+  String get trainerId;
+  @JsonKey(ignore: true)
+  _$$LoadCategoriesForTrainerCopyWith<_$LoadCategoriesForTrainer>
+      get copyWith => throw _privateConstructorUsedError;
 }

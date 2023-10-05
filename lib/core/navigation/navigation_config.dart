@@ -15,6 +15,7 @@ import 'package:Perso/app/screens/trainer_details/trainer_details_screen.dart';
 import 'package:Perso/app/screens/trainer_profile/trainer_profile_screen.dart';
 import 'package:Perso/app/screens/training_categories/training_categories.dart';
 import 'package:Perso/app/screens/trainings/trainings_screen.dart';
+import 'package:Perso/core/models/trainer_entity.dart';
 import 'package:Perso/core/navigation/bottom_nav_bar.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/core/user_type.dart';
@@ -45,11 +46,11 @@ final GoRouter goRouter = GoRouter(
             routes: [
               GoRoute(
                 name: ScreenNavigationKey.trainerDetails,
-                path: "${ScreenNavigationKey.trainerDetails}/:trainerId",
+                path: ScreenNavigationKey.trainerDetails,
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
                       child: TrainerDetailsScreen(
-                          trainerId: state.pathParameters["trainerId"]!));
+                          trainerEntity: state.extra as TrainerEntity));
                 },
               ),
               GoRoute(
