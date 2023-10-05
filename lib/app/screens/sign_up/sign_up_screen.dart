@@ -7,12 +7,13 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class SignUpScreen extends StatelessWidget {
       create: (context) => SignUpBloc(const SignUpState.initial()),
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: const PersoAppBar(title: "Sign up new user"),
+        appBar: PersoAppBar(title: AppLocalizations.of(context)!.sign_up_title),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Form(
@@ -39,12 +40,12 @@ class SignUpScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                    child: Text("Create your account",
+                    child: Text(AppLocalizations.of(context)!.sign_up_body_1,
                         style: ThemeText.largerTitleBold)),
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.mediumMargin, left: Dimens.normalMargin),
-                    child: Text("We are glad that you join us",
+                    child: Text(AppLocalizations.of(context)!.sign_up_body_2,
                         style: ThemeText.bodyRegularBlackText)),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
@@ -53,14 +54,14 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.email, size: 24.0)),
+                          child: const Icon(Icons.email, size: Dimens.iconSize)),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                              title: "Email",
+                              title: AppLocalizations.of(context)!.email,
                               textEditingController: _loginController,
                               customValidator:
                                   TextFieldValidator.validateEmail),
@@ -72,7 +73,7 @@ class SignUpScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: const PersoDivider()),
+                    child: const PersoIndentedDivider()),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: Row(
@@ -81,14 +82,14 @@ class SignUpScreen extends StatelessWidget {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.password, size: 24.0)),
+                            child: const Icon(Icons.password, size: Dimens.iconSize)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin,
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
-                              title: "Password",
+                              title: AppLocalizations.of(context)!.password,
                               customValidator:
                                   TextFieldValidator.validatePassword,
                               shouldObscureText: true,
@@ -109,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
                                 left: Dimens.substantialMargin,
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
-                              title: "Confirm password",
+                              title: AppLocalizations.of(context)!.confirm_password,
                               passwordController: _passwordController,
                               confirmPasswordController:
                                   _confirmPasswordController,
@@ -126,8 +127,8 @@ class SignUpScreen extends StatelessWidget {
                           bottom: Dimens.biggerMargin,
                           right: Dimens.normalMargin),
                       child: PersoButton(
-                          width: 160.0,
-                          title: "Register",
+                          width: Dimens.persoButtonWidth,
+                          title: AppLocalizations.of(context)!.register,
                           onTap: _registerUser)),
                 ),
                 BlocConsumer<SignUpBloc, SignUpState>(

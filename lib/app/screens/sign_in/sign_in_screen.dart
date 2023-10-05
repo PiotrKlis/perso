@@ -7,12 +7,13 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
 import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class SignInScreen extends StatelessWidget {
       create: (context) => SignInBloc(const SignInState.initial()),
       child: SafeArea(
           child: Scaffold(
-        appBar: const PersoAppBar(title: "Sign In"),
+        appBar: PersoAppBar(title: AppLocalizations.of(context)!.sign_in),
         backgroundColor: PersoColors.lightBlue,
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -37,7 +38,7 @@ class SignInScreen extends StatelessWidget {
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: Text("Sign In", style: ThemeText.largerTitleBold)),
+                    child: Text(AppLocalizations.of(context)!.sign_in, style: ThemeText.largerTitleBold)),
               ),
               Form(
                   key: _formKey,
@@ -49,7 +50,7 @@ class SignInScreen extends StatelessWidget {
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                            title: "Login",
+                            title: AppLocalizations.of(context)!.login,
                             textEditingController: _loginController,
                             customValidator: TextFieldValidator.validateIsEmpty,
                           )),
@@ -59,7 +60,7 @@ class SignInScreen extends StatelessWidget {
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                            title: "Password",
+                            title: AppLocalizations.of(context)!.password,
                             shouldObscureText: true,
                             textEditingController: _passwordController,
                             customValidator: TextFieldValidator.validateIsEmpty,
@@ -98,7 +99,7 @@ class SignInScreen extends StatelessWidget {
                     onTap: () =>
                         context.pushNamed(ScreenNavigationKey.passwordRecovery),
                     child: Text(
-                      "Forgot password?",
+                      AppLocalizations.of(context)!.forgotten_password_title,
                       style: ThemeText.calloutBoldBlueText,
                     ),
                   ),
@@ -109,7 +110,7 @@ class SignInScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
                   child: PersoButton(
                     width: Dimens.bigButtonWidth,
-                    title: "Sign In",
+                    title: AppLocalizations.of(context)!.sign_in,
                     onTap: (context) {
                       _loginUser(context);
                     },
@@ -121,9 +122,9 @@ class SignInScreen extends StatelessWidget {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Expanded(child: PersoDivider()),
-                      Text("OR", style: ThemeText.footnoteRegularGrey),
-                      const Expanded(child: PersoDivider()),
+                      const Expanded(child: PersoIndentedDivider()),
+                      Text(AppLocalizations.of(context)!.or, style: ThemeText.footnoteRegularGrey),
+                      const Expanded(child: PersoIndentedDivider()),
                     ]),
               ),
               Container(
@@ -133,9 +134,9 @@ class SignInScreen extends StatelessWidget {
                       right: Dimens.bigMargin),
                   child: GestureDetector(
                     onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
-                    child: const AbsorbPointer(
+                    child:  AbsorbPointer(
                       child:
-                          PersoButton(title: "Sign up", whiteBlackTheme: true),
+                          PersoButton(title: AppLocalizations.of(context)!.sign_up, whiteBlackTheme: true),
                     ),
                   )),
             ],
@@ -148,7 +149,7 @@ class SignInScreen extends StatelessWidget {
   SafeArea _signInScreenView(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: const PersoAppBar(title: "Sign In"),
+      appBar: PersoAppBar(title: AppLocalizations.of(context)!.sign_in),
       backgroundColor: PersoColors.lightBlue,
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -158,7 +159,7 @@ class SignInScreen extends StatelessWidget {
             Center(
               child: Container(
                   margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                  child: Text("Sign In", style: ThemeText.largerTitleBold)),
+                  child: Text(AppLocalizations.of(context)!.sign_in, style: ThemeText.largerTitleBold)),
             ),
             Form(
                 key: _formKey,
@@ -170,7 +171,7 @@ class SignInScreen extends StatelessWidget {
                             left: Dimens.normalMargin,
                             right: Dimens.normalMargin),
                         child: PersoTextField(
-                          title: "Login",
+                          title: AppLocalizations.of(context)!.login,
                           textEditingController: _loginController,
                           customValidator: TextFieldValidator.validateIsEmpty,
                         )),
@@ -180,7 +181,7 @@ class SignInScreen extends StatelessWidget {
                             left: Dimens.normalMargin,
                             right: Dimens.normalMargin),
                         child: PersoTextField(
-                          title: "Password",
+                          title: AppLocalizations.of(context)!.password,
                           shouldObscureText: true,
                           textEditingController: _passwordController,
                           customValidator: TextFieldValidator.validateIsEmpty,
@@ -219,7 +220,7 @@ class SignInScreen extends StatelessWidget {
                   onTap: () =>
                       context.pushNamed(ScreenNavigationKey.passwordRecovery),
                   child: Text(
-                    "Forgot password?",
+                    AppLocalizations.of(context)!.forgotten_password_title,
                     style: ThemeText.calloutBoldBlueText,
                   ),
                 ),
@@ -230,7 +231,7 @@ class SignInScreen extends StatelessWidget {
                 margin: const EdgeInsets.only(top: Dimens.bigMargin),
                 child: PersoButton(
                   width: Dimens.bigButtonWidth,
-                  title: "Sign In",
+                  title: AppLocalizations.of(context)!.sign_in,
                   onTap: (context) {
                     _loginUser(context);
                   },
@@ -242,9 +243,9 @@ class SignInScreen extends StatelessWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Expanded(child: PersoDivider()),
-                    Text("OR", style: ThemeText.footnoteRegularGrey),
-                    const Expanded(child: PersoDivider()),
+                    const Expanded(child: PersoIndentedDivider()),
+                    Text(AppLocalizations.of(context)!.or, style: ThemeText.footnoteRegularGrey),
+                    const Expanded(child: PersoIndentedDivider()),
                   ]),
             ),
             Container(
@@ -254,8 +255,8 @@ class SignInScreen extends StatelessWidget {
                     right: Dimens.bigMargin),
                 child: GestureDetector(
                   onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
-                  child: const AbsorbPointer(
-                    child: PersoButton(title: "Sign up", whiteBlackTheme: true),
+                  child:  AbsorbPointer(
+                    child: PersoButton(title: AppLocalizations.of(context)!.sign_up, whiteBlackTheme: true),
                   ),
                 )),
           ],

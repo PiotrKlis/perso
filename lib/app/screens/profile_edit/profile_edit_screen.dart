@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:Perso/app/models/client_data.dart';
-import 'package:Perso/app/models/trainer_data.dart';
+import 'package:Perso/app/models/editable_client_data.dart';
+import 'package:Perso/app/models/editable_trainer_data.dart';
 import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
 import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
@@ -9,11 +9,12 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
+import 'package:Perso/app/widgets/category_chips/bloc/category_chips_bloc.dart';
+import 'package:Perso/app/widgets/category_chips/category_chips.dart';
 import 'package:Perso/app/widgets/perso_async_text_field.dart';
 import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_chips_list.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
+import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
@@ -24,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -46,7 +48,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _fullBioController = TextEditingController();
   final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final _addressWidget = PersoAutocomplete();
-  final _persoChipsList = PersoChipsList();
+  final _persoChipsList = PersoCategoryChips();
 
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
@@ -59,7 +61,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
           elevation: 0.0,
-          title: Text("Edit ${widget._userType.name} profile"),
+          title: Text(AppLocalizations.of(context)!.edit_profile("userType")),
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -95,7 +97,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: Center(
                         child: PersoButton(
-                      title: "Upload image",
+                      title: AppLocalizations.of(context)!.upload_image,
                       onTap: (context) {
                         _getImage();
                       },
@@ -109,7 +111,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.bigMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                       Container(
                           margin:
                               const EdgeInsets.only(top: Dimens.normalMargin),
@@ -118,7 +120,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               right: Dimens.bigMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                     ],
                   ),
                 ),
@@ -136,7 +138,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                 left: Dimens.normalMargin,
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
-                                title: "Name",
+                                title: AppLocalizations.of(context)!.name,
                                 textEditingController: _nameController,
                                 customValidator:
                                     TextFieldValidator.validateIsEmpty),
@@ -151,7 +153,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       right: Dimens.normalMargin),
                   child: PersoTextField(
                       textEditingController: _surnameController,
-                      title: "Surname",
+                      title: AppLocalizations.of(context)!.surname,
                       customValidator: TextFieldValidator.validateIsEmpty),
                 ),
                 Container(
@@ -161,7 +163,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       right: Dimens.normalMargin),
                   //TODO: Find different, non-hacky way of async validation way
                   child: PersoAsyncTextFormField(
-                      hintText: "Nickname",
+                      hintText: AppLocalizations.of(context)!.nickname,
                       validator: (value) =>
                           widget._userInfoProvider.isNicknameUnique(value),
                       validationDebounce: const Duration(milliseconds: 500),
@@ -170,7 +172,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: const PersoDivider()),
+                    child: const PersoIndentedDivider()),
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.normalMargin, right: Dimens.normalMargin),
@@ -198,7 +200,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                       Container(
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
@@ -217,7 +219,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
                                   child: PersoTextField(
-                                    title: "Short Bio",
+                                    title: AppLocalizations.of(context)!.short_bio,
                                     customValidator:
                                         TextFieldValidator.validateIsEmpty,
                                     isMultiLine: true,
@@ -235,7 +237,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                            title: "Long bio",
+                            title: AppLocalizations.of(context)!.long_bio,
                             isMultiLine: true,
                             maxLength: 500,
                             customValidator: TextFieldValidator.validateIsEmpty,
@@ -245,13 +247,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
-                          child: const PersoDivider()),
+                          child: const PersoIndentedDivider()),
                       Container(
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               left: Dimens.normalMargin),
                           child: Text(
-                            "Select your specialities",
+                            AppLocalizations.of(context)!.select_your_specialities,
                             style: ThemeText.bodyBoldBlackText,
                           )),
                       Container(
@@ -277,7 +279,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                     child: const CircularProgressIndicator())),
                           ) ??
                           PersoButton(
-                              width: 160.0, title: "Next", onTap: _uploadData);
+                              width: 160.0, title: AppLocalizations.of(context)!.next, onTap: _uploadData);
                     },
                     listener: (context, state) {
                       state.whenOrNull(
@@ -328,8 +330,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   void _addClientData(String location, BuildContext context) {
-    final clientData = ClientData(
-        imagePath: _image?.path,
+    final clientData = EditableClientData(
+        imagePath: _image?.path ?? "",
         name: _nameController.text,
         surname: _surnameController.text,
         nickname: _nicknameController.text,
@@ -347,8 +349,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         .expand((element) => element)
         .toList();
 
-    final trainerData = TrainerData(
-        imagePath: _image?.path,
+    final trainerData = EditableTrainerData(
+        imagePath: _image?.path ?? "",
         languages: languages,
         name: _nameController.text,
         surname: _surnameController.text,
@@ -357,7 +359,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         phoneNumber: _phoneNumberController.text,
         shortBio: _shortBioController.text,
         fullBio: _fullBioController.text,
-        categories: _persoChipsList.categories);
+        categories: _persoChipsList.selectedCategories);
 
     context
         .read<ProfileEditBloc>()

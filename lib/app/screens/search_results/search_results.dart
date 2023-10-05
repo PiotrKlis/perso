@@ -7,6 +7,7 @@ import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchResultsScreen extends StatelessWidget {
   const SearchResultsScreen({super.key, String? input = ""}) : _input = input;
@@ -17,7 +18,7 @@ class SearchResultsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: PersoAppBar(
-          title: "Search results",
+          title: AppLocalizations.of(context)!.search_results,
           actionIcon: Icons.filter_list,
           onActionIconClick: onActionClick,
         ),
@@ -28,7 +29,7 @@ class SearchResultsScreen extends StatelessWidget {
               children: [
                 // TODO: Show 10 trainers, then load another 10 more on scroll
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                       top: Dimens.normalMargin, left: Dimens.normalMargin),
                   child: Row(
                     children: [
@@ -51,18 +52,18 @@ class SearchResultsScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: Dimens.normalMargin),
-                    child: PersoTrainersList()),
+                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                    child: const PersoTrainersList()),
                 Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                       top: Dimens.normalMargin, left: Dimens.normalMargin),
                   child: Text(
-                    "Similar trainers",
+                    AppLocalizations.of(context)!.similar_trainers,
                     style: ThemeText.mediumTitleBold,
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: Dimens.normalMargin),
+                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: PersoTrainersSearchCarousel())
               ],
             ),

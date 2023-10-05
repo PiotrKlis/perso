@@ -8,6 +8,7 @@ import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -21,7 +22,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
-          title: const Text('Password recovery'),
+          title: Text(AppLocalizations.of(context)!.password_recovery),
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -33,20 +34,20 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.hugeMargin),
                     child: const Icon(Icons.lock,
-                        size: 160.0, color: Colors.black)),
+                        size: Dimens.iconSizeLarge, color: Colors.black)),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                    child: Text("Forgotten password?",
+                    child: Text(AppLocalizations.of(context)!.forgotten_password_title,
                         style: ThemeText.largeTitleBold)),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                  child: Text("No worries, we've got you covered",
+                  child: Text(AppLocalizations.of(context)!.forgotten_password_subtitle,
                       style: ThemeText.bodyBoldBlackText),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.smallerMargin),
                   child: Text(
-                    'Enter your email address to reset your password',
+                    AppLocalizations.of(context)!.enter_email_forgotten_password,
                     style: ThemeText.bodyRegularBlackText,
                     textAlign: TextAlign.center,
                   ),
@@ -54,13 +55,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: PersoTextField(
-                      title: "Email",
+                      title: AppLocalizations.of(context)!.email,
                       textEditingController: _textEditingController,
                     )),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: PersoButton(
-                    title: "Reset Password",
+                    title: AppLocalizations.of(context)!.reset_password,
                     onTap: (context) {
                       context.read<ForgotPasswordBloc>().add(
                           ForgotPasswordEvent.resetPassword(
@@ -74,7 +75,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       builder: (context, state) {
                         return state.whenOrNull(
                                 passwordResetSuccess: () => Text(
-                                    'Email with password reset instructions has been sent to an email you have provided. See you soon!',
+                                    AppLocalizations.of(context)!.password_reset_success,
                                     style: ThemeText.calloutRegular),
                                 error: (error) => Text(error)) ??
                             Container();

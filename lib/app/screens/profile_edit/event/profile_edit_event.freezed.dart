@@ -18,20 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileEditEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TrainerData trainerData) uploadTrainerData,
-    required TResult Function(ClientData clientData) uploadClientData,
+    required TResult Function(EditableTrainerData trainerData)
+        uploadTrainerData,
+    required TResult Function(EditableClientData clientData) uploadClientData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TrainerData trainerData)? uploadTrainerData,
-    TResult? Function(ClientData clientData)? uploadClientData,
+    TResult? Function(EditableTrainerData trainerData)? uploadTrainerData,
+    TResult? Function(EditableClientData clientData)? uploadClientData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TrainerData trainerData)? uploadTrainerData,
-    TResult Function(ClientData clientData)? uploadClientData,
+    TResult Function(EditableTrainerData trainerData)? uploadTrainerData,
+    TResult Function(EditableClientData clientData)? uploadClientData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -80,7 +81,9 @@ abstract class _$$UploadTrainerDataCopyWith<$Res> {
           _$UploadTrainerData value, $Res Function(_$UploadTrainerData) then) =
       __$$UploadTrainerDataCopyWithImpl<$Res>;
   @useResult
-  $Res call({TrainerData trainerData});
+  $Res call({EditableTrainerData trainerData});
+
+  $EditableTrainerDataCopyWith<$Res> get trainerData;
 }
 
 /// @nodoc
@@ -100,8 +103,16 @@ class __$$UploadTrainerDataCopyWithImpl<$Res>
       null == trainerData
           ? _value.trainerData
           : trainerData // ignore: cast_nullable_to_non_nullable
-              as TrainerData,
+              as EditableTrainerData,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EditableTrainerDataCopyWith<$Res> get trainerData {
+    return $EditableTrainerDataCopyWith<$Res>(_value.trainerData, (value) {
+      return _then(_value.copyWith(trainerData: value));
+    });
   }
 }
 
@@ -111,7 +122,7 @@ class _$UploadTrainerData implements UploadTrainerData {
   const _$UploadTrainerData(this.trainerData);
 
   @override
-  final TrainerData trainerData;
+  final EditableTrainerData trainerData;
 
   @override
   String toString() {
@@ -139,8 +150,9 @@ class _$UploadTrainerData implements UploadTrainerData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TrainerData trainerData) uploadTrainerData,
-    required TResult Function(ClientData clientData) uploadClientData,
+    required TResult Function(EditableTrainerData trainerData)
+        uploadTrainerData,
+    required TResult Function(EditableClientData clientData) uploadClientData,
   }) {
     return uploadTrainerData(trainerData);
   }
@@ -148,8 +160,8 @@ class _$UploadTrainerData implements UploadTrainerData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TrainerData trainerData)? uploadTrainerData,
-    TResult? Function(ClientData clientData)? uploadClientData,
+    TResult? Function(EditableTrainerData trainerData)? uploadTrainerData,
+    TResult? Function(EditableClientData clientData)? uploadClientData,
   }) {
     return uploadTrainerData?.call(trainerData);
   }
@@ -157,8 +169,8 @@ class _$UploadTrainerData implements UploadTrainerData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TrainerData trainerData)? uploadTrainerData,
-    TResult Function(ClientData clientData)? uploadClientData,
+    TResult Function(EditableTrainerData trainerData)? uploadTrainerData,
+    TResult Function(EditableClientData clientData)? uploadClientData,
     required TResult orElse(),
   }) {
     if (uploadTrainerData != null) {
@@ -200,10 +212,10 @@ class _$UploadTrainerData implements UploadTrainerData {
 }
 
 abstract class UploadTrainerData implements ProfileEditEvent {
-  const factory UploadTrainerData(final TrainerData trainerData) =
+  const factory UploadTrainerData(final EditableTrainerData trainerData) =
       _$UploadTrainerData;
 
-  TrainerData get trainerData;
+  EditableTrainerData get trainerData;
   @JsonKey(ignore: true)
   _$$UploadTrainerDataCopyWith<_$UploadTrainerData> get copyWith =>
       throw _privateConstructorUsedError;
@@ -215,7 +227,9 @@ abstract class _$$UploadClientDataCopyWith<$Res> {
           _$UploadClientData value, $Res Function(_$UploadClientData) then) =
       __$$UploadClientDataCopyWithImpl<$Res>;
   @useResult
-  $Res call({ClientData clientData});
+  $Res call({EditableClientData clientData});
+
+  $EditableClientDataCopyWith<$Res> get clientData;
 }
 
 /// @nodoc
@@ -235,8 +249,16 @@ class __$$UploadClientDataCopyWithImpl<$Res>
       null == clientData
           ? _value.clientData
           : clientData // ignore: cast_nullable_to_non_nullable
-              as ClientData,
+              as EditableClientData,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EditableClientDataCopyWith<$Res> get clientData {
+    return $EditableClientDataCopyWith<$Res>(_value.clientData, (value) {
+      return _then(_value.copyWith(clientData: value));
+    });
   }
 }
 
@@ -246,7 +268,7 @@ class _$UploadClientData implements UploadClientData {
   const _$UploadClientData(this.clientData);
 
   @override
-  final ClientData clientData;
+  final EditableClientData clientData;
 
   @override
   String toString() {
@@ -274,8 +296,9 @@ class _$UploadClientData implements UploadClientData {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(TrainerData trainerData) uploadTrainerData,
-    required TResult Function(ClientData clientData) uploadClientData,
+    required TResult Function(EditableTrainerData trainerData)
+        uploadTrainerData,
+    required TResult Function(EditableClientData clientData) uploadClientData,
   }) {
     return uploadClientData(clientData);
   }
@@ -283,8 +306,8 @@ class _$UploadClientData implements UploadClientData {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TrainerData trainerData)? uploadTrainerData,
-    TResult? Function(ClientData clientData)? uploadClientData,
+    TResult? Function(EditableTrainerData trainerData)? uploadTrainerData,
+    TResult? Function(EditableClientData clientData)? uploadClientData,
   }) {
     return uploadClientData?.call(clientData);
   }
@@ -292,8 +315,8 @@ class _$UploadClientData implements UploadClientData {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TrainerData trainerData)? uploadTrainerData,
-    TResult Function(ClientData clientData)? uploadClientData,
+    TResult Function(EditableTrainerData trainerData)? uploadTrainerData,
+    TResult Function(EditableClientData clientData)? uploadClientData,
     required TResult orElse(),
   }) {
     if (uploadClientData != null) {
@@ -335,10 +358,10 @@ class _$UploadClientData implements UploadClientData {
 }
 
 abstract class UploadClientData implements ProfileEditEvent {
-  const factory UploadClientData(final ClientData clientData) =
+  const factory UploadClientData(final EditableClientData clientData) =
       _$UploadClientData;
 
-  ClientData get clientData;
+  EditableClientData get clientData;
   @JsonKey(ignore: true)
   _$$UploadClientDataCopyWith<_$UploadClientData> get copyWith =>
       throw _privateConstructorUsedError;
