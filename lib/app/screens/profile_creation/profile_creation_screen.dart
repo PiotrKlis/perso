@@ -5,6 +5,7 @@ import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/core/user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileCreationScreen extends StatelessWidget {
   const ProfileCreationScreen({super.key});
@@ -19,22 +20,19 @@ class ProfileCreationScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: Dimens.substantialMargin),
-              child: Text(
-                "Welcome to PERSO!",
+              child: Text (AppLocalizations.of(context)!.welcome_message_title,
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-              child: Text(
-                "Thank you for logging in. We're thrilled to have you join our community 🎉",
+              child: Text(AppLocalizations.of(context)!.welcome_message_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
-              child: Text(
-                  "Get ready to embark on a journey of discovery and innovation",
+              child: Text(AppLocalizations.of(context)!.welcome_message_body_2,
                   style: ThemeText.bodyRegularBlackText),
             ),
             Container(
@@ -43,13 +41,13 @@ class ProfileCreationScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PersoButton(
-                      title: "I am a trainer",
+                      title: AppLocalizations.of(context)!.choose_trainer_user_type,
                       whiteBlackTheme: true,
                       onTap: _navigateTrainer),
                   Container(
                     margin: const EdgeInsets.only(left: Dimens.normalMargin),
                     child: PersoButton(
-                      title: "I am a client",
+                      title: AppLocalizations.of(context)!.choose_client_user_type,
                       onTap: _navigateClient,
                     ),
                   ),

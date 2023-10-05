@@ -25,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -60,7 +61,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
           elevation: 0.0,
-          title: Text("Edit ${widget._userType.name} profile"),
+          title: Text(AppLocalizations.of(context)!.edit_profile("userType")),
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -96,7 +97,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: Center(
                         child: PersoButton(
-                      title: "Upload image",
+                      title: AppLocalizations.of(context)!.upload_image,
                       onTap: (context) {
                         _getImage();
                       },
@@ -137,7 +138,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                 left: Dimens.normalMargin,
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
-                                title: "Name",
+                                title: AppLocalizations.of(context)!.name,
                                 textEditingController: _nameController,
                                 customValidator:
                                     TextFieldValidator.validateIsEmpty),
@@ -152,7 +153,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       right: Dimens.normalMargin),
                   child: PersoTextField(
                       textEditingController: _surnameController,
-                      title: "Surname",
+                      title: AppLocalizations.of(context)!.surname,
                       customValidator: TextFieldValidator.validateIsEmpty),
                 ),
                 Container(
@@ -162,7 +163,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       right: Dimens.normalMargin),
                   //TODO: Find different, non-hacky way of async validation way
                   child: PersoAsyncTextFormField(
-                      hintText: "Nickname",
+                      hintText: AppLocalizations.of(context)!.nickname,
                       validator: (value) =>
                           widget._userInfoProvider.isNicknameUnique(value),
                       validationDebounce: const Duration(milliseconds: 500),
@@ -218,7 +219,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                   margin: const EdgeInsets.only(
                                       left: Dimens.normalMargin),
                                   child: PersoTextField(
-                                    title: "Short Bio",
+                                    title: AppLocalizations.of(context)!.short_bio,
                                     customValidator:
                                         TextFieldValidator.validateIsEmpty,
                                     isMultiLine: true,
@@ -236,7 +237,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                            title: "Long bio",
+                            title: AppLocalizations.of(context)!.long_bio,
                             isMultiLine: true,
                             maxLength: 500,
                             customValidator: TextFieldValidator.validateIsEmpty,
@@ -252,7 +253,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               top: Dimens.normalMargin,
                               left: Dimens.normalMargin),
                           child: Text(
-                            "Select your specialities",
+                            AppLocalizations.of(context)!.select_your_specialities,
                             style: ThemeText.bodyBoldBlackText,
                           )),
                       Container(
@@ -278,7 +279,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                     child: const CircularProgressIndicator())),
                           ) ??
                           PersoButton(
-                              width: 160.0, title: "Next", onTap: _uploadData);
+                              width: 160.0, title: AppLocalizations.of(context)!.next, onTap: _uploadData);
                     },
                     listener: (context, state) {
                       state.whenOrNull(

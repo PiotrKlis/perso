@@ -5,6 +5,7 @@ import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:Perso/data/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TrainerProfileScreen extends StatelessWidget {
   TrainerProfileScreen({super.key});
@@ -16,7 +17,7 @@ class TrainerProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: PersoAppBar(title: "Trainer profile screen"),
       body: PersoButton(
-        title: 'Logout',
+        title: AppLocalizations.of(context)!.logout,
         onTap: (context) async {
           //TODO: Move into bloc layer while working on the screen
           await _authService.logout();

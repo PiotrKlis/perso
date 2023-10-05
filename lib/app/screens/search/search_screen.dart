@@ -5,6 +5,7 @@ import 'package:Perso/app/widgets/perso_search.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
@@ -33,7 +34,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: PersoColors.lightWhite,
-        appBar: const PersoAppBar(title: "Search"),
+        appBar:  PersoAppBar(title: AppLocalizations.of(context)!.search),
         body: Column(
           children: [
             Container(
