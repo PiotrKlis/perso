@@ -170,13 +170,12 @@ class HomeScreen extends StatelessWidget {
     final Completer<GoogleMapController> _controller =
         Completer<GoogleMapController>();
     const CameraPosition kGooglePlex = CameraPosition(
-        target: LatLng(37.42796133580664, -122.085749655962), zoom: 14.4746);
+        target: LatLng(52.06923300336246, 19.479766023156003), zoom: 5.5);
 
     return GoogleMap(
       gestureRecognizers: {
         Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
       },
-      mapType: MapType.hybrid,
       initialCameraPosition: kGooglePlex,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
