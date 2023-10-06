@@ -1,3 +1,4 @@
+
 import 'package:Perso/app/utils/localisation_keys.dart';
 import 'package:Perso/core/dependency_injection/get_it_config.dart';
 import 'package:Perso/core/navigation/navigation_config.dart';
@@ -7,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

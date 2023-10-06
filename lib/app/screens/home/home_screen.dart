@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Perso/app/screens/home/bloc/home_bloc.dart';
 import 'package:Perso/app/screens/home/event/home_event.dart';
 import 'package:Perso/app/screens/home/state/home_state.dart';
@@ -13,10 +15,13 @@ import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -102,6 +107,17 @@ class HomeScreen extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(
                               top: Dimens.bigMargin,
+                              left: Dimens.smallMargin,
+                              right: Dimens.smallMargin),
+                          child: SizedBox(
+                            height: 300.0,
+                            width: double.infinity,
+                            child: _googleMap(),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.bigMargin,
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: Row(
@@ -140,13 +156,31 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                     child: Container(),
-                  )
+                  ),
                 ]),
               ),
             ),
           );
         },
       ),
+    );
+  }
+
+  GoogleMap _googleMap() {
+    final Completer<GoogleMapController> _controller =
+        Completer<GoogleMapController>();
+    const CameraPosition kGooglePlex = CameraPosition(
+        target: LatLng(37.42796133580664, -122.085749655962), zoom: 14.4746);
+
+    return GoogleMap(
+      gestureRecognizers: {
+        Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
+      },
+      mapType: MapType.hybrid,
+      initialCameraPosition: kGooglePlex,
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      },
     );
   }
 
