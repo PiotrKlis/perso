@@ -22,54 +22,98 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final Map<String, String> _locations = {};
+  bool _isLocationChecked = false;
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeBloc(),
-      child: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return SafeArea(
-            child: Scaffold(
-              body: SingleChildScrollView(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                child: Column(children: [
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(children: [
+            GestureDetector(
+                onTap: () => _handleAccountClick(context),
+                child: const PersoAccountIcon()),
+            Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.normalMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PersoBigHeader(
+                      title: AppLocalizations.of(context)!.home_main_header,
+                    ),
+                    //TODO: Make this button invisible if user is logged in
+                    PersoButton(
+                        onTap: (context) => _handleAccountClick(context),
+                        title: AppLocalizations.of(context)!
+                            .trainers_section_button,
+                        width: Dimens.smallButtonWidth)
+                  ]),
+            ),
+            Container(
+                margin: const EdgeInsets.only(
+                    left: Dimens.normalMargin,
+                    top: Dimens.normalMargin,
+                    right: Dimens.normalMargin),
+                child: GestureDetector(
+                    onTap: () => context.pushNamed(ScreenNavigationKey.search),
+                    child: const AbsorbPointer(child: PersoSearch()))),
+            Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.bigMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PersoHeader(
+                      title: AppLocalizations.of(context)!.category_header),
                   GestureDetector(
-                      onTap: () => _handleAccountClick(context),
-                      child: const PersoAccountIcon()),
+                    onTap: () => context
+                        .pushNamed(ScreenNavigationKey.trainingCategories),
+                    child: PersoClickableText(
+                        title:
+                            AppLocalizations.of(context)!.see_all_categories),
+                  )
+                ],
+              ),
+            ),
+            Container(
+                margin: const EdgeInsets.only(
+                    left: Dimens.normalMargin, top: Dimens.bigMargin),
+                child: const PersoTrainingCategoryList(isShortList: true)),
+            Container(
+              color: PersoColors.lightBlue,
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                      child: PersoTrainersSearchCarousel()),
                   Container(
                     margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin,
-                        left: Dimens.normalMargin,
-                        right: Dimens.normalMargin),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PersoBigHeader(
-                            title:
-                                AppLocalizations.of(context)!.home_main_header,
-                          ),
-                          //TODO: Make this button invisible if user is logged in
-                          PersoButton(
-                              onTap: (context) => _handleAccountClick(context),
-                              title: AppLocalizations.of(context)!
-                                  .trainers_section_button,
-                              width: Dimens.smallButtonWidth)
-                        ]),
+                        top: Dimens.bigMargin,
+                        left: Dimens.smallMargin,
+                        right: Dimens.smallMargin),
+                    child: SizedBox(
+                      height: 300.0,
+                      width: double.infinity,
+                      child: _googleMap(),
+                    ),
                   ),
-                  Container(
-                      margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin,
-                          top: Dimens.normalMargin,
-                          right: Dimens.normalMargin),
-                      child: GestureDetector(
-                          onTap: () =>
-                              context.pushNamed(ScreenNavigationKey.search),
-                          child: const AbsorbPointer(child: PersoSearch()))),
                   Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.bigMargin,
@@ -79,11 +123,13 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         PersoHeader(
-                            title:
-                                AppLocalizations.of(context)!.category_header),
+                            title: AppLocalizations.of(context)!.near_you),
                         GestureDetector(
                           onTap: () => context.pushNamed(
-                              ScreenNavigationKey.trainingCategories),
+                              ScreenNavigationKey.searchResults,
+                              pathParameters: {
+                                "input": "see all trainers near my location"
+                              }),
                           child: PersoClickableText(
                               title: AppLocalizations.of(context)!
                                   .see_all_categories),
@@ -91,88 +137,51 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                      margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin, top: Dimens.bigMargin),
-                      child:
-                          const PersoTrainingCategoryList(isShortList: true)),
-                  Container(
-                    color: PersoColors.lightBlue,
-                    child: Column(
-                      children: [
-                        Container(
-                            margin:
-                                const EdgeInsets.only(top: Dimens.bigMargin),
-                            child: PersoTrainersSearchCarousel()),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.bigMargin,
-                              left: Dimens.smallMargin,
-                              right: Dimens.smallMargin),
-                          child: SizedBox(
-                            height: 300.0,
-                            width: double.infinity,
-                            child: _googleMap(),
-                          ),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.bigMargin,
-                              left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PersoHeader(
-                                  title:
-                                      AppLocalizations.of(context)!.near_you),
-                              GestureDetector(
-                                onTap: () => context.pushNamed(
-                                    ScreenNavigationKey.searchResults,
-                                    pathParameters: {
-                                      "input":
-                                          "see all trainers near my location"
-                                    }),
-                                child: PersoClickableText(
-                                    title: AppLocalizations.of(context)!
-                                        .see_all_categories),
-                              )
-                            ],
-                          ),
-                        ),
-                        const PersoTrainersList()
-                      ],
-                    ),
-                  ),
-                  BlocListener<HomeBloc, HomeState>(
-                    listener: (context, state) {
-                      state.whenOrNull(
-                        navigateToClientProfile: () => context
-                            .pushNamed(ScreenNavigationKey.clientProfile),
-                        navigateToSignIn: () =>
-                            context.pushNamed(ScreenNavigationKey.signIn),
-                        navigateToTrainerProfile: () => context
-                            .pushNamed(ScreenNavigationKey.trainerProfile),
-                      );
-                    },
-                    child: Container(),
-                  ),
-                ]),
+                  const PersoTrainersList()
+                ],
               ),
             ),
-          );
-        },
+            BlocProvider(
+              create: (context) => HomeBloc(HomeState.initial()),
+              child:
+                  BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+                state.when(
+                  initial: () {
+                    _getLocation();
+                  },
+                  navigateToClientProfile: () =>
+                      context.pushNamed(ScreenNavigationKey.clientProfile),
+                  navigateToSignIn: () =>
+                      context.pushNamed(ScreenNavigationKey.signIn),
+                  navigateToTrainerProfile: () =>
+                      context.pushNamed(ScreenNavigationKey.trainerProfile),
+                );
+                return Container();
+              }),
+            ),
+          ]),
+        ),
       ),
     );
   }
 
   GoogleMap _googleMap() {
+    final Set<Marker> markers = {};
+    markers.add(Marker(markerId: MarkerId("1"), position: const LatLng(0, 0)));
+    for (var location in _locations.entries) {
+      markers.add(Marker(
+          markerId: const MarkerId("1"),
+          position: LatLng(
+              double.parse(location.key), double.parse(location.value))));
+    }
+
     final Completer<GoogleMapController> _controller =
         Completer<GoogleMapController>();
     const CameraPosition kGooglePlex = CameraPosition(
         target: LatLng(52.06923300336246, 19.479766023156003), zoom: 5.5);
 
     return GoogleMap(
+      markers: markers,
       gestureRecognizers: {
         Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
       },
@@ -181,6 +190,52 @@ class HomeScreen extends StatelessWidget {
         _controller.complete(controller);
       },
     );
+  }
+
+  void _getLocation() {
+    _getLocationData().then((location) {
+      String? latitude = location?.latitude.toString();
+      String? longitude = location?.longitude.toString();
+      _locations.forEach((key, value) {
+        if (key == latitude && value == longitude) {
+          return;
+        }
+      });
+      if (latitude != null && longitude != null && !_isLocationChecked) {
+        setState(() {
+          _isLocationChecked = true;
+          _locations.addAll({latitude: longitude});
+        });
+      }
+    });
+  }
+
+  Future<LocationData?> _getLocationData() async {
+    Location location = Location();
+    LocationData _locationData;
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return null;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return null;
+      }
+    }
+
+    _locationData = await location.getLocation();
+
+    return _locationData;
   }
 
   void _handleAccountClick(BuildContext context) {

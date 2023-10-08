@@ -74,22 +74,24 @@ class _$HomeEventCopyWithImpl<$Res, $Val extends HomeEvent>
 }
 
 /// @nodoc
-abstract class _$$InitCopyWith<$Res> {
-  factory _$$InitCopyWith(_$Init value, $Res Function(_$Init) then) =
-      __$$InitCopyWithImpl<$Res>;
+abstract class _$$InitImplCopyWith<$Res> {
+  factory _$$InitImplCopyWith(
+          _$InitImpl value, $Res Function(_$InitImpl) then) =
+      __$$InitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitCopyWithImpl<$Res> extends _$HomeEventCopyWithImpl<$Res, _$Init>
-    implements _$$InitCopyWith<$Res> {
-  __$$InitCopyWithImpl(_$Init _value, $Res Function(_$Init) _then)
+class __$$InitImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$InitImpl>
+    implements _$$InitImplCopyWith<$Res> {
+  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Init implements Init {
-  const _$Init();
+class _$InitImpl implements Init {
+  const _$InitImpl();
 
   @override
   String toString() {
@@ -99,7 +101,7 @@ class _$Init implements Init {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Init);
+        (other.runtimeType == runtimeType && other is _$InitImpl);
   }
 
   @override
@@ -169,29 +171,29 @@ class _$Init implements Init {
 }
 
 abstract class Init implements HomeEvent {
-  const factory Init() = _$Init;
+  const factory Init() = _$InitImpl;
 }
 
 /// @nodoc
-abstract class _$$AccountNavigationCopyWith<$Res> {
-  factory _$$AccountNavigationCopyWith(
-          _$AccountNavigation value, $Res Function(_$AccountNavigation) then) =
-      __$$AccountNavigationCopyWithImpl<$Res>;
+abstract class _$$AccountNavigationImplCopyWith<$Res> {
+  factory _$$AccountNavigationImplCopyWith(_$AccountNavigationImpl value,
+          $Res Function(_$AccountNavigationImpl) then) =
+      __$$AccountNavigationImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AccountNavigationCopyWithImpl<$Res>
-    extends _$HomeEventCopyWithImpl<$Res, _$AccountNavigation>
-    implements _$$AccountNavigationCopyWith<$Res> {
-  __$$AccountNavigationCopyWithImpl(
-      _$AccountNavigation _value, $Res Function(_$AccountNavigation) _then)
+class __$$AccountNavigationImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$AccountNavigationImpl>
+    implements _$$AccountNavigationImplCopyWith<$Res> {
+  __$$AccountNavigationImplCopyWithImpl(_$AccountNavigationImpl _value,
+      $Res Function(_$AccountNavigationImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AccountNavigation implements AccountNavigation {
-  const _$AccountNavigation();
+class _$AccountNavigationImpl implements AccountNavigation {
+  const _$AccountNavigationImpl();
 
   @override
   String toString() {
@@ -201,7 +203,7 @@ class _$AccountNavigation implements AccountNavigation {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AccountNavigation);
+        (other.runtimeType == runtimeType && other is _$AccountNavigationImpl);
   }
 
   @override
@@ -271,5 +273,5 @@ class _$AccountNavigation implements AccountNavigation {
 }
 
 abstract class AccountNavigation implements HomeEvent {
-  const factory AccountNavigation() = _$AccountNavigation;
+  const factory AccountNavigation() = _$AccountNavigationImpl;
 }

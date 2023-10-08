@@ -75,23 +75,25 @@ class _$CategoryChipsStateCopyWithImpl<$Res, $Val extends CategoryChipsState>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$CategoryChipsStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$CategoryChipsStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -101,7 +103,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -171,22 +173,24 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements CategoryChipsState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$ContentCopyWith<$Res> {
-  factory _$$ContentCopyWith(_$Content value, $Res Function(_$Content) then) =
-      __$$ContentCopyWithImpl<$Res>;
+abstract class _$$ContentImplCopyWith<$Res> {
+  factory _$$ContentImplCopyWith(
+          _$ContentImpl value, $Res Function(_$ContentImpl) then) =
+      __$$ContentImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<String> categories});
 }
 
 /// @nodoc
-class __$$ContentCopyWithImpl<$Res>
-    extends _$CategoryChipsStateCopyWithImpl<$Res, _$Content>
-    implements _$$ContentCopyWith<$Res> {
-  __$$ContentCopyWithImpl(_$Content _value, $Res Function(_$Content) _then)
+class __$$ContentImplCopyWithImpl<$Res>
+    extends _$CategoryChipsStateCopyWithImpl<$Res, _$ContentImpl>
+    implements _$$ContentImplCopyWith<$Res> {
+  __$$ContentImplCopyWithImpl(
+      _$ContentImpl _value, $Res Function(_$ContentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -194,7 +198,7 @@ class __$$ContentCopyWithImpl<$Res>
   $Res call({
     Object? categories = null,
   }) {
-    return _then(_$Content(
+    return _then(_$ContentImpl(
       null == categories
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -205,8 +209,8 @@ class __$$ContentCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Content implements Content {
-  const _$Content(final List<String> categories) : _categories = categories;
+class _$ContentImpl implements Content {
+  const _$ContentImpl(final List<String> categories) : _categories = categories;
 
   final List<String> _categories;
   @override
@@ -225,7 +229,7 @@ class _$Content implements Content {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Content &&
+            other is _$ContentImpl &&
             const DeepCollectionEquality()
                 .equals(other._categories, _categories));
   }
@@ -237,8 +241,8 @@ class _$Content implements Content {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContentCopyWith<_$Content> get copyWith =>
-      __$$ContentCopyWithImpl<_$Content>(this, _$identity);
+  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
+      __$$ContentImplCopyWithImpl<_$ContentImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -304,10 +308,10 @@ class _$Content implements Content {
 }
 
 abstract class Content implements CategoryChipsState {
-  const factory Content(final List<String> categories) = _$Content;
+  const factory Content(final List<String> categories) = _$ContentImpl;
 
   List<String> get categories;
   @JsonKey(ignore: true)
-  _$$ContentCopyWith<_$Content> get copyWith =>
+  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

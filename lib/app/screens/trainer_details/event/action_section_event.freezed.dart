@@ -70,25 +70,27 @@ class _$ActionSectionEventCopyWithImpl<$Res, $Val extends ActionSectionEvent>
 }
 
 /// @nodoc
-abstract class _$$ShouldSectionBeVisibleCopyWith<$Res> {
-  factory _$$ShouldSectionBeVisibleCopyWith(_$ShouldSectionBeVisible value,
-          $Res Function(_$ShouldSectionBeVisible) then) =
-      __$$ShouldSectionBeVisibleCopyWithImpl<$Res>;
+abstract class _$$ShouldSectionBeVisibleImplCopyWith<$Res> {
+  factory _$$ShouldSectionBeVisibleImplCopyWith(
+          _$ShouldSectionBeVisibleImpl value,
+          $Res Function(_$ShouldSectionBeVisibleImpl) then) =
+      __$$ShouldSectionBeVisibleImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ShouldSectionBeVisibleCopyWithImpl<$Res>
-    extends _$ActionSectionEventCopyWithImpl<$Res, _$ShouldSectionBeVisible>
-    implements _$$ShouldSectionBeVisibleCopyWith<$Res> {
-  __$$ShouldSectionBeVisibleCopyWithImpl(_$ShouldSectionBeVisible _value,
-      $Res Function(_$ShouldSectionBeVisible) _then)
+class __$$ShouldSectionBeVisibleImplCopyWithImpl<$Res>
+    extends _$ActionSectionEventCopyWithImpl<$Res, _$ShouldSectionBeVisibleImpl>
+    implements _$$ShouldSectionBeVisibleImplCopyWith<$Res> {
+  __$$ShouldSectionBeVisibleImplCopyWithImpl(
+      _$ShouldSectionBeVisibleImpl _value,
+      $Res Function(_$ShouldSectionBeVisibleImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ShouldSectionBeVisible implements ShouldSectionBeVisible {
-  const _$ShouldSectionBeVisible();
+class _$ShouldSectionBeVisibleImpl implements ShouldSectionBeVisible {
+  const _$ShouldSectionBeVisibleImpl();
 
   @override
   String toString() {
@@ -98,7 +100,8 @@ class _$ShouldSectionBeVisible implements ShouldSectionBeVisible {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ShouldSectionBeVisible);
+        (other.runtimeType == runtimeType &&
+            other is _$ShouldSectionBeVisibleImpl);
   }
 
   @override
@@ -163,5 +166,5 @@ class _$ShouldSectionBeVisible implements ShouldSectionBeVisible {
 }
 
 abstract class ShouldSectionBeVisible implements ActionSectionEvent {
-  const factory ShouldSectionBeVisible() = _$ShouldSectionBeVisible;
+  const factory ShouldSectionBeVisible() = _$ShouldSectionBeVisibleImpl;
 }

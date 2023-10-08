@@ -89,22 +89,22 @@ class _$ForgotPasswordEventCopyWithImpl<$Res, $Val extends ForgotPasswordEvent>
 }
 
 /// @nodoc
-abstract class _$$ResetPasswordCopyWith<$Res>
+abstract class _$$ResetPasswordImplCopyWith<$Res>
     implements $ForgotPasswordEventCopyWith<$Res> {
-  factory _$$ResetPasswordCopyWith(
-          _$ResetPassword value, $Res Function(_$ResetPassword) then) =
-      __$$ResetPasswordCopyWithImpl<$Res>;
+  factory _$$ResetPasswordImplCopyWith(
+          _$ResetPasswordImpl value, $Res Function(_$ResetPasswordImpl) then) =
+      __$$ResetPasswordImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email});
 }
 
 /// @nodoc
-class __$$ResetPasswordCopyWithImpl<$Res>
-    extends _$ForgotPasswordEventCopyWithImpl<$Res, _$ResetPassword>
-    implements _$$ResetPasswordCopyWith<$Res> {
-  __$$ResetPasswordCopyWithImpl(
-      _$ResetPassword _value, $Res Function(_$ResetPassword) _then)
+class __$$ResetPasswordImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordEventCopyWithImpl<$Res, _$ResetPasswordImpl>
+    implements _$$ResetPasswordImplCopyWith<$Res> {
+  __$$ResetPasswordImplCopyWithImpl(
+      _$ResetPasswordImpl _value, $Res Function(_$ResetPasswordImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -112,7 +112,7 @@ class __$$ResetPasswordCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
   }) {
-    return _then(_$ResetPassword(
+    return _then(_$ResetPasswordImpl(
       null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -123,8 +123,8 @@ class __$$ResetPasswordCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ResetPassword implements ResetPassword {
-  const _$ResetPassword(this.email);
+class _$ResetPasswordImpl implements ResetPassword {
+  const _$ResetPasswordImpl(this.email);
 
   @override
   final String email;
@@ -138,7 +138,7 @@ class _$ResetPassword implements ResetPassword {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResetPassword &&
+            other is _$ResetPasswordImpl &&
             (identical(other.email, email) || other.email == email));
   }
 
@@ -148,8 +148,8 @@ class _$ResetPassword implements ResetPassword {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResetPasswordCopyWith<_$ResetPassword> get copyWith =>
-      __$$ResetPasswordCopyWithImpl<_$ResetPassword>(this, _$identity);
+  _$$ResetPasswordImplCopyWith<_$ResetPasswordImpl> get copyWith =>
+      __$$ResetPasswordImplCopyWithImpl<_$ResetPasswordImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -209,12 +209,12 @@ class _$ResetPassword implements ResetPassword {
 }
 
 abstract class ResetPassword implements ForgotPasswordEvent {
-  const factory ResetPassword(final String email) = _$ResetPassword;
+  const factory ResetPassword(final String email) = _$ResetPasswordImpl;
 
   @override
   String get email;
   @override
   @JsonKey(ignore: true)
-  _$$ResetPasswordCopyWith<_$ResetPassword> get copyWith =>
+  _$$ResetPasswordImplCopyWith<_$ResetPasswordImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

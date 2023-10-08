@@ -76,25 +76,25 @@ class _$TrainingCategoryListEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$LoadShortListCopyWith<$Res> {
-  factory _$$LoadShortListCopyWith(
-          _$LoadShortList value, $Res Function(_$LoadShortList) then) =
-      __$$LoadShortListCopyWithImpl<$Res>;
+abstract class _$$LoadShortListImplCopyWith<$Res> {
+  factory _$$LoadShortListImplCopyWith(
+          _$LoadShortListImpl value, $Res Function(_$LoadShortListImpl) then) =
+      __$$LoadShortListImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadShortListCopyWithImpl<$Res>
-    extends _$TrainingCategoryListEventCopyWithImpl<$Res, _$LoadShortList>
-    implements _$$LoadShortListCopyWith<$Res> {
-  __$$LoadShortListCopyWithImpl(
-      _$LoadShortList _value, $Res Function(_$LoadShortList) _then)
+class __$$LoadShortListImplCopyWithImpl<$Res>
+    extends _$TrainingCategoryListEventCopyWithImpl<$Res, _$LoadShortListImpl>
+    implements _$$LoadShortListImplCopyWith<$Res> {
+  __$$LoadShortListImplCopyWithImpl(
+      _$LoadShortListImpl _value, $Res Function(_$LoadShortListImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadShortList implements LoadShortList {
-  const _$LoadShortList();
+class _$LoadShortListImpl implements LoadShortList {
+  const _$LoadShortListImpl();
 
   @override
   String toString() {
@@ -104,7 +104,7 @@ class _$LoadShortList implements LoadShortList {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadShortList);
+        (other.runtimeType == runtimeType && other is _$LoadShortListImpl);
   }
 
   @override
@@ -174,27 +174,29 @@ class _$LoadShortList implements LoadShortList {
 }
 
 abstract class LoadShortList implements TrainingCategoryListEvent {
-  const factory LoadShortList() = _$LoadShortList;
+  const factory LoadShortList() = _$LoadShortListImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadAllCopyWith<$Res> {
-  factory _$$LoadAllCopyWith(_$LoadAll value, $Res Function(_$LoadAll) then) =
-      __$$LoadAllCopyWithImpl<$Res>;
+abstract class _$$LoadAllImplCopyWith<$Res> {
+  factory _$$LoadAllImplCopyWith(
+          _$LoadAllImpl value, $Res Function(_$LoadAllImpl) then) =
+      __$$LoadAllImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadAllCopyWithImpl<$Res>
-    extends _$TrainingCategoryListEventCopyWithImpl<$Res, _$LoadAll>
-    implements _$$LoadAllCopyWith<$Res> {
-  __$$LoadAllCopyWithImpl(_$LoadAll _value, $Res Function(_$LoadAll) _then)
+class __$$LoadAllImplCopyWithImpl<$Res>
+    extends _$TrainingCategoryListEventCopyWithImpl<$Res, _$LoadAllImpl>
+    implements _$$LoadAllImplCopyWith<$Res> {
+  __$$LoadAllImplCopyWithImpl(
+      _$LoadAllImpl _value, $Res Function(_$LoadAllImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadAll implements LoadAll {
-  const _$LoadAll();
+class _$LoadAllImpl implements LoadAll {
+  const _$LoadAllImpl();
 
   @override
   String toString() {
@@ -204,7 +206,7 @@ class _$LoadAll implements LoadAll {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadAll);
+        (other.runtimeType == runtimeType && other is _$LoadAllImpl);
   }
 
   @override
@@ -274,5 +276,5 @@ class _$LoadAll implements LoadAll {
 }
 
 abstract class LoadAll implements TrainingCategoryListEvent {
-  const factory LoadAll() = _$LoadAll;
+  const factory LoadAll() = _$LoadAllImpl;
 }

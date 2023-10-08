@@ -96,23 +96,25 @@ class _$SignInStateCopyWithImpl<$Res, $Val extends SignInState>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -122,7 +124,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -213,27 +215,29 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements SignInState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadingCopyWith<$Res> {
-  factory _$$LoadingCopyWith(_$Loading value, $Res Function(_$Loading) then) =
-      __$$LoadingCopyWithImpl<$Res>;
+abstract class _$$LoadingImplCopyWith<$Res> {
+  factory _$$LoadingImplCopyWith(
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$Loading>
-    implements _$$LoadingCopyWith<$Res> {
-  __$$LoadingCopyWithImpl(_$Loading _value, $Res Function(_$Loading) _then)
+class __$$LoadingImplCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res, _$LoadingImpl>
+    implements _$$LoadingImplCopyWith<$Res> {
+  __$$LoadingImplCopyWithImpl(
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Loading implements Loading {
-  const _$Loading();
+class _$LoadingImpl implements Loading {
+  const _$LoadingImpl();
 
   @override
   String toString() {
@@ -243,7 +247,7 @@ class _$Loading implements Loading {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Loading);
+        (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
   @override
@@ -334,22 +338,24 @@ class _$Loading implements Loading {
 }
 
 abstract class Loading implements SignInState {
-  const factory Loading() = _$Loading;
+  const factory Loading() = _$LoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -357,7 +363,7 @@ class __$$ErrorCopyWithImpl<$Res>
   $Res call({
     Object? message = null,
   }) {
-    return _then(_$Error(
+    return _then(_$ErrorImpl(
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -368,8 +374,8 @@ class __$$ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error({required this.message});
+class _$ErrorImpl implements Error {
+  const _$ErrorImpl({required this.message});
 
   @override
   final String message;
@@ -383,7 +389,7 @@ class _$Error implements Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error &&
+            other is _$ErrorImpl &&
             (identical(other.message, message) || other.message == message));
   }
 
@@ -393,8 +399,8 @@ class _$Error implements Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -481,36 +487,38 @@ class _$Error implements Error {
 }
 
 abstract class Error implements SignInState {
-  const factory Error({required final String message}) = _$Error;
+  const factory Error({required final String message}) = _$ErrorImpl;
 
   String get message;
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$NavigateToProfileCreationScreenCopyWith<$Res> {
-  factory _$$NavigateToProfileCreationScreenCopyWith(
-          _$NavigateToProfileCreationScreen value,
-          $Res Function(_$NavigateToProfileCreationScreen) then) =
-      __$$NavigateToProfileCreationScreenCopyWithImpl<$Res>;
+abstract class _$$NavigateToProfileCreationScreenImplCopyWith<$Res> {
+  factory _$$NavigateToProfileCreationScreenImplCopyWith(
+          _$NavigateToProfileCreationScreenImpl value,
+          $Res Function(_$NavigateToProfileCreationScreenImpl) then) =
+      __$$NavigateToProfileCreationScreenImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NavigateToProfileCreationScreenCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$NavigateToProfileCreationScreen>
-    implements _$$NavigateToProfileCreationScreenCopyWith<$Res> {
-  __$$NavigateToProfileCreationScreenCopyWithImpl(
-      _$NavigateToProfileCreationScreen _value,
-      $Res Function(_$NavigateToProfileCreationScreen) _then)
+class __$$NavigateToProfileCreationScreenImplCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res,
+        _$NavigateToProfileCreationScreenImpl>
+    implements _$$NavigateToProfileCreationScreenImplCopyWith<$Res> {
+  __$$NavigateToProfileCreationScreenImplCopyWithImpl(
+      _$NavigateToProfileCreationScreenImpl _value,
+      $Res Function(_$NavigateToProfileCreationScreenImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NavigateToProfileCreationScreen
+class _$NavigateToProfileCreationScreenImpl
     implements NavigateToProfileCreationScreen {
-  const _$NavigateToProfileCreationScreen();
+  const _$NavigateToProfileCreationScreenImpl();
 
   @override
   String toString() {
@@ -521,7 +529,7 @@ class _$NavigateToProfileCreationScreen
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NavigateToProfileCreationScreen);
+            other is _$NavigateToProfileCreationScreenImpl);
   }
 
   @override
@@ -613,29 +621,29 @@ class _$NavigateToProfileCreationScreen
 
 abstract class NavigateToProfileCreationScreen implements SignInState {
   const factory NavigateToProfileCreationScreen() =
-      _$NavigateToProfileCreationScreen;
+      _$NavigateToProfileCreationScreenImpl;
 }
 
 /// @nodoc
-abstract class _$$NavigateToHomeScreenCopyWith<$Res> {
-  factory _$$NavigateToHomeScreenCopyWith(_$NavigateToHomeScreen value,
-          $Res Function(_$NavigateToHomeScreen) then) =
-      __$$NavigateToHomeScreenCopyWithImpl<$Res>;
+abstract class _$$NavigateToHomeScreenImplCopyWith<$Res> {
+  factory _$$NavigateToHomeScreenImplCopyWith(_$NavigateToHomeScreenImpl value,
+          $Res Function(_$NavigateToHomeScreenImpl) then) =
+      __$$NavigateToHomeScreenImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NavigateToHomeScreenCopyWithImpl<$Res>
-    extends _$SignInStateCopyWithImpl<$Res, _$NavigateToHomeScreen>
-    implements _$$NavigateToHomeScreenCopyWith<$Res> {
-  __$$NavigateToHomeScreenCopyWithImpl(_$NavigateToHomeScreen _value,
-      $Res Function(_$NavigateToHomeScreen) _then)
+class __$$NavigateToHomeScreenImplCopyWithImpl<$Res>
+    extends _$SignInStateCopyWithImpl<$Res, _$NavigateToHomeScreenImpl>
+    implements _$$NavigateToHomeScreenImplCopyWith<$Res> {
+  __$$NavigateToHomeScreenImplCopyWithImpl(_$NavigateToHomeScreenImpl _value,
+      $Res Function(_$NavigateToHomeScreenImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NavigateToHomeScreen implements NavigateToHomeScreen {
-  const _$NavigateToHomeScreen();
+class _$NavigateToHomeScreenImpl implements NavigateToHomeScreen {
+  const _$NavigateToHomeScreenImpl();
 
   @override
   String toString() {
@@ -645,7 +653,8 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NavigateToHomeScreen);
+        (other.runtimeType == runtimeType &&
+            other is _$NavigateToHomeScreenImpl);
   }
 
   @override
@@ -736,5 +745,5 @@ class _$NavigateToHomeScreen implements NavigateToHomeScreen {
 }
 
 abstract class NavigateToHomeScreen implements SignInState {
-  const factory NavigateToHomeScreen() = _$NavigateToHomeScreen;
+  const factory NavigateToHomeScreen() = _$NavigateToHomeScreenImpl;
 }

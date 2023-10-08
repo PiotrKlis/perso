@@ -75,23 +75,25 @@ class _$ActionSectionStateCopyWithImpl<$Res, $Val extends ActionSectionState>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$ActionSectionStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$ActionSectionStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -101,7 +103,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -171,24 +173,24 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements ActionSectionState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$SectionVisibilityCopyWith<$Res> {
-  factory _$$SectionVisibilityCopyWith(
-          _$SectionVisibility value, $Res Function(_$SectionVisibility) then) =
-      __$$SectionVisibilityCopyWithImpl<$Res>;
+abstract class _$$SectionVisibilityImplCopyWith<$Res> {
+  factory _$$SectionVisibilityImplCopyWith(_$SectionVisibilityImpl value,
+          $Res Function(_$SectionVisibilityImpl) then) =
+      __$$SectionVisibilityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool shouldSectionBeVisible});
 }
 
 /// @nodoc
-class __$$SectionVisibilityCopyWithImpl<$Res>
-    extends _$ActionSectionStateCopyWithImpl<$Res, _$SectionVisibility>
-    implements _$$SectionVisibilityCopyWith<$Res> {
-  __$$SectionVisibilityCopyWithImpl(
-      _$SectionVisibility _value, $Res Function(_$SectionVisibility) _then)
+class __$$SectionVisibilityImplCopyWithImpl<$Res>
+    extends _$ActionSectionStateCopyWithImpl<$Res, _$SectionVisibilityImpl>
+    implements _$$SectionVisibilityImplCopyWith<$Res> {
+  __$$SectionVisibilityImplCopyWithImpl(_$SectionVisibilityImpl _value,
+      $Res Function(_$SectionVisibilityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -196,7 +198,7 @@ class __$$SectionVisibilityCopyWithImpl<$Res>
   $Res call({
     Object? shouldSectionBeVisible = null,
   }) {
-    return _then(_$SectionVisibility(
+    return _then(_$SectionVisibilityImpl(
       null == shouldSectionBeVisible
           ? _value.shouldSectionBeVisible
           : shouldSectionBeVisible // ignore: cast_nullable_to_non_nullable
@@ -207,8 +209,8 @@ class __$$SectionVisibilityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SectionVisibility implements SectionVisibility {
-  const _$SectionVisibility(this.shouldSectionBeVisible);
+class _$SectionVisibilityImpl implements SectionVisibility {
+  const _$SectionVisibilityImpl(this.shouldSectionBeVisible);
 
   @override
   final bool shouldSectionBeVisible;
@@ -222,7 +224,7 @@ class _$SectionVisibility implements SectionVisibility {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SectionVisibility &&
+            other is _$SectionVisibilityImpl &&
             (identical(other.shouldSectionBeVisible, shouldSectionBeVisible) ||
                 other.shouldSectionBeVisible == shouldSectionBeVisible));
   }
@@ -233,8 +235,9 @@ class _$SectionVisibility implements SectionVisibility {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SectionVisibilityCopyWith<_$SectionVisibility> get copyWith =>
-      __$$SectionVisibilityCopyWithImpl<_$SectionVisibility>(this, _$identity);
+  _$$SectionVisibilityImplCopyWith<_$SectionVisibilityImpl> get copyWith =>
+      __$$SectionVisibilityImplCopyWithImpl<_$SectionVisibilityImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -301,10 +304,10 @@ class _$SectionVisibility implements SectionVisibility {
 
 abstract class SectionVisibility implements ActionSectionState {
   const factory SectionVisibility(final bool shouldSectionBeVisible) =
-      _$SectionVisibility;
+      _$SectionVisibilityImpl;
 
   bool get shouldSectionBeVisible;
   @JsonKey(ignore: true)
-  _$$SectionVisibilityCopyWith<_$SectionVisibility> get copyWith =>
+  _$$SectionVisibilityImplCopyWith<_$SectionVisibilityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

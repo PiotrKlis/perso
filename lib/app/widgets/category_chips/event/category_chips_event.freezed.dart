@@ -76,25 +76,25 @@ class _$CategoryChipsEventCopyWithImpl<$Res, $Val extends CategoryChipsEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadAllCategoriesCopyWith<$Res> {
-  factory _$$LoadAllCategoriesCopyWith(
-          _$LoadAllCategories value, $Res Function(_$LoadAllCategories) then) =
-      __$$LoadAllCategoriesCopyWithImpl<$Res>;
+abstract class _$$LoadAllCategoriesImplCopyWith<$Res> {
+  factory _$$LoadAllCategoriesImplCopyWith(_$LoadAllCategoriesImpl value,
+          $Res Function(_$LoadAllCategoriesImpl) then) =
+      __$$LoadAllCategoriesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadAllCategoriesCopyWithImpl<$Res>
-    extends _$CategoryChipsEventCopyWithImpl<$Res, _$LoadAllCategories>
-    implements _$$LoadAllCategoriesCopyWith<$Res> {
-  __$$LoadAllCategoriesCopyWithImpl(
-      _$LoadAllCategories _value, $Res Function(_$LoadAllCategories) _then)
+class __$$LoadAllCategoriesImplCopyWithImpl<$Res>
+    extends _$CategoryChipsEventCopyWithImpl<$Res, _$LoadAllCategoriesImpl>
+    implements _$$LoadAllCategoriesImplCopyWith<$Res> {
+  __$$LoadAllCategoriesImplCopyWithImpl(_$LoadAllCategoriesImpl _value,
+      $Res Function(_$LoadAllCategoriesImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadAllCategories implements LoadAllCategories {
-  const _$LoadAllCategories();
+class _$LoadAllCategoriesImpl implements LoadAllCategories {
+  const _$LoadAllCategoriesImpl();
 
   @override
   String toString() {
@@ -104,7 +104,7 @@ class _$LoadAllCategories implements LoadAllCategories {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadAllCategories);
+        (other.runtimeType == runtimeType && other is _$LoadAllCategoriesImpl);
   }
 
   @override
@@ -175,24 +175,27 @@ class _$LoadAllCategories implements LoadAllCategories {
 }
 
 abstract class LoadAllCategories implements CategoryChipsEvent {
-  const factory LoadAllCategories() = _$LoadAllCategories;
+  const factory LoadAllCategories() = _$LoadAllCategoriesImpl;
 }
 
 /// @nodoc
-abstract class _$$LoadCategoriesForTrainerCopyWith<$Res> {
-  factory _$$LoadCategoriesForTrainerCopyWith(_$LoadCategoriesForTrainer value,
-          $Res Function(_$LoadCategoriesForTrainer) then) =
-      __$$LoadCategoriesForTrainerCopyWithImpl<$Res>;
+abstract class _$$LoadCategoriesForTrainerImplCopyWith<$Res> {
+  factory _$$LoadCategoriesForTrainerImplCopyWith(
+          _$LoadCategoriesForTrainerImpl value,
+          $Res Function(_$LoadCategoriesForTrainerImpl) then) =
+      __$$LoadCategoriesForTrainerImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String trainerId});
 }
 
 /// @nodoc
-class __$$LoadCategoriesForTrainerCopyWithImpl<$Res>
-    extends _$CategoryChipsEventCopyWithImpl<$Res, _$LoadCategoriesForTrainer>
-    implements _$$LoadCategoriesForTrainerCopyWith<$Res> {
-  __$$LoadCategoriesForTrainerCopyWithImpl(_$LoadCategoriesForTrainer _value,
-      $Res Function(_$LoadCategoriesForTrainer) _then)
+class __$$LoadCategoriesForTrainerImplCopyWithImpl<$Res>
+    extends _$CategoryChipsEventCopyWithImpl<$Res,
+        _$LoadCategoriesForTrainerImpl>
+    implements _$$LoadCategoriesForTrainerImplCopyWith<$Res> {
+  __$$LoadCategoriesForTrainerImplCopyWithImpl(
+      _$LoadCategoriesForTrainerImpl _value,
+      $Res Function(_$LoadCategoriesForTrainerImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -200,7 +203,7 @@ class __$$LoadCategoriesForTrainerCopyWithImpl<$Res>
   $Res call({
     Object? trainerId = null,
   }) {
-    return _then(_$LoadCategoriesForTrainer(
+    return _then(_$LoadCategoriesForTrainerImpl(
       null == trainerId
           ? _value.trainerId
           : trainerId // ignore: cast_nullable_to_non_nullable
@@ -211,8 +214,8 @@ class __$$LoadCategoriesForTrainerCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadCategoriesForTrainer implements LoadCategoriesForTrainer {
-  const _$LoadCategoriesForTrainer(this.trainerId);
+class _$LoadCategoriesForTrainerImpl implements LoadCategoriesForTrainer {
+  const _$LoadCategoriesForTrainerImpl(this.trainerId);
 
   @override
   final String trainerId;
@@ -226,7 +229,7 @@ class _$LoadCategoriesForTrainer implements LoadCategoriesForTrainer {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoadCategoriesForTrainer &&
+            other is _$LoadCategoriesForTrainerImpl &&
             (identical(other.trainerId, trainerId) ||
                 other.trainerId == trainerId));
   }
@@ -237,10 +240,9 @@ class _$LoadCategoriesForTrainer implements LoadCategoriesForTrainer {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoadCategoriesForTrainerCopyWith<_$LoadCategoriesForTrainer>
-      get copyWith =>
-          __$$LoadCategoriesForTrainerCopyWithImpl<_$LoadCategoriesForTrainer>(
-              this, _$identity);
+  _$$LoadCategoriesForTrainerImplCopyWith<_$LoadCategoriesForTrainerImpl>
+      get copyWith => __$$LoadCategoriesForTrainerImplCopyWithImpl<
+          _$LoadCategoriesForTrainerImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -308,10 +310,10 @@ class _$LoadCategoriesForTrainer implements LoadCategoriesForTrainer {
 
 abstract class LoadCategoriesForTrainer implements CategoryChipsEvent {
   const factory LoadCategoriesForTrainer(final String trainerId) =
-      _$LoadCategoriesForTrainer;
+      _$LoadCategoriesForTrainerImpl;
 
   String get trainerId;
   @JsonKey(ignore: true)
-  _$$LoadCategoriesForTrainerCopyWith<_$LoadCategoriesForTrainer>
+  _$$LoadCategoriesForTrainerImplCopyWith<_$LoadCategoriesForTrainerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

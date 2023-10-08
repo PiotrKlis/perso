@@ -100,22 +100,22 @@ class _$TrainingRequestEventCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$TrainingRequestCopyWith<$Res>
+abstract class _$$TrainingRequestImplCopyWith<$Res>
     implements $TrainingRequestEventCopyWith<$Res> {
-  factory _$$TrainingRequestCopyWith(
-          _$TrainingRequest value, $Res Function(_$TrainingRequest) then) =
-      __$$TrainingRequestCopyWithImpl<$Res>;
+  factory _$$TrainingRequestImplCopyWith(_$TrainingRequestImpl value,
+          $Res Function(_$TrainingRequestImpl) then) =
+      __$$TrainingRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String trainerId});
 }
 
 /// @nodoc
-class __$$TrainingRequestCopyWithImpl<$Res>
-    extends _$TrainingRequestEventCopyWithImpl<$Res, _$TrainingRequest>
-    implements _$$TrainingRequestCopyWith<$Res> {
-  __$$TrainingRequestCopyWithImpl(
-      _$TrainingRequest _value, $Res Function(_$TrainingRequest) _then)
+class __$$TrainingRequestImplCopyWithImpl<$Res>
+    extends _$TrainingRequestEventCopyWithImpl<$Res, _$TrainingRequestImpl>
+    implements _$$TrainingRequestImplCopyWith<$Res> {
+  __$$TrainingRequestImplCopyWithImpl(
+      _$TrainingRequestImpl _value, $Res Function(_$TrainingRequestImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$TrainingRequestCopyWithImpl<$Res>
   $Res call({
     Object? trainerId = null,
   }) {
-    return _then(_$TrainingRequest(
+    return _then(_$TrainingRequestImpl(
       null == trainerId
           ? _value.trainerId
           : trainerId // ignore: cast_nullable_to_non_nullable
@@ -134,8 +134,8 @@ class __$$TrainingRequestCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TrainingRequest implements TrainingRequest {
-  const _$TrainingRequest(this.trainerId);
+class _$TrainingRequestImpl implements TrainingRequest {
+  const _$TrainingRequestImpl(this.trainerId);
 
   @override
   final String trainerId;
@@ -149,7 +149,7 @@ class _$TrainingRequest implements TrainingRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TrainingRequest &&
+            other is _$TrainingRequestImpl &&
             (identical(other.trainerId, trainerId) ||
                 other.trainerId == trainerId));
   }
@@ -160,8 +160,9 @@ class _$TrainingRequest implements TrainingRequest {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TrainingRequestCopyWith<_$TrainingRequest> get copyWith =>
-      __$$TrainingRequestCopyWithImpl<_$TrainingRequest>(this, _$identity);
+  _$$TrainingRequestImplCopyWith<_$TrainingRequestImpl> get copyWith =>
+      __$$TrainingRequestImplCopyWithImpl<_$TrainingRequestImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -231,36 +232,36 @@ class _$TrainingRequest implements TrainingRequest {
 }
 
 abstract class TrainingRequest implements TrainingRequestEvent {
-  const factory TrainingRequest(final String trainerId) = _$TrainingRequest;
+  const factory TrainingRequest(final String trainerId) = _$TrainingRequestImpl;
 
   @override
   String get trainerId;
   @override
   @JsonKey(ignore: true)
-  _$$TrainingRequestCopyWith<_$TrainingRequest> get copyWith =>
+  _$$TrainingRequestImplCopyWith<_$TrainingRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CheckIfUserHasAlreadyRequestTrainingCopyWith<$Res>
+abstract class _$$CheckIfUserHasAlreadyRequestTrainingImplCopyWith<$Res>
     implements $TrainingRequestEventCopyWith<$Res> {
-  factory _$$CheckIfUserHasAlreadyRequestTrainingCopyWith(
-          _$CheckIfUserHasAlreadyRequestTraining value,
-          $Res Function(_$CheckIfUserHasAlreadyRequestTraining) then) =
-      __$$CheckIfUserHasAlreadyRequestTrainingCopyWithImpl<$Res>;
+  factory _$$CheckIfUserHasAlreadyRequestTrainingImplCopyWith(
+          _$CheckIfUserHasAlreadyRequestTrainingImpl value,
+          $Res Function(_$CheckIfUserHasAlreadyRequestTrainingImpl) then) =
+      __$$CheckIfUserHasAlreadyRequestTrainingImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String trainerId});
 }
 
 /// @nodoc
-class __$$CheckIfUserHasAlreadyRequestTrainingCopyWithImpl<$Res>
+class __$$CheckIfUserHasAlreadyRequestTrainingImplCopyWithImpl<$Res>
     extends _$TrainingRequestEventCopyWithImpl<$Res,
-        _$CheckIfUserHasAlreadyRequestTraining>
-    implements _$$CheckIfUserHasAlreadyRequestTrainingCopyWith<$Res> {
-  __$$CheckIfUserHasAlreadyRequestTrainingCopyWithImpl(
-      _$CheckIfUserHasAlreadyRequestTraining _value,
-      $Res Function(_$CheckIfUserHasAlreadyRequestTraining) _then)
+        _$CheckIfUserHasAlreadyRequestTrainingImpl>
+    implements _$$CheckIfUserHasAlreadyRequestTrainingImplCopyWith<$Res> {
+  __$$CheckIfUserHasAlreadyRequestTrainingImplCopyWithImpl(
+      _$CheckIfUserHasAlreadyRequestTrainingImpl _value,
+      $Res Function(_$CheckIfUserHasAlreadyRequestTrainingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -268,7 +269,7 @@ class __$$CheckIfUserHasAlreadyRequestTrainingCopyWithImpl<$Res>
   $Res call({
     Object? trainerId = null,
   }) {
-    return _then(_$CheckIfUserHasAlreadyRequestTraining(
+    return _then(_$CheckIfUserHasAlreadyRequestTrainingImpl(
       null == trainerId
           ? _value.trainerId
           : trainerId // ignore: cast_nullable_to_non_nullable
@@ -279,9 +280,9 @@ class __$$CheckIfUserHasAlreadyRequestTrainingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CheckIfUserHasAlreadyRequestTraining
+class _$CheckIfUserHasAlreadyRequestTrainingImpl
     implements CheckIfUserHasAlreadyRequestTraining {
-  const _$CheckIfUserHasAlreadyRequestTraining(this.trainerId);
+  const _$CheckIfUserHasAlreadyRequestTrainingImpl(this.trainerId);
 
   @override
   final String trainerId;
@@ -295,7 +296,7 @@ class _$CheckIfUserHasAlreadyRequestTraining
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CheckIfUserHasAlreadyRequestTraining &&
+            other is _$CheckIfUserHasAlreadyRequestTrainingImpl &&
             (identical(other.trainerId, trainerId) ||
                 other.trainerId == trainerId));
   }
@@ -306,10 +307,10 @@ class _$CheckIfUserHasAlreadyRequestTraining
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CheckIfUserHasAlreadyRequestTrainingCopyWith<
-          _$CheckIfUserHasAlreadyRequestTraining>
-      get copyWith => __$$CheckIfUserHasAlreadyRequestTrainingCopyWithImpl<
-          _$CheckIfUserHasAlreadyRequestTraining>(this, _$identity);
+  _$$CheckIfUserHasAlreadyRequestTrainingImplCopyWith<
+          _$CheckIfUserHasAlreadyRequestTrainingImpl>
+      get copyWith => __$$CheckIfUserHasAlreadyRequestTrainingImplCopyWithImpl<
+          _$CheckIfUserHasAlreadyRequestTrainingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -381,13 +382,13 @@ class _$CheckIfUserHasAlreadyRequestTraining
 abstract class CheckIfUserHasAlreadyRequestTraining
     implements TrainingRequestEvent {
   const factory CheckIfUserHasAlreadyRequestTraining(final String trainerId) =
-      _$CheckIfUserHasAlreadyRequestTraining;
+      _$CheckIfUserHasAlreadyRequestTrainingImpl;
 
   @override
   String get trainerId;
   @override
   @JsonKey(ignore: true)
-  _$$CheckIfUserHasAlreadyRequestTrainingCopyWith<
-          _$CheckIfUserHasAlreadyRequestTraining>
+  _$$CheckIfUserHasAlreadyRequestTrainingImplCopyWith<
+          _$CheckIfUserHasAlreadyRequestTrainingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

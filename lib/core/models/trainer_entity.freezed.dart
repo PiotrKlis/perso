@@ -163,11 +163,11 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
 }
 
 /// @nodoc
-abstract class _$$_TrainerEntityCopyWith<$Res>
+abstract class _$$TrainerEntityImplCopyWith<$Res>
     implements $TrainerEntityCopyWith<$Res> {
-  factory _$$_TrainerEntityCopyWith(
-          _$_TrainerEntity value, $Res Function(_$_TrainerEntity) then) =
-      __$$_TrainerEntityCopyWithImpl<$Res>;
+  factory _$$TrainerEntityImplCopyWith(
+          _$TrainerEntityImpl value, $Res Function(_$TrainerEntityImpl) then) =
+      __$$TrainerEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -190,11 +190,11 @@ abstract class _$$_TrainerEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TrainerEntityCopyWithImpl<$Res>
-    extends _$TrainerEntityCopyWithImpl<$Res, _$_TrainerEntity>
-    implements _$$_TrainerEntityCopyWith<$Res> {
-  __$$_TrainerEntityCopyWithImpl(
-      _$_TrainerEntity _value, $Res Function(_$_TrainerEntity) _then)
+class __$$TrainerEntityImplCopyWithImpl<$Res>
+    extends _$TrainerEntityCopyWithImpl<$Res, _$TrainerEntityImpl>
+    implements _$$TrainerEntityImplCopyWith<$Res> {
+  __$$TrainerEntityImplCopyWithImpl(
+      _$TrainerEntityImpl _value, $Res Function(_$TrainerEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -217,7 +217,7 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
     Object? activeClients = null,
     Object? inactiveClients = null,
   }) {
-    return _then(_$_TrainerEntity(
+    return _then(_$TrainerEntityImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -288,8 +288,8 @@ class __$$_TrainerEntityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TrainerEntity implements _TrainerEntity {
-  const _$_TrainerEntity(
+class _$TrainerEntityImpl implements _TrainerEntity {
+  const _$TrainerEntityImpl(
       {required this.id,
       required this.name,
       required this.surname,
@@ -390,7 +390,7 @@ class _$_TrainerEntity implements _TrainerEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrainerEntity &&
+            other is _$TrainerEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.surname, surname) || other.surname == surname) &&
@@ -442,8 +442,8 @@ class _$_TrainerEntity implements _TrainerEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>
-      __$$_TrainerEntityCopyWithImpl<_$_TrainerEntity>(this, _$identity);
+  _$$TrainerEntityImplCopyWith<_$TrainerEntityImpl> get copyWith =>
+      __$$TrainerEntityImplCopyWithImpl<_$TrainerEntityImpl>(this, _$identity);
 }
 
 abstract class _TrainerEntity implements TrainerEntity {
@@ -463,7 +463,7 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final List<String> categories,
       required final List<String> pendingRequests,
       required final List<String> activeClients,
-      required final List<String> inactiveClients}) = _$_TrainerEntity;
+      required final List<String> inactiveClients}) = _$TrainerEntityImpl;
 
   @override
   String get id;
@@ -499,6 +499,6 @@ abstract class _TrainerEntity implements TrainerEntity {
   List<String> get inactiveClients;
   @override
   @JsonKey(ignore: true)
-  _$$_TrainerEntityCopyWith<_$_TrainerEntity> get copyWith =>
+  _$$TrainerEntityImplCopyWith<_$TrainerEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -81,23 +81,25 @@ class _$ForgotPasswordStateCopyWithImpl<$Res, $Val extends ForgotPasswordState>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -107,7 +109,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -183,29 +185,29 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements ForgotPasswordState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$PasswordResetSuccessCopyWith<$Res> {
-  factory _$$PasswordResetSuccessCopyWith(_$PasswordResetSuccess value,
-          $Res Function(_$PasswordResetSuccess) then) =
-      __$$PasswordResetSuccessCopyWithImpl<$Res>;
+abstract class _$$PasswordResetSuccessImplCopyWith<$Res> {
+  factory _$$PasswordResetSuccessImplCopyWith(_$PasswordResetSuccessImpl value,
+          $Res Function(_$PasswordResetSuccessImpl) then) =
+      __$$PasswordResetSuccessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PasswordResetSuccessCopyWithImpl<$Res>
-    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$PasswordResetSuccess>
-    implements _$$PasswordResetSuccessCopyWith<$Res> {
-  __$$PasswordResetSuccessCopyWithImpl(_$PasswordResetSuccess _value,
-      $Res Function(_$PasswordResetSuccess) _then)
+class __$$PasswordResetSuccessImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$PasswordResetSuccessImpl>
+    implements _$$PasswordResetSuccessImplCopyWith<$Res> {
+  __$$PasswordResetSuccessImplCopyWithImpl(_$PasswordResetSuccessImpl _value,
+      $Res Function(_$PasswordResetSuccessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PasswordResetSuccess implements PasswordResetSuccess {
-  const _$PasswordResetSuccess();
+class _$PasswordResetSuccessImpl implements PasswordResetSuccess {
+  const _$PasswordResetSuccessImpl();
 
   @override
   String toString() {
@@ -215,7 +217,8 @@ class _$PasswordResetSuccess implements PasswordResetSuccess {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PasswordResetSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _$PasswordResetSuccessImpl);
   }
 
   @override
@@ -291,22 +294,24 @@ class _$PasswordResetSuccess implements PasswordResetSuccess {
 }
 
 abstract class PasswordResetSuccess implements ForgotPasswordState {
-  const factory PasswordResetSuccess() = _$PasswordResetSuccess;
+  const factory PasswordResetSuccess() = _$PasswordResetSuccessImpl;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$ForgotPasswordStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -314,7 +319,7 @@ class __$$ErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$Error(
+    return _then(_$ErrorImpl(
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -325,8 +330,8 @@ class __$$ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error(this.error);
+class _$ErrorImpl implements Error {
+  const _$ErrorImpl(this.error);
 
   @override
   final String error;
@@ -340,7 +345,7 @@ class _$Error implements Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error &&
+            other is _$ErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -350,8 +355,8 @@ class _$Error implements Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -423,9 +428,10 @@ class _$Error implements Error {
 }
 
 abstract class Error implements ForgotPasswordState {
-  const factory Error(final String error) = _$Error;
+  const factory Error(final String error) = _$ErrorImpl;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

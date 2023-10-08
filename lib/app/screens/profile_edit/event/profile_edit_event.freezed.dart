@@ -76,10 +76,10 @@ class _$ProfileEditEventCopyWithImpl<$Res, $Val extends ProfileEditEvent>
 }
 
 /// @nodoc
-abstract class _$$UploadTrainerDataCopyWith<$Res> {
-  factory _$$UploadTrainerDataCopyWith(
-          _$UploadTrainerData value, $Res Function(_$UploadTrainerData) then) =
-      __$$UploadTrainerDataCopyWithImpl<$Res>;
+abstract class _$$UploadTrainerDataImplCopyWith<$Res> {
+  factory _$$UploadTrainerDataImplCopyWith(_$UploadTrainerDataImpl value,
+          $Res Function(_$UploadTrainerDataImpl) then) =
+      __$$UploadTrainerDataImplCopyWithImpl<$Res>;
   @useResult
   $Res call({EditableTrainerData trainerData});
 
@@ -87,11 +87,11 @@ abstract class _$$UploadTrainerDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UploadTrainerDataCopyWithImpl<$Res>
-    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadTrainerData>
-    implements _$$UploadTrainerDataCopyWith<$Res> {
-  __$$UploadTrainerDataCopyWithImpl(
-      _$UploadTrainerData _value, $Res Function(_$UploadTrainerData) _then)
+class __$$UploadTrainerDataImplCopyWithImpl<$Res>
+    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadTrainerDataImpl>
+    implements _$$UploadTrainerDataImplCopyWith<$Res> {
+  __$$UploadTrainerDataImplCopyWithImpl(_$UploadTrainerDataImpl _value,
+      $Res Function(_$UploadTrainerDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$UploadTrainerDataCopyWithImpl<$Res>
   $Res call({
     Object? trainerData = null,
   }) {
-    return _then(_$UploadTrainerData(
+    return _then(_$UploadTrainerDataImpl(
       null == trainerData
           ? _value.trainerData
           : trainerData // ignore: cast_nullable_to_non_nullable
@@ -118,8 +118,8 @@ class __$$UploadTrainerDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UploadTrainerData implements UploadTrainerData {
-  const _$UploadTrainerData(this.trainerData);
+class _$UploadTrainerDataImpl implements UploadTrainerData {
+  const _$UploadTrainerDataImpl(this.trainerData);
 
   @override
   final EditableTrainerData trainerData;
@@ -133,7 +133,7 @@ class _$UploadTrainerData implements UploadTrainerData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadTrainerData &&
+            other is _$UploadTrainerDataImpl &&
             (identical(other.trainerData, trainerData) ||
                 other.trainerData == trainerData));
   }
@@ -144,8 +144,9 @@ class _$UploadTrainerData implements UploadTrainerData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UploadTrainerDataCopyWith<_$UploadTrainerData> get copyWith =>
-      __$$UploadTrainerDataCopyWithImpl<_$UploadTrainerData>(this, _$identity);
+  _$$UploadTrainerDataImplCopyWith<_$UploadTrainerDataImpl> get copyWith =>
+      __$$UploadTrainerDataImplCopyWithImpl<_$UploadTrainerDataImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -213,19 +214,19 @@ class _$UploadTrainerData implements UploadTrainerData {
 
 abstract class UploadTrainerData implements ProfileEditEvent {
   const factory UploadTrainerData(final EditableTrainerData trainerData) =
-      _$UploadTrainerData;
+      _$UploadTrainerDataImpl;
 
   EditableTrainerData get trainerData;
   @JsonKey(ignore: true)
-  _$$UploadTrainerDataCopyWith<_$UploadTrainerData> get copyWith =>
+  _$$UploadTrainerDataImplCopyWith<_$UploadTrainerDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UploadClientDataCopyWith<$Res> {
-  factory _$$UploadClientDataCopyWith(
-          _$UploadClientData value, $Res Function(_$UploadClientData) then) =
-      __$$UploadClientDataCopyWithImpl<$Res>;
+abstract class _$$UploadClientDataImplCopyWith<$Res> {
+  factory _$$UploadClientDataImplCopyWith(_$UploadClientDataImpl value,
+          $Res Function(_$UploadClientDataImpl) then) =
+      __$$UploadClientDataImplCopyWithImpl<$Res>;
   @useResult
   $Res call({EditableClientData clientData});
 
@@ -233,11 +234,11 @@ abstract class _$$UploadClientDataCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UploadClientDataCopyWithImpl<$Res>
-    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadClientData>
-    implements _$$UploadClientDataCopyWith<$Res> {
-  __$$UploadClientDataCopyWithImpl(
-      _$UploadClientData _value, $Res Function(_$UploadClientData) _then)
+class __$$UploadClientDataImplCopyWithImpl<$Res>
+    extends _$ProfileEditEventCopyWithImpl<$Res, _$UploadClientDataImpl>
+    implements _$$UploadClientDataImplCopyWith<$Res> {
+  __$$UploadClientDataImplCopyWithImpl(_$UploadClientDataImpl _value,
+      $Res Function(_$UploadClientDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -245,7 +246,7 @@ class __$$UploadClientDataCopyWithImpl<$Res>
   $Res call({
     Object? clientData = null,
   }) {
-    return _then(_$UploadClientData(
+    return _then(_$UploadClientDataImpl(
       null == clientData
           ? _value.clientData
           : clientData // ignore: cast_nullable_to_non_nullable
@@ -264,8 +265,8 @@ class __$$UploadClientDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UploadClientData implements UploadClientData {
-  const _$UploadClientData(this.clientData);
+class _$UploadClientDataImpl implements UploadClientData {
+  const _$UploadClientDataImpl(this.clientData);
 
   @override
   final EditableClientData clientData;
@@ -279,7 +280,7 @@ class _$UploadClientData implements UploadClientData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadClientData &&
+            other is _$UploadClientDataImpl &&
             (identical(other.clientData, clientData) ||
                 other.clientData == clientData));
   }
@@ -290,8 +291,9 @@ class _$UploadClientData implements UploadClientData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$UploadClientDataCopyWith<_$UploadClientData> get copyWith =>
-      __$$UploadClientDataCopyWithImpl<_$UploadClientData>(this, _$identity);
+  _$$UploadClientDataImplCopyWith<_$UploadClientDataImpl> get copyWith =>
+      __$$UploadClientDataImplCopyWithImpl<_$UploadClientDataImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -359,10 +361,10 @@ class _$UploadClientData implements UploadClientData {
 
 abstract class UploadClientData implements ProfileEditEvent {
   const factory UploadClientData(final EditableClientData clientData) =
-      _$UploadClientData;
+      _$UploadClientDataImpl;
 
   EditableClientData get clientData;
   @JsonKey(ignore: true)
-  _$$UploadClientDataCopyWith<_$UploadClientData> get copyWith =>
+  _$$UploadClientDataImplCopyWith<_$UploadClientDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
