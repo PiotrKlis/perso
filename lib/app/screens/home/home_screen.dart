@@ -34,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final Map<String, String> _locations = {};
   bool _isLocationChecked = false;
+  GoogleMapController? mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   PersoHeader(
                       title: AppLocalizations.of(context)!.category_header),
                   GestureDetector(
-                    onTap: () => context
-                        .pushNamed(ScreenNavigationKey.trainingCategories),
+                    onTap: () =>
+                        context
+                            .pushNamed(ScreenNavigationKey.trainingCategories),
                     child: PersoClickableText(
                         title:
-                            AppLocalizations.of(context)!.see_all_categories),
+                        AppLocalizations.of(context)!.see_all_categories),
                   )
                 ],
               ),
@@ -125,11 +127,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         PersoHeader(
                             title: AppLocalizations.of(context)!.near_you),
                         GestureDetector(
-                          onTap: () => context.pushNamed(
-                              ScreenNavigationKey.searchResults,
-                              pathParameters: {
-                                "input": "see all trainers near my location"
-                              }),
+                          onTap: () =>
+                              context.pushNamed(
+                                  ScreenNavigationKey.searchResults,
+                                  pathParameters: {
+                                    "input": "see all trainers near my location"
+                                  }),
                           child: PersoClickableText(
                               title: AppLocalizations.of(context)!
                                   .see_all_categories),
@@ -142,13 +145,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             BlocProvider(
-              create: (context) => HomeBloc(HomeState.initial()),
+              create: (context) => HomeBloc(const HomeState.initial()),
               child:
-                  BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+              BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
                 state.when(
-                  initial: () {
-                    _getLocation();
-                  },
+                  initial: () => _getLocation(),
                   navigateToClientProfile: () =>
                       context.pushNamed(ScreenNavigationKey.clientProfile),
                   navigateToSignIn: () =>
@@ -166,28 +167,30 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   GoogleMap _googleMap() {
+    CameraPosition cameraPosition = const CameraPosition(
+        target: LatLng(0.0, 19.479766023156003), zoom: 5.5);
+
     final Set<Marker> markers = {};
-    markers.add(Marker(markerId: MarkerId("1"), position: const LatLng(0, 0)));
+    markers.add(const Marker(markerId: MarkerId("1"), position: LatLng(0, 0)));
     for (var location in _locations.entries) {
       markers.add(Marker(
           markerId: const MarkerId("1"),
           position: LatLng(
               double.parse(location.key), double.parse(location.value))));
+      cameraPosition = CameraPosition(
+          target: LatLng(
+              double.parse(location.key), double.parse(location.value)),
+          zoom: 17);
     }
-
-    final Completer<GoogleMapController> _controller =
-        Completer<GoogleMapController>();
-    const CameraPosition kGooglePlex = CameraPosition(
-        target: LatLng(52.06923300336246, 19.479766023156003), zoom: 5.5);
 
     return GoogleMap(
       markers: markers,
       gestureRecognizers: {
         Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
       },
-      initialCameraPosition: kGooglePlex,
+      initialCameraPosition: cameraPosition,
       onMapCreated: (GoogleMapController controller) {
-        _controller.complete(controller);
+        mapController = controller;
       },
     );
   }
@@ -205,6 +208,11 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
           _isLocationChecked = true;
           _locations.addAll({latitude: longitude});
+          mapController?.animateCamera(CameraUpdate.newCameraPosition(
+              CameraPosition(
+                  target: LatLng(double.parse(latitude),
+                      double.parse(longitude)),
+                  zoom: 11)));
         });
       }
     });
