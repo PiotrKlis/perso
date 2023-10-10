@@ -108,17 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.bigMargin,
-                        left: Dimens.smallMargin,
-                        right: Dimens.smallMargin),
-                    child: SizedBox(
-                      height: 300.0,
-                      width: double.infinity,
-                      child: _googleMap(),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.bigMargin,
                         left: Dimens.normalMargin,
                         right: Dimens.normalMargin),
                     child: Row(
@@ -139,7 +128,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
-                  const PersoTrainersList()
+                  Container(
+                    margin: const EdgeInsets.only(
+                        top: Dimens.smallMargin,
+                        left: Dimens.smallMargin,
+                        right: Dimens.smallMargin),
+                    child: SizedBox(
+                      height: 300.0,
+                      width: double.infinity,
+                      child: _googleMap(),
+                    ),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.only(top: Dimens.smallMargin),
+                      child: const PersoTrainersList())
                 ],
               ),
             ),
