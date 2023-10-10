@@ -32,7 +32,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final Map<String, String> _locations = {};
+  final List<LatLng> _locations = [];
+  final Set<Marker> _markers = {};
   bool _isLocationChecked = false;
   GoogleMapController? mapController;
 
@@ -84,12 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   PersoHeader(
                       title: AppLocalizations.of(context)!.category_header),
                   GestureDetector(
-                    onTap: () =>
-                        context
-                            .pushNamed(ScreenNavigationKey.trainingCategories),
+                    onTap: () => context
+                        .pushNamed(ScreenNavigationKey.trainingCategories),
                     child: PersoClickableText(
                         title:
-                        AppLocalizations.of(context)!.see_all_categories),
+                            AppLocalizations.of(context)!.see_all_categories),
                   )
                 ],
               ),
@@ -127,12 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         PersoHeader(
                             title: AppLocalizations.of(context)!.near_you),
                         GestureDetector(
-                          onTap: () =>
-                              context.pushNamed(
-                                  ScreenNavigationKey.searchResults,
-                                  pathParameters: {
-                                    "input": "see all trainers near my location"
-                                  }),
+                          onTap: () => context.pushNamed(
+                              ScreenNavigationKey.searchResults,
+                              pathParameters: {
+                                "input": "see all trainers near my location"
+                              }),
                           child: PersoClickableText(
                               title: AppLocalizations.of(context)!
                                   .see_all_categories),
@@ -147,9 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
             BlocProvider(
               create: (context) => HomeBloc(const HomeState.initial()),
               child:
-              BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+                  BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
                 state.when(
-                  initial: () => _getLocation(),
+                  initial: () => _navigateCameraToCurrentLocation(),
                   navigateToClientProfile: () =>
                       context.pushNamed(ScreenNavigationKey.clientProfile),
                   navigateToSignIn: () =>
@@ -167,83 +166,72 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   GoogleMap _googleMap() {
-    CameraPosition cameraPosition = const CameraPosition(
-        target: LatLng(0.0, 19.479766023156003), zoom: 5.5);
+    CameraPosition initialCameraPosition = const CameraPosition(
+        target: LatLng(52.06923300336246, 19.479766023156003), zoom: 5.5);
 
-    final Set<Marker> markers = {};
-    markers.add(const Marker(markerId: MarkerId("1"), position: LatLng(0, 0)));
-    for (var location in _locations.entries) {
-      markers.add(Marker(
-          markerId: const MarkerId("1"),
-          position: LatLng(
-              double.parse(location.key), double.parse(location.value))));
-      cameraPosition = CameraPosition(
-          target: LatLng(
-              double.parse(location.key), double.parse(location.value)),
-          zoom: 17);
+    int markerId = 0;
+    for (var location in _locations) {
+      _markers.add(
+          Marker(markerId: MarkerId(markerId.toString()), position: location));
+      markerId++;
     }
 
     return GoogleMap(
-      markers: markers,
+      myLocationButtonEnabled: true,
+      myLocationEnabled: true,
+      markers: _markers,
       gestureRecognizers: {
         Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
       },
-      initialCameraPosition: cameraPosition,
+      initialCameraPosition: initialCameraPosition,
       onMapCreated: (GoogleMapController controller) {
         mapController = controller;
       },
     );
   }
 
-  void _getLocation() {
-    _getLocationData().then((location) {
-      String? latitude = location?.latitude.toString();
-      String? longitude = location?.longitude.toString();
-      _locations.forEach((key, value) {
-        if (key == latitude && value == longitude) {
-          return;
-        }
-      });
-      if (latitude != null && longitude != null && !_isLocationChecked) {
+  void _navigateCameraToCurrentLocation() {
+    _getCurrentLocation().then((location) {
+      double latitude = double.parse(location.latitude.toString());
+      double longitude = double.parse(location.longitude.toString());
+      if (!_isLocationChecked) {
         setState(() {
           _isLocationChecked = true;
-          _locations.addAll({latitude: longitude});
           mapController?.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(
-                  target: LatLng(double.parse(latitude),
-                      double.parse(longitude)),
-                  zoom: 11)));
+              CameraPosition(target: LatLng(latitude, longitude), zoom: 11)));
         });
+      }
+    }).onError((error, stackTrace) {
+      //TODO: Add error handling
+      if (kDebugMode) {
+        print(error.toString());
       }
     });
   }
 
-  Future<LocationData?> _getLocationData() async {
+  Future<LocationData> _getCurrentLocation() async {
     Location location = Location();
-    LocationData _locationData;
 
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return null;
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return Future.error("Location service is not enabled");
       }
     }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return null;
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return Future.error("Location permission not granted");
       }
     }
 
-    _locationData = await location.getLocation();
-
-    return _locationData;
+    return await location.getLocation();
   }
 
   void _handleAccountClick(BuildContext context) {
