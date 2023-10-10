@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
-  HomeBloc(HomeState homeState) : super(homeState) {
+  HomeBloc() : super(const HomeState.initial()) {
     on<AccountNavigation>((state, emit) async {
       bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
       if (isUserLoggedIn) {
