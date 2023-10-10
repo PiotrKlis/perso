@@ -45,6 +45,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
     );
   }
 
+  //TODO: Change below into bloc implementation
   void _navigateCameraToCurrentLocation() {
     _getCurrentLocation().then((location) {
       double latitude = double.parse(location.latitude.toString());
@@ -70,6 +71,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
     bool serviceEnabled;
     PermissionStatus permissionGranted;
 
+    //TODO: Extract serviceEnabled and permissionGranted into separate services
     serviceEnabled = await location.serviceEnabled();
     if (!serviceEnabled) {
       serviceEnabled = await location.requestService();
