@@ -73,5 +73,11 @@
             "userType": {
                 "type": "String"
             }}},
-  "logout": "Logout"
+  "logout": "Logout",
+  "filters": "Filters",
+  "spoken_languages":"Spoken Languages",
+  "location" : "Location",
+  "rating": "Rating",
+  "specialities": "Specialities",
+  "apply_filtres_button": "Apply Filtres"
 }
