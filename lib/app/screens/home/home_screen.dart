@@ -1,11 +1,10 @@
-import 'dart:async';
-
 import 'package:Perso/app/screens/home/bloc/home_bloc.dart';
 import 'package:Perso/app/screens/home/event/home_event.dart';
 import 'package:Perso/app/screens/home/state/home_state.dart';
 import 'package:Perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
+import 'package:Perso/app/widgets/google_map.dart';
 import 'package:Perso/app/widgets/perso_big_header.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_clickable_text.dart';
@@ -15,14 +14,11 @@ import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:Perso/app/widgets/training_category_list/perso_training_category_list.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -32,10 +28,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<LatLng> _locations = [];
-  final Set<Marker> _markers = {};
-  bool _isLocationChecked = false;
-  GoogleMapController? mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: SizedBox(
                       height: 300.0,
                       width: double.infinity,
-                      child: _googleMap(),
+                      child: PersoGoogleMap(),
                     ),
                   ),
                   Container(
@@ -150,7 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
               child:
                   BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
                 state.when(
-                  initial: () => _navigateCameraToCurrentLocation(),
+                  initial: () {
+                    //no-op
+                  },
                   navigateToClientProfile: () =>
                       context.pushNamed(ScreenNavigationKey.clientProfile),
                   navigateToSignIn: () =>
@@ -165,75 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  GoogleMap _googleMap() {
-    CameraPosition initialCameraPosition = const CameraPosition(
-        target: LatLng(52.06923300336246, 19.479766023156003), zoom: 5.5);
-
-    int markerId = 0;
-    for (var location in _locations) {
-      _markers.add(
-          Marker(markerId: MarkerId(markerId.toString()), position: location));
-      markerId++;
-    }
-
-    return GoogleMap(
-      myLocationButtonEnabled: true,
-      myLocationEnabled: true,
-      markers: _markers,
-      gestureRecognizers: {
-        Factory<OneSequenceGestureRecognizer>(() => EagerGestureRecognizer())
-      },
-      initialCameraPosition: initialCameraPosition,
-      onMapCreated: (GoogleMapController controller) {
-        mapController = controller;
-      },
-    );
-  }
-
-  void _navigateCameraToCurrentLocation() {
-    _getCurrentLocation().then((location) {
-      double latitude = double.parse(location.latitude.toString());
-      double longitude = double.parse(location.longitude.toString());
-      if (!_isLocationChecked) {
-        setState(() {
-          _isLocationChecked = true;
-          mapController?.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(target: LatLng(latitude, longitude), zoom: 11)));
-        });
-      }
-    }).onError((error, stackTrace) {
-      //TODO: Add error handling
-      if (kDebugMode) {
-        print(error.toString());
-      }
-    });
-  }
-
-  Future<LocationData> _getCurrentLocation() async {
-    Location location = Location();
-
-    bool serviceEnabled;
-    PermissionStatus permissionGranted;
-
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
-        return Future.error("Location service is not enabled");
-      }
-    }
-
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return Future.error("Location permission not granted");
-      }
-    }
-
-    return await location.getLocation();
   }
 
   void _handleAccountClick(BuildContext context) {
