@@ -82,22 +82,24 @@ class _$SignInEventCopyWithImpl<$Res, $Val extends SignInEvent>
 }
 
 /// @nodoc
-abstract class _$$InitCopyWith<$Res> {
-  factory _$$InitCopyWith(_$Init value, $Res Function(_$Init) then) =
-      __$$InitCopyWithImpl<$Res>;
+abstract class _$$InitImplCopyWith<$Res> {
+  factory _$$InitImplCopyWith(
+          _$InitImpl value, $Res Function(_$InitImpl) then) =
+      __$$InitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitCopyWithImpl<$Res> extends _$SignInEventCopyWithImpl<$Res, _$Init>
-    implements _$$InitCopyWith<$Res> {
-  __$$InitCopyWithImpl(_$Init _value, $Res Function(_$Init) _then)
+class __$$InitImplCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res, _$InitImpl>
+    implements _$$InitImplCopyWith<$Res> {
+  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Init implements Init {
-  const _$Init();
+class _$InitImpl implements Init {
+  const _$InitImpl();
 
   @override
   String toString() {
@@ -107,7 +109,7 @@ class _$Init implements Init {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Init);
+        (other.runtimeType == runtimeType && other is _$InitImpl);
   }
 
   @override
@@ -184,22 +186,24 @@ class _$Init implements Init {
 }
 
 abstract class Init implements SignInEvent {
-  const factory Init() = _$Init;
+  const factory Init() = _$InitImpl;
 }
 
 /// @nodoc
-abstract class _$$LoginCopyWith<$Res> {
-  factory _$$LoginCopyWith(_$Login value, $Res Function(_$Login) then) =
-      __$$LoginCopyWithImpl<$Res>;
+abstract class _$$LoginImplCopyWith<$Res> {
+  factory _$$LoginImplCopyWith(
+          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
+      __$$LoginImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$LoginCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res, _$Login>
-    implements _$$LoginCopyWith<$Res> {
-  __$$LoginCopyWithImpl(_$Login _value, $Res Function(_$Login) _then)
+class __$$LoginImplCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res, _$LoginImpl>
+    implements _$$LoginImplCopyWith<$Res> {
+  __$$LoginImplCopyWithImpl(
+      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -208,7 +212,7 @@ class __$$LoginCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$Login(
+    return _then(_$LoginImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -223,8 +227,8 @@ class __$$LoginCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Login implements Login {
-  const _$Login({required this.email, required this.password});
+class _$LoginImpl implements Login {
+  const _$LoginImpl({required this.email, required this.password});
 
   @override
   final String email;
@@ -240,7 +244,7 @@ class _$Login implements Login {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Login &&
+            other is _$LoginImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -252,8 +256,8 @@ class _$Login implements Login {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginCopyWith<_$Login> get copyWith =>
-      __$$LoginCopyWithImpl<_$Login>(this, _$identity);
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -327,34 +331,37 @@ class _$Login implements Login {
 
 abstract class Login implements SignInEvent {
   const factory Login(
-      {required final String email, required final String password}) = _$Login;
+      {required final String email,
+      required final String password}) = _$LoginImpl;
 
   String get email;
   String get password;
   @JsonKey(ignore: true)
-  _$$LoginCopyWith<_$Login> get copyWith => throw _privateConstructorUsedError;
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CheckIsProfileCreatedCopyWith<$Res> {
-  factory _$$CheckIsProfileCreatedCopyWith(_$CheckIsProfileCreated value,
-          $Res Function(_$CheckIsProfileCreated) then) =
-      __$$CheckIsProfileCreatedCopyWithImpl<$Res>;
+abstract class _$$CheckIsProfileCreatedImplCopyWith<$Res> {
+  factory _$$CheckIsProfileCreatedImplCopyWith(
+          _$CheckIsProfileCreatedImpl value,
+          $Res Function(_$CheckIsProfileCreatedImpl) then) =
+      __$$CheckIsProfileCreatedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CheckIsProfileCreatedCopyWithImpl<$Res>
-    extends _$SignInEventCopyWithImpl<$Res, _$CheckIsProfileCreated>
-    implements _$$CheckIsProfileCreatedCopyWith<$Res> {
-  __$$CheckIsProfileCreatedCopyWithImpl(_$CheckIsProfileCreated _value,
-      $Res Function(_$CheckIsProfileCreated) _then)
+class __$$CheckIsProfileCreatedImplCopyWithImpl<$Res>
+    extends _$SignInEventCopyWithImpl<$Res, _$CheckIsProfileCreatedImpl>
+    implements _$$CheckIsProfileCreatedImplCopyWith<$Res> {
+  __$$CheckIsProfileCreatedImplCopyWithImpl(_$CheckIsProfileCreatedImpl _value,
+      $Res Function(_$CheckIsProfileCreatedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CheckIsProfileCreated implements CheckIsProfileCreated {
-  const _$CheckIsProfileCreated();
+class _$CheckIsProfileCreatedImpl implements CheckIsProfileCreated {
+  const _$CheckIsProfileCreatedImpl();
 
   @override
   String toString() {
@@ -364,7 +371,8 @@ class _$CheckIsProfileCreated implements CheckIsProfileCreated {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CheckIsProfileCreated);
+        (other.runtimeType == runtimeType &&
+            other is _$CheckIsProfileCreatedImpl);
   }
 
   @override
@@ -441,5 +449,5 @@ class _$CheckIsProfileCreated implements CheckIsProfileCreated {
 }
 
 abstract class CheckIsProfileCreated implements SignInEvent {
-  const factory CheckIsProfileCreated() = _$CheckIsProfileCreated;
+  const factory CheckIsProfileCreated() = _$CheckIsProfileCreatedImpl;
 }

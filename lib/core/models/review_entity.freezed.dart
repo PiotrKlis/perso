@@ -63,22 +63,22 @@ class _$ReviewEntityCopyWithImpl<$Res, $Val extends ReviewEntity>
 }
 
 /// @nodoc
-abstract class _$$_ReviewEntityCopyWith<$Res>
+abstract class _$$ReviewEntityImplCopyWith<$Res>
     implements $ReviewEntityCopyWith<$Res> {
-  factory _$$_ReviewEntityCopyWith(
-          _$_ReviewEntity value, $Res Function(_$_ReviewEntity) then) =
-      __$$_ReviewEntityCopyWithImpl<$Res>;
+  factory _$$ReviewEntityImplCopyWith(
+          _$ReviewEntityImpl value, $Res Function(_$ReviewEntityImpl) then) =
+      __$$ReviewEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({double rating, String description});
 }
 
 /// @nodoc
-class __$$_ReviewEntityCopyWithImpl<$Res>
-    extends _$ReviewEntityCopyWithImpl<$Res, _$_ReviewEntity>
-    implements _$$_ReviewEntityCopyWith<$Res> {
-  __$$_ReviewEntityCopyWithImpl(
-      _$_ReviewEntity _value, $Res Function(_$_ReviewEntity) _then)
+class __$$ReviewEntityImplCopyWithImpl<$Res>
+    extends _$ReviewEntityCopyWithImpl<$Res, _$ReviewEntityImpl>
+    implements _$$ReviewEntityImplCopyWith<$Res> {
+  __$$ReviewEntityImplCopyWithImpl(
+      _$ReviewEntityImpl _value, $Res Function(_$ReviewEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +87,7 @@ class __$$_ReviewEntityCopyWithImpl<$Res>
     Object? rating = null,
     Object? description = null,
   }) {
-    return _then(_$_ReviewEntity(
+    return _then(_$ReviewEntityImpl(
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
@@ -102,8 +102,8 @@ class __$$_ReviewEntityCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReviewEntity implements _ReviewEntity {
-  const _$_ReviewEntity({required this.rating, required this.description});
+class _$ReviewEntityImpl implements _ReviewEntity {
+  const _$ReviewEntityImpl({required this.rating, required this.description});
 
   @override
   final double rating;
@@ -119,7 +119,7 @@ class _$_ReviewEntity implements _ReviewEntity {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReviewEntity &&
+            other is _$ReviewEntityImpl &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -131,14 +131,14 @@ class _$_ReviewEntity implements _ReviewEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewEntityCopyWith<_$_ReviewEntity> get copyWith =>
-      __$$_ReviewEntityCopyWithImpl<_$_ReviewEntity>(this, _$identity);
+  _$$ReviewEntityImplCopyWith<_$ReviewEntityImpl> get copyWith =>
+      __$$ReviewEntityImplCopyWithImpl<_$ReviewEntityImpl>(this, _$identity);
 }
 
 abstract class _ReviewEntity implements ReviewEntity {
   const factory _ReviewEntity(
       {required final double rating,
-      required final String description}) = _$_ReviewEntity;
+      required final String description}) = _$ReviewEntityImpl;
 
   @override
   double get rating;
@@ -146,6 +146,6 @@ abstract class _ReviewEntity implements ReviewEntity {
   String get description;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewEntityCopyWith<_$_ReviewEntity> get copyWith =>
+  _$$ReviewEntityImplCopyWith<_$ReviewEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

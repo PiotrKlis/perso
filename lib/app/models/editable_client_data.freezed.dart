@@ -93,11 +93,11 @@ class _$EditableClientDataCopyWithImpl<$Res, $Val extends EditableClientData>
 }
 
 /// @nodoc
-abstract class _$$_EditableClientDataCopyWith<$Res>
+abstract class _$$EditableClientDataImplCopyWith<$Res>
     implements $EditableClientDataCopyWith<$Res> {
-  factory _$$_EditableClientDataCopyWith(_$_EditableClientData value,
-          $Res Function(_$_EditableClientData) then) =
-      __$$_EditableClientDataCopyWithImpl<$Res>;
+  factory _$$EditableClientDataImplCopyWith(_$EditableClientDataImpl value,
+          $Res Function(_$EditableClientDataImpl) then) =
+      __$$EditableClientDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_EditableClientDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EditableClientDataCopyWithImpl<$Res>
-    extends _$EditableClientDataCopyWithImpl<$Res, _$_EditableClientData>
-    implements _$$_EditableClientDataCopyWith<$Res> {
-  __$$_EditableClientDataCopyWithImpl(
-      _$_EditableClientData _value, $Res Function(_$_EditableClientData) _then)
+class __$$EditableClientDataImplCopyWithImpl<$Res>
+    extends _$EditableClientDataCopyWithImpl<$Res, _$EditableClientDataImpl>
+    implements _$$EditableClientDataImplCopyWith<$Res> {
+  __$$EditableClientDataImplCopyWithImpl(_$EditableClientDataImpl _value,
+      $Res Function(_$EditableClientDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_EditableClientDataCopyWithImpl<$Res>
     Object? location = null,
     Object? phoneNumber = null,
   }) {
-    return _then(_$_EditableClientData(
+    return _then(_$EditableClientDataImpl(
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_EditableClientDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EditableClientData implements _EditableClientData {
-  const _$_EditableClientData(
+class _$EditableClientDataImpl implements _EditableClientData {
+  const _$EditableClientDataImpl(
       {required this.imagePath,
       required this.name,
       required this.surname,
@@ -189,7 +189,7 @@ class _$_EditableClientData implements _EditableClientData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EditableClientData &&
+            other is _$EditableClientDataImpl &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             (identical(other.name, name) || other.name == name) &&
@@ -209,8 +209,8 @@ class _$_EditableClientData implements _EditableClientData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EditableClientDataCopyWith<_$_EditableClientData> get copyWith =>
-      __$$_EditableClientDataCopyWithImpl<_$_EditableClientData>(
+  _$$EditableClientDataImplCopyWith<_$EditableClientDataImpl> get copyWith =>
+      __$$EditableClientDataImplCopyWithImpl<_$EditableClientDataImpl>(
           this, _$identity);
 }
 
@@ -221,7 +221,7 @@ abstract class _EditableClientData implements EditableClientData {
       required final String surname,
       required final String nickname,
       required final String location,
-      required final String phoneNumber}) = _$_EditableClientData;
+      required final String phoneNumber}) = _$EditableClientDataImpl;
 
   @override
   String get imagePath;
@@ -237,6 +237,6 @@ abstract class _EditableClientData implements EditableClientData {
   String get phoneNumber;
   @override
   @JsonKey(ignore: true)
-  _$$_EditableClientDataCopyWith<_$_EditableClientData> get copyWith =>
+  _$$EditableClientDataImplCopyWith<_$EditableClientDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

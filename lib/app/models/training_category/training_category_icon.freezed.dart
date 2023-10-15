@@ -64,22 +64,22 @@ class _$TrainingCategoryIconCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TrainingCategoryIconCopyWith<$Res>
+abstract class _$$TrainingCategoryIconImplCopyWith<$Res>
     implements $TrainingCategoryIconCopyWith<$Res> {
-  factory _$$_TrainingCategoryIconCopyWith(_$_TrainingCategoryIcon value,
-          $Res Function(_$_TrainingCategoryIcon) then) =
-      __$$_TrainingCategoryIconCopyWithImpl<$Res>;
+  factory _$$TrainingCategoryIconImplCopyWith(_$TrainingCategoryIconImpl value,
+          $Res Function(_$TrainingCategoryIconImpl) then) =
+      __$$TrainingCategoryIconImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String path, Color color});
 }
 
 /// @nodoc
-class __$$_TrainingCategoryIconCopyWithImpl<$Res>
-    extends _$TrainingCategoryIconCopyWithImpl<$Res, _$_TrainingCategoryIcon>
-    implements _$$_TrainingCategoryIconCopyWith<$Res> {
-  __$$_TrainingCategoryIconCopyWithImpl(_$_TrainingCategoryIcon _value,
-      $Res Function(_$_TrainingCategoryIcon) _then)
+class __$$TrainingCategoryIconImplCopyWithImpl<$Res>
+    extends _$TrainingCategoryIconCopyWithImpl<$Res, _$TrainingCategoryIconImpl>
+    implements _$$TrainingCategoryIconImplCopyWith<$Res> {
+  __$$TrainingCategoryIconImplCopyWithImpl(_$TrainingCategoryIconImpl _value,
+      $Res Function(_$TrainingCategoryIconImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +88,7 @@ class __$$_TrainingCategoryIconCopyWithImpl<$Res>
     Object? path = null,
     Object? color = null,
   }) {
-    return _then(_$_TrainingCategoryIcon(
+    return _then(_$TrainingCategoryIconImpl(
       path: null == path
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
@@ -103,8 +103,8 @@ class __$$_TrainingCategoryIconCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
-  const _$_TrainingCategoryIcon({required this.path, required this.color});
+class _$TrainingCategoryIconImpl implements _TrainingCategoryIcon {
+  const _$TrainingCategoryIconImpl({required this.path, required this.color});
 
   @override
   final String path;
@@ -120,7 +120,7 @@ class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrainingCategoryIcon &&
+            other is _$TrainingCategoryIconImpl &&
             (identical(other.path, path) || other.path == path) &&
             (identical(other.color, color) || other.color == color));
   }
@@ -131,15 +131,16 @@ class _$_TrainingCategoryIcon implements _TrainingCategoryIcon {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrainingCategoryIconCopyWith<_$_TrainingCategoryIcon> get copyWith =>
-      __$$_TrainingCategoryIconCopyWithImpl<_$_TrainingCategoryIcon>(
-          this, _$identity);
+  _$$TrainingCategoryIconImplCopyWith<_$TrainingCategoryIconImpl>
+      get copyWith =>
+          __$$TrainingCategoryIconImplCopyWithImpl<_$TrainingCategoryIconImpl>(
+              this, _$identity);
 }
 
 abstract class _TrainingCategoryIcon implements TrainingCategoryIcon {
   const factory _TrainingCategoryIcon(
       {required final String path,
-      required final Color color}) = _$_TrainingCategoryIcon;
+      required final Color color}) = _$TrainingCategoryIconImpl;
 
   @override
   String get path;
@@ -147,6 +148,6 @@ abstract class _TrainingCategoryIcon implements TrainingCategoryIcon {
   Color get color;
   @override
   @JsonKey(ignore: true)
-  _$$_TrainingCategoryIconCopyWith<_$_TrainingCategoryIcon> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$TrainingCategoryIconImplCopyWith<_$TrainingCategoryIconImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

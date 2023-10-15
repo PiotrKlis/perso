@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'category_chips_state.dart';
+part of 'action_section_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,58 +15,58 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CategoryChipsState {
+mixin _$ActionSectionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<String> categories) content,
+    required TResult Function(bool shouldSectionBeVisible) sectionVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<String> categories)? content,
+    TResult? Function(bool shouldSectionBeVisible)? sectionVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<String> categories)? content,
+    TResult Function(bool shouldSectionBeVisible)? sectionVisibility,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
+    required TResult Function(SectionVisibility value) sectionVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
+    TResult? Function(SectionVisibility value)? sectionVisibility,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
+    TResult Function(SectionVisibility value)? sectionVisibility,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CategoryChipsStateCopyWith<$Res> {
-  factory $CategoryChipsStateCopyWith(
-          CategoryChipsState value, $Res Function(CategoryChipsState) then) =
-      _$CategoryChipsStateCopyWithImpl<$Res, CategoryChipsState>;
+abstract class $ActionSectionStateCopyWith<$Res> {
+  factory $ActionSectionStateCopyWith(
+          ActionSectionState value, $Res Function(ActionSectionState) then) =
+      _$ActionSectionStateCopyWithImpl<$Res, ActionSectionState>;
 }
 
 /// @nodoc
-class _$CategoryChipsStateCopyWithImpl<$Res, $Val extends CategoryChipsState>
-    implements $CategoryChipsStateCopyWith<$Res> {
-  _$CategoryChipsStateCopyWithImpl(this._value, this._then);
+class _$ActionSectionStateCopyWithImpl<$Res, $Val extends ActionSectionState>
+    implements $ActionSectionStateCopyWith<$Res> {
+  _$ActionSectionStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -83,7 +83,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$CategoryChipsStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ActionSectionStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -97,7 +97,7 @@ class _$InitialImpl implements Initial {
 
   @override
   String toString() {
-    return 'CategoryChipsState.initial()';
+    return 'ActionSectionState.initial()';
   }
 
   @override
@@ -113,7 +113,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<String> categories) content,
+    required TResult Function(bool shouldSectionBeVisible) sectionVisibility,
   }) {
     return initial();
   }
@@ -122,7 +122,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<String> categories)? content,
+    TResult? Function(bool shouldSectionBeVisible)? sectionVisibility,
   }) {
     return initial?.call();
   }
@@ -131,7 +131,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<String> categories)? content,
+    TResult Function(bool shouldSectionBeVisible)? sectionVisibility,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -144,7 +144,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
+    required TResult Function(SectionVisibility value) sectionVisibility,
   }) {
     return initial(this);
   }
@@ -153,7 +153,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
+    TResult? Function(SectionVisibility value)? sectionVisibility,
   }) {
     return initial?.call(this);
   }
@@ -162,7 +162,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
+    TResult Function(SectionVisibility value)? sectionVisibility,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -172,105 +172,100 @@ class _$InitialImpl implements Initial {
   }
 }
 
-abstract class Initial implements CategoryChipsState {
+abstract class Initial implements ActionSectionState {
   const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$ContentImplCopyWith<$Res> {
-  factory _$$ContentImplCopyWith(
-          _$ContentImpl value, $Res Function(_$ContentImpl) then) =
-      __$$ContentImplCopyWithImpl<$Res>;
+abstract class _$$SectionVisibilityImplCopyWith<$Res> {
+  factory _$$SectionVisibilityImplCopyWith(_$SectionVisibilityImpl value,
+          $Res Function(_$SectionVisibilityImpl) then) =
+      __$$SectionVisibilityImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> categories});
+  $Res call({bool shouldSectionBeVisible});
 }
 
 /// @nodoc
-class __$$ContentImplCopyWithImpl<$Res>
-    extends _$CategoryChipsStateCopyWithImpl<$Res, _$ContentImpl>
-    implements _$$ContentImplCopyWith<$Res> {
-  __$$ContentImplCopyWithImpl(
-      _$ContentImpl _value, $Res Function(_$ContentImpl) _then)
+class __$$SectionVisibilityImplCopyWithImpl<$Res>
+    extends _$ActionSectionStateCopyWithImpl<$Res, _$SectionVisibilityImpl>
+    implements _$$SectionVisibilityImplCopyWith<$Res> {
+  __$$SectionVisibilityImplCopyWithImpl(_$SectionVisibilityImpl _value,
+      $Res Function(_$SectionVisibilityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? categories = null,
+    Object? shouldSectionBeVisible = null,
   }) {
-    return _then(_$ContentImpl(
-      null == categories
-          ? _value._categories
-          : categories // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+    return _then(_$SectionVisibilityImpl(
+      null == shouldSectionBeVisible
+          ? _value.shouldSectionBeVisible
+          : shouldSectionBeVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ContentImpl implements Content {
-  const _$ContentImpl(final List<String> categories) : _categories = categories;
+class _$SectionVisibilityImpl implements SectionVisibility {
+  const _$SectionVisibilityImpl(this.shouldSectionBeVisible);
 
-  final List<String> _categories;
   @override
-  List<String> get categories {
-    if (_categories is EqualUnmodifiableListView) return _categories;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
-  }
+  final bool shouldSectionBeVisible;
 
   @override
   String toString() {
-    return 'CategoryChipsState.content(categories: $categories)';
+    return 'ActionSectionState.sectionVisibility(shouldSectionBeVisible: $shouldSectionBeVisible)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ContentImpl &&
-            const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+            other is _$SectionVisibilityImpl &&
+            (identical(other.shouldSectionBeVisible, shouldSectionBeVisible) ||
+                other.shouldSectionBeVisible == shouldSectionBeVisible));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_categories));
+  int get hashCode => Object.hash(runtimeType, shouldSectionBeVisible);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
-      __$$ContentImplCopyWithImpl<_$ContentImpl>(this, _$identity);
+  _$$SectionVisibilityImplCopyWith<_$SectionVisibilityImpl> get copyWith =>
+      __$$SectionVisibilityImplCopyWithImpl<_$SectionVisibilityImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<String> categories) content,
+    required TResult Function(bool shouldSectionBeVisible) sectionVisibility,
   }) {
-    return content(categories);
+    return sectionVisibility(shouldSectionBeVisible);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<String> categories)? content,
+    TResult? Function(bool shouldSectionBeVisible)? sectionVisibility,
   }) {
-    return content?.call(categories);
+    return sectionVisibility?.call(shouldSectionBeVisible);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<String> categories)? content,
+    TResult Function(bool shouldSectionBeVisible)? sectionVisibility,
     required TResult orElse(),
   }) {
-    if (content != null) {
-      return content(categories);
+    if (sectionVisibility != null) {
+      return sectionVisibility(shouldSectionBeVisible);
     }
     return orElse();
   }
@@ -279,39 +274,40 @@ class _$ContentImpl implements Content {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(Content value) content,
+    required TResult Function(SectionVisibility value) sectionVisibility,
   }) {
-    return content(this);
+    return sectionVisibility(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(Content value)? content,
+    TResult? Function(SectionVisibility value)? sectionVisibility,
   }) {
-    return content?.call(this);
+    return sectionVisibility?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(Content value)? content,
+    TResult Function(SectionVisibility value)? sectionVisibility,
     required TResult orElse(),
   }) {
-    if (content != null) {
-      return content(this);
+    if (sectionVisibility != null) {
+      return sectionVisibility(this);
     }
     return orElse();
   }
 }
 
-abstract class Content implements CategoryChipsState {
-  const factory Content(final List<String> categories) = _$ContentImpl;
+abstract class SectionVisibility implements ActionSectionState {
+  const factory SectionVisibility(final bool shouldSectionBeVisible) =
+      _$SectionVisibilityImpl;
 
-  List<String> get categories;
+  bool get shouldSectionBeVisible;
   @JsonKey(ignore: true)
-  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
+  _$$SectionVisibilityImplCopyWith<_$SectionVisibilityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

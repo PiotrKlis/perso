@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'empty_state.dart';
+part of 'action_section_event.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,52 +15,53 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$EmptyState {
+mixin _$ActionSectionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() shouldSectionBeVisible,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? shouldSectionBeVisible,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? shouldSectionBeVisible,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(ShouldSectionBeVisible value)
+        shouldSectionBeVisible,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(ShouldSectionBeVisible value)? shouldSectionBeVisible,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(ShouldSectionBeVisible value)? shouldSectionBeVisible,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $EmptyStateCopyWith<$Res> {
-  factory $EmptyStateCopyWith(
-          EmptyState value, $Res Function(EmptyState) then) =
-      _$EmptyStateCopyWithImpl<$Res, EmptyState>;
+abstract class $ActionSectionEventCopyWith<$Res> {
+  factory $ActionSectionEventCopyWith(
+          ActionSectionEvent value, $Res Function(ActionSectionEvent) then) =
+      _$ActionSectionEventCopyWithImpl<$Res, ActionSectionEvent>;
 }
 
 /// @nodoc
-class _$EmptyStateCopyWithImpl<$Res, $Val extends EmptyState>
-    implements $EmptyStateCopyWith<$Res> {
-  _$EmptyStateCopyWithImpl(this._value, this._then);
+class _$ActionSectionEventCopyWithImpl<$Res, $Val extends ActionSectionEvent>
+    implements $ActionSectionEventCopyWith<$Res> {
+  _$ActionSectionEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -69,35 +70,38 @@ class _$EmptyStateCopyWithImpl<$Res, $Val extends EmptyState>
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+abstract class _$$ShouldSectionBeVisibleImplCopyWith<$Res> {
+  factory _$$ShouldSectionBeVisibleImplCopyWith(
+          _$ShouldSectionBeVisibleImpl value,
+          $Res Function(_$ShouldSectionBeVisibleImpl) then) =
+      __$$ShouldSectionBeVisibleImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$EmptyStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+class __$$ShouldSectionBeVisibleImplCopyWithImpl<$Res>
+    extends _$ActionSectionEventCopyWithImpl<$Res, _$ShouldSectionBeVisibleImpl>
+    implements _$$ShouldSectionBeVisibleImplCopyWith<$Res> {
+  __$$ShouldSectionBeVisibleImplCopyWithImpl(
+      _$ShouldSectionBeVisibleImpl _value,
+      $Res Function(_$ShouldSectionBeVisibleImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$InitialImpl implements Initial {
-  const _$InitialImpl();
+class _$ShouldSectionBeVisibleImpl implements ShouldSectionBeVisible {
+  const _$ShouldSectionBeVisibleImpl();
 
   @override
   String toString() {
-    return 'EmptyState.initial()';
+    return 'ActionSectionEvent.shouldSectionBeVisible()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ShouldSectionBeVisibleImpl);
   }
 
   @override
@@ -106,27 +110,27 @@ class _$InitialImpl implements Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() shouldSectionBeVisible,
   }) {
-    return initial();
+    return shouldSectionBeVisible();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? shouldSectionBeVisible,
   }) {
-    return initial?.call();
+    return shouldSectionBeVisible?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? shouldSectionBeVisible,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (shouldSectionBeVisible != null) {
+      return shouldSectionBeVisible();
     }
     return orElse();
   }
@@ -134,32 +138,33 @@ class _$InitialImpl implements Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(ShouldSectionBeVisible value)
+        shouldSectionBeVisible,
   }) {
-    return initial(this);
+    return shouldSectionBeVisible(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(ShouldSectionBeVisible value)? shouldSectionBeVisible,
   }) {
-    return initial?.call(this);
+    return shouldSectionBeVisible?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(ShouldSectionBeVisible value)? shouldSectionBeVisible,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (shouldSectionBeVisible != null) {
+      return shouldSectionBeVisible(this);
     }
     return orElse();
   }
 }
 
-abstract class Initial implements EmptyState {
-  const factory Initial() = _$InitialImpl;
+abstract class ShouldSectionBeVisible implements ActionSectionEvent {
+  const factory ShouldSectionBeVisible() = _$ShouldSectionBeVisibleImpl;
 }

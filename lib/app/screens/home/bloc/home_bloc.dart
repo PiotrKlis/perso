@@ -9,10 +9,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   HomeBloc() : super(const HomeState.initial()) {
-    on<Init>((state, emit) async {
-      //no-op
-    });
-
     on<AccountNavigation>((state, emit) async {
       bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
       if (isUserLoggedIn) {

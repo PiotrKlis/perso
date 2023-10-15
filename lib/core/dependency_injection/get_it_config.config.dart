@@ -25,8 +25,7 @@ import 'package:Perso/data/training_categories/local_training_category_repositor
     as _i9;
 import 'package:Perso/data/training_request/training_request_service.dart'
     as _i12;
-import 'package:Perso/data/user_info/user_info_provider.dart'
-    as _i13; // ignore_for_file: unnecessary_lambdas
+import 'package:Perso/data/user_info/user_info_provider.dart' as _i13;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt

@@ -88,23 +88,25 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -114,7 +116,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -198,29 +200,29 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements HomeState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$NavigateToSignInCopyWith<$Res> {
-  factory _$$NavigateToSignInCopyWith(
-          _$NavigateToSignIn value, $Res Function(_$NavigateToSignIn) then) =
-      __$$NavigateToSignInCopyWithImpl<$Res>;
+abstract class _$$NavigateToSignInImplCopyWith<$Res> {
+  factory _$$NavigateToSignInImplCopyWith(_$NavigateToSignInImpl value,
+          $Res Function(_$NavigateToSignInImpl) then) =
+      __$$NavigateToSignInImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NavigateToSignInCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$NavigateToSignIn>
-    implements _$$NavigateToSignInCopyWith<$Res> {
-  __$$NavigateToSignInCopyWithImpl(
-      _$NavigateToSignIn _value, $Res Function(_$NavigateToSignIn) _then)
+class __$$NavigateToSignInImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$NavigateToSignInImpl>
+    implements _$$NavigateToSignInImplCopyWith<$Res> {
+  __$$NavigateToSignInImplCopyWithImpl(_$NavigateToSignInImpl _value,
+      $Res Function(_$NavigateToSignInImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NavigateToSignIn implements NavigateToSignIn {
-  const _$NavigateToSignIn();
+class _$NavigateToSignInImpl implements NavigateToSignIn {
+  const _$NavigateToSignInImpl();
 
   @override
   String toString() {
@@ -230,7 +232,7 @@ class _$NavigateToSignIn implements NavigateToSignIn {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NavigateToSignIn);
+        (other.runtimeType == runtimeType && other is _$NavigateToSignInImpl);
   }
 
   @override
@@ -314,29 +316,31 @@ class _$NavigateToSignIn implements NavigateToSignIn {
 }
 
 abstract class NavigateToSignIn implements HomeState {
-  const factory NavigateToSignIn() = _$NavigateToSignIn;
+  const factory NavigateToSignIn() = _$NavigateToSignInImpl;
 }
 
 /// @nodoc
-abstract class _$$NavigateToClientProfileCopyWith<$Res> {
-  factory _$$NavigateToClientProfileCopyWith(_$NavigateToClientProfile value,
-          $Res Function(_$NavigateToClientProfile) then) =
-      __$$NavigateToClientProfileCopyWithImpl<$Res>;
+abstract class _$$NavigateToClientProfileImplCopyWith<$Res> {
+  factory _$$NavigateToClientProfileImplCopyWith(
+          _$NavigateToClientProfileImpl value,
+          $Res Function(_$NavigateToClientProfileImpl) then) =
+      __$$NavigateToClientProfileImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NavigateToClientProfileCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$NavigateToClientProfile>
-    implements _$$NavigateToClientProfileCopyWith<$Res> {
-  __$$NavigateToClientProfileCopyWithImpl(_$NavigateToClientProfile _value,
-      $Res Function(_$NavigateToClientProfile) _then)
+class __$$NavigateToClientProfileImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$NavigateToClientProfileImpl>
+    implements _$$NavigateToClientProfileImplCopyWith<$Res> {
+  __$$NavigateToClientProfileImplCopyWithImpl(
+      _$NavigateToClientProfileImpl _value,
+      $Res Function(_$NavigateToClientProfileImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NavigateToClientProfile implements NavigateToClientProfile {
-  const _$NavigateToClientProfile();
+class _$NavigateToClientProfileImpl implements NavigateToClientProfile {
+  const _$NavigateToClientProfileImpl();
 
   @override
   String toString() {
@@ -347,7 +351,7 @@ class _$NavigateToClientProfile implements NavigateToClientProfile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NavigateToClientProfile);
+            other is _$NavigateToClientProfileImpl);
   }
 
   @override
@@ -431,29 +435,31 @@ class _$NavigateToClientProfile implements NavigateToClientProfile {
 }
 
 abstract class NavigateToClientProfile implements HomeState {
-  const factory NavigateToClientProfile() = _$NavigateToClientProfile;
+  const factory NavigateToClientProfile() = _$NavigateToClientProfileImpl;
 }
 
 /// @nodoc
-abstract class _$$NaviagteToTrainerProfileCopyWith<$Res> {
-  factory _$$NaviagteToTrainerProfileCopyWith(_$NaviagteToTrainerProfile value,
-          $Res Function(_$NaviagteToTrainerProfile) then) =
-      __$$NaviagteToTrainerProfileCopyWithImpl<$Res>;
+abstract class _$$NaviagteToTrainerProfileImplCopyWith<$Res> {
+  factory _$$NaviagteToTrainerProfileImplCopyWith(
+          _$NaviagteToTrainerProfileImpl value,
+          $Res Function(_$NaviagteToTrainerProfileImpl) then) =
+      __$$NaviagteToTrainerProfileImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NaviagteToTrainerProfileCopyWithImpl<$Res>
-    extends _$HomeStateCopyWithImpl<$Res, _$NaviagteToTrainerProfile>
-    implements _$$NaviagteToTrainerProfileCopyWith<$Res> {
-  __$$NaviagteToTrainerProfileCopyWithImpl(_$NaviagteToTrainerProfile _value,
-      $Res Function(_$NaviagteToTrainerProfile) _then)
+class __$$NaviagteToTrainerProfileImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$NaviagteToTrainerProfileImpl>
+    implements _$$NaviagteToTrainerProfileImplCopyWith<$Res> {
+  __$$NaviagteToTrainerProfileImplCopyWithImpl(
+      _$NaviagteToTrainerProfileImpl _value,
+      $Res Function(_$NaviagteToTrainerProfileImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NaviagteToTrainerProfile implements NaviagteToTrainerProfile {
-  const _$NaviagteToTrainerProfile();
+class _$NaviagteToTrainerProfileImpl implements NaviagteToTrainerProfile {
+  const _$NaviagteToTrainerProfileImpl();
 
   @override
   String toString() {
@@ -464,7 +470,7 @@ class _$NaviagteToTrainerProfile implements NaviagteToTrainerProfile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NaviagteToTrainerProfile);
+            other is _$NaviagteToTrainerProfileImpl);
   }
 
   @override
@@ -548,5 +554,5 @@ class _$NaviagteToTrainerProfile implements NaviagteToTrainerProfile {
 }
 
 abstract class NaviagteToTrainerProfile implements HomeState {
-  const factory NaviagteToTrainerProfile() = _$NaviagteToTrainerProfile;
+  const factory NaviagteToTrainerProfile() = _$NaviagteToTrainerProfileImpl;
 }

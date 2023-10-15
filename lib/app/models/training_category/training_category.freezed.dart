@@ -75,11 +75,11 @@ class _$TrainingCategoryCopyWithImpl<$Res, $Val extends TrainingCategory>
 }
 
 /// @nodoc
-abstract class _$$_TrainingCategoryCopyWith<$Res>
+abstract class _$$TrainingCategoryImplCopyWith<$Res>
     implements $TrainingCategoryCopyWith<$Res> {
-  factory _$$_TrainingCategoryCopyWith(
-          _$_TrainingCategory value, $Res Function(_$_TrainingCategory) then) =
-      __$$_TrainingCategoryCopyWithImpl<$Res>;
+  factory _$$TrainingCategoryImplCopyWith(_$TrainingCategoryImpl value,
+          $Res Function(_$TrainingCategoryImpl) then) =
+      __$$TrainingCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({TrainingCategoryIcon trainingCategoryIcon, String name});
@@ -89,11 +89,11 @@ abstract class _$$_TrainingCategoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TrainingCategoryCopyWithImpl<$Res>
-    extends _$TrainingCategoryCopyWithImpl<$Res, _$_TrainingCategory>
-    implements _$$_TrainingCategoryCopyWith<$Res> {
-  __$$_TrainingCategoryCopyWithImpl(
-      _$_TrainingCategory _value, $Res Function(_$_TrainingCategory) _then)
+class __$$TrainingCategoryImplCopyWithImpl<$Res>
+    extends _$TrainingCategoryCopyWithImpl<$Res, _$TrainingCategoryImpl>
+    implements _$$TrainingCategoryImplCopyWith<$Res> {
+  __$$TrainingCategoryImplCopyWithImpl(_$TrainingCategoryImpl _value,
+      $Res Function(_$TrainingCategoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +102,7 @@ class __$$_TrainingCategoryCopyWithImpl<$Res>
     Object? trainingCategoryIcon = null,
     Object? name = null,
   }) {
-    return _then(_$_TrainingCategory(
+    return _then(_$TrainingCategoryImpl(
       trainingCategoryIcon: null == trainingCategoryIcon
           ? _value.trainingCategoryIcon
           : trainingCategoryIcon // ignore: cast_nullable_to_non_nullable
@@ -117,8 +117,8 @@ class __$$_TrainingCategoryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TrainingCategory implements _TrainingCategory {
-  const _$_TrainingCategory(
+class _$TrainingCategoryImpl implements _TrainingCategory {
+  const _$TrainingCategoryImpl(
       {required this.trainingCategoryIcon, required this.name});
 
   @override
@@ -135,7 +135,7 @@ class _$_TrainingCategory implements _TrainingCategory {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrainingCategory &&
+            other is _$TrainingCategoryImpl &&
             (identical(other.trainingCategoryIcon, trainingCategoryIcon) ||
                 other.trainingCategoryIcon == trainingCategoryIcon) &&
             (identical(other.name, name) || other.name == name));
@@ -147,14 +147,15 @@ class _$_TrainingCategory implements _TrainingCategory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrainingCategoryCopyWith<_$_TrainingCategory> get copyWith =>
-      __$$_TrainingCategoryCopyWithImpl<_$_TrainingCategory>(this, _$identity);
+  _$$TrainingCategoryImplCopyWith<_$TrainingCategoryImpl> get copyWith =>
+      __$$TrainingCategoryImplCopyWithImpl<_$TrainingCategoryImpl>(
+          this, _$identity);
 }
 
 abstract class _TrainingCategory implements TrainingCategory {
   const factory _TrainingCategory(
       {required final TrainingCategoryIcon trainingCategoryIcon,
-      required final String name}) = _$_TrainingCategory;
+      required final String name}) = _$TrainingCategoryImpl;
 
   @override
   TrainingCategoryIcon get trainingCategoryIcon;
@@ -162,6 +163,6 @@ abstract class _TrainingCategory implements TrainingCategory {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_TrainingCategoryCopyWith<_$_TrainingCategory> get copyWith =>
+  _$$TrainingCategoryImplCopyWith<_$TrainingCategoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

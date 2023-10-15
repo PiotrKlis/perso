@@ -69,24 +69,25 @@ class _$EmptyEventCopyWithImpl<$Res, $Val extends EmptyEvent>
 }
 
 /// @nodoc
-abstract class _$$LoadDataCopyWith<$Res> {
-  factory _$$LoadDataCopyWith(
-          _$LoadData value, $Res Function(_$LoadData) then) =
-      __$$LoadDataCopyWithImpl<$Res>;
+abstract class _$$LoadDataImplCopyWith<$Res> {
+  factory _$$LoadDataImplCopyWith(
+          _$LoadDataImpl value, $Res Function(_$LoadDataImpl) then) =
+      __$$LoadDataImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadDataCopyWithImpl<$Res>
-    extends _$EmptyEventCopyWithImpl<$Res, _$LoadData>
-    implements _$$LoadDataCopyWith<$Res> {
-  __$$LoadDataCopyWithImpl(_$LoadData _value, $Res Function(_$LoadData) _then)
+class __$$LoadDataImplCopyWithImpl<$Res>
+    extends _$EmptyEventCopyWithImpl<$Res, _$LoadDataImpl>
+    implements _$$LoadDataImplCopyWith<$Res> {
+  __$$LoadDataImplCopyWithImpl(
+      _$LoadDataImpl _value, $Res Function(_$LoadDataImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadData implements LoadData {
-  const _$LoadData();
+class _$LoadDataImpl implements LoadData {
+  const _$LoadDataImpl();
 
   @override
   String toString() {
@@ -96,7 +97,7 @@ class _$LoadData implements LoadData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadData);
+        (other.runtimeType == runtimeType && other is _$LoadDataImpl);
   }
 
   @override
@@ -160,5 +161,5 @@ class _$LoadData implements LoadData {
 }
 
 abstract class LoadData implements EmptyEvent {
-  const factory LoadData() = _$LoadData;
+  const factory LoadData() = _$LoadDataImpl;
 }

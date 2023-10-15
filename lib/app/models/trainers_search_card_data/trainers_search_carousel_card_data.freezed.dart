@@ -78,25 +78,25 @@ class _$TrainersSearchCarouselCardDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TrainersSearchCarouselCardDataCopyWith<$Res>
+abstract class _$$TrainersSearchCarouselCardDataImplCopyWith<$Res>
     implements $TrainersSearchCarouselCardDataCopyWith<$Res> {
-  factory _$$_TrainersSearchCarouselCardDataCopyWith(
-          _$_TrainersSearchCarouselCardData value,
-          $Res Function(_$_TrainersSearchCarouselCardData) then) =
-      __$$_TrainersSearchCarouselCardDataCopyWithImpl<$Res>;
+  factory _$$TrainersSearchCarouselCardDataImplCopyWith(
+          _$TrainersSearchCarouselCardDataImpl value,
+          $Res Function(_$TrainersSearchCarouselCardDataImpl) then) =
+      __$$TrainersSearchCarouselCardDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String image, String categoryName, String title, String subtitle});
 }
 
 /// @nodoc
-class __$$_TrainersSearchCarouselCardDataCopyWithImpl<$Res>
+class __$$TrainersSearchCarouselCardDataImplCopyWithImpl<$Res>
     extends _$TrainersSearchCarouselCardDataCopyWithImpl<$Res,
-        _$_TrainersSearchCarouselCardData>
-    implements _$$_TrainersSearchCarouselCardDataCopyWith<$Res> {
-  __$$_TrainersSearchCarouselCardDataCopyWithImpl(
-      _$_TrainersSearchCarouselCardData _value,
-      $Res Function(_$_TrainersSearchCarouselCardData) _then)
+        _$TrainersSearchCarouselCardDataImpl>
+    implements _$$TrainersSearchCarouselCardDataImplCopyWith<$Res> {
+  __$$TrainersSearchCarouselCardDataImplCopyWithImpl(
+      _$TrainersSearchCarouselCardDataImpl _value,
+      $Res Function(_$TrainersSearchCarouselCardDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +107,7 @@ class __$$_TrainersSearchCarouselCardDataCopyWithImpl<$Res>
     Object? title = null,
     Object? subtitle = null,
   }) {
-    return _then(_$_TrainersSearchCarouselCardData(
+    return _then(_$TrainersSearchCarouselCardDataImpl(
       image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -130,9 +130,9 @@ class __$$_TrainersSearchCarouselCardDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TrainersSearchCarouselCardData
+class _$TrainersSearchCarouselCardDataImpl
     implements _TrainersSearchCarouselCardData {
-  const _$_TrainersSearchCarouselCardData(
+  const _$TrainersSearchCarouselCardDataImpl(
       {required this.image,
       required this.categoryName,
       required this.title,
@@ -156,7 +156,7 @@ class _$_TrainersSearchCarouselCardData
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TrainersSearchCarouselCardData &&
+            other is _$TrainersSearchCarouselCardDataImpl &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.categoryName, categoryName) ||
                 other.categoryName == categoryName) &&
@@ -172,9 +172,10 @@ class _$_TrainersSearchCarouselCardData
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TrainersSearchCarouselCardDataCopyWith<_$_TrainersSearchCarouselCardData>
-      get copyWith => __$$_TrainersSearchCarouselCardDataCopyWithImpl<
-          _$_TrainersSearchCarouselCardData>(this, _$identity);
+  _$$TrainersSearchCarouselCardDataImplCopyWith<
+          _$TrainersSearchCarouselCardDataImpl>
+      get copyWith => __$$TrainersSearchCarouselCardDataImplCopyWithImpl<
+          _$TrainersSearchCarouselCardDataImpl>(this, _$identity);
 }
 
 abstract class _TrainersSearchCarouselCardData
@@ -183,7 +184,7 @@ abstract class _TrainersSearchCarouselCardData
       {required final String image,
       required final String categoryName,
       required final String title,
-      required final String subtitle}) = _$_TrainersSearchCarouselCardData;
+      required final String subtitle}) = _$TrainersSearchCarouselCardDataImpl;
 
   @override
   String get image;
@@ -195,6 +196,7 @@ abstract class _TrainersSearchCarouselCardData
   String get subtitle;
   @override
   @JsonKey(ignore: true)
-  _$$_TrainersSearchCarouselCardDataCopyWith<_$_TrainersSearchCarouselCardData>
+  _$$TrainersSearchCarouselCardDataImplCopyWith<
+          _$TrainersSearchCarouselCardDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

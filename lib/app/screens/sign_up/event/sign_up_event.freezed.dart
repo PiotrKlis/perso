@@ -75,22 +75,24 @@ class _$SignUpEventCopyWithImpl<$Res, $Val extends SignUpEvent>
 }
 
 /// @nodoc
-abstract class _$$InitCopyWith<$Res> {
-  factory _$$InitCopyWith(_$Init value, $Res Function(_$Init) then) =
-      __$$InitCopyWithImpl<$Res>;
+abstract class _$$InitImplCopyWith<$Res> {
+  factory _$$InitImplCopyWith(
+          _$InitImpl value, $Res Function(_$InitImpl) then) =
+      __$$InitImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitCopyWithImpl<$Res> extends _$SignUpEventCopyWithImpl<$Res, _$Init>
-    implements _$$InitCopyWith<$Res> {
-  __$$InitCopyWithImpl(_$Init _value, $Res Function(_$Init) _then)
+class __$$InitImplCopyWithImpl<$Res>
+    extends _$SignUpEventCopyWithImpl<$Res, _$InitImpl>
+    implements _$$InitImplCopyWith<$Res> {
+  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Init implements Init {
-  const _$Init();
+class _$InitImpl implements Init {
+  const _$InitImpl();
 
   @override
   String toString() {
@@ -100,7 +102,7 @@ class _$Init implements Init {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Init);
+        (other.runtimeType == runtimeType && other is _$InitImpl);
   }
 
   @override
@@ -170,23 +172,24 @@ class _$Init implements Init {
 }
 
 abstract class Init implements SignUpEvent {
-  const factory Init() = _$Init;
+  const factory Init() = _$InitImpl;
 }
 
 /// @nodoc
-abstract class _$$RegisterCopyWith<$Res> {
-  factory _$$RegisterCopyWith(
-          _$Register value, $Res Function(_$Register) then) =
-      __$$RegisterCopyWithImpl<$Res>;
+abstract class _$$RegisterImplCopyWith<$Res> {
+  factory _$$RegisterImplCopyWith(
+          _$RegisterImpl value, $Res Function(_$RegisterImpl) then) =
+      __$$RegisterImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String email, String password});
 }
 
 /// @nodoc
-class __$$RegisterCopyWithImpl<$Res>
-    extends _$SignUpEventCopyWithImpl<$Res, _$Register>
-    implements _$$RegisterCopyWith<$Res> {
-  __$$RegisterCopyWithImpl(_$Register _value, $Res Function(_$Register) _then)
+class __$$RegisterImplCopyWithImpl<$Res>
+    extends _$SignUpEventCopyWithImpl<$Res, _$RegisterImpl>
+    implements _$$RegisterImplCopyWith<$Res> {
+  __$$RegisterImplCopyWithImpl(
+      _$RegisterImpl _value, $Res Function(_$RegisterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -195,7 +198,7 @@ class __$$RegisterCopyWithImpl<$Res>
     Object? email = null,
     Object? password = null,
   }) {
-    return _then(_$Register(
+    return _then(_$RegisterImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -210,8 +213,8 @@ class __$$RegisterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Register implements Register {
-  const _$Register({required this.email, required this.password});
+class _$RegisterImpl implements Register {
+  const _$RegisterImpl({required this.email, required this.password});
 
   @override
   final String email;
@@ -227,7 +230,7 @@ class _$Register implements Register {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Register &&
+            other is _$RegisterImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
                 other.password == password));
@@ -239,8 +242,8 @@ class _$Register implements Register {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RegisterCopyWith<_$Register> get copyWith =>
-      __$$RegisterCopyWithImpl<_$Register>(this, _$identity);
+  _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
+      __$$RegisterImplCopyWithImpl<_$RegisterImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -308,11 +311,11 @@ class _$Register implements Register {
 abstract class Register implements SignUpEvent {
   const factory Register(
       {required final String email,
-      required final String password}) = _$Register;
+      required final String password}) = _$RegisterImpl;
 
   String get email;
   String get password;
   @JsonKey(ignore: true)
-  _$$RegisterCopyWith<_$Register> get copyWith =>
+  _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

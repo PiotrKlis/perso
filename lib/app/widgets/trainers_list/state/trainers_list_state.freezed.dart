@@ -19,21 +19,21 @@ mixin _$TrainersListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerShortData> trainers) content,
+    required TResult Function(List<TrainerEntity> trainers) content,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerShortData> trainers)? content,
+    TResult? Function(List<TrainerEntity> trainers)? content,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerShortData> trainers)? content,
+    TResult Function(List<TrainerEntity> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -81,23 +81,25 @@ class _$TrainersListStateCopyWithImpl<$Res, $Val extends TrainersListState>
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$TrainersListStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$TrainersListStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -107,7 +109,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -117,7 +119,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerShortData> trainers) content,
+    required TResult Function(List<TrainerEntity> trainers) content,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -127,7 +129,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerShortData> trainers)? content,
+    TResult? Function(List<TrainerEntity> trainers)? content,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -137,7 +139,7 @@ class _$Initial implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerShortData> trainers)? content,
+    TResult Function(List<TrainerEntity> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -183,22 +185,24 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements TrainersListState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$ContentCopyWith<$Res> {
-  factory _$$ContentCopyWith(_$Content value, $Res Function(_$Content) then) =
-      __$$ContentCopyWithImpl<$Res>;
+abstract class _$$ContentImplCopyWith<$Res> {
+  factory _$$ContentImplCopyWith(
+          _$ContentImpl value, $Res Function(_$ContentImpl) then) =
+      __$$ContentImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TrainerShortData> trainers});
+  $Res call({List<TrainerEntity> trainers});
 }
 
 /// @nodoc
-class __$$ContentCopyWithImpl<$Res>
-    extends _$TrainersListStateCopyWithImpl<$Res, _$Content>
-    implements _$$ContentCopyWith<$Res> {
-  __$$ContentCopyWithImpl(_$Content _value, $Res Function(_$Content) _then)
+class __$$ContentImplCopyWithImpl<$Res>
+    extends _$TrainersListStateCopyWithImpl<$Res, _$ContentImpl>
+    implements _$$ContentImplCopyWith<$Res> {
+  __$$ContentImplCopyWithImpl(
+      _$ContentImpl _value, $Res Function(_$ContentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -206,24 +210,24 @@ class __$$ContentCopyWithImpl<$Res>
   $Res call({
     Object? trainers = null,
   }) {
-    return _then(_$Content(
+    return _then(_$ContentImpl(
       trainers: null == trainers
           ? _value._trainers
           : trainers // ignore: cast_nullable_to_non_nullable
-              as List<TrainerShortData>,
+              as List<TrainerEntity>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$Content implements Content {
-  const _$Content({required final List<TrainerShortData> trainers})
+class _$ContentImpl implements Content {
+  const _$ContentImpl({required final List<TrainerEntity> trainers})
       : _trainers = trainers;
 
-  final List<TrainerShortData> _trainers;
+  final List<TrainerEntity> _trainers;
   @override
-  List<TrainerShortData> get trainers {
+  List<TrainerEntity> get trainers {
     if (_trainers is EqualUnmodifiableListView) return _trainers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_trainers);
@@ -238,7 +242,7 @@ class _$Content implements Content {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Content &&
+            other is _$ContentImpl &&
             const DeepCollectionEquality().equals(other._trainers, _trainers));
   }
 
@@ -249,14 +253,14 @@ class _$Content implements Content {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContentCopyWith<_$Content> get copyWith =>
-      __$$ContentCopyWithImpl<_$Content>(this, _$identity);
+  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
+      __$$ContentImplCopyWithImpl<_$ContentImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerShortData> trainers) content,
+    required TResult Function(List<TrainerEntity> trainers) content,
     required TResult Function(String error) error,
   }) {
     return content(trainers);
@@ -266,7 +270,7 @@ class _$Content implements Content {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerShortData> trainers)? content,
+    TResult? Function(List<TrainerEntity> trainers)? content,
     TResult? Function(String error)? error,
   }) {
     return content?.call(trainers);
@@ -276,7 +280,7 @@ class _$Content implements Content {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerShortData> trainers)? content,
+    TResult Function(List<TrainerEntity> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -322,28 +326,30 @@ class _$Content implements Content {
 }
 
 abstract class Content implements TrainersListState {
-  const factory Content({required final List<TrainerShortData> trainers}) =
-      _$Content;
+  const factory Content({required final List<TrainerEntity> trainers}) =
+      _$ContentImpl;
 
-  List<TrainerShortData> get trainers;
+  List<TrainerEntity> get trainers;
   @JsonKey(ignore: true)
-  _$$ContentCopyWith<_$Content> get copyWith =>
+  _$$ContentImplCopyWith<_$ContentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$ErrorCopyWith<$Res> {
-  factory _$$ErrorCopyWith(_$Error value, $Res Function(_$Error) then) =
-      __$$ErrorCopyWithImpl<$Res>;
+abstract class _$$ErrorImplCopyWith<$Res> {
+  factory _$$ErrorImplCopyWith(
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$ErrorCopyWithImpl<$Res>
-    extends _$TrainersListStateCopyWithImpl<$Res, _$Error>
-    implements _$$ErrorCopyWith<$Res> {
-  __$$ErrorCopyWithImpl(_$Error _value, $Res Function(_$Error) _then)
+class __$$ErrorImplCopyWithImpl<$Res>
+    extends _$TrainersListStateCopyWithImpl<$Res, _$ErrorImpl>
+    implements _$$ErrorImplCopyWith<$Res> {
+  __$$ErrorImplCopyWithImpl(
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -351,7 +357,7 @@ class __$$ErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$Error(
+    return _then(_$ErrorImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -362,8 +368,8 @@ class __$$ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Error implements Error {
-  const _$Error({required this.error});
+class _$ErrorImpl implements Error {
+  const _$ErrorImpl({required this.error});
 
   @override
   final String error;
@@ -377,7 +383,7 @@ class _$Error implements Error {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$Error &&
+            other is _$ErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -387,14 +393,14 @@ class _$Error implements Error {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorCopyWith<_$Error> get copyWith =>
-      __$$ErrorCopyWithImpl<_$Error>(this, _$identity);
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      __$$ErrorImplCopyWithImpl<_$ErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TrainerShortData> trainers) content,
+    required TResult Function(List<TrainerEntity> trainers) content,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -404,7 +410,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TrainerShortData> trainers)? content,
+    TResult? Function(List<TrainerEntity> trainers)? content,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -414,7 +420,7 @@ class _$Error implements Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TrainerShortData> trainers)? content,
+    TResult Function(List<TrainerEntity> trainers)? content,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -460,9 +466,10 @@ class _$Error implements Error {
 }
 
 abstract class Error implements TrainersListState {
-  const factory Error({required final String error}) = _$Error;
+  const factory Error({required final String error}) = _$ErrorImpl;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$ErrorCopyWith<_$Error> get copyWith => throw _privateConstructorUsedError;
+  _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

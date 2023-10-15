@@ -6,9 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PersoCategoryChips extends StatefulWidget {
-  PersoCategoryChips({super.key, this.areChipsSelectable = true});
+  PersoCategoryChips(
+      {super.key, bool areChipsSelectable = true, String? trainerId})
+      : _trainerId = trainerId,
+        _areChipsSelectable = areChipsSelectable;
 
-  final bool areChipsSelectable;
+  final bool _areChipsSelectable;
+  final String? _trainerId;
 
   @override
   State<PersoCategoryChips> createState() => _PersoCategoryChipsState();
@@ -24,10 +28,16 @@ class _PersoCategoryChipsState extends State<PersoCategoryChips> {
         builder: (context, state) {
           return state.when(
             initial: () {
-              context
-                  .read<CategoryChipsBloc>()
-                  .add(const CategoryChipsEvent.loadData());
-              return const Center(child: CircularProgressIndicator());
+              if (widget._trainerId == null) {
+                context
+                    .read<CategoryChipsBloc>()
+                    .add(const CategoryChipsEvent.loadAllCategories());
+              } else {
+                context.read<CategoryChipsBloc>().add(
+                    CategoryChipsEvent.loadCategoriesForTrainer(
+                        widget._trainerId!));
+              }
+              return Container();
             },
             content: (List<String> categories) {
               return Container(
@@ -55,7 +65,7 @@ class _PersoCategoryChipsState extends State<PersoCategoryChips> {
   }
 
   void handleFilterSelection(String filter) {
-    if (widget.areChipsSelectable) {
+    if (widget._areChipsSelectable) {
       setState(() {
         if (widget.selectedCategories.contains(filter)) {
           widget.selectedCategories.remove(filter);

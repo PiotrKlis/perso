@@ -1,7 +1,9 @@
 import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/core/models/trainer_short_data.dart';
 
 abstract class TrainersSource {
-  Future<List<TrainerShortData>> getAllTrainersShortData();
+  Future<List<TrainerEntity>> getAllTrainersData();
+
   Future<TrainerEntity> getTrainerData(String id);
+
+  Future<List<String>> getSpecialities(String id);
 }

@@ -4,7 +4,7 @@ import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/widgets/trainers_list/bloc/trainers_list_bloc.dart';
 import 'package:Perso/app/widgets/trainers_list/event/trainers_list_event.dart';
 import 'package:Perso/app/widgets/trainers_list/state/trainers_list_state.dart';
-import 'package:Perso/core/models/trainer_short_data.dart';
+import 'package:Perso/core/models/trainer_entity.dart';
 import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,7 +35,7 @@ class PersoTrainersList extends StatelessWidget {
         ));
   }
 
-  Widget _getTrainersList(List<TrainerShortData> trainers, BuildContext context) {
+  Widget _getTrainersList(List<TrainerEntity> trainers, BuildContext context) {
     return Column(
       children: trainers
           .map((trainerData) => Row(
@@ -47,7 +47,7 @@ class PersoTrainersList extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => {
                         context.pushNamed(ScreenNavigationKey.trainerDetails,
-                            pathParameters: {"trainerId": trainerData.id})
+                            extra: trainerData)
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(

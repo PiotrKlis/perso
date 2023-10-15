@@ -100,23 +100,25 @@ class _$TrainingRequestStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$InitialCopyWith<$Res> {
-  factory _$$InitialCopyWith(_$Initial value, $Res Function(_$Initial) then) =
-      __$$InitialCopyWithImpl<$Res>;
+abstract class _$$InitialImplCopyWith<$Res> {
+  factory _$$InitialImplCopyWith(
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialCopyWithImpl<$Res>
-    extends _$TrainingRequestStateCopyWithImpl<$Res, _$Initial>
-    implements _$$InitialCopyWith<$Res> {
-  __$$InitialCopyWithImpl(_$Initial _value, $Res Function(_$Initial) _then)
+class __$$InitialImplCopyWithImpl<$Res>
+    extends _$TrainingRequestStateCopyWithImpl<$Res, _$InitialImpl>
+    implements _$$InitialImplCopyWith<$Res> {
+  __$$InitialImplCopyWithImpl(
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Initial implements Initial {
-  const _$Initial();
+class _$InitialImpl implements Initial {
+  const _$InitialImpl();
 
   @override
   String toString() {
@@ -126,7 +128,7 @@ class _$Initial implements Initial {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Initial);
+        (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
   @override
@@ -220,27 +222,27 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements TrainingRequestState {
-  const factory Initial() = _$Initial;
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$HasUserAlreadyRequestedTrainingCopyWith<$Res> {
-  factory _$$HasUserAlreadyRequestedTrainingCopyWith(
-          _$HasUserAlreadyRequestedTraining value,
-          $Res Function(_$HasUserAlreadyRequestedTraining) then) =
-      __$$HasUserAlreadyRequestedTrainingCopyWithImpl<$Res>;
+abstract class _$$HasUserAlreadyRequestedTrainingImplCopyWith<$Res> {
+  factory _$$HasUserAlreadyRequestedTrainingImplCopyWith(
+          _$HasUserAlreadyRequestedTrainingImpl value,
+          $Res Function(_$HasUserAlreadyRequestedTrainingImpl) then) =
+      __$$HasUserAlreadyRequestedTrainingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({bool hasRequested});
 }
 
 /// @nodoc
-class __$$HasUserAlreadyRequestedTrainingCopyWithImpl<$Res>
+class __$$HasUserAlreadyRequestedTrainingImplCopyWithImpl<$Res>
     extends _$TrainingRequestStateCopyWithImpl<$Res,
-        _$HasUserAlreadyRequestedTraining>
-    implements _$$HasUserAlreadyRequestedTrainingCopyWith<$Res> {
-  __$$HasUserAlreadyRequestedTrainingCopyWithImpl(
-      _$HasUserAlreadyRequestedTraining _value,
-      $Res Function(_$HasUserAlreadyRequestedTraining) _then)
+        _$HasUserAlreadyRequestedTrainingImpl>
+    implements _$$HasUserAlreadyRequestedTrainingImplCopyWith<$Res> {
+  __$$HasUserAlreadyRequestedTrainingImplCopyWithImpl(
+      _$HasUserAlreadyRequestedTrainingImpl _value,
+      $Res Function(_$HasUserAlreadyRequestedTrainingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -248,7 +250,7 @@ class __$$HasUserAlreadyRequestedTrainingCopyWithImpl<$Res>
   $Res call({
     Object? hasRequested = null,
   }) {
-    return _then(_$HasUserAlreadyRequestedTraining(
+    return _then(_$HasUserAlreadyRequestedTrainingImpl(
       null == hasRequested
           ? _value.hasRequested
           : hasRequested // ignore: cast_nullable_to_non_nullable
@@ -259,9 +261,9 @@ class __$$HasUserAlreadyRequestedTrainingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HasUserAlreadyRequestedTraining
+class _$HasUserAlreadyRequestedTrainingImpl
     implements HasUserAlreadyRequestedTraining {
-  const _$HasUserAlreadyRequestedTraining(this.hasRequested);
+  const _$HasUserAlreadyRequestedTrainingImpl(this.hasRequested);
 
   @override
   final bool hasRequested;
@@ -275,7 +277,7 @@ class _$HasUserAlreadyRequestedTraining
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HasUserAlreadyRequestedTraining &&
+            other is _$HasUserAlreadyRequestedTrainingImpl &&
             (identical(other.hasRequested, hasRequested) ||
                 other.hasRequested == hasRequested));
   }
@@ -286,9 +288,10 @@ class _$HasUserAlreadyRequestedTraining
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HasUserAlreadyRequestedTrainingCopyWith<_$HasUserAlreadyRequestedTraining>
-      get copyWith => __$$HasUserAlreadyRequestedTrainingCopyWithImpl<
-          _$HasUserAlreadyRequestedTraining>(this, _$identity);
+  _$$HasUserAlreadyRequestedTrainingImplCopyWith<
+          _$HasUserAlreadyRequestedTrainingImpl>
+      get copyWith => __$$HasUserAlreadyRequestedTrainingImplCopyWithImpl<
+          _$HasUserAlreadyRequestedTrainingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -379,34 +382,38 @@ class _$HasUserAlreadyRequestedTraining
 
 abstract class HasUserAlreadyRequestedTraining implements TrainingRequestState {
   const factory HasUserAlreadyRequestedTraining(final bool hasRequested) =
-      _$HasUserAlreadyRequestedTraining;
+      _$HasUserAlreadyRequestedTrainingImpl;
 
   bool get hasRequested;
   @JsonKey(ignore: true)
-  _$$HasUserAlreadyRequestedTrainingCopyWith<_$HasUserAlreadyRequestedTraining>
+  _$$HasUserAlreadyRequestedTrainingImplCopyWith<
+          _$HasUserAlreadyRequestedTrainingImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$LoadingTrainingRequestCopyWith<$Res> {
-  factory _$$LoadingTrainingRequestCopyWith(_$LoadingTrainingRequest value,
-          $Res Function(_$LoadingTrainingRequest) then) =
-      __$$LoadingTrainingRequestCopyWithImpl<$Res>;
+abstract class _$$LoadingTrainingRequestImplCopyWith<$Res> {
+  factory _$$LoadingTrainingRequestImplCopyWith(
+          _$LoadingTrainingRequestImpl value,
+          $Res Function(_$LoadingTrainingRequestImpl) then) =
+      __$$LoadingTrainingRequestImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoadingTrainingRequestCopyWithImpl<$Res>
-    extends _$TrainingRequestStateCopyWithImpl<$Res, _$LoadingTrainingRequest>
-    implements _$$LoadingTrainingRequestCopyWith<$Res> {
-  __$$LoadingTrainingRequestCopyWithImpl(_$LoadingTrainingRequest _value,
-      $Res Function(_$LoadingTrainingRequest) _then)
+class __$$LoadingTrainingRequestImplCopyWithImpl<$Res>
+    extends _$TrainingRequestStateCopyWithImpl<$Res,
+        _$LoadingTrainingRequestImpl>
+    implements _$$LoadingTrainingRequestImplCopyWith<$Res> {
+  __$$LoadingTrainingRequestImplCopyWithImpl(
+      _$LoadingTrainingRequestImpl _value,
+      $Res Function(_$LoadingTrainingRequestImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LoadingTrainingRequest implements LoadingTrainingRequest {
-  const _$LoadingTrainingRequest();
+class _$LoadingTrainingRequestImpl implements LoadingTrainingRequest {
+  const _$LoadingTrainingRequestImpl();
 
   @override
   String toString() {
@@ -416,7 +423,8 @@ class _$LoadingTrainingRequest implements LoadingTrainingRequest {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingTrainingRequest);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadingTrainingRequestImpl);
   }
 
   @override
@@ -510,29 +518,32 @@ class _$LoadingTrainingRequest implements LoadingTrainingRequest {
 }
 
 abstract class LoadingTrainingRequest implements TrainingRequestState {
-  const factory LoadingTrainingRequest() = _$LoadingTrainingRequest;
+  const factory LoadingTrainingRequest() = _$LoadingTrainingRequestImpl;
 }
 
 /// @nodoc
-abstract class _$$SuccessTrainingRequestCopyWith<$Res> {
-  factory _$$SuccessTrainingRequestCopyWith(_$SuccessTrainingRequest value,
-          $Res Function(_$SuccessTrainingRequest) then) =
-      __$$SuccessTrainingRequestCopyWithImpl<$Res>;
+abstract class _$$SuccessTrainingRequestImplCopyWith<$Res> {
+  factory _$$SuccessTrainingRequestImplCopyWith(
+          _$SuccessTrainingRequestImpl value,
+          $Res Function(_$SuccessTrainingRequestImpl) then) =
+      __$$SuccessTrainingRequestImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SuccessTrainingRequestCopyWithImpl<$Res>
-    extends _$TrainingRequestStateCopyWithImpl<$Res, _$SuccessTrainingRequest>
-    implements _$$SuccessTrainingRequestCopyWith<$Res> {
-  __$$SuccessTrainingRequestCopyWithImpl(_$SuccessTrainingRequest _value,
-      $Res Function(_$SuccessTrainingRequest) _then)
+class __$$SuccessTrainingRequestImplCopyWithImpl<$Res>
+    extends _$TrainingRequestStateCopyWithImpl<$Res,
+        _$SuccessTrainingRequestImpl>
+    implements _$$SuccessTrainingRequestImplCopyWith<$Res> {
+  __$$SuccessTrainingRequestImplCopyWithImpl(
+      _$SuccessTrainingRequestImpl _value,
+      $Res Function(_$SuccessTrainingRequestImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SuccessTrainingRequest implements SuccessTrainingRequest {
-  const _$SuccessTrainingRequest();
+class _$SuccessTrainingRequestImpl implements SuccessTrainingRequest {
+  const _$SuccessTrainingRequestImpl();
 
   @override
   String toString() {
@@ -542,7 +553,8 @@ class _$SuccessTrainingRequest implements SuccessTrainingRequest {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SuccessTrainingRequest);
+        (other.runtimeType == runtimeType &&
+            other is _$SuccessTrainingRequestImpl);
   }
 
   @override
@@ -636,29 +648,29 @@ class _$SuccessTrainingRequest implements SuccessTrainingRequest {
 }
 
 abstract class SuccessTrainingRequest implements TrainingRequestState {
-  const factory SuccessTrainingRequest() = _$SuccessTrainingRequest;
+  const factory SuccessTrainingRequest() = _$SuccessTrainingRequestImpl;
 }
 
 /// @nodoc
-abstract class _$$NavigateToSignUpCopyWith<$Res> {
-  factory _$$NavigateToSignUpCopyWith(
-          _$NavigateToSignUp value, $Res Function(_$NavigateToSignUp) then) =
-      __$$NavigateToSignUpCopyWithImpl<$Res>;
+abstract class _$$NavigateToSignUpImplCopyWith<$Res> {
+  factory _$$NavigateToSignUpImplCopyWith(_$NavigateToSignUpImpl value,
+          $Res Function(_$NavigateToSignUpImpl) then) =
+      __$$NavigateToSignUpImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NavigateToSignUpCopyWithImpl<$Res>
-    extends _$TrainingRequestStateCopyWithImpl<$Res, _$NavigateToSignUp>
-    implements _$$NavigateToSignUpCopyWith<$Res> {
-  __$$NavigateToSignUpCopyWithImpl(
-      _$NavigateToSignUp _value, $Res Function(_$NavigateToSignUp) _then)
+class __$$NavigateToSignUpImplCopyWithImpl<$Res>
+    extends _$TrainingRequestStateCopyWithImpl<$Res, _$NavigateToSignUpImpl>
+    implements _$$NavigateToSignUpImplCopyWith<$Res> {
+  __$$NavigateToSignUpImplCopyWithImpl(_$NavigateToSignUpImpl _value,
+      $Res Function(_$NavigateToSignUpImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NavigateToSignUp implements NavigateToSignUp {
-  const _$NavigateToSignUp();
+class _$NavigateToSignUpImpl implements NavigateToSignUp {
+  const _$NavigateToSignUpImpl();
 
   @override
   String toString() {
@@ -668,7 +680,7 @@ class _$NavigateToSignUp implements NavigateToSignUp {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NavigateToSignUp);
+        (other.runtimeType == runtimeType && other is _$NavigateToSignUpImpl);
   }
 
   @override
@@ -762,5 +774,5 @@ class _$NavigateToSignUp implements NavigateToSignUp {
 }
 
 abstract class NavigateToSignUp implements TrainingRequestState {
-  const factory NavigateToSignUp() = _$NavigateToSignUp;
+  const factory NavigateToSignUp() = _$NavigateToSignUpImpl;
 }

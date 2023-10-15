@@ -121,11 +121,11 @@ class _$EditableTrainerDataCopyWithImpl<$Res, $Val extends EditableTrainerData>
 }
 
 /// @nodoc
-abstract class _$$_EditableTrainerDataCopyWith<$Res>
+abstract class _$$EditableTrainerDataImplCopyWith<$Res>
     implements $EditableTrainerDataCopyWith<$Res> {
-  factory _$$_EditableTrainerDataCopyWith(_$_EditableTrainerData value,
-          $Res Function(_$_EditableTrainerData) then) =
-      __$$_EditableTrainerDataCopyWithImpl<$Res>;
+  factory _$$EditableTrainerDataImplCopyWith(_$EditableTrainerDataImpl value,
+          $Res Function(_$EditableTrainerDataImpl) then) =
+      __$$EditableTrainerDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -142,11 +142,11 @@ abstract class _$$_EditableTrainerDataCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_EditableTrainerDataCopyWithImpl<$Res>
-    extends _$EditableTrainerDataCopyWithImpl<$Res, _$_EditableTrainerData>
-    implements _$$_EditableTrainerDataCopyWith<$Res> {
-  __$$_EditableTrainerDataCopyWithImpl(_$_EditableTrainerData _value,
-      $Res Function(_$_EditableTrainerData) _then)
+class __$$EditableTrainerDataImplCopyWithImpl<$Res>
+    extends _$EditableTrainerDataCopyWithImpl<$Res, _$EditableTrainerDataImpl>
+    implements _$$EditableTrainerDataImplCopyWith<$Res> {
+  __$$EditableTrainerDataImplCopyWithImpl(_$EditableTrainerDataImpl _value,
+      $Res Function(_$EditableTrainerDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,7 +163,7 @@ class __$$_EditableTrainerDataCopyWithImpl<$Res>
     Object? fullBio = null,
     Object? categories = null,
   }) {
-    return _then(_$_EditableTrainerData(
+    return _then(_$EditableTrainerDataImpl(
       imagePath: null == imagePath
           ? _value.imagePath
           : imagePath // ignore: cast_nullable_to_non_nullable
@@ -210,8 +210,8 @@ class __$$_EditableTrainerDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_EditableTrainerData implements _EditableTrainerData {
-  const _$_EditableTrainerData(
+class _$EditableTrainerDataImpl implements _EditableTrainerData {
+  const _$EditableTrainerDataImpl(
       {required this.imagePath,
       required final List<String> languages,
       required this.name,
@@ -266,7 +266,7 @@ class _$_EditableTrainerData implements _EditableTrainerData {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_EditableTrainerData &&
+            other is _$EditableTrainerDataImpl &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath) &&
             const DeepCollectionEquality()
@@ -303,8 +303,8 @@ class _$_EditableTrainerData implements _EditableTrainerData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EditableTrainerDataCopyWith<_$_EditableTrainerData> get copyWith =>
-      __$$_EditableTrainerDataCopyWithImpl<_$_EditableTrainerData>(
+  _$$EditableTrainerDataImplCopyWith<_$EditableTrainerDataImpl> get copyWith =>
+      __$$EditableTrainerDataImplCopyWithImpl<_$EditableTrainerDataImpl>(
           this, _$identity);
 }
 
@@ -319,7 +319,7 @@ abstract class _EditableTrainerData implements EditableTrainerData {
       required final String phoneNumber,
       required final String shortBio,
       required final String fullBio,
-      required final List<String> categories}) = _$_EditableTrainerData;
+      required final List<String> categories}) = _$EditableTrainerDataImpl;
 
   @override
   String get imagePath;
@@ -343,6 +343,6 @@ abstract class _EditableTrainerData implements EditableTrainerData {
   List<String> get categories;
   @override
   @JsonKey(ignore: true)
-  _$$_EditableTrainerDataCopyWith<_$_EditableTrainerData> get copyWith =>
+  _$$EditableTrainerDataImplCopyWith<_$EditableTrainerDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
