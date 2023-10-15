@@ -29,7 +29,7 @@ class SearchFilterScreen extends StatelessWidget {
             Container(
               margin: EdgeInsets.only(
                 top: Dimens.normalMargin,
-                left: 24,
+                left: Dimens.bigMargin,
               ),
               child: Text(
                 AppLocalizations.of(context)!.spoken_languages,
@@ -45,14 +45,14 @@ class SearchFilterScreen extends StatelessWidget {
               thickness: Dimens.dividerThickness
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimens.normalMargin, left: 24),
+              margin: EdgeInsets.only(top: Dimens.normalMargin, left: Dimens.bigMargin),
               child: Text(
                 AppLocalizations.of(context)!.location,
                 style: ThemeText.bodyBoldBlackText,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 24, top: 2, bottom: 26),
+              margin: EdgeInsets.only(left: Dimens.bigMargin, top: 2, bottom: Dimens.bigMargin),
               child: Row(
                 children: [Text("By default it is set to My country")],
               ),
@@ -61,7 +61,7 @@ class SearchFilterScreen extends StatelessWidget {
               thickness: Dimens.dividerThickness
             ),
             Container(
-              margin: EdgeInsets.only(top: Dimens.normalMargin, left: 24, bottom: Dimens.normalMargin),
+              margin: EdgeInsets.only(top: Dimens.normalMargin, left: Dimens.bigMargin, bottom: Dimens.normalMargin),
               child: Row(
                 children: <Widget>[
                   Text(AppLocalizations.of(context)!.rating, style: ThemeText.bodyBoldBlackText),
@@ -86,20 +86,20 @@ class SearchFilterScreen extends StatelessWidget {
             Divider(
               thickness: Dimens.dividerThickness),
             Container(
-                margin: EdgeInsets.only(top: Dimens.normalMargin, left: 24),
+                margin: EdgeInsets.only(top: Dimens.normalMargin, left: Dimens.bigMargin),
                 child: Text(
                   AppLocalizations.of(context)!.specialities,
                   style: ThemeText.bodyBoldBlackText,
                 )),
             Container(
-              margin: EdgeInsets.only(top: Dimens.bigMargin, left:24, bottom: 26),
+              margin: EdgeInsets.only(top: Dimens.bigMargin, left:Dimens.bigMargin, bottom: Dimens.bigMargin),
               child: PersoCategoryChips(),
             ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 35),
+                  margin: EdgeInsets.only(bottom: Dimens.biggerMargin),
                   child: PersoButton(
                     width: Dimens.bigButtonWidth,
                     title: AppLocalizations.of(context)!.apply_filtres_button,
