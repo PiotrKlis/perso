@@ -28,7 +28,7 @@ class SearchFilterScreen extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(
-                top: 26,
+                top: Dimens.normalMargin,
                 left: 24,
               ),
               child: Text(
@@ -45,7 +45,7 @@ class SearchFilterScreen extends StatelessWidget {
               thickness: Dimens.dividerThickness
             ),
             Container(
-              margin: EdgeInsets.only(top: 26, left: 24),
+              margin: EdgeInsets.only(top: Dimens.normalMargin, left: 24),
               child: Text(
                 AppLocalizations.of(context)!.location,
                 style: ThemeText.bodyBoldBlackText,
@@ -61,12 +61,12 @@ class SearchFilterScreen extends StatelessWidget {
               thickness: Dimens.dividerThickness
             ),
             Container(
-              margin: EdgeInsets.only(top: 26, left: 24),
+              margin: EdgeInsets.only(top: Dimens.normalMargin, left: 24, bottom: Dimens.normalMargin),
               child: Row(
                 children: <Widget>[
                   Text(AppLocalizations.of(context)!.rating, style: ThemeText.bodyBoldBlackText),
                   Container(
-                    margin: EdgeInsets.only(left: Dimens.bigMargin, bottom: 26),
+                    margin: EdgeInsets.only(left: Dimens.bigMargin),
                     child: RatingBar(
                       allowHalfRating: true,
                       ratingWidget: RatingWidget(
@@ -86,13 +86,13 @@ class SearchFilterScreen extends StatelessWidget {
             Divider(
               thickness: Dimens.dividerThickness),
             Container(
-                margin: EdgeInsets.only(top: 26, left: 24),
+                margin: EdgeInsets.only(top: Dimens.normalMargin, left: 24),
                 child: Text(
                   AppLocalizations.of(context)!.specialities,
                   style: ThemeText.bodyBoldBlackText,
                 )),
             Container(
-              margin: EdgeInsets.only(top: Dimens.bigMargin, bottom: 26),
+              margin: EdgeInsets.only(top: Dimens.bigMargin, left:24, bottom: 26),
               child: PersoCategoryChips(),
             ),
             Expanded(
