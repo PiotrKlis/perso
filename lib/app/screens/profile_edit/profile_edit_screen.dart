@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:Perso/app/models/editable_client_data.dart';
@@ -9,10 +10,13 @@ import 'package:Perso/app/utils/colors.dart';
 import 'package:Perso/app/utils/dimens.dart';
 import 'package:Perso/app/utils/theme_text.dart';
 import 'package:Perso/app/utils/validators.dart';
-import 'package:Perso/app/widgets/category_chips/bloc/category_chips_bloc.dart';
+import 'package:Perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
+import 'package:Perso/app/widgets/adress_and_map/google_map.dart';
+import 'package:Perso/app/widgets/adress_and_map/perso_autocomplete.dart';
+import 'package:Perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
 import 'package:Perso/app/widgets/category_chips/category_chips.dart';
+import 'package:Perso/app/widgets/perso_app_bar.dart';
 import 'package:Perso/app/widgets/perso_async_text_field.dart';
-import 'package:Perso/app/widgets/perso_autocomplete.dart';
 import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:Perso/app/widgets/perso_indented_divider.dart';
 import 'package:Perso/app/widgets/perso_text_field.dart';
@@ -23,9 +27,10 @@ import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -39,330 +44,375 @@ class ProfileEditScreen extends StatefulWidget {
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _surnameController = TextEditingController();
-  final _nicknameController = TextEditingController();
-  final _phoneNumberController = TextEditingController();
-  final _shortBioController = TextEditingController();
-  final _fullBioController = TextEditingController();
-  final _spokenLanguageRowWidget = SpokenLanguageRowWidget();
-  final _addressWidget = PersoAutocomplete();
-  final _persoChipsList = PersoCategoryChips();
-
-  final ImagePicker _picker = ImagePicker();
-  XFile? _image;
+  final TextEditingController autoCompleteController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+  final nicknameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final shortBioController = TextEditingController();
+  final fullBioController = TextEditingController();
+  final spokenLanguageRowWidget = SpokenLanguageRowWidget();
+  final persoChipsList = PersoCategoryChips();
+  final picker = ImagePicker();
+  PersoGoogleMap googleMap = PersoGoogleMap();
+  final PersoAutocomplete addressWidget = PersoAutocomplete();
+  XFile? image;
+  LatLng? latLng;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileEditBloc(const ProfileEditState.initial()),
-      child: Scaffold(
-        backgroundColor: PersoColors.lightBlue,
-        appBar: AppBar(
-          elevation: 0.0,
-          title: Text(AppLocalizations.of(context)!.edit_profile("userType")),
-        ),
-        body: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Container(
-                    width: 200.0,
-                    height: 200.0,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.black),
-                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: _image == null
-                        ? const Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
-                            size: 120.0,
-                          )
-                        : ClipOval(
-                            child: Image.file(
-                              File(_image!.path),
-                              width: 200.0,
-                              height: 200.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                  ),
-                ),
-                Container(
-                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: Center(
-                        child: PersoButton(
-                      title: AppLocalizations.of(context)!.upload_image,
-                      onTap: (context) {
-                        _getImage();
-                      },
-                    ))),
-                Visibility(
-                  visible: widget._userType == UserType.trainer,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.bigMargin,
-                              right: Dimens.normalMargin),
-                          child: const PersoIndentedDivider()),
-                      Container(
-                          margin:
-                              const EdgeInsets.only(top: Dimens.normalMargin),
-                          child: _spokenLanguageRowWidget),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin,
-                              right: Dimens.bigMargin),
-                          child: const PersoIndentedDivider()),
-                    ],
-                  ),
-                ),
-                Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: Row(
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin),
-                            child: const Icon(Icons.person, size: 24.0)),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin,
-                                right: Dimens.normalMargin),
-                            child: PersoTextField(
-                                title: AppLocalizations.of(context)!.name,
-                                textEditingController: _nameController,
-                                customValidator:
-                                    TextFieldValidator.validateIsEmpty),
-                          ),
-                        ),
-                      ],
-                    )),
-                Container(
-                  margin: const EdgeInsets.only(
-                      left: Dimens.substantialMargin,
-                      top: Dimens.bigMargin,
-                      right: Dimens.normalMargin),
-                  child: PersoTextField(
-                      textEditingController: _surnameController,
-                      title: AppLocalizations.of(context)!.surname,
-                      customValidator: TextFieldValidator.validateIsEmpty),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                      left: Dimens.substantialMargin,
-                      top: Dimens.bigMargin,
-                      right: Dimens.normalMargin),
-                  //TODO: Find different, non-hacky way of async validation way
-                  child: PersoAsyncTextFormField(
-                      hintText: AppLocalizations.of(context)!.nickname,
-                      validator: (value) =>
-                          widget._userInfoProvider.isNicknameUnique(value),
-                      validationDebounce: const Duration(milliseconds: 500),
-                      controller: _nicknameController),
-                ),
-                Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: const PersoIndentedDivider()),
-                Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin),
-                            child: const Icon(Icons.pin_drop, size: 24.0)),
-                        Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.only(
-                                  left: Dimens.normalMargin),
-                              child: _addressWidget),
-                        ),
-                      ],
-                    )),
-                Visibility(
-                  visible: widget._userType == UserType.trainer,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: const PersoIndentedDivider()),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                  margin: const EdgeInsets.only(
-                                      left: Dimens.normalMargin),
-                                  child: const Icon(Icons.text_snippet,
-                                      size: 24.0)),
-                              Expanded(
-                                child: Container(
-                                  height: 140.0,
-                                  margin: const EdgeInsets.only(
-                                      left: Dimens.normalMargin),
-                                  child: PersoTextField(
-                                    title: AppLocalizations.of(context)!.short_bio,
-                                    customValidator:
-                                        TextFieldValidator.validateIsEmpty,
-                                    isMultiLine: true,
-                                    maxLength: 150,
-                                    textEditingController: _shortBioController,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                      Container(
-                          height: 340.0,
-                          margin: const EdgeInsets.only(
-                              left: Dimens.substantialMargin,
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: PersoTextField(
-                            title: AppLocalizations.of(context)!.long_bio,
-                            isMultiLine: true,
-                            maxLength: 500,
-                            customValidator: TextFieldValidator.validateIsEmpty,
-                            textEditingController: _fullBioController,
-                          )),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: const PersoIndentedDivider()),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin,
-                              left: Dimens.normalMargin),
-                          child: Text(
-                            AppLocalizations.of(context)!.select_your_specialities,
-                            style: ThemeText.bodyBoldBlackText,
-                          )),
-                      Container(
-                        margin: const EdgeInsets.only(top: Dimens.smallMargin),
-                        child: _persoChipsList,
-                      ),
-                    ],
-                  ),
-                ),
-                Center(
-                    child: Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.biggerMargin,
-                      bottom: Dimens.biggerMargin,
-                      right: Dimens.normalMargin),
-                  child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
-                    builder: (context, state) {
-                      return state.whenOrNull(
-                            loading: () => Center(
-                                child: Container(
-                                    margin: const EdgeInsets.only(
-                                        bottom: Dimens.normalMargin),
-                                    child: const CircularProgressIndicator())),
-                          ) ??
-                          PersoButton(
-                              width: 160.0, title: AppLocalizations.of(context)!.next, onTap: _uploadData);
-                    },
-                    listener: (context, state) {
-                      state.whenOrNull(
-                          success: () => context.replaceNamed(
-                              ScreenNavigationKey.profileCreationSuccess));
-                    },
-                  ),
-                )),
-                Center(
-                    child: Container(
-                  margin: const EdgeInsets.only(
-                    top: Dimens.normalMargin,
-                  ),
-                  child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
-                    builder: (context, state) {
-                      return state.whenOrNull(
-                              error: (error) => Text(
-                                  "Something went wrong - $error",
-                                  style: ThemeText.calloutRegularRed)) ??
-                          Container();
-                    },
-                  ),
-                ))
-              ],
-            ),
+    var imageSection = Center(
+      child: Container(
+        width: 200.0,
+        height: 200.0,
+        decoration:
+        const BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+        margin: const EdgeInsets.only(top: Dimens.bigMargin),
+        child: image == null
+            ? const Icon(
+          Icons.camera_alt,
+          color: Colors.white,
+          size: 120.0,
+        )
+            : ClipOval(
+          child: Image.file(
+            File(image!.path),
+            width: 200.0,
+            height: 200.0,
+            fit: BoxFit.cover,
           ),
         ),
       ),
     );
+    var uploadImageButton = Container(
+        margin: const EdgeInsets.only(top: Dimens.bigMargin),
+        child: Center(
+            child: PersoButton(
+              title: AppLocalizations.of(context)!.upload_image,
+              onTap: (context) {
+                getImage();
+              },
+            )));
+    var languageSection = Visibility(
+      visible: widget._userType == UserType.trainer,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.bigMargin, right: Dimens.normalMargin),
+              child: const PersoIndentedDivider()),
+          Container(
+              margin: const EdgeInsets.only(top: Dimens.normalMargin),
+              child: spokenLanguageRowWidget),
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.normalMargin, right: Dimens.bigMargin),
+              child: const PersoIndentedDivider()),
+        ],
+      ),
+    );
+    var surname = Container(
+      margin: const EdgeInsets.only(
+          left: Dimens.substantialMargin,
+          top: Dimens.bigMargin,
+          right: Dimens.normalMargin),
+      child: PersoTextField(
+          textEditingController: surnameController,
+          title: AppLocalizations.of(context)!.surname,
+          customValidator: TextFieldValidator.validateIsEmpty),
+    );
+    var nickname = Container(
+      margin: const EdgeInsets.only(
+          left: Dimens.substantialMargin,
+          top: Dimens.bigMargin,
+          right: Dimens.normalMargin),
+      //TODO: Find different, non-hacky way of async validation way
+      child: PersoAsyncTextFormField(
+          hintText: AppLocalizations.of(context)!.nickname,
+          validator: (value) =>
+              widget._userInfoProvider.isNicknameUnique(value),
+          validationDebounce: const Duration(milliseconds: 500),
+          controller: nicknameController),
+    );
+    var location = Container(
+        margin: const EdgeInsets.only(
+            top: Dimens.normalMargin, right: Dimens.normalMargin),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                child: const Icon(Icons.pin_drop, size: 24.0)),
+            Expanded(
+              child: Container(
+                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                  child: addressWidget),
+            ),
+          ],
+        ));
+    var shortBio = Container(
+        margin: const EdgeInsets.only(
+            top: Dimens.normalMargin, right: Dimens.normalMargin),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                child: const Icon(Icons.text_snippet, size: 24.0)),
+            Expanded(
+              child: Container(
+                height: 140.0,
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                child: PersoTextField(
+                  title: AppLocalizations.of(context)!.short_bio,
+                  customValidator: TextFieldValidator.validateIsEmpty,
+                  isMultiLine: true,
+                  maxLength: 150,
+                  textEditingController: shortBioController,
+                ),
+              ),
+            ),
+          ],
+        ));
+    var longBio = Container(
+        height: 340.0,
+        margin: const EdgeInsets.only(
+            left: Dimens.substantialMargin,
+            top: Dimens.normalMargin,
+            right: Dimens.normalMargin),
+        child: PersoTextField(
+          title: AppLocalizations.of(context)!.long_bio,
+          isMultiLine: true,
+          maxLength: 500,
+          customValidator: TextFieldValidator.validateIsEmpty,
+          textEditingController: fullBioController,
+        ));
+    var bioAndSpecialitiesSection = Visibility(
+      visible: widget._userType == UserType.trainer,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.normalMargin, right: Dimens.normalMargin),
+              child: const PersoIndentedDivider()),
+          shortBio,
+          longBio,
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.normalMargin, right: Dimens.normalMargin),
+              child: const PersoIndentedDivider()),
+          Container(
+              margin: const EdgeInsets.only(
+                  top: Dimens.normalMargin, left: Dimens.normalMargin),
+              child: Text(
+                AppLocalizations.of(context)!.select_your_specialities,
+                style: ThemeText.bodyBoldBlackText,
+              )),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.smallMargin),
+            child: persoChipsList,
+          ),
+        ],
+      ),
+    );
+    var sendDataButton = Center(
+        child: Container(
+          margin: const EdgeInsets.only(
+              top: Dimens.biggerMargin,
+              bottom: Dimens.biggerMargin,
+              right: Dimens.normalMargin),
+          child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
+            builder: (context, state) {
+              return state.whenOrNull(
+                loading: () =>
+                    Center(
+                        child: Container(
+                            margin:
+                            const EdgeInsets.only(bottom: Dimens.normalMargin),
+                            child: const CircularProgressIndicator())),
+              ) ??
+                  PersoButton(
+                      width: 160.0,
+                      title: AppLocalizations.of(context)!.next,
+                      onTap: uploadData);
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                  success: () =>
+                      context
+                          .replaceNamed(
+                          ScreenNavigationKey.profileCreationSuccess));
+            },
+          ),
+        ));
+    var sendDataErrorText = Center(
+        child: Container(
+          margin: const EdgeInsets.only(
+            top: Dimens.normalMargin,
+          ),
+          child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
+            builder: (context, state) {
+              return state.whenOrNull(
+                  error: (error) =>
+                      Text("Something went wrong - $error",
+                          style: ThemeText.calloutRegularRed)) ??
+                  Container();
+            },
+          ),
+        ));
+
+    var nameSection = Container(
+        margin: const EdgeInsets.only(top: Dimens.normalMargin),
+        child: Row(
+          children: [
+            Container(
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                child: const Icon(Icons.person, size: 24.0)),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(
+                    left: Dimens.normalMargin, right: Dimens.normalMargin),
+                child: PersoTextField(
+                    title: AppLocalizations.of(context)!.name,
+                    textEditingController: nameController,
+                    customValidator: TextFieldValidator.validateIsEmpty),
+              ),
+            ),
+          ],
+        ));
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ProfileEditBloc()),
+        BlocProvider(create: (context) => AddressAndMapBloc()),
+      ],
+      child: BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
+          builder: (context, state) {
+            state.whenOrNull(mapUpdate: (latLon) {
+              latLng = latLon;
+            },
+            );
+            return Scaffold(
+              backgroundColor: PersoColors.lightBlue,
+              appBar: PersoAppBar(
+                  title: AppLocalizations.of(context)!
+                      .edit_profile(widget._userType.toString())),
+              body: SingleChildScrollView(
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior
+                    .onDrag,
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      imageSection,
+                      uploadImageButton,
+                      languageSection,
+                      nameSection,
+                      surname,
+                      nickname,
+                      Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: const PersoIndentedDivider()),
+                      location,
+                      Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.normalMargin),
+                          child: googleMap),
+                      bioAndSpecialitiesSection,
+                      sendDataButton,
+                      sendDataErrorText
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
+      ),
+    );
   }
 
-  Future<void> _getImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  Future<void> getImage() async {
+    final XFile? pickedImage =
+    await picker.pickImage(source: ImageSource.gallery);
     setState(() {
-      _image = image;
+      image = pickedImage;
     });
   }
 
-  void _uploadData(BuildContext context) {
-    if (_formKey.currentState?.validate() == true) {
-      String location = _addressWidget.autocompleteController?.text ?? "";
-      if (widget._userType == UserType.trainer) {
-        _addTrainerData(location, context);
-      } else {
-        _addClientData(location, context);
-      }
-    }
+  void addTrainerData(BuildContext context) {
+    List<String> languages = spokenLanguageRowWidget.listOfLanguages
+        .map((element) => element.keys)
+        .expand((element) => element)
+        .toList();
+    String location = addressWidget.autocompleteController?.text ?? "";
+
+    final trainerData = EditableTrainerData(
+        imagePath: image?.path ?? "",
+        languages: languages,
+        name: nameController.text,
+        surname: surnameController.text,
+        nickname: nicknameController.text,
+        location: location,
+        phoneNumber: phoneNumberController.text,
+        shortBio: shortBioController.text,
+        fullBio: fullBioController.text,
+        categories: persoChipsList.selectedCategories,
+        latLng: latLng ?? const LatLng(0.0, 0.0));
+
+        context
+        .read<ProfileEditBloc>()
+        .add(ProfileEditEvent.uploadTrainerData(trainerData));
   }
 
-  void _addClientData(String location, BuildContext context) {
+  void addClientData(BuildContext context) {
+    String location = addressWidget.autocompleteController?.text ?? "";
+
     final clientData = EditableClientData(
-        imagePath: _image?.path ?? "",
-        name: _nameController.text,
-        surname: _surnameController.text,
-        nickname: _nicknameController.text,
-        location: location,
-        phoneNumber: _phoneNumberController.text);
+        imagePath: image?.path ?? "",
+        name: nameController.text,
+        surname: surnameController.text,
+        nickname: nicknameController.text,
+        location: location);
 
     context
         .read<ProfileEditBloc>()
         .add(ProfileEditEvent.uploadClientData(clientData));
   }
 
-  void _addTrainerData(String location, BuildContext context) {
-    List<String> languages = _spokenLanguageRowWidget.listOfLanguages
-        .map((element) => element.keys)
-        .expand((element) => element)
-        .toList();
+  void uploadData(BuildContext context) {
+    if (formKey.currentState?.validate() == true) {
+      if (widget._userType == UserType.trainer) {
+        addTrainerData(context);
+      } else {
+        addClientData(context);
+      }
+    }
+  }
 
-    final trainerData = EditableTrainerData(
-        imagePath: _image?.path ?? "",
-        languages: languages,
-        name: _nameController.text,
-        surname: _surnameController.text,
-        nickname: _nicknameController.text,
-        location: location,
-        phoneNumber: _phoneNumberController.text,
-        shortBio: _shortBioController.text,
-        fullBio: _fullBioController.text,
-        categories: _persoChipsList.selectedCategories);
-
-    context
-        .read<ProfileEditBloc>()
-        .add(ProfileEditEvent.uploadTrainerData(trainerData));
+  Container nameSection(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(top: Dimens.normalMargin),
+        child: Row(
+          children: [
+            Container(
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                child: const Icon(Icons.person, size: 24.0)),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.only(
+                    left: Dimens.normalMargin, right: Dimens.normalMargin),
+                child: PersoTextField(
+                    title: AppLocalizations.of(context)!.name,
+                    textEditingController: nameController,
+                    customValidator: TextFieldValidator.validateIsEmpty),
+              ),
+            ),
+          ],
+        ));
   }
 }

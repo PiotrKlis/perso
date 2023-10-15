@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:Perso/core/models/PlaceInfo.dart';
 import 'package:Perso/data/address_provider/address_provider.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';

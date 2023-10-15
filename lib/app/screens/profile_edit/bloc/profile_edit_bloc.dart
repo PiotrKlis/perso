@@ -15,7 +15,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       getIt.get<FirestoreTrainersService>();
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
-  ProfileEditBloc(ProfileEditState initialState) : super(initialState) {
+  ProfileEditBloc() : super(const ProfileEditState.initial()) {
     on<UploadTrainerData>((event, emitter) async {
       try {
         emitter(const ProfileEditState.loading());
@@ -63,7 +63,8 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
         pendingRequests: List.empty(),
         activeClients: List.empty(),
         inactiveClients: List.empty(),
-        imagePath: event.trainerData.imagePath);
+        imagePath: event.trainerData.imagePath,
+        latLng: event.trainerData.latLng);
     await _trainersService.setData(trainerEntity);
   }
 }

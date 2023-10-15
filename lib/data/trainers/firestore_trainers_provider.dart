@@ -5,6 +5,7 @@ import 'package:Perso/core/user_type.dart';
 import 'package:Perso/data/trainers/trainers_source.dart';
 import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -37,7 +38,9 @@ class FirestoreTrainersProvider implements TrainersSource {
           activeClients:
               data[UserDocumentFields.activeClients].toString().split(", "),
           inactiveClients:
-              data[UserDocumentFields.inactiveClients].toString().split(", "));
+              data[UserDocumentFields.inactiveClients].toString().split(", "),
+          latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
+              const LatLng(0.0, 0.0));
     }).toList();
   }
 
@@ -75,7 +78,9 @@ class FirestoreTrainersProvider implements TrainersSource {
             data[UserDocumentFields.activeClients].toString().split(", "),
         inactiveClients:
             data[UserDocumentFields.inactiveClients].toString().split(", "),
-        imagePath: data[UserDocumentFields.imagePath]);
+        imagePath: data[UserDocumentFields.imagePath],
+        latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
+            const LatLng(0.0, 0.0));
   }
 
   @override

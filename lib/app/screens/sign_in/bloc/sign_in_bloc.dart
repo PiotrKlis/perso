@@ -20,11 +20,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         emit(const SignInState.loading());
         UserCredential userCredential = await _authProvider.login(
             email: state.email, password: state.password);
-        if (userCredential.user!.emailVerified) {
+        // if (userCredential.user!.emailVerified) {
           await _handleSuccessfulLogin(emit);
-        } else {
-          emit(const SignInState.error(message: "Email not verified"));
-        }
+        // } else {
+        //   emit(const SignInState.error(message: "Email not verified"));
+        // }
       } catch (error) {
         _handleLoginError(error, emit);
       }

@@ -1,5 +1,6 @@
 import 'package:Perso/core/models/trainer_entity.dart';
 import 'package:Perso/data/trainers/trainers_source.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -26,7 +27,8 @@ class TestTrainersRepository implements TrainersSource {
         reviews: [],
         pendingRequests: [],
         activeClients: [],
-        inactiveClients: []),
+        inactiveClients: [],
+        latLng: LatLng(0.0, 0.0)),
     const TrainerEntity(
         id: '2',
         name: "Son gohan",
@@ -43,7 +45,8 @@ class TestTrainersRepository implements TrainersSource {
         reviews: [],
         pendingRequests: [],
         activeClients: [],
-        inactiveClients: []),
+        inactiveClients: [],
+        latLng: LatLng(0.0, 0.0)),
     const TrainerEntity(
         id: '3',
         name: "Son goten",
@@ -60,7 +63,8 @@ class TestTrainersRepository implements TrainersSource {
         reviews: [],
         pendingRequests: [],
         activeClients: [],
-        inactiveClients: []),
+        inactiveClients: [],
+        latLng: LatLng(0.0, 0.0)),
   ];
 
   @override
