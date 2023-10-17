@@ -81,6 +81,6 @@
   "location": "Location",
   "rating": "Rating",
   "specialities": "Specialities",
-  "apply_filtres_button": "Confirm",
+  "confirm": "Confirm",
   "location_default_set": "By default it is set to My country"
 }
