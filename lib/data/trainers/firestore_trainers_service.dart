@@ -64,7 +64,8 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.pendingRequests: trainerEntity.pendingRequests,
         UserDocumentFields.activeClients: trainerEntity.activeClients,
         UserDocumentFields.inactiveClients: trainerEntity.inactiveClients,
-        UserDocumentFields.imagePath: serverImagePath
+        UserDocumentFields.imagePath: serverImagePath,
+        UserDocumentFields.latLng: trainerEntity.latLng.toJson()
       });
       return Future.value();
     } catch (error) {

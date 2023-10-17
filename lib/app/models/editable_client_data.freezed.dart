@@ -21,7 +21,6 @@ mixin _$EditableClientData {
   String get surname => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditableClientDataCopyWith<EditableClientData> get copyWith =>
@@ -39,8 +38,7 @@ abstract class $EditableClientDataCopyWith<$Res> {
       String name,
       String surname,
       String nickname,
-      String location,
-      String phoneNumber});
+      String location});
 }
 
 /// @nodoc
@@ -61,7 +59,6 @@ class _$EditableClientDataCopyWithImpl<$Res, $Val extends EditableClientData>
     Object? surname = null,
     Object? nickname = null,
     Object? location = null,
-    Object? phoneNumber = null,
   }) {
     return _then(_value.copyWith(
       imagePath: null == imagePath
@@ -84,10 +81,6 @@ class _$EditableClientDataCopyWithImpl<$Res, $Val extends EditableClientData>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -105,8 +98,7 @@ abstract class _$$EditableClientDataImplCopyWith<$Res>
       String name,
       String surname,
       String nickname,
-      String location,
-      String phoneNumber});
+      String location});
 }
 
 /// @nodoc
@@ -125,7 +117,6 @@ class __$$EditableClientDataImplCopyWithImpl<$Res>
     Object? surname = null,
     Object? nickname = null,
     Object? location = null,
-    Object? phoneNumber = null,
   }) {
     return _then(_$EditableClientDataImpl(
       imagePath: null == imagePath
@@ -148,10 +139,6 @@ class __$$EditableClientDataImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -164,8 +151,7 @@ class _$EditableClientDataImpl implements _EditableClientData {
       required this.name,
       required this.surname,
       required this.nickname,
-      required this.location,
-      required this.phoneNumber});
+      required this.location});
 
   @override
   final String imagePath;
@@ -177,12 +163,10 @@ class _$EditableClientDataImpl implements _EditableClientData {
   final String nickname;
   @override
   final String location;
-  @override
-  final String phoneNumber;
 
   @override
   String toString() {
-    return 'EditableClientData(imagePath: $imagePath, name: $name, surname: $surname, nickname: $nickname, location: $location, phoneNumber: $phoneNumber)';
+    return 'EditableClientData(imagePath: $imagePath, name: $name, surname: $surname, nickname: $nickname, location: $location)';
   }
 
   @override
@@ -197,14 +181,12 @@ class _$EditableClientDataImpl implements _EditableClientData {
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.location, location) ||
-                other.location == location) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber));
+                other.location == location));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, imagePath, name, surname, nickname, location, phoneNumber);
+  int get hashCode =>
+      Object.hash(runtimeType, imagePath, name, surname, nickname, location);
 
   @JsonKey(ignore: true)
   @override
@@ -220,8 +202,7 @@ abstract class _EditableClientData implements EditableClientData {
       required final String name,
       required final String surname,
       required final String nickname,
-      required final String location,
-      required final String phoneNumber}) = _$EditableClientDataImpl;
+      required final String location}) = _$EditableClientDataImpl;
 
   @override
   String get imagePath;
@@ -233,8 +214,6 @@ abstract class _EditableClientData implements EditableClientData {
   String get nickname;
   @override
   String get location;
-  @override
-  String get phoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$EditableClientDataImplCopyWith<_$EditableClientDataImpl> get copyWith =>

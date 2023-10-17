@@ -25,4 +25,5 @@ class UserDocumentFields {
   static const String imagePath = "imagePath";
   static const String activeTrainers = "activeTrainers";
   static const String inactiveTrainers = "inactiveTrainers";
+  static const String latLng = "latLng";
 }

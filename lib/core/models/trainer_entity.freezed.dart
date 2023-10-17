@@ -32,6 +32,7 @@ mixin _$TrainerEntity {
   List<String> get pendingRequests => throw _privateConstructorUsedError;
   List<String> get activeClients => throw _privateConstructorUsedError;
   List<String> get inactiveClients => throw _privateConstructorUsedError;
+  LatLng get latLng => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TrainerEntityCopyWith<TrainerEntity> get copyWith =>
@@ -60,7 +61,8 @@ abstract class $TrainerEntityCopyWith<$Res> {
       List<String> categories,
       List<String> pendingRequests,
       List<String> activeClients,
-      List<String> inactiveClients});
+      List<String> inactiveClients,
+      LatLng latLng});
 }
 
 /// @nodoc
@@ -92,6 +94,7 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
     Object? pendingRequests = null,
     Object? activeClients = null,
     Object? inactiveClients = null,
+    Object? latLng = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -158,6 +161,10 @@ class _$TrainerEntityCopyWithImpl<$Res, $Val extends TrainerEntity>
           ? _value.inactiveClients
           : inactiveClients // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      latLng: null == latLng
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng,
     ) as $Val);
   }
 }
@@ -186,7 +193,8 @@ abstract class _$$TrainerEntityImplCopyWith<$Res>
       List<String> categories,
       List<String> pendingRequests,
       List<String> activeClients,
-      List<String> inactiveClients});
+      List<String> inactiveClients,
+      LatLng latLng});
 }
 
 /// @nodoc
@@ -216,6 +224,7 @@ class __$$TrainerEntityImplCopyWithImpl<$Res>
     Object? pendingRequests = null,
     Object? activeClients = null,
     Object? inactiveClients = null,
+    Object? latLng = null,
   }) {
     return _then(_$TrainerEntityImpl(
       id: null == id
@@ -282,6 +291,10 @@ class __$$TrainerEntityImplCopyWithImpl<$Res>
           ? _value._inactiveClients
           : inactiveClients // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      latLng: null == latLng
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng,
     ));
   }
 }
@@ -305,7 +318,8 @@ class _$TrainerEntityImpl implements _TrainerEntity {
       required final List<String> categories,
       required final List<String> pendingRequests,
       required final List<String> activeClients,
-      required final List<String> inactiveClients})
+      required final List<String> inactiveClients,
+      required this.latLng})
       : _languages = languages,
         _reviews = reviews,
         _categories = categories,
@@ -382,8 +396,11 @@ class _$TrainerEntityImpl implements _TrainerEntity {
   }
 
   @override
+  final LatLng latLng;
+
+  @override
   String toString() {
-    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, imagePath: $imagePath, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories, pendingRequests: $pendingRequests, activeClients: $activeClients, inactiveClients: $inactiveClients)';
+    return 'TrainerEntity(id: $id, name: $name, surname: $surname, nickname: $nickname, votesNumber: $votesNumber, fullBio: $fullBio, shortBio: $shortBio, imagePath: $imagePath, languages: $languages, rating: $rating, location: $location, reviews: $reviews, categories: $categories, pendingRequests: $pendingRequests, activeClients: $activeClients, inactiveClients: $inactiveClients, latLng: $latLng)';
   }
 
   @override
@@ -416,7 +433,8 @@ class _$TrainerEntityImpl implements _TrainerEntity {
             const DeepCollectionEquality()
                 .equals(other._activeClients, _activeClients) &&
             const DeepCollectionEquality()
-                .equals(other._inactiveClients, _inactiveClients));
+                .equals(other._inactiveClients, _inactiveClients) &&
+            (identical(other.latLng, latLng) || other.latLng == latLng));
   }
 
   @override
@@ -437,7 +455,8 @@ class _$TrainerEntityImpl implements _TrainerEntity {
       const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_pendingRequests),
       const DeepCollectionEquality().hash(_activeClients),
-      const DeepCollectionEquality().hash(_inactiveClients));
+      const DeepCollectionEquality().hash(_inactiveClients),
+      latLng);
 
   @JsonKey(ignore: true)
   @override
@@ -463,7 +482,8 @@ abstract class _TrainerEntity implements TrainerEntity {
       required final List<String> categories,
       required final List<String> pendingRequests,
       required final List<String> activeClients,
-      required final List<String> inactiveClients}) = _$TrainerEntityImpl;
+      required final List<String> inactiveClients,
+      required final LatLng latLng}) = _$TrainerEntityImpl;
 
   @override
   String get id;
@@ -497,6 +517,8 @@ abstract class _TrainerEntity implements TrainerEntity {
   List<String> get activeClients;
   @override
   List<String> get inactiveClients;
+  @override
+  LatLng get latLng;
   @override
   @JsonKey(ignore: true)
   _$$TrainerEntityImplCopyWith<_$TrainerEntityImpl> get copyWith =>

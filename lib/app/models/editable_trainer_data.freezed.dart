@@ -26,6 +26,7 @@ mixin _$EditableTrainerData {
   String get shortBio => throw _privateConstructorUsedError;
   String get fullBio => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
+  LatLng get latLng => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditableTrainerDataCopyWith<EditableTrainerData> get copyWith =>
@@ -48,7 +49,8 @@ abstract class $EditableTrainerDataCopyWith<$Res> {
       String phoneNumber,
       String shortBio,
       String fullBio,
-      List<String> categories});
+      List<String> categories,
+      LatLng latLng});
 }
 
 /// @nodoc
@@ -74,6 +76,7 @@ class _$EditableTrainerDataCopyWithImpl<$Res, $Val extends EditableTrainerData>
     Object? shortBio = null,
     Object? fullBio = null,
     Object? categories = null,
+    Object? latLng = null,
   }) {
     return _then(_value.copyWith(
       imagePath: null == imagePath
@@ -116,6 +119,10 @@ class _$EditableTrainerDataCopyWithImpl<$Res, $Val extends EditableTrainerData>
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      latLng: null == latLng
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng,
     ) as $Val);
   }
 }
@@ -138,7 +145,8 @@ abstract class _$$EditableTrainerDataImplCopyWith<$Res>
       String phoneNumber,
       String shortBio,
       String fullBio,
-      List<String> categories});
+      List<String> categories,
+      LatLng latLng});
 }
 
 /// @nodoc
@@ -162,6 +170,7 @@ class __$$EditableTrainerDataImplCopyWithImpl<$Res>
     Object? shortBio = null,
     Object? fullBio = null,
     Object? categories = null,
+    Object? latLng = null,
   }) {
     return _then(_$EditableTrainerDataImpl(
       imagePath: null == imagePath
@@ -204,6 +213,10 @@ class __$$EditableTrainerDataImplCopyWithImpl<$Res>
           ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      latLng: null == latLng
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng,
     ));
   }
 }
@@ -221,7 +234,8 @@ class _$EditableTrainerDataImpl implements _EditableTrainerData {
       required this.phoneNumber,
       required this.shortBio,
       required this.fullBio,
-      required final List<String> categories})
+      required final List<String> categories,
+      required this.latLng})
       : _languages = languages,
         _categories = categories;
 
@@ -258,8 +272,11 @@ class _$EditableTrainerDataImpl implements _EditableTrainerData {
   }
 
   @override
+  final LatLng latLng;
+
+  @override
   String toString() {
-    return 'EditableTrainerData(imagePath: $imagePath, languages: $languages, name: $name, surname: $surname, nickname: $nickname, location: $location, phoneNumber: $phoneNumber, shortBio: $shortBio, fullBio: $fullBio, categories: $categories)';
+    return 'EditableTrainerData(imagePath: $imagePath, languages: $languages, name: $name, surname: $surname, nickname: $nickname, location: $location, phoneNumber: $phoneNumber, shortBio: $shortBio, fullBio: $fullBio, categories: $categories, latLng: $latLng)';
   }
 
   @override
@@ -283,7 +300,8 @@ class _$EditableTrainerDataImpl implements _EditableTrainerData {
                 other.shortBio == shortBio) &&
             (identical(other.fullBio, fullBio) || other.fullBio == fullBio) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories));
+                .equals(other._categories, _categories) &&
+            (identical(other.latLng, latLng) || other.latLng == latLng));
   }
 
   @override
@@ -298,7 +316,8 @@ class _$EditableTrainerDataImpl implements _EditableTrainerData {
       phoneNumber,
       shortBio,
       fullBio,
-      const DeepCollectionEquality().hash(_categories));
+      const DeepCollectionEquality().hash(_categories),
+      latLng);
 
   @JsonKey(ignore: true)
   @override
@@ -319,7 +338,8 @@ abstract class _EditableTrainerData implements EditableTrainerData {
       required final String phoneNumber,
       required final String shortBio,
       required final String fullBio,
-      required final List<String> categories}) = _$EditableTrainerDataImpl;
+      required final List<String> categories,
+      required final LatLng latLng}) = _$EditableTrainerDataImpl;
 
   @override
   String get imagePath;
@@ -341,6 +361,8 @@ abstract class _EditableTrainerData implements EditableTrainerData {
   String get fullBio;
   @override
   List<String> get categories;
+  @override
+  LatLng get latLng;
   @override
   @JsonKey(ignore: true)
   _$$EditableTrainerDataImplCopyWith<_$EditableTrainerDataImpl> get copyWith =>

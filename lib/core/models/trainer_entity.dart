@@ -1,5 +1,6 @@
 import 'package:Perso/core/models/review_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'trainer_entity.freezed.dart';
 
@@ -22,5 +23,6 @@ class TrainerEntity with _$TrainerEntity {
     required final List<String> pendingRequests,
     required final List<String> activeClients,
     required final List<String> inactiveClients,
+    required final LatLng latLng,
   }) = _TrainerEntity;
 }
