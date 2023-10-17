@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:Perso/app/widgets/spoken_language_row.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:Perso/app/widgets/perso_divider.dart';
 
 class SearchFilterScreen extends StatelessWidget {
   const SearchFilterScreen({super.key});
@@ -21,11 +22,8 @@ class SearchFilterScreen extends StatelessWidget {
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: [
-            Divider(
-              thickness: Dimens.dividerThickness
-            ),
+            PersoDivider(),
             Container(
               margin: EdgeInsets.only(
                 top: Dimens.normalMargin,
@@ -41,30 +39,34 @@ class SearchFilterScreen extends StatelessWidget {
                   top: Dimens.smallMargin, left: Dimens.normalMargin),
               child: SpokenLanguageRowWidget(),
             ),
-            Divider(
-              thickness: Dimens.dividerThickness
-            ),
+            PersoDivider(),
             Container(
-              margin: EdgeInsets.only(top: Dimens.normalMargin, left: Dimens.bigMargin),
+              margin: EdgeInsets.only(
+                  top: Dimens.normalMargin, left: Dimens.bigMargin),
               child: Text(
                 AppLocalizations.of(context)!.location,
                 style: ThemeText.bodyBoldBlackText,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: Dimens.bigMargin, top: 2, bottom: Dimens.bigMargin),
+              margin: EdgeInsets.only(
+                  left: Dimens.bigMargin,
+                  top: Dimens.smallerMargin,
+                  bottom: Dimens.bigMargin),
               child: Row(
-                children: [Text("By default it is set to My country")],
+                children: [Text(AppLocalizations.of(context)!.location_default_set)],
               ),
             ),
-            Divider(
-              thickness: Dimens.dividerThickness
-            ),
+            PersoDivider(),
             Container(
-              margin: EdgeInsets.only(top: Dimens.normalMargin, left: Dimens.bigMargin, bottom: Dimens.normalMargin),
+              margin: EdgeInsets.only(
+                  top: Dimens.normalMargin,
+                  left: Dimens.bigMargin,
+                  bottom: Dimens.normalMargin),
               child: Row(
-                children: <Widget>[
-                  Text(AppLocalizations.of(context)!.rating, style: ThemeText.bodyBoldBlackText),
+                children: [
+                  Text(AppLocalizations.of(context)!.rating,
+                      style: ThemeText.bodyBoldBlackText),
                   Container(
                     margin: EdgeInsets.only(left: Dimens.bigMargin),
                     child: RatingBar(
@@ -83,16 +85,19 @@ class SearchFilterScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(
-              thickness: Dimens.dividerThickness),
+            PersoDivider(),
             Container(
-                margin: EdgeInsets.only(top: Dimens.normalMargin, left: Dimens.bigMargin),
+                margin: EdgeInsets.only(
+                    top: Dimens.normalMargin, left: Dimens.bigMargin),
                 child: Text(
                   AppLocalizations.of(context)!.specialities,
                   style: ThemeText.bodyBoldBlackText,
                 )),
             Container(
-              margin: EdgeInsets.only(top: Dimens.bigMargin, left:Dimens.bigMargin, bottom: Dimens.bigMargin),
+              margin: EdgeInsets.only(
+                  top: Dimens.bigMargin,
+                  left: Dimens.bigMargin,
+                  bottom: Dimens.bigMargin),
               child: PersoCategoryChips(),
             ),
             Expanded(

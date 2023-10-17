@@ -6,7 +6,7 @@ import 'package:Perso/app/screens/profile_creation/profile_creation_screen.dart'
 import 'package:Perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:Perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:Perso/app/screens/search/search_screen.dart';
-import 'package:Perso/app/screens/search_filters/search_filter.dart';
+import 'package:Perso/app/screens/search_filters/search_filter_screen.dart';
 import 'package:Perso/app/screens/search_results/search_results.dart';
 import 'package:Perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:Perso/app/screens/sign_up/sign_up_screen.dart';
@@ -73,7 +73,7 @@ final GoRouter goRouter = GoRouter(
                       name: ScreenNavigationKey.searchFilter,
                       path: ScreenNavigationKey.searchFilter,
                       pageBuilder: (context, state) {
-                        return  NoTransitionPage(
+                        return  const NoTransitionPage(
                             child: SearchFilterScreen());
                       },
                     ),

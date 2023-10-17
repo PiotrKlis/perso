@@ -12,7 +12,7 @@
   "gymnastics": "Gymnastics",
   "crossfit": "Crossfit",
   "near_you": "Near you",
-  "password_recovery" : "Password recovery",
+  "password_recovery": "Password recovery",
   "forgotten_password_title": "Forgotten password?",
   "forgotten_password_subtitle": "No worries, we have got you covered",
   "enter_email_forgotten_password": "Enter your email address to reset your password",
@@ -20,34 +20,34 @@
   "reset_password": "Reset Password",
   "password_reset_success": "Email with password reset instructions has been sent to an email you have provided. See you soon!",
   "generic_error_message": "Something went wrong",
-  "welcome_message_title":"Welcome to PERSO!",
-  "welcome_message_body_1":"Thank you for logging in. We are thrilled to have you join our community 🎉",
+  "welcome_message_title": "Welcome to PERSO!",
+  "welcome_message_body_1": "Thank you for logging in. We are thrilled to have you join our community 🎉",
   "welcome_message_body_2": "Get ready to embark on a journey of discovery and innovation",
   "choose_trainer_user_type": "I am a trainer",
   "choose_client_user_type": "I am a client",
   "succes_message_title": "Amazing success!",
   "succes_message_body_1": "Your account creation has been completed. Now you can enjoy all the benefits of being a member.",
   "succes_message_body_2": "If you have any questions or need assistance, do not hesitate to reach out to our support team. We hope you have a fantastic time using our app!",
-  "finish":"FINISH",
+  "finish": "FINISH",
   "upload_image": "Upload image",
-  "name" : "Name",
-  "surname" : "Surname",
+  "name": "Name",
+  "surname": "Surname",
   "nickname": "Nickname",
   "phone_number": "Phone number",
   "short_bio": "Short Bio",
   "long_bio": "Long bio",
   "select_your_specialities": "Select your specialities",
-  "next" : "Next",
+  "next": "Next",
   "search": "Search",
   "search_filter": "Search filter",
   "search_filter_screen": "Search filter screen",
   "search_results": "Search results",
   "similar_trainers": "Similar trainers",
-  "email_not_verified" : "Email not verified",
+  "email_not_verified": "Email not verified",
   "sign_in": "Sign In",
-  "login":"Login",
+  "login": "Login",
   "password": "Password",
-  "or":"OR",
+  "or": "OR",
   "sign_up": "Sign up",
   "sign_up_title": "Sign up new user",
   "sign_up_body_1": "Create your account",
@@ -68,16 +68,19 @@
   "training_categories": "Training categories",
   "categories": "Categories",
   "edit_profile": "Edit profile {userType}!",
-    "@edit_profile": {
-        "placeholders": {
-            "userType": {
-                "type": "String"
-            }}},
+  "@edit_profile": {
+    "placeholders": {
+      "userType": {
+        "type": "String"
+      }
+    }
+  },
   "logout": "Logout",
   "filters": "Filters",
-  "spoken_languages":"Spoken Languages",
-  "location" : "Location",
+  "spoken_languages": "Languages",
+  "location": "Location",
   "rating": "Rating",
   "specialities": "Specialities",
-  "apply_filtres_button": "Apply Filtres"
+  "apply_filtres_button": "Confirm",
+  "location_default_set": "By default it is set to My country"
 }

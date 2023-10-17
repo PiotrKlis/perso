@@ -75,9 +75,10 @@
           }}},
   "logout": "Wyloguj się",
   "filters": "Filtry",
-  "spoken_languages":"Język komunikacji",
+  "spoken_languages":"Język",
   "location" : "Lokalizacja",
   "rating": "Ocena",
-  "specialities": "Specjalności",
-  "apply_filtres_button": "Zastosuj filtry"
+  "specialities": "Specjalizacje",
+  "apply_filtres_button": "Zatwierdź",
+  "location_default_set": "Domyślnie ustawiony jest Twój kraj"
 }
