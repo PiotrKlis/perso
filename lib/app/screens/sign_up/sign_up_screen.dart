@@ -28,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => SignUpBloc(const SignUpState.initial()),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+
         backgroundColor: PersoColors.lightBlue,
         appBar: PersoAppBar(title: AppLocalizations.of(context)!.sign_up_title),
         body: SingleChildScrollView(
