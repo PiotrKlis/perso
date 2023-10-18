@@ -30,7 +30,7 @@ class SearchFilterScreen extends StatelessWidget {
                 left: Dimens.bigMargin,
               ),
               child: Text(
-                AppLocalizations.of(context)!.spoken_languages,
+                AppLocalizations.of(context)!.languages,
                 style: ThemeText.bodyBoldBlackText,
               ),
             ),
@@ -107,7 +107,7 @@ class SearchFilterScreen extends StatelessWidget {
                   margin: EdgeInsets.only(bottom: Dimens.biggerMargin),
                   child: PersoButton(
                     width: Dimens.bigButtonWidth,
-                    title: AppLocalizations.of(context)!.apply_filtres_button,
+                    title: AppLocalizations.of(context)!.confirm,
                   ),
                 ),
               ),

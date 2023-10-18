@@ -77,10 +77,8 @@
   },
   "logout": "Logout",
   "filters": "Filters",
-  "languages": "Languages",
   "location": "Location",
   "rating": "Rating",
   "specialities": "Specialities",
-  "confirm": "Confirm",
   "location_default_set": "By default it is set to My country"
 }
