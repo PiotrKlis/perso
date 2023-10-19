@@ -1,10 +1,10 @@
-import 'package:Perso/app/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/value/app_colors.dart';
 
 class ThemeText {
   static String fontFamilyName = "Inter";
 
-  static TextStyle largerTitleBold = TextStyle(
+  static final largerTitleBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 34.0,
@@ -12,7 +12,7 @@ class ThemeText {
       letterSpacing: -1.0,
       fontWeight: FontWeight.w700);
 
-  static TextStyle largeTitleBold = TextStyle(
+  static final largeTitleBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 28.0,
@@ -20,7 +20,7 @@ class ThemeText {
       letterSpacing: -1.0,
       fontWeight: FontWeight.w700);
 
-  static TextStyle mediumTitleBold = TextStyle(
+  static final mediumTitleBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 22.0,
@@ -28,7 +28,7 @@ class ThemeText {
       letterSpacing: -0.8,
       fontWeight: FontWeight.w700);
 
-  static TextStyle smallTitleBold = TextStyle(
+  static final smallTitleBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 20.0,
@@ -36,7 +36,7 @@ class ThemeText {
       letterSpacing: -0.7,
       fontWeight: FontWeight.w700);
 
-  static TextStyle subHeadingBold = TextStyle(
+  static final subHeadingBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 15.0,
@@ -44,7 +44,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle subHeadingBoldGrey = TextStyle(
+  static final subHeadingBoldGrey = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.lightGrey,
       fontSize: 15.0,
@@ -52,7 +52,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle bodyBoldBlackText = TextStyle(
+  static final bodyBoldBlackText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 17.0,
@@ -60,7 +60,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle bodyBoldWhiteText = TextStyle(
+  static final bodyBoldWhiteText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.white,
       fontSize: 17.0,
@@ -68,7 +68,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle bodyBoldGreyText = TextStyle(
+  static final bodyBoldGreyText = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.grey,
       fontSize: 17.0,
@@ -76,7 +76,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle calloutBoldBlackText = TextStyle(
+  static final calloutBoldBlackText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 16.0,
@@ -84,7 +84,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle calloutBoldWhiteText = TextStyle(
+  static final calloutBoldWhiteText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.white,
       fontSize: 16.0,
@@ -92,7 +92,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle calloutBoldBlueText = TextStyle(
+  static final calloutBoldBlueText = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.blue,
       fontSize: 16.0,
@@ -100,35 +100,35 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w600);
 
-  static TextStyle footnoteBold = TextStyle(
+  static final footnoteBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 13.0,
       height: 1.38,
       fontWeight: FontWeight.w600);
 
-  static TextStyle footnoteBoldBlue = TextStyle(
+  static final footnoteBoldBlue = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.blue,
       fontSize: 13.0,
       height: 1.38,
       fontWeight: FontWeight.w600);
 
-  static TextStyle footnoteBoldGrey = TextStyle(
+  static final footnoteBoldGrey = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.lightGrey,
       fontSize: 13.0,
       height: 1.38,
       fontWeight: FontWeight.w600);
 
-  static TextStyle captionMediumBold = TextStyle(
+  static final captionMediumBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 12.0,
       height: 1.33,
       fontWeight: FontWeight.w600);
 
-  static TextStyle captionSmallBold = TextStyle(
+  static final captionSmallBold = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 11.0,
@@ -136,7 +136,7 @@ class ThemeText {
       letterSpacing: 0.1,
       fontWeight: FontWeight.w600);
 
-  static TextStyle largerTitleRegular = TextStyle(
+  static final largerTitleRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 41.0,
@@ -144,7 +144,7 @@ class ThemeText {
       letterSpacing: -1.0,
       fontWeight: FontWeight.w400);
 
-  static TextStyle largeTitleRegular = TextStyle(
+  static final largeTitleRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 28.0,
@@ -152,7 +152,7 @@ class ThemeText {
       letterSpacing: -1.0,
       fontWeight: FontWeight.w400);
 
-  static TextStyle mediumTitleRegular = TextStyle(
+  static final mediumTitleRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 22.0,
@@ -160,7 +160,7 @@ class ThemeText {
       letterSpacing: -0.8,
       fontWeight: FontWeight.w400);
 
-  static TextStyle smallTitleRegular = TextStyle(
+  static final smallTitleRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 20.0,
@@ -168,7 +168,7 @@ class ThemeText {
       letterSpacing: -0.7,
       fontWeight: FontWeight.w400);
 
-  static TextStyle subHeadingRegular = TextStyle(
+  static final subHeadingRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 15.0,
@@ -176,7 +176,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle subHeadingRegularBlue = TextStyle(
+  static final subHeadingRegularBlue = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.blue,
       fontSize: 15.0,
@@ -184,7 +184,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle subHeadingRegularGrey = TextStyle(
+  static final subHeadingRegularGrey = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.lightGrey,
       fontSize: 15.0,
@@ -192,7 +192,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle bodyRegularBlue = TextStyle(
+  static final bodyRegularBlue = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.blue,
       fontSize: 17.0,
@@ -200,7 +200,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle bodyRegularBlackText = TextStyle(
+  static final bodyRegularBlackText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 17.0,
@@ -208,7 +208,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle bodyRegularWhiteText = TextStyle(
+  static final bodyRegularWhiteText = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.white,
       fontSize: 17.0,
@@ -216,7 +216,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle bodyRegularGreyText = TextStyle(
+  static final bodyRegularGreyText = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.lightGrey,
       fontSize: 17.0,
@@ -224,7 +224,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle calloutRegular = TextStyle(
+  static final calloutRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 16.0,
@@ -232,7 +232,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle calloutRegularRed = TextStyle(
+  static final calloutRegularRed = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.red,
       fontSize: 16.0,
@@ -240,7 +240,7 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle calloutRegularGrey = TextStyle(
+  static final calloutRegularGrey = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.grey,
       fontSize: 16.0,
@@ -248,28 +248,28 @@ class ThemeText {
       letterSpacing: -0.4,
       fontWeight: FontWeight.w400);
 
-  static TextStyle footnoteRegular = TextStyle(
+  static final footnoteRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 13.0,
       height: 1.38,
       fontWeight: FontWeight.w400);
 
-  static TextStyle footnoteRegularGrey = TextStyle(
+  static final footnoteRegularGrey = TextStyle(
       fontFamily: fontFamilyName,
       color: PersoColors.lightGrey,
       fontSize: 13.0,
       height: 1.38,
       fontWeight: FontWeight.w400);
 
-  static TextStyle captionMediumRegular = TextStyle(
+  static final captionMediumRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 12.0,
       height: 1.33,
       fontWeight: FontWeight.w400);
 
-  static TextStyle captionSmallRegular = TextStyle(
+  static final captionSmallRegular = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.black,
       fontSize: 11.0,
@@ -277,7 +277,7 @@ class ThemeText {
       letterSpacing: 0.1,
       fontWeight: FontWeight.w400);
 
-  static TextStyle captionSmallRegularGrey = TextStyle(
+  static final captionSmallRegularGrey = TextStyle(
       fontFamily: fontFamilyName,
       color: Colors.grey,
       fontSize: 11.0,

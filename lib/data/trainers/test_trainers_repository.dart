@@ -1,5 +1,5 @@
-import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/data/trainers/trainers_source.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/data/trainers/trainers_source.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 

@@ -51,7 +51,7 @@ class Dimens {
   static const double appBarElevation = 0.0;
   static const double placeholderIconSize = 120.0;
 
-  static const double profileImageWidth =200.0;
+  static const double profileImageWidth = 200.0;
   static const double profileImageHeight = 200.0;
 
   static const double iconSize = 24.0;

@@ -1,36 +1,34 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:Perso/app/models/editable_client_data.dart';
-import 'package:Perso/app/models/editable_trainer_data.dart';
-import 'package:Perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
-import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
-import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/utils/validators.dart';
-import 'package:Perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:Perso/app/widgets/adress_and_map/google_map.dart';
-import 'package:Perso/app/widgets/adress_and_map/perso_autocomplete.dart';
-import 'package:Perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
-import 'package:Perso/app/widgets/category_chips/category_chips.dart';
-import 'package:Perso/app/widgets/perso_app_bar.dart';
-import 'package:Perso/app/widgets/perso_async_text_field.dart';
-import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_indented_divider.dart';
-import 'package:Perso/app/widgets/perso_text_field.dart';
-import 'package:Perso/app/widgets/spoken_language_row.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:perso/app/models/editable_client_data.dart';
+import 'package:perso/app/models/editable_trainer_data.dart';
+import 'package:perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
+import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
+import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/utils/validators.dart';
+import 'package:perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
+import 'package:perso/app/widgets/adress_and_map/google_map.dart';
+import 'package:perso/app/widgets/adress_and_map/perso_autocomplete.dart';
+import 'package:perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
+import 'package:perso/app/widgets/category_chips/category_chips.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/perso_async_text_field.dart';
+import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_indented_divider.dart';
+import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/app/widgets/spoken_language_row.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
+import 'package:perso/core/user_type.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   ProfileEditScreen({super.key, required UserType userType})
@@ -67,33 +65,33 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         width: 200.0,
         height: 200.0,
         decoration:
-        const BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.black),
         margin: const EdgeInsets.only(top: Dimens.bigMargin),
         child: image == null
             ? const Icon(
-          Icons.camera_alt,
-          color: Colors.white,
-          size: 120.0,
-        )
+                Icons.camera_alt,
+                color: Colors.white,
+                size: 120.0,
+              )
             : ClipOval(
-          child: Image.file(
-            File(image!.path),
-            width: 200.0,
-            height: 200.0,
-            fit: BoxFit.cover,
-          ),
-        ),
+                child: Image.file(
+                  File(image!.path),
+                  width: 200.0,
+                  height: 200.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
       ),
     );
     var uploadImageButton = Container(
         margin: const EdgeInsets.only(top: Dimens.bigMargin),
         child: Center(
             child: PersoButton(
-              title: AppLocalizations.of(context)!.upload_image,
-              onTap: (context) {
-                getImage();
-              },
-            )));
+          title: context.strings.upload_image,
+          onTap: (context) {
+            getImage();
+          },
+        )));
     var languageSection = Visibility(
       visible: widget._userType == UserType.trainer,
       child: Column(
@@ -120,7 +118,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           right: Dimens.normalMargin),
       child: PersoTextField(
           textEditingController: surnameController,
-          title: AppLocalizations.of(context)!.surname,
+          title: context.strings.surname,
           customValidator: TextFieldValidator.validateIsEmpty),
     );
     var nickname = Container(
@@ -130,7 +128,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           right: Dimens.normalMargin),
       //TODO: Find different, non-hacky way of async validation way
       child: PersoAsyncTextFormField(
-          hintText: AppLocalizations.of(context)!.nickname,
+          hintText: context.strings.nickname,
           validator: (value) =>
               widget._userInfoProvider.isNicknameUnique(value),
           validationDebounce: const Duration(milliseconds: 500),
@@ -166,7 +164,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 height: 140.0,
                 margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 child: PersoTextField(
-                  title: AppLocalizations.of(context)!.short_bio,
+                  title: context.strings.short_bio,
                   customValidator: TextFieldValidator.validateIsEmpty,
                   isMultiLine: true,
                   maxLength: 150,
@@ -183,7 +181,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             top: Dimens.normalMargin,
             right: Dimens.normalMargin),
         child: PersoTextField(
-          title: AppLocalizations.of(context)!.long_bio,
+          title: context.strings.long_bio,
           isMultiLine: true,
           maxLength: 500,
           customValidator: TextFieldValidator.validateIsEmpty,
@@ -208,7 +206,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               margin: const EdgeInsets.only(
                   top: Dimens.normalMargin, left: Dimens.normalMargin),
               child: Text(
-                AppLocalizations.of(context)!.select_your_specialities,
+                context.strings.select_your_specialities,
                 style: ThemeText.bodyBoldBlackText,
               )),
           Container(
@@ -220,49 +218,43 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
     var sendDataButton = Center(
         child: Container(
-          margin: const EdgeInsets.only(
-              top: Dimens.biggerMargin,
-              bottom: Dimens.biggerMargin,
-              right: Dimens.normalMargin),
-          child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
-            builder: (context, state) {
-              return state.whenOrNull(
-                loading: () =>
-                    Center(
-                        child: Container(
-                            margin:
+      margin: const EdgeInsets.only(
+          top: Dimens.biggerMargin,
+          bottom: Dimens.biggerMargin,
+          right: Dimens.normalMargin),
+      child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
+        builder: (context, state) {
+          return state.whenOrNull(
+                loading: () => Center(
+                    child: Container(
+                        margin:
                             const EdgeInsets.only(bottom: Dimens.normalMargin),
-                            child: const CircularProgressIndicator())),
+                        child: const CircularProgressIndicator())),
               ) ??
-                  PersoButton(
-                      width: 160.0,
-                      title: AppLocalizations.of(context)!.next,
-                      onTap: uploadData);
-            },
-            listener: (context, state) {
-              state.whenOrNull(
-                  success: () =>
-                      context
-                          .replaceNamed(
-                          ScreenNavigationKey.profileCreationSuccess));
-            },
-          ),
-        ));
+              PersoButton(
+                  width: 160.0, title: context.strings.next, onTap: uploadData);
+        },
+        listener: (context, state) {
+          state.whenOrNull(
+              success: () => context
+                  .replaceNamed(ScreenNavigationKey.profileCreationSuccess));
+        },
+      ),
+    ));
     var sendDataErrorText = Center(
         child: Container(
-          margin: const EdgeInsets.only(
-            top: Dimens.normalMargin,
-          ),
-          child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
-            builder: (context, state) {
-              return state.whenOrNull(
-                  error: (error) =>
-                      Text("Something went wrong - $error",
-                          style: ThemeText.calloutRegularRed)) ??
-                  Container();
-            },
-          ),
-        ));
+      margin: const EdgeInsets.only(
+        top: Dimens.normalMargin,
+      ),
+      child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
+        builder: (context, state) {
+          return state.whenOrNull(
+                  error: (error) => Text("Something went wrong - $error",
+                      style: ThemeText.calloutRegularRed)) ??
+              Container();
+        },
+      ),
+    ));
 
     var nameSection = Container(
         margin: const EdgeInsets.only(top: Dimens.normalMargin),
@@ -276,7 +268,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 margin: const EdgeInsets.only(
                     left: Dimens.normalMargin, right: Dimens.normalMargin),
                 child: PersoTextField(
-                    title: AppLocalizations.of(context)!.name,
+                    title: context.strings.name,
                     textEditingController: nameController,
                     customValidator: TextFieldValidator.validateIsEmpty),
               ),
@@ -290,55 +282,51 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       ],
       child: BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
           builder: (context, state) {
-            state.whenOrNull(mapUpdate: (latLon) {
-              latLng = latLon;
-            },
-            );
-            return Scaffold(
-              backgroundColor: PersoColors.lightBlue,
-              appBar: PersoAppBar(
-                  title: AppLocalizations.of(context)!
-                      .edit_profile(widget._userType.toString())),
-              body: SingleChildScrollView(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior
-                    .onDrag,
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      imageSection,
-                      uploadImageButton,
-                      languageSection,
-                      nameSection,
-                      surname,
-                      nickname,
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
-                          child: const PersoIndentedDivider()),
-                      location,
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.normalMargin),
-                          child: googleMap),
-                      bioAndSpecialitiesSection,
-                      sendDataButton,
-                      sendDataErrorText
-                    ],
-                  ),
-                ),
+        state.whenOrNull(
+          mapUpdate: (latLon) {
+            latLng = latLon;
+          },
+        );
+        return Scaffold(
+          backgroundColor: PersoColors.lightBlue,
+          appBar: PersoAppBar(
+              title: context.strings.edit_profile(widget._userType.toString())),
+          body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  imageSection,
+                  uploadImageButton,
+                  languageSection,
+                  nameSection,
+                  surname,
+                  nickname,
+                  Container(
+                      margin: const EdgeInsets.only(
+                          top: Dimens.normalMargin, right: Dimens.normalMargin),
+                      child: const PersoIndentedDivider()),
+                  location,
+                  Container(
+                      margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                      child: googleMap),
+                  bioAndSpecialitiesSection,
+                  sendDataButton,
+                  sendDataErrorText
+                ],
               ),
-            );
-          }
-      ),
+            ),
+          ),
+        );
+      }),
     );
   }
 
   Future<void> getImage() async {
     final XFile? pickedImage =
-    await picker.pickImage(source: ImageSource.gallery);
+        await picker.pickImage(source: ImageSource.gallery);
     setState(() {
       image = pickedImage;
     });
@@ -364,7 +352,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         categories: persoChipsList.selectedCategories,
         latLng: latLng ?? const LatLng(0.0, 0.0));
 
-        context
+    context
         .read<ProfileEditBloc>()
         .add(ProfileEditEvent.uploadTrainerData(trainerData));
   }
@@ -407,7 +395,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 margin: const EdgeInsets.only(
                     left: Dimens.normalMargin, right: Dimens.normalMargin),
                 child: PersoTextField(
-                    title: AppLocalizations.of(context)!.name,
+                    title: context.strings.name,
                     textEditingController: nameController,
                     customValidator: TextFieldValidator.validateIsEmpty),
               ),

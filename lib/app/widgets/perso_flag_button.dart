@@ -1,5 +1,5 @@
-import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoFlagButton extends StatelessWidget {
   const PersoFlagButton(

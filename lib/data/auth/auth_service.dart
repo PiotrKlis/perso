@@ -1,8 +1,7 @@
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:injectable/injectable.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 
 @injectable
 class AuthService {

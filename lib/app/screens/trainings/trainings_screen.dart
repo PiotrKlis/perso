@@ -12,7 +12,6 @@ class TrainingScreen extends StatelessWidget {
             // context.go('/trainings/training_details');
           },
           child: Text("I am training body"),
-        )
-    );
+        ));
   }
 }

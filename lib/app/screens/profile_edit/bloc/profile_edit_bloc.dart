@@ -1,12 +1,12 @@
-import 'package:Perso/app/screens/profile_edit/event/profile_edit_event.dart';
-import 'package:Perso/app/screens/profile_edit/state/profile_edit_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/data/clients/clients_service.dart';
-import 'package:Perso/data/clients/firestore_clients_service.dart';
-import 'package:Perso/data/trainers/firestore_trainers_service.dart';
-import 'package:Perso/data/trainers/trainers_service.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
+import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
+import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/data/clients/clients_service.dart';
+import 'package:perso/data/clients/firestore_clients_service.dart';
+import 'package:perso/data/trainers/firestore_trainers_service.dart';
+import 'package:perso/data/trainers/trainers_service.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {

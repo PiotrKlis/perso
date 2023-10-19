@@ -1,10 +1,8 @@
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/perso_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/perso_button.dart';
 
 class SignUpSuccessScreen extends StatelessWidget {
   const SignUpSuccessScreen({super.key});
@@ -23,7 +21,11 @@ class SignUpSuccessScreen extends StatelessWidget {
                   top: Dimens.biggerMargin,
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
-              child: const Center(child: Icon(Icons.email, size: Dimens.iconSizeLarge,)),
+              child: const Center(
+                  child: Icon(
+                Icons.email,
+                size: Dimens.iconSizeLarge,
+              )),
             ),
             Container(
               margin: const EdgeInsets.only(
@@ -31,7 +33,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
-                AppLocalizations.of(context)!.sign_up_succes_title,
+                context.strings.sign_up_succes_title,
                 style: ThemeText.largerTitleBold,
               ),
             ),
@@ -41,7 +43,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
-                AppLocalizations.of(context)!.sign_up_succes_body_1,
+                context.strings.sign_up_succes_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
@@ -51,7 +53,7 @@ class SignUpSuccessScreen extends StatelessWidget {
                   left: Dimens.normalMargin,
                   right: Dimens.normalMargin),
               child: Text(
-                AppLocalizations.of(context)!.sign_up_succes_body_2,
+                context.strings.sign_up_succes_body_2,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
@@ -60,14 +62,14 @@ class SignUpSuccessScreen extends StatelessWidget {
                     top: Dimens.biggerMargin,
                     left: Dimens.normalMargin,
                     right: Dimens.normalMargin),
-                child:
-                    Text(AppLocalizations.of(context)!.sign_up_succes_body_3, style: ThemeText.bodyBoldBlackText)),
+                child: Text(context.strings.sign_up_succes_body_3,
+                    style: ThemeText.bodyBoldBlackText)),
             Container(
                 margin: const EdgeInsets.only(
                     top: Dimens.biggerMargin, left: Dimens.normalMargin),
                 child: Center(
                     child: PersoButton(
-                  title: AppLocalizations.of(context)!.confirm,
+                  title: context.strings.confirm,
                   onTap: _onConfirm,
                 )))
           ],

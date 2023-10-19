@@ -1,4 +1,4 @@
-import 'package:Perso/app/models/training_category/training_category.dart';
+import 'package:perso/app/models/training_category/training_category.dart';
 
 abstract class TrainingCategorySource {
   Future<List<TrainingCategory>> getCategoriesShortList();

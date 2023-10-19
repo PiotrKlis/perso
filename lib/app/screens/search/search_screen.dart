@@ -1,11 +1,10 @@
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/widgets/perso_app_bar.dart';
-import 'package:Perso/app/widgets/perso_search.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/perso_search.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({super.key});
@@ -34,7 +33,7 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: PersoColors.lightWhite,
-        appBar:  PersoAppBar(title: AppLocalizations.of(context)!.search),
+        appBar: PersoAppBar(title: context.strings.search),
         body: Column(
           children: [
             Container(

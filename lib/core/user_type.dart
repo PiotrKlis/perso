@@ -1,6 +1,4 @@
-enum UserType {
-  trainer, client
-}
+enum UserType { trainer, client }
 
 extension StringToUserType on String {
   UserType? toUserType() {

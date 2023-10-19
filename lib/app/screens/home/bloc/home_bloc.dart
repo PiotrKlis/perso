@@ -1,8 +1,8 @@
-import 'package:Perso/app/screens/home/event/home_event.dart';
-import 'package:Perso/app/screens/home/state/home_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
+import 'package:perso/app/screens/home/event/home_event.dart';
+import 'package:perso/app/screens/home/state/home_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/user_type.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {

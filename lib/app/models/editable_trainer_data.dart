@@ -17,6 +17,5 @@ class EditableTrainerData with _$EditableTrainerData {
     required final String fullBio,
     required final List<String> categories,
     required final LatLng latLng,
-
   }) = _EditableTrainerData;
 }

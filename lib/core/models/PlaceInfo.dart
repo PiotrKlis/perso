@@ -7,5 +7,5 @@ class PlaceInfo with _$PlaceInfo {
   const factory PlaceInfo({
     required final String address,
     required final LatLng latLng,
-}) = _PlaceInfo;
+  }) = _PlaceInfo;
 }

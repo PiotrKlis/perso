@@ -1,8 +1,6 @@
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoSmallButton extends StatelessWidget {
   const PersoSmallButton(
@@ -38,9 +36,7 @@ class PersoSmallButton extends StatelessWidget {
         ),
         onTap: () {
           showCountryPicker(
-            onClosed: () {
-
-            },
+            onClosed: () {},
             useSafeArea: true,
             favorite: ["PL", "GB", "UA"],
             context: context,

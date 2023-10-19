@@ -1,19 +1,17 @@
-import 'package:Perso/app/screens/sign_up/bloc/sign_up_bloc.dart';
-import 'package:Perso/app/screens/sign_up/event/sign_up_event.dart';
-import 'package:Perso/app/screens/sign_up/state/sign_up_state.dart';
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/utils/validators.dart';
-import 'package:Perso/app/widgets/perso_app_bar.dart';
-import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_indented_divider.dart';
-import 'package:Perso/app/widgets/perso_text_field.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:perso/app/screens/sign_up/bloc/sign_up_bloc.dart';
+import 'package:perso/app/screens/sign_up/event/sign_up_event.dart';
+import 'package:perso/app/screens/sign_up/state/sign_up_state.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/utils/validators.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_indented_divider.dart';
+import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
@@ -29,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
       create: (context) => SignUpBloc(const SignUpState.initial()),
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(title: AppLocalizations.of(context)!.sign_up_title),
+        appBar: PersoAppBar(title: context.strings.sign_up_title),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Form(
@@ -40,12 +38,12 @@ class SignUpScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                    child: Text(AppLocalizations.of(context)!.sign_up_body_1,
+                    child: Text(context.strings.sign_up_body_1,
                         style: ThemeText.largerTitleBold)),
                 Container(
                     margin: const EdgeInsets.only(
                         top: Dimens.mediumMargin, left: Dimens.normalMargin),
-                    child: Text(AppLocalizations.of(context)!.sign_up_body_2,
+                    child: Text(context.strings.sign_up_body_2,
                         style: ThemeText.bodyRegularBlackText)),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
@@ -54,14 +52,15 @@ class SignUpScreen extends StatelessWidget {
                       Container(
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
-                          child: const Icon(Icons.email, size: Dimens.iconSize)),
+                          child:
+                              const Icon(Icons.email, size: Dimens.iconSize)),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
                               left: Dimens.normalMargin,
                               right: Dimens.normalMargin),
                           child: PersoTextField(
-                              title: AppLocalizations.of(context)!.email,
+                              title: context.strings.email,
                               textEditingController: _loginController,
                               customValidator:
                                   TextFieldValidator.validateEmail),
@@ -82,14 +81,15 @@ class SignUpScreen extends StatelessWidget {
                         Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin),
-                            child: const Icon(Icons.password, size: Dimens.iconSize)),
+                            child: const Icon(Icons.password,
+                                size: Dimens.iconSize)),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin,
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
-                              title: AppLocalizations.of(context)!.password,
+                              title: context.strings.password,
                               customValidator:
                                   TextFieldValidator.validatePassword,
                               shouldObscureText: true,
@@ -110,7 +110,7 @@ class SignUpScreen extends StatelessWidget {
                                 left: Dimens.substantialMargin,
                                 right: Dimens.normalMargin),
                             child: PersoTextField(
-                              title: AppLocalizations.of(context)!.confirm_password,
+                              title: context.strings.confirm_password,
                               passwordController: _passwordController,
                               confirmPasswordController:
                                   _confirmPasswordController,
@@ -128,7 +128,7 @@ class SignUpScreen extends StatelessWidget {
                           right: Dimens.normalMargin),
                       child: PersoButton(
                           width: Dimens.persoButtonWidth,
-                          title: AppLocalizations.of(context)!.register,
+                          title: context.strings.register,
                           onTap: _registerUser)),
                 ),
                 BlocConsumer<SignUpBloc, SignUpState>(

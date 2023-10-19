@@ -1,4 +1,4 @@
-import 'package:Perso/core/models/review_entity.dart';
+import 'package:perso/core/models/review_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 

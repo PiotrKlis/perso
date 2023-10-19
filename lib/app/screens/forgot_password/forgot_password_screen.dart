@@ -1,14 +1,12 @@
-import 'package:Perso/app/screens/forgot_password/bloc/forgot_password_bloc.dart';
-import 'package:Perso/app/screens/forgot_password/event/forgot_password_event.dart';
-import 'package:Perso/app/screens/forgot_password/state/forgot_password_state.dart';
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:perso/app/screens/forgot_password/bloc/forgot_password_bloc.dart';
+import 'package:perso/app/screens/forgot_password/event/forgot_password_event.dart';
+import 'package:perso/app/screens/forgot_password/state/forgot_password_state.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_text_field.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -22,7 +20,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.password_recovery),
+          title: Text(context.strings.password_recovery),
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -37,17 +35,17 @@ class ForgotPasswordScreen extends StatelessWidget {
                         size: Dimens.iconSizeLarge, color: Colors.black)),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                    child: Text(AppLocalizations.of(context)!.forgotten_password_title,
+                    child: Text(context.strings.forgotten_password_title,
                         style: ThemeText.largeTitleBold)),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                  child: Text(AppLocalizations.of(context)!.forgotten_password_subtitle,
+                  child: Text(context.strings.forgotten_password_subtitle,
                       style: ThemeText.bodyBoldBlackText),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.smallerMargin),
                   child: Text(
-                    AppLocalizations.of(context)!.enter_email_forgotten_password,
+                    context.strings.enter_email_forgotten_password,
                     style: ThemeText.bodyRegularBlackText,
                     textAlign: TextAlign.center,
                   ),
@@ -55,13 +53,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: PersoTextField(
-                      title: AppLocalizations.of(context)!.email,
+                      title: context.strings.email,
                       textEditingController: _textEditingController,
                     )),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: PersoButton(
-                    title: AppLocalizations.of(context)!.reset_password,
+                    title: context.strings.reset_password,
                     onTap: (context) {
                       context.read<ForgotPasswordBloc>().add(
                           ForgotPasswordEvent.resetPassword(
@@ -75,7 +73,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       builder: (context, state) {
                         return state.whenOrNull(
                                 passwordResetSuccess: () => Text(
-                                    AppLocalizations.of(context)!.password_reset_success,
+                                    context.strings.password_reset_success,
                                     style: ThemeText.calloutRegular),
                                 error: (error) => Text(error)) ??
                             Container();

@@ -1,13 +1,13 @@
-import 'package:Perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/widgets/trainers_search_carousel/bloc/trainer_search_carousel_bloc.dart';
-import 'package:Perso/app/widgets/trainers_search_carousel/event/trainer_search_carousel_event.dart';
-import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel_card.dart';
-import 'package:Perso/app/widgets/trainers_search_carousel/state/trainer_search_carousel_state.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/trainers_search_carousel/bloc/trainer_search_carousel_bloc.dart';
+import 'package:perso/app/widgets/trainers_search_carousel/event/trainer_search_carousel_event.dart';
+import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel_card.dart';
+import 'package:perso/app/widgets/trainers_search_carousel/state/trainer_search_carousel_state.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoTrainersSearchCarousel extends StatelessWidget {
   PersoTrainersSearchCarousel({super.key});

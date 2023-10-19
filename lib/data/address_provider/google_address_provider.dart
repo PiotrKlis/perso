@@ -1,11 +1,9 @@
 import 'dart:convert';
 
-import 'package:Perso/core/models/PlaceInfo.dart';
-import 'package:Perso/data/address_provider/address_provider.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:collection/collection.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/data/address_provider/address_provider.dart';
 import 'package:uuid/uuid.dart';
 
 @singleton
@@ -18,14 +16,17 @@ class GoogleAddressProvider implements AddressProvider {
   @override
   Future<List<String>> fetchSuggestions(String input) async {
     final Uri request = Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&components=country:pl&key=$apiKey&sessiontoken=$sessionToken');
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?'
+        'input=$input&types=address&components=country:pl&'
+        'key=$apiKey&sessiontoken=$sessionToken');
+
     final response = await client.get(request);
 
     if (response.statusCode == 200) {
-      final result = json.decode(response.body);
+      final result = json.decode(response.body) as Map<String, dynamic>;
       if (result['status'] == 'OK') {
-        return result['predictions']
-            .map<String>((prediction) => prediction['description'] as String)
+        return (result['predictions'] as List<Map<String, String>>)
+            .map((prediction) => prediction['description']!)
             .toList();
       }
       if (result['status'] == 'ZERO_RESULTS') {

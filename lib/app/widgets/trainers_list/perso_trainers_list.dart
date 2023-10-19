@@ -1,11 +1,12 @@
-import 'package:Perso/app/utils/constants.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/trainers_list/bloc/trainers_list_bloc.dart';
-import 'package:Perso/app/widgets/trainers_list/event/trainers_list_event.dart';
-import 'package:Perso/app/widgets/trainers_list/state/trainers_list_state.dart';
-import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/constants.dart';
+
+import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/app/widgets/trainers_list/bloc/trainers_list_bloc.dart';
+import 'package:perso/app/widgets/trainers_list/event/trainers_list_event.dart';
+import 'package:perso/app/widgets/trainers_list/state/trainers_list_state.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -62,7 +63,7 @@ class PersoTrainersList extends StatelessWidget {
                                   top: Dimens.mediumMargin),
                               child: Column(
                                 children: [
-                                  Image.asset("assets/images/trainer1.png",
+                                  Image.asset(AppImages.trainer1,
                                       width: Dimens.trainerImageWidth,
                                       height: Dimens.trainerImageHeight),
                                 ],

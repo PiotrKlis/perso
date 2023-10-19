@@ -1,6 +1,3 @@
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:Perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +5,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
+import 'package:perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
 
 class PersoGoogleMap extends StatefulWidget {
   PersoGoogleMap({super.key, List<LatLng> locations = const []})
@@ -45,33 +45,33 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
       builder: (context, state) =>
           BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
               builder: (context, state) {
-                state.whenOrNull(
-                  initial: () {
-                    print("init");
-                  },
-                );
-                return Container(
-                  margin: const EdgeInsets.only(
-                      left: Dimens.mediumMargin, right: Dimens.mediumMargin),
-                  child: SizedBox(
-                    height: 300.0,
-                    width: double.infinity,
-                    child: GoogleMap(
-                      myLocationButtonEnabled: true,
-                      myLocationEnabled: true,
-                      markers: _markers,
-                      gestureRecognizers: {
-                        Factory<OneSequenceGestureRecognizer>(
-                                () => EagerGestureRecognizer())
-                      },
-                      initialCameraPosition: initialCameraPosition,
-                      onMapCreated: (GoogleMapController controller) {
-                        mapController = controller;
-                      },
-                    ),
-                  ),
-                );
-              }),
+        state.whenOrNull(
+          initial: () {
+            print("init");
+          },
+        );
+        return Container(
+          margin: const EdgeInsets.only(
+              left: Dimens.mediumMargin, right: Dimens.mediumMargin),
+          child: SizedBox(
+            height: 300.0,
+            width: double.infinity,
+            child: GoogleMap(
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
+              markers: _markers,
+              gestureRecognizers: {
+                Factory<OneSequenceGestureRecognizer>(
+                    () => EagerGestureRecognizer())
+              },
+              initialCameraPosition: initialCameraPosition,
+              onMapCreated: (GoogleMapController controller) {
+                mapController = controller;
+              },
+            ),
+          ),
+        );
+      }),
     );
   }
 

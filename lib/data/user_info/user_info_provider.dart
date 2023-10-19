@@ -1,15 +1,15 @@
-import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/core/user_type.dart';
+import 'package:perso/data/utils/firestore_constants.dart';
 
 @singleton
 class UserInfoProvider {
   User? user;
 
   Future<bool> isProfileCreated() async {
-    final String? id = FirebaseAuth.instance.currentUser?.uid;
+    final id = FirebaseAuth.instance.currentUser?.uid;
     final DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(id)
@@ -19,9 +19,8 @@ class UserInfoProvider {
 
   Future<bool> isUserLoggedIn() async {
     if (user != null) {
-      final bool doesProfileExist = await isProfileCreated();
-      final bool isEmailVerified =
-          FirebaseAuth.instance.currentUser!.emailVerified;
+      final doesProfileExist = await isProfileCreated();
+      final isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
       if (doesProfileExist && isEmailVerified) {
         return true;
       }
@@ -30,13 +29,13 @@ class UserInfoProvider {
   }
 
   Future<UserType?> getUserType() async {
-    final bool isLoggedIn = await isUserLoggedIn();
+    final isLoggedIn = await isUserLoggedIn();
     if (isLoggedIn) {
       final DocumentSnapshot snapshot = await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(user?.uid)
           .get();
-      String userType = snapshot.get(UserDocumentFields.userType);
+      final userType = snapshot.get(UserDocumentFields.userType) as String;
       return userType.toUserType();
     } else {
       return null;

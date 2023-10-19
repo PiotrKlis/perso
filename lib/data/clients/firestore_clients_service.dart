@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:Perso/app/models/editable_client_data.dart';
-import 'package:Perso/core/user_type.dart';
-import 'package:Perso/data/clients/clients_service.dart';
-import 'package:Perso/data/utils/firestore_constants.dart';
+import 'package:perso/app/models/editable_client_data.dart';
+import 'package:perso/core/user_type.dart';
+import 'package:perso/data/clients/clients_service.dart';
+import 'package:perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';

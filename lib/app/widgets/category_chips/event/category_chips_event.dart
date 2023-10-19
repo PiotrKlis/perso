@@ -4,5 +4,6 @@ part 'category_chips_event.freezed.dart';
 @freezed
 class CategoryChipsEvent with _$CategoryChipsEvent {
   const factory CategoryChipsEvent.loadAllCategories() = LoadAllCategories;
-  const factory CategoryChipsEvent.loadCategoriesForTrainer(String trainerId) = LoadCategoriesForTrainer;
+  const factory CategoryChipsEvent.loadCategoriesForTrainer(String trainerId) =
+      LoadCategoriesForTrainer;
 }
