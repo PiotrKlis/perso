@@ -42,9 +42,9 @@ class _PersoCategoryChipsState extends State<PersoCategoryChips> {
             content: (List<String> categories) {
               return Container(
                 margin: const EdgeInsets.only(
-                    left: Dimens.smallMargin, right: Dimens.smallMargin),
+                    left: Dimens.xsMargin, right: Dimens.xsMargin),
                 child: Wrap(
-                  spacing: Dimens.smallMargin,
+                  spacing: Dimens.xsMargin,
                   alignment: WrapAlignment.start,
                   children: categories.map((String title) {
                     return FilterChip(

@@ -25,25 +25,25 @@ class ForgotPasswordScreen extends StatelessWidget {
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Container(
-            margin: const EdgeInsets.all(Dimens.normalMargin),
+            margin: const EdgeInsets.all(Dimens.mMargin),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.hugeMargin),
+                    margin: const EdgeInsets.only(top: Dimens.xxlMargin),
                     child: const Icon(Icons.lock,
                         size: Dimens.iconSizeLarge, color: Colors.black)),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                    margin: const EdgeInsets.only(top: Dimens.xlMargin),
                     child: Text(context.strings.forgotten_password_title,
                         style: ThemeText.largeTitleBold)),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
                   child: Text(context.strings.forgotten_password_subtitle,
                       style: ThemeText.bodyBoldBlackText),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.smallerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xxsMargin),
                   child: Text(
                     context.strings.enter_email_forgotten_password,
                     style: ThemeText.bodyRegularBlackText,
@@ -51,13 +51,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                    margin: const EdgeInsets.only(top: Dimens.mMargin),
                     child: PersoTextField(
                       title: context.strings.email,
                       textEditingController: _textEditingController,
                     )),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
                   child: PersoButton(
                     title: context.strings.reset_password,
                     onTap: (context) {
@@ -68,7 +68,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                    margin: const EdgeInsets.only(top: Dimens.mMargin),
                     child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                       builder: (context, state) {
                         return state.whenOrNull(

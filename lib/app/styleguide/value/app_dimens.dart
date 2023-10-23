@@ -1,12 +1,12 @@
 class Dimens {
   static const double noMargin = 0.0;
-  static const double smallerMargin = 4.0;
-  static const double smallMargin = 8.0;
-  static const double mediumMargin = 12.0;
-  static const double normalMargin = 16.0;
-  static const double bigMargin = 24.0;
-  static const double biggerMargin = 32.0;
-  static const double hugeMargin = 52.0;
+  static const double xxsMargin = 4.0;
+  static const double xsMargin = 8.0;
+  static const double sMargin = 12.0;
+  static const double mMargin = 16.0;
+  static const double lMargin = 24.0;
+  static const double xlMargin = 32.0;
+  static const double xxlMargin = 52.0;
   static const double substantialMargin = 56.0;
 
   static const double accountIconSize = 40.0;

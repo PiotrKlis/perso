@@ -27,7 +27,7 @@ class PersoRegisterButton extends StatelessWidget {
                 // getIcon(_registerType),
                 getTitle(_registerType),
                 // Container(
-                //     margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                //     margin: const EdgeInsets.only(left: Dimens.mMargin),
                 //     child: getIcon(_registerType)),
               ],
             )));

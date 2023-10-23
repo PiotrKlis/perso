@@ -65,9 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: const PersoAccountIcon()),
                       Container(
                         margin: const EdgeInsets.only(
-                            top: Dimens.normalMargin,
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
+                            top: Dimens.mMargin,
+                            left: Dimens.mMargin,
+                            right: Dimens.mMargin),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -85,9 +85,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                           margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                              left: Dimens.mMargin,
+                              top: Dimens.mMargin,
+                              right: Dimens.mMargin),
                           child: GestureDetector(
                               onTap: () =>
                                   context.pushNamed(ScreenNavigationKey.search),
@@ -95,9 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const AbsorbPointer(child: PersoSearch()))),
                       Container(
                         margin: const EdgeInsets.only(
-                            top: Dimens.bigMargin,
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
+                            top: Dimens.lMargin,
+                            left: Dimens.mMargin,
+                            right: Dimens.mMargin),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                           margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin, top: Dimens.bigMargin),
+                              left: Dimens.mMargin, top: Dimens.lMargin),
                           child: const PersoTrainingCategoryList(
                               isShortList: true)),
                       Container(
@@ -122,13 +122,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Container(
                                 margin: const EdgeInsets.only(
-                                    top: Dimens.bigMargin),
+                                    top: Dimens.lMargin),
                                 child: PersoTrainersSearchCarousel()),
                             Container(
                               margin: const EdgeInsets.only(
-                                  top: Dimens.bigMargin,
-                                  left: Dimens.normalMargin,
-                                  right: Dimens.normalMargin),
+                                  top: Dimens.lMargin,
+                                  left: Dimens.mMargin,
+                                  right: Dimens.mMargin),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -150,12 +150,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Container(
                               margin: const EdgeInsets.only(
-                                  top: Dimens.smallMargin),
+                                  top: Dimens.xsMargin),
                               child: PersoGoogleMap(),
                             ),
                             Container(
                                 margin: const EdgeInsets.only(
-                                    top: Dimens.smallMargin),
+                                    top: Dimens.xsMargin),
                                 child: const PersoTrainersList())
                           ],
                         ),

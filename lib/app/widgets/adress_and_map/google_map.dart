@@ -52,7 +52,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
         );
         return Container(
           margin: const EdgeInsets.only(
-              left: Dimens.mediumMargin, right: Dimens.mediumMargin),
+              left: Dimens.sMargin, right: Dimens.sMargin),
           child: SizedBox(
             height: 300.0,
             width: double.infinity,
