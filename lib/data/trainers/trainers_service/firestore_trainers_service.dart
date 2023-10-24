@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:perso/app/models/editable_trainer_data.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/user_type.dart';
-import 'package:perso/data/trainers/trainers_service.dart';
+import 'package:perso/data/trainers/trainers_service/trainers_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -40,7 +40,7 @@ class FirestoreTrainersService implements TrainersService {
   }
 
   @override
-  Future<void> setData(TrainerEntity trainerEntity) async {
+  Future<void> uploadFullTrainerData(TrainerEntity trainerEntity) async {
     try {
       final serverImagePath = await _uploadImage(trainerEntity.imagePath);
       final String? id = FirebaseAuth.instance.currentUser?.uid;

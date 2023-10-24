@@ -1,0 +1,18 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'client_entity.freezed.dart';
+
+@freezed
+class ClientEntity with _$ClientEntity {
+  const factory ClientEntity({
+    required String id,
+    required String name,
+    required String surname,
+    required String nickname,
+    required String imagePath,
+    required List<String> languages,
+    required List<String> pendingRequests,
+    required List<String> activeTrainers,
+    required List<String> inactiveTrainers,
+  }) = _ClientEntity;
+}

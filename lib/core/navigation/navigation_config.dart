@@ -18,7 +18,7 @@ import 'package:perso/app/screens/sign_up_success/sign_up_success_screen.dart';
 import 'package:perso/app/screens/trainer_clients_list/trainer_clients_list_screen.dart';
 import 'package:perso/app/screens/trainer_details/trainer_details_screen.dart';
 import 'package:perso/app/screens/trainer_profile/trainer_profile_screen.dart';
-import 'package:perso/app/screens/training_categories/training_categories.dart';
+import 'package:perso/app/screens/training_categories/training_categories_screen.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/bottom_nav_bar.dart';

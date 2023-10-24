@@ -1,7 +1,7 @@
-import 'package:perso/core/models/trainer_entity.dart';
-import 'package:perso/data/trainers/trainers_source.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 
 @injectable
 class TestTrainersRepository implements TrainersSource {

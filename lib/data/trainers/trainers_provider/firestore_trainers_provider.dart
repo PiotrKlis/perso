@@ -5,7 +5,7 @@ import 'package:perso/core/models/review_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/string_extensions.dart';
 import 'package:perso/core/user_type.dart';
-import 'package:perso/data/trainers/trainers_source.dart';
+import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
@@ -26,30 +26,31 @@ class FirestoreTrainersProvider implements TrainersSource {
           votesNumber: data[UserDocumentFields.votesNumber] as int,
           shortBio: data[UserDocumentFields.shortBio] as String,
           rating: data[UserDocumentFields.rating] as double,
-          languages: data[UserDocumentFields.languages].toString().split(", "),
+          languages: data[UserDocumentFields.languages].toString().split(', '),
           categories:
-              data[UserDocumentFields.categories].toString().split(", "),
+              data[UserDocumentFields.categories].toString().split(', '),
           imagePath: data[UserDocumentFields.imagePath] as String,
           fullBio: data[UserDocumentFields.fullBio] as String,
           location: data[UserDocumentFields.location] as String,
           reviews:
               _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
           pendingRequests:
-              data[UserDocumentFields.pendingRequests].toString().split(", "),
+              data[UserDocumentFields.pendingRequests].toString().split(', '),
           activeClients:
-              data[UserDocumentFields.activeClients].toString().split(", "),
+              data[UserDocumentFields.activeClients].toString().split(', '),
           inactiveClients:
-              data[UserDocumentFields.inactiveClients].toString().split(", "),
+              data[UserDocumentFields.inactiveClients].toString().split(', '),
           latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
-              const LatLng(0.0, 0.0));
+              const LatLng(0, 0));
     }).toList();
   }
 
   List<ReviewEntity> _getReviews(List reviews) {
     return reviews.map<ReviewEntity>((review) {
       return ReviewEntity(
-          rating: review[UserDocumentFields.rating] as double,
-          description: review[UserDocumentFields.description] as String);
+        rating: review[UserDocumentFields.rating] as double,
+        description: review[UserDocumentFields.description] as String,
+      );
     }).toList();
   }
 
@@ -71,17 +72,29 @@ class FirestoreTrainersProvider implements TrainersSource {
         rating: data[UserDocumentFields.rating] as double,
         location: data[UserDocumentFields.location] as String,
         reviews: _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
-        languages: data[UserDocumentFields.languages].toString().split(", "),
-        categories: data[UserDocumentFields.categories].toString().split(", "),
-        pendingRequests:
-            data[UserDocumentFields.pendingRequests].toString().split(", "),
-        activeClients:
-            data[UserDocumentFields.activeClients].toString().split(", "),
-        inactiveClients:
-            data[UserDocumentFields.inactiveClients].toString().split(", "),
+        languages: data[UserDocumentFields.languages]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        categories: data[UserDocumentFields.categories]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        pendingRequests: data[UserDocumentFields.pendingRequests]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        activeClients: data[UserDocumentFields.activeClients]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        inactiveClients: data[UserDocumentFields.inactiveClients]
+            .toString()
+            .removeBrackets()
+            .split(', '),
         imagePath: data[UserDocumentFields.imagePath] as String,
         latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
-            const LatLng(0.0, 0.0));
+            const LatLng(0, 0));
   }
 
   @override
@@ -94,7 +107,7 @@ class FirestoreTrainersProvider implements TrainersSource {
     final categories = snapshot.docs.first[UserDocumentFields.categories]
         .toString()
         .removeBrackets()
-        .split(", ");
+        .split(', ');
     return categories;
   }
 }

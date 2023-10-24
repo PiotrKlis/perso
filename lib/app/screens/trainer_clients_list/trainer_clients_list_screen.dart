@@ -1,87 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/trainer_clients_list/bloc/trainer_client_list_bloc.dart';
+import 'package:perso/app/screens/trainer_clients_list/client_section_data.dart';
+import 'package:perso/app/screens/trainer_clients_list/event/trainer_client_list_event.dart';
+import 'package:perso/app/screens/trainer_clients_list/section_type.dart';
+import 'package:perso/app/screens/trainer_clients_list/state/trainer_client_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/string_extensions.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
-
-enum SectionType { active, pending, inactive }
-
-class Section {
-  Section({required this.sectionType, required this.clients});
-
-  final SectionType sectionType;
-  final List<ClientData> clients;
-}
-
-class ClientData {
-  ClientData({required this.imagePath, required this.name});
-
-  final String imagePath;
-  final String name;
-}
 
 class TrainerClientsScreen extends StatelessWidget {
   const TrainerClientsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final sections = [
-      Section(
-        sectionType: SectionType.active,
-        clients: [
-          ClientData(imagePath: 'imagePath', name: 'Active John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Smith'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Smith'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Smith'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Active John Smith'),
-        ],
-      ),
-      Section(
-        sectionType: SectionType.pending,
-        clients: [
-          ClientData(imagePath: 'imagePath', name: 'Pending John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Smith'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Smith'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Smith'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending Jane Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Pending John Smith'),
-        ],
-      ),
-      Section(
-        sectionType: SectionType.inactive,
-        clients: [
-          ClientData(imagePath: 'imagePath', name: 'Inactive John Doe'),
-          ClientData(imagePath: 'imagePath', name: 'Inactive Jane Doe'),
-          ClientData(
-            imagePath: 'imagePath',
-            name: 'Inactive John Smith Inactive John Smith',
-          ),
-        ],
-      ),
-    ];
+    return BlocProvider(
+      create: (context) => TrainerClientsListBloc(),
+      child: _TrainerClientsListView(),
+    );
+  }
+}
+
+class _TrainerClientsListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
-      child: ListView.builder(
-        itemCount: sections.length,
-        itemBuilder: (context, index) {
-          return StickyHeader(
-            header: _Header(sectionType: sections[index].sectionType),
-            content: _Clients(section: sections[index]),
+      child: BlocBuilder<TrainerClientsListBloc, TrainerClientsListState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () {
+              context.read<TrainerClientsListBloc>().add(
+                    const TrainerClientsListEvent.loadData(),
+                  );
+              return const Center(child: CircularProgressIndicator());
+            },
+            clientsData: _ClientsList.new,
+            error: _Error.new,
           );
         },
       ),
+    );
+  }
+}
+
+class _ClientsList extends StatelessWidget {
+  const _ClientsList(this.clientsData);
+
+  final List<ClientSectionData> clientsData;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: clientsData.length,
+      itemBuilder: (context, index) {
+        return StickyHeader(
+          header: _Header(sectionType: clientsData[index].sectionType),
+          content: _Clients(section: clientsData[index]),
+        );
+      },
     );
   }
 }
@@ -110,7 +88,7 @@ class _Clients extends StatelessWidget {
     required this.section,
   });
 
-  final Section section;
+  final ClientSectionData section;
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +108,7 @@ class _Client extends StatelessWidget {
   const _Client({required this.sectionType, required this.client});
 
   final SectionType sectionType;
-  final ClientData client;
+  final ClientEntity client;
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +122,12 @@ class _Client extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const _Image(),
-              _Title(client: client),
+              _Image(imagePath: client.imagePath),
+              _Title(
+                name: client.name,
+                surname: client.surname,
+                nickname: client.nickname,
+              ),
               _Actions(sectionType: sectionType),
             ],
           ),
@@ -158,23 +140,28 @@ class _Client extends StatelessWidget {
 
 class _Title extends StatelessWidget {
   const _Title({
-    required this.client,
+    required this.name,
+    required this.surname,
+    required this.nickname,
   });
 
-  final ClientData client;
+  final String name;
+  final String surname;
+  final String nickname;
 
   @override
   Widget build(BuildContext context) {
+    final title = '$name $surname $nickname';
     return Expanded(
       child: Container(
         margin: const EdgeInsets.only(
           left: Dimens.smallMargin,
         ),
         child: Text(
-          client.name,
+          title,
           style: ThemeText.bodyRegularBlackText,
           overflow: TextOverflow.ellipsis,
-          maxLines: 1,
+          maxLines: 2,
         ),
       ),
     );
@@ -182,17 +169,20 @@ class _Title extends StatelessWidget {
 }
 
 class _Image extends StatelessWidget {
-  const _Image();
+  const _Image({required this.imagePath});
+
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: Dimens.smallMargin),
-      child: const Icon(
-        //client.imagePath
-        Icons.account_circle,
-        size: Dimens.accountIconSize,
-      ),
+      child: imagePath.isNotEmpty
+          ? Image.network(imagePath)
+          : const Icon(
+              Icons.account_circle,
+              size: Dimens.accountIconSize,
+            ),
     );
   }
 }
@@ -301,6 +291,22 @@ class _ActiveActionsState extends State<_ActiveActions> {
           },
         ),
       ],
+    );
+  }
+}
+
+class _Error extends StatelessWidget {
+  const _Error(this.error);
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(
+        error,
+        style: ThemeText.calloutRegularRed,
+      ),
     );
   }
 }

@@ -11,20 +11,26 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:perso/data/address_provider/google_address_provider.dart'
-    as _i7;
-import 'package:perso/data/auth/auth_service.dart' as _i3;
-import 'package:perso/data/clients/firestore_clients_service.dart' as _i4;
-import 'package:perso/data/shared_prefs/perso_shared_prefs.dart' as _i10;
-import 'package:perso/data/trainer_search_cards/local_trainer_search_card_repository.dart'
     as _i8;
-import 'package:perso/data/trainers/firestore_trainers_provider.dart' as _i5;
-import 'package:perso/data/trainers/firestore_trainers_service.dart' as _i6;
-import 'package:perso/data/trainers/test_trainers_repository.dart' as _i11;
-import 'package:perso/data/training_categories/local_training_category_repository.dart'
+import 'package:perso/data/auth/auth_service.dart' as _i3;
+import 'package:perso/data/clients/clients_provider/firestore_clients_provider.dart'
+    as _i4;
+import 'package:perso/data/clients/clients_service/firestore_clients_service.dart'
+    as _i5;
+import 'package:perso/data/shared_prefs/perso_shared_prefs.dart' as _i11;
+import 'package:perso/data/trainer_search_cards/local_trainer_search_card_repository.dart'
     as _i9;
-import 'package:perso/data/training_request/training_request_service.dart'
+import 'package:perso/data/trainers/trainers_provider/firestore_trainers_provider.dart'
+    as _i6;
+import 'package:perso/data/trainers/trainers_provider/test_trainers_repository.dart'
     as _i12;
-import 'package:perso/data/user_info/user_info_provider.dart' as _i13;
+import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.dart'
+    as _i7;
+import 'package:perso/data/training_categories/local_training_category_repository.dart'
+    as _i10;
+import 'package:perso/data/training_request/training_request_service.dart'
+    as _i13;
+import 'package:perso/data/user_info/user_info_provider.dart' as _i14;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -38,23 +44,25 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     gh.factory<_i3.AuthService>(() => _i3.AuthService());
-    gh.factory<_i4.FirestoreClientsService>(
-        () => _i4.FirestoreClientsService());
-    gh.factory<_i5.FirestoreTrainersProvider>(
-        () => _i5.FirestoreTrainersProvider());
-    gh.factory<_i6.FirestoreTrainersService>(
-        () => _i6.FirestoreTrainersService());
-    gh.singleton<_i7.GoogleAddressProvider>(_i7.GoogleAddressProvider());
-    gh.factory<_i8.LocalTrainerSearchCardRepository>(
-        () => _i8.LocalTrainerSearchCardRepository());
-    gh.factory<_i9.LocalTrainingCategoryRepository>(
-        () => _i9.LocalTrainingCategoryRepository());
-    gh.singleton<_i10.PersoSharedPrefs>(_i10.PersoSharedPrefs());
-    gh.factory<_i11.TestTrainersRepository>(
-        () => _i11.TestTrainersRepository());
-    gh.factory<_i12.TrainingRequestService>(
-        () => _i12.TrainingRequestService());
-    gh.singleton<_i13.UserInfoProvider>(_i13.UserInfoProvider());
+    gh.factory<_i4.FirestoreClientsProvider>(
+        () => _i4.FirestoreClientsProvider());
+    gh.factory<_i5.FirestoreClientsService>(
+        () => _i5.FirestoreClientsService());
+    gh.factory<_i6.FirestoreTrainersProvider>(
+        () => _i6.FirestoreTrainersProvider());
+    gh.factory<_i7.FirestoreTrainersService>(
+        () => _i7.FirestoreTrainersService());
+    gh.singleton<_i8.GoogleAddressProvider>(_i8.GoogleAddressProvider());
+    gh.factory<_i9.LocalTrainerSearchCardRepository>(
+        () => _i9.LocalTrainerSearchCardRepository());
+    gh.factory<_i10.LocalTrainingCategoryRepository>(
+        () => _i10.LocalTrainingCategoryRepository());
+    gh.singleton<_i11.PersoSharedPrefs>(_i11.PersoSharedPrefs());
+    gh.factory<_i12.TestTrainersRepository>(
+        () => _i12.TestTrainersRepository());
+    gh.factory<_i13.TrainingRequestService>(
+        () => _i13.TrainingRequestService());
+    gh.singleton<_i14.UserInfoProvider>(_i14.UserInfoProvider());
     return this;
   }
 }

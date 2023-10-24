@@ -1,11 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-part 'PlaceInfo.freezed.dart';
+
+part 'place_info.freezed.dart';
 
 @freezed
 class PlaceInfo with _$PlaceInfo {
   const factory PlaceInfo({
-    required final String address,
-    required final LatLng latLng,
+    required String address,
+    required LatLng latLng,
   }) = _PlaceInfo;
 }

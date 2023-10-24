@@ -10,18 +10,24 @@ class TrainingCategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PersoAppBar(title: context.strings.training_categories),
-        body: Container(
-          margin: EdgeInsets.only(
-              top: Dimens.normalMargin, left: Dimens.normalMargin),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      backgroundColor: Colors.white,
+      appBar: PersoAppBar(title: context.strings.training_categories),
+      body: Container(
+        margin: const EdgeInsets.only(
+          top: Dimens.normalMargin,
+          left: Dimens.normalMargin,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(context.strings.categories, style: ThemeText.largerTitleBold),
             Container(
-                margin: EdgeInsets.only(top: Dimens.bigMargin),
-                child: PersoTrainingCategoryList(isShortList: false))
-          ]),
-        ));
+              margin: const EdgeInsets.only(top: Dimens.bigMargin),
+              child: const PersoTrainingCategoryList(),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

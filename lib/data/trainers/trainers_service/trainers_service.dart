@@ -3,5 +3,5 @@ import 'package:perso/core/models/trainer_entity.dart';
 
 abstract class TrainersService {
   Future<void> updateData(EditableTrainerData trainerData);
-  Future<void> setData(TrainerEntity trainerEntity);
+  Future<void> uploadFullTrainerData(TrainerEntity trainerEntity);
 }
