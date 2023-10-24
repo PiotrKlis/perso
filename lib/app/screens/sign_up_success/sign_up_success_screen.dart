@@ -18,9 +18,9 @@ class SignUpSuccessScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.xlMargin,
-                  left: Dimens.mMargin,
-                  right: Dimens.mMargin),
+                  top: Dimens.biggerMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
               child: const Center(
                   child: Icon(
                 Icons.email,
@@ -29,9 +29,9 @@ class SignUpSuccessScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.sMargin,
-                  left: Dimens.mMargin,
-                  right: Dimens.mMargin),
+                  top: Dimens.mediumMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
               child: Text(
                 context.strings.sign_up_succes_title,
                 style: ThemeText.largerTitleBold,
@@ -39,9 +39,9 @@ class SignUpSuccessScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.xlMargin,
-                  left: Dimens.mMargin,
-                  right: Dimens.mMargin),
+                  top: Dimens.biggerMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
               child: Text(
                 context.strings.sign_up_succes_body_1,
                 style: ThemeText.bodyRegularBlackText,
@@ -49,9 +49,9 @@ class SignUpSuccessScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.xlMargin,
-                  left: Dimens.mMargin,
-                  right: Dimens.mMargin),
+                  top: Dimens.biggerMargin,
+                  left: Dimens.normalMargin,
+                  right: Dimens.normalMargin),
               child: Text(
                 context.strings.sign_up_succes_body_2,
                 style: ThemeText.bodyRegularBlackText,
@@ -59,14 +59,14 @@ class SignUpSuccessScreen extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.xlMargin,
-                    left: Dimens.mMargin,
-                    right: Dimens.mMargin),
+                    top: Dimens.biggerMargin,
+                    left: Dimens.normalMargin,
+                    right: Dimens.normalMargin),
                 child: Text(context.strings.sign_up_succes_body_3,
                     style: ThemeText.bodyBoldBlackText)),
             Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.xlMargin, left: Dimens.mMargin),
+                    top: Dimens.biggerMargin, left: Dimens.normalMargin),
                 child: Center(
                     child: PersoButton(
                   title: context.strings.confirm,

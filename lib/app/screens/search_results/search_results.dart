@@ -28,7 +28,7 @@ class SearchResultsScreen extends StatelessWidget {
                 // TODO: Show 10 trainers, then load another 10 more on scroll
                 Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.mMargin, left: Dimens.mMargin),
+                      top: Dimens.normalMargin, left: Dimens.normalMargin),
                   child: Row(
                     children: [
                       Expanded(
@@ -50,18 +50,18 @@ class SearchResultsScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.mMargin),
+                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: const PersoTrainersList()),
                 Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.mMargin, left: Dimens.mMargin),
+                      top: Dimens.normalMargin, left: Dimens.normalMargin),
                   child: Text(
                     context.strings.similar_trainers,
                     style: ThemeText.mediumTitleBold,
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.mMargin),
+                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: PersoTrainersSearchCarousel())
               ],
             ),

@@ -8,7 +8,7 @@ class PersoIndentedDivider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-          left: Dimens.xlMargin, right: Dimens.mMargin),
+          left: Dimens.biggerMargin, right: Dimens.normalMargin),
       child: const Divider(
         height: 1,
         color: PersoColors.lightGrey,

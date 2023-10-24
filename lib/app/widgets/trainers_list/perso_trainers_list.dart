@@ -59,8 +59,8 @@ class PersoTrainersList extends StatelessWidget {
                           children: [
                             Container(
                               margin: const EdgeInsets.only(
-                                  left: Dimens.sMargin,
-                                  top: Dimens.sMargin),
+                                  left: Dimens.mediumMargin,
+                                  top: Dimens.mediumMargin),
                               child: Column(
                                 children: [
                                   Image.asset(AppImages.trainer1,
@@ -72,8 +72,8 @@ class PersoTrainersList extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 margin: const EdgeInsets.only(
-                                    top: Dimens.sMargin,
-                                    left: Dimens.sMargin),
+                                    top: Dimens.mediumMargin,
+                                    left: Dimens.mediumMargin),
                                 child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -86,7 +86,7 @@ class PersoTrainersList extends StatelessWidget {
                                       Container(
                                         height: 40.0,
                                         margin: const EdgeInsets.only(
-                                            top: Dimens.xsMargin),
+                                            top: Dimens.smallMargin),
                                         child: Text(
                                           trainerData.shortBio,
                                           maxLines: 2,
@@ -97,14 +97,14 @@ class PersoTrainersList extends StatelessWidget {
                                       ),
                                       Container(
                                         margin: const EdgeInsets.only(
-                                            top: Dimens.xsMargin),
+                                            top: Dimens.smallMargin),
                                         child: Row(children: [
                                           Text(trainerData.rating.toString(),
                                               style:
                                                   ThemeText.subHeadingBoldGrey),
                                           Container(
                                             margin: const EdgeInsets.only(
-                                                left: Dimens.xxsMargin),
+                                                left: Dimens.smallerMargin),
                                             child: RatingBar(
                                               itemSize: Dimens.ratingBarSize,
                                               ignoreGestures: true,
@@ -130,7 +130,7 @@ class PersoTrainersList extends StatelessWidget {
                                           ),
                                           Container(
                                             margin: const EdgeInsets.only(
-                                                left: Dimens.xxsMargin),
+                                                left: Dimens.smallerMargin),
                                             child: Text(
                                               "(${trainerData.votesNumber})",
                                               style: ThemeText

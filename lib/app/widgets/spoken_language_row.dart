@@ -28,10 +28,10 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
         children: [
           Container(
               margin: const EdgeInsets.only(
-                  left: Dimens.mMargin, top: Dimens.xsMargin),
+                  left: Dimens.normalMargin, top: Dimens.smallMargin),
               child: const Icon(Icons.flag, size: 24.0)),
           Container(
-              margin: const EdgeInsets.only(left: Dimens.mMargin),
+              margin: const EdgeInsets.only(left: Dimens.normalMargin),
               child: PersoSmallButton(
                 text: "Add language",
                 addLanguage: _addSpokenLanguage,
@@ -48,7 +48,7 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
 
   void _addSpokenLanguage(String languageEmoji) {
     Widget languageChip = Container(
-        margin: const EdgeInsets.only(left: Dimens.mMargin),
+        margin: const EdgeInsets.only(left: Dimens.normalMargin),
         child: PersoFlagButton(
             flagEmoji: languageEmoji, onRemoveTap: _removeSpokenLanguage));
     setState(() {

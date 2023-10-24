@@ -66,7 +66,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         height: 200.0,
         decoration:
             const BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-        margin: const EdgeInsets.only(top: Dimens.lMargin),
+        margin: const EdgeInsets.only(top: Dimens.bigMargin),
         child: image == null
             ? const Icon(
                 Icons.camera_alt,
@@ -84,7 +84,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       ),
     );
     var uploadImageButton = Container(
-        margin: const EdgeInsets.only(top: Dimens.lMargin),
+        margin: const EdgeInsets.only(top: Dimens.bigMargin),
         child: Center(
             child: PersoButton(
           title: context.strings.upload_image,
@@ -99,14 +99,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         children: [
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.lMargin, right: Dimens.mMargin),
+                  top: Dimens.bigMargin, right: Dimens.normalMargin),
               child: const PersoIndentedDivider()),
           Container(
-              margin: const EdgeInsets.only(top: Dimens.mMargin),
+              margin: const EdgeInsets.only(top: Dimens.normalMargin),
               child: spokenLanguageRowWidget),
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.mMargin, right: Dimens.lMargin),
+                  top: Dimens.normalMargin, right: Dimens.bigMargin),
               child: const PersoIndentedDivider()),
         ],
       ),
@@ -114,8 +114,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     var surname = Container(
       margin: const EdgeInsets.only(
           left: Dimens.substantialMargin,
-          top: Dimens.lMargin,
-          right: Dimens.mMargin),
+          top: Dimens.bigMargin,
+          right: Dimens.normalMargin),
       child: PersoTextField(
           textEditingController: surnameController,
           title: context.strings.surname,
@@ -124,8 +124,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     var nickname = Container(
       margin: const EdgeInsets.only(
           left: Dimens.substantialMargin,
-          top: Dimens.lMargin,
-          right: Dimens.mMargin),
+          top: Dimens.bigMargin,
+          right: Dimens.normalMargin),
       //TODO: Find different, non-hacky way of async validation way
       child: PersoAsyncTextFormField(
           hintText: context.strings.nickname,
@@ -136,33 +136,33 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
     var location = Container(
         margin: const EdgeInsets.only(
-            top: Dimens.mMargin, right: Dimens.mMargin),
+            top: Dimens.normalMargin, right: Dimens.normalMargin),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-                margin: const EdgeInsets.only(left: Dimens.mMargin),
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 child: const Icon(Icons.pin_drop, size: 24.0)),
             Expanded(
               child: Container(
-                  margin: const EdgeInsets.only(left: Dimens.mMargin),
+                  margin: const EdgeInsets.only(left: Dimens.normalMargin),
                   child: addressWidget),
             ),
           ],
         ));
     var shortBio = Container(
         margin: const EdgeInsets.only(
-            top: Dimens.mMargin, right: Dimens.mMargin),
+            top: Dimens.normalMargin, right: Dimens.normalMargin),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-                margin: const EdgeInsets.only(left: Dimens.mMargin),
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 child: const Icon(Icons.text_snippet, size: 24.0)),
             Expanded(
               child: Container(
                 height: 140.0,
-                margin: const EdgeInsets.only(left: Dimens.mMargin),
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 child: PersoTextField(
                   title: context.strings.short_bio,
                   customValidator: TextFieldValidator.validateIsEmpty,
@@ -178,8 +178,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         height: 340.0,
         margin: const EdgeInsets.only(
             left: Dimens.substantialMargin,
-            top: Dimens.mMargin,
-            right: Dimens.mMargin),
+            top: Dimens.normalMargin,
+            right: Dimens.normalMargin),
         child: PersoTextField(
           title: context.strings.long_bio,
           isMultiLine: true,
@@ -194,23 +194,23 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         children: [
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.mMargin, right: Dimens.mMargin),
+                  top: Dimens.normalMargin, right: Dimens.normalMargin),
               child: const PersoIndentedDivider()),
           shortBio,
           longBio,
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.mMargin, right: Dimens.mMargin),
+                  top: Dimens.normalMargin, right: Dimens.normalMargin),
               child: const PersoIndentedDivider()),
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.mMargin, left: Dimens.mMargin),
+                  top: Dimens.normalMargin, left: Dimens.normalMargin),
               child: Text(
                 context.strings.select_your_specialities,
                 style: ThemeText.bodyBoldBlackText,
               )),
           Container(
-            margin: const EdgeInsets.only(top: Dimens.xsMargin),
+            margin: const EdgeInsets.only(top: Dimens.smallMargin),
             child: persoChipsList,
           ),
         ],
@@ -219,16 +219,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     var sendDataButton = Center(
         child: Container(
       margin: const EdgeInsets.only(
-          top: Dimens.xlMargin,
-          bottom: Dimens.xlMargin,
-          right: Dimens.mMargin),
+          top: Dimens.biggerMargin,
+          bottom: Dimens.biggerMargin,
+          right: Dimens.normalMargin),
       child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
         builder: (context, state) {
           return state.whenOrNull(
                 loading: () => Center(
                     child: Container(
                         margin:
-                            const EdgeInsets.only(bottom: Dimens.mMargin),
+                            const EdgeInsets.only(bottom: Dimens.normalMargin),
                         child: const CircularProgressIndicator())),
               ) ??
               PersoButton(
@@ -244,7 +244,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     var sendDataErrorText = Center(
         child: Container(
       margin: const EdgeInsets.only(
-        top: Dimens.mMargin,
+        top: Dimens.normalMargin,
       ),
       child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
         builder: (context, state) {
@@ -257,16 +257,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     ));
 
     var nameSection = Container(
-        margin: const EdgeInsets.only(top: Dimens.mMargin),
+        margin: const EdgeInsets.only(top: Dimens.normalMargin),
         child: Row(
           children: [
             Container(
-                margin: const EdgeInsets.only(left: Dimens.mMargin),
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 child: const Icon(Icons.person, size: 24.0)),
             Expanded(
               child: Container(
                 margin: const EdgeInsets.only(
-                    left: Dimens.mMargin, right: Dimens.mMargin),
+                    left: Dimens.normalMargin, right: Dimens.normalMargin),
                 child: PersoTextField(
                     title: context.strings.name,
                     textEditingController: nameController,
@@ -306,11 +306,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   nickname,
                   Container(
                       margin: const EdgeInsets.only(
-                          top: Dimens.mMargin, right: Dimens.mMargin),
+                          top: Dimens.normalMargin, right: Dimens.normalMargin),
                       child: const PersoIndentedDivider()),
                   location,
                   Container(
-                      margin: const EdgeInsets.only(top: Dimens.mMargin),
+                      margin: const EdgeInsets.only(top: Dimens.normalMargin),
                       child: googleMap),
                   bioAndSpecialitiesSection,
                   sendDataButton,
@@ -384,16 +384,16 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   Container nameSection(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(top: Dimens.mMargin),
+        margin: const EdgeInsets.only(top: Dimens.normalMargin),
         child: Row(
           children: [
             Container(
-                margin: const EdgeInsets.only(left: Dimens.mMargin),
+                margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 child: const Icon(Icons.person, size: 24.0)),
             Expanded(
               child: Container(
                 margin: const EdgeInsets.only(
-                    left: Dimens.mMargin, right: Dimens.mMargin),
+                    left: Dimens.normalMargin, right: Dimens.normalMargin),
                 child: PersoTextField(
                     title: context.strings.name,
                     textEditingController: nameController,

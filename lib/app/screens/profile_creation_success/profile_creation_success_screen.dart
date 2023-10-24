@@ -13,7 +13,7 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(
-            left: Dimens.mMargin, right: Dimens.mMargin),
+            left: Dimens.normalMargin, right: Dimens.normalMargin),
         child: Column(
           children: [
             Container(
@@ -24,14 +24,14 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.xlMargin),
+              margin: const EdgeInsets.only(top: Dimens.biggerMargin),
               child: Text(
                 context.strings.succes_message_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.mMargin),
+              margin: const EdgeInsets.only(top: Dimens.normalMargin),
               child: Text(context.strings.succes_message_body_2,
                   style: ThemeText.bodyRegularBlackText),
             ),

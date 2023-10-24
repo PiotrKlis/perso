@@ -38,21 +38,21 @@ class SearchScreen extends StatelessWidget {
           children: [
             Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.mMargin,
-                    left: Dimens.mMargin,
-                    right: Dimens.mMargin),
+                    top: Dimens.normalMargin,
+                    left: Dimens.normalMargin,
+                    right: Dimens.normalMargin),
                 //TODO: Probably will need to migrate to TextEdit to use onFieldSubmitted
                 child: const PersoSearch()),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.only(top: Dimens.mMargin),
+                margin: const EdgeInsets.only(top: Dimens.normalMargin),
                 color: Colors.white,
                 child: ListView.separated(
                   itemCount: _emptySearch.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
                         contentPadding:
-                            const EdgeInsets.only(left: Dimens.xlMargin),
+                            const EdgeInsets.only(left: Dimens.biggerMargin),
                         onTap: () => context.pushNamed(
                             ScreenNavigationKey.searchResults,
                             pathParameters: {"input": _emptySearch[index]}),
@@ -63,8 +63,8 @@ class SearchScreen extends StatelessWidget {
                   separatorBuilder: (BuildContext context, int index) {
                     return Container(
                       margin: const EdgeInsets.only(
-                          left: Dimens.mMargin,
-                          right: Dimens.mMargin),
+                          left: Dimens.normalMargin,
+                          right: Dimens.normalMargin),
                       child: const Divider(
                         thickness: Dimens.dividerThickness,
                       ),

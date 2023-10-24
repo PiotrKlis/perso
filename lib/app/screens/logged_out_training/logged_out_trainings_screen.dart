@@ -54,8 +54,8 @@ class _Subtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.mMargin,
-        top: Dimens.lMargin,
+        left: Dimens.normalMargin,
+        top: Dimens.bigMargin,
       ),
       child: Align(
         alignment: Alignment.bottomLeft,
@@ -75,9 +75,9 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.mMargin,
-        top: Dimens.lMargin,
-        right: Dimens.mMargin,
+        left: Dimens.normalMargin,
+        top: Dimens.bigMargin,
+        right: Dimens.normalMargin,
       ),
       child: Text(
         'Find the best trainers and your ideal personal plan',
@@ -95,8 +95,8 @@ class _Image extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(
         top: Dimens.substantialMargin,
-        left: Dimens.mMargin,
-        right: Dimens.mMargin,
+        left: Dimens.normalMargin,
+        right: Dimens.normalMargin,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),

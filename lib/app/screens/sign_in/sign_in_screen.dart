@@ -35,7 +35,7 @@ class SignInScreen extends StatelessWidget {
               const Icon(Icons.logo_dev, size: 160.0),
               Center(
                 child: Container(
-                    margin: const EdgeInsets.only(top: Dimens.mMargin),
+                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: Text(context.strings.sign_in,
                         style: ThemeText.largerTitleBold)),
               ),
@@ -45,9 +45,9 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       Container(
                           margin: const EdgeInsets.only(
-                              top: Dimens.xlMargin,
-                              left: Dimens.mMargin,
-                              right: Dimens.mMargin),
+                              top: Dimens.biggerMargin,
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
                           child: PersoTextField(
                             title: context.strings.login,
                             textEditingController: _loginController,
@@ -55,9 +55,9 @@ class SignInScreen extends StatelessWidget {
                           )),
                       Container(
                           margin: const EdgeInsets.only(
-                              top: Dimens.mMargin,
-                              left: Dimens.mMargin,
-                              right: Dimens.mMargin),
+                              top: Dimens.normalMargin,
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
                           child: PersoTextField(
                             title: context.strings.password,
                             shouldObscureText: true,
@@ -70,11 +70,11 @@ class SignInScreen extends StatelessWidget {
                 builder: (context, state) {
                   return state.whenOrNull(
                         loading: () => Container(
-                            margin: const EdgeInsets.all(Dimens.mMargin),
+                            margin: const EdgeInsets.all(Dimens.normalMargin),
                             child: const LinearProgressIndicator()),
                         error: (message) => Container(
                             margin:
-                                const EdgeInsets.only(top: Dimens.xsMargin),
+                                const EdgeInsets.only(top: Dimens.smallMargin),
                             child: Text(message,
                                 style: ThemeText.calloutRegularRed)),
                       ) ??
@@ -93,7 +93,7 @@ class SignInScreen extends StatelessWidget {
               ),
               Center(
                 child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.lMargin),
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
                   child: GestureDetector(
                     onTap: () =>
                         context.pushNamed(ScreenNavigationKey.passwordRecovery),
@@ -106,7 +106,7 @@ class SignInScreen extends StatelessWidget {
               ),
               Center(
                 child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.lMargin),
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
                   child: PersoButton(
                     width: Dimens.bigButtonWidth,
                     title: context.strings.sign_in,
@@ -117,7 +117,7 @@ class SignInScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: Dimens.lMargin),
+                margin: const EdgeInsets.only(top: Dimens.bigMargin),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -129,9 +129,9 @@ class SignInScreen extends StatelessWidget {
               ),
               Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.lMargin,
-                      left: Dimens.lMargin,
-                      right: Dimens.lMargin),
+                      top: Dimens.bigMargin,
+                      left: Dimens.bigMargin,
+                      right: Dimens.bigMargin),
                   child: GestureDetector(
                     onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
                     child: AbsorbPointer(
@@ -159,7 +159,7 @@ class SignInScreen extends StatelessWidget {
             const Icon(Icons.logo_dev, size: 160.0),
             Center(
               child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.mMargin),
+                  margin: const EdgeInsets.only(top: Dimens.normalMargin),
                   child: Text(context.strings.sign_in,
                       style: ThemeText.largerTitleBold)),
             ),
@@ -169,9 +169,9 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     Container(
                         margin: const EdgeInsets.only(
-                            top: Dimens.xlMargin,
-                            left: Dimens.mMargin,
-                            right: Dimens.mMargin),
+                            top: Dimens.biggerMargin,
+                            left: Dimens.normalMargin,
+                            right: Dimens.normalMargin),
                         child: PersoTextField(
                           title: context.strings.login,
                           textEditingController: _loginController,
@@ -179,9 +179,9 @@ class SignInScreen extends StatelessWidget {
                         )),
                     Container(
                         margin: const EdgeInsets.only(
-                            top: Dimens.mMargin,
-                            left: Dimens.mMargin,
-                            right: Dimens.mMargin),
+                            top: Dimens.normalMargin,
+                            left: Dimens.normalMargin,
+                            right: Dimens.normalMargin),
                         child: PersoTextField(
                           title: context.strings.password,
                           shouldObscureText: true,
@@ -194,11 +194,11 @@ class SignInScreen extends StatelessWidget {
               builder: (context, state) {
                 return state.whenOrNull(
                       loading: () => Container(
-                          margin: const EdgeInsets.all(Dimens.mMargin),
+                          margin: const EdgeInsets.all(Dimens.normalMargin),
                           child: const LinearProgressIndicator()),
                       error: (message) => Container(
                           margin:
-                              const EdgeInsets.only(top: Dimens.xsMargin),
+                              const EdgeInsets.only(top: Dimens.smallMargin),
                           child: Text(message,
                               style: ThemeText.calloutRegularRed)),
                     ) ??
@@ -217,7 +217,7 @@ class SignInScreen extends StatelessWidget {
             ),
             Center(
               child: Container(
-                margin: const EdgeInsets.only(top: Dimens.lMargin),
+                margin: const EdgeInsets.only(top: Dimens.bigMargin),
                 child: GestureDetector(
                   onTap: () =>
                       context.pushNamed(ScreenNavigationKey.passwordRecovery),
@@ -230,7 +230,7 @@ class SignInScreen extends StatelessWidget {
             ),
             Center(
               child: Container(
-                margin: const EdgeInsets.only(top: Dimens.lMargin),
+                margin: const EdgeInsets.only(top: Dimens.bigMargin),
                 child: PersoButton(
                   width: Dimens.bigButtonWidth,
                   title: context.strings.sign_in,
@@ -239,7 +239,7 @@ class SignInScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.lMargin),
+              margin: const EdgeInsets.only(top: Dimens.bigMargin),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -251,9 +251,9 @@ class SignInScreen extends StatelessWidget {
             ),
             Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.lMargin,
-                    left: Dimens.lMargin,
-                    right: Dimens.lMargin),
+                    top: Dimens.bigMargin,
+                    left: Dimens.bigMargin,
+                    right: Dimens.bigMargin),
                 child: GestureDetector(
                   onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
                   child: AbsorbPointer(
