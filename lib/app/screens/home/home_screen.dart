@@ -59,6 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     keyboardDismissBehavior:
                         ScrollViewKeyboardDismissBehavior.onDrag,
                     child: Column(children: [
+                      GestureDetector(
+                          onTap: () => _handleAccountClick(context),
+                          child: const PersoAccountIcon()),
                       Container(
                         margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
@@ -71,9 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title: AppLocalizations.of(context)!
                                     .home_main_header,
                               ),
-                            GestureDetector(
-                          onTap: () => _handleAccountClick(context),
-                          child: const PersoAccountIcon()),
+                              //TODO: Make This button invisible if user is logged in
+                              PersoButton(
+                                onTap: (context) =>
+                                _handleAccountClick(context),
+                                title: AppLocalizations.of(context)!.trainers_section_button,
+                                width: Dimens.smallerButtonWidth,)
                             ]),
                       ),
                       Container(
