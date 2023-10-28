@@ -1,10 +1,9 @@
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ProfileCreationSuccessScreen extends StatelessWidget {
   const ProfileCreationSuccessScreen({super.key});
@@ -19,19 +18,21 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(top: Dimens.substantialMargin),
-              child: Text(AppLocalizations.of(context)!.succes_message_title,
+              child: Text(
+                context.strings.succes_message_title,
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-              child: Text(AppLocalizations.of(context)!.succes_message_body_1,
+              child: Text(
+                context.strings.succes_message_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
-              child: Text(AppLocalizations.of(context)!.succes_message_body_2,
+              child: Text(context.strings.succes_message_body_2,
                   style: ThemeText.bodyRegularBlackText),
             ),
             Container(
@@ -40,7 +41,7 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   PersoButton(
-                    title: AppLocalizations.of(context)!.finish,
+                    title: context.strings.finish,
                     onTap: (context) {
                       context.replaceNamed(ScreenNavigationKey.home);
                     },

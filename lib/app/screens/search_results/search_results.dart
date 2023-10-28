@@ -1,13 +1,11 @@
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/perso_app_bar.dart';
-import 'package:Perso/app/widgets/trainers_list/perso_trainers_list.dart';
-import 'package:Perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
+import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SearchResultsScreen extends StatelessWidget {
   const SearchResultsScreen({super.key, String? input = ""}) : _input = input;
@@ -18,7 +16,7 @@ class SearchResultsScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: PersoColors.lightBlue,
         appBar: PersoAppBar(
-          title: AppLocalizations.of(context)!.search_results,
+          title: context.strings.search_results,
           actionIcon: Icons.filter_list,
           onActionIconClick: onActionClick,
         ),
@@ -58,7 +56,7 @@ class SearchResultsScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       top: Dimens.normalMargin, left: Dimens.normalMargin),
                   child: Text(
-                    AppLocalizations.of(context)!.similar_trainers,
+                    context.strings.similar_trainers,
                     style: ThemeText.mediumTitleBold,
                   ),
                 ),

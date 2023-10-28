@@ -1,5 +1,5 @@
-import 'package:Perso/core/navigation/bottom_nav_bar_tab_item.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
+import 'package:perso/core/navigation/bottom_nav_bar_tab_item.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +10,7 @@ final tabs = [
     label: 'Home',
   ),
   const ScaffoldWithNavBarTabItem(
-    initialLocation: ScreenNavigationKey.trainings,
+    initialLocation: ScreenNavigationKey.loggedOutTrainings,
     icon: Icon(Icons.sports_gymnastics),
     label: 'Training',
   ),
@@ -32,9 +32,9 @@ class ScaffoldWithBottomNavBar extends StatefulWidget {
 }
 
 class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
-
   // using the helper method below
-  int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
+  int get _currentIndex =>
+      _locationToTabIndex(GoRouterState.of(context).uri.toString());
 
   int _locationToTabIndex(String location) {
     final index =
@@ -47,7 +47,7 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
   void _onItemTapped(BuildContext context, int tabIndex) {
     // if (tabIndex != _currentIndex) {
     //   // go to the initial location of the selected tab (by index)
-      context.go(tabs[tabIndex].initialLocation);
+    context.go(tabs[tabIndex].initialLocation);
     // }
   }
 

@@ -1,6 +1,6 @@
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
-import 'package:Perso/data/utils/firestore_constants.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
+import 'package:perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
@@ -32,11 +32,11 @@ class TrainingRequestService {
         .get();
 
     final pendingRequests =
-        document.get(UserDocumentFields.pendingRequests);
+        document[UserDocumentFields.pendingRequests] as List<String>;
     final activeTrainers =
-        document.get(UserDocumentFields.activeTrainers);
+        document[UserDocumentFields.activeTrainers] as List<String>;
     final inactiveTrainers =
-        document.get(UserDocumentFields.inactiveTrainers);
+        document[UserDocumentFields.inactiveTrainers] as List<String>;
 
     if (pendingRequests.contains(trainerId) ||
         activeTrainers.contains(trainerId) ||

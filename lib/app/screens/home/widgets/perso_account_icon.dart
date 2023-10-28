@@ -1,5 +1,5 @@
-import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoAccountIcon extends StatelessWidget {
   const PersoAccountIcon({Key? key}) : super(key: key);
@@ -8,11 +8,10 @@ class PersoAccountIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.only(left: Dimens.normalMargin, top: Dimens.normalMargin),
-      child: const Icon(
-          Icons.account_circle_rounded,
-          size: Dimens.accountIconSize,
-          color: Colors.black),
+      margin: const EdgeInsets.only(
+          left: Dimens.normalMargin, top: Dimens.normalMargin),
+      child: const Icon(Icons.account_circle_rounded,
+          size: Dimens.accountIconSize, color: Colors.black),
     );
   }
 }

@@ -1,22 +1,21 @@
-import 'package:Perso/app/screens/trainer_details/bloc/action_section_bloc.dart';
-import 'package:Perso/app/screens/trainer_details/bloc/training_request_bloc.dart';
-import 'package:Perso/app/screens/trainer_details/event/action_section_event.dart';
-import 'package:Perso/app/screens/trainer_details/event/training_request_event.dart';
-import 'package:Perso/app/screens/trainer_details/state/action_section_state.dart';
-import 'package:Perso/app/screens/trainer_details/state/training_request_state.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/category_chips/category_chips.dart';
-import 'package:Perso/app/widgets/perso_app_bar.dart';
-import 'package:Perso/app/widgets/perso_button.dart';
-import 'package:Perso/app/widgets/perso_divider.dart';
-import 'package:Perso/core/models/trainer_entity.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
-import 'package:Perso/core/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/trainer_details/bloc/action_section_bloc.dart';
+import 'package:perso/app/screens/trainer_details/bloc/training_request_bloc.dart';
+import 'package:perso/app/screens/trainer_details/event/action_section_event.dart';
+import 'package:perso/app/screens/trainer_details/event/training_request_event.dart';
+import 'package:perso/app/screens/trainer_details/state/action_section_state.dart';
+import 'package:perso/app/screens/trainer_details/state/training_request_state.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/category_chips/category_chips.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
+import 'package:perso/core/string_extensions.dart';
 
 class TrainerDetailsScreen extends StatefulWidget {
   const TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})

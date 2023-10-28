@@ -1,4 +1,4 @@
-import 'package:Perso/app/utils/theme_text.dart';
+import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:flutter/material.dart';
 
 class PersoClickableText extends StatelessWidget {

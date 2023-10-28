@@ -1,7 +1,7 @@
-import 'package:Perso/app/screens/sign_up/event/sign_up_event.dart';
-import 'package:Perso/app/screens/sign_up/state/sign_up_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/auth/auth_service.dart';
+import 'package:perso/app/screens/sign_up/event/sign_up_event.dart';
+import 'package:perso/app/screens/sign_up/state/sign_up_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

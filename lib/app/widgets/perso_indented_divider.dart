@@ -1,6 +1,5 @@
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoIndentedDivider extends StatelessWidget {
   const PersoIndentedDivider({super.key});

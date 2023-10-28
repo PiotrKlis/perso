@@ -1,6 +1,5 @@
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PersoAppBar(

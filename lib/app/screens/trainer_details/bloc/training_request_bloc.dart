@@ -1,8 +1,8 @@
-import 'package:Perso/app/screens/trainer_details/event/training_request_event.dart';
-import 'package:Perso/app/screens/trainer_details/state/training_request_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/training_request/training_request_service.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
+import 'package:perso/app/screens/trainer_details/event/training_request_event.dart';
+import 'package:perso/app/screens/trainer_details/state/training_request_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/training_request/training_request_service.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TrainingRequestBloc

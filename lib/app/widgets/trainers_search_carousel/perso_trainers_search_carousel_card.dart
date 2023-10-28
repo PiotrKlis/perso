@@ -1,7 +1,6 @@
-import 'package:Perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoTrainersSearchCarouselCard extends StatelessWidget {
   final int position;

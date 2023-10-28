@@ -1,7 +1,7 @@
-import 'package:Perso/app/screens/forgot_password/event/forgot_password_event.dart';
-import 'package:Perso/app/screens/forgot_password/state/forgot_password_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/auth/auth_service.dart';
+import 'package:perso/app/screens/forgot_password/event/forgot_password_event.dart';
+import 'package:perso/app/screens/forgot_password/state/forgot_password_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/auth/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

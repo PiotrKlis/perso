@@ -1,9 +1,9 @@
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/widgets/category_chips/bloc/category_chips_bloc.dart';
-import 'package:Perso/app/widgets/category_chips/event/category_chips_event.dart';
-import 'package:Perso/app/widgets/category_chips/state/category_chips_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/category_chips/bloc/category_chips_bloc.dart';
+import 'package:perso/app/widgets/category_chips/event/category_chips_event.dart';
+import 'package:perso/app/widgets/category_chips/state/category_chips_state.dart';
 
 class PersoCategoryChips extends StatefulWidget {
   PersoCategoryChips(

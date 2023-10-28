@@ -4,13 +4,13 @@ Personalized training plans
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+## Assets code generation
 
-A few resources to get you started if this is your first Flutter project:
+We are using [spider](https://pub.dev/packages/spider) for assets code generation. After adding new
+assets to [Images directory](assets/images) or [Vectors directory](assets/vectors) you should
+run [spider](https://pub.dev/packages/spider):
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- `spider build`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This command will generate .dart files in [Values directory](lib/src/ui/styleguide/values) and unit
+tests in [Test directory](test).

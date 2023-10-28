@@ -1,7 +1,7 @@
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/widgets/perso_flag_button.dart';
-import 'package:Perso/app/widgets/perso_small_button.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/perso_flag_button.dart';
+import 'package:perso/app/widgets/perso_small_button.dart';
 
 class SpokenLanguageRowWidget extends StatefulWidget {
   SpokenLanguageRowWidget({Key? key}) : super(key: key);

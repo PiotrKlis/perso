@@ -1,7 +1,7 @@
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/core/navigation/screen_navigation_key.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoSearch extends StatelessWidget {
   const PersoSearch({Key? key}) : super(key: key);

@@ -3,5 +3,6 @@ part 'action_section_event.freezed.dart';
 
 @freezed
 class ActionSectionEvent with _$ActionSectionEvent {
-  const factory ActionSectionEvent.shouldSectionBeVisible() = ShouldSectionBeVisible;
+  const factory ActionSectionEvent.shouldSectionBeVisible() =
+      ShouldSectionBeVisible;
 }

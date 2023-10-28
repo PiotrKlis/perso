@@ -1,0 +1,113 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:injectable/injectable.dart';
+import 'package:perso/core/models/review_entity.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/string_extensions.dart';
+import 'package:perso/core/user_type.dart';
+import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
+import 'package:perso/data/utils/firestore_constants.dart';
+
+@injectable
+class FirestoreTrainersProvider implements TrainersSource {
+  @override
+  Future<List<TrainerEntity>> getAllTrainersData() async {
+    final QuerySnapshot trainersSnapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.userType, isEqualTo: UserType.trainer.name)
+        .get();
+
+    return trainersSnapshot.docs.map((data) {
+      return TrainerEntity(
+          id: data.id,
+          name: data[UserDocumentFields.name] as String,
+          surname: data[UserDocumentFields.surname] as String,
+          nickname: data[UserDocumentFields.nickname] as String,
+          votesNumber: data[UserDocumentFields.votesNumber] as int,
+          shortBio: data[UserDocumentFields.shortBio] as String,
+          rating: data[UserDocumentFields.rating] as double,
+          languages: data[UserDocumentFields.languages].toString().split(', '),
+          categories:
+              data[UserDocumentFields.categories].toString().split(', '),
+          imagePath: data[UserDocumentFields.imagePath] as String,
+          fullBio: data[UserDocumentFields.fullBio] as String,
+          location: data[UserDocumentFields.location] as String,
+          reviews:
+              _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
+          pendingRequests:
+              data[UserDocumentFields.pendingRequests].toString().split(', '),
+          activeClients:
+              data[UserDocumentFields.activeClients].toString().split(', '),
+          inactiveClients:
+              data[UserDocumentFields.inactiveClients].toString().split(', '),
+          latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
+              const LatLng(0, 0));
+    }).toList();
+  }
+
+  List<ReviewEntity> _getReviews(List reviews) {
+    return reviews.map<ReviewEntity>((review) {
+      return ReviewEntity(
+        rating: review[UserDocumentFields.rating] as double,
+        description: review[UserDocumentFields.description] as String,
+      );
+    }).toList();
+  }
+
+  @override
+  Future<TrainerEntity> getTrainerData(String id) async {
+    final QuerySnapshot trainersSnapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.id, isEqualTo: id)
+        .get();
+    final data = trainersSnapshot.docs.first;
+    return TrainerEntity(
+        id: data.id,
+        name: data[UserDocumentFields.name] as String,
+        surname: data[UserDocumentFields.surname] as String,
+        nickname: data[UserDocumentFields.nickname] as String,
+        votesNumber: data[UserDocumentFields.votesNumber] as int,
+        fullBio: data[UserDocumentFields.fullBio] as String,
+        shortBio: data[UserDocumentFields.shortBio] as String,
+        rating: data[UserDocumentFields.rating] as double,
+        location: data[UserDocumentFields.location] as String,
+        reviews: _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
+        languages: data[UserDocumentFields.languages]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        categories: data[UserDocumentFields.categories]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        pendingRequests: data[UserDocumentFields.pendingRequests]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        activeClients: data[UserDocumentFields.activeClients]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        inactiveClients: data[UserDocumentFields.inactiveClients]
+            .toString()
+            .removeBrackets()
+            .split(', '),
+        imagePath: data[UserDocumentFields.imagePath] as String,
+        latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
+            const LatLng(0, 0));
+  }
+
+  @override
+  Future<List<String>> getSpecialities(String id) async {
+    final QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.id, isEqualTo: id)
+        .get();
+
+    final categories = snapshot.docs.first[UserDocumentFields.categories]
+        .toString()
+        .removeBrackets()
+        .split(', ');
+    return categories;
+  }
+}

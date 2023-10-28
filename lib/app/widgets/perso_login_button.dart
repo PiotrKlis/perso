@@ -1,8 +1,6 @@
-import 'package:Perso/app/models/account_type.dart';
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/models/account_type.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoRegisterButton extends StatelessWidget {
   const PersoRegisterButton(

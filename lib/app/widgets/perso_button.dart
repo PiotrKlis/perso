@@ -1,6 +1,6 @@
-import 'package:Perso/app/utils/dimens.dart';
-import 'package:Perso/app/utils/theme_text.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/value/app_dimens.dart';
+import 'package:perso/app/styleguide/value/app_typography.dart';
 
 class PersoButton extends StatelessWidget {
   const PersoButton(

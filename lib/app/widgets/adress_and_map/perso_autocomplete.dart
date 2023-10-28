@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:Perso/app/utils/colors.dart';
-import 'package:Perso/app/utils/theme_text.dart';
-import 'package:Perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:Perso/app/widgets/adress_and_map/event/address_and_map_event.dart';
-import 'package:Perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/address_provider/address_provider.dart';
-import 'package:Perso/data/address_provider/google_address_provider.dart';
+import 'package:perso/app/styleguide/value/app_colors.dart';
+import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
+import 'package:perso/app/widgets/adress_and_map/event/address_and_map_event.dart';
+import 'package:perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/address_provider/address_provider.dart';
+import 'package:perso/data/address_provider/google_address_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';

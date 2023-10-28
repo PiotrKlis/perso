@@ -1,8 +1,8 @@
-import 'package:Perso/app/screens/sign_in/event/sign_in_event.dart';
-import 'package:Perso/app/screens/sign_in/state/sign_in_state.dart';
-import 'package:Perso/core/dependency_injection/get_it_config.dart';
-import 'package:Perso/data/auth/auth_service.dart';
-import 'package:Perso/data/user_info/user_info_provider.dart';
+import 'package:perso/app/screens/sign_in/event/sign_in_event.dart';
+import 'package:perso/app/screens/sign_in/state/sign_in_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/data/auth/auth_service.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +21,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         UserCredential userCredential = await _authProvider.login(
             email: state.email, password: state.password);
         // if (userCredential.user!.emailVerified) {
-          await _handleSuccessfulLogin(emit);
+        await _handleSuccessfulLogin(emit);
         // } else {
         //   emit(const SignInState.error(message: "Email not verified"));
         // }
