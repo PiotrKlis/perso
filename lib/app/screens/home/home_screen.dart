@@ -60,28 +60,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     keyboardDismissBehavior:
                         ScrollViewKeyboardDismissBehavior.onDrag,
                     child: Column(children: [
-                      GestureDetector(
-                          onTap: () => _handleAccountClick(context),
-                          child: const PersoAccountIcon()),
                       Container(
                         margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
                             left: Dimens.normalMargin,
                             right: Dimens.normalMargin),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PersoBigHeader(
-                                title: context.strings.home_main_header,
-                              ),
-                              //TODO: Make this button invisible if user is logged in
-                              PersoButton(
-                                  onTap: (context) =>
-                                      _handleAccountClick(context),
-                                  title:
-                                      context.strings.trainers_section_button,
-                                  width: Dimens.smallButtonWidth)
-                            ]),
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            top: Dimens.normalMargin,
+                          ),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                PersoBigHeader(
+                                  title: context.strings.home_main_header,
+                                ),
+                                GestureDetector(
+                                    onTap: () => _handleAccountClick(context),
+                                    child: const PersoAccountIcon()),
+                              ]),
+                        ),
                       ),
                       Container(
                           margin: const EdgeInsets.only(
