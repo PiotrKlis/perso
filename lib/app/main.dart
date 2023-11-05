@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: goRouter,
         title: "Perso",
-        localizationsDelegates: const [
+        localizationsDelegates:const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
