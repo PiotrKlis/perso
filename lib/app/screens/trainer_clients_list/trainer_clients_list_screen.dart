@@ -120,7 +120,7 @@ class _Client extends StatelessWidget {
         GestureDetector(
           onTap: () {
             context.pushNamed(
-              ScreenNavigationKey.calendarExercises,
+              ScreenNavigationKey.planOverview,
               pathParameters: {'clientId': client.id},
             );
           },
