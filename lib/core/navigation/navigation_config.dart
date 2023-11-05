@@ -6,7 +6,7 @@ import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart'
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
-import 'package:perso/app/screens/plan_overview/plan_overview.dart';
+import 'package:perso/app/screens/plan_overview/plan_overview_screen.dart';
 import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
