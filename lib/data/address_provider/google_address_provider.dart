@@ -25,8 +25,8 @@ class GoogleAddressProvider implements AddressProvider {
     if (response.statusCode == 200) {
       final result = json.decode(response.body) as Map<String, dynamic>;
       if (result['status'] == 'OK') {
-        return (result['predictions'] as List<Map<String, String>>)
-            .map((prediction) => prediction['description']!)
+        return (result['predictions'] as List<dynamic>)
+            .map((prediction) => prediction['description'] as String)
             .toList();
       }
       if (result['status'] == 'ZERO_RESULTS') {

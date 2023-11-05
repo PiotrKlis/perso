@@ -128,7 +128,7 @@ class _Client extends StatelessWidget {
                 surname: client.surname,
                 nickname: client.nickname,
               ),
-              _Actions(sectionType: sectionType),
+              _Actions(sectionType: sectionType, clientId: client.id),
             ],
           ),
         ),
@@ -190,16 +190,18 @@ class _Image extends StatelessWidget {
 class _Actions extends StatelessWidget {
   const _Actions({
     required this.sectionType,
+    required this.clientId,
   });
 
   final SectionType sectionType;
+  final String clientId;
 
   @override
   Widget build(BuildContext context) {
     final buttons = switch (sectionType) {
-      SectionType.active => const _ActiveActions(),
-      SectionType.pending => const _PendingActions(),
-      SectionType.inactive => const _InactiveActions(),
+      SectionType.active => _ActiveActions(clientId),
+      SectionType.pending => _PendingActions(clientId),
+      SectionType.inactive => _InactiveActions(clientId),
     };
     return Container(
       margin: const EdgeInsets.only(right: Dimens.smallMargin),
@@ -209,7 +211,9 @@ class _Actions extends StatelessWidget {
 }
 
 class _InactiveActions extends StatefulWidget {
-  const _InactiveActions();
+  const _InactiveActions(this.clientId);
+
+  final String clientId;
 
   @override
   State<_InactiveActions> createState() => _InactiveActionsState();
@@ -225,13 +229,23 @@ class _InactiveActionsState extends State<_InactiveActions> {
         Switch(
           value: switchValue,
           onChanged: (value) {
+            context
+                .read<TrainerClientsListBloc>()
+                .add(TrainerClientsListEvent.activateClient(widget.clientId));
             setState(() {
               switchValue = value;
             });
           },
         ),
-        const Icon(
-          Icons.delete_forever,
+        GestureDetector(
+          onTap: () {
+            context
+                .read<TrainerClientsListBloc>()
+                .add(TrainerClientsListEvent.removeClient(widget.clientId));
+          },
+          child: const Icon(
+            Icons.delete_forever,
+          ),
         ),
       ],
     );
@@ -239,7 +253,9 @@ class _InactiveActionsState extends State<_InactiveActions> {
 }
 
 class _PendingActions extends StatefulWidget {
-  const _PendingActions();
+  const _PendingActions(this.clientId);
+
+  final String clientId;
 
   @override
   State<_PendingActions> createState() => _PendingActionsState();
@@ -255,13 +271,25 @@ class _PendingActionsState extends State<_PendingActions> {
         Switch(
           value: switchValue,
           onChanged: (value) {
+            if (value) {
+              context
+                  .read<TrainerClientsListBloc>()
+                  .add(TrainerClientsListEvent.activateClient(widget.clientId));
+            }
             setState(() {
               switchValue = value;
             });
           },
         ),
-        const Icon(
-          Icons.delete_forever,
+        GestureDetector(
+          onTap: () {
+            context
+                .read<TrainerClientsListBloc>()
+                .add(TrainerClientsListEvent.removeClient(widget.clientId));
+          },
+          child: const Icon(
+            Icons.delete_forever,
+          ),
         ),
       ],
     );
@@ -269,7 +297,9 @@ class _PendingActionsState extends State<_PendingActions> {
 }
 
 class _ActiveActions extends StatefulWidget {
-  const _ActiveActions();
+  const _ActiveActions(this.clientId);
+
+  final String clientId;
 
   @override
   State<_ActiveActions> createState() => _ActiveActionsState();
@@ -285,6 +315,9 @@ class _ActiveActionsState extends State<_ActiveActions> {
         Switch(
           value: switchValue,
           onChanged: (value) {
+            context
+                .read<TrainerClientsListBloc>()
+                .add(TrainerClientsListEvent.deactivateClient(widget.clientId));
             setState(() {
               switchValue = value;
             });

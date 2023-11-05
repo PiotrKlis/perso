@@ -20,7 +20,7 @@ class TrainerEntity with _$TrainerEntity {
     required String location,
     required List<ReviewEntity> reviews,
     required List<String> categories,
-    required List<String> pendingRequests,
+    required List<String> pendingClients,
     required List<String> activeClients,
     required List<String> inactiveClients,
     required LatLng latLng,

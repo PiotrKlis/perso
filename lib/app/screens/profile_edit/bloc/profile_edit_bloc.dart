@@ -62,7 +62,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       location: event.trainerData.location,
       categories: event.trainerData.categories,
       reviews: List.empty(),
-      pendingRequests: List.empty(),
+      pendingClients: List.empty(),
       activeClients: List.empty(),
       inactiveClients: List.empty(),
       imagePath: event.trainerData.imagePath,
@@ -88,7 +88,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       nickname: event.clientData.nickname,
       languages: event.clientData.languages,
       imagePath: event.clientData.imagePath,
-      pendingRequests: List.empty(),
+      pendingTrainers: List.empty(),
       activeTrainers: List.empty(),
       inactiveTrainers: List.empty(),
     );

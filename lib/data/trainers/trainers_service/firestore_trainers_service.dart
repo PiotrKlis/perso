@@ -1,22 +1,25 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_trainer_data.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/user_type.dart';
 import 'package:perso/data/trainers/trainers_service/trainers_service.dart';
+import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class FirestoreTrainersService implements TrainersService {
+  final _userInfoProvider = getIt.get<UserInfoProvider>();
+
   @override
   Future<void> updateData(EditableTrainerData trainerData) async {
     try {
       final serverImagePath = await _uploadImage(trainerData.imagePath);
-      final String? id = FirebaseAuth.instance.currentUser?.uid;
+      final id = _userInfoProvider.user?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
@@ -30,7 +33,7 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.surname: trainerData.surname,
         UserDocumentFields.categories: trainerData.categories,
         UserDocumentFields.userType: UserType.trainer.name,
-        UserDocumentFields.imagePath: serverImagePath
+        UserDocumentFields.imagePath: serverImagePath,
       });
       return Future.value();
     } catch (error) {
@@ -43,7 +46,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> uploadFullTrainerData(TrainerEntity trainerEntity) async {
     try {
       final serverImagePath = await _uploadImage(trainerEntity.imagePath);
-      final String? id = FirebaseAuth.instance.currentUser?.uid;
+      final id = _userInfoProvider.user?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
@@ -61,11 +64,11 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.reviews: trainerEntity.reviews,
         UserDocumentFields.categories: trainerEntity.categories,
         UserDocumentFields.userType: UserType.trainer.name,
-        UserDocumentFields.pendingRequests: trainerEntity.pendingRequests,
+        UserDocumentFields.pendingClients: trainerEntity.pendingClients,
         UserDocumentFields.activeClients: trainerEntity.activeClients,
         UserDocumentFields.inactiveClients: trainerEntity.inactiveClients,
         UserDocumentFields.imagePath: serverImagePath,
-        UserDocumentFields.latLng: trainerEntity.latLng.toJson()
+        UserDocumentFields.latLng: trainerEntity.latLng.toJson(),
       });
       return Future.value();
     } catch (error) {
@@ -78,16 +81,16 @@ class FirestoreTrainersService implements TrainersService {
   Future<String> _uploadImage(String path) async {
     try {
       if (path.isNotEmpty) {
-        final String? id = FirebaseAuth.instance.currentUser?.uid;
-        final Reference storageReference = FirebaseStorage.instance
+        final id = _userInfoProvider.user?.uid;
+        final storageReference = FirebaseStorage.instance
             .ref()
             .child('${CollectionName.images}/$id/}');
         await _deleteAlreadyPresentImage(storageReference);
         await storageReference.putFile(File(path));
-        ListResult files = await storageReference.list();
+        final files = await storageReference.list();
         return files.items.first.fullPath;
       } else {
-        return "";
+        return '';
       }
     } catch (error) {
       //TODO: Add error handling
@@ -96,9 +99,71 @@ class FirestoreTrainersService implements TrainersService {
   }
 
   Future<void> _deleteAlreadyPresentImage(Reference storageReference) async {
-    ListResult files = await storageReference.list();
+    final files = await storageReference.list();
     if (files.items.isNotEmpty) {
       await Future.wait(files.items.map((Reference ref) => ref.delete()));
     }
+  }
+
+  @override
+  Future<void> activateClient(String clientId) async {
+    final trainerId = _userInfoProvider.user?.uid;
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .update({
+      UserDocumentFields.pendingClients: FieldValue.arrayRemove([clientId]),
+      UserDocumentFields.activeClients: FieldValue.arrayUnion([clientId]),
+      UserDocumentFields.inactiveClients: FieldValue.arrayRemove([clientId]),
+    });
+
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(clientId)
+        .update({
+      UserDocumentFields.pendingTrainers: FieldValue.arrayRemove([trainerId]),
+      UserDocumentFields.activeTrainers: FieldValue.arrayUnion([trainerId]),
+      UserDocumentFields.inactiveTrainers: FieldValue.arrayUnion([trainerId]),
+    });
+  }
+
+  @override
+  Future<void> deactivateClient(String clientId) async {
+    final trainerId = _userInfoProvider.user?.uid;
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .update({
+      UserDocumentFields.inactiveClients: FieldValue.arrayUnion([clientId]),
+      UserDocumentFields.activeClients: FieldValue.arrayRemove([clientId]),
+    });
+
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(clientId)
+        .update({
+      UserDocumentFields.inactiveTrainers: FieldValue.arrayUnion([trainerId]),
+      UserDocumentFields.activeTrainers: FieldValue.arrayRemove([trainerId]),
+    });
+  }
+
+  @override
+  Future<void> removeClient(String clientId) async {
+    final trainerId = _userInfoProvider.user?.uid;
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .update({
+      UserDocumentFields.pendingClients: FieldValue.arrayRemove([clientId]),
+      UserDocumentFields.inactiveClients: FieldValue.arrayRemove([clientId]),
+    });
+
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(clientId)
+        .update({
+      UserDocumentFields.pendingTrainers: FieldValue.arrayRemove([trainerId]),
+      UserDocumentFields.inactiveTrainers: FieldValue.arrayRemove([trainerId]),
+    });
   }
 }

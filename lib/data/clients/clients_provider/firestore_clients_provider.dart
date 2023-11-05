@@ -25,15 +25,15 @@ class FirestoreClientsProvider implements ClientsSource {
           .toString()
           .removeBrackets()
           .split(', '),
-      pendingRequests: data[UserDocumentFields.pendingRequests]
+      pendingTrainers: data[UserDocumentFields.pendingTrainers]
           .toString()
           .removeBrackets()
           .split(', '),
-      activeTrainers: data[UserDocumentFields.activeClients]
+      activeTrainers: data[UserDocumentFields.activeTrainers]
           .toString()
           .removeBrackets()
           .split(', '),
-      inactiveTrainers: data[UserDocumentFields.inactiveClients]
+      inactiveTrainers: data[UserDocumentFields.inactiveTrainers]
           .toString()
           .removeBrackets()
           .split(', '),
