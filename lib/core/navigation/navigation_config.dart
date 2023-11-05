@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/calendar_exercises/calendar_exercises.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
@@ -204,6 +205,19 @@ final GoRouter goRouter = GoRouter(
           pageBuilder: (BuildContext context, GoRouterState state) {
             return const NoTransitionPage(child: ClientTrainingsScreen());
           },
+          routes: [
+            GoRoute(
+              name: ScreenNavigationKey.calendarExercises,
+              path: '${ScreenNavigationKey.calendarExercises}/:clientId',
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return NoTransitionPage(
+                  child: CalendarExercisesScreen(
+                    clientId: state.pathParameters['clientId']!,
+                  ),
+                );
+              },
+            ),
+          ],
         ),
         GoRoute(
           name: ScreenNavigationKey.trainerClientsList,

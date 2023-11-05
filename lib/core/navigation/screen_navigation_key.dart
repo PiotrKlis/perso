@@ -18,4 +18,5 @@ class ScreenNavigationKey {
   static const String profileEdit = "profile_edit";
   static const String profileCreation = "profile_creation";
   static const String profileCreationSuccess = "profile_creation_success";
+  static const String calendarExercises = "calendar_exercises";
 }

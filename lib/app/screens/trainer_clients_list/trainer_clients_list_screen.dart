@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/trainer_clients_list/bloc/trainer_client_list_bloc.dart';
 import 'package:perso/app/screens/trainer_clients_list/client_section_data.dart';
 import 'package:perso/app/screens/trainer_clients_list/event/trainer_client_list_event.dart';
@@ -8,6 +9,7 @@ import 'package:perso/app/screens/trainer_clients_list/state/trainer_client_list
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/models/client_entity.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/core/string_extensions.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
@@ -115,21 +117,30 @@ class _Client extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(
-            top: Dimens.smallMargin,
-            bottom: Dimens.smallMargin,
-          ),
-          child: Row(
-            children: [
-              _Image(imagePath: client.imagePath),
-              _Title(
-                name: client.name,
-                surname: client.surname,
-                nickname: client.nickname,
-              ),
-              _Actions(sectionType: sectionType, clientId: client.id),
-            ],
+        GestureDetector(
+          onTap: () {
+            context.pushNamed(
+              ScreenNavigationKey.calendarExercises,
+              pathParameters: {'clientId': client.id},
+            );
+          },
+          child: Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.smallMargin,
+              bottom: Dimens.smallMargin,
+            ),
+            child: Row(
+              children: [
+                //TODO: Add navigation to client profile on image click
+                _Image(imagePath: client.imagePath),
+                _Title(
+                  name: client.name,
+                  surname: client.surname,
+                  nickname: client.nickname,
+                ),
+                _Actions(sectionType: sectionType, clientId: client.id),
+              ],
+            ),
           ),
         ),
         const PersoDivider(),
