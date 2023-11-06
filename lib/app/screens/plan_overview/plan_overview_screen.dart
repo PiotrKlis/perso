@@ -15,30 +15,54 @@ class PlanOverviewScreen extends StatelessWidget {
       appBar: const PersoAppBar(
         title: 'Plan overview',
       ),
-      body: Column(
-        children: [
-          SfDateRangePicker(
-            showNavigationArrow: true,
-            // onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-            //   print(args.value);
-            // },
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: Dimens.smallMargin)
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Exercises",
-                  style: ThemeText.largeTitleBold,
-                ),
-                const PersoButton(
-                  title: "Start",
-                )
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SfDateRangePicker(
+              showNavigationArrow: true,
+              // onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+              //   print(args.value);
+              // },
             ),
-          )
-        ],
+            ColoredBox(
+              color: PersoColors.lightBlue,
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: Dimens.smallMargin,
+                      right: Dimens.smallMargin,
+                      top: Dimens.smallMargin,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Exercises',
+                          style: ThemeText.largeTitleBold,
+                        ),
+                        const PersoButton(
+                          title: 'Add',
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (BuildContext context, int index) {
+                      return const ListTile(
+                        leading: Icon(Icons.account_circle),
+                        title: Text('Exercise name'),
+                        subtitle: Text('Exercise description'),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
