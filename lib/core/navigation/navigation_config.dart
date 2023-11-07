@@ -10,7 +10,6 @@ import 'package:perso/app/screens/logged_out_training/logged_out_trainings_scree
 import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
-import 'package:perso/app/screens/search/search_screen.dart';
 import 'package:perso/app/screens/search_filters/search_filter.dart';
 import 'package:perso/app/screens/search_results/search_results.dart';
 import 'package:perso/app/screens/sign_in/sign_in_screen.dart';
@@ -58,13 +57,6 @@ final GoRouter goRouter = GoRouter(
                     trainerEntity: state.extra! as TrainerEntity,
                   ),
                 );
-              },
-            ),
-            GoRoute(
-              name: ScreenNavigationKey.search,
-              path: ScreenNavigationKey.search,
-              pageBuilder: (context, state) {
-                return NoTransitionPage(child: SearchScreen());
               },
             ),
             GoRoute(
