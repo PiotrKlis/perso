@@ -4,15 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:video_player/video_player.dart';
 
 class TestExercise {
-  TestExercise(
-      {required this.icon, required this.name, required this.description});
+  TestExercise({
+    required this.icon,
+    required this.name,
+    required this.description,
+  });
 
   final IconData icon;
   final String name;
   final String description;
+  bool isExpanded = false;
 }
 
 class PlanOverviewScreen extends StatefulWidget {
@@ -27,17 +33,20 @@ class PlanOverviewScreen extends StatefulWidget {
 class _PlanOverviewScreenState extends State<PlanOverviewScreen> {
   final List<TestExercise> exercises = [
     TestExercise(
-        icon: Icons.fitness_center,
-        name: 'Exercise name 1',
-        description: 'Exercise description'),
+      icon: Icons.fitness_center,
+      name: 'Exercise name 1',
+      description: 'Exercise description',
+    ),
     TestExercise(
-        icon: Icons.fitness_center,
-        name: 'Exercise name 2',
-        description: 'Exercise description'),
+      icon: Icons.fitness_center,
+      name: 'Exercise name 2',
+      description: 'Exercise description',
+    ),
     TestExercise(
-        icon: Icons.fitness_center,
-        name: 'Exercise name 3',
-        description: 'Exercise description 3'),
+      icon: Icons.fitness_center,
+      name: 'Exercise name 3',
+      description: 'Exercise description 3',
+    ),
   ];
 
   @override
@@ -82,26 +91,138 @@ class _PlanOverviewScreenState extends State<PlanOverviewScreen> {
                     height: 12,
                   ),
                   ReorderableListView(
+                    physics: const NeverScrollableScrollPhysics(),
                     proxyDecorator: proxyDecorator,
                     shrinkWrap: true,
                     children: [
                       for (final exercise in exercises)
                         Container(
                           key: Key(exercise.name),
-                          // margin: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Card(
-                            elevation: 2,
-                            child: ListTile(
-                              key: Key(exercise.name),
-                              leading: Icon(exercise.icon),
-                              title: Text(exercise.name),
-                              subtitle: Text(exercise.description),
-                              trailing: const Icon(Icons.drag_handle),
-                            ),
+                          child: Column(
+                            children: [
+                              ExpansionPanelList(
+                                expansionCallback:
+                                    (int index, bool isExpanded) {
+                                  setState(() {
+                                    exercise.isExpanded = !exercise.isExpanded;
+                                  });
+                                },
+                                children: [
+                                  ExpansionPanel(
+                                    canTapOnHeader: true,
+                                    isExpanded: exercise.isExpanded,
+                                    headerBuilder: (context, isExpanded) {
+                                      return ListTile(
+                                        key: Key(exercise.name),
+                                        leading: Icon(exercise.icon),
+                                        title: Text(exercise.name),
+                                        subtitle: Text(exercise.description),
+                                        trailing: const Icon(Icons.drag_handle),
+                                      );
+                                    },
+                                    body: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 8),
+                                          child: Text(
+                                            'Options',
+                                            style:
+                                                ThemeText.bodyRegularBlackText,
+                                          ),
+                                        ),
+                                        RadioListTile(
+                                          title:
+                                              const Text('Reps based exercise'),
+                                          value: 'Option 1',
+                                          groupValue: true,
+                                          onChanged: (value) {
+                                            //no-op
+                                          },
+                                        ),
+                                        RadioListTile(
+                                          title:
+                                              const Text('Time based exercise'),
+                                          value: 'Option 2',
+                                          groupValue: true,
+                                          onChanged: (value) {
+                                            //no-op
+                                          },
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.all(8),
+                                          child: const Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Expanded(
+                                                child: PersoTextField(
+                                                  textInputType:
+                                                      TextInputType.number,
+                                                  title: 'Sets',
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Expanded(
+                                                child: PersoTextField(
+                                                  textInputType:
+                                                      TextInputType.number,
+                                                  title: 'Repetitions',
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.all(8),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                width: 80,
+                                                // width needs to be specified
+                                                child: PersoTextField(
+                                                    title: 'Minutes'),
+                                              ),
+                                              Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 8),
+                                                  child: Text(
+                                                    ':',
+                                                    style: ThemeText
+                                                        .bodyBoldBlackText,
+                                                  )),
+                                              SizedBox(
+                                                width: 80,
+                                                child: PersoTextField(
+                                                    title: 'Seconds'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              VideoPlayer(
+                                VideoPlayerController.asset(
+                                  AppVideos.testVideo,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                     ],
-
                     onReorder: (oldIndex, newIndex) {
                       setState(() {
                         if (newIndex > oldIndex) {

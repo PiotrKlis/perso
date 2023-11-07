@@ -48,6 +48,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   sticky_headers: ^0.3.0
   syncfusion_flutter_datepicker: ^23.1.43
+  video_player: ^2.8.1
 
   #Http connection with API
   http: ^1.0.0
@@ -95,6 +96,8 @@ flutter:
   assets:
     - assets/images/
     - assets/vectors/
+    - assets/videos/
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
