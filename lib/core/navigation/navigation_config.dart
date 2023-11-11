@@ -4,6 +4,7 @@ import 'package:perso/app/screens/calendar_exercises/calendar_exercises.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
+import 'package:perso/app/screens/exercises/exercises_screen.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
@@ -111,6 +112,13 @@ final GoRouter goRouter = GoRouter(
               pageBuilder: (context, state) {
                 return NoTransitionPage(child: TrainerProfileScreen());
               },
+            ),
+            GoRoute(
+                name: ScreenNavigationKey.exercisesScreen,
+                path: ScreenNavigationKey.exercisesScreen,
+              pageBuilder: (context, state) {
+                  return NoTransitionPage(child: ExercisesScreen());
+              }
             ),
             GoRoute(
               name: ScreenNavigationKey.signIn,
