@@ -4,7 +4,7 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoSearch extends StatelessWidget {
-  const PersoSearch({Key? key}) : super(key: key);
+  const PersoSearch({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,16 @@ class PersoSearch extends StatelessWidget {
         readOnly: true,
         onChanged: (value) =>
             context.pushNamed(ScreenNavigationKey.searchResults),
-        maxLines: 1,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
             border: OutlineInputBorder(
                 borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(Dimens.searchRadius)),
+                borderRadius: BorderRadius.circular(Dimens.searchRadius),),
             fillColor: const Color(0xFFEFEFF0),
             filled: true,
-            hintText: "Search",
+            hintText: 'Search',
             contentPadding: EdgeInsets.zero,
-            prefixIcon: const Icon(Icons.search_outlined)),
+            prefixIcon: const Icon(Icons.search_outlined),),
       ),
     );
   }

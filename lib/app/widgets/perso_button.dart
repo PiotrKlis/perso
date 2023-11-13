@@ -5,11 +5,11 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 class PersoButton extends StatelessWidget {
   const PersoButton(
       {super.key,
-      this.title = "",
+      this.title = '',
       this.width = Dimens.bigButtonWidth,
       this.whiteBlackTheme = false,
       this.isLoading = false,
-      this.onTap});
+      this.onTap,});
 
   final String title;
   final double width;
@@ -24,15 +24,15 @@ class PersoButton extends StatelessWidget {
         height: Dimens.buttonHeight,
         decoration: const BoxDecoration(
             borderRadius:
-                BorderRadius.all(Radius.circular(Dimens.buttonBorderRadius))),
+                BorderRadius.all(Radius.circular(Dimens.buttonBorderRadius)),),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(),
-                backgroundColor: whiteBlackTheme ? Colors.white : Colors.black),
+                backgroundColor: whiteBlackTheme ? Colors.white : Colors.black,),
             onPressed: () {
               onTap?.call(context);
             },
-            child: _getContent()));
+            child: _getContent(),),);
   }
 
   Widget _getContent() {

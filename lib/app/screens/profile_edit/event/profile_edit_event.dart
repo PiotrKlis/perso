@@ -6,7 +6,7 @@ part 'profile_edit_event.freezed.dart';
 @freezed
 class ProfileEditEvent with _$ProfileEditEvent {
   const factory ProfileEditEvent.uploadTrainerData(
-      EditableTrainerData trainerData) = UploadTrainerData;
+      EditableTrainerData trainerData,) = UploadTrainerData;
   const factory ProfileEditEvent.uploadClientData(
-      EditableClientData clientData) = UploadClientData;
+      EditableClientData clientData,) = UploadClientData;
 }

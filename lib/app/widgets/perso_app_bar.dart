@@ -3,11 +3,10 @@ import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PersoAppBar(
-      {super.key,
+      {required String title, super.key,
       IconData? actionIcon,
       bool isTitleCentered = false,
-      required String title,
-      void Function(BuildContext context)? onActionIconClick})
+      void Function(BuildContext context)? onActionIconClick,})
       : _title = title,
         _isTitleCentered = isTitleCentered,
         _onActionIconClick = onActionIconClick,
@@ -24,9 +23,9 @@ class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: _getActionIcon(
           actionIcon: _actionIcon,
           onActionIconClick: _onActionIconClick,
-          context: context),
+          context: context,),
       centerTitle: _isTitleCentered,
-      elevation: 0.0,
+      elevation: 0,
       iconTheme: const IconThemeData(color: Colors.black),
       backgroundColor: PersoColors.lightWhite,
       title: Text(
@@ -42,12 +41,12 @@ class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   List<IconButton> _getActionIcon(
       {required IconData? actionIcon,
       required Function(BuildContext context)? onActionIconClick,
-      required BuildContext context}) {
+      required BuildContext context,}) {
     if (actionIcon != null) {
       return [
         IconButton(
             icon: Icon(actionIcon),
-            onPressed: () => onActionIconClick?.call(context)),
+            onPressed: () => onActionIconClick?.call(context),),
       ];
     } else {
       return [];

@@ -8,5 +8,5 @@ class TrainersSearchCarouselCardData with _$TrainersSearchCarouselCardData {
       {required String image,
       required String categoryName,
       required String title,
-      required String subtitle}) = _TrainersSearchCarouselCardData;
+      required String subtitle,}) = _TrainersSearchCarouselCardData;
 }

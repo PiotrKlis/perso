@@ -197,6 +197,7 @@ final GoRouter goRouter = GoRouter(
                   return null;
               }
             }
+            return null;
           },
         ),
         GoRoute(

@@ -14,7 +14,7 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({Key? key}) : super(key: key);
+  SignInScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final _loginController = TextEditingController();
@@ -32,12 +32,12 @@ class SignInScreen extends StatelessWidget {
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Column(
             children: [
-              const Icon(Icons.logo_dev, size: 160.0),
+              const Icon(Icons.logo_dev, size: 160),
               Center(
                 child: Container(
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
                     child: Text(context.strings.sign_in,
-                        style: ThemeText.largerTitleBold)),
+                        style: ThemeText.largerTitleBold,),),
               ),
               Form(
                   key: _formKey,
@@ -47,36 +47,36 @@ class SignInScreen extends StatelessWidget {
                           margin: const EdgeInsets.only(
                               top: Dimens.biggerMargin,
                               left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                              right: Dimens.normalMargin,),
                           child: PersoTextField(
                             title: context.strings.login,
                             textEditingController: _loginController,
                             customValidator: TextFieldValidator.validateIsEmpty,
-                          )),
+                          ),),
                       Container(
                           margin: const EdgeInsets.only(
                               top: Dimens.normalMargin,
                               left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                              right: Dimens.normalMargin,),
                           child: PersoTextField(
                             title: context.strings.password,
                             shouldObscureText: true,
                             textEditingController: _passwordController,
                             customValidator: TextFieldValidator.validateIsEmpty,
-                          )),
+                          ),),
                     ],
-                  )),
+                  ),),
               BlocBuilder<SignInBloc, SignInState>(
                 builder: (context, state) {
                   return state.whenOrNull(
                         loading: () => Container(
                             margin: const EdgeInsets.all(Dimens.normalMargin),
-                            child: const LinearProgressIndicator()),
+                            child: const LinearProgressIndicator(),),
                         error: (message) => Container(
                             margin:
                                 const EdgeInsets.only(top: Dimens.smallMargin),
                             child: Text(message,
-                                style: ThemeText.calloutRegularRed)),
+                                style: ThemeText.calloutRegularRed,),),
                       ) ??
                       Container();
                 },
@@ -87,7 +87,7 @@ class SignInScreen extends StatelessWidget {
                       navigateToProfileCreationScreen: () => context
                           .pushNamed(ScreenNavigationKey.profileCreation),
                       navigateToHomeScreen: () =>
-                          context.replaceNamed(ScreenNavigationKey.home));
+                          context.replaceNamed(ScreenNavigationKey.home),);
                 },
                 child: Container(),
               ),
@@ -108,11 +108,8 @@ class SignInScreen extends StatelessWidget {
                 child: Container(
                   margin: const EdgeInsets.only(top: Dimens.bigMargin),
                   child: PersoButton(
-                    width: Dimens.bigButtonWidth,
                     title: context.strings.sign_in,
-                    onTap: (context) {
-                      _loginUser(context);
-                    },
+                    onTap: _loginUser,
                   ),
                 ),
               ),
@@ -123,27 +120,27 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       const Expanded(child: PersoIndentedDivider()),
                       Text(context.strings.or,
-                          style: ThemeText.footnoteRegularGrey),
+                          style: ThemeText.footnoteRegularGrey,),
                       const Expanded(child: PersoIndentedDivider()),
-                    ]),
+                    ],),
               ),
               Container(
                   margin: const EdgeInsets.only(
                       top: Dimens.bigMargin,
                       left: Dimens.bigMargin,
-                      right: Dimens.bigMargin),
+                      right: Dimens.bigMargin,),
                   child: GestureDetector(
                     onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
                     child: AbsorbPointer(
                       child: PersoButton(
                           title: context.strings.sign_up,
-                          whiteBlackTheme: true),
+                          whiteBlackTheme: true,),
                     ),
-                  )),
+                  ),),
             ],
           ),
         ),
-      )),
+      ),),
     );
   }
 
@@ -156,12 +153,12 @@ class SignInScreen extends StatelessWidget {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            const Icon(Icons.logo_dev, size: 160.0),
+            const Icon(Icons.logo_dev, size: 160),
             Center(
               child: Container(
                   margin: const EdgeInsets.only(top: Dimens.normalMargin),
                   child: Text(context.strings.sign_in,
-                      style: ThemeText.largerTitleBold)),
+                      style: ThemeText.largerTitleBold,),),
             ),
             Form(
                 key: _formKey,
@@ -171,36 +168,36 @@ class SignInScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(
                             top: Dimens.biggerMargin,
                             left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
+                            right: Dimens.normalMargin,),
                         child: PersoTextField(
                           title: context.strings.login,
                           textEditingController: _loginController,
                           customValidator: TextFieldValidator.validateIsEmpty,
-                        )),
+                        ),),
                     Container(
                         margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
                             left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
+                            right: Dimens.normalMargin,),
                         child: PersoTextField(
                           title: context.strings.password,
                           shouldObscureText: true,
                           textEditingController: _passwordController,
                           customValidator: TextFieldValidator.validateIsEmpty,
-                        )),
+                        ),),
                   ],
-                )),
+                ),),
             BlocBuilder<SignInBloc, SignInState>(
               builder: (context, state) {
                 return state.whenOrNull(
                       loading: () => Container(
                           margin: const EdgeInsets.all(Dimens.normalMargin),
-                          child: const LinearProgressIndicator()),
+                          child: const LinearProgressIndicator(),),
                       error: (message) => Container(
                           margin:
                               const EdgeInsets.only(top: Dimens.smallMargin),
                           child: Text(message,
-                              style: ThemeText.calloutRegularRed)),
+                              style: ThemeText.calloutRegularRed,),),
                     ) ??
                     Container();
               },
@@ -211,7 +208,7 @@ class SignInScreen extends StatelessWidget {
                     navigateToProfileCreationScreen: () =>
                         context.pushNamed(ScreenNavigationKey.profileCreation),
                     navigateToHomeScreen: () =>
-                        context.replaceNamed(ScreenNavigationKey.home));
+                        context.replaceNamed(ScreenNavigationKey.home),);
               },
               child: Container(),
             ),
@@ -232,7 +229,6 @@ class SignInScreen extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(top: Dimens.bigMargin),
                 child: PersoButton(
-                  width: Dimens.bigButtonWidth,
                   title: context.strings.sign_in,
                   onTap: _loginUser,
                 ),
@@ -245,32 +241,32 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     const Expanded(child: PersoIndentedDivider()),
                     Text(context.strings.or,
-                        style: ThemeText.footnoteRegularGrey),
+                        style: ThemeText.footnoteRegularGrey,),
                     const Expanded(child: PersoIndentedDivider()),
-                  ]),
+                  ],),
             ),
             Container(
                 margin: const EdgeInsets.only(
                     top: Dimens.bigMargin,
                     left: Dimens.bigMargin,
-                    right: Dimens.bigMargin),
+                    right: Dimens.bigMargin,),
                 child: GestureDetector(
                   onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
                   child: AbsorbPointer(
                     child: PersoButton(
-                        title: context.strings.sign_up, whiteBlackTheme: true),
+                        title: context.strings.sign_up, whiteBlackTheme: true,),
                   ),
-                )),
+                ),),
           ],
         ),
       ),
-    ));
+    ),);
   }
 
   void _loginUser(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
       context.read<SignInBloc>().add(SignInEvent.login(
-          email: _loginController.text, password: _passwordController.text));
+          email: _loginController.text, password: _passwordController.text,),);
     }
   }
 }

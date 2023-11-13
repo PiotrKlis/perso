@@ -7,7 +7,7 @@ import 'package:perso/app/widgets/category_chips/state/category_chips_state.dart
 
 class PersoCategoryChips extends StatefulWidget {
   PersoCategoryChips(
-      {super.key, bool areChipsSelectable = true, String? trainerId})
+      {super.key, bool areChipsSelectable = true, String? trainerId,})
       : _trainerId = trainerId,
         _areChipsSelectable = areChipsSelectable;
 
@@ -35,17 +35,16 @@ class _PersoCategoryChipsState extends State<PersoCategoryChips> {
               } else {
                 context.read<CategoryChipsBloc>().add(
                     CategoryChipsEvent.loadCategoriesForTrainer(
-                        widget._trainerId!));
+                        widget._trainerId!,),);
               }
               return Container();
             },
             content: (List<String> categories) {
               return Container(
                 margin: const EdgeInsets.only(
-                    left: Dimens.smallMargin, right: Dimens.smallMargin),
+                    left: Dimens.smallMargin, right: Dimens.smallMargin,),
                 child: Wrap(
                   spacing: Dimens.smallMargin,
-                  alignment: WrapAlignment.start,
                   children: categories.map((String title) {
                     return FilterChip(
                       label: Text(title),

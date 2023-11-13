@@ -14,13 +14,13 @@ class TrainingRequestService {
         .collection(CollectionName.users)
         .doc(clientId)
         .update({
-      UserDocumentFields.pendingTrainers: FieldValue.arrayUnion([trainerId])
+      UserDocumentFields.pendingTrainers: FieldValue.arrayUnion([trainerId]),
     });
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
         .update({
-      UserDocumentFields.pendingClients: FieldValue.arrayUnion([clientId])
+      UserDocumentFields.pendingClients: FieldValue.arrayUnion([clientId]),
     });
   }
 

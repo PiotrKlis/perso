@@ -6,7 +6,7 @@ part 'training_category_list_state.freezed.dart';
 class TrainingCategoryListState with _$TrainingCategoryListState {
   const factory TrainingCategoryListState.initial() = _Initial;
   const factory TrainingCategoryListState.content(
-      {required List<TrainingCategory> categories}) = _Content;
+      {required List<TrainingCategory> categories,}) = _Content;
   const factory TrainingCategoryListState.error({required String error}) =
       _Error;
 }

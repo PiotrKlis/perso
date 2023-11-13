@@ -14,7 +14,7 @@ class ProfileCreationScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(
-            left: Dimens.normalMargin, right: Dimens.normalMargin),
+            left: Dimens.normalMargin, right: Dimens.normalMargin,),
         child: Column(
           children: [
             Container(
@@ -34,7 +34,7 @@ class ProfileCreationScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
               child: Text(context.strings.welcome_message_body_2,
-                  style: ThemeText.bodyRegularBlackText),
+                  style: ThemeText.bodyRegularBlackText,),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.substantialMargin),
@@ -44,7 +44,7 @@ class ProfileCreationScreen extends StatelessWidget {
                   PersoButton(
                       title: context.strings.choose_trainer_user_type,
                       whiteBlackTheme: true,
-                      onTap: _navigateTrainer),
+                      onTap: _navigateTrainer,),
                   Container(
                     margin: const EdgeInsets.only(left: Dimens.normalMargin),
                     child: PersoButton(
@@ -54,7 +54,7 @@ class ProfileCreationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

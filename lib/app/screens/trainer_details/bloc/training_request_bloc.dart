@@ -7,15 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TrainingRequestBloc
     extends Bloc<TrainingRequestEvent, TrainingRequestState> {
-  final TrainingRequestService _trainingRequestService =
-      getIt.get<TrainingRequestService>();
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
-  TrainingRequestBloc(TrainingRequestState trainingRequestState)
-      : super(trainingRequestState) {
+  TrainingRequestBloc(super.trainingRequestState) {
     on<TrainingRequest>((event, emitter) async {
       try {
-        bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
+        final isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
         if (isUserLoggedIn) {
           emitter(const TrainingRequestState.loadingTrainingRequest());
           await _trainingRequestService.sendTrainingRequest(event.trainerId);
@@ -32,13 +28,16 @@ class TrainingRequestBloc
 
     on<CheckIfUserHasAlreadyRequestTraining>((event, emitter) async {
       try {
-        final bool hasAlreadySentRequest = await _trainingRequestService
+        final hasAlreadySentRequest = await _trainingRequestService
             .checkIfUserHasAlreadySentRequest(event.trainerId);
         emitter(TrainingRequestState.hasUserAlreadyRequestedTraining(
-            hasAlreadySentRequest));
+            hasAlreadySentRequest,),);
       } catch (error) {
         emitter(const TrainingRequestState.initial());
       }
     });
   }
+  final TrainingRequestService _trainingRequestService =
+      getIt.get<TrainingRequestService>();
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 }
