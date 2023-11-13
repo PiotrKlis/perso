@@ -22,7 +22,7 @@ class TestExercise {
 }
 
 class PlanOverviewScreen extends StatefulWidget {
-  PlanOverviewScreen({required this.clientId, super.key});
+  const PlanOverviewScreen({required this.clientId, super.key});
 
   final String clientId;
 
@@ -48,6 +48,18 @@ class _PlanOverviewScreenState extends State<PlanOverviewScreen> {
       description: 'Exercise description 3',
     ),
   ];
+
+  late VideoPlayerController _videoPlayerController;
+  late Future<void> _initializeVideoPlayerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _videoPlayerController = VideoPlayerController.asset(AppVideos.testVideo);
+    _initializeVideoPlayerFuture = _videoPlayerController
+        .initialize()
+        .then((value) => _videoPlayerController.play());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,27 +196,53 @@ class _PlanOverviewScreenState extends State<PlanOverviewScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 80,
                                                 // width needs to be specified
                                                 child: PersoTextField(
-                                                    title: 'Minutes'),
+                                                  title: 'Minutes',
+                                                ),
                                               ),
                                               Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 8),
-                                                  child: Text(
-                                                    ':',
-                                                    style: ThemeText
-                                                        .bodyBoldBlackText,
-                                                  )),
-                                              SizedBox(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 8,
+                                                ),
+                                                child: Text(
+                                                  ':',
+                                                  style: ThemeText
+                                                      .bodyBoldBlackText,
+                                                ),
+                                              ),
+                                              const SizedBox(
                                                 width: 80,
                                                 child: PersoTextField(
-                                                    title: 'Seconds'),
+                                                  title: 'Seconds',
+                                                ),
                                               ),
                                             ],
                                           ),
+                                        ),
+                                        FutureBuilder(
+                                          future: _initializeVideoPlayerFuture,
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              return AspectRatio(
+                                                aspectRatio:
+                                                    _videoPlayerController
+                                                        .value.aspectRatio,
+                                                child: VideoPlayer(
+                                                  _videoPlayerController,
+                                                ),
+                                              );
+                                            } else {
+                                              return const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            }
+                                          },
                                         ),
                                       ],
                                     ),
@@ -213,11 +251,6 @@ class _PlanOverviewScreenState extends State<PlanOverviewScreen> {
                               ),
                               const SizedBox(
                                 height: 8,
-                              ),
-                              VideoPlayer(
-                                VideoPlayerController.asset(
-                                  AppVideos.testVideo,
-                                ),
                               ),
                             ],
                           ),
