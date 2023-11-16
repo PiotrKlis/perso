@@ -2,8 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/category_chips/category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:video_player/video_player.dart';
@@ -62,7 +64,7 @@ class _ExercisesOverview extends StatelessWidget {
       child: Column(
         children: [
           const _ExercisesHeaderRow(),
-          Expanded(child: _ExercisesList()),
+          _ExercisesList(),
         ],
       ),
     );
@@ -98,12 +100,15 @@ class _ExercisesListState extends State<_ExercisesList> {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: Dimens.mediumMargin),
       child: ReorderableListView(
+        shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         proxyDecorator: (child, index, animation) =>
             _ExercisesListDecorator(animation: animation, child: child),
         children: exercises.map<Widget>((exercise) {
           return _Exercise(
-              key: PageStorageKey(UniqueKey()), exercise: exercise);
+            key: UniqueKey(),
+            exercise: exercise,
+          );
         }).toList(),
         onReorder: (oldIndex, newIndex) {
           setState(() {
@@ -157,23 +162,20 @@ class _ExerciseState extends State<_Exercise> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      margin: const EdgeInsets.only(top: Dimens.smallMargin),
+      child: ExpansionPanelList(
+        expansionCallback: (int index, bool isExpanded) {
+          setState(() {
+            widget.exercise.isExpanded = !widget.exercise.isExpanded;
+          });
+        },
         children: [
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                widget.exercise.isExpanded = !widget.exercise.isExpanded;
-              });
-            },
-            children: [
-              ExpansionPanel(
-                canTapOnHeader: true,
-                isExpanded: widget.exercise.isExpanded,
-                headerBuilder: (context, isExpanded) =>
-                    _ExerciseHeader(exercise: widget.exercise),
-                body: _ExerciseExpansionPanel(),
-              ),
-            ],
+          ExpansionPanel(
+            canTapOnHeader: true,
+            isExpanded: widget.exercise.isExpanded,
+            headerBuilder: (context, isExpanded) =>
+                _ExerciseHeader(exercise: widget.exercise),
+            body: _ExerciseExpansionPanel(),
           ),
         ],
       ),
@@ -187,13 +189,43 @@ class _ExerciseExpansionPanel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(left: 8),
-          child: Text(
-            'Options',
-            style: ThemeText.bodyRegularBlackText,
-          ),
-        ),
+        const PersoDivider(),
+        const _OptionsHeader(),
+        const _Options(),
+        _VideoPlayer(),
+        const _Categories(),
+      ],
+    );
+  }
+}
+
+class _Categories extends StatelessWidget {
+  const _Categories({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: Dimens.smallMargin),
+      child: PersoCategoryChips(
+        areChipsSelectable: false,
+      ),
+    );
+  }
+}
+
+class _Options extends StatelessWidget {
+  const _Options({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        //TODO: Make it a stful widget and add variable which will hold info on which button is clicked
+        // and set visibility accordingly
         RadioListTile(
           title: const Text('Reps based exercise'),
           value: 'Option 1',
@@ -264,8 +296,25 @@ class _ExerciseExpansionPanel extends StatelessWidget {
             ],
           ),
         ),
-        _VideoPlayer(),
       ],
+    );
+  }
+}
+
+class _OptionsHeader extends StatelessWidget {
+  const _OptionsHeader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+          left: Dimens.smallMargin, top: Dimens.normalMargin),
+      child: Text(
+        'Options',
+        style: ThemeText.bodyBoldBlackText,
+      ),
     );
   }
 }
@@ -283,9 +332,11 @@ class _VideoPlayerState extends State<_VideoPlayer> {
   @override
   void initState() {
     super.initState();
-    print("Init state!!!!");
-    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4"));
+    _videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+      ),
+    );
 
     _initializeVideoPlayerFuture = _videoPlayerController
         .initialize()
@@ -294,23 +345,29 @@ class _VideoPlayerState extends State<_VideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initializeVideoPlayerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return SizedBox(
-            height: 360,
-            width: double.infinity,
-            child: VideoPlayer(
-              _videoPlayerController,
-            ),
-          );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+    return SizedBox(
+      height: 260,
+      child: FutureBuilder(
+        future: _initializeVideoPlayerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return GestureDetector(
+              onTap: () {
+                _videoPlayerController.value.isPlaying
+                    ? _videoPlayerController.pause()
+                    : _videoPlayerController.play();
+              },
+              child: VideoPlayer(
+                _videoPlayerController,
+              ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }
