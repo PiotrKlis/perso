@@ -180,19 +180,25 @@ class _ExerciseState extends State<_Exercise> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: Dimens.smallMargin),
-      child: ExpansionPanelList(
-        expansionCallback: (int index, bool isExpanded) {
-          setState(() {
-            widget.exercise.isExpanded = !widget.exercise.isExpanded;
-          });
-        },
+      //ExpansionPanelList needs to be wrapped in Column as it fixes
+      //avoid RenderListBody must have unlimited space along its main axis error
+      child: Column(
         children: [
-          ExpansionPanel(
-            canTapOnHeader: true,
-            isExpanded: widget.exercise.isExpanded,
-            headerBuilder: (context, isExpanded) =>
-                _ExerciseHeader(exercise: widget.exercise),
-            body: _ExerciseExpansionPanel(),
+          ExpansionPanelList(
+            expansionCallback: (int index, bool isExpanded) {
+              setState(() {
+                widget.exercise.isExpanded = !widget.exercise.isExpanded;
+              });
+            },
+            children: [
+              ExpansionPanel(
+                canTapOnHeader: true,
+                isExpanded: widget.exercise.isExpanded,
+                headerBuilder: (context, isExpanded) =>
+                    _ExerciseHeader(exercise: widget.exercise),
+                body: _ExerciseExpansionPanel(),
+              ),
+            ],
           ),
         ],
       ),
