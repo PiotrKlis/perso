@@ -56,6 +56,20 @@ class _PlanOverviewScreenContent extends StatelessWidget {
   }
 }
 
+class _Calendar extends StatelessWidget {
+  const _Calendar();
+
+  @override
+  Widget build(BuildContext context) {
+    return SfDateRangePicker(
+      showNavigationArrow: true,
+      // onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
+      //   print(args.value);
+      // },
+    );
+  }
+}
+
 class _ExercisesOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -98,7 +112,10 @@ class _ExercisesListState extends State<_ExercisesList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: Dimens.mediumMargin),
+      margin: const EdgeInsets.only(
+        top: Dimens.smallMargin,
+        bottom: Dimens.normalMargin,
+      ),
       child: ReorderableListView(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -150,7 +167,7 @@ class _ExercisesListDecorator extends StatelessWidget {
 }
 
 class _Exercise extends StatefulWidget {
-  _Exercise({required this.exercise, super.key});
+  const _Exercise({required this.exercise, super.key});
 
   final TestExercise exercise;
 
@@ -200,9 +217,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
 }
 
 class _Categories extends StatelessWidget {
-  const _Categories({
-    super.key,
-  });
+  const _Categories();
 
   @override
   Widget build(BuildContext context) {
@@ -215,85 +230,107 @@ class _Categories extends StatelessWidget {
   }
 }
 
-class _Options extends StatelessWidget {
-  const _Options({
-    super.key,
-  });
+enum _ExerciseType { repsBased, timeBased }
+
+class _Options extends StatefulWidget {
+  const _Options();
+
+  @override
+  State<_Options> createState() => _OptionsState();
+}
+
+class _OptionsState extends State<_Options> {
+  var _exerciseType = _ExerciseType.repsBased;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //TODO: Make it a stful widget and add variable which will hold info on which button is clicked
-        // and set visibility accordingly
         RadioListTile(
           title: const Text('Reps based exercise'),
-          value: 'Option 1',
-          groupValue: true,
+          value: _ExerciseType.repsBased,
+          groupValue: _exerciseType,
           onChanged: (value) {
-            //no-op
+            setState(() {
+              _exerciseType = value!;
+            });
           },
         ),
         RadioListTile(
           title: const Text('Time based exercise'),
-          value: 'Option 2',
-          groupValue: true,
+          value: _ExerciseType.timeBased,
+          groupValue: _exerciseType,
           onChanged: (value) {
-            //no-op
+            setState(() {
+              _exerciseType = value!;
+            });
           },
         ),
-        Container(
-          margin: const EdgeInsets.all(8),
-          child: const Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: PersoTextField(
-                  textInputType: TextInputType.number,
-                  title: 'Sets',
+        Visibility(
+          visible: _exerciseType == _ExerciseType.repsBased,
+          child: Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.smallMargin,
+              left: Dimens.smallMargin,
+              right: Dimens.smallMargin,
+              bottom: Dimens.normalMargin,
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(
+                  child: PersoTextField(
+                    textInputType: TextInputType.number,
+                    title: 'Sets',
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Expanded(
-                child: PersoTextField(
-                  textInputType: TextInputType.number,
-                  title: 'Repetitions',
+                SizedBox(
+                  width: 8,
                 ),
-              ),
-            ],
+                Expanded(
+                  child: PersoTextField(
+                    textInputType: TextInputType.number,
+                    title: 'Repetitions',
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        Container(
-          margin: const EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                width: 80,
-                // width needs to be specified
-                child: PersoTextField(
-                  title: 'Minutes',
+        Visibility(
+          visible: _exerciseType == _ExerciseType.timeBased,
+          child: Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.smallMargin,
+              left: Dimens.smallMargin,
+              right: Dimens.smallMargin,
+              bottom: Dimens.normalMargin,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Expanded(
+                  child: PersoTextField(
+                    title: 'Minutes',
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 8,
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                  ),
+                  child: Text(
+                    ':',
+                    style: ThemeText.bodyBoldBlackText,
+                  ),
                 ),
-                child: Text(
-                  ':',
-                  style: ThemeText.bodyBoldBlackText,
+                const Expanded(
+                  child: PersoTextField(
+                    title: 'Seconds',
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 80,
-                child: PersoTextField(
-                  title: 'Seconds',
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
@@ -302,15 +339,15 @@ class _Options extends StatelessWidget {
 }
 
 class _OptionsHeader extends StatelessWidget {
-  const _OptionsHeader({
-    super.key,
-  });
+  const _OptionsHeader();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-          left: Dimens.smallMargin, top: Dimens.normalMargin),
+        left: Dimens.smallMargin,
+        top: Dimens.normalMargin,
+      ),
       child: Text(
         'Options',
         style: ThemeText.bodyBoldBlackText,
@@ -338,9 +375,7 @@ class _VideoPlayerState extends State<_VideoPlayer> {
       ),
     );
 
-    _initializeVideoPlayerFuture = _videoPlayerController
-        .initialize()
-        .then((value) => _videoPlayerController.play());
+    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
   }
 
   @override
@@ -399,7 +434,7 @@ class _ExercisesHeaderRow extends StatelessWidget {
       margin: const EdgeInsets.only(
         left: Dimens.smallMargin,
         right: Dimens.smallMargin,
-        top: Dimens.mediumMargin,
+        top: Dimens.normalMargin,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -413,20 +448,6 @@ class _ExercisesHeaderRow extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _Calendar extends StatelessWidget {
-  const _Calendar();
-
-  @override
-  Widget build(BuildContext context) {
-    return SfDateRangePicker(
-      showNavigationArrow: true,
-      // onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-      //   print(args.value);
-      // },
     );
   }
 }
