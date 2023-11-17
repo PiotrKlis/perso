@@ -1,12 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/category_chips/category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -31,25 +33,28 @@ class PlanOverviewScreen extends StatelessWidget {
   // @override
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PersoAppBar(
+    return Scaffold(
+      appBar: const PersoAppBar(
         title: 'Plan overview',
       ),
-      body: _PlanOverviewScreenContent(),
+      body: _PlanOverviewScreenContent(clientId: clientId),
     );
   }
 }
 
 class _PlanOverviewScreenContent extends StatelessWidget {
-  const _PlanOverviewScreenContent();
+  const _PlanOverviewScreenContent({required this.clientId});
+
+  final String clientId;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Column(
         children: [
           const _Calendar(),
-          _ExercisesOverview(),
+          _ExercisesOverview(clientId: clientId),
         ],
       ),
     );
@@ -71,13 +76,17 @@ class _Calendar extends StatelessWidget {
 }
 
 class _ExercisesOverview extends StatelessWidget {
+  const _ExercisesOverview({required this.clientId});
+
+  final String clientId;
+
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
       color: PersoColors.lightBlue,
       child: Column(
         children: [
-          const _ExercisesHeaderRow(),
+          _ExercisesHeaderRow(clientId: clientId),
           _ExercisesList(),
         ],
       ),
@@ -274,72 +283,90 @@ class _OptionsState extends State<_Options> {
         ),
         Visibility(
           visible: _exerciseType == _ExerciseType.repsBased,
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.smallMargin,
-              left: Dimens.smallMargin,
-              right: Dimens.smallMargin,
-              bottom: Dimens.normalMargin,
-            ),
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: PersoTextField(
-                    textInputType: TextInputType.number,
-                    title: 'Sets',
-                  ),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                  child: PersoTextField(
-                    textInputType: TextInputType.number,
-                    title: 'Repetitions',
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: const _RepsBasedExerciseOptions(),
         ),
         Visibility(
           visible: _exerciseType == _ExerciseType.timeBased,
-          child: Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.smallMargin,
-              left: Dimens.smallMargin,
-              right: Dimens.smallMargin,
-              bottom: Dimens.normalMargin,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Expanded(
-                  child: PersoTextField(
-                    title: 'Minutes',
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                  ),
-                  child: Text(
-                    ':',
-                    style: ThemeText.bodyBoldBlackText,
-                  ),
-                ),
-                const Expanded(
-                  child: PersoTextField(
-                    title: 'Seconds',
-                  ),
-                ),
-              ],
-            ),
-          ),
+          child: const _TimeBasedExerciseOptions(),
         ),
       ],
+    );
+  }
+}
+
+class _RepsBasedExerciseOptions extends StatelessWidget {
+  const _RepsBasedExerciseOptions();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: Dimens.smallMargin,
+        left: Dimens.smallMargin,
+        right: Dimens.smallMargin,
+        bottom: Dimens.normalMargin,
+      ),
+      child: const Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: PersoTextField(
+              textInputType: TextInputType.number,
+              title: 'Sets',
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: PersoTextField(
+              textInputType: TextInputType.number,
+              title: 'Repetitions',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TimeBasedExerciseOptions extends StatelessWidget {
+  const _TimeBasedExerciseOptions();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: Dimens.smallMargin,
+        left: Dimens.smallMargin,
+        right: Dimens.smallMargin,
+        bottom: Dimens.normalMargin,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Expanded(
+            child: PersoTextField(
+              title: 'Minutes',
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 8,
+            ),
+            child: Text(
+              ':',
+              style: ThemeText.bodyBoldBlackText,
+            ),
+          ),
+          const Expanded(
+            child: PersoTextField(
+              title: 'Seconds',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -350,13 +377,21 @@ class _OptionsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        left: Dimens.smallMargin,
-        top: Dimens.normalMargin,
-      ),
-      child: Text(
-        'Options',
-        style: ThemeText.bodyBoldBlackText,
+      margin: const EdgeInsets.symmetric(horizontal: Dimens.smallMargin),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Options',
+            style: ThemeText.smallTitleBold,
+          ),
+          IconButton(
+            onPressed: () {
+              //remove this exercise
+            },
+            icon: const Icon(Icons.delete_forever),
+          )
+        ],
       ),
     );
   }
@@ -432,7 +467,9 @@ class _ExerciseHeader extends StatelessWidget {
 }
 
 class _ExercisesHeaderRow extends StatelessWidget {
-  const _ExercisesHeaderRow();
+  const _ExercisesHeaderRow({required this.clientId});
+
+  final String clientId;
 
   @override
   Widget build(BuildContext context) {
@@ -449,8 +486,12 @@ class _ExercisesHeaderRow extends StatelessWidget {
             'Exercises',
             style: ThemeText.largeTitleBold,
           ),
-          const PersoButton(
+          PersoButton(
             title: 'Add',
+            onTap: (context) => context.pushNamed(
+              ScreenNavigationKey.exerciseLibrary,
+              queryParameters: {'clientId': clientId},
+            ),
           ),
         ],
       ),

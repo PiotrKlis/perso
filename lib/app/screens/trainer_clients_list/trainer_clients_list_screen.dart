@@ -121,7 +121,7 @@ class _Client extends StatelessWidget {
           onTap: () {
             context.pushNamed(
               ScreenNavigationKey.planOverview,
-              pathParameters: {'clientId': client.id},
+              queryParameters: {'clientId': client.id},
             );
           },
           child: Container(

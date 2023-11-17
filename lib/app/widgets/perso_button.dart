@@ -5,7 +5,7 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 class PersoButton extends StatelessWidget {
   const PersoButton(
       {super.key,
-      this.title = "",
+      this.title = '',
       this.width = Dimens.bigButtonWidth,
       this.whiteBlackTheme = false,
       this.isLoading = false,

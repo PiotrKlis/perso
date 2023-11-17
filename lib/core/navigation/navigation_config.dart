@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
+import 'package:perso/app/screens/exercise_library/exercise_library.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
@@ -30,6 +31,8 @@ import 'package:perso/data/user_info/user_info_provider.dart';
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final _userInfoProvider = getIt.get<UserInfoProvider>();
+const _clientId = 'clientId';
+const _input = 'input';
 
 final GoRouter goRouter = GoRouter(
   initialLocation: ScreenNavigationKey.home,
@@ -69,11 +72,11 @@ final GoRouter goRouter = GoRouter(
             ),
             GoRoute(
               name: ScreenNavigationKey.searchResults,
-              path: '${ScreenNavigationKey.searchResults}/:input',
+              path: '${ScreenNavigationKey.searchResults}/:$_input',
               pageBuilder: (context, state) {
                 return NoTransitionPage(
                   child: SearchResultsScreen(
-                    input: state.pathParameters['input'],
+                    input: state.pathParameters[_input],
                   ),
                 );
               },
@@ -208,14 +211,27 @@ final GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               name: ScreenNavigationKey.planOverview,
-              path: '${ScreenNavigationKey.planOverview}/:clientId',
+              path: '${ScreenNavigationKey.planOverview}',
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return NoTransitionPage(
                   child: PlanOverviewScreen(
-                    clientId: state.pathParameters['clientId']!,
+                    clientId: state.uri.queryParameters[_clientId]!,
                   ),
                 );
               },
+              routes: [
+                GoRoute(
+                  name: ScreenNavigationKey.exerciseLibrary,
+                  path: ScreenNavigationKey.exerciseLibrary,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return NoTransitionPage(
+                      child: ExerciseLibraryScreen(
+                        clientId: state.uri.queryParameters['clientId']!,
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
