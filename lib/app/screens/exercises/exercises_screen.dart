@@ -14,15 +14,6 @@ class ExercisesScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: 350,
-            child: Card(
-                child: Container(
-                  margin: EdgeInsets.only(
-                    left: 16, top: 26,
-                  ),
-                    child: Text(
-              "Stop",
-              style: TextStyle(color: Colors.blue),
-            ))),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -55,8 +46,18 @@ class ExercisesScreen extends StatelessWidget {
               left: Dimens.biggerMargin,
               right: Dimens.biggerMargin,
             ),
-            child: Text(
-                "Start standing with legs slightly wider than shoulder-distance Read More...", ),
+            child: RichText(text: TextSpan(
+              text: "Start standing with legs slightly wider than shoulder-distance ",
+              style: ThemeText.bodyBoldBlackText,
+                children: [
+                  TextSpan(
+                    text: "Read More...",
+                    style: ThemeText.bodyBoldBlackText,
+                  )
+                ]),
+            maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            )
           ),
           Container(
             margin: EdgeInsets.only(top: 100),
@@ -78,7 +79,7 @@ class ExercisesScreen extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: Colors.grey,
                   radius: 20,
-                  child: Text(">", style: TextStyle(color: Colors.black54),),
+                  child: Icon(Icons.navigate_next)
                 )
               ],
             ),

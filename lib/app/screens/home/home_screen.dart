@@ -6,7 +6,6 @@ import 'package:perso/app/screens/home/event/home_event.dart';
 import 'package:perso/app/screens/home/state/home_state.dart';
 import 'package:perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
 import 'package:perso/app/widgets/adress_and_map/google_map.dart';
@@ -113,16 +112,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               left: Dimens.normalMargin, top: Dimens.bigMargin),
                           child: const PersoTrainingCategoryList(
                               isShortList: true)),
-                                  Container(
-                                    margin: const EdgeInsets.only(
-                                      bottom: Dimens.normalMargin
-                                    ),
-                                    child: PersoButton(
-                                      width: Dimens.bigButtonWidth,
-                                        title: "Exercises",
-                                      onTap: _exercises,
-                                    ),
-                                  ),
+                      Container(
+                        margin:
+                            const EdgeInsets.only(bottom: Dimens.normalMargin),
+                        child: PersoButton(
+                          width: Dimens.bigButtonWidth,
+                          title: "Exercises",
+                          onTap: (context) =>
+                            context.pushNamed(ScreenNavigationKey.exercisesScreen),
+                        ),
+                      ),
                       Container(
                         color: PersoColors.lightBlue,
                         child: Column(
@@ -177,9 +176,4 @@ class _HomeScreenState extends State<HomeScreen> {
   void _handleAccountClick(BuildContext context) {
     context.read<HomeBloc>().add(const HomeEvent.accountNavigation());
   }
-  
-  void _exercises (BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.exercisesScreen);
-  }
-  
 }
