@@ -1,4 +1,4 @@
-{
+{ "common__cancel": "Anuluj",
   "app_title": "Perso",
   "home_main_header": "Odkrywaj",
   "trainers_section_button": "Dla trenerów",
@@ -58,7 +58,7 @@
   "sign_up_succes_body_1": "Sprawdź swoją pocztę e-mail, aby potwierdzić swoje konto",
   "sign_up_succes_body_2": "Jeśli nie otrzymasz żadnej wiadomości e-mail, sprawdź folder ze spamem.",
   "sign_up_succes_body_3": "Do zobaczenia wkrótce!",
-  "confirm": "Potwierdź",
+  "confirm": "Zatwierdź",
   "about": "O sobie",
   "reviews": "Opinie",
   "trainer_details_request": "Zapytaj o trening",
@@ -73,5 +73,10 @@
           "userType": {
               "type": "String"
           }}},
-  "logout": "Wyloguj się"
+  "logout": "Wyloguj się",
+  "filters": "Filtry",
+  "location" : "Lokalizacja",
+  "rating": "Ocena",
+  "specialities": "Specjalizacje",
+  "location_default_set": "Domyślnie ustawiony jest Twój kraj"
 }

@@ -4,7 +4,7 @@ import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoRegisterButton extends StatelessWidget {
   const PersoRegisterButton(
-      {super.key, AccountType registerType = AccountType.client})
+      {super.key, AccountType registerType = AccountType.client,})
       : _registerType = registerType;
 
   final AccountType _registerType;
@@ -19,7 +19,7 @@ class PersoRegisterButton extends StatelessWidget {
                 backgroundColor: PersoColors.lightWhite,
                 shape: RoundedRectangleBorder(
                     borderRadius:
-                        BorderRadius.circular(Dimens.buttonBorderRadius))),
+                        BorderRadius.circular(Dimens.buttonBorderRadius),),),
             onPressed: () {},
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +30,7 @@ class PersoRegisterButton extends StatelessWidget {
                 //     margin: const EdgeInsets.only(left: Dimens.normalMargin),
                 //     child: getIcon(_registerType)),
               ],
-            )));
+            ),),);
   }
 
   Icon getIcon(AccountType loginType) {
@@ -45,9 +45,9 @@ class PersoRegisterButton extends StatelessWidget {
   Text getTitle(AccountType loginType) {
     switch (loginType) {
       case AccountType.client:
-        return Text("Sign Up", style: ThemeText.bodyBoldGreyText);
+        return Text('Sign Up', style: ThemeText.bodyBoldGreyText);
       case AccountType.trainer:
-        return Text("Register", style: ThemeText.bodyBoldGreyText);
+        return Text('Register', style: ThemeText.bodyBoldGreyText);
     }
   }
 }

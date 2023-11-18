@@ -13,7 +13,7 @@ class PersoSharedPrefs {
     await _prefs?.setString(key, value);
   }
 
-  String getString(String key, {String defaultValue = ""}) {
+  String getString(String key, {String defaultValue = ''}) {
     return _prefs?.getString(key) ?? defaultValue;
   }
 

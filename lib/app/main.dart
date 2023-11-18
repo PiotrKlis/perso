@@ -30,12 +30,12 @@ class MyApp extends StatelessWidget {
       data: ThemeData(
           primaryColor: Colors.white,
           buttonTheme: const ButtonThemeData(
-              buttonColor: Colors.black, textTheme: ButtonTextTheme.primary),
-          fontFamily: "Inter"),
+              buttonColor: Colors.black, textTheme: ButtonTextTheme.primary,),
+          fontFamily: 'Inter',),
       child: MaterialApp.router(
         routerConfig: goRouter,
-        title: "Perso",
-        localizationsDelegates: const [
+        title: 'Perso',
+        localizationsDelegates:const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 navigateToTrainerProfile: () {
                   context.pushNamed(ScreenNavigationKey.trainerProfile);
-                });
+                },);
           },
           builder: (context, state) => SafeArea(
                 child: Scaffold(
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
                             left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
+                            right: Dimens.normalMargin,),
                         child: Container(
                           margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
@@ -74,15 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 GestureDetector(
                                     onTap: () => _handleAccountClick(context),
-                                    child: const PersoAccountIcon()),
-                              ]),
+                                    child: const PersoAccountIcon(),),
+                              ],),
                         ),
                       ),
                       Container(
                           margin: const EdgeInsets.only(
                               left: Dimens.normalMargin,
                               top: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                              right: Dimens.normalMargin,),
                           child: GestureDetector(
                               onTap: () => context.pushNamed(
                                       ScreenNavigationKey.searchResults,
@@ -91,43 +91,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ScreenNavigationKey.searchResults
                                       }),
                               child:
-                                  const AbsorbPointer(child: PersoSearch()))),
+                                  const AbsorbPointer(child: PersoSearch()),),),
                       Container(
                         margin: const EdgeInsets.only(
                             top: Dimens.bigMargin,
                             left: Dimens.normalMargin,
-                            right: Dimens.normalMargin),
+                            right: Dimens.normalMargin,),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             PersoHeader(title: context.strings.category_header),
                             GestureDetector(
                               onTap: () => context.pushNamed(
-                                  ScreenNavigationKey.trainingCategories),
+                                  ScreenNavigationKey.trainingCategories,),
                               child: PersoClickableText(
-                                  title: context.strings.see_all_categories),
-                            )
+                                  title: context.strings.see_all_categories,),
+                            ),
                           ],
                         ),
                       ),
                       Container(
                           margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin, top: Dimens.bigMargin),
+                              left: Dimens.normalMargin, top: Dimens.bigMargin,),
                           child: const PersoTrainingCategoryList(
-                              isShortList: true)),
+                              isShortList: true,),),
                       Container(
                         color: PersoColors.lightBlue,
                         child: Column(
                           children: [
                             Container(
                                 margin: const EdgeInsets.only(
-                                    top: Dimens.bigMargin),
-                                child: PersoTrainersSearchCarousel()),
+                                    top: Dimens.bigMargin,),
+                                child: const PersoTrainersSearchCarousel(),),
                             Container(
                               margin: const EdgeInsets.only(
                                   top: Dimens.bigMargin,
                                   left: Dimens.normalMargin,
-                                  right: Dimens.normalMargin),
+                                  right: Dimens.normalMargin,),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -137,32 +137,32 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onTap: () => context.pushNamed(
                                         ScreenNavigationKey.searchResults,
                                         pathParameters: {
-                                          "input":
-                                              "see all trainers near my location"
-                                        }),
+                                          'input':
+                                              'see all trainers near my location',
+                                        },),
                                     child: PersoClickableText(
                                         title:
-                                            context.strings.see_all_categories),
-                                  )
+                                            context.strings.see_all_categories,),
+                                  ),
                                 ],
                               ),
                             ),
                             Container(
                               margin: const EdgeInsets.only(
-                                  top: Dimens.smallMargin),
-                              child: PersoGoogleMap(),
+                                  top: Dimens.smallMargin,),
+                              child: const PersoGoogleMap(),
                             ),
                             Container(
                                 margin: const EdgeInsets.only(
-                                    top: Dimens.smallMargin),
-                                child: const PersoTrainersList())
+                                    top: Dimens.smallMargin,),
+                                child: const PersoTrainersList(),),
                           ],
                         ),
                       ),
-                    ]),
+                    ],),
                   ),
                 ),
-              )),
+              ),),
     );
   }
 

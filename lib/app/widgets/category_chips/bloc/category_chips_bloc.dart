@@ -8,30 +8,30 @@ import 'package:perso/data/training_categories/local_training_category_repositor
 import 'package:perso/data/training_categories/training_category_source.dart';
 
 class CategoryChipsBloc extends Bloc<CategoryChipsEvent, CategoryChipsState> {
-  final TrainingCategorySource _trainingCategorySource =
-      getIt.get<LocalTrainingCategoryRepository>();
-
-  final TrainersSource _trainersSource = getIt.get<FirestoreTrainersProvider>();
 
   CategoryChipsBloc() : super(const CategoryChipsState.initial()) {
     on<LoadAllCategories>((event, emitter) async {
       try {
-        List<String> categories =
+        final categories =
             await _trainingCategorySource.getAllCategoriesNames();
         emitter(CategoryChipsState.content(categories));
       } catch (error) {
-        Future.error(error);
+        await Future.error(error);
       }
     });
 
     on<LoadCategoriesForTrainer>((event, emitter) async {
       try {
-        List<String> categories =
+        final categories =
             await _trainersSource.getSpecialities(event.trainerId);
         emitter(CategoryChipsState.content(categories));
       } catch (error) {
-        Future.error(error);
+        await Future.error(error);
       }
     });
   }
+  final TrainingCategorySource _trainingCategorySource =
+      getIt.get<LocalTrainingCategoryRepository>();
+
+  final TrainersSource _trainersSource = getIt.get<FirestoreTrainersProvider>();
 }

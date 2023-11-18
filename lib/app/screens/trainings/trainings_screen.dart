@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TrainingScreen extends StatelessWidget {
-  const TrainingScreen({Key? key}) : super(key: key);
+  const TrainingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("training screen")),
+        appBar: AppBar(title: const Text('training screen')),
         body: ElevatedButton(
           onPressed: () {
             // context.go('/trainings/training_details');
           },
-          child: Text("I am training body"),
-        ));
+          child: const Text('I am training body'),
+        ),);
   }
 }

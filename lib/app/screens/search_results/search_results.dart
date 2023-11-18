@@ -8,7 +8,7 @@ import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SearchResultsScreen extends StatelessWidget {
-  const SearchResultsScreen({super.key, String? input = ""}) : _input = input;
+  const SearchResultsScreen({super.key, String? input = ''}) : _input = input;
   final String? _input;
 
   @override
@@ -28,20 +28,20 @@ class SearchResultsScreen extends StatelessWidget {
                 // TODO: Show 10 trainers, then load another 10 more on scroll
                 Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, left: Dimens.normalMargin),
+                      top: Dimens.normalMargin, left: Dimens.normalMargin,),
                   child: Row(
                     children: [
                       Expanded(
                         child: RichText(
                           text: TextSpan(
-                              text: "\"$_input\"",
+                              text: '"$_input"',
                               style: ThemeText.mediumTitleBold,
                               children: [
                                 TextSpan(
-                                  text: " (1)",
+                                  text: ' (1)',
                                   style: ThemeText.mediumTitleRegular,
-                                )
-                              ]),
+                                ),
+                              ],),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -51,10 +51,10 @@ class SearchResultsScreen extends StatelessWidget {
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: const PersoTrainersList()),
+                    child: const PersoTrainersList(),),
                 Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, left: Dimens.normalMargin),
+                      top: Dimens.normalMargin, left: Dimens.normalMargin,),
                   child: Text(
                     context.strings.similar_trainers,
                     style: ThemeText.mediumTitleBold,
@@ -62,15 +62,15 @@ class SearchResultsScreen extends StatelessWidget {
                 ),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: PersoTrainersSearchCarousel())
+                    child: const PersoTrainersSearchCarousel(),),
               ],
             ),
           ),
-        ));
+        ),);
   }
 
   void onActionClick(BuildContext context) {
     context.pushNamed(ScreenNavigationKey.searchFilter,
-        pathParameters: {"input": _input ?? ""});
+        pathParameters: {'input': _input ?? ''},);
   }
 }

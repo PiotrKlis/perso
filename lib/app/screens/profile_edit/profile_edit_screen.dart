@@ -52,7 +52,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final persoChipsList = PersoCategoryChips();
   final imagePicker = ImagePicker();
-  PersoGoogleMap googleMap = PersoGoogleMap();
+  PersoGoogleMap googleMap = const PersoGoogleMap();
   final PersoAutocomplete addressWidget = PersoAutocomplete();
   XFile? image;
   LatLng? latLng;

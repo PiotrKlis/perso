@@ -5,6 +5,6 @@ part 'sign_in_event.freezed.dart';
 class SignInEvent with _$SignInEvent {
   const factory SignInEvent.init() = Init;
   const factory SignInEvent.login(
-      {required String email, required String password}) = Login;
+      {required String email, required String password,}) = Login;
   const factory SignInEvent.checkIsProfileCreated() = CheckIsProfileCreated;
 }
