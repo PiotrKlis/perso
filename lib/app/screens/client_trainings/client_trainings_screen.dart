@@ -45,7 +45,7 @@ class _TrainerSearchCarousel extends StatelessWidget {
           top: Dimens.normalMargin,
           bottom: Dimens.normalMargin,
         ),
-        child: PersoTrainersSearchCarousel(),
+        child: const PersoTrainersSearchCarousel(),
       ),
     );
   }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:collection/collection.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/data/address_provider/address_provider.dart';
@@ -11,11 +10,11 @@ class GoogleAddressProvider implements AddressProvider {
   final client = Client();
   final sessionToken = const Uuid().v4();
 
-  final String apiKey = "AIzaSyAFu6Z8q4klRZddcUjXZSAqluMZW8hcP1Q";
+  final String apiKey = 'AIzaSyAFu6Z8q4klRZddcUjXZSAqluMZW8hcP1Q';
 
   @override
   Future<List<String>> fetchSuggestions(String input) async {
-    final Uri request = Uri.parse(
+    final request = Uri.parse(
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?'
         'input=$input&types=address&components=country:pl&'
         'key=$apiKey&sessiontoken=$sessionToken');

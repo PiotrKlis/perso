@@ -22,8 +22,7 @@ final tabs = [
 ];
 
 class ScaffoldWithBottomNavBar extends StatefulWidget {
-  const ScaffoldWithBottomNavBar({Key? key, required this.child})
-      : super(key: key);
+  const ScaffoldWithBottomNavBar({required this.child, super.key});
   final Widget child;
 
   @override

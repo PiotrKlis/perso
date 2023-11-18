@@ -12,7 +12,7 @@ class ClientProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PersoAppBar(title: "Client profile screen"),
+        appBar: const PersoAppBar(title: 'Client profile screen'),
         body: PersoButton(
           title: 'Logout',
           onTap: (context) async {
@@ -20,6 +20,6 @@ class ClientProfileScreen extends StatelessWidget {
             await _authService.logout();
             context.replaceNamed(ScreenNavigationKey.home);
           },
-        ));
+        ),);
   }
 }

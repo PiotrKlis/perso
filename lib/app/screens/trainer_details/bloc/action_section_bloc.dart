@@ -6,11 +6,10 @@ import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActionSectionBloc extends Bloc<ActionSectionEvent, ActionSectionState> {
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   ActionSectionBloc() : super(const ActionSectionState.initial()) {
     on<ShouldSectionBeVisible>((event, emitter) async {
-      final UserType? userType = await _userInfoProvider.getUserType();
+      final userType = await _userInfoProvider.getUserType();
       switch (userType) {
         case UserType.trainer:
           emitter(const ActionSectionState.sectionVisibility(false));
@@ -23,4 +22,5 @@ class ActionSectionBloc extends Bloc<ActionSectionEvent, ActionSectionState> {
       }
     });
   }
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 }

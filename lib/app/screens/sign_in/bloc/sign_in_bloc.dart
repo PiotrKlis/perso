@@ -7,10 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  final AuthService _authProvider = getIt.get<AuthService>();
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
-  SignInBloc(SignInState initialState) : super(initialState) {
+  SignInBloc(super.initialState) {
     on<Init>((state, emit) async {
       //no-op
     });
@@ -18,8 +16,8 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<Login>((state, emit) async {
       try {
         emit(const SignInState.loading());
-        UserCredential userCredential = await _authProvider.login(
-            email: state.email, password: state.password);
+        final userCredential = await _authProvider.login(
+            email: state.email, password: state.password,);
         // if (userCredential.user!.emailVerified) {
         await _handleSuccessfulLogin(emit);
         // } else {
@@ -30,9 +28,11 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       }
     });
   }
+  final AuthService _authProvider = getIt.get<AuthService>();
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   Future<void> _handleSuccessfulLogin(Emitter<SignInState> emit) async {
-    final bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
+    final isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
     if (isUserLoggedIn) {
       emit(const SignInState.navigateToHomeScreen());
     } else {
@@ -41,20 +41,20 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   }
 
   void _handleLoginError(Object error, Emitter<SignInState> emit) {
-    String errorMessage = "Something went wrong";
+    var errorMessage = 'Something went wrong';
     if (error is FirebaseAuthException) {
       switch (error.code) {
         case 'invalid-email':
-          errorMessage = "Invalid email";
+          errorMessage = 'Invalid email';
           break;
         case 'user-disabled':
-          errorMessage = "Email is disabled";
+          errorMessage = 'Email is disabled';
           break;
         case 'user-not-found':
-          errorMessage = "User not found";
+          errorMessage = 'User not found';
           break;
         case 'wrong-password':
-          errorMessage = "Invalid password";
+          errorMessage = 'Invalid password';
           break;
       }
     }

@@ -32,15 +32,15 @@ class ForgotPasswordScreen extends StatelessWidget {
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.hugeMargin),
                     child: const Icon(Icons.lock,
-                        size: Dimens.iconSizeLarge, color: Colors.black)),
+                        size: Dimens.iconSizeLarge, color: Colors.black,),),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                     child: Text(context.strings.forgotten_password_title,
-                        style: ThemeText.largeTitleBold)),
+                        style: ThemeText.largeTitleBold,),),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: Text(context.strings.forgotten_password_subtitle,
-                      style: ThemeText.bodyBoldBlackText),
+                      style: ThemeText.bodyBoldBlackText,),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.smallerMargin),
@@ -55,7 +55,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     child: PersoTextField(
                       title: context.strings.email,
                       textEditingController: _textEditingController,
-                    )),
+                    ),),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: PersoButton(
@@ -63,7 +63,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     onTap: (context) {
                       context.read<ForgotPasswordBloc>().add(
                           ForgotPasswordEvent.resetPassword(
-                              _textEditingController.text));
+                              _textEditingController.text,),);
                     },
                   ),
                 ),
@@ -74,11 +74,11 @@ class ForgotPasswordScreen extends StatelessWidget {
                         return state.whenOrNull(
                                 passwordResetSuccess: () => Text(
                                     context.strings.password_reset_success,
-                                    style: ThemeText.calloutRegular),
-                                error: (error) => Text(error)) ??
+                                    style: ThemeText.calloutRegular,),
+                                error: Text.new,) ??
                             Container();
                       },
-                    )),
+                    ),),
               ],
             ),
           ),

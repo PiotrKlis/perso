@@ -6,5 +6,5 @@ class ActionSectionState with _$ActionSectionState {
   const factory ActionSectionState.initial() = Initial;
 
   const factory ActionSectionState.sectionVisibility(
-      bool shouldSectionBeVisible) = SectionVisibility;
+      bool shouldSectionBeVisible,) = SectionVisibility;
 }

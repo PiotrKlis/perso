@@ -14,7 +14,7 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+  SignUpScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final _loginController = TextEditingController();
@@ -37,14 +37,14 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 Container(
                     margin: const EdgeInsets.only(
-                        top: Dimens.biggerMargin, left: Dimens.normalMargin),
+                        top: Dimens.biggerMargin, left: Dimens.normalMargin,),
                     child: Text(context.strings.sign_up_body_1,
-                        style: ThemeText.largerTitleBold)),
+                        style: ThemeText.largerTitleBold,),),
                 Container(
                     margin: const EdgeInsets.only(
-                        top: Dimens.mediumMargin, left: Dimens.normalMargin),
+                        top: Dimens.mediumMargin, left: Dimens.normalMargin,),
                     child: Text(context.strings.sign_up_body_2,
-                        style: ThemeText.bodyRegularBlackText)),
+                        style: ThemeText.bodyRegularBlackText,),),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: Row(
@@ -53,17 +53,17 @@ class SignUpScreen extends StatelessWidget {
                           margin:
                               const EdgeInsets.only(left: Dimens.normalMargin),
                           child:
-                              const Icon(Icons.email, size: Dimens.iconSize)),
+                              const Icon(Icons.email, size: Dimens.iconSize),),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
                               left: Dimens.normalMargin,
-                              right: Dimens.normalMargin),
+                              right: Dimens.normalMargin,),
                           child: PersoTextField(
                               title: context.strings.email,
                               textEditingController: _loginController,
                               customValidator:
-                                  TextFieldValidator.validateEmail),
+                                  TextFieldValidator.validateEmail,),
                         ),
                       ),
                     ],
@@ -71,23 +71,22 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Container(
                     margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin, right: Dimens.normalMargin),
-                    child: const PersoIndentedDivider()),
+                        top: Dimens.normalMargin, right: Dimens.normalMargin,),
+                    child: const PersoIndentedDivider(),),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
                             margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin),
+                                left: Dimens.normalMargin,),
                             child: const Icon(Icons.password,
-                                size: Dimens.iconSize)),
+                                size: Dimens.iconSize,),),
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.normalMargin,
-                                right: Dimens.normalMargin),
+                                right: Dimens.normalMargin,),
                             child: PersoTextField(
                               title: context.strings.password,
                               customValidator:
@@ -98,17 +97,16 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )),
+                    ),),
                 Container(
                     margin: const EdgeInsets.only(top: Dimens.bigMargin),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
                           child: Container(
                             margin: const EdgeInsets.only(
                                 left: Dimens.substantialMargin,
-                                right: Dimens.normalMargin),
+                                right: Dimens.normalMargin,),
                             child: PersoTextField(
                               title: context.strings.confirm_password,
                               passwordController: _passwordController,
@@ -119,17 +117,16 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )),
+                    ),),
                 Center(
                   child: Container(
                       margin: const EdgeInsets.only(
                           top: Dimens.hugeMargin,
                           bottom: Dimens.biggerMargin,
-                          right: Dimens.normalMargin),
+                          right: Dimens.normalMargin,),
                       child: PersoButton(
-                          width: Dimens.persoButtonWidth,
                           title: context.strings.register,
-                          onTap: _registerUser)),
+                          onTap: _registerUser,),),
                 ),
                 BlocConsumer<SignUpBloc, SignUpState>(
                   builder: (context, state) {
@@ -137,12 +134,12 @@ class SignUpScreen extends StatelessWidget {
                             loading: () => const Center(
                                     child: CircularProgressIndicator(
                                   color: Colors.black,
-                                )),
+                                ),),
                             error: (error) => Center(
                                     child: Text(
                                   error,
                                   style: ThemeText.calloutRegularRed,
-                                ))) ??
+                                ),),) ??
                         Container();
                   },
                   listener: (context, state) {
@@ -162,7 +159,7 @@ class SignUpScreen extends StatelessWidget {
   void _registerUser(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
       context.read<SignUpBloc>().add(SignUpEvent.register(
-          email: _loginController.text, password: _passwordController.text));
+          email: _loginController.text, password: _passwordController.text,),);
     }
   }
 }
