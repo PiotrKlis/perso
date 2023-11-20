@@ -10,7 +10,6 @@ import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:video_player/video_player.dart';
 
 class TestExercise {
@@ -62,20 +61,6 @@ class _PlanOverviewScreenContent extends StatelessWidget {
   }
 }
 
-class _Calendar extends StatelessWidget {
-  const _Calendar();
-
-  @override
-  Widget build(BuildContext context) {
-    return SfDateRangePicker(
-      showNavigationArrow: true,
-      // onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-      //   print(args.value);
-      // },
-    );
-  }
-}
-
 class _ExercisesOverview extends StatelessWidget {
   const _ExercisesOverview({required this.clientId});
 
@@ -83,13 +68,16 @@ class _ExercisesOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: PersoColors.lightBlue,
-      child: Column(
-        children: [
-          _ExercisesHeaderRow(clientId: clientId),
-          _ExercisesList(),
-        ],
+    return Container(
+      margin: EdgeInsets.only(top: Dimens.normalMargin),
+      child: ColoredBox(
+        color: PersoColors.lightBlue,
+        child: Column(
+          children: [
+            _ExercisesHeaderRow(clientId: clientId),
+            _ExercisesList(),
+          ],
+        ),
       ),
     );
   }
@@ -476,7 +464,7 @@ class _ExercisesHeaderRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.smallMargin,
+        left: Dimens.normalMargin,
         right: Dimens.smallMargin,
         top: Dimens.normalMargin,
       ),

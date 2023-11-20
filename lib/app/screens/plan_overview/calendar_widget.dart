@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatelessWidget {
-
   const CalendarWidget({required this.clientId, super.key});
+
   final String clientId;
 
   @override
@@ -13,8 +13,8 @@ class CalendarWidget extends StatelessWidget {
 }
 
 class TableCalendarWidget extends StatefulWidget {
-
   const TableCalendarWidget({required this.clientId, super.key});
+
   final String clientId;
 
   @override
@@ -30,18 +30,18 @@ class _TableCalendarState extends State<TableCalendarWidget> {
     return TableCalendar<bool>(
       headerStyle: const HeaderStyle(formatButtonVisible: false),
       calendarBuilders: CalendarBuilders(
-        singleMarkerBuilder: (context, date, event) {
+        markerBuilder: (context, day, events) {
           return Container(
-            decoration:
-                const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: Colors.black),
             width: 8,
             height: 8,
           );
         },
       ),
       onPageChanged: (focusedDay) {},
-      firstDay: DateUtil.calendarStartDate,
-      lastDay: DateUtil.calendarEndDate,
+      firstDay: DateTime.utc(2023, 11),
+      lastDay: DateTime.utc(2028, 12, 31),
       focusedDay: _selectedDate,
       calendarFormat: _calendarFormat,
       startingDayOfWeek: StartingDayOfWeek.monday,
@@ -75,8 +75,3 @@ class _TableCalendarState extends State<TableCalendarWidget> {
 //   var isEvent = events[day] ?? false;
 //   return isEvent ? [isEvent] : [];
 // }
-
-class DateUtil {
-  static DateTime calendarStartDate = DateTime.utc(2021, 09);
-  static DateTime calendarEndDate = DateTime.utc(2028, 12, 31);
-}
