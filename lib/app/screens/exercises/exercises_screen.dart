@@ -15,10 +15,10 @@ class ExercisesScreen extends StatelessWidget {
       appBar: PersoAppBar(title: "exercises"),
       body: Column(
         children: [
-        SizedBox(
-        width: double.infinity,
-        height: 350,
-      ),
+ Container(
+            height: 350,
+            color: Colors.grey,
+          ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
