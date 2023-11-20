@@ -49,6 +49,7 @@ dependencies:
   sticky_headers: ^0.3.0
   syncfusion_flutter_datepicker: ^23.1.43
   video_player: ^2.8.1
+  table_calendar: ^3.0.9
 
   #Http connection with API
   http: ^1.0.0

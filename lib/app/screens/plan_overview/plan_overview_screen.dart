@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/plan_overview/calendar_widget.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/category_chips/category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
@@ -53,7 +54,7 @@ class _PlanOverviewScreenContent extends StatelessWidget {
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       child: Column(
         children: [
-          const _Calendar(),
+          const CalendarWidget(clientId: 'clientId'),
           _ExercisesOverview(clientId: clientId),
         ],
       ),
