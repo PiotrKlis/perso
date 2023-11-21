@@ -2,7 +2,7 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:flutter/material.dart';
 
 class PersoHeader extends StatelessWidget {
-  const PersoHeader({Key? key, required this.title}) : super(key: key);
+  const PersoHeader({required this.title, super.key});
   final String title;
 
   @override

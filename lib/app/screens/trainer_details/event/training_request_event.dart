@@ -6,5 +6,5 @@ class TrainingRequestEvent with _$TrainingRequestEvent {
   const factory TrainingRequestEvent.trainingRequest(String trainerId) =
       TrainingRequest;
   const factory TrainingRequestEvent.checkIfUserHasAlreadyRequestTraining(
-      String trainerId) = CheckIfUserHasAlreadyRequestTraining;
+      String trainerId,) = CheckIfUserHasAlreadyRequestTraining;
 }

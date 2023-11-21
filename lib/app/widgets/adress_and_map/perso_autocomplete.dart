@@ -14,11 +14,11 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PersoAutocomplete extends StatelessWidget {
+  PersoAutocomplete({super.key});
+
   final AddressProvider _addressProvider = getIt.get<GoogleAddressProvider>();
   TextEditingController? autocompleteController;
   Timer? _debounce;
-
-  PersoAutocomplete({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,34 +30,35 @@ class PersoAutocomplete extends StatelessWidget {
             controller: autocompleteController,
             focusNode: focusNode,
             decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                errorMaxLines: 2,
-                focusedBorder: const OutlineInputBorder(
-                    borderSide:
-                        BorderSide(width: 0.5, color: PersoColors.lightGrey)),
-                enabledBorder: const OutlineInputBorder(
-                  borderSide:
-                      BorderSide(width: 0.5, color: PersoColors.lightGrey),
-                ),
-                labelText: "Location",
-                labelStyle: ThemeText.bodyRegularGreyText),
+              filled: true,
+              fillColor: Colors.white,
+              errorMaxLines: 2,
+              focusedBorder: const OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 0.5, color: PersoColors.lightGrey),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 0.5, color: PersoColors.lightGrey),
+              ),
+              labelText: 'Location',
+              labelStyle: ThemeText.bodyRegularGreyText,
+            ),
           );
         },
         optionsBuilder: (TextEditingValue textEditingValue) async {
-          String input = textEditingValue.text;
-          if (input == "") {
+          final input = textEditingValue.text;
+          if (input == '') {
             return const Iterable<String>.empty();
           }
-          List<String> suggestions =
-              await _addressProvider.fetchSuggestions(input);
+          final suggestions = await _addressProvider.fetchSuggestions(input);
           return suggestions.map((suggestion) => suggestion);
         },
         onSelected: (String address) async {
-          List<Location> locations = await locationFromAddress(address);
+          final locations = await locationFromAddress(address);
           if (locations.isNotEmpty) {
-            Location location = locations.first;
-            LatLng latLng = LatLng(location.latitude, location.longitude);
+            final location = locations.first;
+            final latLng = LatLng(location.latitude, location.longitude);
             context
                 .read<AddressAndMapBloc>()
                 .add(AddressAndMapEvent.updateMap(latLng));

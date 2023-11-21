@@ -8,7 +8,7 @@ class TrainersListState with _$TrainersListState {
   const factory TrainersListState.initial() = Initial;
 
   const factory TrainersListState.content(
-      {required List<TrainerEntity> trainers}) = Content;
+      {required List<TrainerEntity> trainers,}) = Content;
 
   const factory TrainersListState.error({required String error}) = Error;
 }

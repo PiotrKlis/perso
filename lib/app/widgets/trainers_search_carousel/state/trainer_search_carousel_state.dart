@@ -6,7 +6,7 @@ part 'trainer_search_carousel_state.freezed.dart';
 class TrainerSearchCarouselState with _$TrainerSearchCarouselState {
   const factory TrainerSearchCarouselState.initial() = Initial;
   const factory TrainerSearchCarouselState.content(
-      {required List<TrainersSearchCarouselCardData> cardsData}) = Content;
+      {required List<TrainersSearchCarouselCardData> cardsData,}) = Content;
   const factory TrainerSearchCarouselState.error({required String error}) =
       Error;
 }
