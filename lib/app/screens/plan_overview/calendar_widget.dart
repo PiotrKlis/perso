@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends StatelessWidget {
@@ -23,7 +24,7 @@ class TableCalendarWidget extends StatefulWidget {
 
 class _TableCalendarState extends State<TableCalendarWidget> {
   final _calendarFormat = CalendarFormat.week;
-  final _selectedDate = DateTime.now();
+  var _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +32,21 @@ class _TableCalendarState extends State<TableCalendarWidget> {
       headerStyle: const HeaderStyle(formatButtonVisible: false),
       calendarBuilders: CalendarBuilders(
         markerBuilder: (context, day, events) {
-          return Container(
-            decoration: const BoxDecoration(
-                shape: BoxShape.circle, color: Colors.black),
-            width: 8,
-            height: 8,
-          );
+          if (day.day.isEven) {
+            return Padding(
+              padding: const EdgeInsets.only(top: Dimens.bigMargin),
+              child: Container(
+                width: 4,
+                height: 4,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black,
+                ),
+              ),
+            );
+          }
         },
       ),
-      onPageChanged: (focusedDay) {},
       firstDay: DateTime.utc(2023, 11),
       lastDay: DateTime.utc(2028, 12, 31),
       focusedDay: _selectedDate,
@@ -47,7 +54,11 @@ class _TableCalendarState extends State<TableCalendarWidget> {
       startingDayOfWeek: StartingDayOfWeek.monday,
       selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
       onDaySelected: (selectedDate, focusedDay) {
-        if (_selectedDate != selectedDate) {}
+        if (_selectedDate != selectedDate) {
+          setState(() {
+            _selectedDate = selectedDate;
+          });
+        }
       },
       eventLoader: (date) {
         return List.empty();
