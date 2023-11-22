@@ -12,10 +12,20 @@ class ExercisesInProgressScreen extends StatelessWidget {
       appBar: const PersoAppBar(title: 'exercises'),
       body: Column(
         children: [
+<<<<<<< HEAD
           const SizedBox(
             width: double.infinity,
             height: 350,
           ),
+=======
+ Container(
+            height: 350,
+            color: Colors.grey,
+          ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+>>>>>>> bb722f1d4222808cb68f34a440179005585b57f4
           Container(
             margin: const EdgeInsets.only(
               top: 48,
