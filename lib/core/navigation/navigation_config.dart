@@ -64,13 +64,6 @@ final GoRouter goRouter = GoRouter(
               },
             ),
             GoRoute(
-              name: ScreenNavigationKey.search,
-              path: ScreenNavigationKey.search,
-              pageBuilder: (context, state) {
-                return NoTransitionPage(child: SearchScreen());
-              },
-            ),
-            GoRoute(
               name: ScreenNavigationKey.searchResults,
               path: '${ScreenNavigationKey.searchResults}/:$_input',
               pageBuilder: (context, state) {

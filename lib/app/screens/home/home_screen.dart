@@ -85,8 +85,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               top: Dimens.normalMargin,
                               right: Dimens.normalMargin,),
                           child: GestureDetector(
-                              onTap: () =>
-                                  context.pushNamed(ScreenNavigationKey.search),
+                              onTap: () => context.pushNamed(
+                                      ScreenNavigationKey.searchResults,
+                                      pathParameters: {
+                                        "input":
+                                            ScreenNavigationKey.searchResults
+                                      }),
                               child:
                                   const AbsorbPointer(child: PersoSearch()),),),
                       Container(
