@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 
 class ExercisesScreen extends StatelessWidget {
@@ -18,6 +18,11 @@ class ExercisesScreen extends StatelessWidget {
         SizedBox(
         width: double.infinity,
         height: 350,
+      ),
+      PersoButton(
+        title: 'BREAK',
+        onTap: (context)=>
+        context.pushNamed(ScreenNavigationKey.exercisesBreakScreen),
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +70,7 @@ class ExercisesScreen extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           )),
       Container(
-        margin: EdgeInsets.only(top: 100),
+        margin: EdgeInsets.only(top: 70),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
