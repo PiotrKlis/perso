@@ -6,6 +6,7 @@ class Dimens {
   static const double normalMargin = 16.0;
   static const double bigMargin = 24.0;
   static const double biggerMargin = 32.0;
+  static const double biggerMargin2 = 40.0;
   static const double hugeMargin = 52.0;
   static const double substantialMargin = 56.0;
 

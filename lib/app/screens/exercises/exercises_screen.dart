@@ -18,7 +18,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: 48,
+              top: Dimens.hugeMargin,
             ),
             child: Text(
               'Exercise name',
@@ -27,13 +27,13 @@ class ExercisesInProgressScreen extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: 8,
+              top: Dimens.smallMargin,
             ),
             child: const Text('12 reps'),
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: 24,
+              top: Dimens.bigMargin,
               left: Dimens.normalMargin,
               right: Dimens.normalMargin,
             ),
@@ -41,7 +41,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               text: const TextSpan(
                 text:
-                    'Start standing with legs slightly wider than shoulder-distance',
+                    'Start standing with legs slightly wider than shoulder-distance ',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 15,
@@ -53,7 +53,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              maxLines: 2,
+              maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -63,7 +63,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(right: 40),
+                  margin: const EdgeInsets.only(right: Dimens.biggerMargin2),
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -82,7 +82,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(Dimens.bigMargin),
                   ),
                   child: const Icon(
                     Icons.check_rounded,
@@ -90,7 +90,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 40),
+                  margin: const EdgeInsets.only(left: Dimens.biggerMargin2),
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
