@@ -20,7 +20,7 @@ import 'package:perso/app/widgets/training_category_list/perso_training_category
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -50,131 +50,127 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
                 navigateToTrainerProfile: () {
                   context.pushNamed(ScreenNavigationKey.trainerProfile);
-                },);
+                });
           },
           builder: (context, state) => SafeArea(
-                child: Scaffold(
-                  body: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.onDrag,
-                    child: Column(children: [
-                      Container(
-                        margin: const EdgeInsets.only(
-                            top: Dimens.normalMargin,
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin,),
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                            top: Dimens.normalMargin,
-                          ),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                PersoBigHeader(
-                                  title: context.strings.home_main_header,
-                                ),
-                                GestureDetector(
-                                    onTap: () => _handleAccountClick(context),
-                                    child: const PersoAccountIcon(),),
-                              ],),
-                        ),
+            child: Scaffold(
+              body: SingleChildScrollView(
+                keyboardDismissBehavior:
+                ScrollViewKeyboardDismissBehavior.onDrag,
+                child: Column(children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                        top: Dimens.normalMargin,
+                        left: Dimens.normalMargin,
+                        right: Dimens.normalMargin),
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        top: Dimens.normalMargin,
                       ),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              top: Dimens.normalMargin,
-                              right: Dimens.normalMargin,),
-                          child: GestureDetector(
-                              onTap: () => context.pushNamed(
-                                      ScreenNavigationKey.searchResults,
-                                      pathParameters: {
-                                        "input":
-                                            ScreenNavigationKey.searchResults
-                                      }),
-                              child:
-                                  const AbsorbPointer(child: PersoSearch()),),),
-                      Container(
-                        margin: const EdgeInsets.only(
-                            top: Dimens.bigMargin,
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin,),
-                        child: Row(
+                      child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            PersoHeader(title: context.strings.category_header),
+                            PersoBigHeader(
+                              title: context.strings.home_main_header,
+                            ),
                             GestureDetector(
-                              onTap: () => context.pushNamed(
-                                  ScreenNavigationKey.trainingCategories,),
-                              child: PersoClickableText(
-                                  title: context.strings.see_all_categories,),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin, top: Dimens.bigMargin,),
-                          child: const PersoTrainingCategoryList(
-                              isShortList: true,),),
-                             ],),
-                      Container(
-                        margin:
-                            const EdgeInsets.only(bottom: Dimens.normalMargin),
-                        child: PersoButton(
-                          width: Dimens.bigButtonWidth,
-                          title: "Exercises",
-                          onTap: (context) =>
-                            context.pushNamed(ScreenNavigationKey.exercisesScreen),
-                        ),
-                      ),
-                      Container(
-                        color: PersoColors.lightBlue,
-                        child: Column(
-                          children: [
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: Dimens.bigMargin,),
-                                child: const PersoTrainersSearchCarousel(),),
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  top: Dimens.bigMargin,
-                                  left: Dimens.normalMargin,
-                                  right: Dimens.normalMargin,),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  PersoHeader(title: context.strings.near_you),
-                                  GestureDetector(
-                                    onTap: () => context.pushNamed(
-                                        ScreenNavigationKey.searchResults,
-                                        pathParameters: {
-                                          'input':
-                                              'see all trainers near my location',
-                                        },),
-                                    child: PersoClickableText(
-                                        title:
-                                            context.strings.see_all_categories,),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(
-                                  top: Dimens.smallMargin,),
-                              child: const PersoGoogleMap(),
-                            ),
-                            Container(
-                                margin: const EdgeInsets.only(
-                                    top: Dimens.smallMargin,),
-                                child: const PersoTrainersList(),),
-                          ],
-                        ),
-                      ),
-                  ],),
+                                onTap: () => _handleAccountClick(context),
+                                child: const PersoAccountIcon()),
+                          ]),
+                    ),
                   ),
-                ),
-              ),);
+                  Container(
+                      margin: const EdgeInsets.only(
+                          left: Dimens.normalMargin,
+                          top: Dimens.normalMargin,
+                          right: Dimens.normalMargin),
+                      child: GestureDetector(
+                          onTap: () =>
+                              context.pushNamed(ScreenNavigationKey.search),
+                          child:
+                          const AbsorbPointer(child: PersoSearch()))),
+                  Container(
+                    margin: const EdgeInsets.only(
+                        top: Dimens.bigMargin,
+                        left: Dimens.normalMargin,
+                        right: Dimens.normalMargin),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        PersoHeader(title: context.strings.category_header),
+                        GestureDetector(
+                          onTap: () => context.pushNamed(
+                              ScreenNavigationKey.trainingCategories),
+                          child: PersoClickableText(
+                              title: context.strings.see_all_categories),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                      margin: const EdgeInsets.only(
+                          left: Dimens.normalMargin, top: Dimens.bigMargin),
+                      child: const PersoTrainingCategoryList(
+                          isShortList: true)),
+                  Container(
+                    margin:
+                    const EdgeInsets.only(bottom: Dimens.normalMargin),
+                    child: PersoButton(
+                      width: Dimens.bigButtonWidth,
+                      title: "Exercises",
+                      onTap: (context) =>
+                          context.pushNamed(ScreenNavigationKey.exercisesScreen),
+                    ),
+                  ),
+                  Container(
+                    color: PersoColors.lightBlue,
+                    child: Column(
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.only(
+                                top: Dimens.bigMargin),
+                            child: PersoTrainersSearchCarousel()),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.bigMargin,
+                              left: Dimens.normalMargin,
+                              right: Dimens.normalMargin),
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              PersoHeader(title: context.strings.near_you),
+                              GestureDetector(
+                                onTap: () => context.pushNamed(
+                                    ScreenNavigationKey.searchResults,
+                                    pathParameters: {
+                                      "input":
+                                      "see all trainers near my location"
+                                    }),
+                                child: PersoClickableText(
+                                    title:
+                                    context.strings.see_all_categories),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                              top: Dimens.smallMargin),
+                          child: PersoGoogleMap(),
+                        ),
+                        Container(
+                            margin: const EdgeInsets.only(
+                                top: Dimens.smallMargin),
+                            child: const PersoTrainersList())
+                      ],
+                    ),
+                  ),
+                ]),
+              ),
+            ),
+          )),
+    );
   }
 
   void _handleAccountClick(BuildContext context) {
