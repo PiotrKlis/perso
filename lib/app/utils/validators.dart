@@ -1,13 +1,13 @@
 class TextFieldValidator {
   static String? validateEmail(String value) {
-    final RegExp emailRegex = RegExp(
+    final emailRegex = RegExp(
       r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
     );
 
     if (value.isEmpty) {
       return 'Required Field';
     } else if (!emailRegex.hasMatch(value)) {
-      return "Please enter a valid email address";
+      return 'Please enter a valid email address';
     } else {
       return null;
     }
@@ -15,8 +15,8 @@ class TextFieldValidator {
 
   static String? validatePassword(String value) {
     const minLength = 8;
-    final hasUppercase = RegExp(r'[A-Z]').hasMatch(value);
-    final hasLowercase = RegExp(r'[a-z]').hasMatch(value);
+    final hasUppercase = RegExp('[A-Z]').hasMatch(value);
+    final hasLowercase = RegExp('[a-z]').hasMatch(value);
     final hasDigit = RegExp(r'\d').hasMatch(value);
 
     if (value.isEmpty) {
@@ -27,7 +27,7 @@ class TextFieldValidator {
         hasDigit) {
       return null;
     } else {
-      return "Password needs to be at least 8 characters, with an uppercase and a number";
+      return 'Password needs to be at least 8 characters, with an uppercase and a number';
     }
   }
 
@@ -35,7 +35,7 @@ class TextFieldValidator {
     if (input.isEmpty) {
       return 'Required Field';
     } else if (input != valueToCompare) {
-      return "Passwords do not match";
+      return 'Passwords do not match';
     } else {
       return null;
     }
@@ -62,7 +62,7 @@ class TextFieldValidator {
       return null;
     }
 
-    final RegExp digitsRegex = RegExp(r'^[0-9]+$');
+    final digitsRegex = RegExp(r'^[0-9]+$');
     if (!digitsRegex.hasMatch(value)) {
       return 'Only digits are allowed';
     }

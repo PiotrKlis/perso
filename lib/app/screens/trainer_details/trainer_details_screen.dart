@@ -18,7 +18,7 @@ import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/core/string_extensions.dart';
 
 class TrainerDetailsScreen extends StatefulWidget {
-  const TrainerDetailsScreen({super.key, required TrainerEntity trainerEntity})
+  const TrainerDetailsScreen({required TrainerEntity trainerEntity, super.key})
       : _trainerEntity = trainerEntity,
         super();
 
@@ -35,7 +35,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PersoAppBar(
-          isTitleCentered: true, title: "@${widget._trainerEntity.nickname}"),
+          isTitleCentered: true, title: '@${widget._trainerEntity.nickname}',),
       body: SingleChildScrollView(
           child: Column(children: [
         Column(
@@ -44,35 +44,35 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
               margin: const EdgeInsets.only(
                   top: Dimens.normalMargin,
                   left: Dimens.hugeMargin,
-                  right: Dimens.hugeMargin),
+                  right: Dimens.hugeMargin,),
               child: Row(
                 children: [Expanded(child: _segmentedButton())],
               ),
             ),
             Container(
                 margin: const EdgeInsets.only(top: Dimens.biggerMargin),
-                child: _image(widget._trainerEntity.imagePath)),
+                child: _image(widget._trainerEntity.imagePath),),
             Container(
               margin: const EdgeInsets.only(top: Dimens.mediumMargin),
               child: Text(
-                  "${widget._trainerEntity.name} ${widget._trainerEntity.surname}",
-                  style: ThemeText.mediumTitleBold),
+                  '${widget._trainerEntity.name} ${widget._trainerEntity.surname}',
+                  style: ThemeText.mediumTitleBold,),
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.smallerMargin, bottom: Dimens.mediumMargin),
+                  top: Dimens.smallerMargin, bottom: Dimens.mediumMargin,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(widget._trainerEntity.rating.toString(),
-                      style: ThemeText.subHeadingBold),
+                      style: ThemeText.subHeadingBold,),
                   Container(
                       margin: const EdgeInsets.only(
                           left: Dimens.smallerMargin,
-                          right: Dimens.smallerMargin),
-                      child: const Icon(Icons.star)),
-                  Text("(${widget._trainerEntity.votesNumber})",
-                      style: ThemeText.subHeadingRegular)
+                          right: Dimens.smallerMargin,),
+                      child: const Icon(Icons.star),),
+                  Text('(${widget._trainerEntity.votesNumber})',
+                      style: ThemeText.subHeadingRegular,),
                 ],
               ),
             ),
@@ -83,7 +83,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     return state.when(
                       initial: () {
                         context.read<ActionSectionBloc>().add(
-                            const ActionSectionEvent.shouldSectionBeVisible());
+                            const ActionSectionEvent.shouldSectionBeVisible(),);
                         return Container();
                       },
                       sectionVisibility: (shouldSectionBeVisible) {
@@ -100,7 +100,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                       },
                     );
                   },
-                )),
+                ),),
             Visibility(
               visible: _segmentSelected.contains(_Segments.about.name),
               child: _aboutSection(widget._trainerEntity),
@@ -108,10 +108,10 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
             Visibility(
               visible: _segmentSelected.contains(_Segments.reviews.name),
               child: _reviewsSection(widget._trainerEntity),
-            )
+            ),
           ],
         ),
-      ])),
+      ],),),
     );
   }
 
@@ -141,26 +141,26 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
         selected: _segmentSelected,
         segments: [
           ButtonSegment<String>(
-              value: _Segments.about.name, label: const Text('About')),
+              value: _Segments.about.name, label: const Text('About'),),
           ButtonSegment<String>(
-              value: _Segments.reviews.name, label: const Text('Reviews')),
+              value: _Segments.reviews.name, label: const Text('Reviews'),),
         ],
         onSelectionChanged: (selectedSet) {
           setState(() {
             _segmentSelected = selectedSet;
           });
-        });
+        },);
   }
 
   Container _contactButton() {
     return Container(
         margin: const EdgeInsets.only(
-            top: Dimens.mediumMargin, bottom: Dimens.biggerMargin),
+            top: Dimens.mediumMargin, bottom: Dimens.biggerMargin,),
         child: const PersoButton(
-          title: "Contact",
+          title: 'Contact',
           width: Dimens.largeButtonWidth,
           whiteBlackTheme: true,
-        ));
+        ),);
   }
 
   BlocProvider<TrainingRequestBloc> _requestForTrainingButton() {
@@ -173,7 +173,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                   initial: () {
                     context.read<TrainingRequestBloc>().add(TrainingRequestEvent
                         .checkIfUserHasAlreadyRequestTraining(
-                            widget._trainerEntity.id));
+                            widget._trainerEntity.id,),);
                     return _initialTrainingRequestButton();
                   },
                   hasUserAlreadyRequestedTraining: (bool hasRequested) {
@@ -183,14 +183,14 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                       return _initialTrainingRequestButton();
                     }
                   },
-                  loadingTrainingRequest: () => _trainingRequestLoading(),
-                  successTrainingRequest: () => _trainingRequestSentButton()) ??
+                  loadingTrainingRequest: _trainingRequestLoading,
+                  successTrainingRequest: _trainingRequestSentButton,) ??
               Container();
         },
         listener: (context, state) {
           state.whenOrNull(navigateToSignUp: () {
             context.pushNamed(ScreenNavigationKey.signIn);
-          });
+          },);
         },
       ),
     );
@@ -206,17 +206,17 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
   PersoButton _trainingRequestSentButton() {
     return const PersoButton(
       width: Dimens.largeButtonWidth,
-      title: "Request sent",
+      title: 'Request sent',
     );
   }
 
   PersoButton _initialTrainingRequestButton() {
     return PersoButton(
-      title: "Request for training",
+      title: 'Request for training',
       width: Dimens.largeButtonWidth,
       onTap: (context) {
         context.read<TrainingRequestBloc>().add(
-            TrainingRequestEvent.trainingRequest(widget._trainerEntity.id));
+            TrainingRequestEvent.trainingRequest(widget._trainerEntity.id),);
       },
     );
   }
@@ -227,7 +227,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
     } else {
       return const Icon(
         Icons.account_circle,
-        size: 88.0,
+        size: 88,
       );
     }
   }
@@ -240,16 +240,16 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
         children: [
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.bigMargin, left: Dimens.normalMargin),
+                  top: Dimens.bigMargin, left: Dimens.normalMargin,),
               child: Text(
-                "Biography",
+                'Biography',
                 style: ThemeText.bodyBoldBlackText,
-              )),
+              ),),
           Container(
             margin: const EdgeInsets.only(
                 top: Dimens.smallMargin,
                 left: Dimens.normalMargin,
-                right: Dimens.normalMargin),
+                right: Dimens.normalMargin,),
             child: Text(
               trainerEntity.fullBio,
               style: ThemeText.subHeadingRegularGrey,
@@ -259,16 +259,16 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
               margin: const EdgeInsets.only(
                   top: Dimens.bigMargin,
                   left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
+                  right: Dimens.normalMargin,),
               child: Text(
-                "Location",
+                'Location',
                 style: ThemeText.bodyBoldBlackText,
-              )),
+              ),),
           Container(
             margin: const EdgeInsets.only(
                 left: Dimens.normalMargin,
                 top: Dimens.mediumMargin,
-                right: Dimens.normalMargin),
+                right: Dimens.normalMargin,),
             child: Row(
               children: [
                 const Icon(Icons.pin_drop),
@@ -276,21 +276,21 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                   child: Container(
                       margin: const EdgeInsets.only(
                           left: Dimens.normalMargin,
-                          right: Dimens.normalMargin),
+                          right: Dimens.normalMargin,),
                       child: Text(
                         trainerEntity.location,
                         style: ThemeText.bodyRegularBlackText,
                         softWrap: true,
-                      )),
-                )
+                      ),),
+                ),
               ],
             ),
           ),
           Container(
             margin: const EdgeInsets.only(
-                top: Dimens.bigMargin, left: Dimens.normalMargin),
+                top: Dimens.bigMargin, left: Dimens.normalMargin,),
             child: Text(
-              "Specialities",
+              'Specialities',
               style: ThemeText.bodyBoldBlackText,
             ),
           ),
@@ -299,12 +299,12 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
               child: PersoCategoryChips(
                 areChipsSelectable: false,
                 trainerId: trainerEntity.id,
-              )),
+              ),),
           Container(
             margin: const EdgeInsets.only(
-                top: Dimens.bigMargin, left: Dimens.normalMargin),
+                top: Dimens.bigMargin, left: Dimens.normalMargin,),
             child: Text(
-              "Languages",
+              'Languages',
               style: ThemeText.bodyBoldBlackText,
             ),
           ),
@@ -313,7 +313,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                 top: Dimens.mediumMargin,
                 left: Dimens.smallMargin,
                 right: Dimens.normalMargin,
-                bottom: Dimens.normalMargin),
+                bottom: Dimens.normalMargin,),
             child: _getLanguages(trainerEntity.languages),
           ),
         ],
@@ -322,13 +322,13 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
   }
 
   Row _getLanguages(List<String> languages) {
-    List<Container> languageWidgets = languages.map((element) {
-      String language = element.removeBrackets();
+    final languageWidgets = languages.map((element) {
+      final language = element.removeBrackets();
       return Container(
         margin: const EdgeInsets.only(left: Dimens.smallMargin),
         child: Text(
           language,
-          style: const TextStyle(fontSize: 24.0),
+          style: const TextStyle(fontSize: 24),
         ),
       );
     }).toList();
@@ -343,34 +343,33 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
         children: [
           Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.mediumMargin, left: Dimens.mediumMargin),
-              child: Text("Rating", style: ThemeText.bodyBoldBlackText)),
+                  top: Dimens.mediumMargin, left: Dimens.mediumMargin,),
+              child: Text('Rating', style: ThemeText.bodyBoldBlackText),),
           Container(
             margin: const EdgeInsets.only(
-                left: Dimens.mediumMargin, bottom: Dimens.mediumMargin),
+                left: Dimens.mediumMargin, bottom: Dimens.mediumMargin,),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Based on 142 reviews",
-                    style: ThemeText.bodyRegularBlackText),
+                Text('Based on 142 reviews',
+                    style: ThemeText.bodyRegularBlackText,),
                 Row(
                   children: [
                     const Icon(
                       Icons.star,
                       color: Colors.yellow,
-                      size: 40.0,
+                      size: 40,
                     ),
                     Container(
                         margin: const EdgeInsets.only(
                             left: Dimens.smallMargin,
-                            right: Dimens.normalMargin),
+                            right: Dimens.normalMargin,),
                         child: Text(
-                          "5.0",
+                          '5.0',
                           style: ThemeText.largerTitleBold,
-                        )),
+                        ),),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -379,12 +378,12 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
             margin: const EdgeInsets.only(
                 top: Dimens.mediumMargin,
                 left: Dimens.mediumMargin,
-                right: Dimens.mediumMargin),
+                right: Dimens.mediumMargin,),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Tap to rate",
+                  'Tap to rate',
                   style: ThemeText.bodyBoldBlackText,
                 ),
                 RatingBar(
@@ -393,11 +392,11 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                       full: const Icon(Icons.star, color: Colors.yellow),
                       half: const Icon(Icons.star_half, color: Colors.yellow),
                       empty:
-                          const Icon(Icons.star_border, color: Colors.yellow)),
+                          const Icon(Icons.star_border, color: Colors.yellow),),
                   onRatingUpdate: (value) {
                     //no-op
                   },
-                )
+                ),
               ],
             ),
           ),
@@ -405,30 +404,30 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
             margin: const EdgeInsets.only(
                 left: Dimens.mediumMargin,
                 right: Dimens.mediumMargin,
-                bottom: Dimens.mediumMargin),
+                bottom: Dimens.mediumMargin,),
             child: Row(
               children: [
                 const Icon(
                   Icons.account_circle,
-                  size: 48.0,
+                  size: 48,
                 ),
                 Container(
                     margin: const EdgeInsets.only(left: Dimens.smallMargin),
-                    child: Text("Write review",
-                        style: ThemeText.calloutRegularGrey))
+                    child: Text('Write review',
+                        style: ThemeText.calloutRegularGrey,),),
               ],
             ),
           ),
           const PersoDivider(),
           Container(
             margin: const EdgeInsets.only(
-                top: Dimens.mediumMargin, left: Dimens.mediumMargin),
+                top: Dimens.mediumMargin, left: Dimens.mediumMargin,),
             child: Text(
-              "Reviews",
+              'Reviews',
               style: ThemeText.bodyBoldBlackText,
             ),
           ),
-          _review()
+          _review(),
         ],
       ),
     );
@@ -442,21 +441,21 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(
               children: [
-                const Icon(Icons.account_circle, size: 48.0),
+                const Icon(Icons.account_circle, size: 48),
                 Container(
                   margin: const EdgeInsets.only(left: Dimens.smallMargin),
                   child: Column(
                     children: [
-                      Text("John Wick", style: ThemeText.bodyBoldBlackText),
+                      Text('John Wick', style: ThemeText.bodyBoldBlackText),
                       RatingBar(
-                        itemSize: 20.0,
+                        itemSize: 20,
                         allowHalfRating: true,
                         ratingWidget: RatingWidget(
                             full: const Icon(Icons.star, color: Colors.yellow),
                             half: const Icon(Icons.star_half,
-                                color: Colors.yellow),
+                                color: Colors.yellow,),
                             empty: const Icon(Icons.star_border,
-                                color: Colors.yellow)),
+                                color: Colors.yellow,),),
                         onRatingUpdate: (value) {
                           //no-op
                         },
@@ -466,13 +465,13 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                 ),
               ],
             ),
-            Text("1 month ago", style: ThemeText.bodyRegularBlackText)
-          ]),
+            Text('1 month ago', style: ThemeText.bodyRegularBlackText),
+          ],),
           Container(
               margin: const EdgeInsets.only(top: Dimens.smallMargin),
               child: Text(
-                  "Let me put it this way! Andrew went out of his way to in our journey together. I wasn’t sure about things in the beginning, Lol.",
-                  style: ThemeText.bodyRegularBlackText)),
+                  'Let me put it this way! Andrew went out of his way to in our journey together. I wasn’t sure about things in the beginning, Lol.',
+                  style: ThemeText.bodyRegularBlackText,),),
         ],
       ),
     );

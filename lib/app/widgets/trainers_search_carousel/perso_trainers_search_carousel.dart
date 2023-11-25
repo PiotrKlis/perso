@@ -10,31 +10,31 @@ import 'package:perso/app/widgets/trainers_search_carousel/state/trainer_search_
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoTrainersSearchCarousel extends StatelessWidget {
-  PersoTrainersSearchCarousel({super.key});
+  const PersoTrainersSearchCarousel({super.key});
 
   @override
   Widget build(BuildContext context) {
     Widget getCarousel(
-        {required List<TrainersSearchCarouselCardData> cardsData}) {
+        {required List<TrainersSearchCarouselCardData> cardsData,}) {
       return SizedBox(
         height: Dimens.carouselCardHeight,
         child: PageView.builder(
             itemCount: cardsData.length,
             padEnds: false,
             controller: PageController(
-                viewportFraction: Dimens.carouselViewportFraction),
+                viewportFraction: Dimens.carouselViewportFraction,),
             itemBuilder: (context, pagePosition) {
-              bool isLastCard = pagePosition == cardsData.length - 1;
+              final isLastCard = pagePosition == cardsData.length - 1;
               return GestureDetector(
                 onTap: () => context.pushNamed(
                     ScreenNavigationKey.searchResults,
-                    pathParameters: {"input": cardsData[pagePosition].title}),
+                    pathParameters: {'input': cardsData[pagePosition].title},),
                 child: PersoTrainersSearchCarouselCard(
                     position: pagePosition,
                     cardData: cardsData[pagePosition],
-                    isLastCard: isLastCard),
+                    isLastCard: isLastCard,),
               );
-            }),
+            },),
       );
     }
 
@@ -52,7 +52,7 @@ class PersoTrainersSearchCarousel extends StatelessWidget {
             return getCarousel(cardsData: cardsData);
           }, error: (error) {
             return Text(error);
-          });
+          },);
         },
       ),
     );

@@ -6,11 +6,10 @@ import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   HomeBloc() : super(const HomeState.initial()) {
     on<AccountNavigation>((state, emit) async {
-      bool isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
+      final isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
       if (isUserLoggedIn) {
         await _navigateLoggedIn(emit);
       } else {
@@ -19,9 +18,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     });
   }
+  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   Future<void> _navigateLoggedIn(Emitter<HomeState> emit) async {
-    UserType? userType = await _userInfoProvider.getUserType();
+    final userType = await _userInfoProvider.getUserType();
     switch (userType) {
       case UserType.trainer:
         emit(const HomeState.navigateToTrainerProfile());

@@ -20,7 +20,7 @@ class PersoTrainingCategoryIcon extends StatelessWidget {
         child: SizedBox(
             width: Dimens.trainingCategoryIconWidth,
             height: Dimens.trainingCategoryIconHeight,
-            child: SvgPicture.asset(path, fit: BoxFit.none)),
+            child: SvgPicture.asset(path, fit: BoxFit.none),),
       ),
     );
   }

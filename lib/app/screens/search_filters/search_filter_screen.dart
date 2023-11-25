@@ -23,9 +23,9 @@ class SearchFilterScreen extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PersoDivider(),
+            const PersoDivider(),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                 top: Dimens.normalMargin,
                 left: Dimens.bigMargin,
               ),
@@ -35,40 +35,40 @@ class SearchFilterScreen extends StatelessWidget {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
-                  top: Dimens.smallMargin, left: Dimens.normalMargin),
+              margin: const EdgeInsets.only(
+                  top: Dimens.smallMargin, left: Dimens.normalMargin,),
               child: SpokenLanguageRowWidget(),
             ),
-            PersoDivider(),
+            const PersoDivider(),
             Container(
-              margin: EdgeInsets.only(
-                  top: Dimens.normalMargin, left: Dimens.bigMargin),
+              margin: const EdgeInsets.only(
+                  top: Dimens.normalMargin, left: Dimens.bigMargin,),
               child: Text(
                 AppLocalizations.of(context)!.location,
                 style: ThemeText.bodyBoldBlackText,
               ),
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   left: Dimens.bigMargin,
                   top: Dimens.smallerMargin,
-                  bottom: Dimens.bigMargin),
+                  bottom: Dimens.bigMargin,),
               child: Row(
                 children: [Text(AppLocalizations.of(context)!.location_default_set)],
               ),
             ),
-            PersoDivider(),
+            const PersoDivider(),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: Dimens.normalMargin,
                   left: Dimens.bigMargin,
-                  bottom: Dimens.normalMargin),
+                  bottom: Dimens.normalMargin,),
               child: Row(
                 children: [
                   Text(AppLocalizations.of(context)!.rating,
-                      style: ThemeText.bodyBoldBlackText),
+                      style: ThemeText.bodyBoldBlackText,),
                   Container(
-                    margin: EdgeInsets.only(left: Dimens.bigMargin),
+                    margin: const EdgeInsets.only(left: Dimens.bigMargin),
                     child: RatingBar(
                       allowHalfRating: true,
                       ratingWidget: RatingWidget(
@@ -76,43 +76,42 @@ class SearchFilterScreen extends StatelessWidget {
                           half:
                           const Icon(Icons.star_half, color: Colors.yellow),
                           empty: const Icon(Icons.star_border,
-                              color: Colors.yellow)),
+                              color: Colors.yellow,),),
                       onRatingUpdate: (value) {
                         //no-op
                       },
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
-            PersoDivider(),
+            const PersoDivider(),
             Container(
-                margin: EdgeInsets.only(
-                    top: Dimens.normalMargin, left: Dimens.bigMargin),
+                margin: const EdgeInsets.only(
+                    top: Dimens.normalMargin, left: Dimens.bigMargin,),
                 child: Text(
                   AppLocalizations.of(context)!.specialities,
                   style: ThemeText.bodyBoldBlackText,
-                )),
+                ),),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: Dimens.bigMargin,
                   left: Dimens.bigMargin,
-                  bottom: Dimens.bigMargin),
+                  bottom: Dimens.bigMargin,),
               child: PersoCategoryChips(),
             ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  margin: EdgeInsets.only(bottom: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(bottom: Dimens.biggerMargin),
                   child: PersoButton(
-                    width: Dimens.bigButtonWidth,
                     title: AppLocalizations.of(context)!.confirm,
                   ),
                 ),
               ),
             ),
           ],
-        ));
+        ),);
   }
 }
