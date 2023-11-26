@@ -7,7 +7,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.5 <4.0.0"
-  flutter: ^3.10.5
+  flutter: ^3.9.0
 
 dependencies:
   flutter:
@@ -49,18 +49,22 @@ dependencies:
   sticky_headers: ^0.3.0
   video_player: ^2.8.1
   table_calendar: ^3.0.9
+  stream_chat_flutter: ^6.12.0
 
   #Http connection with API
   http: ^1.0.0
 
   # Utils
-  uuid: ^4.1.0
+  uuid: ^3.0.7
   shared_preferences: ^2.2.0
   image_picker: ^1.0.4
 
   # Code generation
   freezed_annotation: ^2.2.0
   spider: ^4.2.2
+
+dependency_overrides:
+  photo_manager: ^3.0.0-dev.2
 
 dev_dependencies:
   flutter_test:
