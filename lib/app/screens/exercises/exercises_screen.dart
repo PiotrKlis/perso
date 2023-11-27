@@ -21,8 +21,7 @@ class ExercisesScreen extends StatelessWidget {
       ),
       PersoButton(
         title: 'BREAK',
-        onTap: (context)=>
-        context.pushNamed(ScreenNavigationKey.exercisesBreakScreen),
+        onTap: (context)  {context.pushNamed(ScreenNavigationKey.exercisesBreakScreen);},
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,

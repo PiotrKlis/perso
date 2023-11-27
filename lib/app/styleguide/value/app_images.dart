@@ -11,4 +11,5 @@ class AppImages {
   static const String trainer1 = 'assets/images/trainer1.png';
   static const String trainer2 = 'assets/images/trainer2.png';
   static const String trainer3 = 'assets/images/trainer3.png';
+  static const String restIcon = 'assets/images/rest_icon.png';
 }

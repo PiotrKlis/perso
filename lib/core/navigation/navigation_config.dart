@@ -119,7 +119,7 @@ final GoRouter goRouter = GoRouter(
                 path: ScreenNavigationKey.exercisesBreakScreen,
               pageBuilder: (context, state) {
                   return NoTransitionPage(child: ExercisesBreakScreen());
-              }
+              },
             ),
             GoRoute(
                 name: ScreenNavigationKey.exercisesScreen,

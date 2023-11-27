@@ -13,5 +13,6 @@ void main() {
     expect(File(AppImages.trainer1).existsSync(), isTrue);
     expect(File(AppImages.trainer2).existsSync(), isTrue);
     expect(File(AppImages.trainer3).existsSync(), isTrue);
+    expect(File(AppImages.restIcon).existsSync(), isTrue);
   });
 }

@@ -35,6 +35,9 @@ class Dimens {
   static const double trainerImageWidth = 80.0;
   static const double trainerImageHeight = 80.0;
 
+  static const double resetIconWidth = 90.0;
+  static const double resetIconHeight = 90.0;
+
   static const double ratingBarSize = 16.0;
   static const double ratingBarItemCount = 5;
 
