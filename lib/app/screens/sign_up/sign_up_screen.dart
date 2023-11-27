@@ -36,110 +36,138 @@ class SignUpScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.biggerMargin, left: Dimens.normalMargin,),
-                    child: Text(context.strings.sign_up_body_1,
-                        style: ThemeText.largerTitleBold,),),
+                  margin: const EdgeInsets.only(
+                    top: Dimens.biggerMargin,
+                    left: Dimens.normalMargin,
+                  ),
+                  child: Text(
+                    context.strings.sign_up_body_1,
+                    style: ThemeText.largerTitleBold,
+                  ),
+                ),
                 Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.mediumMargin, left: Dimens.normalMargin,),
-                    child: Text(context.strings.sign_up_body_2,
-                        style: ThemeText.bodyRegularBlackText,),),
+                  margin: const EdgeInsets.only(
+                    top: Dimens.mediumMargin,
+                    left: Dimens.normalMargin,
+                  ),
+                  child: Text(
+                    context.strings.sign_up_body_2,
+                    style: ThemeText.bodyRegularBlackText,
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.biggerMargin),
                   child: Row(
                     children: [
                       Container(
-                          margin:
-                              const EdgeInsets.only(left: Dimens.normalMargin),
-                          child:
-                              const Icon(Icons.email, size: Dimens.iconSize),),
+                        margin:
+                            const EdgeInsets.only(left: Dimens.normalMargin),
+                        child: const Icon(Icons.email, size: Dimens.iconSize),
+                      ),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
-                              left: Dimens.normalMargin,
-                              right: Dimens.normalMargin,),
+                            left: Dimens.normalMargin,
+                            right: Dimens.normalMargin,
+                          ),
                           child: PersoTextField(
-                              title: context.strings.email,
-                              textEditingController: _loginController,
-                              customValidator:
-                                  TextFieldValidator.validateEmail,),
+                            title: context.strings.email,
+                            textEditingController: _loginController,
+                            customValidator: TextFieldValidator.validateEmail,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.normalMargin, right: Dimens.normalMargin,),
-                    child: const PersoIndentedDivider(),),
+                  margin: const EdgeInsets.only(
+                    top: Dimens.normalMargin,
+                    right: Dimens.normalMargin,
+                  ),
+                  child: const PersoIndentedDivider(),
+                ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: Row(
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin,),
-                            child: const Icon(Icons.password,
-                                size: Dimens.iconSize,),),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.normalMargin,
-                                right: Dimens.normalMargin,),
-                            child: PersoTextField(
-                              title: context.strings.password,
-                              customValidator:
-                                  TextFieldValidator.validatePassword,
-                              shouldObscureText: true,
-                              passwordController: _passwordController,
-                            ),
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(
+                          left: Dimens.normalMargin,
+                        ),
+                        child: const Icon(
+                          Icons.password,
+                          size: Dimens.iconSize,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            left: Dimens.normalMargin,
+                            right: Dimens.normalMargin,
+                          ),
+                          child: PersoTextField(
+                            title: context.strings.password,
+                            customValidator:
+                                TextFieldValidator.validatePassword,
+                            shouldObscureText: true,
+                            passwordController: _passwordController,
                           ),
                         ),
-                      ],
-                    ),),
+                      ),
+                    ],
+                  ),
+                ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.bigMargin),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                left: Dimens.substantialMargin,
-                                right: Dimens.normalMargin,),
-                            child: PersoTextField(
-                              title: context.strings.confirm_password,
-                              passwordController: _passwordController,
-                              confirmPasswordController:
-                                  _confirmPasswordController,
-                              shouldObscureText: true,
-                            ),
+                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(
+                            left: Dimens.substantialMargin,
+                            right: Dimens.normalMargin,
+                          ),
+                          child: PersoTextField(
+                            title: context.strings.confirm_password,
+                            passwordController: _passwordController,
+                            confirmPasswordController:
+                                _confirmPasswordController,
+                            shouldObscureText: true,
                           ),
                         ),
-                      ],
-                    ),),
+                      ),
+                    ],
+                  ),
+                ),
                 Center(
                   child: Container(
-                      margin: const EdgeInsets.only(
-                          top: Dimens.hugeMargin,
-                          bottom: Dimens.biggerMargin,
-                          right: Dimens.normalMargin,),
-                      child: PersoButton(
-                          title: context.strings.register,
-                          onTap: _registerUser,),),
+                    margin: const EdgeInsets.only(
+                      top: Dimens.hugeMargin,
+                      bottom: Dimens.biggerMargin,
+                      right: Dimens.normalMargin,
+                    ),
+                    child: PersoButton(
+                      title: context.strings.register,
+                      onTap: _registerUser,
+                    ),
+                  ),
                 ),
                 BlocConsumer<SignUpBloc, SignUpState>(
                   builder: (context, state) {
                     return state.whenOrNull(
-                            loading: () => const Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.black,
-                                ),),
-                            error: (error) => Center(
-                                    child: Text(
-                                  error,
-                                  style: ThemeText.calloutRegularRed,
-                                ),),) ??
+                          loading: () => const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.black,
+                            ),
+                          ),
+                          error: (error) => Center(
+                            child: Text(
+                              error,
+                              style: ThemeText.calloutRegularRed,
+                            ),
+                          ),
+                        ) ??
                         Container();
                   },
                   listener: (context, state) {
@@ -158,8 +186,12 @@ class SignUpScreen extends StatelessWidget {
 
   void _registerUser(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      context.read<SignUpBloc>().add(SignUpEvent.register(
-          email: _loginController.text, password: _passwordController.text,),);
+      context.read<SignUpBloc>().add(
+            SignUpEvent.register(
+              email: _loginController.text,
+              password: _passwordController.text,
+            ),
+          );
     }
   }
 }
