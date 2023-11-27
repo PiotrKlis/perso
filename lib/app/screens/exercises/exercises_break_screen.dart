@@ -60,7 +60,6 @@ class ExercisesBreakScreen extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }
