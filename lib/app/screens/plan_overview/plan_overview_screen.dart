@@ -9,6 +9,7 @@ import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:video_player/video_player.dart';
 
@@ -69,13 +70,13 @@ class _ExercisesOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: Dimens.normalMargin),
+      margin: const EdgeInsets.only(top: Dimens.normalMargin),
       child: ColoredBox(
         color: PersoColors.lightBlue,
         child: Column(
           children: [
             _ExercisesHeaderRow(clientId: clientId),
-            ExercisesList(),
+            const ExercisesList(),
           ],
         ),
       ),
@@ -209,14 +210,14 @@ class _ExerciseState extends State<_Exercise> {
 class _ExerciseExpansionPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PersoDivider(),
-        const _OptionsHeader(),
-        const _Options(),
-        _VideoPlayer(),
-        const _Categories(),
+        PersoDivider(),
+        _OptionsHeader(),
+        _Options(),
+        PersoVideoPlayer(),
+        _Categories(),
       ],
     );
   }

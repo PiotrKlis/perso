@@ -52,7 +52,7 @@ dependencies:
   stream_chat_flutter: ^6.12.0
 
   #Http connection with API
-  http: ^1.0.0
+  http: ^1.1.2
 
   # Utils
   uuid: ^3.0.7

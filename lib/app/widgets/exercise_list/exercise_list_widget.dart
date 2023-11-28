@@ -9,8 +9,8 @@ import 'package:perso/app/widgets/category_chips/category_chips.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:video_player/video_player.dart';
 
 class ExercisesList extends StatefulWidget {
   const ExercisesList({super.key});
@@ -138,14 +138,14 @@ class _ExerciseState extends State<_Exercise> {
 class _ExerciseExpansionPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PersoDivider(),
-        const _OptionsHeader(),
-        const _Options(),
-        _VideoPlayer(),
-        const _Categories(),
+        PersoDivider(),
+        _OptionsHeader(),
+        _Options(),
+        PersoVideoPlayer(),
+        _Categories(),
       ],
     );
   }
@@ -310,59 +310,8 @@ class _OptionsHeader extends StatelessWidget {
               //remove this exercise
             },
             icon: const Icon(Icons.delete_forever),
-          )
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class _VideoPlayer extends StatefulWidget {
-  @override
-  State<_VideoPlayer> createState() => _VideoPlayerState();
-}
-
-class _VideoPlayerState extends State<_VideoPlayer> {
-  late VideoPlayerController _videoPlayerController;
-
-  late Future<void> _initializeVideoPlayerFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _videoPlayerController = VideoPlayerController.networkUrl(
-      Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-      ),
-    );
-
-    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 260,
-      child: FutureBuilder(
-        future: _initializeVideoPlayerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return GestureDetector(
-              onTap: () {
-                _videoPlayerController.value.isPlaying
-                    ? _videoPlayerController.pause()
-                    : _videoPlayerController.play();
-              },
-              child: VideoPlayer(
-                _videoPlayerController,
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
       ),
     );
   }
