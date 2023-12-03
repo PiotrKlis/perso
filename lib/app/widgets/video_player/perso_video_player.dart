@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class PersoVideoPlayer extends StatefulWidget {
-  const PersoVideoPlayer({super.key});
+  const PersoVideoPlayer({required this.videoId, super.key});
+
+  final String videoId;
 
   @override
   State<PersoVideoPlayer> createState() => _PersoVideoPlayerState();
@@ -17,9 +19,8 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
   void initState() {
     super.initState();
     const muxStreamBaseUrl = 'https://stream.mux.com';
-    const playbackId = 'sI4ql9Cvqt45UokrgoLMpiIOwyDkJ01f3gyMSNIKRvPI';
     const videoExtension = 'm3u8';
-    const path = '$muxStreamBaseUrl/$playbackId.$videoExtension';
+    final path = '$muxStreamBaseUrl/${widget.videoId}.$videoExtension';
     _videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(
         path,

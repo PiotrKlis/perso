@@ -75,6 +75,7 @@ class _ExercisesOverview extends StatelessWidget {
         color: PersoColors.lightBlue,
         child: Column(
           children: [
+            //TODO: Add "save" button, so then data is sent to the client
             _ExercisesHeaderRow(clientId: clientId),
             const ExercisesList(),
           ],
@@ -210,14 +211,16 @@ class _ExerciseState extends State<_Exercise> {
 class _ExerciseExpansionPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PersoDivider(),
-        _OptionsHeader(),
-        _Options(),
-        PersoVideoPlayer(),
-        _Categories(),
+        const PersoDivider(),
+        const _OptionsHeader(),
+        const _Options(),
+        PersoVideoPlayer(
+          videoId: 'sI4ql9Cvqt45UokrgoLMpiIOwyDkJ01f3gyMSNIKRvPI',
+        ),
+        const _Categories(),
       ],
     );
   }
