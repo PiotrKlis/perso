@@ -13,7 +13,9 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(
-            left: Dimens.xmMargin, right: Dimens.xmMargin,),
+          left: Dimens.xmMargin,
+          right: Dimens.xmMargin,
+        ),
         child: Column(
           children: [
             Container(
@@ -32,21 +34,18 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.xmMargin),
-              child: Text(context.strings.succes_message_body_2,
-                  style: ThemeText.bodyRegularBlackText,),
+              child: Text(
+                context.strings.succes_message_body_2,
+                style: ThemeText.bodyRegularBlackText,
+              ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.xxxlMargin),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PersoButton(
-                    title: context.strings.finish,
-                    onTap: (context) {
-                      context.replaceNamed(ScreenNavigationKey.home);
-                    },
-                  ),
-                ],
+              margin: const EdgeInsets.only(top: Dimens.xlMargin),
+              child: PersoButton(
+                title: context.strings.finish,
+                onTap: (context) {
+                  context.replaceNamed(ScreenNavigationKey.home);
+                },
               ),
             ),
           ],

@@ -60,8 +60,7 @@ class SignUpScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        margin:
-                            const EdgeInsets.only(left: Dimens.xmMargin),
+                        margin: const EdgeInsets.only(left: Dimens.xmMargin),
                         child: const Icon(Icons.email, size: Dimens.iconSize),
                       ),
                       Expanded(
@@ -142,11 +141,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Container(
-                    margin: const EdgeInsets.only(
-                      top: Dimens.xxlMargin,
-                      bottom: Dimens.xlMargin,
-                      right: Dimens.xmMargin,
-                    ),
+                    margin: const EdgeInsets.all(Dimens.xlMargin),
                     child: PersoButton(
                       title: context.strings.register,
                       onTap: _registerUser,

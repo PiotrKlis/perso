@@ -33,12 +33,15 @@ class _ConfirmButton extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          margin: const EdgeInsets.only(bottom: Dimens.xxxlMargin),
+          margin: const EdgeInsets.only(
+            bottom: Dimens.xxxlMargin,
+            left: Dimens.xlMargin,
+            right: Dimens.xlMargin,
+          ),
           child: PersoButton(
             onTap: (context) {
               context.pushNamed(ScreenNavigationKey.signIn);
             },
-            width: Dimens.largeButtonWidth,
             title: context.strings.sign_in,
           ),
         ),

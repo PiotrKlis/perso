@@ -14,7 +14,9 @@ class ProfileCreationScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(
-            left: Dimens.xmMargin, right: Dimens.xmMargin,),
+          left: Dimens.xmMargin,
+          right: Dimens.xmMargin,
+        ),
         child: Column(
           children: [
             Container(
@@ -33,21 +35,35 @@ class ProfileCreationScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.xmMargin),
-              child: Text(context.strings.welcome_message_body_2,
-                  style: ThemeText.bodyRegularBlackText,),
+              child: Text(
+                context.strings.welcome_message_body_2,
+                style: ThemeText.bodyRegularBlackText,
+              ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.xxxlMargin),
+              margin: const EdgeInsets.only(
+                top: Dimens.xxxlMargin,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PersoButton(
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: Dimens.sMargin,
+                    ),
+                    child: PersoButton(
+                      width: Dimens.bigButtonWidth,
                       title: context.strings.choose_trainer_user_type,
                       whiteBlackTheme: true,
-                      onTap: _navigateTrainer,),
+                      onTap: _navigateTrainer,
+                    ),
+                  ),
                   Container(
-                    margin: const EdgeInsets.only(left: Dimens.xmMargin),
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: Dimens.sMargin,
+                    ),
                     child: PersoButton(
+                      width: Dimens.bigButtonWidth,
                       title: context.strings.choose_client_user_type,
                       onTap: _navigateClient,
                     ),

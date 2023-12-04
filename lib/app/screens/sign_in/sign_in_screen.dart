@@ -25,7 +25,150 @@ class SignInScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => SignInBloc(const SignInState.initial()),
       child: SafeArea(
-          child: Scaffold(
+        child: Scaffold(
+          appBar: PersoAppBar(title: context.strings.sign_in),
+          backgroundColor: PersoColors.lightBlue,
+          body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Column(
+              children: [
+                const Icon(Icons.logo_dev, size: 160),
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                    child: Text(
+                      context.strings.sign_in,
+                      style: ThemeText.largerTitleBold,
+                    ),
+                  ),
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimens.xlMargin,
+                          left: Dimens.xmMargin,
+                          right: Dimens.xmMargin,
+                        ),
+                        child: PersoTextField(
+                          title: context.strings.login,
+                          textEditingController: _loginController,
+                          customValidator: TextFieldValidator.validateIsEmpty,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimens.xmMargin,
+                          left: Dimens.xmMargin,
+                          right: Dimens.xmMargin,
+                        ),
+                        child: PersoTextField(
+                          title: context.strings.password,
+                          shouldObscureText: true,
+                          textEditingController: _passwordController,
+                          customValidator: TextFieldValidator.validateIsEmpty,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                BlocBuilder<SignInBloc, SignInState>(
+                  builder: (context, state) {
+                    return state.whenOrNull(
+                          loading: () => Container(
+                            margin: const EdgeInsets.all(Dimens.xmMargin),
+                            child: const LinearProgressIndicator(),
+                          ),
+                          error: (message) => Container(
+                            margin: const EdgeInsets.only(top: Dimens.xsMargin),
+                            child: Text(
+                              message,
+                              style: ThemeText.calloutRegularRed,
+                            ),
+                          ),
+                        ) ??
+                        Container();
+                  },
+                ),
+                BlocListener<SignInBloc, SignInState>(
+                  listener: (context, state) {
+                    state.whenOrNull(
+                      navigateToProfileCreationScreen: () => context
+                          .pushNamed(ScreenNavigationKey.profileCreation),
+                      navigateToHomeScreen: () =>
+                          context.replaceNamed(ScreenNavigationKey.home),
+                    );
+                  },
+                  child: Container(),
+                ),
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(top: Dimens.lMargin),
+                    child: GestureDetector(
+                      onTap: () => context
+                          .pushNamed(ScreenNavigationKey.passwordRecovery),
+                      child: Text(
+                        context.strings.forgotten_password_title,
+                        style: ThemeText.calloutBoldBlueText,
+                      ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                        top: Dimens.lMargin,
+                        left: Dimens.lMargin,
+                        right: Dimens.lMargin),
+                    child: PersoButton(
+                      title: context.strings.sign_in,
+                      onTap: _loginUser,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: Dimens.lMargin),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Expanded(child: PersoIndentedDivider()),
+                      Text(
+                        context.strings.or,
+                        style: ThemeText.footnoteRegularGrey,
+                      ),
+                      const Expanded(child: PersoIndentedDivider()),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.lMargin,
+                    left: Dimens.lMargin,
+                    right: Dimens.lMargin,
+                  ),
+                  child: GestureDetector(
+                    onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
+                    child: AbsorbPointer(
+                      child: PersoButton(
+                        title: context.strings.sign_up,
+                        whiteBlackTheme: true,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SafeArea _signInScreenView(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
         appBar: PersoAppBar(title: context.strings.sign_in),
         backgroundColor: PersoColors.lightBlue,
         body: SingleChildScrollView(
@@ -35,48 +178,59 @@ class SignInScreen extends StatelessWidget {
               const Icon(Icons.logo_dev, size: 160),
               Center(
                 child: Container(
-                    margin: const EdgeInsets.only(top: Dimens.xmMargin),
-                    child: Text(context.strings.sign_in,
-                        style: ThemeText.largerTitleBold,),),
+                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                  child: Text(
+                    context.strings.sign_in,
+                    style: ThemeText.largerTitleBold,
+                  ),
+                ),
               ),
               Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.xlMargin,
-                              left: Dimens.xmMargin,
-                              right: Dimens.xmMargin,),
-                          child: PersoTextField(
-                            title: context.strings.login,
-                            textEditingController: _loginController,
-                            customValidator: TextFieldValidator.validateIsEmpty,
-                          ),),
-                      Container(
-                          margin: const EdgeInsets.only(
-                              top: Dimens.xmMargin,
-                              left: Dimens.xmMargin,
-                              right: Dimens.xmMargin,),
-                          child: PersoTextField(
-                            title: context.strings.password,
-                            shouldObscureText: true,
-                            textEditingController: _passwordController,
-                            customValidator: TextFieldValidator.validateIsEmpty,
-                          ),),
-                    ],
-                  ),),
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: Dimens.xlMargin,
+                        left: Dimens.xmMargin,
+                        right: Dimens.xmMargin,
+                      ),
+                      child: PersoTextField(
+                        title: context.strings.login,
+                        textEditingController: _loginController,
+                        customValidator: TextFieldValidator.validateIsEmpty,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: Dimens.xmMargin,
+                        left: Dimens.xmMargin,
+                        right: Dimens.xmMargin,
+                      ),
+                      child: PersoTextField(
+                        title: context.strings.password,
+                        shouldObscureText: true,
+                        textEditingController: _passwordController,
+                        customValidator: TextFieldValidator.validateIsEmpty,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               BlocBuilder<SignInBloc, SignInState>(
                 builder: (context, state) {
                   return state.whenOrNull(
                         loading: () => Container(
-                            margin: const EdgeInsets.all(Dimens.xmMargin),
-                            child: const LinearProgressIndicator(),),
+                          margin: const EdgeInsets.all(Dimens.xmMargin),
+                          child: const LinearProgressIndicator(),
+                        ),
                         error: (message) => Container(
-                            margin:
-                                const EdgeInsets.only(top: Dimens.xsMargin),
-                            child: Text(message,
-                                style: ThemeText.calloutRegularRed,),),
+                          margin: const EdgeInsets.only(top: Dimens.xsMargin),
+                          child: Text(
+                            message,
+                            style: ThemeText.calloutRegularRed,
+                          ),
+                        ),
                       ) ??
                       Container();
                 },
@@ -84,10 +238,11 @@ class SignInScreen extends StatelessWidget {
               BlocListener<SignInBloc, SignInState>(
                 listener: (context, state) {
                   state.whenOrNull(
-                      navigateToProfileCreationScreen: () => context
-                          .pushNamed(ScreenNavigationKey.profileCreation),
-                      navigateToHomeScreen: () =>
-                          context.replaceNamed(ScreenNavigationKey.home),);
+                    navigateToProfileCreationScreen: () =>
+                        context.pushNamed(ScreenNavigationKey.profileCreation),
+                    navigateToHomeScreen: () =>
+                        context.replaceNamed(ScreenNavigationKey.home),
+                  );
                 },
                 child: Container(),
               ),
@@ -116,157 +271,48 @@ class SignInScreen extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: Dimens.lMargin),
                 child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(child: PersoIndentedDivider()),
-                      Text(context.strings.or,
-                          style: ThemeText.footnoteRegularGrey,),
-                      const Expanded(child: PersoIndentedDivider()),
-                    ],),
-              ),
-              Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.lMargin,
-                      left: Dimens.lMargin,
-                      right: Dimens.lMargin,),
-                  child: GestureDetector(
-                    onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
-                    child: AbsorbPointer(
-                      child: PersoButton(
-                          title: context.strings.sign_up,
-                          whiteBlackTheme: true,),
-                    ),
-                  ),),
-            ],
-          ),
-        ),
-      ),),
-    );
-  }
-
-  SafeArea _signInScreenView(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: PersoAppBar(title: context.strings.sign_in),
-      backgroundColor: PersoColors.lightBlue,
-      body: SingleChildScrollView(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Column(
-          children: [
-            const Icon(Icons.logo_dev, size: 160),
-            Center(
-              child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
-                  child: Text(context.strings.sign_in,
-                      style: ThemeText.largerTitleBold,),),
-            ),
-            Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(
-                            top: Dimens.xlMargin,
-                            left: Dimens.xmMargin,
-                            right: Dimens.xmMargin,),
-                        child: PersoTextField(
-                          title: context.strings.login,
-                          textEditingController: _loginController,
-                          customValidator: TextFieldValidator.validateIsEmpty,
-                        ),),
-                    Container(
-                        margin: const EdgeInsets.only(
-                            top: Dimens.xmMargin,
-                            left: Dimens.xmMargin,
-                            right: Dimens.xmMargin,),
-                        child: PersoTextField(
-                          title: context.strings.password,
-                          shouldObscureText: true,
-                          textEditingController: _passwordController,
-                          customValidator: TextFieldValidator.validateIsEmpty,
-                        ),),
-                  ],
-                ),),
-            BlocBuilder<SignInBloc, SignInState>(
-              builder: (context, state) {
-                return state.whenOrNull(
-                      loading: () => Container(
-                          margin: const EdgeInsets.all(Dimens.xmMargin),
-                          child: const LinearProgressIndicator(),),
-                      error: (message) => Container(
-                          margin:
-                              const EdgeInsets.only(top: Dimens.xsMargin),
-                          child: Text(message,
-                              style: ThemeText.calloutRegularRed,),),
-                    ) ??
-                    Container();
-              },
-            ),
-            BlocListener<SignInBloc, SignInState>(
-              listener: (context, state) {
-                state.whenOrNull(
-                    navigateToProfileCreationScreen: () =>
-                        context.pushNamed(ScreenNavigationKey.profileCreation),
-                    navigateToHomeScreen: () =>
-                        context.replaceNamed(ScreenNavigationKey.home),);
-              },
-              child: Container(),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: Dimens.lMargin),
-                child: GestureDetector(
-                  onTap: () =>
-                      context.pushNamed(ScreenNavigationKey.passwordRecovery),
-                  child: Text(
-                    context.strings.forgotten_password_title,
-                    style: ThemeText.calloutBoldBlueText,
-                  ),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                margin: const EdgeInsets.only(top: Dimens.lMargin),
-                child: PersoButton(
-                  title: context.strings.sign_in,
-                  onTap: _loginUser,
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: Dimens.lMargin),
-              child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Expanded(child: PersoIndentedDivider()),
-                    Text(context.strings.or,
-                        style: ThemeText.footnoteRegularGrey,),
+                    Text(
+                      context.strings.or,
+                      style: ThemeText.footnoteRegularGrey,
+                    ),
                     const Expanded(child: PersoIndentedDivider()),
-                  ],),
-            ),
-            Container(
+                  ],
+                ),
+              ),
+              Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.lMargin,
-                    left: Dimens.lMargin,
-                    right: Dimens.lMargin,),
+                  top: Dimens.lMargin,
+                  left: Dimens.lMargin,
+                  right: Dimens.lMargin,
+                ),
                 child: GestureDetector(
                   onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
                   child: AbsorbPointer(
                     child: PersoButton(
-                        title: context.strings.sign_up, whiteBlackTheme: true,),
+                      title: context.strings.sign_up,
+                      whiteBlackTheme: true,
+                    ),
                   ),
-                ),),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 
   void _loginUser(BuildContext context) {
     if (_formKey.currentState?.validate() == true) {
-      context.read<SignInBloc>().add(SignInEvent.login(
-          email: _loginController.text, password: _passwordController.text,),);
+      context.read<SignInBloc>().add(
+            SignInEvent.login(
+              email: _loginController.text,
+              password: _passwordController.text,
+            ),
+          );
     }
   }
 }

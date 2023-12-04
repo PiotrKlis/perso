@@ -109,7 +109,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: Dimens.lMargin),
+                      margin: const EdgeInsets.only(
+                        top: Dimens.lMargin,
+                        left: Dimens.lMargin,
+                        right: Dimens.lMargin,
+                      ),
                       child: Center(
                         child: PersoButton(
                           title: context.strings.upload_image,
@@ -208,6 +212,7 @@ class _ConfirmButton extends StatelessWidget {
           top: Dimens.xlMargin,
           bottom: Dimens.xlMargin,
           right: Dimens.xmMargin,
+          left: Dimens.xmMargin,
         ),
         child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
           builder: (context, state) {
