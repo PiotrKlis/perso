@@ -20,13 +20,13 @@ class ExerciseLibraryScreen extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.only(
-                left: Dimens.normalMargin,
-                right: Dimens.normalMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
               ),
               child: const PersoSearch(),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.normalMargin),
+              margin: const EdgeInsets.only(top: Dimens.xmMargin),
               color: PersoColors.lightBlue,
               child: const ExercisesList(),
             ),

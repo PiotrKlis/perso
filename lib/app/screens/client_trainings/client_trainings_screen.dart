@@ -38,12 +38,12 @@ class _TrainerSearchCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.normalMargin),
+      margin: const EdgeInsets.only(top: Dimens.xmMargin),
       color: PersoColors.lightBlue,
       child: Container(
         margin: const EdgeInsets.only(
-          top: Dimens.normalMargin,
-          bottom: Dimens.normalMargin,
+          top: Dimens.xmMargin,
+          bottom: Dimens.xmMargin,
         ),
         child: const PersoTrainersSearchCarousel(),
       ),
@@ -58,9 +58,9 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.normalMargin,
-        top: Dimens.bigMargin,
-        right: Dimens.normalMargin,
+        left: Dimens.xmMargin,
+        top: Dimens.lMargin,
+        right: Dimens.xmMargin,
       ),
       child: Text(
         "You have no trainers so far. Let's change that.",
@@ -77,9 +77,9 @@ class _Image extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: Dimens.substantialMargin,
-        left: Dimens.normalMargin,
-        right: Dimens.normalMargin,
+        top: Dimens.xxxlMargin,
+        left: Dimens.xmMargin,
+        right: Dimens.xmMargin,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),

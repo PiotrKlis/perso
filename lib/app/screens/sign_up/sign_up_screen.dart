@@ -37,8 +37,8 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.only(
-                    top: Dimens.biggerMargin,
-                    left: Dimens.normalMargin,
+                    top: Dimens.xlMargin,
+                    left: Dimens.xmMargin,
                   ),
                   child: Text(
                     context.strings.sign_up_body_1,
@@ -47,8 +47,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(
-                    top: Dimens.mediumMargin,
-                    left: Dimens.normalMargin,
+                    top: Dimens.mMargin,
+                    left: Dimens.xmMargin,
                   ),
                   child: Text(
                     context.strings.sign_up_body_2,
@@ -56,19 +56,19 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
                   child: Row(
                     children: [
                       Container(
                         margin:
-                            const EdgeInsets.only(left: Dimens.normalMargin),
+                            const EdgeInsets.only(left: Dimens.xmMargin),
                         child: const Icon(Icons.email, size: Dimens.iconSize),
                       ),
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin,
+                            left: Dimens.xmMargin,
+                            right: Dimens.xmMargin,
                           ),
                           child: PersoTextField(
                             title: context.strings.email,
@@ -82,18 +82,18 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(
-                    top: Dimens.normalMargin,
-                    right: Dimens.normalMargin,
+                    top: Dimens.xmMargin,
+                    right: Dimens.xmMargin,
                   ),
                   child: const PersoIndentedDivider(),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  margin: const EdgeInsets.only(top: Dimens.lMargin),
                   child: Row(
                     children: [
                       Container(
                         margin: const EdgeInsets.only(
-                          left: Dimens.normalMargin,
+                          left: Dimens.xmMargin,
                         ),
                         child: const Icon(
                           Icons.password,
@@ -103,8 +103,8 @@ class SignUpScreen extends StatelessWidget {
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
-                            left: Dimens.normalMargin,
-                            right: Dimens.normalMargin,
+                            left: Dimens.xmMargin,
+                            right: Dimens.xmMargin,
                           ),
                           child: PersoTextField(
                             title: context.strings.password,
@@ -119,14 +119,14 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                  margin: const EdgeInsets.only(top: Dimens.lMargin),
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
                           margin: const EdgeInsets.only(
-                            left: Dimens.substantialMargin,
-                            right: Dimens.normalMargin,
+                            left: Dimens.xxxlMargin,
+                            right: Dimens.xmMargin,
                           ),
                           child: PersoTextField(
                             title: context.strings.confirm_password,
@@ -143,9 +143,9 @@ class SignUpScreen extends StatelessWidget {
                 Center(
                   child: Container(
                     margin: const EdgeInsets.only(
-                      top: Dimens.hugeMargin,
-                      bottom: Dimens.biggerMargin,
-                      right: Dimens.normalMargin,
+                      top: Dimens.xxlMargin,
+                      bottom: Dimens.xlMargin,
+                      right: Dimens.xmMargin,
                     ),
                     child: PersoButton(
                       title: context.strings.register,

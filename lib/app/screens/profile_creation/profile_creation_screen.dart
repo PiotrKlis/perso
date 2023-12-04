@@ -14,30 +14,30 @@ class ProfileCreationScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(
-            left: Dimens.normalMargin, right: Dimens.normalMargin,),
+            left: Dimens.xmMargin, right: Dimens.xmMargin,),
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: Dimens.substantialMargin),
+              margin: const EdgeInsets.only(top: Dimens.xxxlMargin),
               child: Text(
                 context.strings.welcome_message_title,
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+              margin: const EdgeInsets.only(top: Dimens.xlMargin),
               child: Text(
                 context.strings.welcome_message_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.normalMargin),
+              margin: const EdgeInsets.only(top: Dimens.xmMargin),
               child: Text(context.strings.welcome_message_body_2,
                   style: ThemeText.bodyRegularBlackText,),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.substantialMargin),
+              margin: const EdgeInsets.only(top: Dimens.xxxlMargin),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -46,7 +46,7 @@ class ProfileCreationScreen extends StatelessWidget {
                       whiteBlackTheme: true,
                       onTap: _navigateTrainer,),
                   Container(
-                    margin: const EdgeInsets.only(left: Dimens.normalMargin),
+                    margin: const EdgeInsets.only(left: Dimens.xmMargin),
                     child: PersoButton(
                       title: context.strings.choose_client_user_type,
                       onTap: _navigateClient,

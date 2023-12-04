@@ -42,8 +42,8 @@ class _ExercisesListState extends State<ExercisesList> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: Dimens.smallMargin,
-        bottom: Dimens.normalMargin,
+        top: Dimens.xsMargin,
+        bottom: Dimens.xmMargin,
       ),
       child: ReorderableListView(
         shrinkWrap: true,
@@ -108,7 +108,7 @@ class _ExerciseState extends State<_Exercise> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.smallMargin),
+      margin: const EdgeInsets.only(top: Dimens.xsMargin),
       //ExpansionPanelList needs to be wrapped in Column as it fixes
       //avoid RenderListBody must have unlimited space along its main axis error
       child: Column(
@@ -157,7 +157,7 @@ class _Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: Dimens.smallMargin),
+      margin: const EdgeInsets.symmetric(vertical: Dimens.xsMargin),
       child: PersoCategoryChips(
         areChipsSelectable: false,
       ),
@@ -221,10 +221,10 @@ class _RepsBasedExerciseOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: Dimens.smallMargin,
-        left: Dimens.smallMargin,
-        right: Dimens.smallMargin,
-        bottom: Dimens.normalMargin,
+        top: Dimens.xsMargin,
+        left: Dimens.xsMargin,
+        right: Dimens.xsMargin,
+        bottom: Dimens.xmMargin,
       ),
       child: const Row(
         mainAxisSize: MainAxisSize.min,
@@ -258,10 +258,10 @@ class _TimeBasedExerciseOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: Dimens.smallMargin,
-        left: Dimens.smallMargin,
-        right: Dimens.smallMargin,
-        bottom: Dimens.normalMargin,
+        top: Dimens.xsMargin,
+        left: Dimens.xsMargin,
+        right: Dimens.xsMargin,
+        bottom: Dimens.xmMargin,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -297,7 +297,7 @@ class _OptionsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.smallMargin),
+      margin: const EdgeInsets.symmetric(horizontal: Dimens.xsMargin),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -395,9 +395,9 @@ class _ExercisesHeaderRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.normalMargin,
-        right: Dimens.smallMargin,
-        top: Dimens.normalMargin,
+        left: Dimens.xmMargin,
+        right: Dimens.xsMargin,
+        top: Dimens.xmMargin,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

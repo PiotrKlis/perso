@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
+import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
+import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
 
 class PersoGoogleMap extends StatefulWidget {
   const PersoGoogleMap({super.key, List<LatLng> locations = const []})
@@ -52,7 +52,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
         );
         return Container(
           margin: const EdgeInsets.only(
-              left: Dimens.mediumMargin, right: Dimens.mediumMargin,),
+              left: Dimens.mMargin, right: Dimens.mMargin,),
           child: SizedBox(
             height: 300,
             width: double.infinity,

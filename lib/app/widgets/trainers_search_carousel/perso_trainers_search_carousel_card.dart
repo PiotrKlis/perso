@@ -16,19 +16,19 @@ class PersoTrainersSearchCarouselCard extends StatelessWidget {
       Image.asset(cardData.image),
       Container(
           margin: const EdgeInsets.only(
-              top: Dimens.normalMargin, left: Dimens.normalMargin,),
+              top: Dimens.xmMargin, left: Dimens.xmMargin,),
           child: Text(cardData.categoryName,
               style: ThemeText.captionSmallRegularGrey,),),
       Container(
           margin: const EdgeInsets.only(
-              top: Dimens.smallerMargin, left: Dimens.normalMargin,),
+              top: Dimens.sMargin, left: Dimens.xmMargin,),
           child: Text(
             cardData.title,
             style: ThemeText.mediumTitleBold,
           ),),
       Container(
           margin: const EdgeInsets.only(
-              top: Dimens.smallerMargin, left: Dimens.normalMargin,),
+              top: Dimens.sMargin, left: Dimens.xmMargin,),
           child: Text(
             cardData.subtitle,
             style: ThemeText.footnoteRegular,
@@ -38,25 +38,25 @@ class PersoTrainersSearchCarouselCard extends StatelessWidget {
     final cardWithImageOnTheBottom = [
       Container(
           margin: const EdgeInsets.only(
-              top: Dimens.normalMargin, left: Dimens.normalMargin,),
+              top: Dimens.xmMargin, left: Dimens.xmMargin,),
           child: Text(cardData.categoryName,
               style: ThemeText.captionSmallRegularGrey,),),
       Container(
           margin: const EdgeInsets.only(
-              top: Dimens.smallerMargin, left: Dimens.normalMargin,),
+              top: Dimens.sMargin, left: Dimens.xmMargin,),
           child: Text(
             cardData.title,
             style: ThemeText.mediumTitleBold,
           ),),
       Container(
           margin: const EdgeInsets.only(
-              top: Dimens.smallerMargin, left: Dimens.normalMargin,),
+              top: Dimens.sMargin, left: Dimens.xmMargin,),
           child: Text(
             cardData.subtitle,
             style: ThemeText.footnoteRegular,
           ),),
       Container(
-          margin: const EdgeInsets.only(top: Dimens.smallMargin),
+          margin: const EdgeInsets.only(top: Dimens.xsMargin),
           child: Image.asset(cardData.image, fit: BoxFit.fitHeight),),
     ];
 

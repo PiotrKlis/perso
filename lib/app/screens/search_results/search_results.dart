@@ -14,63 +14,73 @@ class SearchResultsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: PersoColors.lightBlue,
-        appBar: PersoAppBar(
-          title: context.strings.search_results,
-          actionIcon: Icons.filter_list,
-          onActionIconClick: onActionClick,
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // TODO: Show 10 trainers, then load another 10 more on scroll
-                Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, left: Dimens.normalMargin,),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                              text: '"$_input"',
-                              style: ThemeText.mediumTitleBold,
-                              children: [
-                                TextSpan(
-                                  text: ' (1)',
-                                  style: ThemeText.mediumTitleRegular,
-                                ),
-                              ],),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+      backgroundColor: PersoColors.lightBlue,
+      appBar: PersoAppBar(
+        title: context.strings.search_results,
+        actionIcon: Icons.filter_list,
+        onActionIconClick: onActionClick,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // TODO: Show 10 trainers, then load another 10 more on scroll
+              Container(
+                margin: const EdgeInsets.only(
+                  top: Dimens.xmMargin,
+                  left: Dimens.xmMargin,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          text: '"$_input"',
+                          style: ThemeText.mediumTitleBold,
+                          children: [
+                            TextSpan(
+                              text: ' (1)',
+                              style: ThemeText.mediumTitleRegular,
+                            ),
+                          ],
                         ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: const PersoTrainersList(),),
-                Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.normalMargin, left: Dimens.normalMargin,),
-                  child: Text(
-                    context.strings.similar_trainers,
-                    style: ThemeText.mediumTitleBold,
-                  ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                child: const PersoTrainersList(),
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: Dimens.xmMargin,
+                  left: Dimens.xmMargin,
                 ),
-                Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
-                    child: const PersoTrainersSearchCarousel(),),
-              ],
-            ),
+                child: Text(
+                  context.strings.similar_trainers,
+                  style: ThemeText.mediumTitleBold,
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                child: PersoTrainersSearchCarousel(),
+              ),
+            ],
           ),
-        ),);
+        ),
+      ),
+    );
   }
 
   void onActionClick(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.searchFilter,
-        pathParameters: {'input': _input ?? ''},);
+    context.pushNamed(
+      ScreenNavigationKey.searchFilter,
+      pathParameters: {'input': _input ?? ''},
+    );
   }
 }

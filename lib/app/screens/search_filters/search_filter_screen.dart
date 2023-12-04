@@ -26,8 +26,8 @@ class SearchFilterScreen extends StatelessWidget {
             const PersoDivider(),
             Container(
               margin: const EdgeInsets.only(
-                top: Dimens.normalMargin,
-                left: Dimens.bigMargin,
+                top: Dimens.xmMargin,
+                left: Dimens.lMargin,
               ),
               child: Text(
                 AppLocalizations.of(context)!.languages,
@@ -36,13 +36,13 @@ class SearchFilterScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.smallMargin, left: Dimens.normalMargin,),
+                  top: Dimens.xsMargin, left: Dimens.xmMargin,),
               child: SpokenLanguageRowWidget(),
             ),
             const PersoDivider(),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.normalMargin, left: Dimens.bigMargin,),
+                  top: Dimens.xmMargin, left: Dimens.lMargin,),
               child: Text(
                 AppLocalizations.of(context)!.location,
                 style: ThemeText.bodyBoldBlackText,
@@ -50,9 +50,9 @@ class SearchFilterScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  left: Dimens.bigMargin,
-                  top: Dimens.smallerMargin,
-                  bottom: Dimens.bigMargin,),
+                  left: Dimens.lMargin,
+                  top: Dimens.sMargin,
+                  bottom: Dimens.lMargin,),
               child: Row(
                 children: [Text(AppLocalizations.of(context)!.location_default_set)],
               ),
@@ -60,15 +60,15 @@ class SearchFilterScreen extends StatelessWidget {
             const PersoDivider(),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.normalMargin,
-                  left: Dimens.bigMargin,
-                  bottom: Dimens.normalMargin,),
+                  top: Dimens.xmMargin,
+                  left: Dimens.lMargin,
+                  bottom: Dimens.xmMargin,),
               child: Row(
                 children: [
                   Text(AppLocalizations.of(context)!.rating,
                       style: ThemeText.bodyBoldBlackText,),
                   Container(
-                    margin: const EdgeInsets.only(left: Dimens.bigMargin),
+                    margin: const EdgeInsets.only(left: Dimens.lMargin),
                     child: RatingBar(
                       allowHalfRating: true,
                       ratingWidget: RatingWidget(
@@ -88,23 +88,23 @@ class SearchFilterScreen extends StatelessWidget {
             const PersoDivider(),
             Container(
                 margin: const EdgeInsets.only(
-                    top: Dimens.normalMargin, left: Dimens.bigMargin,),
+                    top: Dimens.xmMargin, left: Dimens.lMargin,),
                 child: Text(
                   AppLocalizations.of(context)!.specialities,
                   style: ThemeText.bodyBoldBlackText,
                 ),),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.bigMargin,
-                  left: Dimens.bigMargin,
-                  bottom: Dimens.bigMargin,),
+                  top: Dimens.lMargin,
+                  left: Dimens.lMargin,
+                  bottom: Dimens.lMargin,),
               child: PersoCategoryChips(),
             ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  margin: const EdgeInsets.only(bottom: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(bottom: Dimens.xlMargin),
                   child: PersoButton(
                     title: AppLocalizations.of(context)!.confirm,
                   ),

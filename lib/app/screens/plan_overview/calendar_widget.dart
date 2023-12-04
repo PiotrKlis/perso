@@ -34,7 +34,7 @@ class _TableCalendarState extends State<TableCalendarWidget> {
         markerBuilder: (context, day, events) {
           if (day.day.isEven) {
             return Padding(
-              padding: const EdgeInsets.only(top: Dimens.bigMargin),
+              padding: const EdgeInsets.only(top: Dimens.lMargin),
               child: Container(
                 width: 4,
                 height: 4,
