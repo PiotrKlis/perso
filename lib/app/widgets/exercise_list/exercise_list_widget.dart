@@ -13,7 +13,18 @@ import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
 class ExercisesList extends StatefulWidget {
-  const ExercisesList({super.key});
+  const ExercisesList({
+    super.key,
+    this.isReorderable = false,
+    this.isEditable = false,
+    this.isRemovable = false,
+    this.isAddable = false,
+  });
+
+  final bool isReorderable;
+  final bool isEditable;
+  final bool isRemovable;
+  final bool isAddable;
 
   @override
   State<ExercisesList> createState() => _ExercisesListState();
@@ -32,6 +43,7 @@ class _ExercisesListState extends State<ExercisesList> {
           return state.when(
             exercises: (exercises) {
               return ReorderableListView(
+                buildDefaultDragHandles: false,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 proxyDecorator: (child, index, animation) =>
@@ -40,6 +52,7 @@ class _ExercisesListState extends State<ExercisesList> {
                   return _Exercise(
                     key: UniqueKey(),
                     exercise: exercise,
+                    isReorderable: widget.isReorderable,
                   );
                 }).toList(),
                 onReorder: (oldIndex, newIndex) {
@@ -97,9 +110,10 @@ class _ExercisesListDecorator extends StatelessWidget {
 }
 
 class _Exercise extends StatefulWidget {
-  _Exercise({required this.exercise, super.key});
+  _Exercise({required this.exercise, super.key, required this.isReorderable});
 
   final ExerciseEntity exercise;
+  final bool isReorderable;
   bool isExpanded = false;
 
   @override
@@ -125,9 +139,12 @@ class _ExerciseState extends State<_Exercise> {
               ExpansionPanel(
                 canTapOnHeader: true,
                 isExpanded: widget.isExpanded,
-                headerBuilder: (context, isExpanded) =>
-                    _ExerciseHeader(exercise: widget.exercise),
-                body: _ExerciseExpansionPanel(widget.exercise.videoId),
+                headerBuilder: (context, isExpanded) => _ExerciseHeader(
+                  exercise: widget.exercise,
+                  isReorderable: widget.isReorderable,
+                ),
+                body: _ExerciseExpansionPanel(
+                    widget.exercise.videoId, widget.exercise.description),
               ),
             ],
           ),
@@ -138,9 +155,10 @@ class _ExerciseState extends State<_Exercise> {
 }
 
 class _ExerciseExpansionPanel extends StatelessWidget {
-  const _ExerciseExpansionPanel(this.videoId);
+  const _ExerciseExpansionPanel(this.videoId, this.description);
 
   final String videoId;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +166,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const PersoDivider(),
+        _DescriptionSection(description: description),
         const _OptionsHeader(),
         const _Options(),
         PersoVideoPlayer(
@@ -155,6 +174,60 @@ class _ExerciseExpansionPanel extends StatelessWidget {
         ),
         const _Categories(),
       ],
+    );
+  }
+}
+
+class _DescriptionSection extends StatelessWidget {
+  const _DescriptionSection({required this.description});
+
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: Dimens.smallMargin),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.smallMargin,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Description',
+                  style: ThemeText.smallTitleBold,
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.add_circle,
+                    size: 32,
+                  ),
+                  onPressed: () {
+                    //Add bloc logic to add exercise
+                  },
+                ),
+                IconButton(
+                  onPressed: () {
+                    //remove this exercise
+                  },
+                  icon: const Icon(
+                    Icons.delete_forever,
+                    size: 32,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.normalMargin),
+            child: Text(description),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -313,12 +386,6 @@ class _OptionsHeader extends StatelessWidget {
             'Options',
             style: ThemeText.smallTitleBold,
           ),
-          IconButton(
-            onPressed: () {
-              //remove this exercise
-            },
-            icon: const Icon(Icons.delete_forever),
-          ),
         ],
       ),
     );
@@ -328,21 +395,30 @@ class _OptionsHeader extends StatelessWidget {
 class _ExerciseHeader extends StatelessWidget {
   const _ExerciseHeader({
     required this.exercise,
+    required this.isReorderable,
   });
 
   final ExerciseEntity exercise;
+  final bool isReorderable;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: _getIconForTags(exercise.tags),
       title: Text(exercise.title),
-      subtitle: Text(exercise.description),
-      trailing: const Icon(Icons.drag_handle),
+      trailing: _getIconForReorder(isReorderable),
     );
   }
 
   Icon _getIconForTags(List<String> tags) {
     return const Icon(Icons.fitness_center);
+  }
+
+  Icon? _getIconForReorder(bool isReorderable) {
+    if (isReorderable) {
+      return const Icon(Icons.reorder);
+    } else {
+      return null;
+    }
   }
 }
