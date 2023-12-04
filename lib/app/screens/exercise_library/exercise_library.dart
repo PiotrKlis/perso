@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
 import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
-import 'package:perso/app/widgets/exercise_list/exercise_list_widget.dart';
+import 'package:perso/app/widgets/exercise_list/perso_exercises_list.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_search.dart';
 
@@ -48,7 +48,10 @@ class _ExerciseLibraryScreenContent extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: Dimens.normalMargin),
               color: PersoColors.lightBlue,
-              child: const ExercisesList(),
+              child: const PersoExercisesList(
+                isEditable: true,
+                isAddable: true,
+              ),
             ),
           ],
         ),

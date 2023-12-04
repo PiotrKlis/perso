@@ -6,31 +6,36 @@ import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/category_chips.dart';
 import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
+import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
 import 'package:perso/app/widgets/exercise_list/state/exercise_list_state.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
-class ExercisesList extends StatefulWidget {
-  const ExercisesList({
+class PersoExercisesList extends StatefulWidget {
+  const PersoExercisesList({
     super.key,
     this.isReorderable = false,
     this.isEditable = false,
     this.isRemovable = false,
     this.isAddable = false,
+    this.clientId,
+    this.date,
   });
 
   final bool isReorderable;
   final bool isEditable;
   final bool isRemovable;
   final bool isAddable;
+  final String? clientId;
+  final DateTime? date;
 
   @override
-  State<ExercisesList> createState() => _ExercisesListState();
+  State<PersoExercisesList> createState() => _PersoExercisesListState();
 }
 
-class _ExercisesListState extends State<ExercisesList> {
+class _PersoExercisesListState extends State<PersoExercisesList> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +48,7 @@ class _ExercisesListState extends State<ExercisesList> {
           return state.when(
             exercises: (exercises) {
               return ReorderableListView(
-                buildDefaultDragHandles: false,
+                buildDefaultDragHandles: widget.isReorderable,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 proxyDecorator: (child, index, animation) =>
@@ -53,6 +58,11 @@ class _ExercisesListState extends State<ExercisesList> {
                     key: UniqueKey(),
                     exercise: exercise,
                     isReorderable: widget.isReorderable,
+                    isAddable: widget.isAddable,
+                    isRemovable: widget.isRemovable,
+                    isEditable: widget.isEditable,
+                    clientId: widget.clientId,
+                    date: widget.date,
                   );
                 }).toList(),
                 onReorder: (oldIndex, newIndex) {
@@ -110,10 +120,24 @@ class _ExercisesListDecorator extends StatelessWidget {
 }
 
 class _Exercise extends StatefulWidget {
-  _Exercise({required this.exercise, super.key, required this.isReorderable});
+  _Exercise({
+    required this.exercise,
+    required this.isReorderable,
+    required this.isAddable,
+    required this.isRemovable,
+    required this.isEditable,
+    required this.clientId,
+    required this.date,
+    super.key,
+  });
 
   final ExerciseEntity exercise;
   final bool isReorderable;
+  final bool isAddable;
+  final bool isRemovable;
+  final bool isEditable;
+  final String? clientId;
+  final DateTime? date;
   bool isExpanded = false;
 
   @override
@@ -144,7 +168,15 @@ class _ExerciseState extends State<_Exercise> {
                   isReorderable: widget.isReorderable,
                 ),
                 body: _ExerciseExpansionPanel(
-                    widget.exercise.videoId, widget.exercise.description),
+                  videoId: widget.exercise.videoId,
+                  description: widget.exercise.description,
+                  isRemovable: widget.isRemovable,
+                  isAddable: widget.isAddable,
+                  isEditable: widget.isEditable,
+                  clientId: widget.clientId,
+                  date: widget.date,
+                  exerciseEntity: widget.exercise,
+                ),
               ),
             ],
           ),
@@ -155,10 +187,25 @@ class _ExerciseState extends State<_Exercise> {
 }
 
 class _ExerciseExpansionPanel extends StatelessWidget {
-  const _ExerciseExpansionPanel(this.videoId, this.description);
+  const _ExerciseExpansionPanel({
+    required this.videoId,
+    required this.description,
+    required this.isRemovable,
+    required this.isAddable,
+    required this.isEditable,
+    required this.clientId,
+    required this.date,
+    required this.exerciseEntity,
+  });
 
   final String videoId;
   final String description;
+  final bool isRemovable;
+  final bool isAddable;
+  final bool isEditable;
+  final String? clientId;
+  final DateTime? date;
+  final ExerciseEntity exerciseEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -166,11 +213,20 @@ class _ExerciseExpansionPanel extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const PersoDivider(),
-        _DescriptionSection(description: description),
-        const _OptionsHeader(),
-        const _Options(),
-        PersoVideoPlayer(
-          videoId: videoId,
+        _DescriptionSection(
+          description: description,
+          isRemovable: isRemovable,
+          isAddable: isAddable,
+          clientId: clientId,
+          date: date,
+          exerciseEntity: exerciseEntity,
+        ),
+        _OptionsSection(isEditable: isEditable),
+        Container(
+          margin: const EdgeInsets.only(top: Dimens.smallMargin),
+          child: PersoVideoPlayer(
+            videoId: videoId,
+          ),
         ),
         const _Categories(),
       ],
@@ -179,9 +235,21 @@ class _ExerciseExpansionPanel extends StatelessWidget {
 }
 
 class _DescriptionSection extends StatelessWidget {
-  const _DescriptionSection({required this.description});
+  const _DescriptionSection({
+    required this.description,
+    required this.isRemovable,
+    required this.isAddable,
+    required this.clientId,
+    required this.date,
+    required this.exerciseEntity,
+  });
 
   final String description;
+  final bool isRemovable;
+  final bool isAddable;
+  final String? clientId;
+  final DateTime? date;
+  final ExerciseEntity exerciseEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -201,34 +269,70 @@ class _DescriptionSection extends StatelessWidget {
                   'Description',
                   style: ThemeText.smallTitleBold,
                 ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.add_circle,
-                    size: 32,
-                  ),
-                  onPressed: () {
-                    //Add bloc logic to add exercise
-                  },
-                ),
-                IconButton(
-                  onPressed: () {
-                    //remove this exercise
-                  },
-                  icon: const Icon(
-                    Icons.delete_forever,
-                    size: 32,
-                  ),
+                _ActionableIcon(
+                  isRemovable: isRemovable,
+                  isAddable: isAddable,
+                  clientId: clientId,
+                  date: date,
+                  exerciseEntity: exerciseEntity,
                 ),
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.normalMargin),
-            child: Text(description),
-          ),
+          Text(description),
         ],
       ),
     );
+  }
+}
+
+class _ActionableIcon extends StatelessWidget {
+  const _ActionableIcon({
+    required this.isRemovable,
+    required this.isAddable,
+    required this.clientId,
+    required this.date,
+    required this.exerciseEntity,
+  });
+
+  final bool isRemovable;
+  final bool isAddable;
+  final String? clientId;
+  final DateTime? date;
+  final ExerciseEntity exerciseEntity;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isRemovable) {
+      return IconButton(
+        icon: const Icon(
+          Icons.delete_forever,
+          size: 32,
+        ),
+        onPressed: () {
+          //Add bloc logic to add exercise
+        },
+      );
+    } else if (isAddable) {
+      return IconButton(
+        icon: const Icon(
+          Icons.add_circle,
+          size: 32,
+        ),
+        onPressed: () {
+          //TODO: Add bloc logic to add exercise
+          context.read<ExerciseListBloc>().add(
+                ExerciseListEvent.addExercise(
+                  clientId!,
+                  date!,
+                  exerciseEntity,
+                ),
+              );
+        },
+      );
+    } else {
+      return Container();
+    }
   }
 }
 
@@ -248,49 +352,66 @@ class _Categories extends StatelessWidget {
 
 enum _ExerciseType { repsBased, timeBased }
 
-class _Options extends StatefulWidget {
-  const _Options();
+class _OptionsSection extends StatefulWidget {
+  const _OptionsSection({required this.isEditable});
+
+  final bool isEditable;
 
   @override
-  State<_Options> createState() => _OptionsState();
+  State<_OptionsSection> createState() => _OptionsSectionState();
 }
 
-class _OptionsState extends State<_Options> {
+class _OptionsSectionState extends State<_OptionsSection> {
   var _exerciseType = _ExerciseType.repsBased;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RadioListTile(
-          title: const Text('Reps based exercise'),
-          value: _ExerciseType.repsBased,
-          groupValue: _exerciseType,
-          onChanged: (value) {
-            setState(() {
-              _exerciseType = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Time based exercise'),
-          value: _ExerciseType.timeBased,
-          groupValue: _exerciseType,
-          onChanged: (value) {
-            setState(() {
-              _exerciseType = value!;
-            });
-          },
-        ),
-        Visibility(
-          visible: _exerciseType == _ExerciseType.repsBased,
-          child: const _RepsBasedExerciseOptions(),
-        ),
-        Visibility(
-          visible: _exerciseType == _ExerciseType.timeBased,
-          child: const _TimeBasedExerciseOptions(),
-        ),
-      ],
+    return Visibility(
+      visible: widget.isEditable,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              left: Dimens.smallMargin,
+              right: Dimens.smallMargin,
+              top: Dimens.normalMargin,
+            ),
+            child: Text(
+              'Options',
+              style: ThemeText.smallTitleBold,
+            ),
+          ),
+          RadioListTile(
+            title: const Text('Reps based exercise'),
+            value: _ExerciseType.repsBased,
+            groupValue: _exerciseType,
+            onChanged: (value) {
+              setState(() {
+                _exerciseType = value!;
+              });
+            },
+          ),
+          RadioListTile(
+            title: const Text('Time based exercise'),
+            value: _ExerciseType.timeBased,
+            groupValue: _exerciseType,
+            onChanged: (value) {
+              setState(() {
+                _exerciseType = value!;
+              });
+            },
+          ),
+          Visibility(
+            visible: _exerciseType == _ExerciseType.repsBased,
+            child: const _RepsBasedExerciseOptions(),
+          ),
+          Visibility(
+            visible: _exerciseType == _ExerciseType.timeBased,
+            child: const _TimeBasedExerciseOptions(),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -378,15 +499,14 @@ class _OptionsHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.smallMargin),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Options',
-            style: ThemeText.smallTitleBold,
-          ),
-        ],
+      margin: const EdgeInsets.only(
+        left: Dimens.smallMargin,
+        right: Dimens.smallMargin,
+        top: Dimens.normalMargin,
+      ),
+      child: Text(
+        'Options',
+        style: ThemeText.smallTitleBold,
       ),
     );
   }

@@ -22,7 +22,6 @@ class ExerciseListEvent with _$ExerciseListEvent {
 
   const factory ExerciseListEvent.addExercise(
     String clientId,
-    String trainerId,
     DateTime date,
     ExerciseEntity exerciseEntity,
   ) = AddExercise;
