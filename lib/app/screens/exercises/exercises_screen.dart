@@ -11,8 +11,8 @@ class ExercisesInProgressScreen extends StatelessWidget {
       appBar: const PersoAppBar(title: 'Exercise in progress'),
       body: Column(
         children: [
-          const SizedBox(
-            width: double.infinity,
+  Container(
+            color: Colors.grey,
             height: 350,
           ),
           Container(
