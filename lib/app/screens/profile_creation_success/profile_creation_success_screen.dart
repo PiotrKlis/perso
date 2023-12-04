@@ -13,40 +13,39 @@ class ProfileCreationSuccessScreen extends StatelessWidget {
     return SafeArea(
       child: Container(
         margin: const EdgeInsets.only(
-            left: Dimens.normalMargin, right: Dimens.normalMargin,),
+          left: Dimens.xmMargin,
+          right: Dimens.xmMargin,
+        ),
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: Dimens.substantialMargin),
+              margin: const EdgeInsets.only(top: Dimens.xxxlMargin),
               child: Text(
                 context.strings.succes_message_title,
                 style: ThemeText.largeTitleBold,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+              margin: const EdgeInsets.only(top: Dimens.xlMargin),
               child: Text(
                 context.strings.succes_message_body_1,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.normalMargin),
-              child: Text(context.strings.succes_message_body_2,
-                  style: ThemeText.bodyRegularBlackText,),
+              margin: const EdgeInsets.only(top: Dimens.xmMargin),
+              child: Text(
+                context.strings.succes_message_body_2,
+                style: ThemeText.bodyRegularBlackText,
+              ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.substantialMargin),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  PersoButton(
-                    title: context.strings.finish,
-                    onTap: (context) {
-                      context.replaceNamed(ScreenNavigationKey.home);
-                    },
-                  ),
-                ],
+              margin: const EdgeInsets.only(top: Dimens.xlMargin),
+              child: PersoButton(
+                title: context.strings.finish,
+                onTap: (context) {
+                  context.replaceNamed(ScreenNavigationKey.home);
+                },
               ),
             ),
           ],

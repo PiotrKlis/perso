@@ -6,7 +6,7 @@ class PersoButton extends StatelessWidget {
   const PersoButton(
       {super.key,
       this.title = '',
-      this.width = Dimens.bigButtonWidth,
+      this.width = double.infinity,
       this.whiteBlackTheme = false,
       this.isLoading = false,
       this.onTap,});

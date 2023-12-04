@@ -2,86 +2,15 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perso/app/screens/plan_overview/calendar_widget.dart';
-import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/screens/plan_overview/plan_overview_screen.dart';
+import 'package:perso/app/styleguide/value/app_dimens.dart';
+import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/category_chips.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:video_player/video_player.dart';
-
-class TestExercise {
-  TestExercise({
-    required this.icon,
-    required this.name,
-    required this.description,
-  });
-
-  final IconData icon;
-  final String name;
-  final String description;
-  bool isExpanded = false;
-}
-
-class PlanOverviewScreen extends StatelessWidget {
-  const PlanOverviewScreen({required this.clientId, super.key});
-
-  final String clientId;
-
-  // @override
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PersoAppBar(
-        title: 'Plan overview',
-      ),
-      body: _PlanOverviewScreenContent(clientId: clientId),
-    );
-  }
-}
-
-class _PlanOverviewScreenContent extends StatelessWidget {
-  const _PlanOverviewScreenContent({required this.clientId});
-
-  final String clientId;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      child: Column(
-        children: [
-          const CalendarWidget(clientId: 'clientId'),
-          _ExercisesOverview(clientId: clientId),
-        ],
-      ),
-    );
-  }
-}
-
-class _ExercisesOverview extends StatelessWidget {
-  const _ExercisesOverview({required this.clientId});
-
-  final String clientId;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: Dimens.xmMargin),
-      child: ColoredBox(
-        color: PersoColors.lightBlue,
-        child: Column(
-          children: [
-            _ExercisesHeaderRow(clientId: clientId),
-            ExercisesList(),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 class ExercisesList extends StatefulWidget {
   const ExercisesList({super.key});

@@ -213,7 +213,7 @@ final GoRouter goRouter = GoRouter(
           routes: [
             GoRoute(
               name: ScreenNavigationKey.planOverview,
-              path: '${ScreenNavigationKey.planOverview}',
+              path: ScreenNavigationKey.planOverview,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return NoTransitionPage(
                   child: PlanOverviewScreen(

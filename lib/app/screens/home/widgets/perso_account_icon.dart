@@ -9,7 +9,7 @@ class PersoAccountIcon extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.only(
-          left: Dimens.normalMargin, top: Dimens.normalMargin,),
+          left: Dimens.xmMargin, top: Dimens.xmMargin,),
       child: const Icon(Icons.account_circle_rounded,
           size: Dimens.accountIconSize, color: Colors.black,),
     );

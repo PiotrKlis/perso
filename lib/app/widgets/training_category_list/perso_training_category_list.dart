@@ -69,7 +69,7 @@ class PersoTrainingCategoryList extends StatelessWidget {
                       ),
                       Container(
                         margin:
-                            const EdgeInsets.only(left: Dimens.normalMargin),
+                            const EdgeInsets.only(left: Dimens.xmMargin),
                         child: Text(
                           category.name,
                           style: ThemeText.bodyBoldBlackText,

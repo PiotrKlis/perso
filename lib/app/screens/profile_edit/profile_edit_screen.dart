@@ -13,10 +13,10 @@ import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/validators.dart';
-import 'package:perso/app/widgets/adress_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:perso/app/widgets/adress_and_map/google_map.dart';
-import 'package:perso/app/widgets/adress_and_map/perso_autocomplete.dart';
-import 'package:perso/app/widgets/adress_and_map/state/address_and_map_state.dart';
+import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
+import 'package:perso/app/widgets/address_and_map/google_map.dart';
+import 'package:perso/app/widgets/address_and_map/perso_autocomplete.dart';
+import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
 import 'package:perso/app/widgets/category_chips/category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
@@ -52,7 +52,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final persoChipsList = PersoCategoryChips();
   final imagePicker = ImagePicker();
-  PersoGoogleMap googleMap = const PersoGoogleMap();
+  final googleMap = const PersoGoogleMap();
   final PersoAutocomplete addressWidget = PersoAutocomplete();
   XFile? image;
   LatLng? latLng;
@@ -91,7 +91,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           shape: BoxShape.circle,
                           color: Colors.black,
                         ),
-                        margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                        margin: const EdgeInsets.only(top: Dimens.lMargin),
                         child: image == null
                             ? const Icon(
                                 Icons.camera_alt,
@@ -109,7 +109,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                     ),
                     Container(
-                      margin: const EdgeInsets.only(top: Dimens.bigMargin),
+                      margin: const EdgeInsets.only(
+                        top: Dimens.lMargin,
+                        left: Dimens.lMargin,
+                        right: Dimens.lMargin,
+                      ),
                       child: Center(
                         child: PersoButton(
                           title: context.strings.upload_image,
@@ -205,9 +209,10 @@ class _ConfirmButton extends StatelessWidget {
     return Center(
       child: Container(
         margin: const EdgeInsets.only(
-          top: Dimens.biggerMargin,
-          bottom: Dimens.biggerMargin,
-          right: Dimens.normalMargin,
+          top: Dimens.xlMargin,
+          bottom: Dimens.xlMargin,
+          right: Dimens.xmMargin,
+          left: Dimens.xmMargin,
         ),
         child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
           builder: (context, state) {
@@ -215,7 +220,7 @@ class _ConfirmButton extends StatelessWidget {
                   loading: () => Center(
                     child: Container(
                       margin: const EdgeInsets.only(
-                        bottom: Dimens.normalMargin,
+                        bottom: Dimens.xmMargin,
                       ),
                       child: const CircularProgressIndicator(),
                     ),
@@ -300,7 +305,7 @@ class _Languages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.normalMargin),
+      margin: const EdgeInsets.only(top: Dimens.xmMargin),
       child: spokenLanguageRowWidget,
     );
   }
@@ -313,8 +318,8 @@ class _Divider extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: Dimens.normalMargin,
-        right: Dimens.normalMargin,
+        top: Dimens.xmMargin,
+        right: Dimens.xmMargin,
       ),
       child: const PersoIndentedDivider(),
     );
@@ -334,9 +339,9 @@ class _NicknameSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.substantialMargin,
-        top: Dimens.bigMargin,
-        right: Dimens.normalMargin,
+        left: Dimens.xxxlMargin,
+        top: Dimens.lMargin,
+        right: Dimens.xmMargin,
       ),
       //TODO: Find different, non-hacky way of async validation way
       child: PersoAsyncTextFormField(
@@ -360,9 +365,9 @@ class _SurnameSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.substantialMargin,
-        top: Dimens.bigMargin,
-        right: Dimens.normalMargin,
+        left: Dimens.xxxlMargin,
+        top: Dimens.lMargin,
+        right: Dimens.xmMargin,
       ),
       child: PersoTextField(
         textEditingController: surnameController,
@@ -383,20 +388,20 @@ class _NameSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.normalMargin),
+      margin: const EdgeInsets.only(top: Dimens.xmMargin),
       child: Row(
         children: [
           Container(
             margin: const EdgeInsets.only(
-              left: Dimens.normalMargin,
+              left: Dimens.xmMargin,
             ),
             child: const Icon(Icons.person, size: 24),
           ),
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(
-                left: Dimens.normalMargin,
-                right: Dimens.normalMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
               ),
               child: PersoTextField(
                 title: context.strings.name,
@@ -437,21 +442,21 @@ class _TrainerOnlySection extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.normalMargin,
-              right: Dimens.normalMargin,
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
             ),
             child: Row(
               children: [
                 Container(
                   margin: const EdgeInsets.only(
-                    left: Dimens.normalMargin,
+                    left: Dimens.xmMargin,
                   ),
                   child: const Icon(Icons.pin_drop, size: 24),
                 ),
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.only(
-                      left: Dimens.normalMargin,
+                      left: Dimens.xmMargin,
                     ),
                     child: addressWidget,
                   ),
@@ -460,26 +465,26 @@ class _TrainerOnlySection extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: Dimens.normalMargin),
+            margin: const EdgeInsets.only(top: Dimens.xmMargin),
             child: googleMap,
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.normalMargin,
-              right: Dimens.normalMargin,
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
             ),
             child: const PersoIndentedDivider(),
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.normalMargin,
-              right: Dimens.normalMargin,
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
             ),
             child: Row(
               children: [
                 Container(
                   margin: const EdgeInsets.only(
-                    left: Dimens.normalMargin,
+                    left: Dimens.xmMargin,
                   ),
                   child: const Icon(
                     Icons.text_snippet,
@@ -490,7 +495,7 @@ class _TrainerOnlySection extends StatelessWidget {
                   child: Container(
                     height: 140,
                     margin: const EdgeInsets.only(
-                      left: Dimens.normalMargin,
+                      left: Dimens.xmMargin,
                     ),
                     child: PersoTextField(
                       title: context.strings.short_bio,
@@ -507,9 +512,9 @@ class _TrainerOnlySection extends StatelessWidget {
           Container(
             height: 340,
             margin: const EdgeInsets.only(
-              left: Dimens.substantialMargin,
-              top: Dimens.normalMargin,
-              right: Dimens.normalMargin,
+              left: Dimens.xxxlMargin,
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
             ),
             child: PersoTextField(
               title: context.strings.long_bio,
@@ -521,15 +526,15 @@ class _TrainerOnlySection extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.normalMargin,
-              right: Dimens.normalMargin,
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
             ),
             child: const PersoIndentedDivider(),
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.normalMargin,
-              left: Dimens.normalMargin,
+              top: Dimens.xmMargin,
+              left: Dimens.xmMargin,
             ),
             child: Text(
               context.strings.select_your_specialities,
@@ -537,7 +542,7 @@ class _TrainerOnlySection extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: Dimens.smallMargin),
+            margin: const EdgeInsets.only(top: Dimens.xsMargin),
             child: persoChipsList,
           ),
         ],
@@ -554,7 +559,7 @@ class _ErrorText extends StatelessWidget {
     return Center(
       child: Container(
         margin: const EdgeInsets.only(
-          top: Dimens.normalMargin,
+          top: Dimens.xmMargin,
         ),
         child: BlocBuilder<ProfileEditBloc, ProfileEditState>(
           builder: (context, state) {

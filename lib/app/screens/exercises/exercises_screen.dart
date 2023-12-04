@@ -17,7 +17,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.hugeMargin,
+              top: Dimens.xlMargin,
             ),
             child: Text(
               'Exercise name',
@@ -26,15 +26,15 @@ class ExercisesInProgressScreen extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.smallMargin,
+              top: Dimens.sMargin,
             ),
             child: const Text('12 reps'),
           ),
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.bigMargin,
-              left: Dimens.normalMargin,
-              right: Dimens.normalMargin,
+              top: Dimens.lMargin,
+              left: Dimens.mMargin,
+              right: Dimens.mMargin,
             ),
             child: RichText(
               textAlign: TextAlign.center,
@@ -62,7 +62,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(right: Dimens.biggerMargin2),
+                  margin: const EdgeInsets.only(right: Dimens.xlMargin),
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -81,7 +81,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: const CircleBorder(),
-                    padding: const EdgeInsets.all(Dimens.bigMargin),
+                    padding: const EdgeInsets.all(Dimens.lMargin),
                   ),
                   child: const Icon(
                     Icons.check_rounded,
@@ -89,7 +89,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: Dimens.biggerMargin2),
+                  margin: const EdgeInsets.only(left: Dimens.xlMargin),
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(

@@ -14,15 +14,15 @@ class TrainingCategoriesScreen extends StatelessWidget {
       appBar: PersoAppBar(title: context.strings.training_categories),
       body: Container(
         margin: const EdgeInsets.only(
-          top: Dimens.normalMargin,
-          left: Dimens.normalMargin,
+          top: Dimens.xmMargin,
+          left: Dimens.xmMargin,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(context.strings.categories, style: ThemeText.largerTitleBold),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.bigMargin),
+              margin: const EdgeInsets.only(top: Dimens.lMargin),
               child: const PersoTrainingCategoryList(),
             ),
           ],

@@ -27,7 +27,7 @@ class PersoFlagButton extends StatelessWidget {
                   style: const TextStyle(fontSize: 24),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(left: Dimens.mediumMargin),
+                    margin: const EdgeInsets.only(left: Dimens.mMargin),
                     child: GestureDetector(
                       onTap: () {
                         onRemoveTap.call(flagEmoji);
