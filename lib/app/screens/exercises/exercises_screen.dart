@@ -8,7 +8,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PersoAppBar(title: 'exercises'),
+      appBar: const PersoAppBar(title: 'Exercise in progress'),
       body: Column(
         children: [
           const SizedBox(
