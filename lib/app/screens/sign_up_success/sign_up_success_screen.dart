@@ -13,25 +13,27 @@ class SignUpSuccessScreen extends StatelessWidget {
       child: Container(
         color: PersoColors.lightBlue,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.biggerMargin,
-                  left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
+                top: Dimens.xlMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
+              ),
               child: const Center(
-                  child: Icon(
-                Icons.email,
-                size: Dimens.iconSizeLarge,
-              )),
+                child: Icon(
+                  Icons.email,
+                  size: Dimens.iconSizeLarge,
+                ),
+              ),
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.mediumMargin,
-                  left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
+                top: Dimens.mMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
+              ),
               child: Text(
                 context.strings.sign_up_succes_title,
                 style: ThemeText.largerTitleBold,
@@ -39,9 +41,10 @@ class SignUpSuccessScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.biggerMargin,
-                  left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
+                top: Dimens.xlMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
+              ),
               child: Text(
                 context.strings.sign_up_succes_body_1,
                 style: ThemeText.bodyRegularBlackText,
@@ -49,29 +52,39 @@ class SignUpSuccessScreen extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(
-                  top: Dimens.biggerMargin,
-                  left: Dimens.normalMargin,
-                  right: Dimens.normalMargin),
+                top: Dimens.xlMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
+              ),
               child: Text(
                 context.strings.sign_up_succes_body_2,
                 style: ThemeText.bodyRegularBlackText,
               ),
             ),
             Container(
-                margin: const EdgeInsets.only(
-                    top: Dimens.biggerMargin,
-                    left: Dimens.normalMargin,
-                    right: Dimens.normalMargin),
-                child: Text(context.strings.sign_up_succes_body_3,
-                    style: ThemeText.bodyBoldBlackText)),
+              margin: const EdgeInsets.only(
+                top: Dimens.xlMargin,
+                left: Dimens.xmMargin,
+                right: Dimens.xmMargin,
+              ),
+              child: Text(
+                context.strings.sign_up_succes_body_3,
+                style: ThemeText.bodyBoldBlackText,
+              ),
+            ),
             Container(
-                margin: const EdgeInsets.only(
-                    top: Dimens.biggerMargin, left: Dimens.normalMargin),
-                child: Center(
-                    child: PersoButton(
+              margin: const EdgeInsets.only(
+                top: Dimens.xlMargin,
+                left: Dimens.lMargin,
+                right: Dimens.lMargin,
+              ),
+              child: Center(
+                child: PersoButton(
                   title: context.strings.confirm,
                   onTap: _onConfirm,
-                )))
+                ),
+              ),
+            ),
           ],
         ),
       ),

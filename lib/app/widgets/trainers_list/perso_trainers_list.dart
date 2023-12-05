@@ -1,19 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/constants.dart';
-
-import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/trainers_list/bloc/trainers_list_bloc.dart';
 import 'package:perso/app/widgets/trainers_list/event/trainers_list_event.dart';
 import 'package:perso/app/widgets/trainers_list/state/trainers_list_state.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:go_router/go_router.dart';
 
 class PersoTrainersList extends StatelessWidget {
-  const PersoTrainersList({Key? key}) : super(key: key);
+  const PersoTrainersList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +28,9 @@ class PersoTrainersList extends StatelessWidget {
               return _getTrainersList(trainers, context);
             }, error: (error) {
               return Text(error);
-            });
+            },);
           },
-        ));
+        ),);
   }
 
   Widget _getTrainersList(List<TrainerEntity> trainers, BuildContext context) {
@@ -48,45 +45,44 @@ class PersoTrainersList extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () => {
                         context.pushNamed(ScreenNavigationKey.trainerDetails,
-                            extra: trainerData)
+                            extra: trainerData,),
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                Dimens.trainerCardBorderRadius)),
+                                Dimens.trainerCardBorderRadius,),),
                         child: Row(
-                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
                               margin: const EdgeInsets.only(
-                                  left: Dimens.mediumMargin,
-                                  top: Dimens.mediumMargin),
+                                  left: Dimens.mMargin,
+                                  top: Dimens.mMargin,),
                               child: Column(
                                 children: [
                                   Image.asset(AppImages.trainer1,
                                       width: Dimens.trainerImageWidth,
-                                      height: Dimens.trainerImageHeight),
+                                      height: Dimens.trainerImageHeight,),
                                 ],
                               ),
                             ),
                             Expanded(
                               child: Container(
                                 margin: const EdgeInsets.only(
-                                    top: Dimens.mediumMargin,
-                                    left: Dimens.mediumMargin),
+                                    top: Dimens.mMargin,
+                                    left: Dimens.mMargin,),
                                 child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(trainerData.name,
-                                          style: ThemeText.bodyBoldBlackText),
+                                          style: ThemeText.bodyBoldBlackText,),
                                       Text(trainerData.nickname,
                                           style:
-                                              ThemeText.subHeadingRegularBlue),
+                                              ThemeText.subHeadingRegularBlue,),
                                       Container(
-                                        height: 40.0,
+                                        height: 40,
                                         margin: const EdgeInsets.only(
-                                            top: Dimens.smallMargin),
+                                            top: Dimens.xsMargin,),
                                         child: Text(
                                           trainerData.shortBio,
                                           maxLines: 2,
@@ -97,19 +93,17 @@ class PersoTrainersList extends StatelessWidget {
                                       ),
                                       Container(
                                         margin: const EdgeInsets.only(
-                                            top: Dimens.smallMargin),
+                                            top: Dimens.xsMargin,),
                                         child: Row(children: [
                                           Text(trainerData.rating.toString(),
                                               style:
-                                                  ThemeText.subHeadingBoldGrey),
+                                                  ThemeText.subHeadingBoldGrey,),
                                           Container(
                                             margin: const EdgeInsets.only(
-                                                left: Dimens.smallerMargin),
+                                                left: Dimens.sMargin,),
                                             child: RatingBar(
                                               itemSize: Dimens.ratingBarSize,
                                               ignoreGestures: true,
-                                              itemCount:
-                                                  Constants.ratingBarItemCount,
                                               ratingWidget: RatingWidget(
                                                 full: const Icon(
                                                   Icons.star,
@@ -117,10 +111,10 @@ class PersoTrainersList extends StatelessWidget {
                                                 ),
                                                 half: const Icon(
                                                     Icons.star_half,
-                                                    color: Colors.yellow),
+                                                    color: Colors.yellow,),
                                                 empty: const Icon(
                                                     Icons.star_rate_outlined,
-                                                    color: Colors.yellow),
+                                                    color: Colors.yellow,),
                                               ),
                                               initialRating: trainerData.rating,
                                               onRatingUpdate: (double value) {
@@ -130,26 +124,26 @@ class PersoTrainersList extends StatelessWidget {
                                           ),
                                           Container(
                                             margin: const EdgeInsets.only(
-                                                left: Dimens.smallerMargin),
+                                                left: Dimens.sMargin,),
                                             child: Text(
-                                              "(${trainerData.votesNumber})",
+                                              '(${trainerData.votesNumber})',
                                               style: ThemeText
                                                   .subHeadingRegularGrey,
                                               textAlign: TextAlign.end,
                                             ),
-                                          )
-                                        ]),
+                                          ),
+                                        ],),
                                       ),
-                                    ]),
+                                    ],),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ),
                 ],
-              ))
+              ),)
           .toList(),
     );
   }

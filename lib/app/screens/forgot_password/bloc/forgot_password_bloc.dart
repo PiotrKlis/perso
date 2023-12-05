@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordBloc
     extends Bloc<ForgotPasswordEvent, ForgotPasswordState> {
-  final _authProvider = getIt.get<AuthService>();
 
   ForgotPasswordBloc() : super(const ForgotPasswordState.initial()) {
     on<ResetPassword>((event, emitter) async {
@@ -15,17 +14,17 @@ class ForgotPasswordBloc
         await _authProvider.resetPassword(event.email);
         emitter.call(const ForgotPasswordState.passwordResetSuccess());
       } catch (error) {
-        String errorMessage = "Something went wrong";
+        var errorMessage = 'Something went wrong';
         if (error is FirebaseAuthException) {
           switch (error.code) {
             case 'email-already-in-use':
-              errorMessage = "Email already in use";
+              errorMessage = 'Email already in use';
               break;
             case 'invalid-email':
-              errorMessage = "Invalid email";
+              errorMessage = 'Invalid email';
               break;
             case 'user-not-found':
-              errorMessage = "Password is too weak";
+              errorMessage = 'Password is too weak';
               break;
           }
           emitter.call(ForgotPasswordState.error(errorMessage));
@@ -33,4 +32,5 @@ class ForgotPasswordBloc
       }
     });
   }
+  final _authProvider = getIt.get<AuthService>();
 }

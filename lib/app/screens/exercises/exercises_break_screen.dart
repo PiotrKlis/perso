@@ -24,8 +24,8 @@ class ExercisesBreakScreen extends StatelessWidget {
                 ),
                 child: Image.asset(
                   AppImages.restIcon,
-                  width: Dimens.resetIconWidth,
-                  height: Dimens.resetIconHeight,
+                  width: Dimens.restIconWidth,
+                  height: Dimens.restIconHeight,
                 ),
               ),
             ],

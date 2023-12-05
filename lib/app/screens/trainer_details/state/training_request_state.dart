@@ -7,7 +7,7 @@ class TrainingRequestState with _$TrainingRequestState {
   const factory TrainingRequestState.initial() = Initial;
 
   const factory TrainingRequestState.hasUserAlreadyRequestedTraining(
-      bool hasRequested) = HasUserAlreadyRequestedTraining;
+      bool hasRequested,) = HasUserAlreadyRequestedTraining;
 
   const factory TrainingRequestState.loadingTrainingRequest() =
       LoadingTrainingRequest;

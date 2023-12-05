@@ -5,18 +5,14 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:flutter/material.dart';
 
 class PersoAsyncTextFormField extends StatefulWidget {
+
+  const PersoAsyncTextFormField(
+      {required this.validator, required this.validationDebounce, required this.controller, super.key,
+      this.hintText = '',});
   final Future<bool> Function(String) validator;
   final Duration validationDebounce;
   final TextEditingController controller;
   final String hintText;
-
-  const PersoAsyncTextFormField(
-      {Key? key,
-      required this.validator,
-      required this.validationDebounce,
-      required this.controller,
-      this.hintText = ''})
-      : super(key: key);
 
   @override
   _PersoAsyncTextFormFieldState createState() =>
@@ -25,16 +21,16 @@ class PersoAsyncTextFormField extends StatefulWidget {
 
 class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
   Timer? _debounce;
-  var isValid = false;
+  bool isValid = false;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) {
         if (value?.isEmpty ?? false) {
-          return "Required Field";
+          return 'Required Field';
         } else if (!isValid) {
-          return "This nickname is already taken";
+          return 'This nickname is already taken';
         } else {
           return null;
         }
@@ -48,21 +44,19 @@ class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
           isValid = await validate(text);
         });
       },
-      textAlign: TextAlign.start,
       controller: widget.controller,
-      maxLines: 1,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
           errorMaxLines: 2,
           focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey)),
+              borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
           ),
           labelText: widget.hintText,
-          labelStyle: ThemeText.bodyRegularGreyText),
+          labelStyle: ThemeText.bodyRegularGreyText,),
     );
   }
 

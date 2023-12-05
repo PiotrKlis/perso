@@ -15,7 +15,7 @@ class TrainerProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PersoAppBar(title: "Trainer profile screen"),
+      appBar: const PersoAppBar(title: 'Trainer profile screen'),
       body: PersoButton(
         title: context.strings.logout,
         onTap: (context) async {

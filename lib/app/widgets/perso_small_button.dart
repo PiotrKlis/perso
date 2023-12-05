@@ -4,11 +4,7 @@ import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoSmallButton extends StatelessWidget {
   const PersoSmallButton(
-      {Key? key,
-      required this.text,
-      required this.addLanguage,
-      required this.customValidator})
-      : super(key: key);
+      {required this.text, required this.addLanguage, required this.customValidator, super.key,});
 
   final String text;
   final void Function(String value) addLanguage;
@@ -17,13 +13,12 @@ class PersoSmallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 170.0,
+      width: 170,
       child: TextFormField(
         validator: (_) => customValidator.call(),
         readOnly: true,
-        textAlign: TextAlign.start,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(0.0),
+          contentPadding: const EdgeInsets.all(0),
           prefixIcon: const Icon(Icons.add),
           prefixIconColor: PersoColors.blue,
           filled: true,
@@ -32,16 +27,16 @@ class PersoSmallButton extends StatelessWidget {
           hintStyle: ThemeText.bodyRegularBlue,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),
-              borderSide: BorderSide.none),
+              borderSide: BorderSide.none,),
         ),
         onTap: () {
           showCountryPicker(
             onClosed: () {},
             useSafeArea: true,
-            favorite: ["PL", "GB", "UA"],
+            favorite: ['PL', 'GB', 'UA'],
             context: context,
             onSelect: (value) {
-              String emoji = value.flagEmoji;
+              final emoji = value.flagEmoji;
               addLanguage.call(emoji);
             },
           );

@@ -75,7 +75,7 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: PersoColors.grey,
-      padding: const EdgeInsets.all(Dimens.normalMargin),
+      padding: const EdgeInsets.all(Dimens.xmMargin),
       alignment: Alignment.centerLeft,
       child: Text(
         '${sectionType.name.capitalizeFirstLetter()} clients',
@@ -120,14 +120,14 @@ class _Client extends StatelessWidget {
         GestureDetector(
           onTap: () {
             context.pushNamed(
-              ScreenNavigationKey.calendarExercises,
-              pathParameters: {'clientId': client.id},
+              ScreenNavigationKey.planOverview,
+              queryParameters: {'clientId': client.id},
             );
           },
           child: Container(
             margin: const EdgeInsets.only(
-              top: Dimens.smallMargin,
-              bottom: Dimens.smallMargin,
+              top: Dimens.xsMargin,
+              bottom: Dimens.xsMargin,
             ),
             child: Row(
               children: [
@@ -166,7 +166,7 @@ class _Title extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.only(
-          left: Dimens.smallMargin,
+          left: Dimens.xsMargin,
         ),
         child: Text(
           title,
@@ -187,7 +187,7 @@ class _Image extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: Dimens.smallMargin),
+      margin: const EdgeInsets.only(left: Dimens.xsMargin),
       child: imagePath.isNotEmpty
           ? Image.network(imagePath)
           : const Icon(
@@ -215,7 +215,7 @@ class _Actions extends StatelessWidget {
       SectionType.inactive => _InactiveActions(clientId),
     };
     return Container(
-      margin: const EdgeInsets.only(right: Dimens.smallMargin),
+      margin: const EdgeInsets.only(right: Dimens.xsMargin),
       child: buttons,
     );
   }
