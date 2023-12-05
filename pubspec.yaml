@@ -49,7 +49,7 @@ dependencies:
   sticky_headers: ^0.3.0
   video_player: ^2.8.1
   table_calendar: ^3.0.9
-  stream_chat_flutter: ^6.12.0
+  stream_chat_flutter: ^7.0.0
 
   #Http connection with API
   http: ^1.0.0

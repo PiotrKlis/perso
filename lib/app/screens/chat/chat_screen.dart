@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/utils/chat_client.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -11,7 +13,10 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Chat screen'),
       ),
-      body: StreamChat(client: chatClient, child: const ChannelListPage()),
+      body: StreamChat(
+        client: chatClient,
+        child: const ChannelListPage(),
+      ),
     );
   }
 }
@@ -24,7 +29,7 @@ class ChannelListPage extends StatefulWidget {
 }
 
 class _ChannelListPageState extends State<ChannelListPage> {
-  late final _controller = StreamChannelListController(
+  final _controller = StreamChannelListController(
     client: chatClient,
     // filter: Filter.in_(
     //   'members',
@@ -40,53 +45,15 @@ class _ChannelListPageState extends State<ChannelListPage> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
+  Widget build(BuildContext context) => Scaffold(
         body: RefreshIndicator(
           onRefresh: _controller.refresh,
           child: StreamChannelListView(
             controller: _controller,
             onChannelTap: (channel) {
-              //TODO: Change to gorouter
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                      StreamChannel(
-                        channel: channel,
-                        child: const ChannelPage(),
-                      ),
-                ),
-              );
+              context.goNamed(ScreenNavigationKey.chatChannel);
             },
           ),
         ),
       );
-}
-
-class ChannelPage extends StatelessWidget {
-  const ChannelPage({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamChat(
-      client: chatClient,
-      child: StreamChatTheme(
-        data: StreamChatThemeData.dark(),
-        child: const Scaffold(
-          appBar: StreamChannelHeader(),
-          body: Column(
-            children: <Widget>[
-              Expanded(
-                child: StreamMessageListView(),
-              ),
-              StreamMessageInput(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }

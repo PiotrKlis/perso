@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/chat/chat_channel_screen.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
@@ -242,6 +243,15 @@ final GoRouter goRouter = GoRouter(
           pageBuilder: (BuildContext context, GoRouterState state) {
             return const NoTransitionPage(child: ChatScreen());
           },
+          routes: [
+            GoRoute(
+              name: ScreenNavigationKey.chatChannel,
+              path: ScreenNavigationKey.chatChannel,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return const NoTransitionPage(child: ChatChannelScreen());
+              },
+            ),
+          ],
         ),
       ],
     ),

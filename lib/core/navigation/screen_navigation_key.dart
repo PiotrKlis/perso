@@ -20,4 +20,5 @@ class ScreenNavigationKey {
   static const String profileCreationSuccess = 'profile_creation_success';
   static const String planOverview = 'plan_overview';
   static const String exerciseLibrary = 'exercise_library';
+  static const String chatChannel = 'chat_channel';
 }
