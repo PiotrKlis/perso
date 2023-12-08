@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
 import 'package:perso/app/widgets/exercise_list/state/exercise_list_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercise_provider/firestore_exercise_provider.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
   ExerciseListBloc() : super(const ExerciseListState.init()) {
-    final trainerId = _userInfoProvider.user?.uid ?? '';
+    final trainerId = _userSessionModel.user?.uid ?? '';
 
     on<GetAllExercises>((event, emitter) async {
       try {
@@ -77,7 +78,6 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
     });
   }
 
-  final _userInfoProvider = getIt.get<UserInfoProvider>();
-
+  final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesProvider = getIt.get<FirestoreExerciseProvider>();
 }

@@ -23,16 +23,17 @@ import 'package:perso/app/screens/trainer_profile/trainer_profile_screen.dart';
 import 'package:perso/app/screens/training_categories/training_categories_screen.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/navigation/bottom_nav_bar.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/core/user_type.dart';
-import 'package:perso/data/user_info/user_info_provider.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _homeShellNavigatorKey = GlobalKey<NavigatorState>();
 final _trainingShellNavigatorKey = GlobalKey<NavigatorState>();
 final _chatShellNavigatorKey = GlobalKey<NavigatorState>();
-final _userInfoProvider = getIt.get<UserInfoProvider>();
+final _userSessionModel = getIt.get<UserSessionModel>();
 const _clientId = 'clientId';
 const _input = 'input';
 
@@ -56,6 +57,22 @@ final GoRouter goRouter = GoRouter(
                 return const NoTransitionPage(child: HomeScreen());
               },
               routes: [
+                GoRoute(
+                  name: ScreenNavigationKey.clientProfile,
+                  path: ScreenNavigationKey.clientProfile,
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage(child: ClientProfileScreen());
+                  },
+                ),
+                GoRoute(
+                  name: ScreenNavigationKey.trainerProfile,
+                  path: ScreenNavigationKey.trainerProfile,
+                  pageBuilder: (context, state) {
+                    return NoTransitionPage(
+                      child: TrainerProfileScreen(),
+                    );
+                  },
+                ),
                 GoRoute(
                   name: ScreenNavigationKey.trainerDetails,
                   path: ScreenNavigationKey.trainerDetails,
@@ -99,26 +116,23 @@ final GoRouter goRouter = GoRouter(
                   },
                 ),
                 GoRoute(
-                  name: ScreenNavigationKey.clientProfile,
-                  path: ScreenNavigationKey.clientProfile,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(child: ClientProfileScreen());
-                  },
-                ),
-                GoRoute(
-                  name: ScreenNavigationKey.trainerProfile,
-                  path: ScreenNavigationKey.trainerProfile,
-                  pageBuilder: (context, state) {
-                    return NoTransitionPage(
-                      child: TrainerProfileScreen(),
-                    );
-                  },
-                ),
-                GoRoute(
                   name: ScreenNavigationKey.signIn,
                   path: ScreenNavigationKey.signIn,
                   pageBuilder: (context, state) {
                     return NoTransitionPage(child: SignInScreen());
+                  },
+                  redirect: (context, state) {
+                    if (_userSessionModel.isUserLoggedIn) {
+                      switch (_userSessionModel.userType) {
+                        case UserType.trainer:
+                          return '${ScreenNavigationKey.home}/${ScreenNavigationKey.trainerProfile}';
+                        case UserType.client:
+                          return '${ScreenNavigationKey.home}/${ScreenNavigationKey.clientProfile}';
+                        case null:
+                          return null;
+                      }
+                    }
+                    return null;
                   },
                   routes: [
                     GoRoute(
@@ -162,21 +176,19 @@ final GoRouter goRouter = GoRouter(
                               userType: state.extra! as UserType,
                             ),
                           ),
-                          routes: [
-                            GoRoute(
-                              path: ScreenNavigationKey.profileCreationSuccess,
-                              name: ScreenNavigationKey.profileCreationSuccess,
-                              pageBuilder: (context, state) {
-                                return const NoTransitionPage(
-                                  child: ProfileCreationSuccessScreen(),
-                                );
-                              },
-                            ),
-                          ],
                         ),
                       ],
                     ),
                   ],
+                ),
+                GoRoute(
+                  path: ScreenNavigationKey.profileCreationSuccess,
+                  name: ScreenNavigationKey.profileCreationSuccess,
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(
+                      child: ProfileCreationSuccessScreen(),
+                    );
+                  },
                 ),
               ],
             ),
@@ -191,11 +203,9 @@ final GoRouter goRouter = GoRouter(
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const NoTransitionPage(child: LoggedOutTrainingScreen());
               },
-              redirect: (context, state) async {
-                final isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
-                if (isUserLoggedIn) {
-                  final userType = await _userInfoProvider.getUserType();
-                  switch (userType) {
+              redirect: (context, state) {
+                if (_userSessionModel.isUserLoggedIn) {
+                  switch (_userSessionModel.userType) {
                     case UserType.trainer:
                       return ScreenNavigationKey.trainerClientsList;
                     case UserType.client:
@@ -276,7 +286,11 @@ final GoRouter goRouter = GoRouter(
                   name: ScreenNavigationKey.chatChannel,
                   path: ScreenNavigationKey.chatChannel,
                   pageBuilder: (BuildContext context, GoRouterState state) {
-                    return const NoTransitionPage(child: ChatChannelScreen());
+                    return NoTransitionPage(
+                      child: ChatChannelScreen(
+                        channel: state.extra! as Channel,
+                      ),
+                    );
                   },
                 ),
               ],

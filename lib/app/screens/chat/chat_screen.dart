@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/utils/chat_client.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
@@ -10,8 +11,8 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat screen'),
+      appBar: const PersoAppBar(
+        title: 'Chat screen',
       ),
       body: StreamChat(
         client: chatClient,
@@ -51,7 +52,10 @@ class _ChannelListPageState extends State<ChannelListPage> {
           child: StreamChannelListView(
             controller: _controller,
             onChannelTap: (channel) {
-              context.goNamed(ScreenNavigationKey.chatChannel);
+              context.goNamed(
+                ScreenNavigationKey.chatChannel,
+                extra: channel,
+              );
             },
           ),
         ),

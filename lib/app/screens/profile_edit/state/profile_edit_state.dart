@@ -6,5 +6,6 @@ class ProfileEditState with _$ProfileEditState {
   const factory ProfileEditState.initial() = Initial;
   const factory ProfileEditState.loading() = Loading;
   const factory ProfileEditState.error(String error) = Error;
-  const factory ProfileEditState.success() = Success;
+  const factory ProfileEditState.editSuccess() = EditSuccess;
+  const factory ProfileEditState.profileCreated() = ProfileCreated;
 }

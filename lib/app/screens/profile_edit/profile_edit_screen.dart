@@ -284,7 +284,10 @@ class _ConfirmButton extends StatelessWidget {
           },
           listener: (context, state) {
             state.whenOrNull(
-              success: () => context.replaceNamed(
+              editSuccess: () => context.replaceNamed(
+                ScreenNavigationKey.home,
+              ),
+              profileCreated: () => context.clearAndNavigate(
                 ScreenNavigationKey.profileCreationSuccess,
               ),
             );

@@ -1,13 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/sign_in/event/sign_in_event.dart';
 import 'package:perso/app/screens/sign_in/state/sign_in_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/auth/auth_service.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-
   SignInBloc(super.initialState) {
     on<Init>((state, emit) async {
       //no-op
@@ -16,24 +16,28 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<Login>((state, emit) async {
       try {
         emit(const SignInState.loading());
-        final userCredential = await _authProvider.login(
-            email: state.email, password: state.password,);
-        // if (userCredential.user!.emailVerified) {
-        await _handleSuccessfulLogin(emit);
-        // } else {
-        //   emit(const SignInState.error(message: "Email not verified"));
-        // }
+        final userCredentials = await _authProvider.login(
+          email: state.email,
+          password: state.password,
+        );
+        await _userInfoProvider.updateSessionModel(userCredentials.user!);
+        if (_userSessionModel.isEmailVerified) {
+          await _handleSuccessfulLogin(emit);
+        } else {
+          emit(const SignInState.error(message: 'Email not verified'));
+        }
       } catch (error) {
         _handleLoginError(error, emit);
       }
     });
   }
-  final AuthService _authProvider = getIt.get<AuthService>();
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
+
+  final _authProvider = getIt.get<AuthService>();
+  final _userSessionModel = getIt.get<UserSessionModel>();
+  final _userInfoProvider = getIt.get<UserInfoProvider>();
 
   Future<void> _handleSuccessfulLogin(Emitter<SignInState> emit) async {
-    final isUserLoggedIn = await _userInfoProvider.isUserLoggedIn();
-    if (isUserLoggedIn) {
+    if (_userSessionModel.isProfileCreated) {
       emit(const SignInState.navigateToHomeScreen());
     } else {
       emit(const SignInState.navigateToProfileCreationScreen());

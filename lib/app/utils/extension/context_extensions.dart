@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,5 +13,13 @@ extension AppLocalizationsExtensions on BuildContext {
       ..showSnackBar(
         SnackBar(content: Text(text)),
       );
+  }
+
+  //GoRouter extension
+  void clearAndNavigate(String path) {
+    while (canPop() == true) {
+      pop();
+    }
+    pushNamed(path);
   }
 }
