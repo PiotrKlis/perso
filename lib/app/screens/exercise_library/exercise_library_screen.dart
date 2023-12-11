@@ -8,9 +8,15 @@ import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_search.dart';
 
 class ExerciseLibraryScreen extends StatelessWidget {
-  const ExerciseLibraryScreen({required this.clientId, super.key});
+  const ExerciseLibraryScreen({
+    required String clientId,
+    required String selectedDate,
+    super.key,
+  })  : _selectedDate = selectedDate,
+        _clientId = clientId;
 
-  final String clientId;
+  final String _clientId;
+  final String _selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +27,16 @@ class ExerciseLibraryScreen extends StatelessWidget {
             const ExerciseListEvent.getAllExercises(),
           );
       },
-      child: const _ExerciseLibraryScreenContent(),
+      child: _ExerciseLibraryScreenContent(_clientId, _selectedDate),
     );
   }
 }
 
 class _ExerciseLibraryScreenContent extends StatelessWidget {
-  const _ExerciseLibraryScreenContent();
+  const _ExerciseLibraryScreenContent(this._clientId, this._selectedDate);
+
+  final String _clientId;
+  final String _selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +57,10 @@ class _ExerciseLibraryScreenContent extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: Dimens.xmMargin),
               color: PersoColors.lightBlue,
-              child: const PersoExercisesList(
-                isEditable: true,
+              child: PersoExercisesList(
                 isAddable: true,
+                clientId: _clientId,
+                date: _selectedDate,
               ),
             ),
           ],

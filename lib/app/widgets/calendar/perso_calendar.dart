@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
+import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
+import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarWidget extends StatelessWidget {
-  const CalendarWidget({required this.clientId, super.key});
+class PersoCalendar extends StatefulWidget {
+  const PersoCalendar({required this.clientId, super.key});
 
   final String clientId;
 
   @override
-  Widget build(BuildContext context) {
-    return TableCalendarWidget(clientId: clientId);
-  }
+  State<PersoCalendar> createState() => _PersoCalendarState();
 }
 
-class TableCalendarWidget extends StatefulWidget {
-  const TableCalendarWidget({required this.clientId, super.key});
-
-  final String clientId;
-
-  @override
-  State<TableCalendarWidget> createState() => _TableCalendarState();
-}
-
-class _TableCalendarState extends State<TableCalendarWidget> {
+class _PersoCalendarState extends State<PersoCalendar> {
   final _calendarFormat = CalendarFormat.week;
-  var _selectedDate = DateTime.now();
+  DateTime _selectedDate = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<CalendarBloc>().add(
+          CalendarEvent.updateSelectedDate(_selectedDate),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +45,7 @@ class _TableCalendarState extends State<TableCalendarWidget> {
               ),
             );
           }
+          return null;
         },
       ),
       firstDay: DateTime.utc(2023, 11),
@@ -57,6 +58,9 @@ class _TableCalendarState extends State<TableCalendarWidget> {
         if (_selectedDate != selectedDate) {
           setState(() {
             _selectedDate = selectedDate;
+            context.read<CalendarBloc>().add(
+                  CalendarEvent.updateSelectedDate(selectedDate),
+                );
           });
         }
       },

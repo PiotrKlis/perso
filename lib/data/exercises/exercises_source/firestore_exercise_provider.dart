@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
@@ -30,53 +29,6 @@ class FirestoreExerciseProvider extends ExerciseSource {
           ),
         )
         .toList();
-  }
-
-  @override
-  Future<void> addExercise(
-    String clientId,
-    String trainerId,
-    DateTime date,
-    ExerciseEntity exerciseEntity,
-  ) async {
-    await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection(CollectionName.clientExercises)
-        .doc(clientId)
-        .collection(date.toString())
-        .doc(exerciseEntity.id)
-        .set({
-      UserDocumentFields.id: exerciseEntity.id,
-      UserDocumentFields.description: exerciseEntity.description,
-      UserDocumentFields.index: exerciseEntity.index,
-      UserDocumentFields.isRepsBased: exerciseEntity.isRepsBased,
-      UserDocumentFields.isTimeBased: exerciseEntity.isTimeBased,
-      UserDocumentFields.reps: exerciseEntity.reps,
-      UserDocumentFields.sets: exerciseEntity.sets,
-      UserDocumentFields.tags: exerciseEntity.tags,
-      UserDocumentFields.time: exerciseEntity.time,
-      UserDocumentFields.title: exerciseEntity.title,
-      UserDocumentFields.videoId: exerciseEntity.videoId,
-    });
-  }
-
-  @override
-  Future<void> editExercise(
-      String clientId, String trainerId, String exerciseId, DateTime date) {
-    // TODO: implement editExercise
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> removeExercise(
-    String clientId,
-    String trainerId,
-    DateTime date,
-    String exerciseId,
-  ) {
-    // TODO: implement removeExercise
-    throw UnimplementedError();
   }
 
   List<String> _getTags(List<dynamic> tags) {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perso/app/screens/plan_overview/calendar_widget.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
+import 'package:perso/app/widgets/calendar/perso_calendar.dart';
+import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
 import 'package:perso/app/widgets/exercise_list/perso_exercises_list.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
@@ -14,11 +16,17 @@ class PlanOverviewScreen extends StatelessWidget {
 
   final String clientId;
 
-  // @override
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ExerciseListBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ExerciseListBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CalendarBloc(),
+        ),
+      ],
       child: _PlanOverviewScreenContent(clientId: clientId),
     );
   }
@@ -39,7 +47,7 @@ class _PlanOverviewScreenContent extends StatelessWidget {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            const CalendarWidget(clientId: 'clientId'),
+            PersoCalendar(clientId: clientId),
             _ExercisesOverview(clientId: clientId),
           ],
         ),
@@ -72,34 +80,50 @@ class _ExercisesOverview extends StatelessWidget {
 }
 
 class _ExercisesHeaderRow extends StatelessWidget {
-  const _ExercisesHeaderRow({required this.clientId});
+  _ExercisesHeaderRow({required String clientId}) : _clientId = clientId;
 
-  final String clientId;
+  final String _clientId;
+  String? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        left: Dimens.mMargin,
-        right: Dimens.sMargin,
-        top: Dimens.mMargin,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Exercises',
-            style: ThemeText.largeTitleBold,
-          ),
-          PersoButton(
-            width: Dimens.smallButtonWidth,
-            title: 'Add',
-            onTap: (context) => context.pushNamed(
-              ScreenNavigationKey.exerciseLibrary,
-              queryParameters: {'clientId': clientId},
+    return BlocListener<CalendarBloc, CalendarState>(
+      listener: (BuildContext context, CalendarState state) {
+        state.when(
+          initial: () {},
+          selectedDate: (selectedDate) {
+            _selectedDate = selectedDate;
+          },
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(
+          left: Dimens.mMargin,
+          right: Dimens.sMargin,
+          top: Dimens.mMargin,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Exercises',
+              style: ThemeText.largeTitleBold,
             ),
-          ),
-        ],
+            PersoButton(
+              width: Dimens.smallButtonWidth,
+              title: 'Add',
+              onTap: (context) {
+                context.pushNamed(
+                  ScreenNavigationKey.exerciseLibrary,
+                  queryParameters: {
+                    'clientId': _clientId,
+                    'date': _selectedDate,
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

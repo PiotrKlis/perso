@@ -9,5 +9,7 @@ class ExerciseListState with _$ExerciseListState {
       Exercises;
 
   const factory ExerciseListState.init() = Init;
+
   const factory ExerciseListState.error(String error) = Error;
+
 }

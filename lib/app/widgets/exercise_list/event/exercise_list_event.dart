@@ -10,26 +10,26 @@ class ExerciseListEvent with _$ExerciseListEvent {
   const factory ExerciseListEvent.getExercises(
     String clientId,
     String trainerId,
-    DateTime date,
+    String date,
   ) = GetExercises;
 
   const factory ExerciseListEvent.editExercise(
     String clientId,
     String trainerId,
     String exerciseId,
-    DateTime date,
+    String date,
   ) = EditExercise;
 
   const factory ExerciseListEvent.addExercise(
     String clientId,
-    DateTime date,
+    String date,
     ExerciseEntity exerciseEntity,
   ) = AddExercise;
 
   const factory ExerciseListEvent.removeExercise(
     String clientId,
     String trainerId,
-    DateTime date,
+    String date,
     String exerciseId,
   ) = RemoveExercise;
 }

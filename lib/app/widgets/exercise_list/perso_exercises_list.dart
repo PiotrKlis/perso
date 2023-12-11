@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/widgets/category_chips/category_chips.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
 import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
 import 'package:perso/app/widgets/exercise_list/state/exercise_list_state.dart';
@@ -29,7 +30,7 @@ class PersoExercisesList extends StatefulWidget {
   final bool isRemovable;
   final bool isAddable;
   final String? clientId;
-  final DateTime? date;
+  final String? date;
 
   @override
   State<PersoExercisesList> createState() => _PersoExercisesListState();
@@ -137,7 +138,7 @@ class _Exercise extends StatefulWidget {
   final bool isRemovable;
   final bool isEditable;
   final String? clientId;
-  final DateTime? date;
+  final String? date;
   bool isExpanded = false;
 
   @override
@@ -204,7 +205,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
   final bool isAddable;
   final bool isEditable;
   final String? clientId;
-  final DateTime? date;
+  final String? date;
   final ExerciseEntity exerciseEntity;
 
   @override
@@ -228,7 +229,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
             videoId: videoId,
           ),
         ),
-        const _Categories(),
+        _Categories(exerciseEntity.tags),
       ],
     );
   }
@@ -248,13 +249,13 @@ class _DescriptionSection extends StatelessWidget {
   final bool isRemovable;
   final bool isAddable;
   final String? clientId;
-  final DateTime? date;
+  final String? date;
   final ExerciseEntity exerciseEntity;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.sMargin),
+      margin: const EdgeInsets.symmetric(horizontal: Dimens.mMargin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -298,7 +299,7 @@ class _ActionableIcon extends StatelessWidget {
   final bool isRemovable;
   final bool isAddable;
   final String? clientId;
-  final DateTime? date;
+  final String? date;
   final ExerciseEntity exerciseEntity;
 
   @override
@@ -317,7 +318,7 @@ class _ActionableIcon extends StatelessWidget {
       return IconButton(
         icon: const Icon(
           Icons.add_circle,
-          size: 32,
+          size: 42,
         ),
         onPressed: () {
           context.read<ExerciseListBloc>().add(
@@ -327,6 +328,7 @@ class _ActionableIcon extends StatelessWidget {
                   exerciseEntity,
                 ),
               );
+          context.showSnackBar('Exercise "${exerciseEntity.title}" added!');
         },
       );
     } else {
@@ -336,7 +338,9 @@ class _ActionableIcon extends StatelessWidget {
 }
 
 class _Categories extends StatelessWidget {
-  const _Categories();
+  const _Categories(this._categories);
+
+  final List<String> _categories;
 
   @override
   Widget build(BuildContext context) {
@@ -344,6 +348,8 @@ class _Categories extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: Dimens.sMargin),
       child: PersoCategoryChips(
         areChipsSelectable: false,
+        selectedCategories: _categories,
+        shouldHideNotSelectedChips: true,
       ),
     );
   }
@@ -366,6 +372,7 @@ class _OptionsSectionState extends State<_OptionsSection> {
   @override
   Widget build(BuildContext context) {
     return Visibility(
+      replacement: const SizedBox(height: Dimens.mMargin),
       visible: widget.isEditable,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -492,25 +499,6 @@ class _TimeBasedExerciseOptions extends StatelessWidget {
   }
 }
 
-class _OptionsHeader extends StatelessWidget {
-  const _OptionsHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        left: Dimens.sMargin,
-        right: Dimens.sMargin,
-        top: Dimens.mMargin,
-      ),
-      child: Text(
-        'Options',
-        style: ThemeText.smallTitleBold,
-      ),
-    );
-  }
-}
-
 class _ExerciseHeader extends StatelessWidget {
   const _ExerciseHeader({
     required this.exercise,
@@ -524,7 +512,7 @@ class _ExerciseHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: _getIconForTags(exercise.tags),
-      title: Text(exercise.title),
+      title: Text(exercise.title, style: ThemeText.bodyBoldBlackText),
       trailing: _getIconForReorder(isReorderable),
     );
   }

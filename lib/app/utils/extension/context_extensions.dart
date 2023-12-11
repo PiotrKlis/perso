@@ -11,7 +11,7 @@ extension AppLocalizationsExtensions on BuildContext {
     ScaffoldMessenger.of(this)
       ..hideCurrentSnackBar()
       ..showSnackBar(
-        SnackBar(content: Text(text)),
+        SnackBar(content: Text(text), backgroundColor: Colors.green),
       );
   }
 

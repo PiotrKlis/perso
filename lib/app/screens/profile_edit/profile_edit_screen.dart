@@ -17,7 +17,7 @@ import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart'
 import 'package:perso/app/widgets/address_and_map/google_map.dart';
 import 'package:perso/app/widgets/address_and_map/perso_autocomplete.dart';
 import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
-import 'package:perso/app/widgets/category_chips/category_chips.dart';
+import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
