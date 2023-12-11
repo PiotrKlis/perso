@@ -223,25 +223,24 @@ final GoRouter goRouter = GoRouter(
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const NoTransitionPage(child: ClientTrainingsScreen());
               },
-              routes: [
-                // GoRoute(
-                //   name: ScreenNavigationKey.planOverview,
-                //   path: ScreenNavigationKey.planOverview,
-                //   pageBuilder: (BuildContext context, GoRouterState state) {
-                //     return NoTransitionPage(
-                //       child: PlanOverviewScreen(
-                //         clientId: state.uri.queryParameters[_clientId]!,
-                //       ),
-                //     );
-                //   },
-                // ),
-              ],
+              redirect: (context, state) {
+                if (!_userSessionModel.isUserLoggedIn) {
+                  return ScreenNavigationKey.loggedOutTrainings;
+                }
+                return null;
+              },
             ),
             GoRoute(
               name: ScreenNavigationKey.trainerClientsList,
               path: ScreenNavigationKey.trainerClientsList,
               pageBuilder: (BuildContext context, GoRouterState state) {
                 return const NoTransitionPage(child: TrainerClientsScreen());
+              },
+              redirect: (context, state) {
+                if (!_userSessionModel.isUserLoggedIn) {
+                  return ScreenNavigationKey.loggedOutTrainings;
+                }
+                return null;
               },
               routes: [
                 GoRoute(
@@ -254,6 +253,12 @@ final GoRouter goRouter = GoRouter(
                       ),
                     );
                   },
+                  redirect: (context, state) {
+                    if (!_userSessionModel.isUserLoggedIn) {
+                      return ScreenNavigationKey.loggedOutTrainings;
+                    }
+                    return null;
+                  },
                   routes: [
                     GoRoute(
                       name: ScreenNavigationKey.exerciseLibrary,
@@ -264,6 +269,12 @@ final GoRouter goRouter = GoRouter(
                             clientId: state.uri.queryParameters['clientId']!,
                           ),
                         );
+                      },
+                      redirect: (context, state) {
+                        if (!_userSessionModel.isUserLoggedIn) {
+                          return ScreenNavigationKey.loggedOutTrainings;
+                        }
+                        return null;
                       },
                     ),
                   ],

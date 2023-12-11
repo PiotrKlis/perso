@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/models/exercise_entity.dart';
-import 'package:perso/data/exercise_provider/exercise_source.dart';
+import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable

@@ -320,7 +320,6 @@ class _ActionableIcon extends StatelessWidget {
           size: 32,
         ),
         onPressed: () {
-          //TODO: Add bloc logic to add exercise
           context.read<ExerciseListBloc>().add(
                 ExerciseListEvent.addExercise(
                   clientId!,

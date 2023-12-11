@@ -4,8 +4,7 @@ import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
 import 'package:perso/app/widgets/exercise_list/state/exercise_list_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
-import 'package:perso/data/exercise_provider/firestore_exercise_provider.dart';
-import 'package:perso/data/user_info/user_info_provider.dart';
+import 'package:perso/data/exercises/exercises_source/firestore_exercise_provider.dart';
 
 class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
   ExerciseListBloc() : super(const ExerciseListState.init()) {
