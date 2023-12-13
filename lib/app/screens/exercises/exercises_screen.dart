@@ -42,7 +42,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                 text:
                     'Start standing with legs slightly wider than shoulder-distance ',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.black,
                   fontSize: 15,
                 ),
                 children: [
@@ -71,7 +71,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                     ),
                     child: const Icon(
-                      Icons.arrow_back_ios_new,
+                      Icons.keyboard_arrow_left,
                       color: Colors.black,
                     ),
                   ),
@@ -98,7 +98,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(12),
                     ),
                     child: const Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.keyboard_arrow_right,
                       color: Colors.black,
                     ),
                   ),
