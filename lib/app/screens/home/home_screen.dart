@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/home/bloc/home_bloc.dart';
-import 'package:perso/app/screens/home/event/home_event.dart';
 import 'package:perso/app/screens/home/state/home_state.dart';
 import 'package:perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
@@ -38,21 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           create: (context) => AddressAndMapBloc(),
         ),
       ],
-      child: BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state) {
-          state.when(
-            initial: () {},
-            navigateToSignIn: () {
-              context.pushNamed(ScreenNavigationKey.signIn);
-            },
-            navigateToClientProfile: () {
-              context.pushNamed(ScreenNavigationKey.clientProfile);
-            },
-            navigateToTrainerProfile: () {
-              context.pushNamed(ScreenNavigationKey.trainerProfile);
-            },
-          );
-        },
+      child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) => SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
@@ -76,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             title: context.strings.home_main_header,
                           ),
                           GestureDetector(
-                            onTap: () => _handleAccountClick(context),
+                            onTap: () =>
+                                context.pushNamed(ScreenNavigationKey.signIn),
                             child: const PersoAccountIcon(),
                           ),
                         ],
@@ -197,9 +183,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  void _handleAccountClick(BuildContext context) {
-    context.read<HomeBloc>().add(const HomeEvent.accountNavigation());
   }
 }

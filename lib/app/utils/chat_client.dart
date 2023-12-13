@@ -13,7 +13,7 @@ class ChatClient {
     /// your project dashboard.
     chatClient = StreamChatClient(
       apiKey,
-      logLevel: Level.INFO,
+      // logLevel: Level.INFO,
     );
 
     /// Set the current user and connect the websocket.
