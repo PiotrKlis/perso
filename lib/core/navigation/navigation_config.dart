@@ -59,6 +59,15 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
+                  name: ScreenNavigationKey.exerciseInProgress,
+                  path: ScreenNavigationKey.exerciseInProgress,
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(
+                      child: ExercisesInProgressScreen(),
+                    );
+                  },
+                ),
+                GoRoute(
                   name: ScreenNavigationKey.clientProfile,
                   path: ScreenNavigationKey.clientProfile,
                   pageBuilder: (context, state) {
