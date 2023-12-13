@@ -103,11 +103,8 @@ class _ExercisesHeaderRow extends StatelessWidget {
     return BlocListener<CalendarBloc, CalendarState>(
       listener: (BuildContext context, CalendarState state) {
         state.when(
-          initial: () {
-            print("PKPK initial!");
-          },
+          initial: () {},
           selectedDate: (selectedDate) {
-            print("PKPK selected date!");
             _selectedDate = selectedDate;
           },
         );

@@ -3,7 +3,7 @@ import 'package:perso/core/models/exercise_entity.dart';
 abstract class ExerciseSource {
   Future<List<ExerciseEntity>> getAllExercises();
 
-  Future<List<ExerciseEntity>> getExercisesForTrainer(
+  Stream<List<ExerciseEntity>> getExercisesForTrainer(
       String clientId, String trainerId, String date);
 
   Future<List<ExerciseEntity>> getExercisesForClient(

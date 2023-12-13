@@ -40,35 +40,37 @@ class FirestoreExerciseProvider extends ExerciseSource {
     throw UnimplementedError();
   }
 
-  //TODO: Change to listen/observe on the collection
   @override
-  Future<List<ExerciseEntity>> getExercisesForTrainer(
-      String clientId, String trainerId, String date) async {
-    final snapshots = await FirebaseFirestore.instance
+  Stream<List<ExerciseEntity>> getExercisesForTrainer(
+      String clientId, String trainerId, String date) async* {
+    final snapshots = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
         .collection(CollectionName.exercises)
         .doc(clientId)
         .collection(date)
-        .get();
+        .snapshots();
 
-    return snapshots.docs
-        .map(
-          (exercise) => ExerciseEntity(
-            id: exercise[UserDocumentFields.id] as String,
-            description: exercise[UserDocumentFields.description] as String,
-            index: exercise[UserDocumentFields.index] as int,
-            isRepsBased: exercise[UserDocumentFields.isRepsBased] as bool,
-            isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
-            reps: exercise[UserDocumentFields.reps] as int,
-            sets: exercise[UserDocumentFields.sets] as int,
-            tags: _getTags(exercise[UserDocumentFields.tags] as List<dynamic>),
-            time: exercise[UserDocumentFields.time] as String,
-            title: exercise[UserDocumentFields.title] as String,
-            videoId: exercise[UserDocumentFields.videoId] as String,
-          ),
-        )
-        .toList();
+    await for (final snapshot in snapshots) {
+      yield snapshot.docs
+          .map(
+            (exercise) => ExerciseEntity(
+              id: exercise[UserDocumentFields.id] as String,
+              description: exercise[UserDocumentFields.description] as String,
+              index: exercise[UserDocumentFields.index] as int,
+              isRepsBased: exercise[UserDocumentFields.isRepsBased] as bool,
+              isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
+              reps: exercise[UserDocumentFields.reps] as int,
+              sets: exercise[UserDocumentFields.sets] as int,
+              tags:
+                  _getTags(exercise[UserDocumentFields.tags] as List<dynamic>),
+              time: exercise[UserDocumentFields.time] as String,
+              title: exercise[UserDocumentFields.title] as String,
+              videoId: exercise[UserDocumentFields.videoId] as String,
+            ),
+          )
+          .toList();
+    }
   }
 
   List<String> _getTags(List<dynamic> tags) {
