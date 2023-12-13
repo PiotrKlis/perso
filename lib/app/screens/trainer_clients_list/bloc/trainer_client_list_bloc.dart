@@ -7,13 +7,10 @@ import 'package:perso/app/screens/trainer_clients_list/section_type.dart';
 import 'package:perso/app/screens/trainer_clients_list/state/trainer_client_list_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
-import 'package:perso/data/clients/clients_provider/clients_source.dart';
+import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/clients/clients_provider/firestore_clients_provider.dart';
 import 'package:perso/data/trainers/trainers_provider/firestore_trainers_provider.dart';
-import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.dart';
-import 'package:perso/data/trainers/trainers_service/trainers_service.dart';
-import 'package:perso/data/user_info/user_info_provider.dart';
 
 class TrainerClientsListBloc
     extends Bloc<TrainerClientsListEvent, TrainerClientsListState> {
@@ -21,8 +18,7 @@ class TrainerClientsListBloc
     on<LoadData>(
       (event, emitter) async {
         try {
-          final trainerId = _userInfoProvider.user?.uid ?? '';
-
+          final trainerId = _userSessionModel.user?.uid ?? '';
           final trainerData = _trainersSource.getTrainerData(trainerId);
 
           await for (final trainerEntity in trainerData) {
@@ -81,11 +77,10 @@ class TrainerClientsListBloc
     });
   }
 
-  final _userInfoProvider = getIt.get<UserInfoProvider>();
-  final ClientsSource _clientsSource = getIt.get<FirestoreClientsProvider>();
-  final TrainersSource _trainersSource = getIt.get<FirestoreTrainersProvider>();
-  final TrainersService _trainersService =
-      getIt.get<FirestoreTrainersService>();
+  final _userSessionModel = getIt.get<UserSessionModel>();
+  final _clientsSource = getIt.get<FirestoreClientsProvider>();
+  final _trainersSource = getIt.get<FirestoreTrainersProvider>();
+  final _trainersService = getIt.get<FirestoreTrainersService>();
 
   Future<List<ClientEntity>> _addClients(
     List<String> clientIds,

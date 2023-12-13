@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_trainer_data.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/user_type.dart';
 import 'package:perso/data/trainers/trainers_service/trainers_service.dart';
@@ -13,13 +14,13 @@ import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class FirestoreTrainersService implements TrainersService {
-  final _userInfoProvider = getIt.get<UserInfoProvider>();
+  final _userSessionModel = getIt.get<UserSessionModel>();
 
   @override
   Future<void> updateData(EditableTrainerData trainerData) async {
     try {
       final serverImagePath = await _uploadImage(trainerData.imagePath);
-      final id = _userInfoProvider.user?.uid;
+      final id = _userSessionModel.user?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
@@ -46,7 +47,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> uploadFullTrainerData(TrainerEntity trainerEntity) async {
     try {
       final serverImagePath = await _uploadImage(trainerEntity.imagePath);
-      final id = _userInfoProvider.user?.uid;
+      final id = _userSessionModel.user?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
@@ -81,7 +82,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<String> _uploadImage(String path) async {
     try {
       if (path.isNotEmpty) {
-        final id = _userInfoProvider.user?.uid;
+        final id = _userSessionModel.user?.uid;
         final storageReference = FirebaseStorage.instance
             .ref()
             .child('${CollectionName.images}/$id/}');
@@ -107,7 +108,7 @@ class FirestoreTrainersService implements TrainersService {
 
   @override
   Future<void> activateClient(String clientId) async {
-    final trainerId = _userInfoProvider.user?.uid;
+    final trainerId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -129,7 +130,7 @@ class FirestoreTrainersService implements TrainersService {
 
   @override
   Future<void> deactivateClient(String clientId) async {
-    final trainerId = _userInfoProvider.user?.uid;
+    final trainerId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -149,7 +150,7 @@ class FirestoreTrainersService implements TrainersService {
 
   @override
   Future<void> removeClient(String clientId) async {
-    final trainerId = _userInfoProvider.user?.uid;
+    final trainerId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)

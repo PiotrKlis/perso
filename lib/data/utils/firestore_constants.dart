@@ -1,6 +1,7 @@
 class CollectionName {
   static String users = 'users';
   static String images = 'images';
+  static String exercises = 'exercises';
 }
 
 class UserDocumentFields {
@@ -27,4 +28,13 @@ class UserDocumentFields {
   static const String activeTrainers = 'activeTrainers';
   static const String pendingTrainers = 'pendingTrainers';
   static const String inactiveTrainers = 'inactiveTrainers';
+  static const String index = 'index';
+  static const String isRepsBased = 'isRepsBased';
+  static const String isTimeBased = 'isTimeBased';
+  static const String reps = 'reps';
+  static const String sets = 'sets';
+  static const String tags = 'tags';
+  static const String time = 'time';
+  static const String title = 'title';
+  static const String videoId = 'videoId';
 }

@@ -4,7 +4,7 @@ import 'package:perso/app/widgets/perso_flag_button.dart';
 import 'package:perso/app/widgets/perso_small_button.dart';
 
 class SpokenLanguageRowWidget extends StatefulWidget {
-  SpokenLanguageRowWidget({Key? key}) : super(key: key);
+  SpokenLanguageRowWidget({super.key});
   List<Map<String, Widget>> listOfLanguages = [];
 
   @override
@@ -15,7 +15,7 @@ class SpokenLanguageRowWidget extends StatefulWidget {
 class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
   @override
   Widget build(BuildContext context) {
-    List<Widget> languageWidgets = widget.listOfLanguages
+    final languageWidgets = widget.listOfLanguages
         .map((map) => map.values.toList())
         .expand((list) => list)
         .toList();
@@ -24,33 +24,32 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
       scrollDirection: Axis.horizontal,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
               margin: const EdgeInsets.only(
-                  left: Dimens.normalMargin, top: Dimens.smallMargin),
-              child: const Icon(Icons.flag, size: 24.0)),
+                  left: Dimens.xmMargin, top: Dimens.xsMargin,),
+              child: const Icon(Icons.flag, size: 24),),
           Container(
-              margin: const EdgeInsets.only(left: Dimens.normalMargin),
+              margin: const EdgeInsets.only(left: Dimens.xmMargin),
               child: PersoSmallButton(
-                text: "Add language",
+                text: 'Add language',
                 addLanguage: _addSpokenLanguage,
                 customValidator: _validateNumberOfLanguages,
-              )),
-          ...languageWidgets
+              ),),
+          ...languageWidgets,
         ],
       ),
     );
   }
 
   String? _validateNumberOfLanguages() =>
-      widget.listOfLanguages.isEmpty ? "Add at least one language" : null;
+      widget.listOfLanguages.isEmpty ? 'Add at least one language' : null;
 
   void _addSpokenLanguage(String languageEmoji) {
-    Widget languageChip = Container(
-        margin: const EdgeInsets.only(left: Dimens.normalMargin),
+    final Widget languageChip = Container(
+        margin: const EdgeInsets.only(left: Dimens.xmMargin),
         child: PersoFlagButton(
-            flagEmoji: languageEmoji, onRemoveTap: _removeSpokenLanguage));
+            flagEmoji: languageEmoji, onRemoveTap: _removeSpokenLanguage,),);
     setState(() {
       widget.listOfLanguages.add({languageEmoji: languageChip});
     });

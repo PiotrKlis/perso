@@ -6,9 +6,8 @@ import 'package:perso/data/trainers/trainers_provider/firestore_trainers_provide
 import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 
 class TrainersListBloc extends Bloc<TrainersListEvent, TrainersListState> {
-  final TrainersSource _trainersSource = getIt.get<FirestoreTrainersProvider>();
 
-  TrainersListBloc(TrainersListState initialState) : super(initialState) {
+  TrainersListBloc(super.initialState) {
     on<LoadData>((event, emitter) async {
       try {
         final trainers = await _trainersSource.getAllTrainersData();
@@ -18,4 +17,5 @@ class TrainersListBloc extends Bloc<TrainersListEvent, TrainersListState> {
       }
     });
   }
+  final TrainersSource _trainersSource = getIt.get<FirestoreTrainersProvider>();
 }

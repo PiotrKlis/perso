@@ -4,11 +4,10 @@ import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
-import 'package:perso/data/clients/clients_service/clients_service.dart';
+import 'package:perso/core/models/user_session_model.dart';
+import 'package:perso/core/user_type.dart';
 import 'package:perso/data/clients/clients_service/firestore_clients_service.dart';
 import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.dart';
-import 'package:perso/data/trainers/trainers_service/trainers_service.dart';
-import 'package:perso/data/user_info/user_info_provider.dart';
 
 class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   ProfileEditBloc() : super(const ProfileEditState.initial()) {
@@ -16,7 +15,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       try {
         emitter(const ProfileEditState.loading());
         await _handleTrainerDataUpload(event);
-        emitter(const ProfileEditState.success());
+        await _handleStateEmit(emitter, UserType.trainer);
       } catch (error) {
         emitter(ProfileEditState.error(error.toString()));
       }
@@ -26,21 +25,45 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       try {
         emitter(const ProfileEditState.loading());
         await _handleClientDataUpload(event);
-        emitter(const ProfileEditState.success());
+        await _handleStateEmit(emitter, UserType.client);
       } catch (error) {
         emitter(ProfileEditState.error(error.toString()));
       }
     });
   }
 
-  final ClientsService _clientsService = getIt.get<FirestoreClientsService>();
-  final TrainersService _trainersService =
-      getIt.get<FirestoreTrainersService>();
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
+  Future<void> _handleStateEmit(
+    Emitter<ProfileEditState> emitter,
+    UserType userType,
+  ) async {
+    if (_userSessionModel.isProfileCreated) {
+      emitter(const ProfileEditState.editSuccess());
+    } else {
+      await _handleProfileCreation(emitter, userType);
+    }
+  }
 
-  Future<void> _handleTrainerDataUpload(UploadTrainerData event) async {
-    final isProfileCreated = await _userInfoProvider.isProfileCreated();
-    if (isProfileCreated) {
+  Future<void> _handleProfileCreation(
+    Emitter<ProfileEditState> emitter,
+    UserType userType,
+  ) async {
+    await _userSessionModel.update(
+      user: _userSessionModel.user!,
+      isProfileCreated: true,
+      userType: userType,
+      isEmailVerified: _userSessionModel.isEmailVerified,
+    );
+    emitter(const ProfileEditState.profileCreated());
+  }
+
+  final _clientsService = getIt.get<FirestoreClientsService>();
+  final _trainersService = getIt.get<FirestoreTrainersService>();
+  final _userSessionModel = getIt.get<UserSessionModel>();
+
+  Future<void> _handleTrainerDataUpload(
+    UploadTrainerData event,
+  ) async {
+    if (_userSessionModel.isProfileCreated) {
       await _trainersService.updateData(event.trainerData);
     } else {
       await _handleTrainerProfileCreation(event);
@@ -48,9 +71,10 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   }
 
   Future<void> _handleTrainerProfileCreation(
-      UploadTrainerData event,) async {
+    UploadTrainerData event,
+  ) async {
     final trainerEntity = TrainerEntity(
-      id: _userInfoProvider.user?.uid ?? '',
+      id: _userSessionModel.user?.uid ?? '',
       name: event.trainerData.name,
       surname: event.trainerData.surname,
       nickname: event.trainerData.nickname,
@@ -72,8 +96,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   }
 
   Future<void> _handleClientDataUpload(UploadClientData event) async {
-    final isProfileCreated = await _userInfoProvider.isProfileCreated();
-    if (isProfileCreated) {
+    if (_userSessionModel.isProfileCreated) {
       await _clientsService.updateData(event.clientData);
     } else {
       await _handleClientProfileCreation(event);
@@ -82,7 +105,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
 
   Future<void> _handleClientProfileCreation(UploadClientData event) async {
     final clientEntity = ClientEntity(
-      id: _userInfoProvider.user?.uid ?? '',
+      id: _userSessionModel.user?.uid ?? '',
       name: event.clientData.name,
       surname: event.clientData.surname,
       nickname: event.clientData.nickname,

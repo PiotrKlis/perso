@@ -33,12 +33,15 @@ class _ConfirmButton extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          margin: const EdgeInsets.only(bottom: Dimens.substantialMargin),
+          margin: const EdgeInsets.only(
+            bottom: Dimens.xxxlMargin,
+            left: Dimens.xlMargin,
+            right: Dimens.xlMargin,
+          ),
           child: PersoButton(
             onTap: (context) {
               context.pushNamed(ScreenNavigationKey.signIn);
             },
-            width: Dimens.largeButtonWidth,
             title: context.strings.sign_in,
           ),
         ),
@@ -54,8 +57,8 @@ class _Subtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.normalMargin,
-        top: Dimens.bigMargin,
+        left: Dimens.xmMargin,
+        top: Dimens.lMargin,
       ),
       child: Align(
         alignment: Alignment.bottomLeft,
@@ -75,9 +78,9 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.normalMargin,
-        top: Dimens.bigMargin,
-        right: Dimens.normalMargin,
+        left: Dimens.xmMargin,
+        top: Dimens.lMargin,
+        right: Dimens.xmMargin,
       ),
       child: Text(
         'Find the best trainers and your ideal personal plan',
@@ -94,9 +97,9 @@ class _Image extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: Dimens.substantialMargin,
-        left: Dimens.normalMargin,
-        right: Dimens.normalMargin,
+        top: Dimens.xxxlMargin,
+        left: Dimens.xmMargin,
+        right: Dimens.xmMargin,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),

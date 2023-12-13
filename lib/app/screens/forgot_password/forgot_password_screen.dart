@@ -25,25 +25,25 @@ class ForgotPasswordScreen extends StatelessWidget {
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: Container(
-            margin: const EdgeInsets.all(Dimens.normalMargin),
+            margin: const EdgeInsets.all(Dimens.xmMargin),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.hugeMargin),
+                    margin: const EdgeInsets.only(top: Dimens.xxlMargin),
                     child: const Icon(Icons.lock,
-                        size: Dimens.iconSizeLarge, color: Colors.black)),
+                        size: Dimens.iconSizeLarge, color: Colors.black,),),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                    margin: const EdgeInsets.only(top: Dimens.xlMargin),
                     child: Text(context.strings.forgotten_password_title,
-                        style: ThemeText.largeTitleBold)),
+                        style: ThemeText.largeTitleBold,),),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
                   child: Text(context.strings.forgotten_password_subtitle,
-                      style: ThemeText.bodyBoldBlackText),
+                      style: ThemeText.bodyBoldBlackText,),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.smallerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.sMargin),
                   child: Text(
                     context.strings.enter_email_forgotten_password,
                     style: ThemeText.bodyRegularBlackText,
@@ -51,34 +51,34 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                    margin: const EdgeInsets.only(top: Dimens.xmMargin),
                     child: PersoTextField(
                       title: context.strings.email,
                       textEditingController: _textEditingController,
-                    )),
+                    ),),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.biggerMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
                   child: PersoButton(
                     title: context.strings.reset_password,
                     onTap: (context) {
                       context.read<ForgotPasswordBloc>().add(
                           ForgotPasswordEvent.resetPassword(
-                              _textEditingController.text));
+                              _textEditingController.text,),);
                     },
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.normalMargin),
+                    margin: const EdgeInsets.only(top: Dimens.xmMargin),
                     child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
                       builder: (context, state) {
                         return state.whenOrNull(
                                 passwordResetSuccess: () => Text(
                                     context.strings.password_reset_success,
-                                    style: ThemeText.calloutRegular),
-                                error: (error) => Text(error)) ??
+                                    style: ThemeText.calloutRegular,),
+                                error: Text.new,) ??
                             Container();
                       },
-                    )),
+                    ),),
               ],
             ),
           ),

@@ -1,31 +1,35 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
-import 'package:perso/data/user_info/user_info_provider.dart';
+import 'package:perso/core/models/user_session_model.dart';
 
 @injectable
 class AuthService {
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
+  final _userSessionModel = getIt.get<UserSessionModel>();
 
-  Future<UserCredential> register(
-      {required String email, required String password}) async {
-    UserCredential userCredentials = await FirebaseAuth.instance
+  Future<UserCredential> register({
+    required String email,
+    required String password,
+  }) async {
+    final userCredentials = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
-    await _userInfoProvider.user?.sendEmailVerification();
+    await _userSessionModel.user?.sendEmailVerification();
     return userCredentials;
   }
 
-  Future<UserCredential> login(
-      {required String email, required String password}) async {
+  Future<UserCredential> login({
+    required String email,
+    required String password,
+  }) async {
     return FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
   }
 
-  Future resetPassword(String email) async {
-    FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  Future<void> resetPassword(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
   }
 
-  Future logout() async {
+  Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
   }
 }

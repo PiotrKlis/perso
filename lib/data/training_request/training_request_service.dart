@@ -1,31 +1,31 @@
-import 'package:perso/core/dependency_injection/get_it.dart';
-import 'package:perso/data/user_info/user_info_provider.dart';
-import 'package:perso/data/utils/firestore_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/user_session_model.dart';
+import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class TrainingRequestService {
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
+  final _userSessionModel = getIt.get<UserSessionModel>();
 
   Future<void> sendTrainingRequest(String trainerId) async {
-    final clientId = _userInfoProvider.user?.uid;
+    final clientId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(clientId)
         .update({
-      UserDocumentFields.pendingTrainers: FieldValue.arrayUnion([trainerId])
+      UserDocumentFields.pendingTrainers: FieldValue.arrayUnion([trainerId]),
     });
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
         .update({
-      UserDocumentFields.pendingClients: FieldValue.arrayUnion([clientId])
+      UserDocumentFields.pendingClients: FieldValue.arrayUnion([clientId]),
     });
   }
 
   Future<bool> checkIfUserHasAlreadySentRequest(String trainerId) async {
-    final clientId = _userInfoProvider.user?.uid;
+    final clientId = _userSessionModel.user?.uid;
     final document = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(clientId)
@@ -37,7 +37,6 @@ class TrainingRequestService {
         document[UserDocumentFields.activeTrainers] as List<String>;
     final inactiveTrainers =
         document[UserDocumentFields.inactiveTrainers] as List<String>;
-
     if (pendingRequests.contains(trainerId) ||
         activeTrainers.contains(trainerId) ||
         inactiveTrainers.contains(trainerId)) {
