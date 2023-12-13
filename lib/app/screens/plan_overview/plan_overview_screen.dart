@@ -2,32 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
+import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
 import 'package:perso/app/widgets/exercise_list/perso_exercises_list.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PlanOverviewScreen extends StatelessWidget {
-  const PlanOverviewScreen({required this.clientId, super.key});
+  const PlanOverviewScreen(
+      {required String clientId, required String trainerId, super.key})
+      : _trainerId = trainerId,
+        _clientId = clientId;
 
-  final String clientId;
+  final String _clientId;
+  final String _trainerId;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ExerciseListBloc(),
+          create: (context) => ExerciseListBloc()
+            ..add(
+              ExerciseListEvent.getExercises(
+                _clientId,
+                _trainerId,
+                DateTime.now().yearMonthDayFormat,
+              ),
+            ),
         ),
         BlocProvider(
           create: (context) => CalendarBloc(),
         ),
       ],
-      child: _PlanOverviewScreenContent(clientId: clientId),
+      child: _PlanOverviewScreenContent(clientId: _clientId),
     );
   }
 }
@@ -90,8 +103,11 @@ class _ExercisesHeaderRow extends StatelessWidget {
     return BlocListener<CalendarBloc, CalendarState>(
       listener: (BuildContext context, CalendarState state) {
         state.when(
-          initial: () {},
+          initial: () {
+            print("PKPK initial!");
+          },
           selectedDate: (selectedDate) {
+            print("PKPK selected date!");
             _selectedDate = selectedDate;
           },
         );

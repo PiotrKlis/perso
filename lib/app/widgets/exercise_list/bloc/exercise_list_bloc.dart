@@ -22,7 +22,8 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
 
     on<GetExercises>((event, emitter) async {
       try {
-        final exercises = await _exercisesProvider.getAllExercises();
+        final exercises = await _exercisesProvider.getExercisesForTrainer(
+            event.clientId, event.trainerId, event.date);
         emitter(ExerciseListState.exercises(exercises));
       } catch (error) {
         emitter(ExerciseListState.error(error.toString()));

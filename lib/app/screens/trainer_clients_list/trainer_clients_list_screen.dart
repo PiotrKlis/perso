@@ -34,8 +34,8 @@ class _TrainerClientsListView extends StatelessWidget {
           return state.when(
             initial: () {
               context.read<TrainerClientsListBloc>().add(
-                    const TrainerClientsListEvent.loadData(),
-                  );
+                const TrainerClientsListEvent.loadData(),
+              );
               return const Center(child: CircularProgressIndicator());
             },
             clientsData: _ClientsList.new,
@@ -100,6 +100,7 @@ class _Clients extends StatelessWidget {
           _Client(
             sectionType: section.sectionType,
             client: client,
+            trainerId: section.trainerId,
           ),
       ],
     );
@@ -107,10 +108,12 @@ class _Clients extends StatelessWidget {
 }
 
 class _Client extends StatelessWidget {
-  const _Client({required this.sectionType, required this.client});
+  const _Client(
+      {required this.sectionType, required this.client, required this.trainerId,});
 
   final SectionType sectionType;
   final ClientEntity client;
+  final String trainerId;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +124,7 @@ class _Client extends StatelessWidget {
           onTap: () {
             context.pushNamed(
               ScreenNavigationKey.planOverview,
-              queryParameters: {'clientId': client.id},
+              queryParameters: {'clientId': client.id, 'trainerId': trainerId},
             );
           },
           child: Container(
@@ -191,9 +194,9 @@ class _Image extends StatelessWidget {
       child: imagePath.isNotEmpty
           ? Image.network(imagePath)
           : const Icon(
-              Icons.account_circle,
-              size: Dimens.accountIconSize,
-            ),
+        Icons.account_circle,
+        size: Dimens.accountIconSize,
+      ),
     );
   }
 }

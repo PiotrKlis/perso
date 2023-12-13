@@ -35,6 +35,7 @@ final _trainingShellNavigatorKey = GlobalKey<NavigatorState>();
 final _chatShellNavigatorKey = GlobalKey<NavigatorState>();
 final _userSessionModel = getIt.get<UserSessionModel>();
 const _clientId = 'clientId';
+const _trainerId = 'trainerId';
 const _input = 'input';
 
 final GoRouter goRouter = GoRouter(
@@ -250,6 +251,7 @@ final GoRouter goRouter = GoRouter(
                     return NoTransitionPage(
                       child: PlanOverviewScreen(
                         clientId: state.uri.queryParameters[_clientId]!,
+                        trainerId: state.uri.queryParameters[_trainerId]!,
                       ),
                     );
                   },
