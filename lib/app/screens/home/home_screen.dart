@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
       child: BlocConsumer<HomeBloc, HomeState>(
-<<<<<<< HEAD
           listener: (context, state) {
             state.when(
                 initial: () {},
@@ -65,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             left: Dimens.normalMargin,
                             right: Dimens.normalMargin),
                         child: Container(
-=======
         listener: (context, state) {
           state.when(
             initial: () {},
@@ -172,7 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         Container(
->>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
                           margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
                           ),
@@ -182,7 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 PersoBigHeader(
                                   title: context.strings.home_main_header,
                                 ),
-<<<<<<< HEAD
                                 GestureDetector(
                                     onTap: () => _handleAccountClick(context),
                                     child: const PersoAccountIcon()),
