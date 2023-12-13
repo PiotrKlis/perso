@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
 
 class ExercisesInProgressScreen extends StatelessWidget {
   const ExercisesInProgressScreen({super.key});
@@ -8,12 +9,12 @@ class ExercisesInProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PersoAppBar(title: 'Exercise in progress'),
+      appBar:  PersoAppBar(title: context.strings.exercise_in_progress),
       body: Column(
         children: [
   Container(
             color: Colors.grey,
-            height: 350,
+            height: Dimens.xlPlaceholder,
           ),
           Container(
             margin: const EdgeInsets.only(
@@ -38,17 +39,14 @@ class ExercisesInProgressScreen extends StatelessWidget {
             ),
             child: RichText(
               textAlign: TextAlign.center,
-              text: const TextSpan(
+              text: TextSpan(
                 text:
                     'Start standing with legs slightly wider than shoulder-distance ',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                ),
+                style: ThemeText.bodyRegularBlackText,
                 children: [
                   TextSpan(
                     text: 'Read More...',
-                    style: TextStyle(color: Colors.blue),
+                    style: ThemeText.footnoteBoldBlue,
                   ),
                 ],
               ),
@@ -57,7 +55,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 100),
+            margin: const EdgeInsets.only(top: Dimens.xxxxlMargin),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
