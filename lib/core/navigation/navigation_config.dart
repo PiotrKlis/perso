@@ -4,9 +4,9 @@ import 'package:perso/app/screens/chat/chat_channel_screen.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
-import 'package:perso/app/screens/exercises/exercises_break_screen.dart';
 import 'package:perso/app/screens/exercise_in_progress/exercise_in_progress_screen.dart';
 import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart';
+import 'package:perso/app/screens/exercises/exercises_break_screen.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
@@ -60,14 +60,24 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
-                  name: ScreenNavigationKey.clientProfile,
-                  path: ScreenNavigationKey.clientProfile,
+                  name: ScreenNavigationKey.exerciseInProgress,
+                  path: ScreenNavigationKey.exerciseInProgress,
                   pageBuilder: (context, state) {
-                    return NoTransitionPage(child: ClientProfileScreen());
+                    return const NoTransitionPage(
+                      child: ExercisesInProgressScreen(),
+                    );
                   },
                   routes: [
-
-                  ]
+                    GoRoute(
+                      name: ScreenNavigationKey.exerciseBreak,
+                      path: ScreenNavigationKey.exerciseBreak,
+                      pageBuilder: (context, state) {
+                        return const NoTransitionPage(
+                          child: ExercisesBreakScreen(),
+                        );
+                      },
+                    ),
+                  ],
                 ),
                 GoRoute(
                   name: ScreenNavigationKey.clientProfile,

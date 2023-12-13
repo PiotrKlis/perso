@@ -30,7 +30,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
           ),
           PersoButton(
             onTap: (context) =>
-                context.pushNamed(ScreenNavigationKey.exercisesBreakScreen),
+                context.pushNamed(ScreenNavigationKey.exerciseBreak),
           ),
           Container(
             margin: const EdgeInsets.only(
