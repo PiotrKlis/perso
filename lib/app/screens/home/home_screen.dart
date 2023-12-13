@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
       child: BlocConsumer<HomeBloc, HomeState>(
+<<<<<<< HEAD
           listener: (context, state) {
             state.when(
                 initial: () {},
@@ -64,6 +65,114 @@ class _HomeScreenState extends State<HomeScreen> {
                             left: Dimens.normalMargin,
                             right: Dimens.normalMargin),
                         child: Container(
+=======
+        listener: (context, state) {
+          state.when(
+            initial: () {},
+            navigateToSignIn: () {
+              context.pushNamed(ScreenNavigationKey.signIn);
+            },
+            navigateToClientProfile: () {
+              context.pushNamed(ScreenNavigationKey.clientProfile);
+            },
+            navigateToTrainerProfile: () {
+              context.pushNamed(ScreenNavigationKey.trainerProfile);
+            },
+          );
+        },
+        builder: (context, state) => SafeArea(
+          child: Scaffold(
+            body: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: Dimens.xmMargin,
+                      left: Dimens.xmMargin,
+                      right: Dimens.xmMargin,
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        top: Dimens.xmMargin,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          PersoBigHeader(
+                            title: context.strings.home_main_header,
+                          ),
+                          GestureDetector(
+                            onTap: () => _handleAccountClick(context),
+                            child: const PersoAccountIcon(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: Dimens.xmMargin,
+                      top: Dimens.xmMargin,
+                      right: Dimens.xmMargin,
+                    ),
+                    child: GestureDetector(
+                      onTap: () => context.pushNamed(
+                          ScreenNavigationKey.searchResults,
+                          pathParameters: {
+                            "input": ScreenNavigationKey.searchResults
+                          }),
+                      child: const AbsorbPointer(child: PersoSearch()),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: Dimens.lMargin,
+                      left: Dimens.xmMargin,
+                      right: Dimens.xmMargin,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        PersoHeader(title: context.strings.category_header),
+                        GestureDetector(
+                          onTap: () => context.pushNamed(
+                            ScreenNavigationKey.trainingCategories,
+                          ),
+                          child: PersoClickableText(
+                            title: context.strings.see_all_categories,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      left: Dimens.xmMargin,
+                      top: Dimens.lMargin,
+                    ),
+                    child: const PersoTrainingCategoryList(
+                      isShortList: true,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(
+                      bottom: Dimens.mMargin,
+                      left: Dimens.xmMargin,
+                      right: Dimens.xmMargin,
+                    ),
+                    child: PersoButton(
+                      title: 'Exercises',
+                      onTap: (context) => context
+                          .pushNamed(ScreenNavigationKey.exercisesScreen),
+                    ),
+                  ),
+                  Container(
+                    color: PersoColors.lightBlue,
+                    child: Column(
+                      children: [
+                        Container(
+>>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
                           margin: const EdgeInsets.only(
                             top: Dimens.normalMargin,
                           ),
@@ -73,6 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 PersoBigHeader(
                                   title: context.strings.home_main_header,
                                 ),
+<<<<<<< HEAD
                                 GestureDetector(
                                     onTap: () => _handleAccountClick(context),
                                     child: const PersoAccountIcon()),
@@ -152,6 +262,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             context.strings.see_all_categories),
                                   ),
                                 ],
+=======
+                                child: PersoClickableText(
+                                  title: context.strings.see_all_categories,
+                                ),
+>>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
                               ),
                             ),
                             Container(

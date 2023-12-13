@@ -35,10 +35,14 @@ class Dimens {
   static const double trainerImageWidth = 80.0;
   static const double trainerImageHeight = 80.0;
 
+<<<<<<< HEAD
   static const double resetIconWidth = 90.0;
   static const double resetIconHeight = 90.0;
 
   static const double ratingBarSize = 16.0;
+=======
+  static const double ratingBarSize = 16;
+>>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
   static const double ratingBarItemCount = 5;
 
   static const double textFieldHeight = 48.0;
@@ -62,7 +66,16 @@ class Dimens {
   static const double longBioHeight = 340.0;
   static const double persoButtonWidth = 160.0;
 
+<<<<<<< HEAD
   static const double dividerThickness = 1.0;
   static const double iconSizeLarge = 160.0;
   static const double iconSizeMedium = 88.0;
+=======
+  static const double dividerThickness = 1;
+  static const double iconSizeLarge = 160;
+  static const double iconSizeMedium = 88;
+
+  static const double restIconWidth = 90;
+  static const double restIconHeight = 90;
+>>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
 }
