@@ -39,14 +39,17 @@ class TrainerClientsListBloc
                   ClientSectionData(
                     sectionType: SectionType.active,
                     clients: activeClients,
+                    trainerId: trainerId,
                   ),
                   ClientSectionData(
                     sectionType: SectionType.pending,
                     clients: pendingClients,
+                    trainerId: trainerId,
                   ),
                   ClientSectionData(
                     sectionType: SectionType.inactive,
                     clients: inactiveClients,
+                    trainerId: trainerId,
                   ),
                 ],
               ),

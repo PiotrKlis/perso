@@ -1,6 +1,6 @@
 class Dimens {
   static const double noMargin = 0;
-<<<<<<< HEAD
+
   static const double smallerMargin = 4;
   static const double smallMargin = 8;
   static const double mediumMargin = 12;
@@ -9,7 +9,7 @@ class Dimens {
   static const double biggerMargin = 32;
   static const double hugeMargin = 52;
   static const double substantialMargin = 56;
-=======
+
   static const double sMargin = 4;
   static const double xsMargin = 8;
   static const double mMargin = 12;
@@ -19,7 +19,6 @@ class Dimens {
   static const double xxlMargin = 52;
   static const double xxxlMargin = 56;
   static const double xxxxlMargin = 100;
->>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
 
   static const double accountIconSize = 40;
   static const double noElevation = 0;
@@ -47,18 +46,10 @@ class Dimens {
   static const double trainerImageWidth = 80;
   static const double trainerImageHeight = 80;
 
-<<<<<<< HEAD
   static const double resetIconWidth = 90;
   static const double resetIconHeight = 90;
-
-
   static const double ratingBarSize = 16;
-=======
-  static const double ratingBarSize = 16;
-  static const double resetIconWidth = 90;
-  static const double resetIconHeight = 90;
 
->>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
   static const double ratingBarItemCount = 5;
 
   static const double textFieldHeight = 48;
@@ -88,10 +79,8 @@ class Dimens {
   static const double iconSizeLarge = 160;
   static const double iconSizeMedium = 88;
 
-<<<<<<< HEAD
+
   static const double restIconWidth = 90;
   static const double restIconHeight = 90;
 
-=======
->>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
 }

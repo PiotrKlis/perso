@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
-<<<<<<< HEAD:lib/app/screens/exercises/exercises_screen.dart
-=======
 import 'package:perso/app/utils/extension/context_extensions.dart';
->>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895:lib/app/screens/exercise_in_progress/exercise_in_progress_screen.dart
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
@@ -18,7 +15,6 @@ class ExercisesInProgressScreen extends StatelessWidget {
       appBar: PersoAppBar(title: context.strings.exercise_in_progress),
       body: Column(
         children: [
-<<<<<<< HEAD:lib/app/screens/exercises/exercises_screen.dart
           const SizedBox(
             width: double.infinity,
             height: 350,
@@ -29,12 +25,11 @@ class ExercisesInProgressScreen extends StatelessWidget {
               context.pushNamed(ScreenNavigationKey.exercisesBreakScreen);
             },
           ),
-=======
           Container(
             color: Colors.grey,
             height: Dimens.xlPlaceholder,
           ),
->>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895:lib/app/screens/exercise_in_progress/exercise_in_progress_screen.dart
+
           Container(
             margin: const EdgeInsets.only(
               top: Dimens.xlMargin,
@@ -69,11 +64,10 @@ class ExercisesInProgressScreen extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: 'Read More...',
-<<<<<<< HEAD:lib/app/screens/exercises/exercises_screen.dart
+
                     style: TextStyle(color: Colors.blue),
-=======
                     style: ThemeText.footnoteBoldBlue,
->>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895:lib/app/screens/exercise_in_progress/exercise_in_progress_screen.dart
+
                   ),
                 ],
               ),

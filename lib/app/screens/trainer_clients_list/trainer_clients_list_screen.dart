@@ -34,8 +34,8 @@ class _TrainerClientsListView extends StatelessWidget {
           return state.when(
             initial: () {
               context.read<TrainerClientsListBloc>().add(
-                    const TrainerClientsListEvent.loadData(),
-                  );
+                const TrainerClientsListEvent.loadData(),
+              );
               return const Center(child: CircularProgressIndicator());
             },
             clientsData: _ClientsList.new,
@@ -75,7 +75,7 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: PersoColors.grey,
-      padding: const EdgeInsets.all(Dimens.normalMargin),
+      padding: const EdgeInsets.all(Dimens.xmMargin),
       alignment: Alignment.centerLeft,
       child: Text(
         '${sectionType.name.capitalizeFirstLetter()} clients',
@@ -100,6 +100,7 @@ class _Clients extends StatelessWidget {
           _Client(
             sectionType: section.sectionType,
             client: client,
+            trainerId: section.trainerId,
           ),
       ],
     );
@@ -107,10 +108,12 @@ class _Clients extends StatelessWidget {
 }
 
 class _Client extends StatelessWidget {
-  const _Client({required this.sectionType, required this.client});
+  const _Client(
+      {required this.sectionType, required this.client, required this.trainerId,});
 
   final SectionType sectionType;
   final ClientEntity client;
+  final String trainerId;
 
   @override
   Widget build(BuildContext context) {
@@ -120,14 +123,14 @@ class _Client extends StatelessWidget {
         GestureDetector(
           onTap: () {
             context.pushNamed(
-              ScreenNavigationKey.calendarExercises,
-              pathParameters: {'clientId': client.id},
+              ScreenNavigationKey.planOverview,
+              queryParameters: {'clientId': client.id, 'trainerId': trainerId},
             );
           },
           child: Container(
             margin: const EdgeInsets.only(
-              top: Dimens.smallMargin,
-              bottom: Dimens.smallMargin,
+              top: Dimens.xsMargin,
+              bottom: Dimens.xsMargin,
             ),
             child: Row(
               children: [
@@ -166,7 +169,7 @@ class _Title extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.only(
-          left: Dimens.smallMargin,
+          left: Dimens.xsMargin,
         ),
         child: Text(
           title,
@@ -187,13 +190,13 @@ class _Image extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: Dimens.smallMargin),
+      margin: const EdgeInsets.only(left: Dimens.xsMargin),
       child: imagePath.isNotEmpty
           ? Image.network(imagePath)
           : const Icon(
-              Icons.account_circle,
-              size: Dimens.accountIconSize,
-            ),
+        Icons.account_circle,
+        size: Dimens.accountIconSize,
+      ),
     );
   }
 }
@@ -215,7 +218,7 @@ class _Actions extends StatelessWidget {
       SectionType.inactive => _InactiveActions(clientId),
     };
     return Container(
-      margin: const EdgeInsets.only(right: Dimens.smallMargin),
+      margin: const EdgeInsets.only(right: Dimens.xsMargin),
       child: buttons,
     );
   }
