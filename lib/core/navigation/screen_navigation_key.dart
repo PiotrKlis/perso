@@ -34,8 +34,14 @@ class ScreenNavigationKey {
   static const String profileCreationSuccess = 'profile_creation_success';
   static const String planOverview = 'plan_overview';
   static const String exerciseLibrary = 'exercise_library';
+<<<<<<< HEAD
 >>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
   static const String calendarExercises = "calendar_exercises";
   static const String exercisesScreen = "exercises_screen";
   static const String exercisesBreakScreen = "exercises_break_screen";
+=======
+  static const String chatChannel = 'chat_channel';
+  static const String exerciseInProgress = 'exercise_in_progress';
+  static const String exerciseBreak = 'exercise_break';
+>>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
 }

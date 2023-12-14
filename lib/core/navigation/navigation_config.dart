@@ -5,11 +5,17 @@ import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import 'package:perso/app/screens/exercise_library/exercise_library.dart';
 >>>>>>> 7d48ac273ceb2ac8d0e5d4e9d54826c1a7663049
 import 'package:perso/app/screens/exercises/exercises_break_screen.dart';
 import 'package:perso/app/screens/exercises/exercises_screen.dart';
+=======
+import 'package:perso/app/screens/exercise_in_progress/exercise_in_progress_screen.dart';
+import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart';
+import 'package:perso/app/screens/exercises/exercises_break_screen.dart';
+>>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
@@ -84,14 +90,40 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
+<<<<<<< HEAD
                   name: ScreenNavigationKey.searchFilter,
                   path: ScreenNavigationKey.searchFilter,
+=======
+                  name: ScreenNavigationKey.exerciseInProgress,
+                  path: ScreenNavigationKey.exerciseInProgress,
+                  pageBuilder: (context, state) {
+                    return const NoTransitionPage(
+                      child: ExercisesInProgressScreen(),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      name: ScreenNavigationKey.exerciseBreak,
+                      path: ScreenNavigationKey.exerciseBreak,
+                      pageBuilder: (context, state) {
+                        return const NoTransitionPage(
+                          child: ExercisesBreakScreen(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                GoRoute(
+                  name: ScreenNavigationKey.clientProfile,
+                  path: ScreenNavigationKey.clientProfile,
+>>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
                   pageBuilder: (context, state) {
                     return const NoTransitionPage(
                       child: SearchFilterScreen(),
                     );
                   },
                 ),
+<<<<<<< HEAD
               ],
             ),
             GoRoute(
@@ -137,6 +169,8 @@ final GoRouter goRouter = GoRouter(
                 return NoTransitionPage(child: SignInScreen());
               },
               routes: [
+=======
+>>>>>>> 395a771f2e8193c44e492f416bb9eae3f6059895
                 GoRoute(
                   path: ScreenNavigationKey.passwordRecovery,
                   name: ScreenNavigationKey.passwordRecovery,
