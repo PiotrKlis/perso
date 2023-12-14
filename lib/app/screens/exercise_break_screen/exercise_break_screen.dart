@@ -62,12 +62,14 @@ class ExercisesBreakScreen extends StatelessWidget {
           Container(
             color: Colors.white,
             height: 100,
-            margin: const EdgeInsets.only(top: 100),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(left: 20, top: 20),
+                  margin: const EdgeInsets.only(left: Dimens.mMargin),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Next 4/12',
@@ -86,7 +88,7 @@ class ExercisesBreakScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 160),
+                  margin: const EdgeInsets.only(right: Dimens.mMargin),
                   child: Image.asset(
                     AppImages.dummyPic1,
                     width: 65,
