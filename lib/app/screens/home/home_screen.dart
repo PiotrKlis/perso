@@ -123,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: PersoButton(
                       title: 'Exercises',
                       onTap: (context) => context
-                          .pushNamed(ScreenNavigationKey.exercisesScreen),
+                          .pushNamed(ScreenNavigationKey.exerciseInProgress),
                     ),
                   ),
                   Container(
