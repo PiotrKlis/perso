@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/widgets/perso_app_bar.dart';
 
 class ExercisesInProgressScreen extends StatelessWidget {
   const ExercisesInProgressScreen({super.key});
@@ -9,53 +9,49 @@ class ExercisesInProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PersoAppBar(title: context.strings.exercise_in_progress),
+      appBar: PersoAppBar(title: context.strings.exercise_in_progress),
       body: Column(
         children: [
-  Container(
-            color: Colors.grey,
-            height: Dimens.xlPlaceholder,
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.xlMargin,
-            ),
-            child: Text(
-              'Exercise name',
-              style: ThemeText.bodyBoldBlackText,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.sMargin,
-            ),
-            child: const Text('12 reps'),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.lMargin,
-              left: Dimens.mMargin,
-              right: Dimens.mMargin,
-            ),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text:
-                    'Start standing with legs slightly wider than shoulder-distance ',
-                style: ThemeText.bodyRegularBlackText,
-                children: [
-                  TextSpan(
-                    text: 'Read More...',
-                    style: ThemeText.footnoteBoldBlue,
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  color: Colors.grey,
+                  height: Dimens.xlPlaceholder,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.xlMargin,
                   ),
-                ],
-              ),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
+                  child: Text(
+                    'Exercise name',
+                    style: ThemeText.bodyBoldBlackText,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.sMargin,
+                  ),
+                  child: const Text('12 reps'),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.lMargin,
+                    left: Dimens.mMargin,
+                    right: Dimens.mMargin,
+                  ),
+                  child:
+                   Text(
+                     'Start standing with legs slightly wider than shoulder-distance',
+                     overflow: TextOverflow.ellipsis,
+                     maxLines: 1,
+                   )
+                ),
+              ],
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: Dimens.xxxxlMargin),
+            margin: const EdgeInsets.only(bottom: Dimens.mMargin),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
