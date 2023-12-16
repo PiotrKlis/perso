@@ -79,5 +79,7 @@
   "rating": "Ocena",
   "specialities": "Specjalizacje",
   "location_default_set": "Domyślnie ustawiony jest Twój kraj",
-  "exercise_in_progress" : "Ćwiczeniu w toku"
+  "exercise_in_progress" : "Ćwiczeniu w toku",
+  "break_header": "Przerwa",
+  "rest": "Odpoczynek"
 }

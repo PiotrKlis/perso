@@ -66,7 +66,10 @@ class Dimens {
   static const double iconSizeLarge = 160;
   static const double iconSizeMedium = 88;
 
-  static const double restIconWidth = 80;
-  static const double restIconHeight = 80;
+  static const double sRestIconWidth = 65;
+  static const double sRestIconHeight = 65;
+  static const double mRestIconWidth = 80;
+  static const double mRestIconHeight = 80;
 
+  static const double whiteBackground = 100;
 }

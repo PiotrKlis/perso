@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 
@@ -9,59 +10,60 @@ class ExercisesBreakScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PersoAppBar(
-        title: 'break',
-      ),
+      appBar: PersoAppBar(title: context.strings.break_header),
       backgroundColor: PersoColors.lightBlue,
       body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: 120,
-            ),
-            child: Image.asset(
-              AppImages.restIcon,
-              width: Dimens.restIconWidth,
-              height: Dimens.restIconHeight,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: 48,
-            ),
-            child: const Text(
-              'Rest',
-              style: TextStyle(
-                color: Color.fromRGBO(60, 60, 67, 0.60),
-                fontSize: 17,
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: const Text(
-              '00:39',
-              style: TextStyle(color: Colors.black, fontSize: 34),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 35),
-            width: 322,
-            child: const PersoButton(
-              title: '+20 sec',
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 16),
-            child: const PersoButton(
-              title: 'Stop',
-              width: 322,
-              whiteBlackTheme: true,
+          Expanded(
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.xxxxlMargin,
+                  ),
+                  child: Image.asset(
+                    AppImages.restIcon,
+                    width: Dimens.mRestIconWidth,
+                    height: Dimens.mRestIconHeight,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.xxlMargin,
+                  ),
+                  child: Text(
+                    context.strings.rest,
+                    style: ThemeText.calloutRegularGrey,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                  child: Text(
+                    '00:39',
+                    style: ThemeText.largerTitle,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
+                  width: 322,
+                  child: const PersoButton(
+                    title: '+20 sec',
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                  child: const PersoButton(
+                    title: 'Stop',
+                    width: 322,
+                    whiteBlackTheme: true,
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
             color: Colors.white,
-            height: 100,
+            height: Dimens.whiteBackground,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -71,14 +73,9 @@ class ExercisesBreakScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Next 4/12',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 16,
-                          letterSpacing: -0.4,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: ThemeText.calloutBoldBlueText,
                       ),
                       Text(
                         'Jumping Jacks x30',
@@ -91,8 +88,8 @@ class ExercisesBreakScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(right: Dimens.mMargin),
                   child: Image.asset(
                     AppImages.dummyPic1,
-                    width: 65,
-                    height: 65,
+                    width: Dimens.mRestIconWidth,
+                    height: Dimens.mRestIconHeight,
                   ),
                 ),
               ],
