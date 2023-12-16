@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:expandable_text/expandable_text.dart';
 
 class ExercisesInProgressScreen extends StatelessWidget {
   const ExercisesInProgressScreen({super.key});
@@ -40,12 +41,17 @@ class ExercisesInProgressScreen extends StatelessWidget {
                     left: Dimens.mMargin,
                     right: Dimens.mMargin,
                   ),
-                  child:
-                   Text(
-                     'Start standing with legs slightly wider than shoulder-distance',
-                     overflow: TextOverflow.ellipsis,
-                     maxLines: 1,
-                   )
+                  child: const Column(
+                    children: <Widget>[
+                      ExpandableText(
+                        'Start standing with legs slightly wider than shoulder-distance',
+                        expandText: 'show more',
+                        collapseText: 'show less',
+                        maxLines: 1,
+                        linkColor: PersoColors.blue,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

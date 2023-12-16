@@ -16,6 +16,9 @@ dependencies:
     sdk: flutter
   intl: ^0.18.1
 
+
+  expandable_text: 2.3.0
+
   # Dart
   collection: ^1.17.2
 
