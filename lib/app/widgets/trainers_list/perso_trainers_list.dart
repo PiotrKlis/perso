@@ -15,135 +15,160 @@ class PersoTrainersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) =>
-            TrainersListBloc(const TrainersListState.initial()),
-        child: BlocBuilder<TrainersListBloc, TrainersListState>(
-          builder: (context, state) {
-            return state.when(initial: () {
+      create: (context) => TrainersListBloc(const TrainersListState.initial()),
+      child: BlocBuilder<TrainersListBloc, TrainersListState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () {
               context
                   .read<TrainersListBloc>()
                   .add(const TrainersListEvent.loadData());
               return Container();
-            }, content: (trainers) {
+            },
+            content: (trainers) {
               return _getTrainersList(trainers, context);
-            }, error: (error) {
+            },
+            error: (error) {
               return Text(error);
-            },);
-          },
-        ),);
+            },
+          );
+        },
+      ),
+    );
   }
 
   Widget _getTrainersList(List<TrainerEntity> trainers, BuildContext context) {
     return Column(
       children: trainers
-          .map((trainerData) => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: Dimens.trainerCardWidth,
-                    height: Dimens.trainerCardHeight,
-                    child: GestureDetector(
-                      onTap: () => {
-                        context.pushNamed(ScreenNavigationKey.trainerDetails,
-                            extra: trainerData,),
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                Dimens.trainerCardBorderRadius,),),
-                        child: Row(
-                          children: [
-                            Container(
+          .map(
+            (trainerData) => Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: Dimens.trainerCardWidth,
+                  height: Dimens.trainerCardHeight,
+                  child: GestureDetector(
+                    onTap: () => {
+                      context.pushNamed(
+                        ScreenNavigationKey.trainerDetails,
+                        extra: trainerData,
+                      ),
+                    },
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          Dimens.trainerCardBorderRadius,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: Dimens.mMargin,
+                              top: Dimens.mMargin,
+                            ),
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  AppImages.trainer1,
+                                  width: Dimens.trainerImageWidth,
+                                  height: Dimens.trainerImageHeight,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
                               margin: const EdgeInsets.only(
-                                  left: Dimens.mMargin,
-                                  top: Dimens.mMargin,),
+                                top: Dimens.mMargin,
+                                left: Dimens.mMargin,
+                              ),
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Image.asset(AppImages.trainer1,
-                                      width: Dimens.trainerImageWidth,
-                                      height: Dimens.trainerImageHeight,),
+                                  Text(
+                                    trainerData.name,
+                                    style: ThemeText.bodyBoldBlackText,
+                                  ),
+                                  Text(
+                                    trainerData.nickname,
+                                    style: ThemeText.subHeadingRegularBlue,
+                                  ),
+                                  Container(
+                                    height: 40,
+                                    margin: const EdgeInsets.only(
+                                      top: Dimens.xsMargin,
+                                    ),
+                                    child: Text(
+                                      trainerData.shortBio,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: ThemeText.subHeadingRegularGrey,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                      top: Dimens.xsMargin,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          trainerData.rating.toString(),
+                                          style: ThemeText.subHeadingBoldGrey,
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                            left: Dimens.sMargin,
+                                          ),
+                                          child: RatingBar(
+                                            itemSize: Dimens.ratingBarSize,
+                                            ignoreGestures: true,
+                                            ratingWidget: RatingWidget(
+                                              full: const Icon(
+                                                Icons.star,
+                                                color: Colors.yellow,
+                                              ),
+                                              half: const Icon(
+                                                Icons.star_half,
+                                                color: Colors.yellow,
+                                              ),
+                                              empty: const Icon(
+                                                Icons.star_rate_outlined,
+                                                color: Colors.yellow,
+                                              ),
+                                            ),
+                                            initialRating: trainerData.rating,
+                                            onRatingUpdate: (double value) {
+                                              //no-op
+                                            },
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: const EdgeInsets.only(
+                                            left: Dimens.sMargin,
+                                          ),
+                                          child: Text(
+                                            '(${trainerData.votesNumber})',
+                                            style:
+                                                ThemeText.subHeadingRegularGrey,
+                                            textAlign: TextAlign.end,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            Expanded(
-                              child: Container(
-                                margin: const EdgeInsets.only(
-                                    top: Dimens.mMargin,
-                                    left: Dimens.mMargin,),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(trainerData.name,
-                                          style: ThemeText.bodyBoldBlackText,),
-                                      Text(trainerData.nickname,
-                                          style:
-                                              ThemeText.subHeadingRegularBlue,),
-                                      Container(
-                                        height: 40,
-                                        margin: const EdgeInsets.only(
-                                            top: Dimens.xsMargin,),
-                                        child: Text(
-                                          trainerData.shortBio,
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style:
-                                              ThemeText.subHeadingRegularGrey,
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                            top: Dimens.xsMargin,),
-                                        child: Row(children: [
-                                          Text(trainerData.rating.toString(),
-                                              style:
-                                                  ThemeText.subHeadingBoldGrey,),
-                                          Container(
-                                            margin: const EdgeInsets.only(
-                                                left: Dimens.sMargin,),
-                                            child: RatingBar(
-                                              itemSize: Dimens.ratingBarSize,
-                                              ignoreGestures: true,
-                                              ratingWidget: RatingWidget(
-                                                full: const Icon(
-                                                  Icons.star,
-                                                  color: Colors.yellow,
-                                                ),
-                                                half: const Icon(
-                                                    Icons.star_half,
-                                                    color: Colors.yellow,),
-                                                empty: const Icon(
-                                                    Icons.star_rate_outlined,
-                                                    color: Colors.yellow,),
-                                              ),
-                                              initialRating: trainerData.rating,
-                                              onRatingUpdate: (double value) {
-                                                //no-op
-                                              },
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: const EdgeInsets.only(
-                                                left: Dimens.sMargin,),
-                                            child: Text(
-                                              '(${trainerData.votesNumber})',
-                                              style: ThemeText
-                                                  .subHeadingRegularGrey,
-                                              textAlign: TextAlign.end,
-                                            ),
-                                          ),
-                                        ],),
-                                      ),
-                                    ],),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),)
+                ),
+              ],
+            ),
+          )
           .toList(),
     );
   }

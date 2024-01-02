@@ -84,7 +84,11 @@ class _ExercisesOverview extends StatelessWidget {
           children: [
             //TODO: Add "save" button, so then data is sent to the client
             _ExercisesHeaderRow(clientId: clientId),
-            const PersoExercisesList(),
+            const PersoExercisesList(
+              isReorderable: true,
+              isEditable: true,
+              isRemovable: true,
+            ),
           ],
         ),
       ),
@@ -100,44 +104,44 @@ class _ExercisesHeaderRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<CalendarBloc, CalendarState>(
-      listener: (BuildContext context, CalendarState state) {
+    return BlocBuilder<CalendarBloc, CalendarState>(
+      builder: (BuildContext context, CalendarState state) {
         state.when(
           initial: () {},
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
           },
         );
+        return Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.mMargin,
+            right: Dimens.sMargin,
+            top: Dimens.mMargin,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Exercises',
+                style: ThemeText.largeTitleBold,
+              ),
+              PersoButton(
+                width: Dimens.smallButtonWidth,
+                title: 'Add',
+                onTap: (context) {
+                  context.pushNamed(
+                    ScreenNavigationKey.exerciseLibrary,
+                    queryParameters: {
+                      'clientId': _clientId,
+                      'date': _selectedDate,
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        );
       },
-      child: Container(
-        margin: const EdgeInsets.only(
-          left: Dimens.mMargin,
-          right: Dimens.sMargin,
-          top: Dimens.mMargin,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Exercises',
-              style: ThemeText.largeTitleBold,
-            ),
-            PersoButton(
-              width: Dimens.smallButtonWidth,
-              title: 'Add',
-              onTap: (context) {
-                context.pushNamed(
-                  ScreenNavigationKey.exerciseLibrary,
-                  queryParameters: {
-                    'clientId': _clientId,
-                    'date': _selectedDate,
-                  },
-                );
-              },
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

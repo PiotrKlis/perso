@@ -32,7 +32,12 @@ class SignInScreen extends StatelessWidget {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
-                const Icon(Icons.logo_dev, size: 160),
+                Container(
+                  margin: EdgeInsets.all(Dimens.lMargin),
+                  child: ClipOval(
+                    child: Image(image: AssetImage('assets/icon/icon_black.png')),
+                  ),
+                ),
                 Center(
                   child: Container(
                     margin: const EdgeInsets.only(top: Dimens.xmMargin),

@@ -15,7 +15,6 @@ import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
 class PersoExercisesList extends StatefulWidget {
-
   const PersoExercisesList({
     super.key,
     this.isReorderable = false,
@@ -35,10 +34,12 @@ class PersoExercisesList extends StatefulWidget {
 
   @override
   State<PersoExercisesList> createState() => _PersoExercisesListState();
-
 }
 
 class _PersoExercisesListState extends State<PersoExercisesList> {
+  //Local exercises are used so user can reorder exercises without waiting for
+  //update from the remote
+  final _localExercises = <ExerciseEntity>[];
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +52,16 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
         builder: (context, state) {
           return state.when(
             exercises: (exercises) {
+              _localExercises
+                ..clear()
+                ..addAll(exercises);
               return ReorderableListView(
                 buildDefaultDragHandles: widget.isReorderable,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 proxyDecorator: (child, index, animation) =>
                     _ExercisesListDecorator(animation: animation, child: child),
-                children: exercises.map((exercise) {
+                children: _localExercises.map((exercise) {
                   return _Exercise(
                     key: UniqueKey(),
                     exercise: exercise,
@@ -74,9 +78,11 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
                     if (newIndex > oldIndex) {
                       newIndex -= 1;
                     }
-                    final items = exercises.removeAt(oldIndex);
-                    exercises.insert(newIndex, items);
-                    //TODO: update exercise order in database
+                    final item = _localExercises.removeAt(oldIndex);
+                    _localExercises.insert(newIndex, item);
+                    context
+                        .read<ExerciseListBloc>()
+                        .add(ExerciseListEvent.reorder(_localExercises));
                   });
                 },
               );
