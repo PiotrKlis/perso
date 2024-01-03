@@ -34,8 +34,8 @@ class _TrainerClientsListView extends StatelessWidget {
           return state.when(
             initial: () {
               context.read<TrainerClientsListBloc>().add(
-                const TrainerClientsListEvent.loadData(),
-              );
+                    const TrainerClientsListEvent.loadData(),
+                  );
               return const Center(child: CircularProgressIndicator());
             },
             clientsData: _ClientsList.new,
@@ -108,8 +108,11 @@ class _Clients extends StatelessWidget {
 }
 
 class _Client extends StatelessWidget {
-  const _Client(
-      {required this.sectionType, required this.client, required this.trainerId,});
+  const _Client({
+    required this.sectionType,
+    required this.client,
+    required this.trainerId,
+  });
 
   final SectionType sectionType;
   final ClientEntity client;
@@ -122,10 +125,15 @@ class _Client extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            context.pushNamed(
-              ScreenNavigationKey.planOverview,
-              queryParameters: {'clientId': client.id, 'trainerId': trainerId},
-            );
+            if (sectionType == SectionType.active) {
+              context.pushNamed(
+                ScreenNavigationKey.planOverview,
+                queryParameters: {
+                  'clientId': client.id,
+                  'trainerId': trainerId
+                },
+              );
+            }
           },
           child: Container(
             margin: const EdgeInsets.only(
@@ -194,9 +202,9 @@ class _Image extends StatelessWidget {
       child: imagePath.isNotEmpty
           ? Image.network(imagePath)
           : const Icon(
-        Icons.account_circle,
-        size: Dimens.accountIconSize,
-      ),
+              Icons.account_circle,
+              size: Dimens.accountIconSize,
+            ),
     );
   }
 }
