@@ -5,15 +5,14 @@ import 'package:perso/core/models/user_session_model.dart';
 
 @injectable
 class AuthService {
-  final _userSessionModel = getIt.get<UserSessionModel>();
 
-  Future<UserCredential> register({
+  Future register({
     required String email,
     required String password,
   }) async {
     final userCredentials = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
-    await _userSessionModel.user?.sendEmailVerification();
+    await userCredentials.user?.sendEmailVerification();
     return userCredentials;
   }
 

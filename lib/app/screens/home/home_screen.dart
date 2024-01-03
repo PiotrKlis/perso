@@ -38,133 +38,125 @@ class _HomeScreenState extends State<HomeScreen> {
       ],
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) => SafeArea(
-          child: Scaffold(
-            body: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: Dimens.xmMargin,
-                      left: Dimens.xmMargin,
-                      right: Dimens.xmMargin,
-                    ),
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                        top: Dimens.xmMargin,
+          child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.xmMargin,
+                    left: Dimens.xmMargin,
+                    right: Dimens.xmMargin,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PersoBigHeader(
+                        title: context.strings.home_main_header,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          PersoBigHeader(
-                            title: context.strings.home_main_header,
-                          ),
-                          GestureDetector(
-                            onTap: () =>
-                                context.pushNamed(ScreenNavigationKey.signIn),
-                            child: const PersoAccountIcon(),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () =>
+                            context.pushNamed(ScreenNavigationKey.signIn),
+                        child: const PersoAccountIcon(),
                       ),
-                    ),
+                    ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: Dimens.xmMargin,
-                      top: Dimens.xmMargin,
-                      right: Dimens.xmMargin,
-                    ),
-                    child: GestureDetector(
-                      onTap: () => context.pushNamed(
-                          ScreenNavigationKey.searchResults,
-                          pathParameters: {
-                            "input": ScreenNavigationKey.searchResults
-                          }),
-                      child: const AbsorbPointer(child: PersoSearch()),
-                    ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: Dimens.xmMargin,
+                    top: Dimens.xmMargin,
+                    right: Dimens.xmMargin,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: Dimens.lMargin,
-                      left: Dimens.xmMargin,
-                      right: Dimens.xmMargin,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        PersoHeader(title: context.strings.category_header),
-                        GestureDetector(
-                          onTap: () => context.pushNamed(
-                            ScreenNavigationKey.trainingCategories,
-                          ),
-                          child: PersoClickableText(
-                            title: context.strings.see_all_categories,
-                          ),
+                  child: GestureDetector(
+                    onTap: () => context.pushNamed(
+                        ScreenNavigationKey.searchResults,
+                        pathParameters: {
+                          "input": ScreenNavigationKey.searchResults
+                        }),
+                    child: const AbsorbPointer(child: PersoSearch()),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: Dimens.lMargin,
+                    left: Dimens.xmMargin,
+                    right: Dimens.xmMargin,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      PersoHeader(title: context.strings.category_header),
+                      GestureDetector(
+                        onTap: () => context.pushNamed(
+                          ScreenNavigationKey.trainingCategories,
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      left: Dimens.xmMargin,
-                      top: Dimens.lMargin,
-                    ),
-                    child: const PersoTrainingCategoryList(
-                      isShortList: true,
-                    ),
-                  ),
-                  Container(
-                    color: PersoColors.lightBlue,
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: Dimens.lMargin,
-                          ),
-                          child: const PersoTrainersSearchCarousel(),
+                        child: PersoClickableText(
+                          title: context.strings.see_all_categories,
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: Dimens.lMargin,
-                            left: Dimens.xmMargin,
-                            right: Dimens.xmMargin,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              PersoHeader(title: context.strings.near_you),
-                              GestureDetector(
-                                onTap: () => context.pushNamed(
-                                  ScreenNavigationKey.searchResults,
-                                  pathParameters: {
-                                    'input':
-                                        'see all trainers near my location',
-                                  },
-                                ),
-                                child: PersoClickableText(
-                                  title: context.strings.see_all_categories,
-                                ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: Dimens.xmMargin,
+                    top: Dimens.lMargin,
+                  ),
+                  child: const PersoTrainingCategoryList(
+                    isShortList: true,
+                  ),
+                ),
+                Container(
+                  color: PersoColors.lightBlue,
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimens.lMargin,
+                        ),
+                        child: const PersoTrainersSearchCarousel(),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimens.lMargin,
+                          left: Dimens.xmMargin,
+                          right: Dimens.xmMargin,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            PersoHeader(title: context.strings.near_you),
+                            GestureDetector(
+                              onTap: () => context.pushNamed(
+                                ScreenNavigationKey.searchResults,
+                                pathParameters: {
+                                  'input': 'see all trainers near my location',
+                                },
                               ),
-                            ],
-                          ),
+                              child: PersoClickableText(
+                                title: context.strings.see_all_categories,
+                              ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: Dimens.xsMargin,
-                          ),
-                          child: const PersoGoogleMap(),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimens.xsMargin,
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            top: Dimens.xsMargin,
-                          ),
-                          child: const PersoTrainersList(),
+                        child: const PersoGoogleMap(),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: Dimens.xsMargin,
                         ),
-                      ],
-                    ),
+                        child: const PersoTrainersList(),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
