@@ -69,12 +69,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           state.whenOrNull(
             mapUpdate: (latLon) {
               latLng = latLon;
-            },
+            }
           );
           return Scaffold(
             backgroundColor: PersoColors.lightBlue,
             appBar: PersoAppBar(
-              title: context.strings.edit_profile(widget._userType.toString()),
+              title: context.strings.edit_profile(widget._userType.name),
             ),
             body: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
