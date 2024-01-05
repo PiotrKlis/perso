@@ -16,7 +16,7 @@ class FirestoreExerciseService extends ExerciseService {
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
-        .collection(CollectionName.exercises)
+        .collection(CollectionName.clients)
         .doc(clientId)
         .collection(date)
         .doc()
