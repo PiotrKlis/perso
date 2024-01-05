@@ -24,10 +24,9 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
       try {
         final exercisesStream = _exercisesProvider.getExercisesForTrainer(
           event.clientId,
-          event.trainerId,
+          trainerId,
           event.date,
         );
-        //TODO: Add sorting by index, take care of the same number. Change default index on firestore.
         await for (final exercises in exercisesStream) {
           exercises.sort((a, b) => a.index.compareTo(b.index));
           emitter(ExerciseListState.exercises(exercises));
@@ -59,8 +58,9 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           event.clientId,
           trainerId,
           event.date,
-          event.exerciseEntity,
+          event.exerciseEntity.copyWith(index: _currentExerciseIndex),
         );
+        _currentExerciseIndex++;
       } catch (error) {
         emitter(ExerciseListState.error(error.toString()));
       }
@@ -81,9 +81,23 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
         emitter(ExerciseListState.error(error.toString()));
       }
     });
+
+    on<GetNumberOfExercises>((event, emitter) async {
+      try {
+        final numberOfExercises = await _exercisesProvider.getNumberOfExercises(
+          event.clientId,
+          trainerId,
+          event.date,
+        );
+        _currentExerciseIndex = numberOfExercises;
+      } catch (error) {
+        emitter(ExerciseListState.error(error.toString()));
+      }
+    });
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesProvider = getIt.get<FirestoreExerciseProvider>();
   final _exercisesService = getIt.get<FirestoreExerciseService>();
+  var _currentExerciseIndex = 0;
 }

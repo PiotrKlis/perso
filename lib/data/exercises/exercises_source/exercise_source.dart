@@ -12,7 +12,6 @@ abstract class ExerciseSource {
   Future<int> getNumberOfExercises(
     String clientId,
     String trainerId,
-    String exerciseId,
     String date,
   );
 }

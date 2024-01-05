@@ -15,7 +15,6 @@ class ExerciseListEvent with _$ExerciseListEvent {
 
   const factory ExerciseListEvent.editExercise(
     String clientId,
-    String trainerId,
     String exerciseId,
     String date,
   ) = EditExercise;
@@ -28,12 +27,18 @@ class ExerciseListEvent with _$ExerciseListEvent {
 
   const factory ExerciseListEvent.removeExercise(
     String clientId,
-    String trainerId,
     String date,
     String exerciseId,
   ) = RemoveExercise;
 
   const factory ExerciseListEvent.reorder(
+    String clientId,
+    String date,
     List<ExerciseEntity> exercises,
   ) = Reorder;
+
+  const factory ExerciseListEvent.getNumberOfExercises(
+    String clientId,
+    String date,
+  ) = GetNumberOfExercises;
 }

@@ -42,6 +42,17 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
   final _localExercises = <ExerciseEntity>[];
 
   @override
+  void initState() {
+    context.read<ExerciseListBloc>().add(
+          ExerciseListEvent.getNumberOfExercises(
+            widget.clientId ?? '',
+            widget.date ?? '',
+          ),
+        );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
@@ -80,9 +91,9 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
                     }
                     final item = _localExercises.removeAt(oldIndex);
                     _localExercises.insert(newIndex, item);
-                    context
-                        .read<ExerciseListBloc>()
-                        .add(ExerciseListEvent.reorder(_localExercises));
+                    context.read<ExerciseListBloc>().add(
+                        ExerciseListEvent.reorder(widget.clientId ?? '',
+                            widget.date ?? '', _localExercises));
                   });
                 },
               );
