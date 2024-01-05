@@ -46,7 +46,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
     final snapshots = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
-        .collection(CollectionName.exercises)
+        .collection(CollectionName.clients)
         .doc(clientId)
         .collection(date)
         .snapshots();
@@ -71,6 +71,20 @@ class FirestoreExerciseProvider extends ExerciseSource {
           )
           .toList();
     }
+  }
+
+  @override
+  Future<int> getNumberOfExercises(
+      String clientId, String trainerId, String exerciseId, String date) async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .collection(CollectionName.exercises)
+        .doc(clientId)
+        .collection(date)
+        .get();
+
+    return snapshot.docs.length;
   }
 
   List<String> _getTags(List<dynamic> tags) {
