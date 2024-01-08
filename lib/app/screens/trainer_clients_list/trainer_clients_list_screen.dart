@@ -130,7 +130,7 @@ class _Client extends StatelessWidget {
                 ScreenNavigationKey.planOverview,
                 queryParameters: {
                   'clientId': client.id,
-                  'trainerId': trainerId
+                  'trainerId': trainerId,
                 },
               );
             }

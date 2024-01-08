@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
@@ -7,6 +8,7 @@ import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
 import 'package:perso/data/exercises/exercises_source/firestore_exercise_provider.dart';
 
+//TODO: Różne blocki per screen? Client/Trainer/Library
 class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
   ExerciseListBloc() : super(const ExerciseListState.init()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
@@ -38,7 +40,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
 
     on<EditExercise>((event, emitter) async {
       try {
-        await _exercisesService.editExercise(
+        await _exercisesService.edit(
           event.clientId,
           trainerId,
           event.exerciseId,
@@ -54,7 +56,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
 
     on<AddExercise>((event, emitter) async {
       try {
-        await _exercisesService.addExercise(
+        await _exercisesService.add(
           event.clientId,
           trainerId,
           event.date,
@@ -68,7 +70,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
 
     on<RemoveExercise>((event, emitter) async {
       try {
-        await _exercisesService.removeExercise(
+        await _exercisesService.remove(
           event.clientId,
           trainerId,
           event.date,
@@ -90,6 +92,23 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           event.date,
         );
         _currentExerciseIndex = numberOfExercises;
+      } catch (error) {
+        emitter(ExerciseListState.error(error.toString()));
+      }
+    });
+
+    on<Reorder>((event, emitter) async {
+      try {
+        final reorderedExercises = event.exercises
+            .mapIndexed((index, exercise) => exercise.copyWith(index: index))
+            .toList();
+        emitter(ExerciseListState.exercises(reorderedExercises));
+        await _exercisesService.reorder(
+          event.clientId,
+          trainerId,
+          event.date,
+          reorderedExercises,
+        );
       } catch (error) {
         emitter(ExerciseListState.error(error.toString()));
       }

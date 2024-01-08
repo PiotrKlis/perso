@@ -69,10 +69,17 @@ class _PlanOverviewScreenContent extends StatelessWidget {
   }
 }
 
-class _ExercisesOverview extends StatelessWidget {
+class _ExercisesOverview extends StatefulWidget {
   const _ExercisesOverview({required this.clientId});
 
   final String clientId;
+
+  @override
+  State<_ExercisesOverview> createState() => _ExercisesOverviewState();
+}
+
+class _ExercisesOverviewState extends State<_ExercisesOverview> {
+  String _selectedDate = DateTime.now().yearMonthDayFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +90,23 @@ class _ExercisesOverview extends StatelessWidget {
         child: Column(
           children: [
             //TODO: Add "save" button, so then data is sent to the client
-            _ExercisesHeaderRow(clientId: clientId),
-            const PersoExercisesList(
-              isReorderable: true,
-              isEditable: true,
-              isRemovable: true,
+            _ExercisesHeaderRow(clientId: widget.clientId),
+            BlocBuilder<CalendarBloc, CalendarState>(
+              builder: (context, state) {
+                state.when(
+                  initial: () {},
+                  selectedDate: (selectedDate) {
+                    _selectedDate = selectedDate;
+                  },
+                );
+                return PersoExercisesList(
+                  isReorderable: true,
+                  isEditable: true,
+                  isRemovable: true,
+                  clientId: widget.clientId,
+                  date: _selectedDate,
+                );
+              },
             ),
           ],
         ),
@@ -96,10 +115,16 @@ class _ExercisesOverview extends StatelessWidget {
   }
 }
 
-class _ExercisesHeaderRow extends StatelessWidget {
-  _ExercisesHeaderRow({required String clientId}) : _clientId = clientId;
+class _ExercisesHeaderRow extends StatefulWidget {
+  const _ExercisesHeaderRow({required String clientId}) : _clientId = clientId;
 
   final String _clientId;
+
+  @override
+  State<_ExercisesHeaderRow> createState() => _ExercisesHeaderRowState();
+}
+
+class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
   String? _selectedDate;
 
   @override
@@ -132,7 +157,7 @@ class _ExercisesHeaderRow extends StatelessWidget {
                   context.pushNamed(
                     ScreenNavigationKey.exerciseLibrary,
                     queryParameters: {
-                      'clientId': _clientId,
+                      'clientId': widget._clientId,
                       'date': _selectedDate,
                     },
                   );

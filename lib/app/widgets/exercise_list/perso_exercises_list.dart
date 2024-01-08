@@ -21,16 +21,16 @@ class PersoExercisesList extends StatefulWidget {
     this.isEditable = false,
     this.isRemovable = false,
     this.isAddable = false,
-    this.clientId,
-    this.date,
+    this.clientId = '',
+    this.date = '',
   });
 
   final bool isReorderable;
   final bool isEditable;
   final bool isRemovable;
   final bool isAddable;
-  final String? clientId;
-  final String? date;
+  final String clientId;
+  final String date;
 
   @override
   State<PersoExercisesList> createState() => _PersoExercisesListState();
@@ -45,10 +45,21 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
   void initState() {
     context.read<ExerciseListBloc>().add(
           ExerciseListEvent.getNumberOfExercises(
-            widget.clientId ?? '',
-            widget.date ?? '',
+            widget.clientId,
+            widget.date,
           ),
         );
+    BlocListener<ExerciseListBloc, ExerciseListState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          exercises: (exercises) {
+            _localExercises
+              ..clear()
+              ..addAll(exercises);
+          },
+        );
+      },
+    );
     super.initState();
   }
 
@@ -92,8 +103,12 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
                     final item = _localExercises.removeAt(oldIndex);
                     _localExercises.insert(newIndex, item);
                     context.read<ExerciseListBloc>().add(
-                        ExerciseListEvent.reorder(widget.clientId ?? '',
-                            widget.date ?? '', _localExercises));
+                          ExerciseListEvent.reorder(
+                            widget.clientId,
+                            widget.date,
+                            _localExercises,
+                          ),
+                        );
                   });
                 },
               );

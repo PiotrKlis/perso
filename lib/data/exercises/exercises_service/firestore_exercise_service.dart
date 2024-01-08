@@ -7,7 +7,7 @@ import 'package:perso/data/utils/firestore_constants.dart';
 @injectable
 class FirestoreExerciseService extends ExerciseService {
   @override
-  Future<void> addExercise(
+  Future<void> add(
     String clientId,
     String trainerId,
     String date,
@@ -36,7 +36,7 @@ class FirestoreExerciseService extends ExerciseService {
   }
 
   @override
-  Future<void> editExercise(
+  Future<void> edit(
     String clientId,
     String trainerId,
     String exerciseId,
@@ -47,7 +47,7 @@ class FirestoreExerciseService extends ExerciseService {
   }
 
   @override
-  Future<void> removeExercise(
+  Future<void> remove(
     String clientId,
     String trainerId,
     String date,
@@ -55,5 +55,33 @@ class FirestoreExerciseService extends ExerciseService {
   ) {
     // TODO: implement removeExercise
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> reorder(
+    String clientId,
+    String trainerId,
+    String date,
+    List<ExerciseEntity> exercises,
+  ) async {
+    final batch = FirebaseFirestore.instance.batch();
+
+    final collection = FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(date);
+
+    for (final exercise in exercises) {
+      final querySnapshot = await collection
+          .where(UserDocumentFields.id, isEqualTo: exercise.id)
+          .get();
+
+      batch.update(querySnapshot.docs.first.reference, {
+        UserDocumentFields.index: exercise.index,
+      });
+    }
+    await batch.commit();
   }
 }
