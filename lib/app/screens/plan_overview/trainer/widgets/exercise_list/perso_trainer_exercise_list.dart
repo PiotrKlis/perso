@@ -52,62 +52,56 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: Dimens.sMargin,
-        bottom: Dimens.mMargin,
-      ),
-      child: BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
-        builder: (context, state) {
-          return state.when(
-            exercises: (exercises) {
-              _localExercises
-                ..clear()
-                ..addAll(exercises);
-              return ReorderableListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                proxyDecorator: (child, index, animation) =>
-                    _ExercisesListDecorator(animation: animation, child: child),
-                children: _localExercises.map((exercise) {
-                  return _Exercise(
-                    key: UniqueKey(),
-                    exercise: exercise.exerciseEntity,
-                    clientId: widget.clientId,
-                    date: _selectedDate,
-                  );
-                }).toList(),
-                onReorder: (oldIndex, newIndex) {
-                  setState(() {
-                    if (newIndex > oldIndex) {
-                      newIndex -= 1;
-                    }
-                    final item = _localExercises.removeAt(oldIndex);
-                    _localExercises.insert(newIndex, item);
-                    context.read<TrainerExerciseListBloc>().add(
-                          TrainerExerciseListEvent.reorder(
-                            widget.clientId,
-                            _selectedDate,
-                            _localExercises,
-                          ),
-                        );
-                  });
-                },
-              );
-            },
-            error: (error) {
-              return Center(
-                child: Text(error),
-              );
-            },
-            init: () {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          );
-        },
-      ),
+    return BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
+      builder: (context, state) {
+        return state.when(
+          exercises: (exercises) {
+            _localExercises
+              ..clear()
+              ..addAll(exercises);
+            return ReorderableListView(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              proxyDecorator: (child, index, animation) =>
+                  _ExercisesListDecorator(animation: animation, child: child),
+              children: _localExercises.map((exercise) {
+                return _Exercise(
+                  key: UniqueKey(),
+                  exercise: exercise.exerciseEntity,
+                  clientId: widget.clientId,
+                  date: _selectedDate,
+                );
+              }).toList(),
+              onReorder: (oldIndex, newIndex) {
+                setState(() {
+                  if (newIndex > oldIndex) {
+                    newIndex -= 1;
+                  }
+                  final item = _localExercises.removeAt(oldIndex);
+                  _localExercises.insert(newIndex, item);
+                  context.read<TrainerExerciseListBloc>().add(
+                        TrainerExerciseListEvent.reorder(
+                          widget.clientId,
+                          _selectedDate,
+                          _localExercises,
+                        ),
+                      );
+                });
+              },
+            );
+          },
+          error: (error) {
+            return Center(
+              child: Text(error),
+            );
+          },
+          init: () {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
+        );
+      },
     );
   }
 }

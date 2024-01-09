@@ -130,8 +130,14 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
         child: Column(
           children: [
             const _ExercisesHeaderRow(),
-            PersoTrainerExerciseList(
-              clientId: widget.clientId,
+            Container(
+              margin: const EdgeInsets.only(
+                top: Dimens.mMargin,
+                bottom: Dimens.mMargin,
+              ),
+              child: PersoTrainerExerciseList(
+                clientId: widget.clientId,
+              ),
             ),
           ],
         ),
@@ -154,7 +160,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
       margin: const EdgeInsets.only(
         left: Dimens.mMargin,
         right: Dimens.mMargin,
-        top: Dimens.mMargin,
+        top: Dimens.lMargin,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
