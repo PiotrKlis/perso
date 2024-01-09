@@ -29,6 +29,17 @@ class PersoLibraryExerciseList extends StatefulWidget {
 
 class _PersoLibraryExerciseListState extends State<PersoLibraryExerciseList> {
   @override
+  void initState() {
+    super.initState();
+    context.read<LibraryExerciseListBloc>().add(
+          LibraryExerciseListEvent.updateNumberOfAlreadyPresentExercises(
+            widget._clientId,
+            widget._selectedDate,
+          ),
+        );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<LibraryExerciseListBloc, LibraryExerciseListState>(
       builder: (context, state) {

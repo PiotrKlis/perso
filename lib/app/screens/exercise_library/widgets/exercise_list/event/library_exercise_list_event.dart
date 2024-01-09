@@ -9,7 +9,15 @@ class LibraryExerciseListEvent with _$LibraryExerciseListEvent {
       GetAllLibraryExercises;
 
   const factory LibraryExerciseListEvent.add(
-      String clientId, String date, ExerciseEntity exerciseEntity) = Add;
+    String clientId,
+    String date,
+    ExerciseEntity exerciseEntity,
+  ) = Add;
+
+  const factory LibraryExerciseListEvent.updateNumberOfAlreadyPresentExercises(
+    String clientId,
+    String date,
+  ) = UpdateNumberOfAlreadyPresentExercises;
 
 // const factory LibraryExerciseListEvent.getExercises(
 //   String clientId,
@@ -17,8 +25,4 @@ class LibraryExerciseListEvent with _$LibraryExerciseListEvent {
 //   String date,
 // ) = GetExercises;
 //
-// const factory LibraryExerciseListEvent.getNumberOfExercises(
-//   String clientId,
-//   String date,
-// ) = GetNumberOfExercises;
 }

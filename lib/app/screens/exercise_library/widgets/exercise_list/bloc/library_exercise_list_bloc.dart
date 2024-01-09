@@ -34,6 +34,19 @@ class LibraryExerciseListBloc
       }
     });
 
+    on<UpdateNumberOfAlreadyPresentExercises>((event, emitter) async {
+      try {
+        final numberOfExercises = await _exercisesProvider.getNumberOfExercises(
+          event.clientId,
+          trainerId,
+          event.date,
+        );
+        _currentExerciseIndex = numberOfExercises;
+      } catch (error) {
+        emitter(LibraryExerciseListState.error(error.toString()));
+      }
+    });
+
     // on<GetExercises>((event, emitter) async {
     //   try {
     //     final exercisesStream = _exercisesProvider.getExercisesForTrainer(
@@ -51,18 +64,6 @@ class LibraryExerciseListBloc
     //   }
     // });
     //
-    // on<GetNumberOfExercises>((event, emitter) async {
-    //   try {
-    //     final numberOfExercises = await _exercisesProvider.getNumberOfExercises(
-    //       event.clientId,
-    //       trainerId,
-    //       event.date,
-    //     );
-    //     _currentExerciseIndex = numberOfExercises;
-    //   } catch (error) {
-    //     emitter(TrainerExerciseListState.error(error.toString()));
-    //   }
-    // });
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();
