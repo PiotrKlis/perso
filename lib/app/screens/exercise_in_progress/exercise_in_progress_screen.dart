@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
-import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ExercisesInProgressScreen extends StatelessWidget {
   const ExercisesInProgressScreen({super.key});
@@ -12,18 +9,12 @@ class ExercisesInProgressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PersoAppBar(title: context.strings.exercise_in_progress),
+      appBar: PersoAppBar(title: context.strings.exercise_in_progress),
       body: Column(
         children: [
-  Container(
+          Container(
             color: Colors.grey,
             height: Dimens.xlPlaceholder,
-          ),
-          PersoButton(
-            title: 'BREAk',
-            onTap: (context) {
-              context.pushNamed(ScreenNavigationKey.exerciseBreak);
-            },
           ),
           Container(
             margin: const EdgeInsets.only(
@@ -64,7 +55,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: Dimens.xxxlMargin),
+            margin: const EdgeInsets.only(top: Dimens.xlMargin),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -75,7 +66,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: PersoColors.lighterGrey,
                       shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(Dimens.sIconSize),
                     ),
                     child: const Icon(
                       Icons.keyboard_arrow_left,
@@ -102,7 +93,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: PersoColors.lighterGrey,
                       shape: const CircleBorder(),
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(Dimens.sIconSize),
                     ),
                     child: const Icon(
                       Icons.keyboard_arrow_right,

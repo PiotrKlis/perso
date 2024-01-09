@@ -29,7 +29,7 @@ class ExercisesBreakScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(
-                    top: Dimens.xxlMargin,
+                    top: Dimens.xlMargin,
                   ),
                   child: Text(
                     context.strings.rest,
@@ -44,17 +44,17 @@ class ExercisesBreakScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  width: 322,
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin,
+                      left: Dimens.xxlMargin, right: Dimens.xxlMargin,),
                   child: const PersoButton(
                     title: '+20 sec',
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                  margin: const EdgeInsets.only(top: Dimens.xmMargin,
+                      left: Dimens.xxlMargin, right: Dimens.xxlMargin,),
                   child: const PersoButton(
                     title: 'Stop',
-                    width: 322,
                     whiteBlackTheme: true,
                   ),
                 ),

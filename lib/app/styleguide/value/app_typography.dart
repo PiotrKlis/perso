@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 
 class ThemeText {
+
   static String fontFamilyName = 'Inter';
+
+static final largerTitle = TextStyle(
+    fontFamily: fontFamilyName,
+    color: Colors.black,
+    fontSize: 34,
+    height: 1.21,
+    letterSpacing: -1,
+    fontWeight: FontWeight.w100,);
 
   static final largerTitleBold = TextStyle(
       fontFamily: fontFamilyName,
@@ -284,12 +293,4 @@ class ThemeText {
       height: 1.27,
       letterSpacing: 0.1,
       fontWeight: FontWeight.w600,);
-
-  static final largerTitle = TextStyle(
-      fontFamily: fontFamilyName,
-      color: Colors.black,
-      fontSize: 34,
-      height: 1.21,
-      letterSpacing: -1,
-      fontWeight: FontWeight.w100,);
 }

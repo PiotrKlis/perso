@@ -52,11 +52,13 @@ class Dimens {
   static const double appBarElevation = 0;
   static const double placeholderIconSize = 120;
 
-  static const double xlPlaceholder = 350;
+  static const double xlPlaceholder = 280;
 
   static const double profileImageWidth = 200;
   static const double profileImageHeight = 200;
 
+
+  static const double sIconSize = 12;
   static const double iconSize = 24;
   static const double shortBioHeight = 140;
   static const double longBioHeight = 340;
