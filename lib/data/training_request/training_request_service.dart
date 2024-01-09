@@ -32,11 +32,17 @@ class TrainingRequestService {
         .get();
 
     final pendingRequests =
-        document[UserDocumentFields.pendingClients] as List<String>;
+        (document[UserDocumentFields.pendingTrainers] as List<dynamic>)
+            .map((trainer) => trainer as String)
+            .toList();
     final activeTrainers =
-        document[UserDocumentFields.activeTrainers] as List<String>;
+        (document[UserDocumentFields.activeTrainers] as List<dynamic>)
+            .map((trainer) => trainer as String)
+            .toList();
     final inactiveTrainers =
-        document[UserDocumentFields.inactiveTrainers] as List<String>;
+        (document[UserDocumentFields.inactiveTrainers] as List<dynamic>)
+            .map((trainer) => trainer as String)
+            .toList();
     if (pendingRequests.contains(trainerId) ||
         activeTrainers.contains(trainerId) ||
         inactiveTrainers.contains(trainerId)) {

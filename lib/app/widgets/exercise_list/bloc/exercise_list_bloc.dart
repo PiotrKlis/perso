@@ -27,7 +27,9 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           event.trainerId,
           event.date,
         );
+        //TODO: Add sorting by index, take care of the same number. Change default index on firestore.
         await for (final exercises in exercisesStream) {
+          exercises.sort((a, b) => a.index.compareTo(b.index));
           emitter(ExerciseListState.exercises(exercises));
         }
       } catch (error) {

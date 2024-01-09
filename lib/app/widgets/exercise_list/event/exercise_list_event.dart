@@ -32,4 +32,8 @@ class ExerciseListEvent with _$ExerciseListEvent {
     String date,
     String exerciseId,
   ) = RemoveExercise;
+
+  const factory ExerciseListEvent.reorder(
+    List<ExerciseEntity> exercises,
+  ) = Reorder;
 }

@@ -23,7 +23,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignInBloc(const SignInState.initial()),
+      create: (context) => SignInBloc(),
       child: SafeArea(
         child: Scaffold(
           appBar: PersoAppBar(title: context.strings.sign_in),
@@ -32,7 +32,13 @@ class SignInScreen extends StatelessWidget {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               children: [
-                const Icon(Icons.logo_dev, size: 160),
+                Container(
+                  margin: EdgeInsets.all(Dimens.lMargin),
+                  child: ClipOval(
+                    child:
+                        Image(image: AssetImage('assets/icon/icon_black.png')),
+                  ),
+                ),
                 Center(
                   child: Container(
                     margin: const EdgeInsets.only(top: Dimens.xmMargin),
@@ -116,16 +122,14 @@ class SignInScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                        top: Dimens.lMargin,
-                        left: Dimens.lMargin,
-                        right: Dimens.lMargin),
-                    child: PersoButton(
-                      title: context.strings.sign_in,
-                      onTap: _loginUser,
-                    ),
+                Container(
+                  margin: const EdgeInsets.only(
+                      top: Dimens.lMargin,
+                      left: Dimens.lMargin,
+                      right: Dimens.lMargin),
+                  child: PersoButton(
+                    title: context.strings.sign_in,
+                    onTap: _loginUser,
                   ),
                 ),
                 Container(
@@ -143,162 +147,19 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(
-                    top: Dimens.lMargin,
-                    left: Dimens.lMargin,
-                    right: Dimens.lMargin,
+                  margin: const EdgeInsets.all(
+                    Dimens.lMargin,
                   ),
-                  child: GestureDetector(
-                    onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
-                    child: AbsorbPointer(
-                      child: PersoButton(
-                        title: context.strings.sign_up,
-                        whiteBlackTheme: true,
-                      ),
-                    ),
+                  child: PersoButton(
+                    onTap: (context) {
+                      context.pushNamed(ScreenNavigationKey.signUp);
+                    },
+                    title: context.strings.sign_up,
+                    whiteBlackTheme: true,
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  SafeArea _signInScreenView(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: PersoAppBar(title: context.strings.sign_in),
-        backgroundColor: PersoColors.lightBlue,
-        body: SingleChildScrollView(
-          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-          child: Column(
-            children: [
-              const Icon(Icons.logo_dev, size: 160),
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
-                  child: Text(
-                    context.strings.sign_in,
-                    style: ThemeText.largerTitleBold,
-                  ),
-                ),
-              ),
-              Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: Dimens.xlMargin,
-                        left: Dimens.xmMargin,
-                        right: Dimens.xmMargin,
-                      ),
-                      child: PersoTextField(
-                        title: context.strings.login,
-                        textEditingController: _loginController,
-                        customValidator: TextFieldValidator.validateIsEmpty,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: Dimens.xmMargin,
-                        left: Dimens.xmMargin,
-                        right: Dimens.xmMargin,
-                      ),
-                      child: PersoTextField(
-                        title: context.strings.password,
-                        shouldObscureText: true,
-                        textEditingController: _passwordController,
-                        customValidator: TextFieldValidator.validateIsEmpty,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              BlocBuilder<SignInBloc, SignInState>(
-                builder: (context, state) {
-                  return state.whenOrNull(
-                        loading: () => Container(
-                          margin: const EdgeInsets.all(Dimens.xmMargin),
-                          child: const LinearProgressIndicator(),
-                        ),
-                        error: (message) => Container(
-                          margin: const EdgeInsets.only(top: Dimens.xsMargin),
-                          child: Text(
-                            message,
-                            style: ThemeText.calloutRegularRed,
-                          ),
-                        ),
-                      ) ??
-                      Container();
-                },
-              ),
-              BlocListener<SignInBloc, SignInState>(
-                listener: (context, state) {
-                  state.whenOrNull(
-                    navigateToProfileCreationScreen: () =>
-                        context.pushNamed(ScreenNavigationKey.profileCreation),
-                    navigateToHomeScreen: () =>
-                        context.replaceNamed(ScreenNavigationKey.home),
-                  );
-                },
-                child: Container(),
-              ),
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.lMargin),
-                  child: GestureDetector(
-                    onTap: () =>
-                        context.pushNamed(ScreenNavigationKey.passwordRecovery),
-                    child: Text(
-                      context.strings.forgotten_password_title,
-                      style: ThemeText.calloutBoldBlueText,
-                    ),
-                  ),
-                ),
-              ),
-              Center(
-                child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.lMargin),
-                  child: PersoButton(
-                    title: context.strings.sign_in,
-                    onTap: _loginUser,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: Dimens.lMargin),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Expanded(child: PersoIndentedDivider()),
-                    Text(
-                      context.strings.or,
-                      style: ThemeText.footnoteRegularGrey,
-                    ),
-                    const Expanded(child: PersoIndentedDivider()),
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                  top: Dimens.lMargin,
-                  left: Dimens.lMargin,
-                  right: Dimens.lMargin,
-                ),
-                child: GestureDetector(
-                  onTap: () => context.pushNamed(ScreenNavigationKey.signUp),
-                  child: AbsorbPointer(
-                    child: PersoButton(
-                      title: context.strings.sign_up,
-                      whiteBlackTheme: true,
-                    ),
-                  ),
-                ),
-              ),
-            ],
           ),
         ),
       ),

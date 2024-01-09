@@ -8,7 +8,7 @@ import 'package:perso/data/auth/auth_service.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class SignInBloc extends Bloc<SignInEvent, SignInState> {
-  SignInBloc(super.initialState) {
+  SignInBloc() : super(const SignInState.initial()) {
     on<Init>((state, emit) async {
       //no-op
     });
