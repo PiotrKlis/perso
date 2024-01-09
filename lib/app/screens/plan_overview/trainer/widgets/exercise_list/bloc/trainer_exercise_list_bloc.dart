@@ -1,28 +1,28 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
-import 'package:perso/app/widgets/exercise_list/state/exercise_list_state.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
 import 'package:perso/data/exercises/exercises_source/firestore_exercise_provider.dart';
 
 //TODO: Różne blocki per screen? Client/Trainer/Library
-class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
-  ExerciseListBloc() : super(const ExerciseListState.init()) {
+class TrainerExerciseListBloc extends Bloc<TrainerExerciseListEvent, TrainerExerciseListState> {
+  TrainerExerciseListBloc() : super(const TrainerExerciseListState.init()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
 
-    on<GetAllExercises>((event, emitter) async {
-      try {
-        final exercises = await _exercisesProvider.getAllExercises();
-        emitter(ExerciseListState.exercises(exercises));
-      } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
-      }
-    });
+    // on<GetAllExercises>((event, emitter) async {
+    //   try {
+    //     final exercises = await _exercisesProvider.getAllExercises();
+    //     emitter(ExerciseListState.exercises(exercises));
+    //   } catch (error) {
+    //     emitter(ExerciseListState.error(error.toString()));
+    //   }
+    // });
 
-    on<GetExercises>((event, emitter) async {
+    on<GetTrainerExercises>((event, emitter) async {
       try {
         final exercisesStream = _exercisesProvider.getExercisesForTrainer(
           event.clientId,
@@ -30,11 +30,12 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           event.date,
         );
         await for (final exercises in exercisesStream) {
-          exercises.sort((a, b) => a.index.compareTo(b.index));
-          emitter(ExerciseListState.exercises(exercises));
+          exercises.sort((a, b) =>
+              a.exerciseEntity.index.compareTo(b.exerciseEntity.index));
+          emitter(TrainerExerciseListState.exercises(exercises));
         }
       } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
+        emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
 
@@ -50,7 +51,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           print('Exercise edited successfully');
         }
       } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
+        emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
 
@@ -64,7 +65,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
         );
         _currentExerciseIndex++;
       } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
+        emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
 
@@ -80,7 +81,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           print('Exercise removed successfully');
         }
       } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
+        emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
 
@@ -93,16 +94,23 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
         );
         _currentExerciseIndex = numberOfExercises;
       } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
+        emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
 
     on<Reorder>((event, emitter) async {
       try {
         final reorderedExercises = event.exercises
-            .mapIndexed((index, exercise) => exercise.copyWith(index: index))
+            .mapIndexed(
+              (index, exercise) => exercise.copyWith(
+                exerciseEntity: exercise.exerciseEntity.copyWith(
+                  index: index,
+                ),
+              ),
+            )
             .toList();
-        emitter(ExerciseListState.exercises(reorderedExercises));
+
+        emitter(TrainerExerciseListState.exercises(reorderedExercises));
         await _exercisesService.reorder(
           event.clientId,
           trainerId,
@@ -110,7 +118,7 @@ class ExerciseListBloc extends Bloc<ExerciseListEvent, ExerciseListState> {
           reorderedExercises,
         );
       } catch (error) {
-        emitter(ExerciseListState.error(error.toString()));
+        emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
   }

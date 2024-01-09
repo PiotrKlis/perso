@@ -6,15 +6,12 @@ import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
-import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
-import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
-import 'package:perso/app/widgets/exercise_list/perso_exercises_list.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
-class PlanOverviewScreen extends StatelessWidget {
-  const PlanOverviewScreen(
+class ClientPlanOverviewScreen extends StatelessWidget {
+  const ClientPlanOverviewScreen(
       {required String clientId, required String trainerId, super.key})
       : _trainerId = trainerId,
         _clientId = clientId;
@@ -24,24 +21,25 @@ class PlanOverviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => ExerciseListBloc()
-            ..add(
-              ExerciseListEvent.getExercises(
-                _clientId,
-                _trainerId,
-                DateTime.now().yearMonthDayFormat,
-              ),
-            ),
-        ),
-        BlocProvider(
-          create: (context) => CalendarBloc(),
-        ),
-      ],
-      child: _PlanOverviewScreenContent(clientId: _clientId),
-    );
+    return Container();
+    // return MultiBlocProvider(
+    //   providers: [
+    //     BlocProvider(
+    //       create: (context) => ClientExerciseListBloc()
+    //         ..add(
+    //           TrainerExerciseListEvent.getExercises(
+    //             _clientId,
+    //             _trainerId,
+    //             DateTime.now().yearMonthDayFormat,
+    //           ),
+    //         ),
+    //     ),
+    //     BlocProvider(
+    //       create: (context) => CalendarBloc(),
+    //     ),
+    //   ],
+    //   child: _PlanOverviewScreenContent(clientId: _clientId),
+    // );
   }
 }
 
@@ -99,13 +97,11 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
                     _selectedDate = selectedDate;
                   },
                 );
-                return PersoExercisesList(
-                  isReorderable: true,
-                  isEditable: true,
-                  isRemovable: true,
-                  clientId: widget.clientId,
-                  date: _selectedDate,
-                );
+                return Container();
+                // return PersoTrainerExerciseList(
+                //   clientId: widget.clientId,
+                //   date: _selectedDate,
+                // );
               },
             ),
           ],

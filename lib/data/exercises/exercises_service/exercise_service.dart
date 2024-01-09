@@ -1,4 +1,5 @@
 import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_training_entity.dart';
 
 abstract class ExerciseService {
   Future<void> edit(
@@ -26,6 +27,6 @@ abstract class ExerciseService {
     String clientId,
     String trainerId,
     String date,
-    List<ExerciseEntity> exercises,
+    List<ExerciseInTrainingEntity> exercises,
   );
 }

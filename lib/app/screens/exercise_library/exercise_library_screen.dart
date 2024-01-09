@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/exercise_library/widgets/exercise_list/bloc/library_exercise_list_bloc.dart';
+import 'package:perso/app/screens/exercise_library/widgets/exercise_list/event/library_exercise_list_event.dart';
+import 'package:perso/app/screens/exercise_library/widgets/exercise_list/perso_library_exercise_list.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
-import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
-import 'package:perso/app/widgets/exercise_list/perso_exercises_list.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_search.dart';
 
@@ -20,11 +20,11 @@ class ExerciseLibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ExerciseListBloc>(
+    return BlocProvider<LibraryExerciseListBloc>(
       create: (BuildContext context) {
-        return ExerciseListBloc()
+        return LibraryExerciseListBloc()
           ..add(
-            const ExerciseListEvent.getAllExercises(),
+            const LibraryExerciseListEvent.getAllLibraryExercises(),
           );
       },
       child: _ExerciseLibraryScreenContent(_clientId, _selectedDate),
@@ -57,10 +57,9 @@ class _ExerciseLibraryScreenContent extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: Dimens.xmMargin),
               color: PersoColors.lightBlue,
-              child: PersoExercisesList(
-                isAddable: true,
+              child: PersoLibraryExerciseList(
                 clientId: _clientId,
-                date: _selectedDate,
+                selectedDate: _selectedDate,
               ),
             ),
           ],

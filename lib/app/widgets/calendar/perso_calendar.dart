@@ -28,7 +28,7 @@ class _PersoCalendarState extends State<PersoCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    return TableCalendar<bool>(
+    return TableCalendar(
       headerStyle: const HeaderStyle(formatButtonVisible: false),
       calendarBuilders: CalendarBuilders(
         markerBuilder: (context, day, events) {

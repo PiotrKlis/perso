@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/data/exercises/exercises_service/exercise_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
@@ -62,7 +63,7 @@ class FirestoreExerciseService extends ExerciseService {
     String clientId,
     String trainerId,
     String date,
-    List<ExerciseEntity> exercises,
+    List<ExerciseInTrainingEntity> exercises,
   ) async {
     final batch = FirebaseFirestore.instance.batch();
 
@@ -74,12 +75,10 @@ class FirestoreExerciseService extends ExerciseService {
         .collection(date);
 
     for (final exercise in exercises) {
-      final querySnapshot = await collection
-          .where(UserDocumentFields.id, isEqualTo: exercise.id)
-          .get();
+      final docRef = collection.doc(exercise.id);
 
-      batch.update(querySnapshot.docs.first.reference, {
-        UserDocumentFields.index: exercise.index,
+      batch.update(docRef, {
+        UserDocumentFields.index: exercise.exerciseEntity.index,
       });
     }
     await batch.commit();

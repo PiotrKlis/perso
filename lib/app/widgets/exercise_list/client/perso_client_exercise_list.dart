@@ -6,16 +6,16 @@ import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
-import 'package:perso/app/widgets/exercise_list/bloc/exercise_list_bloc.dart';
-import 'package:perso/app/widgets/exercise_list/event/exercise_list_event.dart';
-import 'package:perso/app/widgets/exercise_list/state/exercise_list_state.dart';
+import 'package:perso/app/widgets/exercise_list/client/bloc/client_exercise_list_bloc.dart';
+import 'package:perso/app/widgets/exercise_list/client/event/client_exercise_list_event.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_training_entity.dart';
 
-class PersoExercisesList extends StatefulWidget {
-  const PersoExercisesList({
+class PersoClientExerciseList extends StatefulWidget {
+  const PersoClientExerciseList({
     super.key,
     this.isReorderable = false,
     this.isEditable = false,
@@ -33,35 +33,14 @@ class PersoExercisesList extends StatefulWidget {
   final String date;
 
   @override
-  State<PersoExercisesList> createState() => _PersoExercisesListState();
+  State<PersoClientExerciseList> createState() =>
+      _PersoClientExerciseListState();
 }
 
-class _PersoExercisesListState extends State<PersoExercisesList> {
+class _PersoClientExerciseListState extends State<PersoClientExerciseList> {
   //Local exercises are used so user can reorder exercises without waiting for
   //update from the remote
-  final _localExercises = <ExerciseEntity>[];
-
-  @override
-  void initState() {
-    context.read<ExerciseListBloc>().add(
-          ExerciseListEvent.getNumberOfExercises(
-            widget.clientId,
-            widget.date,
-          ),
-        );
-    BlocListener<ExerciseListBloc, ExerciseListState>(
-      listener: (context, state) {
-        state.whenOrNull(
-          exercises: (exercises) {
-            _localExercises
-              ..clear()
-              ..addAll(exercises);
-          },
-        );
-      },
-    );
-    super.initState();
-  }
+  final _localExercises = <ExerciseInTrainingEntity>[];
 
   @override
   Widget build(BuildContext context) {
@@ -70,62 +49,63 @@ class _PersoExercisesListState extends State<PersoExercisesList> {
         top: Dimens.sMargin,
         bottom: Dimens.mMargin,
       ),
-      child: BlocBuilder<ExerciseListBloc, ExerciseListState>(
-        builder: (context, state) {
-          return state.when(
-            exercises: (exercises) {
-              _localExercises
-                ..clear()
-                ..addAll(exercises);
-              return ReorderableListView(
-                buildDefaultDragHandles: widget.isReorderable,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                proxyDecorator: (child, index, animation) =>
-                    _ExercisesListDecorator(animation: animation, child: child),
-                children: _localExercises.map((exercise) {
-                  return _Exercise(
-                    key: UniqueKey(),
-                    exercise: exercise,
-                    isReorderable: widget.isReorderable,
-                    isAddable: widget.isAddable,
-                    isRemovable: widget.isRemovable,
-                    isEditable: widget.isEditable,
-                    clientId: widget.clientId,
-                    date: widget.date,
-                  );
-                }).toList(),
-                onReorder: (oldIndex, newIndex) {
-                  setState(() {
-                    if (newIndex > oldIndex) {
-                      newIndex -= 1;
-                    }
-                    final item = _localExercises.removeAt(oldIndex);
-                    _localExercises.insert(newIndex, item);
-                    context.read<ExerciseListBloc>().add(
-                          ExerciseListEvent.reorder(
-                            widget.clientId,
-                            widget.date,
-                            _localExercises,
-                          ),
-                        );
-                  });
-                },
-              );
-            },
-            error: (error) {
-              return Center(
-                child: Text(error),
-              );
-            },
-            init: () {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          );
-        },
-      ),
+      child: Container(),
+      // child: BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
+      //   builder: (context, state) {
+      //     return state.when(
+      //       exercises: (exercises) {
+      //         _localExercises
+      //           ..clear()
+      //           ..addAll(exercises);
+      //         return ReorderableListView(
+      //           buildDefaultDragHandles: widget.isReorderable,
+      //           shrinkWrap: true,
+      //           physics: const NeverScrollableScrollPhysics(),
+      //           proxyDecorator: (child, index, animation) =>
+      //               _ExercisesListDecorator(animation: animation, child: child),
+      //           children: _localExercises.map((exercise) {
+      //             return _Exercise(
+      //               key: UniqueKey(),
+      //               exercise: exercise.exerciseEntity,
+      //               isReorderable: widget.isReorderable,
+      //               isAddable: widget.isAddable,
+      //               isRemovable: widget.isRemovable,
+      //               isEditable: widget.isEditable,
+      //               clientId: widget.clientId,
+      //               date: widget.date,
+      //             );
+      //           }).toList(),
+      //           onReorder: (oldIndex, newIndex) {
+      //             setState(() {
+      //               if (newIndex > oldIndex) {
+      //                 newIndex -= 1;
+      //               }
+      //               final item = _localExercises.removeAt(oldIndex);
+      //               _localExercises.insert(newIndex, item);
+      //               context.read<TrainerExerciseListBloc>().add(
+      //                     TrainerExerciseListEvent.reorder(
+      //                       widget.clientId,
+      //                       widget.date,
+      //                       _localExercises,
+      //                     ),
+      //                   );
+      //             });
+      //           },
+      //         );
+      //       },
+      //       error: (error) {
+      //         return Center(
+      //           child: Text(error),
+      //         );
+      //       },
+      //       init: () {
+      //         return const Center(
+      //           child: CircularProgressIndicator(),
+      //         );
+      //       },
+      //     );
+      //   },
+      // ),
     );
   }
 }
@@ -174,13 +154,14 @@ class _Exercise extends StatefulWidget {
   final bool isEditable;
   final String? clientId;
   final String? date;
-  bool isExpanded = false;
 
   @override
   State<_Exercise> createState() => _ExerciseState();
 }
 
 class _ExerciseState extends State<_Exercise> {
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -192,13 +173,13 @@ class _ExerciseState extends State<_Exercise> {
           ExpansionPanelList(
             expansionCallback: (int index, bool isExpanded) {
               setState(() {
-                widget.isExpanded = !widget.isExpanded;
+                isExpanded = !isExpanded;
               });
             },
             children: [
               ExpansionPanel(
                 canTapOnHeader: true,
-                isExpanded: widget.isExpanded,
+                isExpanded: isExpanded,
                 headerBuilder: (context, isExpanded) => _ExerciseHeader(
                   exercise: widget.exercise,
                   isReorderable: widget.isReorderable,
@@ -356,8 +337,8 @@ class _ActionableIcon extends StatelessWidget {
           size: 42,
         ),
         onPressed: () {
-          context.read<ExerciseListBloc>().add(
-                ExerciseListEvent.addExercise(
+          context.read<ClientExerciseListBloc>().add(
+                ClientExerciseListEvent.addExercise(
                   clientId!,
                   date!,
                   exerciseEntity,

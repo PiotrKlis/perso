@@ -8,7 +8,7 @@ import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart'
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
-import 'package:perso/app/screens/plan_overview/plan_overview_screen.dart';
+import 'package:perso/app/screens/plan_overview/trainer/trainer_plan_overview_screen.dart';
 import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
@@ -249,9 +249,8 @@ final GoRouter goRouter = GoRouter(
                   path: ScreenNavigationKey.planOverview,
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return NoTransitionPage(
-                      child: PlanOverviewScreen(
+                      child: TrainerPlanOverviewScreen(
                         clientId: state.uri.queryParameters[_clientId]!,
-                        trainerId: state.uri.queryParameters[_trainerId]!,
                       ),
                     );
                   },

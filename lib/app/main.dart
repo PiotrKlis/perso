@@ -14,7 +14,7 @@ import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await ChatClient.initializeClient();
+  // await ChatClient.initializeClient();
   configureDependencies(Environment.dev);
   runApp(MyApp());
 }
