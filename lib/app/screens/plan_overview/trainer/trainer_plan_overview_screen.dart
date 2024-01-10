@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/perso_trainer_exercise_list.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
@@ -54,33 +53,6 @@ class _TrainerPlanOverviewScreenContentState
   String _selectedDate = DateTime.now().yearMonthDayFormat;
 
   @override
-  void initState() {
-    context.read<TrainerExerciseListBloc>().add(
-          TrainerExerciseListEvent.getTrainerExercises(
-            widget._clientId,
-            _selectedDate,
-          ),
-        );
-    BlocListener<CalendarBloc, CalendarState>(
-      listener: (context, state) {
-        state.when(
-          initial: () {},
-          selectedDate: (selectedDate) {
-            _selectedDate = selectedDate;
-            context.read<TrainerExerciseListBloc>().add(
-                  TrainerExerciseListEvent.getTrainerExercises(
-                    widget._clientId,
-                    _selectedDate,
-                  ),
-                );
-          },
-        );
-      },
-    );
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const PersoAppBar(
@@ -95,17 +67,27 @@ class _TrainerPlanOverviewScreenContentState
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.pushNamed(
-            ScreenNavigationKey.exerciseLibrary,
-            queryParameters: {
-              'clientId': widget._clientId,
-              'date': _selectedDate,
+      floatingActionButton: BlocListener<CalendarBloc, CalendarState>(
+        listener: (BuildContext context, CalendarState state) {
+          state.when(
+            initial: () {},
+            selectedDate: (selectedDate) {
+              _selectedDate = selectedDate;
             },
           );
         },
-        child: const Icon(Icons.add),
+        child: FloatingActionButton(
+          onPressed: () {
+            context.pushNamed(
+              ScreenNavigationKey.exerciseLibrary,
+              queryParameters: {
+                'clientId': widget._clientId,
+                'date': _selectedDate,
+              },
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }

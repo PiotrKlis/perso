@@ -36,72 +36,75 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
   String _selectedDate = DateTime.now().yearMonthDayFormat;
 
   @override
-  void initState() {
-    BlocListener<CalendarBloc, CalendarState>(
+  Widget build(BuildContext context) {
+    return BlocListener<CalendarBloc, CalendarState>(
       listener: (context, state) {
         state.when(
           initial: () {},
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
-          },
-        );
-      },
-    );
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
-      builder: (context, state) {
-        return state.when(
-          exercises: (exercises) {
-            _localExercises
-              ..clear()
-              ..addAll(exercises);
-            return ReorderableListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              proxyDecorator: (child, index, animation) =>
-                  _ExercisesListDecorator(animation: animation, child: child),
-              children: _localExercises.map((exercise) {
-                return _Exercise(
-                  key: UniqueKey(),
-                  exercise: exercise.exerciseEntity,
-                  clientId: widget.clientId,
-                  date: _selectedDate,
+            context.read<TrainerExerciseListBloc>().add(
+                  TrainerExerciseListEvent.getTrainerExercises(
+                    widget.clientId,
+                    _selectedDate,
+                  ),
                 );
-              }).toList(),
-              onReorder: (oldIndex, newIndex) {
-                setState(() {
-                  if (newIndex > oldIndex) {
-                    newIndex -= 1;
-                  }
-                  final item = _localExercises.removeAt(oldIndex);
-                  _localExercises.insert(newIndex, item);
-                  context.read<TrainerExerciseListBloc>().add(
-                        TrainerExerciseListEvent.reorder(
-                          widget.clientId,
-                          _selectedDate,
-                          _localExercises,
-                        ),
-                      );
-                });
-              },
-            );
-          },
-          error: (error) {
-            return Center(
-              child: Text(error),
-            );
-          },
-          init: () {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
           },
         );
+        // return Container();
       },
+      child: BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
+        builder: (context, state) {
+          Container();
+          return state.when(
+            exercises: (exercises) {
+              _localExercises
+                ..clear()
+                ..addAll(exercises);
+              return ReorderableListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                proxyDecorator: (child, index, animation) =>
+                    _ExercisesListDecorator(animation: animation, child: child),
+                children: _localExercises.map((exercise) {
+                  return _Exercise(
+                    key: UniqueKey(),
+                    exercise: exercise.exerciseEntity,
+                    clientId: widget.clientId,
+                    date: _selectedDate,
+                  );
+                }).toList(),
+                onReorder: (oldIndex, newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) {
+                      newIndex -= 1;
+                    }
+                    final item = _localExercises.removeAt(oldIndex);
+                    _localExercises.insert(newIndex, item);
+                    context.read<TrainerExerciseListBloc>().add(
+                          TrainerExerciseListEvent.reorder(
+                            widget.clientId,
+                            _selectedDate,
+                            _localExercises,
+                          ),
+                        );
+                  });
+                },
+              );
+            },
+            error: (error) {
+              return Center(
+                child: Text(error),
+              );
+            },
+            init: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
