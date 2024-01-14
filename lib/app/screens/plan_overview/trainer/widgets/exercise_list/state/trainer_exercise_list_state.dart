@@ -6,7 +6,7 @@ part 'trainer_exercise_list_state.freezed.dart';
 @freezed
 class TrainerExerciseListState with _$TrainerExerciseListState {
   const factory TrainerExerciseListState.exercises(
-      List<ExerciseInTrainingEntity> exercises) = Exercises;
+      List<ExerciseInTrainingEntity> exercises,) = Exercises;
 
   const factory TrainerExerciseListState.error(String error) = Error;
 

@@ -9,12 +9,11 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // await ChatClient.initializeClient();
+  await ChatClient.initializeClient();
   configureDependencies(Environment.dev);
   runApp(MyApp());
 }

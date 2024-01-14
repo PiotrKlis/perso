@@ -1,5 +1,6 @@
-import 'package:perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
+
 part 'trainer_search_carousel_state.freezed.dart';
 
 @freezed

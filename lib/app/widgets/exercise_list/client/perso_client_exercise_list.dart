@@ -136,7 +136,7 @@ class _ExercisesListDecorator extends StatelessWidget {
 }
 
 class _Exercise extends StatefulWidget {
-  _Exercise({
+  const _Exercise({
     required this.exercise,
     required this.isReorderable,
     required this.isAddable,
@@ -144,7 +144,6 @@ class _Exercise extends StatefulWidget {
     required this.isEditable,
     required this.clientId,
     required this.date,
-    super.key,
   });
 
   final ExerciseEntity exercise;

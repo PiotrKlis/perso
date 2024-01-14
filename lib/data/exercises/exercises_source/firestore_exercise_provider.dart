@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
@@ -36,7 +35,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
 
   @override
   Future<List<ExerciseEntity>> getExercisesForClient(
-      String clientId, String trainerId, String date) {
+      String clientId, String trainerId, String date,) {
     // TODO: implement getExercisesForClient
     throw UnimplementedError();
   }
@@ -69,7 +68,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
                 reps: exercise[UserDocumentFields.reps] as int,
                 sets: exercise[UserDocumentFields.sets] as int,
                 tags: _getTags(
-                    exercise[UserDocumentFields.tags] as List<dynamic>),
+                    exercise[UserDocumentFields.tags] as List<dynamic>,),
                 time: exercise[UserDocumentFields.time] as String,
                 title: exercise[UserDocumentFields.title] as String,
                 videoId: exercise[UserDocumentFields.videoId] as String,

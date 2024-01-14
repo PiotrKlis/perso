@@ -1,5 +1,6 @@
-import 'package:perso/app/models/training_category/training_category.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:perso/app/models/training_category/training_category.dart';
+
 part 'training_category_list_state.freezed.dart';
 
 @freezed

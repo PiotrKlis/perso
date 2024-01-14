@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/training_category/training_category.dart';
 import 'package:perso/app/models/training_category/training_category_icon.dart';
 import 'package:perso/app/styleguide/value/app_assets.dart';
 import 'package:perso/app/utils/constants.dart';
 import 'package:perso/data/training_categories/training_category_source.dart';
-import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class LocalTrainingCategoryRepository implements TrainingCategorySource {

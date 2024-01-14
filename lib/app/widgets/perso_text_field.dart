@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
-import 'package:flutter/material.dart';
 
 class PersoTextField extends StatefulWidget {
   const PersoTextField({
