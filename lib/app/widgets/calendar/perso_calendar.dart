@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
-import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PersoCalendar extends StatefulWidget {
@@ -29,17 +28,6 @@ class _PersoCalendarState extends State<PersoCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    BlocBuilder<CalendarBloc, CalendarState>(
-      builder: (context, state) {
-        state.when(
-          initial: () {},
-          selectedDate: (selectedDate) {
-            print(selectedDate);
-          },
-        );
-        return Container();
-      },
-    );
     return TableCalendar(
       headerStyle: const HeaderStyle(formatButtonVisible: false),
       calendarBuilders: CalendarBuilders(

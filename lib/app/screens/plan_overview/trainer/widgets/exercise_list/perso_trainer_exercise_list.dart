@@ -51,7 +51,6 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                 );
           },
         );
-        // return Container();
       },
       child: BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
         builder: (context, state) {
@@ -97,7 +96,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                 child: Text(error),
               );
             },
-            init: () {
+            loading: () {
               return const Center(
                 child: CircularProgressIndicator(),
               );
