@@ -16,8 +16,7 @@ class TrainerExerciseListBloc
   TrainerExerciseListBloc() : super(const TrainerExerciseListState.loading()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
     final streamController = StreamController<List<ExerciseInTrainingEntity>>();
-    final streamSubscription =
-        StreamSubscription<List<ExerciseInTrainingEntity>>();
+    // final StreamSubscription streamSubscription;
 
     on<GetTrainerExercises>((event, emitter) async {
       try {
