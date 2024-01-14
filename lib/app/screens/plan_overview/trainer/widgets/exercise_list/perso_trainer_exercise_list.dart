@@ -44,7 +44,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
             context.read<TrainerExerciseListBloc>().add(
-                  TrainerExerciseListEvent.getTrainerExercises(
+                  TrainerExerciseListEvent.activateExercisesStream(
                     widget.clientId,
                     _selectedDate,
                   ),

@@ -8,10 +8,14 @@ part 'trainer_exercise_list_event.freezed.dart';
 class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
   const factory TrainerExerciseListEvent.getAllExercises() = GetAllExercises;
 
-  const factory TrainerExerciseListEvent.getTrainerExercises(
+  const factory TrainerExerciseListEvent.emitExercise(
+    List<ExerciseInTrainingEntity> exercises,
+  ) = EmitExercise;
+
+  const factory TrainerExerciseListEvent.activateExercisesStream(
     String clientId,
     String date,
-  ) = GetTrainerExercises;
+  ) = ActivateExercisesStream;
 
   const factory TrainerExerciseListEvent.editExercise(
     String clientId,

@@ -26,7 +26,7 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
         path,
       ),
     );
-    _initializeVideoPlayerFuture = _videoPlayerController.initialize();
+    // _initializeVideoPlayerFuture = _videoPlayerController.initialize();
   }
 
   @override
