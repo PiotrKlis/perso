@@ -30,17 +30,26 @@ class ForgotPasswordScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.xxlMargin),
-                    child: const Icon(Icons.lock,
-                        size: Dimens.iconSizeLarge, color: Colors.black,),),
-                Container(
-                    margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                    child: Text(context.strings.forgotten_password_title,
-                        style: ThemeText.largeTitleBold,),),
+                  margin: const EdgeInsets.only(top: Dimens.xxlMargin),
+                  child: const Icon(
+                    Icons.lock,
+                    size: Dimens.iconSizeLarge,
+                    color: Colors.black,
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: Text(context.strings.forgotten_password_subtitle,
-                      style: ThemeText.bodyBoldBlackText,),
+                  child: Text(
+                    context.strings.forgotten_password_title,
+                    style: ThemeText.largeTitleBold,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
+                  child: Text(
+                    context.strings.forgotten_password_subtitle,
+                    style: ThemeText.bodyBoldBlackText,
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.sMargin),
@@ -51,34 +60,40 @@ class ForgotPasswordScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.xmMargin),
-                    child: PersoTextField(
-                      title: context.strings.email,
-                      textEditingController: _textEditingController,
-                    ),),
+                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                  child: PersoTextField(
+                    title: context.strings.email,
+                    textEditingController: _textEditingController,
+                  ),
+                ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.xlMargin),
                   child: PersoButton(
                     title: context.strings.reset_password,
                     onTap: (context) {
                       context.read<ForgotPasswordBloc>().add(
-                          ForgotPasswordEvent.resetPassword(
-                              _textEditingController.text,),);
+                            ForgotPasswordEvent.resetPassword(
+                              _textEditingController.text,
+                            ),
+                          );
                     },
                   ),
                 ),
                 Container(
-                    margin: const EdgeInsets.only(top: Dimens.xmMargin),
-                    child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                      builder: (context, state) {
-                        return state.whenOrNull(
-                                passwordResetSuccess: () => Text(
-                                    context.strings.password_reset_success,
-                                    style: ThemeText.calloutRegular,),
-                                error: Text.new,) ??
-                            Container();
-                      },
-                    ),),
+                  margin: const EdgeInsets.only(top: Dimens.xmMargin),
+                  child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                    builder: (context, state) {
+                      return state.whenOrNull(
+                            passwordResetSuccess: () => Text(
+                              context.strings.password_reset_success,
+                              style: ThemeText.calloutRegular,
+                            ),
+                            error: Text.new,
+                          ) ??
+                          Container();
+                    },
+                  ),
+                ),
               ],
             ),
           ),

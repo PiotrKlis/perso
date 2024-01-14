@@ -12,7 +12,7 @@ import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
   const ClientPlanOverviewScreen(
-      {required String clientId, required String trainerId, super.key})
+      {required String clientId, required String trainerId, super.key,})
       : _trainerId = trainerId,
         _clientId = clientId;
 

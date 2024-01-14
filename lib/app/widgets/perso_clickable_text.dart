@@ -1,5 +1,5 @@
-import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:flutter/material.dart';
+import 'package:perso/app/styleguide/value/app_typography.dart';
 
 class PersoClickableText extends StatelessWidget {
   const PersoClickableText({required this.title, super.key});

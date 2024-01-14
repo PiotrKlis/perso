@@ -69,7 +69,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           state.whenOrNull(
             mapUpdate: (latLon) {
               latLng = latLon;
-            }
+            },
           );
           return Scaffold(
             backgroundColor: PersoColors.lightBlue,

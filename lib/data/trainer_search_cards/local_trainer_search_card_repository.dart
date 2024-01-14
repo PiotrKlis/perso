@@ -1,7 +1,7 @@
+import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/trainers_search_card_data/trainers_search_carousel_card_data.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/data/trainer_search_cards/trainer_search_card_source.dart';
-import 'package:injectable/injectable.dart';
 
 @injectable
 class LocalTrainerSearchCardRepository implements TrainerSearchCardSource {

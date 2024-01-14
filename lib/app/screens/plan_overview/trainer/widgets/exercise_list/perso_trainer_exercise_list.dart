@@ -132,7 +132,7 @@ class _ExercisesListDecorator extends StatelessWidget {
 }
 
 class _Exercise extends StatefulWidget {
-  _Exercise({
+  const _Exercise({
     required this.exercise,
     required this.clientId,
     required this.date,
@@ -214,7 +214,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
           date: date,
           exerciseEntity: exerciseEntity,
         ),
-        _OptionsSection(),
+        const _OptionsSection(),
         Container(
           margin: const EdgeInsets.only(top: Dimens.sMargin),
           child: PersoVideoPlayer(

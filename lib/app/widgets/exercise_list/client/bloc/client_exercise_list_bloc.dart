@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/widgets/exercise_list/client/event/client_exercise_list_event.dart';
 import 'package:perso/app/widgets/exercise_list/client/state/client_exercise_list_state.dart';
@@ -12,7 +10,7 @@ import 'package:perso/data/exercises/exercises_source/firestore_exercise_provide
 class ClientExerciseListBloc
     extends Bloc<ClientExerciseListEvent, ClientExerciseListState> {
   ClientExerciseListBloc() : super(const ClientExerciseListState.init()) {
-    final _clientId = _userSessionModel.user?.uid ?? '';
+    final clientId = _userSessionModel.user?.uid ?? '';
 
 
     on<GetExercises>((event, emitter) async {
@@ -36,5 +34,5 @@ class ClientExerciseListBloc
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesProvider = getIt.get<FirestoreExerciseProvider>();
   final _exercisesService = getIt.get<FirestoreExerciseService>();
-  var _currentExerciseIndex = 0;
+  final _currentExerciseIndex = 0;
 }

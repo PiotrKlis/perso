@@ -72,8 +72,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () => context.pushNamed(
                         ScreenNavigationKey.searchResults,
                         pathParameters: {
-                          "input": ScreenNavigationKey.searchResults
-                        }),
+                          'input': ScreenNavigationKey.searchResults,
+                        },),
                     child: const AbsorbPointer(child: PersoSearch()),
                   ),
                 ),

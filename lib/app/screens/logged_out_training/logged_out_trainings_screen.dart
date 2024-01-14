@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 
 class LoggedOutTrainingScreen extends StatelessWidget {
   const LoggedOutTrainingScreen({super.key});

@@ -33,8 +33,8 @@ class SignInScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.all(Dimens.lMargin),
-                  child: ClipOval(
+                  margin: const EdgeInsets.all(Dimens.lMargin),
+                  child: const ClipOval(
                     child:
                         Image(image: AssetImage('assets/icon/icon_black.png')),
                   ),
@@ -126,7 +126,7 @@ class SignInScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(
                       top: Dimens.lMargin,
                       left: Dimens.lMargin,
-                      right: Dimens.lMargin),
+                      right: Dimens.lMargin,),
                   child: PersoButton(
                     title: context.strings.sign_in,
                     onTap: _loginUser,

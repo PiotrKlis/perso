@@ -59,7 +59,7 @@ class SearchFilterScreen extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text(AppLocalizations.of(context)!.location_default_set)
+                Text(AppLocalizations.of(context)!.location_default_set),
               ],
             ),
           ),

@@ -31,7 +31,7 @@ class TrainerExerciseListBloc extends Bloc<TrainerExerciseListEvent, TrainerExer
         );
         await for (final exercises in exercisesStream) {
           exercises.sort((a, b) =>
-              a.exerciseEntity.index.compareTo(b.exerciseEntity.index));
+              a.exerciseEntity.index.compareTo(b.exerciseEntity.index),);
           emitter(TrainerExerciseListState.exercises(exercises));
         }
       } catch (error) {

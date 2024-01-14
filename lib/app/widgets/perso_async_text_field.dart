@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:flutter/material.dart';
 
 class PersoAsyncTextFormField extends StatefulWidget {
 
