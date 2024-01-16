@@ -8,6 +8,8 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
+import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
@@ -54,10 +56,13 @@ class _PersoLibraryExerciseListState extends State<PersoLibraryExerciseList> {
               shrinkWrap: true,
               itemCount: exercises.length,
               itemBuilder: (context, index) {
-                return _Exercise(
-                  exercise: exercises[index],
-                  clientId: widget._clientId,
-                  date: widget._selectedDate,
+                return BlocProvider(
+                  create: (context) => VideoPlayerBloc(),
+                  child: _Exercise(
+                    exercise: exercises[index],
+                    clientId: widget._clientId,
+                    date: widget._selectedDate,
+                  ),
                 );
               },
             );
@@ -105,6 +110,15 @@ class _ExerciseState extends State<_Exercise> {
             expansionCallback: (int index, bool isExpanded) {
               setState(() {
                 _isExpanded = isExpanded;
+                if (_isExpanded) {
+                  context
+                      .read<VideoPlayerBloc>()
+                      .add(const VideoPlayerEvent.initialize());
+                } else {
+                  context
+                      .read<VideoPlayerBloc>()
+                      .add(const VideoPlayerEvent.dispose());
+                }
               });
             },
             children: [

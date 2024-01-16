@@ -62,4 +62,6 @@ class Dimens {
   static const double dividerThickness = 1;
   static const double iconSizeLarge = 160;
   static const double iconSizeMedium = 88;
+
+  static const double videoPlayerHeight = 260;
 }

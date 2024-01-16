@@ -13,6 +13,8 @@ import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
+import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
@@ -66,11 +68,14 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                 proxyDecorator: (child, index, animation) =>
                     _ExercisesListDecorator(animation: animation, child: child),
                 children: _localExercises.map((exercise) {
-                  return _Exercise(
+                  return BlocProvider(
                     key: UniqueKey(),
-                    exercise: exercise.exerciseEntity,
-                    clientId: widget.clientId,
-                    date: _selectedDate,
+                    create: (context) => VideoPlayerBloc(),
+                    child: _Exercise(
+                      exercise: exercise.exerciseEntity,
+                      clientId: widget.clientId,
+                      date: _selectedDate,
+                    ),
                   );
                 }).toList(),
                 onReorder: (oldIndex, newIndex) {
@@ -164,6 +169,15 @@ class _ExerciseState extends State<_Exercise> {
             expansionCallback: (int index, bool isExpanded) {
               setState(() {
                 _isExpanded = isExpanded;
+                if (_isExpanded) {
+                  context
+                      .read<VideoPlayerBloc>()
+                      .add(const VideoPlayerEvent.initialize());
+                } else {
+                  context
+                      .read<VideoPlayerBloc>()
+                      .add(const VideoPlayerEvent.dispose());
+                }
               });
             },
             children: [
