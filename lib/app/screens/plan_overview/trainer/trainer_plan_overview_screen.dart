@@ -69,8 +69,7 @@ class _TrainerPlanOverviewScreenContentState
       ),
       floatingActionButton: BlocListener<CalendarBloc, CalendarState>(
         listener: (BuildContext context, CalendarState state) {
-          state.when(
-            initial: () {},
+          state.whenOrNull(
             selectedDate: (selectedDate) {
               _selectedDate = selectedDate;
             },

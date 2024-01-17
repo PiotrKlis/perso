@@ -41,8 +41,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
   Widget build(BuildContext context) {
     return BlocListener<CalendarBloc, CalendarState>(
       listener: (context, state) {
-        state.when(
-          initial: () {},
+        state.whenOrNull(
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
             context.read<TrainerExerciseListBloc>().add(

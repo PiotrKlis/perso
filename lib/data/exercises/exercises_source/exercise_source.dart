@@ -21,4 +21,11 @@ abstract class ExerciseSource {
     String trainerId,
     String date,
   );
+
+  Stream<Map<DateTime, bool>> getMarkersForDates(
+    String clientId,
+    String trainerId,
+    DateTime startDate,
+    DateTime endDate,
+  );
 }

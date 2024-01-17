@@ -11,9 +11,11 @@ import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
-  const ClientPlanOverviewScreen(
-      {required String clientId, required String trainerId, super.key,})
-      : _trainerId = trainerId,
+  const ClientPlanOverviewScreen({
+    required String clientId,
+    required String trainerId,
+    super.key,
+  })  : _trainerId = trainerId,
         _clientId = clientId;
 
   final String _clientId;
@@ -92,6 +94,7 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
             BlocBuilder<CalendarBloc, CalendarState>(
               builder: (context, state) {
                 state.when(
+                  markersData: (selectedDate) {},
                   initial: () {},
                   selectedDate: (selectedDate) {
                     _selectedDate = selectedDate;
@@ -128,6 +131,9 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
     return BlocBuilder<CalendarBloc, CalendarState>(
       builder: (BuildContext context, CalendarState state) {
         state.when(
+          markersData: (selectedDate) {
+
+          },
           initial: () {},
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
