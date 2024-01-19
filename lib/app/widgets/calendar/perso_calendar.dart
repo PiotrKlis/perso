@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
@@ -37,6 +36,13 @@ class _PersoCalendarState extends State<PersoCalendar> {
           widget.trainerId,
         ),
       );
+    // ..add(
+    //   CalendarEvent.activateMarkerListener(
+    //     _selectedDate,
+    //     widget.clientId,
+    //     widget.trainerId,
+    //   ),
+    // );
   }
 
   @override
@@ -79,17 +85,29 @@ class _PersoCalendarState extends State<PersoCalendar> {
         selectedDayPredicate: (day) => isSameDay(_selectedDate, day),
         onDaySelected: (selectedDate, focusedDay) {
           if (_selectedDate != selectedDate) {
+            context.read<CalendarBloc>().add(
+                  CalendarEvent.updateSelectedDate(selectedDate),
+                );
             setState(() {
               _selectedDate = selectedDate;
-              context.read<CalendarBloc>().add(
-                    CalendarEvent.updateSelectedDate(selectedDate),
-                  );
             });
           }
         },
-        eventLoader: (date) {
-          return List.empty();
-          // return getEventMarkerForDate(date, state);
+        onPageChanged: (focusedDay) {
+          context.read<CalendarBloc>().add(
+                CalendarEvent.getMarkersForDates(
+                  focusedDay.getMondayInTheWeek,
+                  focusedDay.getSundayInTheWeek,
+                  widget.clientId,
+                  widget.trainerId,
+                ),
+              );
+          context.read<CalendarBloc>().add(
+                CalendarEvent.updateSelectedDate(focusedDay),
+              );
+          setState(() {
+            _selectedDate = focusedDay;
+          });
         },
       ),
     );

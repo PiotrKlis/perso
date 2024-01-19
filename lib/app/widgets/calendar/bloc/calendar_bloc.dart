@@ -21,18 +21,13 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
     on<GetMarkersForDates>(
       (event, emitter) async {
         try {
-          final stream = _exercisesProvider.getMarkersForDates(
+          final markers = await _exercisesProvider.getMarkersForDates(
             event.clientId ?? _userSessionModel.user?.uid ?? '',
             event.trainerId ?? _userSessionModel.user?.uid ?? '',
             event.startDate,
             event.endDate,
           );
-          await emitter.forEach(
-            stream,
-            onData: (data) {
-              return CalendarState.markersData(data);
-            },
-          );
+          emitter(CalendarState.markersData(markers));
         } catch (error) {
           if (kDebugMode) {
             print(error);

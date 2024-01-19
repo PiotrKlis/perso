@@ -13,4 +13,10 @@ class CalendarEvent with _$CalendarEvent {
     String? clientId,
     String? trainerId,
   ) = GetMarkersForDates;
+
+  const factory CalendarEvent.activateMarkerListener(
+    DateTime selectedDate,
+    String? clientId,
+    String? trainerId,
+  ) = ActivateMarkerListener;
 }

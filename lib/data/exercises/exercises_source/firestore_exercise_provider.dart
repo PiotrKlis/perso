@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
@@ -108,12 +106,12 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Stream<Map<DateTime, bool>> getMarkersForDates(
+  Future<Map<DateTime, bool>> getMarkersForDates(
     String clientId,
     String trainerId,
     DateTime startDate,
     DateTime endDate,
-  ) async* {
+  ) async {
     final docRef = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -128,11 +126,12 @@ class FirestoreExerciseProvider extends ExerciseSource {
     }
     final collection = await Future.wait(collectionList);
 
-    final map = collection.asMap().map<DateTime, bool>((index, collection) {
+    return collection.asMap().map<DateTime, bool>((index, collection) {
       return MapEntry(
-          collectionIds[index].yearMonthDayFormat, collection.docs.isNotEmpty);
+        collectionIds[index].yearMonthDayFormat,
+        collection.docs.isNotEmpty,
+      );
     });
-    yield map;
   }
 
   List<String> getDateIds(DateTime startDate, DateTime endDate) {

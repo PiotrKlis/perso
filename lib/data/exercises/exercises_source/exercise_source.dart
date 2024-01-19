@@ -22,7 +22,7 @@ abstract class ExerciseSource {
     String date,
   );
 
-  Stream<Map<DateTime, bool>> getMarkersForDates(
+  Future<Map<DateTime, bool>> getMarkersForDates(
     String clientId,
     String trainerId,
     DateTime startDate,
