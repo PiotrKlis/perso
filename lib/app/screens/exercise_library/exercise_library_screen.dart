@@ -48,18 +48,20 @@ class _ExerciseLibraryScreenContent extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(
-                left: Dimens.xmMargin,
-                right: Dimens.xmMargin,
-              ),
+              margin: const EdgeInsets.all(Dimens.xmMargin),
               child: const PersoSearch(),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: Dimens.xmMargin),
+            ColoredBox(
               color: PersoColors.lightBlue,
-              child: PersoLibraryExerciseList(
-                clientId: _clientId,
-                selectedDate: _selectedDate,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: Dimens.sMargin,
+                  bottom: Dimens.xsMargin,
+                ),
+                child: PersoLibraryExerciseList(
+                  clientId: _clientId,
+                  selectedDate: _selectedDate,
+                ),
               ),
             ),
           ],

@@ -53,6 +53,7 @@ class _PersoLibraryExerciseListState extends State<PersoLibraryExerciseList> {
           },
           exercises: (List<ExerciseEntity> exercises) {
             return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: exercises.length,
               itemBuilder: (context, index) {
@@ -104,39 +105,35 @@ class _ExerciseState extends State<_Exercise> {
       margin: const EdgeInsets.only(top: Dimens.sMargin),
       //ExpansionPanelList needs to be wrapped in Column as it fixes
       //avoid RenderListBody must have unlimited space along its main axis error
-      child: Column(
+      child: ExpansionPanelList(
+        expansionCallback: (int index, bool isExpanded) {
+          setState(() {
+            _isExpanded = isExpanded;
+            if (_isExpanded) {
+              context
+                  .read<VideoPlayerBloc>()
+                  .add(const VideoPlayerEvent.initialize());
+            } else {
+              context
+                  .read<VideoPlayerBloc>()
+                  .add(const VideoPlayerEvent.dispose());
+            }
+          });
+        },
         children: [
-          ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {
-              setState(() {
-                _isExpanded = isExpanded;
-                if (_isExpanded) {
-                  context
-                      .read<VideoPlayerBloc>()
-                      .add(const VideoPlayerEvent.initialize());
-                } else {
-                  context
-                      .read<VideoPlayerBloc>()
-                      .add(const VideoPlayerEvent.dispose());
-                }
-              });
-            },
-            children: [
-              ExpansionPanel(
-                canTapOnHeader: true,
-                isExpanded: _isExpanded,
-                headerBuilder: (context, isExpanded) => _ExerciseHeader(
-                  exercise: widget._exercise,
-                ),
-                body: _ExerciseExpansionPanel(
-                  videoId: widget._exercise.videoId,
-                  description: widget._exercise.description,
-                  clientId: widget._clientId,
-                  date: widget._date,
-                  exerciseEntity: widget._exercise,
-                ),
-              ),
-            ],
+          ExpansionPanel(
+            canTapOnHeader: true,
+            isExpanded: _isExpanded,
+            headerBuilder: (context, isExpanded) => _ExerciseHeader(
+              exercise: widget._exercise,
+            ),
+            body: _ExerciseExpansionPanel(
+              videoId: widget._exercise.videoId,
+              description: widget._exercise.description,
+              clientId: widget._clientId,
+              date: widget._date,
+              exerciseEntity: widget._exercise,
+            ),
           ),
         ],
       ),

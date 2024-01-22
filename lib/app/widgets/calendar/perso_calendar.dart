@@ -52,8 +52,6 @@ class _PersoCalendarState extends State<PersoCalendar> {
         state.whenOrNull(
           markersData: (markers) {
             setState(() {
-              //TODO: Update markers on going back from library
-              //TODO: Update markers on mobing through the week
               _markers = markers;
             });
           },
