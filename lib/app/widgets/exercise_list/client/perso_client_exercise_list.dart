@@ -361,11 +361,7 @@ class _Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: Dimens.sMargin),
-      child: PersoCategoryChips(
-        areChipsSelectable: false,
-        selectedCategories: _categories,
-        shouldHideNotSelectedChips: true,
-      ),
+      child: PersoCategoryChips(categories: _categories),
     );
   }
 }

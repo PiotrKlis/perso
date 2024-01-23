@@ -17,7 +17,7 @@ import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart'
 import 'package:perso/app/widgets/address_and_map/google_map.dart';
 import 'package:perso/app/widgets/address_and_map/perso_autocomplete.dart';
 import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
-import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
+import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
@@ -50,7 +50,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final shortBioController = TextEditingController();
   final fullBioController = TextEditingController();
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
-  final persoChipsList = PersoCategoryChips();
+  final persoChipsList = PersoSelectableCategoryChips();
   final imagePicker = ImagePicker();
   final googleMap = const PersoGoogleMap();
   final PersoAutocomplete addressWidget = PersoAutocomplete();
@@ -201,7 +201,7 @@ class _ConfirmButton extends StatelessWidget {
   final TextEditingController phoneNumberController;
   final TextEditingController shortBioController;
   final TextEditingController fullBioController;
-  final PersoCategoryChips persoChipsList;
+  final PersoSelectableCategoryChips persoChipsList;
   final LatLng? latLng;
 
   @override
@@ -434,7 +434,7 @@ class _TrainerOnlySection extends StatelessWidget {
   final PersoGoogleMap googleMap;
   final TextEditingController shortBioController;
   final TextEditingController fullBioController;
-  final PersoCategoryChips persoChipsList;
+  final PersoSelectableCategoryChips persoChipsList;
 
   @override
   Widget build(BuildContext context) {

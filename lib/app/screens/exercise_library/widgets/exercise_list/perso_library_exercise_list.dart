@@ -7,6 +7,7 @@ import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
+import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
@@ -277,9 +278,7 @@ class _Categories extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: Dimens.sMargin),
       child: PersoCategoryChips(
-        areChipsSelectable: false,
-        selectedCategories: _categories,
-        shouldHideNotSelectedChips: true,
+        categories: _categories,
       ),
     );
   }
