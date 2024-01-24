@@ -15,9 +15,10 @@ class FirestoreExerciseProvider extends ExerciseSource {
         .collection(CollectionName.exercises)
         .get();
 
-    return exerciseSnapshots.docs
-        .map(
-          (exercise) => ExerciseEntity(
+    final exercises = Future.wait(
+      exerciseSnapshots.docs.map(
+        (exercise) async {
+          return ExerciseEntity(
             id: exercise[UserDocumentFields.id] as String,
             description: exercise[UserDocumentFields.description] as String,
             index: exercise[UserDocumentFields.index] as int,
@@ -25,13 +26,17 @@ class FirestoreExerciseProvider extends ExerciseSource {
             isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
             reps: exercise[UserDocumentFields.reps] as int,
             sets: exercise[UserDocumentFields.sets] as int,
-            tags: _getTags(exercise[UserDocumentFields.tags] as List<dynamic>),
+            tags: await _getTags(
+              exercise[UserDocumentFields.tags],
+            ),
             time: exercise[UserDocumentFields.time] as String,
             title: exercise[UserDocumentFields.title] as String,
             videoId: exercise[UserDocumentFields.videoId] as String,
-          ),
-        )
-        .toList();
+          );
+        },
+      ).toList(),
+    );
+    return exercises;
   }
 
   @override
@@ -59,28 +64,32 @@ class FirestoreExerciseProvider extends ExerciseSource {
         .snapshots();
 
     await for (final snapshot in snapshots) {
-      yield snapshot.docs
-          .map(
-            (exercise) => ExerciseInTrainingEntity(
-              id: exercise.id,
-              exerciseEntity: ExerciseEntity(
-                id: exercise[UserDocumentFields.id] as String,
-                description: exercise[UserDocumentFields.description] as String,
-                index: exercise[UserDocumentFields.index] as int,
-                isRepsBased: exercise[UserDocumentFields.isRepsBased] as bool,
-                isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
-                reps: exercise[UserDocumentFields.reps] as int,
-                sets: exercise[UserDocumentFields.sets] as int,
-                tags: _getTags(
-                  exercise[UserDocumentFields.tags] as List<dynamic>,
+      yield await Future.wait(
+        snapshot.docs
+            .map(
+              (exercise) async => ExerciseInTrainingEntity(
+                id: exercise.id,
+                exerciseEntity: ExerciseEntity(
+                  id: exercise[UserDocumentFields.id] as String,
+                  description:
+                      exercise[UserDocumentFields.description] as String,
+                  index: exercise[UserDocumentFields.index] as int,
+                  isRepsBased: exercise[UserDocumentFields.isRepsBased] as bool,
+                  isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
+                  reps: exercise[UserDocumentFields.reps] as int,
+                  sets: exercise[UserDocumentFields.sets] as int,
+                  tags: await _getTags(
+                    exercise[UserDocumentFields.tags]
+                        as List<DocumentReference>,
+                  ),
+                  time: exercise[UserDocumentFields.time] as String,
+                  title: exercise[UserDocumentFields.title] as String,
+                  videoId: exercise[UserDocumentFields.videoId] as String,
                 ),
-                time: exercise[UserDocumentFields.time] as String,
-                title: exercise[UserDocumentFields.title] as String,
-                videoId: exercise[UserDocumentFields.videoId] as String,
               ),
-            ),
-          )
-          .toList();
+            )
+            .toList(),
+      );
     }
   }
 
@@ -101,8 +110,15 @@ class FirestoreExerciseProvider extends ExerciseSource {
     return snapshot.docs.length;
   }
 
-  List<String> _getTags(List<dynamic> tags) {
-    return tags.map<String>((tag) => tag as String).toList();
+  Future<List<String>> _getTags(List<dynamic> tags) async {
+    //TODO: Fix casting
+    print(tags);
+    return Future.wait(
+      (tags as List<DocumentReference>).map((tag) async {
+        final tagSnapshot = await tag.get();
+        return tagSnapshot["title-en"] as String;
+      }).toList(),
+    );
   }
 
   @override
