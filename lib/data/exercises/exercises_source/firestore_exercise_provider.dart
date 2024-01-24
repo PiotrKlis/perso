@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:perso/app/utils/extension/string_extensions.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
+import 'package:perso/core/models/tag_entity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
@@ -27,7 +28,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
             reps: exercise[UserDocumentFields.reps] as int,
             sets: exercise[UserDocumentFields.sets] as int,
             tags: await _getTags(
-              exercise[UserDocumentFields.tags],
+              exercise[UserDocumentFields.tags] as List<dynamic>,
             ),
             time: exercise[UserDocumentFields.time] as String,
             title: exercise[UserDocumentFields.title] as String,
@@ -79,8 +80,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
                   reps: exercise[UserDocumentFields.reps] as int,
                   sets: exercise[UserDocumentFields.sets] as int,
                   tags: await _getTags(
-                    exercise[UserDocumentFields.tags]
-                        as List<DocumentReference>,
+                    exercise[UserDocumentFields.tags] as List<dynamic>,
                   ),
                   time: exercise[UserDocumentFields.time] as String,
                   title: exercise[UserDocumentFields.title] as String,
@@ -110,13 +110,15 @@ class FirestoreExerciseProvider extends ExerciseSource {
     return snapshot.docs.length;
   }
 
-  Future<List<String>> _getTags(List<dynamic> tags) async {
-    //TODO: Fix casting
-    print(tags);
+  Future<List<TagEntity>> _getTags(List<dynamic> dynamicTagsList) async {
+    final tags = dynamicTagsList.cast<DocumentReference>();
     return Future.wait(
-      (tags as List<DocumentReference>).map((tag) async {
+      tags.map((tag) async {
         final tagSnapshot = await tag.get();
-        return tagSnapshot["title-en"] as String;
+        return TagEntity(
+          id: tagSnapshot.id,
+          title: tagSnapshot[UserDocumentFields.titlePl] as String,
+        );
       }).toList(),
     );
   }

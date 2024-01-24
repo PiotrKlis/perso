@@ -3,6 +3,7 @@ class CollectionName {
   static String images = 'images';
   static String exercises = 'exercises';
   static String clients = 'clients';
+  static String tags = 'tags';
 }
 
 class UserDocumentFields {
@@ -38,4 +39,6 @@ class UserDocumentFields {
   static const String time = 'time';
   static const String title = 'title';
   static const String videoId = 'videoId';
+  static const String titlePl = 'title-pl';
+  static const String titleEn = 'title-en';
 }

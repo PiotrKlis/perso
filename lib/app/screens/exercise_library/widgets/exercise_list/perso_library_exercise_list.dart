@@ -179,7 +179,9 @@ class _ExerciseExpansionPanel extends StatelessWidget {
             videoId: _videoId,
           ),
         ),
-        _Categories(_exerciseEntity.tags),
+        _Categories(
+          _exerciseEntity.tags.map((tag) => tag.title).toList(),
+        ),
       ],
     );
   }
@@ -294,7 +296,7 @@ class _ExerciseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: _getIconForTags(_exercise.tags),
+      leading: _getIconForTags(_exercise.tags.map((tag) => tag.title).toList()),
       title: Text(_exercise.title, style: ThemeText.bodyBoldBlackText),
     );
   }

@@ -14,6 +14,12 @@ class FirestoreExerciseService extends ExerciseService {
     String date,
     ExerciseEntity exerciseEntity,
   ) async {
+    final tagsDocRef = exerciseEntity.tags.map(
+      (tag) => FirebaseFirestore.instance
+          .collection(CollectionName.tags)
+          .doc(tag.id),
+    ).toList();
+
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -29,7 +35,7 @@ class FirestoreExerciseService extends ExerciseService {
       UserDocumentFields.isTimeBased: exerciseEntity.isTimeBased,
       UserDocumentFields.reps: exerciseEntity.reps,
       UserDocumentFields.sets: exerciseEntity.sets,
-      UserDocumentFields.tags: exerciseEntity.tags,
+      UserDocumentFields.tags: tagsDocRef,
       UserDocumentFields.time: exerciseEntity.time,
       UserDocumentFields.title: exerciseEntity.title,
       UserDocumentFields.videoId: exerciseEntity.videoId,

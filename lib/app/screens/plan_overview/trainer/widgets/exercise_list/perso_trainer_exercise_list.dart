@@ -11,7 +11,6 @@ import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
-import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
@@ -235,7 +234,9 @@ class _ExerciseExpansionPanel extends StatelessWidget {
             videoId: videoId,
           ),
         ),
-        _Categories(exerciseEntity.tags),
+        _Categories(
+          exerciseEntity.tags.map((tag) => tag.title).toList(),
+        ),
       ],
     );
   }
@@ -476,7 +477,7 @@ class _ExerciseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: _getIconForTags(exercise.tags),
+      leading: _getIconForTags(exercise.tags.map((tag) => tag.title).toList()),
       title: Text(exercise.title, style: ThemeText.bodyBoldBlackText),
       trailing: const Icon(Icons.reorder),
     );
