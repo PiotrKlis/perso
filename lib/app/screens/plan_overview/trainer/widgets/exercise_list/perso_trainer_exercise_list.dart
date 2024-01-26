@@ -71,7 +71,8 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                     key: UniqueKey(),
                     create: (context) => VideoPlayerBloc(),
                     child: _Exercise(
-                      exercise: exercise.exerciseEntity,
+                      exerciseInTrainingEntityList: _localExercises,
+                      exerciseInTrainingEntity: exercise,
                       clientId: widget.clientId,
                       date: _selectedDate,
                     ),
@@ -137,13 +138,14 @@ class _ExercisesListDecorator extends StatelessWidget {
 
 class _Exercise extends StatefulWidget {
   const _Exercise({
-    required this.exercise,
+    required this.exerciseInTrainingEntity,
+    required this.exerciseInTrainingEntityList,
     required this.clientId,
     required this.date,
-    super.key,
   });
 
-  final ExerciseEntity exercise;
+  final ExerciseInTrainingEntity exerciseInTrainingEntity;
+  final List<ExerciseInTrainingEntity> exerciseInTrainingEntityList;
   final String clientId;
   final String date;
 
@@ -182,14 +184,14 @@ class _ExerciseState extends State<_Exercise> {
                 canTapOnHeader: true,
                 isExpanded: _isExpanded,
                 headerBuilder: (context, isExpanded) => _ExerciseHeader(
-                  exercise: widget.exercise,
+                  exercise: widget.exerciseInTrainingEntity.exerciseEntity,
                 ),
                 body: _ExerciseExpansionPanel(
-                  videoId: widget.exercise.videoId,
-                  description: widget.exercise.description,
                   clientId: widget.clientId,
                   date: widget.date,
-                  exerciseEntity: widget.exercise,
+                  exerciseInTrainingEntity: widget.exerciseInTrainingEntity,
+                  exerciseInTrainingEntityList:
+                      widget.exerciseInTrainingEntityList,
                 ),
               ),
             ],
@@ -202,18 +204,16 @@ class _ExerciseState extends State<_Exercise> {
 
 class _ExerciseExpansionPanel extends StatelessWidget {
   const _ExerciseExpansionPanel({
-    required this.videoId,
-    required this.description,
     required this.clientId,
     required this.date,
-    required this.exerciseEntity,
+    required this.exerciseInTrainingEntity,
+    required this.exerciseInTrainingEntityList,
   });
 
-  final String videoId;
-  final String description;
-  final String? clientId;
-  final String? date;
-  final ExerciseEntity exerciseEntity;
+  final String clientId;
+  final String date;
+  final ExerciseInTrainingEntity exerciseInTrainingEntity;
+  final List<ExerciseInTrainingEntity> exerciseInTrainingEntityList;
 
   @override
   Widget build(BuildContext context) {
@@ -222,20 +222,23 @@ class _ExerciseExpansionPanel extends StatelessWidget {
       children: [
         const PersoDivider(),
         _DescriptionSection(
-          description: description,
+          description: exerciseInTrainingEntity.exerciseEntity.description,
           clientId: clientId,
           date: date,
-          exerciseEntity: exerciseEntity,
+          exerciseInTrainingEntity: exerciseInTrainingEntity,
+          exerciseInTrainingEntityList: exerciseInTrainingEntityList,
         ),
         const _OptionsSection(),
         Container(
           margin: const EdgeInsets.only(top: Dimens.sMargin),
           child: PersoVideoPlayer(
-            videoId: videoId,
+            videoId: exerciseInTrainingEntity.exerciseEntity.videoId,
           ),
         ),
         _Categories(
-          exerciseEntity.tags.map((tag) => tag.title).toList(),
+          exerciseInTrainingEntity.exerciseEntity.tags
+              .map((tag) => tag.title)
+              .toList(),
         ),
       ],
     );
@@ -247,13 +250,15 @@ class _DescriptionSection extends StatelessWidget {
     required this.description,
     required this.clientId,
     required this.date,
-    required this.exerciseEntity,
+    required this.exerciseInTrainingEntity,
+    required this.exerciseInTrainingEntityList,
   });
 
   final String description;
-  final String? clientId;
-  final String? date;
-  final ExerciseEntity exerciseEntity;
+  final String clientId;
+  final String date;
+  final ExerciseInTrainingEntity exerciseInTrainingEntity;
+  final List<ExerciseInTrainingEntity> exerciseInTrainingEntityList;
 
   @override
   Widget build(BuildContext context) {
@@ -276,7 +281,8 @@ class _DescriptionSection extends StatelessWidget {
                 _ActionableIcon(
                   clientId: clientId,
                   date: date,
-                  exerciseEntity: exerciseEntity,
+                  exerciseInTrainingEntity: exerciseInTrainingEntity,
+                  exerciseInTrainingEntityList: exerciseInTrainingEntityList,
                 ),
               ],
             ),
@@ -292,12 +298,14 @@ class _ActionableIcon extends StatelessWidget {
   const _ActionableIcon({
     required this.clientId,
     required this.date,
-    required this.exerciseEntity,
+    required this.exerciseInTrainingEntity,
+    required this.exerciseInTrainingEntityList,
   });
 
-  final String? clientId;
-  final String? date;
-  final ExerciseEntity exerciseEntity;
+  final String clientId;
+  final String date;
+  final ExerciseInTrainingEntity exerciseInTrainingEntity;
+  final List<ExerciseInTrainingEntity> exerciseInTrainingEntityList;
 
   @override
   Widget build(BuildContext context) {
@@ -307,7 +315,10 @@ class _ActionableIcon extends StatelessWidget {
         size: 32,
       ),
       onPressed: () {
-        //Add bloc logic to add exercise
+        context.read<TrainerExerciseListBloc>().add(
+              TrainerExerciseListEvent.removeExercise(clientId, date,
+                  exerciseInTrainingEntity, exerciseInTrainingEntityList),
+            );
       },
     );
   }
@@ -348,7 +359,7 @@ class _OptionsSectionState extends State<_OptionsSection> {
       children: [
         Container(
           margin: const EdgeInsets.only(
-            left: Dimens.sMargin,
+            left: Dimens.mMargin,
             right: Dimens.sMargin,
             top: Dimens.mMargin,
           ),

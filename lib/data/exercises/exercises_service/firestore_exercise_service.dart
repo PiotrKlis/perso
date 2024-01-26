@@ -14,11 +14,13 @@ class FirestoreExerciseService extends ExerciseService {
     String date,
     ExerciseEntity exerciseEntity,
   ) async {
-    final tagsDocRef = exerciseEntity.tags.map(
-      (tag) => FirebaseFirestore.instance
-          .collection(CollectionName.tags)
-          .doc(tag.id),
-    ).toList();
+    final tagsDocRef = exerciseEntity.tags
+        .map(
+          (tag) => FirebaseFirestore.instance
+              .collection(CollectionName.tags)
+              .doc(tag.id),
+        )
+        .toList();
 
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
@@ -58,10 +60,33 @@ class FirestoreExerciseService extends ExerciseService {
     String clientId,
     String trainerId,
     String date,
-    String exerciseId,
-  ) {
-    // TODO: implement removeExercise
-    throw UnimplementedError();
+    ExerciseInTrainingEntity exerciseInTrainingEntity,
+    List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
+  ) async {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(date)
+        .doc(exerciseInTrainingEntity.id)
+        .delete();
+
+    final batch = FirebaseFirestore.instance.batch();
+    final collection = FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(date);
+
+    for (final exercise in exerciseInTrainingEntityList) {
+      final docRef = collection.doc(exercise.id);
+      batch.update(docRef, {
+        UserDocumentFields.index: exercise.exerciseEntity.index,
+      });
+    }
+    await batch.commit();
   }
 
   @override
@@ -72,7 +97,6 @@ class FirestoreExerciseService extends ExerciseService {
     List<ExerciseInTrainingEntity> exercises,
   ) async {
     final batch = FirebaseFirestore.instance.batch();
-
     final collection = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -82,7 +106,6 @@ class FirestoreExerciseService extends ExerciseService {
 
     for (final exercise in exercises) {
       final docRef = collection.doc(exercise.id);
-
       batch.update(docRef, {
         UserDocumentFields.index: exercise.exerciseEntity.index,
       });

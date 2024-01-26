@@ -20,7 +20,8 @@ abstract class ExerciseService {
     String clientId,
     String trainerId,
     String date,
-    String exerciseId,
+    ExerciseInTrainingEntity exerciseInTrainingEntity,
+    List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
   );
 
   Future<void> reorder(

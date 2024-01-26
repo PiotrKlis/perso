@@ -32,7 +32,8 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
   const factory TrainerExerciseListEvent.removeExercise(
     String clientId,
     String date,
-    String exerciseId,
+    ExerciseInTrainingEntity exerciseInTrainingEntity,
+      List<ExerciseInTrainingEntity> exerciseInTrainingEntityList
   ) = RemoveExercise;
 
   const factory TrainerExerciseListEvent.reorder(

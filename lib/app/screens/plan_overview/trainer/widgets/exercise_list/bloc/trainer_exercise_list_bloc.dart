@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
 import 'package:perso/data/exercises/exercises_source/firestore_exercise_provider.dart';
@@ -72,15 +73,26 @@ class TrainerExerciseListBloc
 
     on<RemoveExercise>((event, emitter) async {
       try {
+        final mutableList = <ExerciseInTrainingEntity>[
+          ...event.exerciseInTrainingEntityList,
+        ]..remove(event.exerciseInTrainingEntity);
+        final updatedIndexesList = mutableList
+            .mapIndexed(
+              (index, exercise) => exercise.copyWith(
+                exerciseEntity: exercise.exerciseEntity.copyWith(
+                  index: index,
+                ),
+              ),
+            )
+            .toList();
+
         await _exercisesService.remove(
           event.clientId,
           trainerId,
           event.date,
-          event.exerciseId,
+          event.exerciseInTrainingEntity,
+          updatedIndexesList,
         );
-        if (kDebugMode) {
-          print('Exercise removed successfully');
-        }
       } catch (error) {
         emitter(TrainerExerciseListState.error(error.toString()));
       }
