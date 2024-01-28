@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/perso_trainer_exercise_options.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
@@ -228,7 +229,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
           exerciseInTrainingEntity: exerciseInTrainingEntity,
           exerciseInTrainingEntityList: exerciseInTrainingEntityList,
         ),
-        const _OptionsSection(),
+        PersoTrainerExerciseOptionsSection(clientId, date, exerciseInTrainingEntity),
         Container(
           margin: const EdgeInsets.only(top: Dimens.sMargin),
           child: PersoVideoPlayer(
@@ -340,143 +341,7 @@ class _Categories extends StatelessWidget {
   }
 }
 
-enum _ExerciseType { repsBased, timeBased }
 
-class _OptionsSection extends StatefulWidget {
-  const _OptionsSection();
-
-  @override
-  State<_OptionsSection> createState() => _OptionsSectionState();
-}
-
-class _OptionsSectionState extends State<_OptionsSection> {
-  var _exerciseType = _ExerciseType.repsBased;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            left: Dimens.mMargin,
-            right: Dimens.sMargin,
-            top: Dimens.mMargin,
-          ),
-          child: Text(
-            'Options',
-            style: ThemeText.smallTitleBold,
-          ),
-        ),
-        RadioListTile(
-          title: const Text('Reps based exercise'),
-          value: _ExerciseType.repsBased,
-          groupValue: _exerciseType,
-          onChanged: (value) {
-            setState(() {
-              _exerciseType = value!;
-            });
-          },
-        ),
-        RadioListTile(
-          title: const Text('Time based exercise'),
-          value: _ExerciseType.timeBased,
-          groupValue: _exerciseType,
-          onChanged: (value) {
-            setState(() {
-              _exerciseType = value!;
-            });
-          },
-        ),
-        Visibility(
-          visible: _exerciseType == _ExerciseType.repsBased,
-          child: const _RepsBasedExerciseOptions(),
-        ),
-        Visibility(
-          visible: _exerciseType == _ExerciseType.timeBased,
-          child: const _TimeBasedExerciseOptions(),
-        ),
-      ],
-    );
-  }
-}
-
-class _RepsBasedExerciseOptions extends StatelessWidget {
-  const _RepsBasedExerciseOptions();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: Dimens.sMargin,
-        left: Dimens.sMargin,
-        right: Dimens.sMargin,
-        bottom: Dimens.mMargin,
-      ),
-      child: const Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            child: PersoTextField(
-              textInputType: TextInputType.number,
-              title: 'Sets',
-            ),
-          ),
-          SizedBox(
-            width: 8,
-          ),
-          Expanded(
-            child: PersoTextField(
-              textInputType: TextInputType.number,
-              title: 'Repetitions',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TimeBasedExerciseOptions extends StatelessWidget {
-  const _TimeBasedExerciseOptions();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: Dimens.sMargin,
-        left: Dimens.sMargin,
-        right: Dimens.sMargin,
-        bottom: Dimens.mMargin,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Expanded(
-            child: PersoTextField(
-              title: 'Minutes',
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: 8,
-            ),
-            child: Text(
-              ':',
-              style: ThemeText.bodyBoldBlackText,
-            ),
-          ),
-          const Expanded(
-            child: PersoTextField(
-              title: 'Seconds',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _ExerciseHeader extends StatelessWidget {
   const _ExerciseHeader({

@@ -23,10 +23,10 @@ class LibraryExerciseListBloc
     on<Add>((event, emitter) async {
       try {
         await _exercisesService.add(
-          event.clientId,
-          trainerId,
-          event.date,
-          event.exerciseEntity.copyWith(index: _currentExerciseIndex),
+          clientId: event.clientId,
+          trainerId: trainerId,
+          date: event.date,
+          exerciseEntity: event.exerciseEntity.copyWith(index: _currentExerciseIndex),
         );
         _currentExerciseIndex++;
       } catch (error) {

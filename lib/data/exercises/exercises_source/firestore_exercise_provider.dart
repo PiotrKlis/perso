@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:perso/app/utils/extension/string_extensions.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
+import 'package:perso/core/models/exercise_type.dart';
 import 'package:perso/core/models/tag_entity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
@@ -18,13 +19,13 @@ class FirestoreExerciseProvider extends ExerciseSource {
 
     final exercises = Future.wait(
       exerciseSnapshots.docs.map(
-        (exercise) async {
+            (exercise) async {
           return ExerciseEntity(
             id: exercise[UserDocumentFields.id] as String,
             description: exercise[UserDocumentFields.description] as String,
             index: exercise[UserDocumentFields.index] as int,
-            isRepsBased: exercise[UserDocumentFields.isRepsBased] as bool,
-            isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
+            exerciseType: (exercise[UserDocumentFields.exerciseType] as String)
+                .toExerciseType()!,
             reps: exercise[UserDocumentFields.reps] as int,
             sets: exercise[UserDocumentFields.sets] as int,
             tags: await _getTags(
@@ -41,21 +42,17 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<List<ExerciseEntity>> getExercisesForClient(
-    String clientId,
-    String trainerId,
-    String date,
-  ) {
+  Future<List<ExerciseEntity>> getExercisesForClient(String clientId,
+      String trainerId,
+      String date,) {
     // TODO: implement getExercisesForClient
     throw UnimplementedError();
   }
 
   @override
-  Stream<List<ExerciseInTrainingEntity>> getExercisesForTrainer(
-    String clientId,
-    String trainerId,
-    String date,
-  ) async* {
+  Stream<List<ExerciseInTrainingEntity>> getExercisesForTrainer(String clientId,
+      String trainerId,
+      String date,) async* {
     final snapshots = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -68,37 +65,37 @@ class FirestoreExerciseProvider extends ExerciseSource {
       yield await Future.wait(
         snapshot.docs
             .map(
-              (exercise) async => ExerciseInTrainingEntity(
+              (exercise) async =>
+              ExerciseInTrainingEntity(
                 id: exercise.id,
                 exerciseEntity: ExerciseEntity(
-                  id: exercise[UserDocumentFields.id] as String,
-                  description:
-                      exercise[UserDocumentFields.description] as String,
-                  index: exercise[UserDocumentFields.index] as int,
-                  isRepsBased: exercise[UserDocumentFields.isRepsBased] as bool,
-                  isTimeBased: exercise[UserDocumentFields.isTimeBased] as bool,
-                  reps: exercise[UserDocumentFields.reps] as int,
-                  sets: exercise[UserDocumentFields.sets] as int,
-                  tags: await _getTags(
-                    exercise[UserDocumentFields.tags] as List<dynamic>,
-                  ),
-                  time: exercise[UserDocumentFields.time] as String,
-                  title: exercise[UserDocumentFields.title] as String,
-                  videoId: exercise[UserDocumentFields.videoId] as String,
+                    id: exercise[UserDocumentFields.id] as String,
+                    description:
+                    exercise[UserDocumentFields.description] as String,
+                    index: exercise[UserDocumentFields.index] as int,
+                    exerciseType: (exercise[UserDocumentFields
+                        .exerciseType] as String)
+                        .toExerciseType()!,
+                    reps: exercise[UserDocumentFields.reps] as int,
+                    sets: exercise[UserDocumentFields.sets] as int,
+                    tags: await _getTags(
+                      exercise[UserDocumentFields.tags] as List<dynamic>,
+                    ),
+                    time: exercise[UserDocumentFields.time] as String,
+                    title: exercise[UserDocumentFields.title] as String,
+                    videoId: exercise[UserDocumentFields.videoId] as String,
                 ),
               ),
-            )
+        )
             .toList(),
       );
     }
   }
 
   @override
-  Future<int> getNumberOfExercises(
-    String clientId,
-    String trainerId,
-    String date,
-  ) async {
+  Future<int> getNumberOfExercises(String clientId,
+      String trainerId,
+      String date,) async {
     final snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -124,12 +121,10 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<Map<DateTime, bool>> getMarkersForDates(
-    String clientId,
-    String trainerId,
-    DateTime startDate,
-    DateTime endDate,
-  ) async {
+  Future<Map<DateTime, bool>> getMarkersForDates(String clientId,
+      String trainerId,
+      DateTime startDate,
+      DateTime endDate,) async {
     final docRef = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)

@@ -1,6 +1,5 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
@@ -41,29 +40,14 @@ class TrainerExerciseListBloc
       transformer: restartable(),
     );
 
-    on<EditExercise>((event, emitter) async {
-      try {
-        await _exercisesService.edit(
-          event.clientId,
-          trainerId,
-          event.exerciseId,
-          event.date,
-        );
-        if (kDebugMode) {
-          print('Exercise edited successfully');
-        }
-      } catch (error) {
-        emitter(TrainerExerciseListState.error(error.toString()));
-      }
-    });
-
     on<AddExercise>((event, emitter) async {
       try {
         await _exercisesService.add(
-          event.clientId,
-          trainerId,
-          event.date,
-          event.exerciseEntity.copyWith(index: _currentExerciseIndex),
+          clientId: event.clientId,
+          trainerId: trainerId,
+          date: event.date,
+          exerciseEntity:
+              event.exerciseEntity.copyWith(index: _currentExerciseIndex),
         );
         _currentExerciseIndex++;
       } catch (error) {
@@ -87,11 +71,11 @@ class TrainerExerciseListBloc
             .toList();
 
         await _exercisesService.remove(
-          event.clientId,
-          trainerId,
-          event.date,
-          event.exerciseInTrainingEntity,
-          updatedIndexesList,
+          clientId: event.clientId,
+          trainerId: trainerId,
+          date: event.date,
+          exerciseInTrainingEntity: event.exerciseInTrainingEntity,
+          exerciseInTrainingEntityList: updatedIndexesList,
         );
       } catch (error) {
         emitter(TrainerExerciseListState.error(error.toString()));
@@ -125,10 +109,10 @@ class TrainerExerciseListBloc
 
         emitter(TrainerExerciseListState.exercises(reorderedExercises));
         await _exercisesService.reorder(
-          event.clientId,
-          trainerId,
-          event.date,
-          reorderedExercises,
+          clientId: event.clientId,
+          trainerId: trainerId,
+          date: event.date,
+          exercises: reorderedExercises,
         );
       } catch (error) {
         emitter(TrainerExerciseListState.error(error.toString()));

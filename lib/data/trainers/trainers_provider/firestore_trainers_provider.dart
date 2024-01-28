@@ -5,7 +5,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/review_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/string_extensions.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 import 'package:perso/data/utils/firestore_constants.dart';

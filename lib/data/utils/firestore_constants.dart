@@ -31,8 +31,6 @@ class UserDocumentFields {
   static const String pendingTrainers = 'pendingTrainers';
   static const String inactiveTrainers = 'inactiveTrainers';
   static const String index = 'index';
-  static const String isRepsBased = 'isRepsBased';
-  static const String isTimeBased = 'isTimeBased';
   static const String reps = 'reps';
   static const String sets = 'sets';
   static const String tags = 'tags';
@@ -41,4 +39,5 @@ class UserDocumentFields {
   static const String videoId = 'videoId';
   static const String titlePl = 'title-pl';
   static const String titleEn = 'title-en';
+  static const String exerciseType = 'exerciseType';
 }

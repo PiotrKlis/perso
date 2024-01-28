@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_client_data.dart';
 import 'package:perso/core/models/client_entity.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/clients/clients_service/clients_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 

@@ -3,7 +3,7 @@ import 'package:perso/app/screens/trainer_details/event/action_section_event.dar
 import 'package:perso/app/screens/trainer_details/state/action_section_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 
 class ActionSectionBloc extends Bloc<ActionSectionEvent, ActionSectionState> {
 

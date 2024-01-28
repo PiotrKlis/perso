@@ -26,7 +26,7 @@ import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/navigation/bottom_nav_bar.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();

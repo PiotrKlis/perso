@@ -1,4 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/perso_trainer_exercise_list.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/perso_trainer_exercise_options.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 
@@ -17,12 +19,6 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
     String date,
   ) = ActivateExercisesStream;
 
-  const factory TrainerExerciseListEvent.editExercise(
-    String clientId,
-    String exerciseId,
-    String date,
-  ) = EditExercise;
-
   const factory TrainerExerciseListEvent.addExercise(
     String clientId,
     String date,
@@ -30,11 +26,11 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
   ) = AddExercise;
 
   const factory TrainerExerciseListEvent.removeExercise(
-    String clientId,
-    String date,
-    ExerciseInTrainingEntity exerciseInTrainingEntity,
-      List<ExerciseInTrainingEntity> exerciseInTrainingEntityList
-  ) = RemoveExercise;
+          String clientId,
+          String date,
+          ExerciseInTrainingEntity exerciseInTrainingEntity,
+          List<ExerciseInTrainingEntity> exerciseInTrainingEntityList) =
+      RemoveExercise;
 
   const factory TrainerExerciseListEvent.reorder(
     String clientId,

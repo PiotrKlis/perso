@@ -7,7 +7,7 @@ import 'package:perso/app/models/editable_trainer_data.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/trainers/trainers_service/trainers_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 

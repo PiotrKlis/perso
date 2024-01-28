@@ -26,7 +26,7 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/spoken_language_row.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class ProfileEditScreen extends StatefulWidget {
