@@ -76,14 +76,15 @@ class _TrainerPlanOverviewScreenContentState
           );
         },
         child: FloatingActionButton(
-          onPressed: () {
-            context.pushNamed(
+          onPressed: () async {
+            await context.pushNamed(
               ScreenNavigationKey.exerciseLibrary,
               queryParameters: {
                 'clientId': widget._clientId,
                 'date': _selectedDate,
               },
             );
+            print("PKPK I'm back!");
           },
           child: const Icon(Icons.add),
         ),

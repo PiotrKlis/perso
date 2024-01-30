@@ -14,25 +14,16 @@ class TrainerExerciseListBloc
   TrainerExerciseListBloc() : super(const TrainerExerciseListState.loading()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
 
-    on<ActivateExercisesStream>(
+    on<FetchExercises>(
       (event, emitter) async {
         try {
           emitter(const TrainerExerciseListState.loading());
-          final stream = _exercisesProvider.getExercisesForTrainer(
+          final exercises = await _exercisesProvider.getExercisesForTrainer(
             event.clientId,
             trainerId,
             event.date,
           );
-          await emitter.forEach(
-            stream,
-            onData: (exercises) {
-              exercises.sort(
-                (a, b) =>
-                    a.exerciseEntity.index.compareTo(b.exerciseEntity.index),
-              );
-              return TrainerExerciseListState.exercises(exercises);
-            },
-          );
+          emitter(TrainerExerciseListState.exercises(exercises));
         } catch (error) {
           emitter(TrainerExerciseListState.error(error.toString()));
         }
@@ -107,7 +98,11 @@ class TrainerExerciseListBloc
             )
             .toList();
 
-        emitter(TrainerExerciseListState.exercises(reorderedExercises));
+        emitter(
+          TrainerExerciseListState.exercises(
+            reorderedExercises,
+          ),
+        );
         await _exercisesService.reorder(
           clientId: event.clientId,
           trainerId: trainerId,
@@ -118,10 +113,19 @@ class TrainerExerciseListBloc
         emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
+
+    on<PanelExpansion>((event, emitter) async {
+      if (_expandedPanels.contains(event.exerciseId)) {
+        _expandedPanels.remove(event.exerciseId);
+      } else {
+        _expandedPanels.add(event.exerciseId);
+      }
+    });
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesProvider = getIt.get<FirestoreExerciseProvider>();
   final _exercisesService = getIt.get<FirestoreExerciseService>();
   var _currentExerciseIndex = 0;
+  final _expandedPanels = <String>[];
 }

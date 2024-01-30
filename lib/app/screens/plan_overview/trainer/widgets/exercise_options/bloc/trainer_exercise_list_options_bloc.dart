@@ -15,51 +15,65 @@ class TrainerExerciseListOptionsBloc extends Bloc<
     on<EditReps>(
       (event, emitter) async {
         try {
+          emitter(
+            TrainerExerciseListOptionsState.exerciseOptionsDataUpdate(
+              event.exerciseOptionsData,
+            ),
+          );
           await _exercisesService.editReps(
             clientId: event.clientId,
             trainerId: trainerId,
             exerciseId: event.exerciseId,
             date: event.date,
-            reps: int.parse(event.reps),
-            sets: int.parse(event.sets),
+            reps: int.parse(event.exerciseOptionsData.reps),
+            sets: int.parse(event.exerciseOptionsData.sets),
           );
         } catch (error) {
           print(error);
         }
       },
       transformer: debounce(
-        const Duration(milliseconds: 500),
+        const Duration(milliseconds: 750),
       ),
     );
 
     on<EditTime>(
       (event, emitter) async {
         try {
-          final time = '${event.minutes}:${event.seconds}';
+          emitter(
+            TrainerExerciseListOptionsState.exerciseOptionsDataUpdate(
+              event.exerciseOptionsData,
+            ),
+          );
           await _exercisesService.editTime(
             clientId: event.clientId,
             trainerId: trainerId,
             exerciseId: event.exerciseId,
             date: event.date,
-            time: time,
+            time: event.exerciseOptionsData.time,
           );
         } catch (error) {
           print(error);
         }
       },
       transformer: debounce(
-        const Duration(milliseconds: 500),
+        const Duration(milliseconds: 750),
       ),
     );
 
     on<EditExerciseType>((event, emitter) async {
       try {
+        emitter(
+          TrainerExerciseListOptionsState.exerciseOptionsDataUpdate(
+            event.exerciseOptionsData,
+          ),
+        );
         await _exercisesService.editExerciseType(
           clientId: event.clientId,
           trainerId: trainerId,
           exerciseId: event.id,
           date: event.date,
-          exerciseType: event.exerciseType.name,
+          exerciseType: event.exerciseOptionsData.exerciseType.name,
         );
       } catch (error) {
         print(error);

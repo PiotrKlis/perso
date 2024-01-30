@@ -13,7 +13,6 @@ import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
-import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
@@ -46,7 +45,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
             context.read<TrainerExerciseListBloc>().add(
-                  TrainerExerciseListEvent.activateExercisesStream(
+                  TrainerExerciseListEvent.fetchExercises(
                     widget.clientId,
                     _selectedDate,
                   ),
@@ -139,16 +138,19 @@ class _ExercisesListDecorator extends StatelessWidget {
 
 class _Exercise extends StatefulWidget {
   const _Exercise({
-    required this.exerciseInTrainingEntity,
-    required this.exerciseInTrainingEntityList,
-    required this.clientId,
-    required this.date,
-  });
+    required ExerciseInTrainingEntity exerciseInTrainingEntity,
+    required List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
+    required String clientId,
+    required String date,
+  })  : _date = date,
+        _clientId = clientId,
+        _exerciseInTrainingEntityList = exerciseInTrainingEntityList,
+        _exerciseInTrainingEntity = exerciseInTrainingEntity;
 
-  final ExerciseInTrainingEntity exerciseInTrainingEntity;
-  final List<ExerciseInTrainingEntity> exerciseInTrainingEntityList;
-  final String clientId;
-  final String date;
+  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final List<ExerciseInTrainingEntity> _exerciseInTrainingEntityList;
+  final String _clientId;
+  final String _date;
 
   @override
   State<_Exercise> createState() => _ExerciseState();
@@ -170,9 +172,14 @@ class _ExerciseState extends State<_Exercise> {
               setState(() {
                 _isExpanded = isExpanded;
                 if (_isExpanded) {
-                  context
-                      .read<VideoPlayerBloc>()
-                      .add(const VideoPlayerEvent.initialize());
+                  context.read<VideoPlayerBloc>().add(
+                        const VideoPlayerEvent.initialize(),
+                      );
+                  context.read<TrainerExerciseListBloc>().add(
+                        TrainerExerciseListEvent.panelExpansion(
+                          widget._exerciseInTrainingEntity.id,
+                        ),
+                      );
                 } else {
                   context
                       .read<VideoPlayerBloc>()
@@ -185,14 +192,14 @@ class _ExerciseState extends State<_Exercise> {
                 canTapOnHeader: true,
                 isExpanded: _isExpanded,
                 headerBuilder: (context, isExpanded) => _ExerciseHeader(
-                  exercise: widget.exerciseInTrainingEntity.exerciseEntity,
+                  exercise: widget._exerciseInTrainingEntity.exerciseEntity,
                 ),
                 body: _ExerciseExpansionPanel(
-                  clientId: widget.clientId,
-                  date: widget.date,
-                  exerciseInTrainingEntity: widget.exerciseInTrainingEntity,
+                  clientId: widget._clientId,
+                  date: widget._date,
+                  exerciseInTrainingEntity: widget._exerciseInTrainingEntity,
                   exerciseInTrainingEntityList:
-                      widget.exerciseInTrainingEntityList,
+                      widget._exerciseInTrainingEntityList,
                 ),
               ),
             ],
@@ -229,7 +236,11 @@ class _ExerciseExpansionPanel extends StatelessWidget {
           exerciseInTrainingEntity: exerciseInTrainingEntity,
           exerciseInTrainingEntityList: exerciseInTrainingEntityList,
         ),
-        PersoTrainerExerciseOptionsSection(clientId, date, exerciseInTrainingEntity),
+        PersoTrainerExerciseOptionsSection(
+          clientId,
+          date,
+          exerciseInTrainingEntity,
+        ),
         Container(
           margin: const EdgeInsets.only(top: Dimens.sMargin),
           child: PersoVideoPlayer(
@@ -340,8 +351,6 @@ class _Categories extends StatelessWidget {
     );
   }
 }
-
-
 
 class _ExerciseHeader extends StatelessWidget {
   const _ExerciseHeader({

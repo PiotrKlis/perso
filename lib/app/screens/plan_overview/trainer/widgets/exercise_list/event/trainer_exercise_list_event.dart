@@ -14,10 +14,10 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
     List<ExerciseInTrainingEntity> exercises,
   ) = EmitExercise;
 
-  const factory TrainerExerciseListEvent.activateExercisesStream(
+  const factory TrainerExerciseListEvent.fetchExercises(
     String clientId,
     String date,
-  ) = ActivateExercisesStream;
+  ) = FetchExercises;
 
   const factory TrainerExerciseListEvent.addExercise(
     String clientId,
@@ -42,4 +42,8 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
     String clientId,
     String date,
   ) = GetNumberOfExercises;
+
+  const factory TrainerExerciseListEvent.panelExpansion(
+      String exerciseId
+      ) = PanelExpansion;
 }

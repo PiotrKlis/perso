@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/bloc/trainer_exercise_list_options_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/event/trainer_exercise_list_options_event.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/state/trainer_exercise_list_options_state.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
@@ -23,17 +25,18 @@ class PersoTrainerExerciseOptionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => TrainerExerciseListOptionsBloc(),
-        child: _OptionsContent(
-          _clientId,
-          _date,
-          _exerciseInTrainingEntity,
-        ));
+      create: (context) => TrainerExerciseListOptionsBloc(),
+      child: _OptionsSectionContent(
+        _clientId,
+        _date,
+        _exerciseInTrainingEntity,
+      ),
+    );
   }
 }
 
-class _OptionsContent extends StatefulWidget {
-  const _OptionsContent(
+class _OptionsSectionContent extends StatefulWidget {
+  const _OptionsSectionContent(
     this._clientId,
     this._date,
     this._exerciseInTrainingEntity,
@@ -44,145 +47,171 @@ class _OptionsContent extends StatefulWidget {
   final ExerciseInTrainingEntity _exerciseInTrainingEntity;
 
   @override
-  State<_OptionsContent> createState() => _OptionsContentState();
+  State<_OptionsSectionContent> createState() => _OptionsSectionContentState();
 }
 
-class _OptionsContentState extends State<_OptionsContent> {
-  ExerciseType? _exerciseType;
+class _OptionsSectionContentState extends State<_OptionsSectionContent> {
+  late ExerciseOptionsData _optionsData;
 
   @override
   void initState() {
-    _exerciseType =
-        widget._exerciseInTrainingEntity.exerciseEntity.exerciseType;
+    _optionsData = ExerciseOptionsData(
+      exerciseType:
+          widget._exerciseInTrainingEntity.exerciseEntity.exerciseType,
+      reps: widget._exerciseInTrainingEntity.exerciseEntity.reps.toString(),
+      sets: widget._exerciseInTrainingEntity.exerciseEntity.sets.toString(),
+      time: widget._exerciseInTrainingEntity.exerciseEntity.time,
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            left: Dimens.mMargin,
-            right: Dimens.sMargin,
-            top: Dimens.mMargin,
-          ),
-          child: Text(
-            'Options',
-            style: ThemeText.smallTitleBold,
-          ),
-        ),
-        RadioListTile(
-          title: const Text('Reps based exercise'),
-          value: ExerciseType.repsBased,
-          groupValue: _exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _exerciseType) {
-              context.read<TrainerExerciseListOptionsBloc>().add(
-                    TrainerExerciseListOptionsEvent.editExerciseType(
-                      widget._clientId,
-                      widget._date,
-                      widget._exerciseInTrainingEntity.id,
-                      exerciseType!,
-                    ),
-                  );
-              setState(() {
-                _exerciseType = exerciseType;
-              });
-            }
+    return BlocListener<TrainerExerciseListOptionsBloc,
+        TrainerExerciseListOptionsState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          exerciseOptionsDataUpdate: (optionsData) {
+            setState(() {
+              _optionsData = optionsData;
+            });
           },
-        ),
-        RadioListTile(
-          title: const Text('Time based exercise'),
-          value: ExerciseType.timeBased,
-          groupValue: _exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _exerciseType) {
-              context.read<TrainerExerciseListOptionsBloc>().add(
-                    TrainerExerciseListOptionsEvent.editExerciseType(
-                      widget._clientId,
-                      widget._date,
-                      widget._exerciseInTrainingEntity.id,
-                      exerciseType!,
-                    ),
-                  );
-              setState(() {
-                _exerciseType = exerciseType;
-              });
-            }
-          },
-        ),
-        Visibility(
-          visible: _exerciseType == ExerciseType.repsBased,
-          child: _RepsBasedExerciseOptions(
-            clientId: widget._clientId,
-            date: widget._date,
-            exerciseId: widget._exerciseInTrainingEntity.id,
-            reps:
-                widget._exerciseInTrainingEntity.exerciseEntity.reps.toString(),
-            sets:
-                widget._exerciseInTrainingEntity.exerciseEntity.sets.toString(),
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              left: Dimens.mMargin,
+              right: Dimens.sMargin,
+              top: Dimens.mMargin,
+            ),
+            child: Text(
+              'Options',
+              style: ThemeText.smallTitleBold,
+            ),
           ),
-        ),
-        Visibility(
-          visible: _exerciseType == ExerciseType.timeBased,
-          child: _TimeBasedExerciseOptions(
-            widget._exerciseInTrainingEntity.exerciseEntity.time,
-            widget._date,
-            widget._clientId,
-            widget._exerciseInTrainingEntity.id,
+          RadioListTile(
+            title: const Text('Reps based exercise'),
+            value: ExerciseType.repsBased,
+            groupValue: _optionsData.exerciseType,
+            onChanged: (exerciseType) {
+              if (exerciseType != _optionsData.exerciseType) {
+                setState(() {
+                  _optionsData =
+                      _optionsData.copyWith(exerciseType: exerciseType!);
+                  context.read<TrainerExerciseListOptionsBloc>().add(
+                        TrainerExerciseListOptionsEvent.editExerciseType(
+                          widget._clientId,
+                          widget._date,
+                          widget._exerciseInTrainingEntity.id,
+                          _optionsData,
+                        ),
+                      );
+                });
+              }
+            },
           ),
-        ),
-      ],
+          RadioListTile(
+            title: const Text('Time based exercise'),
+            value: ExerciseType.timeBased,
+            groupValue: _optionsData.exerciseType,
+            onChanged: (exerciseType) {
+              if (exerciseType != _optionsData.exerciseType) {
+                setState(() {
+                  _optionsData =
+                      _optionsData.copyWith(exerciseType: exerciseType!);
+                  context.read<TrainerExerciseListOptionsBloc>().add(
+                        TrainerExerciseListOptionsEvent.editExerciseType(
+                          widget._clientId,
+                          widget._date,
+                          widget._exerciseInTrainingEntity.id,
+                          _optionsData,
+                        ),
+                      );
+                });
+              }
+            },
+          ),
+          Visibility(
+            visible: _optionsData.exerciseType == ExerciseType.repsBased,
+            child: _RepsBasedExerciseOptions(
+              clientId: widget._clientId,
+              date: widget._date,
+              exerciseId: widget._exerciseInTrainingEntity.id,
+              optionsData: _optionsData,
+            ),
+          ),
+          Visibility(
+            visible: _optionsData.exerciseType == ExerciseType.timeBased,
+            child: _TimeBasedExerciseOptions(
+              optionsData: _optionsData,
+              date: widget._date,
+              clientId: widget._clientId,
+              exerciseId: widget._exerciseInTrainingEntity.id,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _RepsBasedExerciseOptions extends StatelessWidget {
-  _RepsBasedExerciseOptions({
-    required String reps,
-    required String sets,
+class _RepsBasedExerciseOptions extends StatefulWidget {
+  const _RepsBasedExerciseOptions({
     required String clientId,
     required String date,
     required String exerciseId,
-  })  : _reps = reps,
-        _sets = sets,
-        _clientId = clientId,
+    required ExerciseOptionsData optionsData,
+  })  : _clientId = clientId,
         _date = date,
-        _exerciseId = exerciseId;
+        _exerciseId = exerciseId,
+        _optionsData = optionsData;
 
   final String _clientId;
   final String _date;
   final String _exerciseId;
-  final String _reps;
-  final String _sets;
+  final ExerciseOptionsData _optionsData;
+
+  @override
+  State<_RepsBasedExerciseOptions> createState() =>
+      _RepsBasedExerciseOptionsState();
+}
+
+class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
   final _repsController = TextEditingController();
   final _setsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    _repsController.text = _reps;
-    _setsController.text = _sets;
+    _repsController.text = widget._optionsData.reps;
+    _setsController.text = widget._optionsData.sets;
     _repsController.addListener(() {
+      final updatedOptions = widget._optionsData.copyWith(
+        reps: _repsController.text,
+        sets: _setsController.text,
+      );
       context.read<TrainerExerciseListOptionsBloc>().add(
             TrainerExerciseListOptionsEvent.editReps(
-              _clientId,
-              _date,
-              _exerciseId,
-              _repsController.text,
-              _setsController.text,
+              widget._clientId,
+              widget._date,
+              widget._exerciseId,
+              updatedOptions,
             ),
           );
     });
     _setsController.addListener(() {
+      final updatedOptions = widget._optionsData.copyWith(
+        reps: _repsController.text,
+        sets: _setsController.text,
+      );
       context.read<TrainerExerciseListOptionsBloc>().add(
             TrainerExerciseListOptionsEvent.editReps(
-              _clientId,
-              _date,
-              _exerciseId,
-              _repsController.text,
-              _setsController.text,
+              widget._clientId,
+              widget._date,
+              widget._exerciseId,
+              updatedOptions,
             ),
           );
     });
@@ -221,42 +250,55 @@ class _RepsBasedExerciseOptions extends StatelessWidget {
 }
 
 class _TimeBasedExerciseOptions extends StatelessWidget {
-  _TimeBasedExerciseOptions(
-      this._time, this._date, this._clientId, this._exerciseId);
+  _TimeBasedExerciseOptions({
+    required ExerciseOptionsData optionsData,
+    required String clientId,
+    required String date,
+    required String exerciseId,
+  })  : _clientId = clientId,
+        _date = date,
+        _exerciseId = exerciseId,
+        _optionsData = optionsData;
 
   final String _date;
   final String _clientId;
   final String _exerciseId;
-  final String _time;
+  final ExerciseOptionsData _optionsData;
   final _minutesController = TextEditingController();
   final _secondsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final time = _time.split(':');
+    final time = _optionsData.time.split(':');
     final minutes = time[0];
     final seconds = time[1];
     _minutesController.text = minutes;
     _secondsController.text = seconds;
     _minutesController.addListener(() {
+      final time = '${_minutesController.text}:${_secondsController.text}';
+      final updatedOptions = _optionsData.copyWith(
+        time: time,
+      );
       context.read<TrainerExerciseListOptionsBloc>().add(
             TrainerExerciseListOptionsEvent.editTime(
               _clientId,
               _date,
               _exerciseId,
-              _secondsController.text,
-              _minutesController.text,
+              updatedOptions,
             ),
           );
     });
     _secondsController.addListener(() {
+      final time = '${_minutesController.text}:${_secondsController.text}';
+      final updatedOptions = _optionsData.copyWith(
+        time: time,
+      );
       context.read<TrainerExerciseListOptionsBloc>().add(
             TrainerExerciseListOptionsEvent.editTime(
               _clientId,
               _date,
               _exerciseId,
-              _secondsController.text,
-              _minutesController.text,
+              updatedOptions,
             ),
           );
     });
