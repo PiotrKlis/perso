@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
+import 'package:perso/app/widgets/video_player/state/video_player_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
@@ -22,6 +23,9 @@ class TrainerExerciseListBloc
             event.clientId,
             trainerId,
             event.date,
+          );
+          exercises.sort(
+            (a, b) => a.exerciseEntity.index.compareTo(b.exerciseEntity.index),
           );
           emitter(TrainerExerciseListState.exercises(exercises));
         } catch (error) {
@@ -113,19 +117,10 @@ class TrainerExerciseListBloc
         emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
-
-    on<PanelExpansion>((event, emitter) async {
-      if (_expandedPanels.contains(event.exerciseId)) {
-        _expandedPanels.remove(event.exerciseId);
-      } else {
-        _expandedPanels.add(event.exerciseId);
-      }
-    });
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesProvider = getIt.get<FirestoreExerciseProvider>();
   final _exercisesService = getIt.get<FirestoreExerciseService>();
   var _currentExerciseIndex = 0;
-  final _expandedPanels = <String>[];
 }

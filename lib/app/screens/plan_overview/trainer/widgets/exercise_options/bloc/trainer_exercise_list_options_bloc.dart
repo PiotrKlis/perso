@@ -32,9 +32,6 @@ class TrainerExerciseListOptionsBloc extends Bloc<
           print(error);
         }
       },
-      transformer: debounce(
-        const Duration(milliseconds: 250),
-      ),
     );
 
     on<EditTime>(
@@ -56,9 +53,6 @@ class TrainerExerciseListOptionsBloc extends Bloc<
           print(error);
         }
       },
-      transformer: debounce(
-        const Duration(milliseconds: 500),
-      ),
     );
 
     on<EditExerciseType>((event, emitter) async {

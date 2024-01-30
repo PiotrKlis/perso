@@ -15,7 +15,13 @@ class PersoVideoPlayer extends StatefulWidget {
 }
 
 class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
-  late VideoPlayerController _videoPlayerController;
+  VideoPlayerController? _videoPlayerController;
+
+  @override
+  void dispose() {
+    _videoPlayerController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +36,17 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
             return SizedBox(
               height: Dimens.videoPlayerHeight,
               child: FutureBuilder(
-                future: _videoPlayerController.initialize(),
+                future: _videoPlayerController?.initialize(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     return GestureDetector(
                       onTap: () {
-                        _videoPlayerController.value.isPlaying
-                            ? _videoPlayerController.pause()
-                            : _videoPlayerController.play();
+                        _videoPlayerController!.value.isPlaying
+                            ? _videoPlayerController?.pause()
+                            : _videoPlayerController?.play();
                       },
                       child: VideoPlayer(
-                        _videoPlayerController,
+                        _videoPlayerController!,
                       ),
                     );
                   } else {
@@ -53,7 +59,7 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
             );
           },
           stop: () {
-            _videoPlayerController.dispose();
+            _videoPlayerController?.dispose();
             return const SizedBox(
               height: Dimens.videoPlayerHeight,
             );
@@ -63,7 +69,7 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
     );
   }
 
-  Future<void> initVideoPlayerController() async {
+  void initVideoPlayerController() {
     const muxStreamBaseUrl = 'https://stream.mux.com';
     const videoExtension = 'm3u8';
     final path = '$muxStreamBaseUrl/${widget.videoId}.$videoExtension';
@@ -72,7 +78,7 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
         path,
       ),
     );
-    await _videoPlayerController.setLooping(true);
-    await _videoPlayerController.play();
+    _videoPlayerController?.setLooping(true);
+    _videoPlayerController?.play();
   }
 }

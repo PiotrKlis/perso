@@ -175,11 +175,6 @@ class _ExerciseState extends State<_Exercise> {
                   context.read<VideoPlayerBloc>().add(
                         const VideoPlayerEvent.initialize(),
                       );
-                  context.read<TrainerExerciseListBloc>().add(
-                        TrainerExerciseListEvent.panelExpansion(
-                          widget._exerciseInTrainingEntity.id,
-                        ),
-                      );
                 } else {
                   context
                       .read<VideoPlayerBloc>()
