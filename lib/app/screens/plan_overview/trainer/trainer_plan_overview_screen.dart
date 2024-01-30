@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/perso_trainer_exercise_list.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
+import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
@@ -83,8 +85,14 @@ class _TrainerPlanOverviewScreenContentState
                 'clientId': widget._clientId,
                 'date': _selectedDate,
               },
-            );
-            print("PKPK I'm back!");
+            ).then((_) {
+              context.read<TrainerExerciseListBloc>().add(
+                    TrainerExerciseListEvent.fetchExercises(
+                      widget._clientId,
+                      _selectedDate,
+                    ),
+                  );
+            });
           },
           child: const Icon(Icons.add),
         ),

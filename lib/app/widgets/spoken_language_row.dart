@@ -5,7 +5,8 @@ import 'package:perso/app/widgets/perso_small_button.dart';
 
 class SpokenLanguageRowWidget extends StatefulWidget {
   SpokenLanguageRowWidget({super.key});
-  List<Map<String, Widget>> listOfLanguages = [];
+
+  final List<Map<String, Widget>> listOfLanguages = [];
 
   @override
   State<SpokenLanguageRowWidget> createState() =>
@@ -26,16 +27,20 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-              margin: const EdgeInsets.only(
-                  left: Dimens.xmMargin, top: Dimens.xsMargin,),
-              child: const Icon(Icons.flag, size: 24),),
+            margin: const EdgeInsets.only(
+              left: Dimens.xmMargin,
+              top: Dimens.xsMargin,
+            ),
+            child: const Icon(Icons.flag, size: 24),
+          ),
           Container(
-              margin: const EdgeInsets.only(left: Dimens.xmMargin),
-              child: PersoSmallButton(
-                text: 'Add language',
-                addLanguage: _addSpokenLanguage,
-                customValidator: _validateNumberOfLanguages,
-              ),),
+            margin: const EdgeInsets.only(left: Dimens.xmMargin),
+            child: PersoSmallButton(
+              text: 'Add language',
+              addLanguage: _addSpokenLanguage,
+              customValidator: _validateNumberOfLanguages,
+            ),
+          ),
           ...languageWidgets,
         ],
       ),
@@ -47,9 +52,12 @@ class _SpokenLanguageRowWidgetState extends State<SpokenLanguageRowWidget> {
 
   void _addSpokenLanguage(String languageEmoji) {
     final Widget languageChip = Container(
-        margin: const EdgeInsets.only(left: Dimens.xmMargin),
-        child: PersoFlagButton(
-            flagEmoji: languageEmoji, onRemoveTap: _removeSpokenLanguage,),);
+      margin: const EdgeInsets.only(left: Dimens.xmMargin),
+      child: PersoFlagButton(
+        flagEmoji: languageEmoji,
+        onRemoveTap: _removeSpokenLanguage,
+      ),
+    );
     setState(() {
       widget.listOfLanguages.add({languageEmoji: languageChip});
     });

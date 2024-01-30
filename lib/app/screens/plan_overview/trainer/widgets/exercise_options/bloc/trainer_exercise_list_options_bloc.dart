@@ -33,7 +33,7 @@ class TrainerExerciseListOptionsBloc extends Bloc<
         }
       },
       transformer: debounce(
-        const Duration(milliseconds: 750),
+        const Duration(milliseconds: 250),
       ),
     );
 
@@ -57,7 +57,7 @@ class TrainerExerciseListOptionsBloc extends Bloc<
         }
       },
       transformer: debounce(
-        const Duration(milliseconds: 750),
+        const Duration(milliseconds: 500),
       ),
     );
 

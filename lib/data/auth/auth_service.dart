@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 @injectable
 class AuthService {
 
-  Future register({
+  Future<UserCredential> register({
     required String email,
     required String password,
   }) async {

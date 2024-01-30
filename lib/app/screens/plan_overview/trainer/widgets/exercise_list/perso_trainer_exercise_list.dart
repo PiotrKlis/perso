@@ -328,8 +328,12 @@ class _ActionableIcon extends StatelessWidget {
       ),
       onPressed: () {
         context.read<TrainerExerciseListBloc>().add(
-              TrainerExerciseListEvent.removeExercise(clientId, date,
-                  exerciseInTrainingEntity, exerciseInTrainingEntityList),
+              TrainerExerciseListEvent.removeExercise(
+                clientId,
+                date,
+                exerciseInTrainingEntity,
+                exerciseInTrainingEntityList,
+              ),
             );
       },
     );

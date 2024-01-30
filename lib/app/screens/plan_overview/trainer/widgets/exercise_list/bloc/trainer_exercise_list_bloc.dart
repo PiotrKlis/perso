@@ -60,7 +60,7 @@ class TrainerExerciseListBloc
               ),
             )
             .toList();
-
+        emitter(TrainerExerciseListState.exercises(updatedIndexesList));
         await _exercisesService.remove(
           clientId: event.clientId,
           trainerId: trainerId,
