@@ -5,24 +5,10 @@ part 'trainer_exercise_list_options_event.freezed.dart';
 
 @freezed
 class TrainerExerciseListOptionsEvent with _$TrainerExerciseListOptionsEvent {
-  const factory TrainerExerciseListOptionsEvent.editExerciseType(
-    String clientId,
-    String date,
-    String id,
-    ExerciseOptionsData exerciseOptionsData,
-  ) = EditExerciseType;
-
-  const factory TrainerExerciseListOptionsEvent.editReps(
-    String clientId,
-    String date,
-    String exerciseId,
-    ExerciseOptionsData exerciseOptionsData,
-  ) = EditReps;
-
-  const factory TrainerExerciseListOptionsEvent.editTime(
-    String clientId,
-    String date,
-    String exerciseId,
-    ExerciseOptionsData exerciseOptionsData,
-  ) = EditTime;
+  const factory TrainerExerciseListOptionsEvent.editExerciseOptions({
+    required String clientId,
+    required String date,
+    required String exerciseInTrainingId,
+    required ExerciseOptionsData exerciseOptionsData,
+  }) = EditExerciseOptions;
 }

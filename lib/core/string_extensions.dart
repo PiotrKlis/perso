@@ -12,4 +12,12 @@ extension StringExtension on String {
     }
     return replaceAll('[', '').replaceAll(']', '');
   }
+
+  String removeLeadingZeroes() {
+    return int.parse(this).toString();
+  }
+
+  String limitToTwoDigits() {
+    return length > 2 ? substring(0, 2) : this;
+  }
 }

@@ -1,13 +1,14 @@
+import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 
 abstract class ExerciseService {
-  Future<void> editExerciseType({
+  Future<void> editExerciseOptions({
     required String clientId,
     required String trainerId,
     required String exerciseId,
     required String date,
-    required String exerciseType,
+    required ExerciseOptionsData exerciseOptions,
   });
 
   Future<void> add({
@@ -30,22 +31,5 @@ abstract class ExerciseService {
     required String trainerId,
     required String date,
     required List<ExerciseInTrainingEntity> exercises,
-  });
-
-  Future<void> editReps({
-    required String clientId,
-    required String trainerId,
-    required String date,
-    required String exerciseId,
-    required int reps,
-    required int sets,
-  });
-
-  Future<void> editTime({
-    required String clientId,
-    required String trainerId,
-    required String date,
-    required String exerciseId,
-    required String time,
   });
 }

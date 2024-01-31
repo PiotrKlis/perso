@@ -6,8 +6,8 @@ part 'exercise_options_data.freezed.dart';
 class ExerciseOptionsData with _$ExerciseOptionsData {
   const factory ExerciseOptionsData({
   required ExerciseType exerciseType,
-    required String reps,
-    required String sets,
+    required int reps,
+    required int sets,
     required String time,
   }) = _ExerciseOptionsData;
 }

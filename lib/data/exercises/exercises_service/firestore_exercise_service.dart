@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/data/exercises/exercises_service/exercise_service.dart';
@@ -44,12 +45,12 @@ class FirestoreExerciseService extends ExerciseService {
   }
 
   @override
-  Future<void> editExerciseType({
+  Future<void> editExerciseOptions({
     required String clientId,
     required String trainerId,
     required String exerciseId,
     required String date,
-    required String exerciseType,
+    required ExerciseOptionsData exerciseOptions,
   }) async {
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
@@ -59,7 +60,10 @@ class FirestoreExerciseService extends ExerciseService {
         .collection(date)
         .doc(exerciseId)
         .update({
-      UserDocumentFields.exerciseType: exerciseType,
+      UserDocumentFields.exerciseType: exerciseOptions.exerciseType.name,
+      UserDocumentFields.sets: exerciseOptions.sets,
+      UserDocumentFields.reps: exerciseOptions.reps,
+      UserDocumentFields.time: exerciseOptions.time,
     });
   }
 
@@ -119,47 +123,5 @@ class FirestoreExerciseService extends ExerciseService {
       });
     }
     await batch.commit();
-  }
-
-  @override
-  Future<void> editReps({
-    required String clientId,
-    required String trainerId,
-    required String date,
-    required String exerciseId,
-    required int reps,
-    required int sets,
-  }) async {
-    await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(trainerId)
-        .collection(CollectionName.clients)
-        .doc(clientId)
-        .collection(date)
-        .doc(exerciseId)
-        .update({
-      UserDocumentFields.reps: reps,
-      UserDocumentFields.sets: sets,
-    });
-  }
-
-  @override
-  Future<void> editTime({
-    required String clientId,
-    required String trainerId,
-    required String date,
-    required String exerciseId,
-    required String time,
-  }) async {
-    await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(trainerId)
-        .collection(CollectionName.clients)
-        .doc(clientId)
-        .collection(date)
-        .doc(exerciseId)
-        .update({
-      UserDocumentFields.time: time,
-    });
   }
 }
