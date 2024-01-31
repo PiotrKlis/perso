@@ -346,7 +346,7 @@ class _ActionableIcon extends StatelessWidget {
                   exerciseEntity,
                 ),
               );
-          context.showSnackBar('Exercise "${exerciseEntity.title}" added!');
+          context.showSuccessfulSnackBar('Exercise "${exerciseEntity.title}" added!');
         },
       );
     } else {

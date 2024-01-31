@@ -65,6 +65,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   json_annotation: ^4.8.1
   bloc_concurrency: ^0.2.3
+  formz: ^0.6.1
 
 dependency_overrides:
   photo_manager: ^3.0.0-dev.2

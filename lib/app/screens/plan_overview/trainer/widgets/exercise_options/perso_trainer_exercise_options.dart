@@ -5,6 +5,8 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/event/trainer_exercise_list_options_event.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
@@ -57,6 +59,7 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
   final _repsController = TextEditingController();
   final _minutesController = TextEditingController();
   final _secondsController = TextEditingController();
+  final _key = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -112,21 +115,30 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
             }
           },
         ),
-        Visibility(
-          visible: _optionsData.exerciseType == ExerciseType.repsBased,
-          child: _RepsBasedExerciseOptions(
-            reps: _optionsData.reps.toString(),
-            sets: _optionsData.sets.toString(),
-            repsController: _repsController,
-            setsController: _setsController,
-          ),
-        ),
-        Visibility(
-          visible: _optionsData.exerciseType == ExerciseType.timeBased,
-          child: _TimeBasedExerciseOptions(
-            time: _optionsData.time,
-            minutesController: _minutesController,
-            secondsController: _secondsController,
+        Form(
+          key: _key,
+          child: Column(
+            children: [
+              Visibility(
+                maintainState: true,
+                visible: _optionsData.exerciseType == ExerciseType.repsBased,
+                child: _RepsBasedExerciseOptions(
+                  reps: _optionsData.reps.toString(),
+                  sets: _optionsData.sets.toString(),
+                  repsController: _repsController,
+                  setsController: _setsController,
+                ),
+              ),
+              Visibility(
+                maintainState: true,
+                visible: _optionsData.exerciseType == ExerciseType.timeBased,
+                child: _TimeBasedExerciseOptions(
+                  time: _optionsData.time,
+                  minutesController: _minutesController,
+                  secondsController: _secondsController,
+                ),
+              ),
+            ],
           ),
         ),
         Container(
@@ -134,24 +146,38 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
           child: PersoButton(
             title: 'Save',
             onTap: (context) {
-              final minutes = _minutesController.text.removeLeadingZeroes;
-              final seconds = _secondsController.text
-                  .removeLeadingZeroes()
-                  .limitToTwoDigits;
-              //TODO: add validation // form? pass custom validator? validateDigits
-              _optionsData = _optionsData.copyWith(
-                reps: int.parse(_repsController.text),
-                sets: int.parse(_setsController.text),
-                time: '$seconds:$minutes',
-              );
-              context.read<TrainerExerciseListOptionsBloc>().add(
-                    TrainerExerciseListOptionsEvent.editExerciseOptions(
-                      clientId: widget._clientId,
-                      date: widget._date,
-                      exerciseInTrainingId: widget._exerciseInTrainingEntity.id,
-                      exerciseOptionsData: _optionsData,
-                    ),
-                  );
+              if (_key.currentState!.validate()) {
+                switch (_optionsData.exerciseType) {
+                  case ExerciseType.repsBased:
+                    {
+                      _optionsData = _optionsData.copyWith(
+                        reps: int.parse(_repsController.text),
+                        sets: int.parse(_setsController.text),
+                      );
+                    }
+                  case ExerciseType.timeBased:
+                    {
+                      final minutes =
+                          _minutesController.text.removeLeadingZeroes();
+                      final seconds = _secondsController.text
+                          .removeLeadingZeroes()
+                          .limitToTwoDigits();
+                      _optionsData = _optionsData.copyWith(
+                        time: '$minutes:$seconds',
+                      );
+                    }
+                }
+                context.read<TrainerExerciseListOptionsBloc>().add(
+                      TrainerExerciseListOptionsEvent.editExerciseOptions(
+                        clientId: widget._clientId,
+                        date: widget._date,
+                        exerciseInTrainingId:
+                            widget._exerciseInTrainingEntity.id,
+                        exerciseOptionsData: _optionsData,
+                      ),
+                    );
+                context.showSuccessfulSnackBar('Saving succeeded');
+              }
             },
           ),
         ),
@@ -202,6 +228,7 @@ class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
               textEditingController: widget._setsController,
               textInputType: TextInputType.number,
               title: 'Sets',
+              customValidator: TextFieldValidator.validateDigits,
             ),
           ),
           const SizedBox(
@@ -212,6 +239,7 @@ class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
               textEditingController: widget._repsController,
               textInputType: TextInputType.number,
               title: 'Repetitions',
+              customValidator: TextFieldValidator.validateDigits,
             ),
           ),
         ],
@@ -253,7 +281,9 @@ class _TimeBasedExerciseOptions extends StatelessWidget {
           Expanded(
             child: PersoTextField(
               textEditingController: _minutesController,
+              textInputType: TextInputType.number,
               title: 'Minutes',
+              customValidator: TextFieldValidator.validateDigits,
             ),
           ),
           Container(
@@ -268,7 +298,9 @@ class _TimeBasedExerciseOptions extends StatelessWidget {
           Expanded(
             child: PersoTextField(
               textEditingController: _secondsController,
+              textInputType: TextInputType.number,
               title: 'Seconds',
+              customValidator: TextFieldValidator.validateDigits,
             ),
           ),
         ],

@@ -263,7 +263,7 @@ class _ActionableIcon extends StatelessWidget {
                 _exerciseEntity,
               ),
             );
-        context.showSnackBar('Exercise "${_exerciseEntity.title}" added!');
+        context.showSuccessfulSnackBar('Exercise "${_exerciseEntity.title}" added!');
       },
     );
   }
