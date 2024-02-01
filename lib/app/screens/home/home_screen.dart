@@ -1,3 +1,4 @@
+import 'package:algoliasearch/algoliasearch_lite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -69,11 +70,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: Dimens.xmMargin,
                   ),
                   child: GestureDetector(
-                    onTap: () => context.pushNamed(
-                        ScreenNavigationKey.searchResults,
-                        pathParameters: {
-                          'input': ScreenNavigationKey.searchResults,
-                        },),
+                    onTap: () async {
+                      final client = SearchClient(
+                        appId: 'MQCK4CMRWW',
+                        apiKey: 'b9d0cecfb4ccbdfe1f0c61ebfa5dab24',
+                      );
+
+                      // Constructing a query to search for hits in the 'instant_search' index.
+                      const queryHits = SearchForHits(
+                        indexName: 'perso',
+                        query: 'biceps',
+                        hitsPerPage: 100,
+                      );
+                      // Execute the search request.
+                      final responseHits = await client.searchIndex(request: queryHits);
+                      // Print the search hits.
+                      print("PKK $responseHits");
+                    },
                     child: const AbsorbPointer(child: PersoSearch()),
                   ),
                 ),
