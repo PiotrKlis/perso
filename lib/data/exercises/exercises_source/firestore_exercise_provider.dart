@@ -2,15 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:perso/app/utils/extension/string_extensions.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/mappers/translations/string_list_mapper.dart';
+import 'package:perso/core/mappers/translations/string_mapper.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
-import 'package:perso/core/models/tag_entity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class FirestoreExerciseProvider extends ExerciseSource {
+  final _stringTranslationsMapper = getIt.get<StringMapper>();
+  final _stringListTranslationsMapper = getIt.get<StringListMapper>();
+
   @override
   Future<List<ExerciseEntity>> getAllExercises() async {
     final exerciseSnapshots = await FirebaseFirestore.instance
@@ -22,17 +27,20 @@ class FirestoreExerciseProvider extends ExerciseSource {
         (exercise) async {
           return ExerciseEntity(
             id: exercise[UserDocumentFields.id] as String,
-            description: exercise[UserDocumentFields.description] as String,
+            description: _stringTranslationsMapper.map(
+              exercise[UserDocumentFields.description] as Map<String, String>,
+            ),
             index: exercise[UserDocumentFields.index] as int,
             exerciseType: (exercise[UserDocumentFields.exerciseType] as String)
                 .toExerciseType()!,
             reps: exercise[UserDocumentFields.reps] as int,
             sets: exercise[UserDocumentFields.sets] as int,
-            tags: await _getTags(
-              exercise[UserDocumentFields.tags] as List<dynamic>,
+            tags: _stringListTranslationsMapper.map(
+              exercise[UserDocumentFields.tags] as Map<String, List<String>>,
             ),
             time: exercise[UserDocumentFields.time] as String,
-            title: exercise[UserDocumentFields.title] as String,
+            title: _stringTranslationsMapper
+                .map(exercise[UserDocumentFields.title] as Map<String, String>),
             videoId: exercise[UserDocumentFields.videoId] as String,
           );
         },
@@ -79,9 +87,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
                         .toExerciseType()!,
                 reps: exercise[UserDocumentFields.reps] as int,
                 sets: exercise[UserDocumentFields.sets] as int,
-                tags: await _getTags(
-                  exercise[UserDocumentFields.tags] as List<dynamic>,
-                ),
+                tags: exercise[UserDocumentFields.tags] as List<String>,
                 time: exercise[UserDocumentFields.time] as String,
                 title: exercise[UserDocumentFields.title] as String,
                 videoId: exercise[UserDocumentFields.videoId] as String,
@@ -107,19 +113,6 @@ class FirestoreExerciseProvider extends ExerciseSource {
         .get();
 
     return snapshot.docs.length;
-  }
-
-  Future<List<TagEntity>> _getTags(List<dynamic> dynamicTagsList) async {
-    final tags = dynamicTagsList.cast<DocumentReference>();
-    return Future.wait(
-      tags.map((tag) async {
-        final tagSnapshot = await tag.get();
-        return TagEntity(
-          id: tagSnapshot.id,
-          title: tagSnapshot[UserDocumentFields.titlePl] as String,
-        );
-      }).toList(),
-    );
   }
 
   @override

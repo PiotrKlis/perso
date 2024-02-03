@@ -243,9 +243,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
           ),
         ),
         _Categories(
-          exerciseInTrainingEntity.exerciseEntity.tags
-              .map((tag) => tag.title)
-              .toList(),
+          exerciseInTrainingEntity.exerciseEntity.tags,
         ),
       ],
     );
@@ -361,7 +359,7 @@ class _ExerciseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: _getIconForTags(exercise.tags.map((tag) => tag.title).toList()),
+      leading: _getIconForTags(exercise.tags),
       title: Text(exercise.title, style: ThemeText.bodyBoldBlackText),
       trailing: const Icon(Icons.reorder),
     );

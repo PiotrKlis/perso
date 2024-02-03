@@ -1,4 +1,3 @@
-import 'package:algoliasearch/algoliasearch_lite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +11,6 @@ import 'package:perso/app/widgets/address_and_map/google_map.dart';
 import 'package:perso/app/widgets/perso_big_header.dart';
 import 'package:perso/app/widgets/perso_clickable_text.dart';
 import 'package:perso/app/widgets/perso_header.dart';
-import 'package:perso/app/widgets/perso_search.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:perso/app/widgets/training_category_list/perso_training_category_list.dart';
@@ -69,25 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     top: Dimens.xmMargin,
                     right: Dimens.xmMargin,
                   ),
-                  child: GestureDetector(
-                    onTap: () async {
-                      final client = SearchClient(
-                        appId: 'MQCK4CMRWW',
-                        apiKey: 'b9d0cecfb4ccbdfe1f0c61ebfa5dab24',
-                      );
-
-                      // Constructing a query to search for hits in the 'instant_search' index.
-                      const queryHits = SearchForHits(
-                        indexName: 'perso',
-                        query: 'biceps',
-                        hitsPerPage: 100,
-                      );
-                      // Execute the search request.
-                      final responseHits = await client.searchIndex(request: queryHits);
-                      // Print the search hits.
-                      print("PKK $responseHits");
-                    },
-                    child: const AbsorbPointer(child: PersoSearch()),
+                  child: Container(
+                    color: Colors.grey,
+                    height: 30,
+                    width: double.infinity,
+                    child: const Center(child: Text('TODO: Users search')),
                   ),
                 ),
                 Container(

@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:perso/core/models/exercise_type.dart';
-import 'package:perso/core/models/tag_entity.dart';
 
 part 'exercise_entity.freezed.dart';
 
@@ -13,7 +12,7 @@ class ExerciseEntity with _$ExerciseEntity {
     required ExerciseType exerciseType,
     required int reps,
     required int sets,
-    required List<TagEntity> tags,
+    required List<String> tags,
     required String time,
     required String title,
     required String videoId,

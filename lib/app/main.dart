@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/utils/chat_client.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
+import 'package:perso/app/utils/locale_repository.dart';
 import 'package:perso/app/utils/localisation_keys.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
@@ -15,6 +18,7 @@ void main() async {
   await Firebase.initializeApp();
   await ChatClient.initializeClient();
   configureDependencies(Environment.dev);
+  LocaleRepository.init();
   runApp(MyApp());
 }
 

@@ -13,7 +13,6 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
-import 'package:perso/core/models/tag_entity.dart';
 
 class PersoClientExerciseList extends StatefulWidget {
   const PersoClientExerciseList({
@@ -246,7 +245,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
           ),
         ),
         _Categories(
-          exerciseEntity.tags.map((tag) => tag.title).toList(),
+          exerciseEntity.tags,
         ),
       ],
     );
@@ -531,7 +530,7 @@ class _ExerciseHeader extends StatelessWidget {
     );
   }
 
-  Icon _getIconForTags(List<TagEntity> tags) {
+  Icon _getIconForTags(List<String> tags) {
     return const Icon(Icons.fitness_center);
   }
 

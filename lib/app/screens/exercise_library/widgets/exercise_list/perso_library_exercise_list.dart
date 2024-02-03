@@ -8,13 +8,15 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/search/exercises/bloc/search_exercises_bloc.dart';
+import 'package:perso/app/widgets/search/exercises/state/search_exercises_state.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
-class PersoLibraryExerciseList extends StatefulWidget {
-  const PersoLibraryExerciseList({
+class LibraryExerciseList extends StatelessWidget {
+  const LibraryExerciseList({
     required String clientId,
     required String selectedDate,
     super.key,
@@ -25,30 +27,52 @@ class PersoLibraryExerciseList extends StatefulWidget {
   final String _selectedDate;
 
   @override
-  State<PersoLibraryExerciseList> createState() =>
-      _PersoLibraryExerciseListState();
-}
-
-class _PersoLibraryExerciseListState extends State<PersoLibraryExerciseList> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<LibraryExerciseListBloc>().add(
-          LibraryExerciseListEvent.updateNumberOfAlreadyPresentExercises(
-            widget._clientId,
-            widget._selectedDate,
-          ),
-        );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LibraryExerciseListBloc, LibraryExerciseListState>(
+    return BlocBuilder<SearchExercisesBloc, SearchExercisesState>(
       builder: (context, state) {
         return state.when(
           init: () {
             return const Center(
               child: CircularProgressIndicator(),
+            );
+          },
+          empty: () {
+            context
+                .read<LibraryExerciseListBloc>()
+                .add(const LibraryExerciseListEvent.getAllLibraryExercises());
+            return BlocBuilder<LibraryExerciseListBloc,
+                LibraryExerciseListState>(
+              builder: (context, state) {
+                return state.when(
+                  init: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  exercises: (List<ExerciseEntity> exercises) {
+                    return ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: exercises.length,
+                      itemBuilder: (context, index) {
+                        return BlocProvider(
+                          create: (context) => VideoPlayerBloc(),
+                          child: _Exercise(
+                            exercise: exercises[index],
+                            clientId: _clientId,
+                            date: _selectedDate,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  error: (String error) {
+                    return Center(
+                      child: Text(error),
+                    );
+                  },
+                );
+              },
             );
           },
           exercises: (List<ExerciseEntity> exercises) {
@@ -61,8 +85,8 @@ class _PersoLibraryExerciseListState extends State<PersoLibraryExerciseList> {
                   create: (context) => VideoPlayerBloc(),
                   child: _Exercise(
                     exercise: exercises[index],
-                    clientId: widget._clientId,
-                    date: widget._selectedDate,
+                    clientId: _clientId,
+                    date: _selectedDate,
                   ),
                 );
               },
@@ -179,7 +203,7 @@ class _ExerciseExpansionPanel extends StatelessWidget {
           ),
         ),
         _Categories(
-          _exerciseEntity.tags.map((tag) => tag.title).toList(),
+          _exerciseEntity.tags,
         ),
       ],
     );
@@ -263,7 +287,8 @@ class _ActionableIcon extends StatelessWidget {
                 _exerciseEntity,
               ),
             );
-        context.showSuccessfulSnackBar('Exercise "${_exerciseEntity.title}" added!');
+        context.showSuccessfulSnackBar(
+            'Exercise "${_exerciseEntity.title}" added!');
       },
     );
   }
@@ -295,7 +320,7 @@ class _ExerciseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: _getIconForTags(_exercise.tags.map((tag) => tag.title).toList()),
+      leading: _getIconForTags(_exercise.tags),
       title: Text(_exercise.title, style: ThemeText.bodyBoldBlackText),
     );
   }

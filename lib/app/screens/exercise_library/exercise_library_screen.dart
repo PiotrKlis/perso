@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/bloc/library_exercise_list_bloc.dart';
-import 'package:perso/app/screens/exercise_library/widgets/exercise_list/event/library_exercise_list_event.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/perso_library_exercise_list.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
-import 'package:perso/app/widgets/perso_search.dart';
+import 'package:perso/app/widgets/search/exercises/bloc/search_exercises_bloc.dart';
+import 'package:perso/app/widgets/search/exercises/perso_exercises_search.dart';
 
 class ExerciseLibraryScreen extends StatelessWidget {
   const ExerciseLibraryScreen({
@@ -20,15 +20,18 @@ class ExerciseLibraryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LibraryExerciseListBloc>(
-      create: (BuildContext context) {
-        return LibraryExerciseListBloc()
-          ..add(
-            const LibraryExerciseListEvent.getAllLibraryExercises(),
-          );
-      },
-      child: _ExerciseLibraryScreenContent(_clientId, _selectedDate),
-    );
+    return MultiBlocProvider(providers: [
+      BlocProvider<SearchExercisesBloc>(
+        create: (BuildContext context) {
+          return SearchExercisesBloc();
+        },
+      ),
+      BlocProvider<LibraryExerciseListBloc>(
+        create: (BuildContext context) {
+          return LibraryExerciseListBloc();
+        },
+      ),
+    ], child: _ExerciseLibraryScreenContent(_clientId, _selectedDate));
   }
 }
 
@@ -49,7 +52,7 @@ class _ExerciseLibraryScreenContent extends StatelessWidget {
           children: [
             Container(
               margin: const EdgeInsets.all(Dimens.xmMargin),
-              child: const PersoSearch(),
+              child: const PersoExercisesSearch(),
             ),
             ColoredBox(
               color: PersoColors.lightBlue,
@@ -58,7 +61,7 @@ class _ExerciseLibraryScreenContent extends StatelessWidget {
                   top: Dimens.sMargin,
                   bottom: Dimens.xsMargin,
                 ),
-                child: PersoLibraryExerciseList(
+                child: LibraryExerciseList(
                   clientId: _clientId,
                   selectedDate: _selectedDate,
                 ),
