@@ -31,7 +31,10 @@ class FirestoreTrainersProvider implements TrainersSource {
         shortBio: data[UserDocumentFields.shortBio] as String,
         rating: data[UserDocumentFields.rating] as double,
         languages: data[UserDocumentFields.languages].toString().split(', '),
-        categories: data[UserDocumentFields.categories].toString().split(', '),
+        categories: data[UserDocumentFields.categories]
+            .toString()
+            .removeBrackets()
+            .split(', '),
         imagePath: data[UserDocumentFields.imagePath] as String,
         fullBio: data[UserDocumentFields.fullBio] as String,
         location: data[UserDocumentFields.location] as String,

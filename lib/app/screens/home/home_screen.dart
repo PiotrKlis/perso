@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     isShortList: true,
                   ),
                 ),
-                Container(
+                ColoredBox(
                   color: PersoColors.lightBlue,
                   child: Column(
                     children: [
