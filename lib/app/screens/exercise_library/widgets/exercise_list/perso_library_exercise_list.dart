@@ -31,10 +31,30 @@ class LibraryExerciseList extends StatelessWidget {
     return BlocBuilder<SearchExercisesBloc, SearchExercisesState>(
       builder: (context, state) {
         return state.when(
-          init: () {
-            return const Center(
-              child: CircularProgressIndicator(),
+          exercises: (List<ExerciseEntity> exercises) {
+            return ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: exercises.length,
+              itemBuilder: (context, index) {
+                return BlocProvider(
+                  create: (context) => VideoPlayerBloc(),
+                  child: _Exercise(
+                    exercise: exercises[index],
+                    clientId: _clientId,
+                    date: _selectedDate,
+                  ),
+                );
+              },
             );
+          },
+          error: (String error) {
+            return Center(
+              child: Text(error),
+            );
+          },
+          loading: () {
+            return const Center(child: CircularProgressIndicator());
           },
           empty: () {
             context
@@ -73,28 +93,6 @@ class LibraryExerciseList extends StatelessWidget {
                   },
                 );
               },
-            );
-          },
-          exercises: (List<ExerciseEntity> exercises) {
-            return ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: exercises.length,
-              itemBuilder: (context, index) {
-                return BlocProvider(
-                  create: (context) => VideoPlayerBloc(),
-                  child: _Exercise(
-                    exercise: exercises[index],
-                    clientId: _clientId,
-                    date: _selectedDate,
-                  ),
-                );
-              },
-            );
-          },
-          error: (String error) {
-            return Center(
-              child: Text(error),
             );
           },
         );

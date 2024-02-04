@@ -7,10 +7,11 @@ import 'package:perso/data/search/search_service.dart';
 
 class SearchExercisesBloc
     extends Bloc<SearchExercisesEvent, SearchExercisesState> {
-  SearchExercisesBloc() : super(const SearchExercisesState.init()) {
+  SearchExercisesBloc() : super(const SearchExercisesState.loading()) {
     on<SearchInput>(
       (event, emitter) async {
         try {
+          emitter(const SearchExercisesState.loading());
           final exercises = await _searchService.getSuggestions(event.input);
           emitter(SearchExercisesState.exercises(exercises));
         } catch (error) {

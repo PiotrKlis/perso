@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/event/trainer_exercise_list_options_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/state/trainer_exercise_list_options_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';

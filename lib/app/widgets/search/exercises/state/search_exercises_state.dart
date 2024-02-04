@@ -10,5 +10,5 @@ class SearchExercisesState with _$SearchExercisesState {
 
   const factory SearchExercisesState.empty() = Empty;
   const factory SearchExercisesState.error(String error) = Error;
-  const factory SearchExercisesState.init() = Init;
+  const factory SearchExercisesState.loading() = Loading;
 }

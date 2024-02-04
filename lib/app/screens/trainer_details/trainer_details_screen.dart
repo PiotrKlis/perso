@@ -10,7 +10,6 @@ import 'package:perso/app/screens/trainer_details/state/action_section_state.dar
 import 'package:perso/app/screens/trainer_details/state/training_request_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
-import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
