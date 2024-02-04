@@ -67,11 +67,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     top: Dimens.xmMargin,
                     right: Dimens.xmMargin,
                   ),
-                  child: Container(
-                    color: Colors.grey,
-                    height: 30,
-                    width: double.infinity,
-                    child: const Center(child: Text('TODO: Users search')),
+                  child: const SearchBar(
+                    padding: MaterialStatePropertyAll<EdgeInsets>(
+                      EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                    ),
+                    leading: Icon(Icons.search),
                   ),
                 ),
                 Container(
