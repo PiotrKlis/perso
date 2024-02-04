@@ -7,7 +7,6 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/pe
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
-import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';

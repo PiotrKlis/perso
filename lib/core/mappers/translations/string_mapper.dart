@@ -2,15 +2,23 @@ import 'package:injectable/injectable.dart';
 import 'package:perso/app/utils/locale_repository.dart';
 
 @injectable
-class StringMapper {
-  String map(Map<String, String> description) {
+class StringTranslationsMapper {
+  String mapFrom(Map<String, dynamic> value) {
+    final key = value.keys.first.split('-').first;
+    final input = value.map((key, value) => MapEntry(key, value.toString()));
     switch (LocaleRepository.languageCode) {
       case 'en':
-        return description['en-description']!;
+        return input['$key-en']!;
       case 'pl':
-        return description['pl-description']!;
+        return input['$key-pl']!;
       default:
         throw const FormatException('String translation not found');
     }
+  }
+
+  Map<String, dynamic> mapTo(String key, String value) {
+    return {
+      '$key-${LocaleRepository.languageCode}': value,
+    };
   }
 }

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/mappers/translations/string_list_mapper.dart';
+import 'package:perso/core/mappers/translations/string_mapper.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/data/exercises/exercises_service/exercise_service.dart';
@@ -8,6 +11,10 @@ import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class FirestoreExerciseService extends ExerciseService {
+  final _stringTranslationsMapper = getIt.get<StringTranslationsMapper>();
+  final _stringListTranslationsMapper =
+      getIt.get<StringListTranslationsMapper>();
+
   @override
   Future<void> add({
     required String clientId,
@@ -24,13 +31,22 @@ class FirestoreExerciseService extends ExerciseService {
         .doc()
         .set({
       UserDocumentFields.id: exerciseEntity.id,
-      UserDocumentFields.description: exerciseEntity.description,
+      UserDocumentFields.description: _stringTranslationsMapper.mapTo(
+        UserDocumentFields.description,
+        exerciseEntity.description,
+      ),
       UserDocumentFields.index: exerciseEntity.index,
       UserDocumentFields.reps: exerciseEntity.reps,
       UserDocumentFields.sets: exerciseEntity.sets,
-      UserDocumentFields.tags: exerciseEntity.tags,
+      UserDocumentFields.tags: _stringListTranslationsMapper.mapTo(
+        UserDocumentFields.tags,
+        exerciseEntity.tags,
+      ),
       UserDocumentFields.time: exerciseEntity.time,
-      UserDocumentFields.title: exerciseEntity.title,
+      UserDocumentFields.title: _stringTranslationsMapper.mapTo(
+        UserDocumentFields.title,
+        exerciseEntity.title,
+      ),
       UserDocumentFields.videoId: exerciseEntity.videoId,
       UserDocumentFields.exerciseType: exerciseEntity.exerciseType.name,
     });

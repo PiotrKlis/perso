@@ -26,7 +26,8 @@ class LibraryExerciseListBloc
           clientId: event.clientId,
           trainerId: trainerId,
           date: event.date,
-          exerciseEntity: event.exerciseEntity.copyWith(index: _currentExerciseIndex),
+          exerciseEntity:
+              event.exerciseEntity.copyWith(index: _currentExerciseIndex),
         );
         _currentExerciseIndex++;
       } catch (error) {
