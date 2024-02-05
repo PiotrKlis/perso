@@ -104,7 +104,7 @@ class SignInScreen extends StatelessWidget {
                       navigateToProfileCreationScreen: () => context
                           .pushNamed(ScreenNavigationKey.profileCreation),
                       navigateToHomeScreen: () =>
-                          context.replaceNamed(ScreenNavigationKey.home),
+                          context.clearAndNavigate(ScreenNavigationKey.home),
                     );
                   },
                   child: Container(),

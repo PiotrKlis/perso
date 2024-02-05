@@ -73,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         horizontal: 16,
                       ),
                     ),
+
                     hintText: 'Search trainers',
                     leading: const Icon(Icons.search),
                     onTap: () => context.pushNamed(

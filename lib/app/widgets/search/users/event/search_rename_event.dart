@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'search_users_event.freezed.dart';
+part 'search_rename_event.freezed.dart';
 
 @freezed
 class SearchExercisesEvent with _$SearchExercisesEvent {
