@@ -27,28 +27,19 @@ class SearchResultsScreen extends StatelessWidget {
             // TODO: Show 10 trainers, then load another 10 more on scroll
             Container(
               margin: const EdgeInsets.only(
-                top: Dimens.xmMargin,
-                left: Dimens.xmMargin,
+                top: Dimens.mMargin,
+                left: Dimens.mMargin,
+                right: Dimens.mMargin,
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: RichText(
-                      text: TextSpan(
-                        text: '"$_input"',
-                        style: ThemeText.mediumTitleBold,
-                        children: [
-                          TextSpan(
-                            text: ' (1)',
-                            style: ThemeText.mediumTitleRegular,
-                          ),
-                        ],
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+              //TODO: Implement search users
+              child: const SearchBar(
+                padding: MaterialStatePropertyAll<EdgeInsets>(
+                  EdgeInsets.symmetric(
+                    horizontal: 16,
                   ),
-                ],
+                ),
+                hintText: 'Search trainers',
+                leading: Icon(Icons.search),
               ),
             ),
             Container(

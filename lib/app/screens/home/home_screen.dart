@@ -67,13 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     top: Dimens.xmMargin,
                     right: Dimens.xmMargin,
                   ),
-                  child: const SearchBar(
-                    padding: MaterialStatePropertyAll<EdgeInsets>(
+                  child: SearchBar(
+                    padding: const MaterialStatePropertyAll<EdgeInsets>(
                       EdgeInsets.symmetric(
                         horizontal: 16,
                       ),
                     ),
-                    leading: Icon(Icons.search),
+                    hintText: 'Search trainers',
+                    leading: const Icon(Icons.search),
+                    onTap: () => context.pushNamed(
+                      ScreenNavigationKey.searchResults,
+                      pathParameters: {'input': ' '},
+                    ),
                   ),
                 ),
                 Container(

@@ -13,7 +13,7 @@ import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart'
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:perso/app/screens/search_filters/search_filter_screen.dart';
-import 'package:perso/app/screens/search_results/search_results.dart';
+import 'package:perso/app/screens/search_results/search_results_screen.dart';
 import 'package:perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:perso/app/screens/sign_up_success/sign_up_success_screen.dart';
