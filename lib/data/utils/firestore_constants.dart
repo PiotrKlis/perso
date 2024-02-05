@@ -1,8 +1,8 @@
 class CollectionName {
-  static String users = 'users';
   static String images = 'images';
   static String exercises = 'exercises';
   static String clients = 'clients';
+  static String trainers = 'trainers';
   static String tags = 'tags';
 }
 

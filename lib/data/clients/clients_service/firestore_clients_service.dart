@@ -16,7 +16,7 @@ class FirestoreClientsService implements ClientsService {
   Future<void> uploadFullClientData(ClientEntity clientEntity) async {
     final serverImagePath = await _uploadImage(clientEntity.imagePath);
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.clients)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .set({
       UserDocumentFields.name: clientEntity.name,
@@ -29,14 +29,13 @@ class FirestoreClientsService implements ClientsService {
       UserDocumentFields.pendingTrainers: clientEntity.pendingTrainers,
       UserDocumentFields.inactiveTrainers: clientEntity.inactiveTrainers,
     });
-    return Future.value();
   }
 
   @override
   Future<void> updateData(EditableClientData editableClientData) async {
     final serverImagePath = await _uploadImage(editableClientData.imagePath);
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.clients)
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .update({
       UserDocumentFields.name: editableClientData.name,

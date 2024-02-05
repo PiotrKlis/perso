@@ -17,8 +17,7 @@ class FirestoreTrainersProvider implements TrainersSource {
   @override
   Future<List<TrainerEntity>> getAllTrainersData() async {
     final QuerySnapshot trainersSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .where(UserDocumentFields.userType, isEqualTo: UserType.trainer.name)
+        .collection(CollectionName.trainers)
         .get();
 
     return trainersSnapshot.docs.map((data) {
@@ -60,10 +59,11 @@ class FirestoreTrainersProvider implements TrainersSource {
     }).toList();
   }
 
+  //TODO: Refactor into future?
   @override
   Stream<TrainerEntity> getTrainerData(String id) async* {
     final snapshots = FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(id)
         .snapshots();
 
@@ -110,7 +110,7 @@ class FirestoreTrainersProvider implements TrainersSource {
   @override
   Future<List<String>> getSpecialities(String id) async {
     final QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .where(UserDocumentFields.id, isEqualTo: id)
         .get();
 

@@ -23,7 +23,7 @@ class FirestoreExerciseService extends ExerciseService {
     required ExerciseEntity exerciseEntity,
   }) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
@@ -61,7 +61,7 @@ class FirestoreExerciseService extends ExerciseService {
     required ExerciseOptionsData exerciseOptions,
   }) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
@@ -84,7 +84,7 @@ class FirestoreExerciseService extends ExerciseService {
     required List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
   }) async {
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
@@ -94,7 +94,7 @@ class FirestoreExerciseService extends ExerciseService {
 
     final batch = FirebaseFirestore.instance.batch();
     final collection = FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
@@ -118,7 +118,7 @@ class FirestoreExerciseService extends ExerciseService {
   }) async {
     final batch = FirebaseFirestore.instance.batch();
     final collection = FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)

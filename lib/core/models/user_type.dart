@@ -1,3 +1,5 @@
+import 'package:perso/data/utils/firestore_constants.dart';
+
 enum UserType { trainer, client }
 
 extension StringToUserType on String {
@@ -9,6 +11,17 @@ extension StringToUserType on String {
         return UserType.client;
       default:
         return null;
+    }
+  }
+}
+
+extension UserTypeToDocumentField on UserType {
+  String toCollectionName() {
+    switch (this) {
+      case UserType.trainer:
+        return CollectionName.trainers;
+      case UserType.client:
+        return CollectionName.clients;
     }
   }
 }
