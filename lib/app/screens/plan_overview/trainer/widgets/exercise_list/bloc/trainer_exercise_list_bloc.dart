@@ -89,8 +89,6 @@ class TrainerExerciseListBloc
         emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
-
-
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();

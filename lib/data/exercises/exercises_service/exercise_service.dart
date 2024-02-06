@@ -32,4 +32,16 @@ abstract class ExerciseService {
     required String date,
     required List<ExerciseInTrainingEntity> exercises,
   });
+
+  Future<String> sendToClient({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  });
+
+  Future<String> getSentDate({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  });
 }

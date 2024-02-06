@@ -40,4 +40,5 @@ class UserDocumentFields {
   static const String titlePl = 'title-pl';
   static const String titleEn = 'title-en';
   static const String exerciseType = 'exerciseType';
+  static const String sentDate = 'sentDate';
 }

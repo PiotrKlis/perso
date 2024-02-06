@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
+import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/translations/string_list_mapper.dart';
 import 'package:perso/core/mappers/translations/string_mapper.dart';
@@ -13,7 +15,7 @@ import 'package:perso/data/utils/firestore_constants.dart';
 class FirestoreExerciseService extends ExerciseService {
   final _stringTranslationsMapper = getIt.get<StringTranslationsMapper>();
   final _stringListTranslationsMapper =
-      getIt.get<StringListTranslationsMapper>();
+  getIt.get<StringListTranslationsMapper>();
 
   @override
   Future<void> add({
@@ -131,5 +133,46 @@ class FirestoreExerciseService extends ExerciseService {
       });
     }
     await batch.commit();
+  }
+
+  @override
+  Future<String> getSentDate({required String clientId,
+    required String trainerId,
+    required String date}) {
+    // TODO: implement getSentDate
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<String> sendToClient({required String clientId,
+    required String trainerId,
+    required String date}) async {
+    final sourceCollection = FirebaseFirestore.instance
+        .collection(CollectionName.trainers)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(date);
+
+    final sentDate = DateTime
+        .now()
+        .yearMonthDayHourMinuteSecondFormat;
+    //TOOD: figure out what's the best way to hold the sent date
+    await sourceCollection.add({
+      UserDocumentFields.sentDate: sentDate,
+    });
+
+    final targetCollection = FirebaseFirestore.instance
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(CollectionName.trainers)
+        .doc(trainerId)
+        .collection(date);
+
+    final querySnapshot = await sourceCollection.get();
+    for (final document in querySnapshot.docs) {
+      await targetCollection.doc(document.id).set(document.data());
+    }
+    return sentDate.toString();
   }
 }

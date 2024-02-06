@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/perso_trainer_exercise_list.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/perso_send_exercises_section.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
@@ -101,9 +102,9 @@ class _TrainerPlanOverviewScreenContentState
 }
 
 class _ExercisesOverview extends StatefulWidget {
-  const _ExercisesOverview({required this.clientId});
+  const _ExercisesOverview({required String clientId}) : _clientId = clientId;
 
-  final String clientId;
+  final String _clientId;
 
   @override
   State<_ExercisesOverview> createState() => _ExercisesOverviewState();
@@ -118,14 +119,14 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
         color: PersoColors.lightBlue,
         child: Column(
           children: [
-            const _ExercisesHeaderRow(),
+            _ExercisesHeaderRow(clientId: widget._clientId),
             Container(
               margin: const EdgeInsets.only(
                 top: Dimens.mMargin,
                 bottom: Dimens.mMargin,
               ),
               child: PersoTrainerExerciseList(
-                clientId: widget.clientId,
+                clientId: widget._clientId,
               ),
             ),
           ],
@@ -136,7 +137,8 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
 }
 
 class _ExercisesHeaderRow extends StatefulWidget {
-  const _ExercisesHeaderRow() : super();
+  const _ExercisesHeaderRow({required String clientId}) : _clientId = clientId;
+  final String _clientId;
 
   @override
   State<_ExercisesHeaderRow> createState() => _ExercisesHeaderRowState();
@@ -158,10 +160,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
             'Exercises',
             style: ThemeText.largeTitleBold,
           ),
-          const PersoButton(
-            width: Dimens.smallButtonWidth,
-            title: 'Send',
-          ),
+          PersoSendExercisesSection(clientId: widget._clientId),
         ],
       ),
     );
