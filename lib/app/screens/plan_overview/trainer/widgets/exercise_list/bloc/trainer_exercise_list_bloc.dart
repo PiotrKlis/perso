@@ -35,21 +35,6 @@ class TrainerExerciseListBloc
       transformer: restartable(),
     );
 
-    on<AddExercise>((event, emitter) async {
-      try {
-        await _exercisesService.add(
-          clientId: event.clientId,
-          trainerId: trainerId,
-          date: event.date,
-          exerciseEntity:
-              event.exerciseEntity.copyWith(index: _currentExerciseIndex),
-        );
-        _currentExerciseIndex++;
-      } catch (error) {
-        emitter(TrainerExerciseListState.error(error.toString()));
-      }
-    });
-
     on<RemoveExercise>((event, emitter) async {
       try {
         final mutableList = <ExerciseInTrainingEntity>[
@@ -72,19 +57,6 @@ class TrainerExerciseListBloc
           exerciseInTrainingEntity: event.exerciseInTrainingEntity,
           exerciseInTrainingEntityList: updatedIndexesList,
         );
-      } catch (error) {
-        emitter(TrainerExerciseListState.error(error.toString()));
-      }
-    });
-
-    on<GetNumberOfExercises>((event, emitter) async {
-      try {
-        final numberOfExercises = await _exercisesProvider.getNumberOfExercises(
-          event.clientId,
-          trainerId,
-          event.date,
-        );
-        _currentExerciseIndex = numberOfExercises;
       } catch (error) {
         emitter(TrainerExerciseListState.error(error.toString()));
       }
@@ -117,10 +89,11 @@ class TrainerExerciseListBloc
         emitter(TrainerExerciseListState.error(error.toString()));
       }
     });
+
+
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesProvider = getIt.get<FirestoreExerciseProvider>();
   final _exercisesService = getIt.get<FirestoreExerciseService>();
-  var _currentExerciseIndex = 0;
 }

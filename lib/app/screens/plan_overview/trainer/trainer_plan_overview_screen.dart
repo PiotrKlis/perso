@@ -158,10 +158,9 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
             'Exercises',
             style: ThemeText.largeTitleBold,
           ),
-          //TODO: Add "save" button, so then data is sent to the client
           const PersoButton(
             width: Dimens.smallButtonWidth,
-            title: 'Save',
+            title: 'Send',
           ),
         ],
       ),
