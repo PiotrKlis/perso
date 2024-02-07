@@ -9,6 +9,7 @@ class SendExerciseBloc extends Bloc<SendExercisesEvent, SendExercisesState> {
   SendExerciseBloc() : super(const SendExercisesState.initial()) {
     on<SendExercises>((event, emitter) async {
       try {
+        emitter(const SendExercisesState.sendingInProgress());
         final sentDate = await _exerciseService.sendToClient(
           clientId: event.clientId,
           date: event.date,
@@ -19,7 +20,18 @@ class SendExerciseBloc extends Bloc<SendExercisesEvent, SendExercisesState> {
         emitter(SendExercisesState.error(error.toString()));
       }
     });
-    on<GetExercisesSentDate>((event, emitter) async {});
+    on<GetExercisesSentDate>((event, emitter) async {
+      try {
+        final sentDate = await _exerciseService.getSentDate(
+          clientId: event.clientId,
+          date: event.date,
+          trainerId: _userSessionModel.user?.uid ?? '',
+        );
+        emitter(SendExercisesState.exerciseSentDate(sentDate));
+      } catch (error) {
+        emitter(SendExercisesState.error(error.toString()));
+      }
+    });
   }
 
   final _exerciseService = getIt.get<FirestoreExerciseService>();

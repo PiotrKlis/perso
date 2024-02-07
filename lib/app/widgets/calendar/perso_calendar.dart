@@ -61,7 +61,7 @@ class _PersoCalendarState extends State<PersoCalendar> {
         headerStyle: const HeaderStyle(formatButtonVisible: false),
         calendarBuilders: CalendarBuilders(
           markerBuilder: (context, day, events) {
-            final formattedDay = day.yearMonthDayHourMinuteSecondFormat;
+            final formattedDay = day.yearMonthDayHourMinuteSecondsMillisecondsFormat;
             if (_markers.containsKey(formattedDay) && _markers[formattedDay]!) {
               return Container(
                 width: 4,

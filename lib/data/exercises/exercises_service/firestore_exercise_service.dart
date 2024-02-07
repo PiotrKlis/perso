@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
 import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
@@ -139,9 +138,21 @@ class FirestoreExerciseService extends ExerciseService {
   Future<String> getSentDate(
       {required String clientId,
       required String trainerId,
-      required String date}) {
-    // TODO: implement getSentDate
-    throw UnimplementedError();
+      required String date}) async {
+    final client = await FirebaseFirestore.instance
+        .collection(CollectionName.trainers)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .get();
+
+    final data = client.data();
+    if (data != null && data.containsKey(date)) {
+      final sentDate = data[date] as String;
+      return sentDate;
+    } else {
+      return '';
+    }
   }
 
   @override
@@ -156,11 +167,8 @@ class FirestoreExerciseService extends ExerciseService {
         .collection(CollectionName.clients)
         .doc(clientId);
 
-    //TODO: Change format into proper one
-    final sentDate = DateTime.now().yearMonthDayHourMinuteSecondFormat;
-    await sourceDocument.set({
-      date: sentDate,
-    });
+    final sentDate = DateTime.now().yearMonthDayHourMinuteSecondsFormat;
+    await sourceDocument.set({date: sentDate}, SetOptions(merge: true));
 
     final sourceCollection = sourceDocument.collection(date);
 
@@ -175,6 +183,6 @@ class FirestoreExerciseService extends ExerciseService {
     for (final document in querySnapshot.docs) {
       await targetCollection.doc(document.id).set(document.data());
     }
-    return sentDate.toString();
+    return sentDate;
   }
 }

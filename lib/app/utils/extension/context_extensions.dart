@@ -23,6 +23,14 @@ extension AppLocalizationsExtensions on BuildContext {
       );
   }
 
+  void showLoadingSnackBar(String text) {
+    ScaffoldMessenger.of(this)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(content: Text(text), backgroundColor: Colors.grey),
+      );
+  }
+
   //GoRouter extension
   void clearAndNavigate(String path) {
     while (canPop() == true) {

@@ -14,7 +14,7 @@ import 'package:perso/data/user_info/user_info_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await ChatClient.initializeClient();
+  // await ChatClient.initializeClient();
   configureDependencies(Environment.dev);
   LocaleRepository.init();
   runApp(MyApp());
