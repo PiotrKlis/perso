@@ -15,7 +15,7 @@ import 'package:perso/data/utils/firestore_constants.dart';
 class FirestoreExerciseService extends ExerciseService {
   final _stringTranslationsMapper = getIt.get<StringTranslationsMapper>();
   final _stringListTranslationsMapper =
-  getIt.get<StringListTranslationsMapper>();
+      getIt.get<StringListTranslationsMapper>();
 
   @override
   Future<void> add({
@@ -136,31 +136,33 @@ class FirestoreExerciseService extends ExerciseService {
   }
 
   @override
-  Future<String> getSentDate({required String clientId,
-    required String trainerId,
-    required String date}) {
+  Future<String> getSentDate(
+      {required String clientId,
+      required String trainerId,
+      required String date}) {
     // TODO: implement getSentDate
     throw UnimplementedError();
   }
 
   @override
-  Future<String> sendToClient({required String clientId,
+  Future<String> sendToClient({
+    required String clientId,
     required String trainerId,
-    required String date}) async {
-    final sourceCollection = FirebaseFirestore.instance
+    required String date,
+  }) async {
+    final sourceDocument = FirebaseFirestore.instance
         .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
-        .doc(clientId)
-        .collection(date);
+        .doc(clientId);
 
-    final sentDate = DateTime
-        .now()
-        .yearMonthDayHourMinuteSecondFormat;
-    //TOOD: figure out what's the best way to hold the sent date
-    await sourceCollection.add({
-      UserDocumentFields.sentDate: sentDate,
+    //TODO: Change format into proper one
+    final sentDate = DateTime.now().yearMonthDayHourMinuteSecondFormat;
+    await sourceDocument.set({
+      date: sentDate,
     });
+
+    final sourceCollection = sourceDocument.collection(date);
 
     final targetCollection = FirebaseFirestore.instance
         .collection(CollectionName.clients)

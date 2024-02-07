@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/bloc/send_exercises_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/event/send_exercises_event.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/state/send_exercises_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
@@ -70,15 +71,22 @@ class _SendExerciseSectionContentState
                   );
             },
           ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.sMargin),
-            child: Visibility(
-              visible: false,
-              child: Text(
-                'Sent on ${DateTime.now().yearMonthDayFormat}',
-                style: ThemeText.footnoteRegular,
-              ),
-            ),
+          BlocBuilder<SendExerciseBloc, SendExercisesState>(
+            builder: (context, state) {
+              return state.when(
+                initial: Container.new,
+                exerciseSentDate: (date) {
+                  return Container(
+                    margin: const EdgeInsets.only(top: Dimens.sMargin),
+                    child: Text(
+                      'Sent on $date',
+                      style: ThemeText.footnoteRegular,
+                    ),
+                  );
+                },
+                error: Text.new,
+              );
+            },
           )
         ],
       ),
