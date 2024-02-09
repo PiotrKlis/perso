@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/plan_overview/client/bloc/client_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/client/perso_client_exercise_list.dart';
+import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
-import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
   const ClientPlanOverviewScreen({
@@ -71,8 +73,6 @@ class _ExercisesOverview extends StatefulWidget {
 }
 
 class _ExercisesOverviewState extends State<_ExercisesOverview> {
-  String _selectedDate = DateTime.now().yearMonthDayFormat;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -81,7 +81,7 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
         color: PersoColors.lightBlue,
         child: Column(
           children: [
-            _ExercisesHeaderRow(clientId: widget.trainerId),
+            _ExercisesHeaderRow(),
             PersoClientExerciseList(
               trainerId: widget.trainerId,
             ),
@@ -93,58 +93,43 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
 }
 
 class _ExercisesHeaderRow extends StatefulWidget {
-  const _ExercisesHeaderRow({required String clientId}) : _clientId = clientId;
-
-  final String _clientId;
-
   @override
   State<_ExercisesHeaderRow> createState() => _ExercisesHeaderRowState();
 }
 
 class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
-  String? _selectedDate;
+  List<ExerciseEntity>? _exercises;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CalendarBloc, CalendarState>(
-      builder: (BuildContext context, CalendarState state) {
-        state.when(
-          markersData: (selectedDate) {},
-          initial: () {},
-          selectedDate: (selectedDate) {
-            _selectedDate = selectedDate;
-          },
-        );
-        return Container(
-          margin: const EdgeInsets.only(
-            left: Dimens.mMargin,
-            right: Dimens.sMargin,
-            top: Dimens.mMargin,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Exercises',
-                style: ThemeText.largeTitleBold,
-              ),
-              PersoButton(
-                width: Dimens.smallButtonWidth,
-                title: 'Start',
-                onTap: (context) {
-                  // context.pushNamed(
-                  //   ScreenNavigationKey.exerciseLibrary,
-                  //   queryParameters: {
-                  //     'clientId': widget._clientId,
-                  //     'date': _selectedDate,
-                  //   },
-                  // );
-                },
-              ),
-            ],
-          ),
-        );
+    return BlocListener<ClientExerciseListBloc, ClientExerciseListState>(
+      listener: (context, state) {
+        state.whenOrNull(exercises: (exercises) {
+          _exercises = exercises;
+        });
       },
+      child: Container(
+        margin: const EdgeInsets.all(Dimens.mMargin),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Exercises',
+              style: ThemeText.largeTitleBold,
+            ),
+            PersoButton(
+              width: Dimens.smallButtonWidth,
+              title: 'Start',
+              onTap: (context) {
+                context.pushNamed(
+                  ScreenNavigationKey.exerciseInProgress,
+                  extra: _exercises,
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

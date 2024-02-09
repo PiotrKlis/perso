@@ -49,7 +49,6 @@ class _PersoClientExerciseListState extends State<PersoClientExerciseList> {
       },
       child: BlocBuilder<ClientExerciseListBloc, ClientExerciseListState>(
         builder: (context, state) {
-          Container();
           return state.when(
             exercises: (exercises) {
               //TODO: Sliverlist? remove shrinkwrap
