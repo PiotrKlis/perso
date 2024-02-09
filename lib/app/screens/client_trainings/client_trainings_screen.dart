@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/client_trainings/bloc/client_trainings_bloc.dart';
+import 'package:perso/app/screens/client_trainings/event/client_trainings_event.dart';
+import 'package:perso/app/screens/client_trainings/state/client_trainings_state.dart';
+import 'package:perso/app/styleguide/value/app_assets.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
@@ -9,7 +14,133 @@ class ClientTrainingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _NoTrainersView();
+    return BlocProvider(
+      create: (context) => ClientTrainingBloc()..add(const LoadTrainings()),
+      child: const _ClientTrainingsContent(),
+    );
+  }
+}
+
+class _ClientTrainingsContent extends StatelessWidget {
+  const _ClientTrainingsContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        margin: const EdgeInsets.only(top: Dimens.lMargin),
+        child: BlocBuilder<ClientTrainingBloc, ClientTrainingState>(
+          builder: (context, state) {
+            return state.when(
+              initial: Container.new,
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              trainings: (trainerNicknames) {
+                if (trainerNicknames.isEmpty) {
+                  return const _NoTrainersView();
+                } else {
+                  return _TrainersView(trainerNicknames);
+                }
+              },
+              error: (error) => Center(
+                child: Text(
+                  error,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _TrainersView extends StatelessWidget {
+  _TrainersView(this.trainerNicknames);
+
+  final List<String> trainerNicknames;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.xmMargin,
+            right: Dimens.xmMargin,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Trainings', style: ThemeText.largerTitleBold),
+              const Icon(Icons.notifications_off),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.xmMargin,
+            top: Dimens.lMargin,
+          ),
+          child: Text(
+            'My plans',
+            style: ThemeText.mediumTitleBold,
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: PersoColors.lightBlue,
+            margin: const EdgeInsets.only(
+              top: Dimens.mMargin,
+            ),
+            child: GridView.count(
+              crossAxisCount: 1,
+              children: trainerNicknames
+                  .map(
+                    (nickname) => Container(
+                      margin: const EdgeInsets.all(Dimens.mMargin),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: const LinearGradient(
+                          colors: [
+                            Colors.blue, // First color
+                            Colors.green, // Second color
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              AppImages.trainer1,
+                              // width: Dimens.trainerImageWidth,
+                              // height: Dimens.trainerImageHeight,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              top: Dimens.mMargin,
+                            ),
+                            child: Text(
+                              nickname,
+                              style: ThemeText.largeTitleBold,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

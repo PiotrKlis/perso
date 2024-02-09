@@ -29,13 +29,30 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<List<ExerciseEntity>> getExercisesForClient(
+  Future<List<String>> getTrainersForClient(
     String clientId,
-    String trainerId,
-    String date,
-  ) {
-    // TODO: implement getExercisesForClient
-    throw UnimplementedError();
+  ) async {
+    final trainersSnapshots = await FirebaseFirestore.instance
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .get();
+
+    final trainersIds =
+        (trainersSnapshots[UserDocumentFields.activeTrainers] as List<dynamic>)
+            .map((e) => e.toString())
+            .toList();
+
+    return Future.wait(
+      trainersIds.map(
+        (trainerId) async {
+          final trainerSnapshot = await FirebaseFirestore.instance
+              .collection(CollectionName.trainers)
+              .doc(trainerId)
+              .get();
+          return trainerSnapshot[UserDocumentFields.nickname] as String;
+        },
+      ),
+    );
   }
 
   @override
