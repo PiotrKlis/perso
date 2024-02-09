@@ -6,6 +6,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/exercise_entity_mapper.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
+import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
@@ -29,7 +30,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<List<String>> getTrainersForClient(
+  Future<List<TrainerIdentity>> getTrainersForClient(
     String clientId,
   ) async {
     final trainersSnapshots = await FirebaseFirestore.instance
@@ -49,7 +50,11 @@ class FirestoreExerciseProvider extends ExerciseSource {
               .collection(CollectionName.trainers)
               .doc(trainerId)
               .get();
-          return trainerSnapshot[UserDocumentFields.nickname] as String;
+          return TrainerIdentity(
+            name: trainerSnapshot[UserDocumentFields.name] as String,
+            surname: trainerSnapshot[UserDocumentFields.surname] as String,
+            nickname: trainerSnapshot[UserDocumentFields.nickname] as String,
+          );
         },
       ),
     );

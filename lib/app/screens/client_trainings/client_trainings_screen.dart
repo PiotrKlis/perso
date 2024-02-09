@@ -8,6 +8,7 @@ import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
+import 'package:perso/core/models/trainer_identity.dart';
 
 class ClientTrainingsScreen extends StatelessWidget {
   const ClientTrainingsScreen({super.key});
@@ -36,11 +37,11 @@ class _ClientTrainingsContent extends StatelessWidget {
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
-              trainings: (trainerNicknames) {
-                if (trainerNicknames.isEmpty) {
+              trainings: (trainerIdentities) {
+                if (trainerIdentities.isEmpty) {
                   return const _NoTrainersView();
                 } else {
-                  return _TrainersView(trainerNicknames);
+                  return _TrainersView(trainerIdentities);
                 }
               },
               error: (error) => Center(
@@ -57,9 +58,9 @@ class _ClientTrainingsContent extends StatelessWidget {
 }
 
 class _TrainersView extends StatelessWidget {
-  _TrainersView(this.trainerNicknames);
+  const _TrainersView(this.trainerIdentities);
 
-  final List<String> trainerNicknames;
+  final List<TrainerIdentity> trainerIdentities;
 
   @override
   Widget build(BuildContext context) {
@@ -97,16 +98,16 @@ class _TrainersView extends StatelessWidget {
             ),
             child: GridView.count(
               crossAxisCount: 1,
-              children: trainerNicknames
+              children: trainerIdentities
                   .map(
-                    (nickname) => Container(
-                      margin: const EdgeInsets.all(Dimens.mMargin),
+                    (trainerIdentity) => Container(
+                      margin: const EdgeInsets.all(Dimens.xmMargin),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         gradient: const LinearGradient(
                           colors: [
                             Colors.blue, // First color
-                            Colors.green, // Second color
+                            Colors.greenAccent, // Second color
                           ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
@@ -118,8 +119,6 @@ class _TrainersView extends StatelessWidget {
                           ClipOval(
                             child: Image.asset(
                               AppImages.trainer1,
-                              // width: Dimens.trainerImageWidth,
-                              // height: Dimens.trainerImageHeight,
                             ),
                           ),
                           Container(
@@ -127,10 +126,19 @@ class _TrainersView extends StatelessWidget {
                               top: Dimens.mMargin,
                             ),
                             child: Text(
-                              nickname,
+                              '${trainerIdentity.name} ${trainerIdentity.surname}',
                               style: ThemeText.largeTitleBold,
                             ),
-                          )
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              top: Dimens.xsMargin,
+                            ),
+                            child: Text(
+                              '@${trainerIdentity.nickname}',
+                              style: ThemeText.bodyBoldGreyText,
+                            ),
+                          ),
                         ],
                       ),
                     ),

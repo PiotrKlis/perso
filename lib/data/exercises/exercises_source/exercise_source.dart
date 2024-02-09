@@ -1,5 +1,6 @@
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
+import 'package:perso/core/models/trainer_identity.dart';
 
 abstract class ExerciseSource {
   Future<List<ExerciseEntity>> getAllExercises();
@@ -10,7 +11,7 @@ abstract class ExerciseSource {
     String date,
   );
 
-  Future<List<String>> getTrainersForClient(
+  Future<List<TrainerIdentity>> getTrainersForClient(
     String clientId,
   );
 
