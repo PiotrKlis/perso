@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
-import 'package:flutter/material.dart';
 
 class PersoTextField extends StatefulWidget {
   const PersoTextField({
-    required String title, super.key,
+    required String title,
+    super.key,
     String? Function(String)? customValidator,
     bool shouldObscureText = false,
     TextInputType textInputType = TextInputType.text,
@@ -50,28 +51,32 @@ class _PersoTextFieldState extends State<PersoTextField> {
       keyboardType:
           widget._isMultiLine ? TextInputType.multiline : widget._textInputType,
       maxLines: widget._isMultiLine ? null : 1,
-      expands: widget._isMultiLine ? true : false,
+      expands: widget._isMultiLine,
       textAlignVertical: TextAlignVertical.top,
       validator: _handleValidation,
       decoration: InputDecoration(
-          counterText: widget._isMultiLine ? null : '',
-          filled: true,
-          fillColor: Colors.white,
-          errorMaxLines: 2,
-          focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
-          ),
-          labelText: widget._title,
-          labelStyle: ThemeText.bodyRegularGreyText,),
+        counterText: widget._isMultiLine ? null : '',
+        filled: true,
+        fillColor: Colors.white,
+        errorMaxLines: 2,
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
+        ),
+        labelText: widget._title,
+        labelStyle: ThemeText.bodyRegularGreyText,
+      ),
     );
   }
 
   String? _handleValidation(String? value) {
     if (widget._confirmPasswordController != null) {
       return TextFieldValidator.validateSameText(
-          value ?? '', widget._passwordController?.text ?? '',);
+        value ?? '',
+        widget._passwordController?.text ?? '',
+      );
     } else {
       return widget._customValidator?.call(value ?? '');
     }

@@ -10,12 +10,13 @@ import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart'
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
-import 'package:perso/app/screens/plan_overview/plan_overview_screen.dart';
+import 'package:perso/app/screens/plan_overview/client/client_plan_overview_screen.dart';
+import 'package:perso/app/screens/plan_overview/trainer/trainer_plan_overview_screen.dart';
 import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:perso/app/screens/search_filters/search_filter_screen.dart';
-import 'package:perso/app/screens/search_results/search_results.dart';
+import 'package:perso/app/screens/search_results/search_results_screen.dart';
 import 'package:perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:perso/app/screens/sign_up_success/sign_up_success_screen.dart';
@@ -24,11 +25,12 @@ import 'package:perso/app/screens/trainer_details/trainer_details_screen.dart';
 import 'package:perso/app/screens/trainer_profile/trainer_profile_screen.dart';
 import 'package:perso/app/screens/training_categories/training_categories_screen.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/navigation/bottom_nav_bar.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/user_type.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -245,11 +247,41 @@ final GoRouter goRouter = GoRouter(
                 return const NoTransitionPage(child: ClientTrainingsScreen());
               },
               redirect: (context, state) {
-                if (!_userSessionModel.isUserLoggedIn) {
+                if (_userSessionModel.isUserLoggedIn) {
+                  if (_userSessionModel.userType == UserType.trainer) {
+                      return ScreenNavigationKey.trainerClientsList;
+                  }
+                } else {
                   return ScreenNavigationKey.loggedOutTrainings;
                 }
                 return null;
               },
+              routes: [
+                GoRoute(
+                  name: ScreenNavigationKey.clientPlanOverview,
+                  path: ScreenNavigationKey.clientPlanOverview,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return NoTransitionPage(
+                      child: ClientPlanOverviewScreen(
+                        trainerId: state.uri.queryParameters[_trainerId]!,
+                      ),
+                    );
+                  },
+                  routes: [
+                    // GoRoute(
+                    //   name: ScreenNavigationKey.exerciseInProgress,
+                    //   path: ScreenNavigationKey.exerciseInProgress,
+                    //   pageBuilder: (BuildContext context, GoRouterState state) {
+                    //     return NoTransitionPage(
+                    //       child: ExerciseInProgressScreen(
+                    //         exerciseEntities: state.extra! as List<ExerciseEntity>,
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+                  ],
+                )
+              ]
             ),
             GoRoute(
               name: ScreenNavigationKey.trainerClientsList,
@@ -258,20 +290,23 @@ final GoRouter goRouter = GoRouter(
                 return const NoTransitionPage(child: TrainerClientsScreen());
               },
               redirect: (context, state) {
-                if (!_userSessionModel.isUserLoggedIn) {
+                if (_userSessionModel.isUserLoggedIn) {
+                  if (_userSessionModel.userType == UserType.client) {
+                    return ScreenNavigationKey.clientTrainings;
+                  }
+                } else {
                   return ScreenNavigationKey.loggedOutTrainings;
                 }
                 return null;
               },
               routes: [
                 GoRoute(
-                  name: ScreenNavigationKey.planOverview,
-                  path: ScreenNavigationKey.planOverview,
+                  name: ScreenNavigationKey.trainerPlanOverview,
+                  path: ScreenNavigationKey.trainerPlanOverview,
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return NoTransitionPage(
-                      child: PlanOverviewScreen(
+                      child: TrainerPlanOverviewScreen(
                         clientId: state.uri.queryParameters[_clientId]!,
-                        trainerId: state.uri.queryParameters[_trainerId]!,
                       ),
                     );
                   },
@@ -288,7 +323,7 @@ final GoRouter goRouter = GoRouter(
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
                           child: ExerciseLibraryScreen(
-                            clientId: state.uri.queryParameters['clientId']!,
+                            clientId: state.uri.queryParameters[_clientId]!,
                             selectedDate: state.uri.queryParameters['date']!,
                           ),
                         );

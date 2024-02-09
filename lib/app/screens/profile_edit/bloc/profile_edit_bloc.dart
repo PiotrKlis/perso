@@ -5,7 +5,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/clients/clients_service/firestore_clients_service.dart';
 import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.dart';
 

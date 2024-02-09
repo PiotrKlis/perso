@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:perso/core/user_type.dart';
+import 'package:perso/core/models/user_type.dart';
 
 @Singleton(order: -1)
 class UserSessionModel {

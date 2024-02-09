@@ -1,15 +1,167 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/client_trainings/bloc/client_trainings_bloc.dart';
+import 'package:perso/app/screens/client_trainings/event/client_trainings_event.dart';
+import 'package:perso/app/screens/client_trainings/state/client_trainings_state.dart';
+import 'package:perso/app/styleguide/value/app_assets.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
+import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/models/trainer_identity.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientTrainingsScreen extends StatelessWidget {
   const ClientTrainingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const _NoTrainersView();
+    return BlocProvider(
+      create: (context) => ClientTrainingBloc()..add(const LoadTrainings()),
+      child: const _ClientTrainingsContent(),
+    );
+  }
+}
+
+class _ClientTrainingsContent extends StatelessWidget {
+  const _ClientTrainingsContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Container(
+        margin: const EdgeInsets.only(top: Dimens.lMargin),
+        child: BlocBuilder<ClientTrainingBloc, ClientTrainingState>(
+          builder: (context, state) {
+            return state.when(
+              initial: Container.new,
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              trainings: (trainingIdentities) {
+                if (trainingIdentities.isEmpty) {
+                  return const _NoTrainersView();
+                } else {
+                  return _TrainersView(trainingIdentities);
+                }
+              },
+              error: (error) => Center(
+                child: Text(
+                  error,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _TrainersView extends StatelessWidget {
+  const _TrainersView(this.trainerIdentities);
+
+  final List<TrainerIdentity> trainerIdentities;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.xmMargin,
+            right: Dimens.xmMargin,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Trainings', style: ThemeText.largerTitleBold),
+              const Icon(Icons.notifications_off),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.xmMargin,
+            top: Dimens.lMargin,
+          ),
+          child: Text(
+            'My plans',
+            style: ThemeText.mediumTitleBold,
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: PersoColors.lightBlue,
+            margin: const EdgeInsets.only(
+              top: Dimens.mMargin,
+            ),
+            child: GridView.count(
+              crossAxisCount: 1,
+              children: trainerIdentities
+                  .map(
+                    (trainerIdentity) => GestureDetector(
+                      onTap: () {
+                        context.pushNamed(
+                          ScreenNavigationKey.clientPlanOverview,
+                          queryParameters: {
+                            'trainerId': trainerIdentity.id,
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(Dimens.xmMargin),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.blue, // First color
+                              Colors.greenAccent, // Second color
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipOval(
+                              child: Image.asset(
+                                AppImages.trainer1,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                top: Dimens.mMargin,
+                              ),
+                              child: Text(
+                                '${trainerIdentity.name} ${trainerIdentity.surname}',
+                                style: ThemeText.largeTitleBold,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                top: Dimens.xsMargin,
+                              ),
+                              child: Text(
+                                '@${trainerIdentity.nickname}',
+                                style: ThemeText.bodyBoldGreyText,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

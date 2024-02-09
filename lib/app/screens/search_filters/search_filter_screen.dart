@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
+import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
@@ -59,7 +59,7 @@ class SearchFilterScreen extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Text(AppLocalizations.of(context)!.location_default_set)
+                Text(AppLocalizations.of(context)!.location_default_set),
               ],
             ),
           ),
@@ -113,7 +113,7 @@ class SearchFilterScreen extends StatelessWidget {
               left: Dimens.lMargin,
               bottom: Dimens.lMargin,
             ),
-            child: PersoCategoryChips(),
+            child: PersoSelectableCategoryChips(),
           ),
           Expanded(
             child: Align(

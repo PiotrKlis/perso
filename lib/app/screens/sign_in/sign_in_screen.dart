@@ -33,10 +33,18 @@ class SignInScreen extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.all(Dimens.lMargin),
-                  child: ClipOval(
-                    child:
-                        Image(image: AssetImage('assets/icon/icon_black.png')),
+                  margin: const EdgeInsets.only(
+                    left: Dimens.mMargin,
+                    right: Dimens.mMargin,
+                    top: Dimens.mMargin,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(Dimens.searchRadius),
+                    child: const Align(
+                      heightFactor: 0.5,
+                      child: Image(
+                          image: AssetImage('assets/icon/icon_black.png')),
+                    ),
                   ),
                 ),
                 Center(
@@ -54,7 +62,7 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       Container(
                         margin: const EdgeInsets.only(
-                          top: Dimens.xlMargin,
+                          top: Dimens.xmMargin,
                           left: Dimens.xmMargin,
                           right: Dimens.xmMargin,
                         ),
@@ -104,7 +112,7 @@ class SignInScreen extends StatelessWidget {
                       navigateToProfileCreationScreen: () => context
                           .pushNamed(ScreenNavigationKey.profileCreation),
                       navigateToHomeScreen: () =>
-                          context.replaceNamed(ScreenNavigationKey.home),
+                          context.clearAndNavigate(ScreenNavigationKey.home),
                     );
                   },
                   child: Container(),
@@ -124,9 +132,10 @@ class SignInScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(
-                      top: Dimens.lMargin,
-                      left: Dimens.lMargin,
-                      right: Dimens.lMargin),
+                    top: Dimens.lMargin,
+                    left: Dimens.lMargin,
+                    right: Dimens.lMargin,
+                  ),
                   child: PersoButton(
                     title: context.strings.sign_in,
                     onTap: _loginUser,

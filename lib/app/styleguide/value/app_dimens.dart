@@ -74,4 +74,6 @@ class Dimens {
   static const double mRestIconHeight = 80;
 
   static const double whiteBackground = 100;
+
+  static const double videoPlayerHeight = 260;
 }

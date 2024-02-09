@@ -346,8 +346,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
           Container(
             margin: const EdgeInsets.only(top: Dimens.xsMargin),
             child: PersoCategoryChips(
-              areChipsSelectable: false,
-              trainerId: trainerEntity.id,
+              categories: trainerEntity.categories,
             ),
           ),
           Container(

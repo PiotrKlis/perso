@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
@@ -9,9 +12,6 @@ import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.da
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/data/address_provider/address_provider.dart';
 import 'package:perso/data/address_provider/google_address_provider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PersoAutocomplete extends StatelessWidget {
   PersoAutocomplete({super.key});

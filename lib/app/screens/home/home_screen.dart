@@ -12,7 +12,6 @@ import 'package:perso/app/widgets/perso_big_header.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_clickable_text.dart';
 import 'package:perso/app/widgets/perso_header.dart';
-import 'package:perso/app/widgets/perso_search.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:perso/app/widgets/training_category_list/perso_training_category_list.dart';
@@ -75,13 +74,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       top: Dimens.xmMargin,
                       right: Dimens.xmMargin,
                     ),
-                    child: GestureDetector(
+                    child: SearchBar(
+                    padding: const MaterialStatePropertyAll<EdgeInsets>(
+                      EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                    ),
+
+                    hintText: 'Search trainers',
+                    leading: const Icon(Icons.search),
                       onTap: () => context.pushNamed(
                           ScreenNavigationKey.searchResults,
                           pathParameters: {
-                            "input": ScreenNavigationKey.searchResults
-                          }),
-                      child: const AbsorbPointer(child: PersoSearch()),
+                            'input': ' '},
+                          ),
                     ),
                   ),
                   Container(
@@ -126,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .pushNamed(ScreenNavigationKey.exerciseInProgress),
                     ),
                   ),
-                  Container(
+                  ColoredBox(
                     color: PersoColors.lightBlue,
                     child: Column(
                       children: [

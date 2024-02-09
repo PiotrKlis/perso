@@ -11,13 +11,13 @@ class TrainingRequestService {
   Future<void> sendTrainingRequest(String trainerId) async {
     final clientId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.clients)
         .doc(clientId)
         .update({
       UserDocumentFields.pendingTrainers: FieldValue.arrayUnion([trainerId]),
     });
     await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.trainers)
         .doc(trainerId)
         .update({
       UserDocumentFields.pendingClients: FieldValue.arrayUnion([clientId]),
@@ -27,7 +27,7 @@ class TrainingRequestService {
   Future<bool> checkIfUserHasAlreadySentRequest(String trainerId) async {
     final clientId = _userSessionModel.user?.uid;
     final document = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.clients)
         .doc(clientId)
         .get();
 

@@ -10,7 +10,7 @@ class FirestoreClientsProvider implements ClientsSource {
   @override
   Future<ClientEntity> getClientData(String id) async {
     final DocumentSnapshot clientsSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
+        .collection(CollectionName.clients)
         .doc(id)
         .get();
 
