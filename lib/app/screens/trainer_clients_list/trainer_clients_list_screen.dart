@@ -127,7 +127,7 @@ class _Client extends StatelessWidget {
           onTap: () {
             if (sectionType == SectionType.active) {
               context.pushNamed(
-                ScreenNavigationKey.planOverview,
+                ScreenNavigationKey.trainerPlanOverview,
                 queryParameters: {
                   'clientId': client.id,
                   'trainerId': trainerId,

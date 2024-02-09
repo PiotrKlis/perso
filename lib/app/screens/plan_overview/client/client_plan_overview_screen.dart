@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/plan_overview/client/bloc/client_exercise_list_bloc.dart';
+import 'package:perso/app/screens/plan_overview/client/perso_client_exercise_list.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
@@ -8,47 +9,33 @@ import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
   const ClientPlanOverviewScreen({
-    required String clientId,
     required String trainerId,
     super.key,
-  })  : _trainerId = trainerId,
-        _clientId = clientId;
+  }) : _trainerId = trainerId;
 
-  final String _clientId;
   final String _trainerId;
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-    // return MultiBlocProvider(
-    //   providers: [
-    //     BlocProvider(
-    //       create: (context) => ClientExerciseListBloc()
-    //         ..add(
-    //           TrainerExerciseListEvent.getExercises(
-    //             _clientId,
-    //             _trainerId,
-    //             DateTime.now().yearMonthDayFormat,
-    //           ),
-    //         ),
-    //     ),
-    //     BlocProvider(
-    //       create: (context) => CalendarBloc(),
-    //     ),
-    //   ],
-    //   child: _PlanOverviewScreenContent(clientId: _clientId),
-    // );
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => ClientExerciseListBloc()),
+        BlocProvider(
+          create: (context) => CalendarBloc(),
+        ),
+      ],
+      child: _PlanOverviewScreenContent(_trainerId),
+    );
   }
 }
 
 class _PlanOverviewScreenContent extends StatelessWidget {
-  const _PlanOverviewScreenContent({required this.clientId});
+  const _PlanOverviewScreenContent(this._trainerId);
 
-  final String clientId;
+  final String _trainerId;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +47,13 @@ class _PlanOverviewScreenContent extends StatelessWidget {
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
-            PersoCalendar(clientId: clientId),
-            _ExercisesOverview(clientId: clientId),
+            PersoCalendar(
+              clientId: null,
+              trainerId: _trainerId,
+            ),
+            _ExercisesOverview(
+              trainerId: _trainerId,
+            ),
           ],
         ),
       ),
@@ -70,9 +62,9 @@ class _PlanOverviewScreenContent extends StatelessWidget {
 }
 
 class _ExercisesOverview extends StatefulWidget {
-  const _ExercisesOverview({required this.clientId});
+  const _ExercisesOverview({required this.trainerId});
 
-  final String clientId;
+  final String trainerId;
 
   @override
   State<_ExercisesOverview> createState() => _ExercisesOverviewState();
@@ -89,23 +81,9 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
         color: PersoColors.lightBlue,
         child: Column(
           children: [
-            //TODO: Add "save" button, so then data is sent to the client
-            _ExercisesHeaderRow(clientId: widget.clientId),
-            BlocBuilder<CalendarBloc, CalendarState>(
-              builder: (context, state) {
-                state.when(
-                  markersData: (selectedDate) {},
-                  initial: () {},
-                  selectedDate: (selectedDate) {
-                    _selectedDate = selectedDate;
-                  },
-                );
-                return Container();
-                // return PersoTrainerExerciseList(
-                //   clientId: widget.clientId,
-                //   date: _selectedDate,
-                // );
-              },
+            _ExercisesHeaderRow(clientId: widget.trainerId),
+            PersoClientExerciseList(
+              trainerId: widget.trainerId,
             ),
           ],
         ),
@@ -131,9 +109,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
     return BlocBuilder<CalendarBloc, CalendarState>(
       builder: (BuildContext context, CalendarState state) {
         state.when(
-          markersData: (selectedDate) {
-
-          },
+          markersData: (selectedDate) {},
           initial: () {},
           selectedDate: (selectedDate) {
             _selectedDate = selectedDate;
@@ -154,15 +130,15 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
               ),
               PersoButton(
                 width: Dimens.smallButtonWidth,
-                title: 'Add',
+                title: 'Start',
                 onTap: (context) {
-                  context.pushNamed(
-                    ScreenNavigationKey.exerciseLibrary,
-                    queryParameters: {
-                      'clientId': widget._clientId,
-                      'date': _selectedDate,
-                    },
-                  );
+                  // context.pushNamed(
+                  //   ScreenNavigationKey.exerciseLibrary,
+                  //   queryParameters: {
+                  //     'clientId': widget._clientId,
+                  //     'date': _selectedDate,
+                  //   },
+                  // );
                 },
               ),
             ],

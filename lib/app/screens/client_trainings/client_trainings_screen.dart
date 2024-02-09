@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/client_trainings/bloc/client_trainings_bloc.dart';
 import 'package:perso/app/screens/client_trainings/event/client_trainings_event.dart';
 import 'package:perso/app/screens/client_trainings/state/client_trainings_state.dart';
@@ -8,7 +9,9 @@ import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
+import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientTrainingsScreen extends StatelessWidget {
   const ClientTrainingsScreen({super.key});
@@ -37,11 +40,11 @@ class _ClientTrainingsContent extends StatelessWidget {
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
-              trainings: (trainerIdentities) {
-                if (trainerIdentities.isEmpty) {
+              trainings: (trainingIdentities) {
+                if (trainingIdentities.isEmpty) {
                   return const _NoTrainersView();
                 } else {
-                  return _TrainersView(trainerIdentities);
+                  return _TrainersView(trainingIdentities);
                 }
               },
               error: (error) => Center(
@@ -100,46 +103,56 @@ class _TrainersView extends StatelessWidget {
               crossAxisCount: 1,
               children: trainerIdentities
                   .map(
-                    (trainerIdentity) => Container(
-                      margin: const EdgeInsets.all(Dimens.xmMargin),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: const LinearGradient(
-                          colors: [
-                            Colors.blue, // First color
-                            Colors.greenAccent, // Second color
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                    (trainerIdentity) => GestureDetector(
+                      onTap: () {
+                        context.pushNamed(
+                          ScreenNavigationKey.clientPlanOverview,
+                          queryParameters: {
+                            'trainerId': trainerIdentity.id,
+                          },
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(Dimens.xmMargin),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Colors.blue, // First color
+                              Colors.greenAccent, // Second color
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
                         ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipOval(
-                            child: Image.asset(
-                              AppImages.trainer1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipOval(
+                              child: Image.asset(
+                                AppImages.trainer1,
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                              top: Dimens.mMargin,
+                            Container(
+                              margin: const EdgeInsets.only(
+                                top: Dimens.mMargin,
+                              ),
+                              child: Text(
+                                '${trainerIdentity.name} ${trainerIdentity.surname}',
+                                style: ThemeText.largeTitleBold,
+                              ),
                             ),
-                            child: Text(
-                              '${trainerIdentity.name} ${trainerIdentity.surname}',
-                              style: ThemeText.largeTitleBold,
+                            Container(
+                              margin: const EdgeInsets.only(
+                                top: Dimens.xsMargin,
+                              ),
+                              child: Text(
+                                '@${trainerIdentity.nickname}',
+                                style: ThemeText.bodyBoldGreyText,
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                              top: Dimens.xsMargin,
-                            ),
-                            child: Text(
-                              '@${trainerIdentity.nickname}',
-                              style: ThemeText.bodyBoldGreyText,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   )

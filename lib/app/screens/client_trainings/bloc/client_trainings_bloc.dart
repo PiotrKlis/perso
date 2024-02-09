@@ -3,22 +3,22 @@ import 'package:perso/app/screens/client_trainings/event/client_trainings_event.
 import 'package:perso/app/screens/client_trainings/state/client_trainings_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
-import 'package:perso/data/exercises/exercises_source/firestore_exercise_provider.dart';
+import 'package:perso/data/trainers/trainers_provider/firestore_trainers_provider.dart';
 
 class ClientTrainingBloc
     extends Bloc<ClientTrainingEvent, ClientTrainingState> {
   ClientTrainingBloc() : super(const ClientTrainingState.initial()) {
     final clientId = _userSessionModel.user?.uid ?? '';
     on<LoadTrainings>((event, emitter) async {
-      final trainerNicknames = await _exerciseProvider.getTrainersForClient(
+      final trainerIdentities = await _trainersProvider.getTrainersForClient(
         clientId,
       );
       emitter(
-        ClientTrainingState.trainings(trainerNicknames: trainerNicknames),
+        ClientTrainingState.trainings(trainerIdentities: trainerIdentities),
       );
     });
   }
 
-  final _exerciseProvider = getIt.get<FirestoreExerciseProvider>();
+  final _trainersProvider = getIt.get<FirestoreTrainersProvider>();
   final _userSessionModel = getIt.get<UserSessionModel>();
 }

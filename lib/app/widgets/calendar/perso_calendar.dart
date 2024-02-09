@@ -36,13 +36,6 @@ class _PersoCalendarState extends State<PersoCalendar> {
           widget.trainerId,
         ),
       );
-    // ..add(
-    //   CalendarEvent.activateMarkerListener(
-    //     _selectedDate,
-    //     widget.clientId,
-    //     widget.trainerId,
-    //   ),
-    // );
   }
 
   @override

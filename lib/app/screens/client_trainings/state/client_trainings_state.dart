@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 
 part 'client_trainings_state.freezed.dart';
@@ -10,7 +11,7 @@ class ClientTrainingState with _$ClientTrainingState {
   const factory ClientTrainingState.loading() = Loading;
 
   const factory ClientTrainingState.trainings({
-    required List<TrainerIdentity> trainerNicknames,
+    required List<TrainerIdentity> trainerIdentities,
   }) = Trainings;
 
   const factory ClientTrainingState.error(String error) = Error;

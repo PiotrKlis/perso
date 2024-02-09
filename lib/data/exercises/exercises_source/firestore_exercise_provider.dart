@@ -4,15 +4,16 @@ import 'package:intl/intl.dart';
 import 'package:perso/app/utils/extension/string_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/exercise_entity_mapper.dart';
+import 'package:perso/core/mappers/trainer_entity_mapper.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
-import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class FirestoreExerciseProvider extends ExerciseSource {
   final _exerciseEntityMapper = getIt.get<ExerciseEntityMapper>();
+  final _trainerEntityMapper = getIt.get<TrainerEntityMapper>();
 
   @override
   Future<List<ExerciseEntity>> getAllExercises() async {
@@ -26,37 +27,6 @@ class FirestoreExerciseProvider extends ExerciseSource {
             (exercise) async => _exerciseEntityMapper.map(exercise),
           )
           .toList(),
-    );
-  }
-
-  @override
-  Future<List<TrainerIdentity>> getTrainersForClient(
-    String clientId,
-  ) async {
-    final trainersSnapshots = await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
-        .doc(clientId)
-        .get();
-
-    final trainersIds =
-        (trainersSnapshots[UserDocumentFields.activeTrainers] as List<dynamic>)
-            .map((e) => e.toString())
-            .toList();
-
-    return Future.wait(
-      trainersIds.map(
-        (trainerId) async {
-          final trainerSnapshot = await FirebaseFirestore.instance
-              .collection(CollectionName.trainers)
-              .doc(trainerId)
-              .get();
-          return TrainerIdentity(
-            name: trainerSnapshot[UserDocumentFields.name] as String,
-            surname: trainerSnapshot[UserDocumentFields.surname] as String,
-            nickname: trainerSnapshot[UserDocumentFields.nickname] as String,
-          );
-        },
-      ),
     );
   }
 
@@ -142,5 +112,26 @@ class FirestoreExerciseProvider extends ExerciseSource {
       currentDate = currentDate.add(const Duration(days: 1));
     }
     return dateIds;
+  }
+
+  @override
+  Future<List<ExerciseEntity>> getExercisesForClient({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  }) async {
+    final snapshots = await FirebaseFirestore.instance
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(CollectionName.trainers)
+        .doc(trainerId)
+        .collection(date)
+        .get();
+
+    return Future.wait(
+      snapshots.docs
+          .map((exercise) async => _exerciseEntityMapper.map(exercise))
+          .toList(),
+    );
   }
 }

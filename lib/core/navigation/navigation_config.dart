@@ -8,6 +8,7 @@ import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart'
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
 import 'package:perso/app/screens/logged_out_training/logged_out_trainings_screen.dart';
+import 'package:perso/app/screens/plan_overview/client/client_plan_overview_screen.dart';
 import 'package:perso/app/screens/plan_overview/trainer/trainer_plan_overview_screen.dart';
 import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
@@ -234,6 +235,19 @@ final GoRouter goRouter = GoRouter(
                 }
                 return null;
               },
+              routes: [
+                GoRoute(
+                  name: ScreenNavigationKey.clientPlanOverview,
+                  path: ScreenNavigationKey.clientPlanOverview,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return NoTransitionPage(
+                      child: ClientPlanOverviewScreen(
+                        trainerId: state.uri.queryParameters[_trainerId]!,
+                      ),
+                    );
+                  },
+                )
+              ]
             ),
             GoRoute(
               name: ScreenNavigationKey.trainerClientsList,
@@ -253,8 +267,8 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
-                  name: ScreenNavigationKey.planOverview,
-                  path: ScreenNavigationKey.planOverview,
+                  name: ScreenNavigationKey.trainerPlanOverview,
+                  path: ScreenNavigationKey.trainerPlanOverview,
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return NoTransitionPage(
                       child: TrainerPlanOverviewScreen(
@@ -275,7 +289,7 @@ final GoRouter goRouter = GoRouter(
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
                           child: ExerciseLibraryScreen(
-                            clientId: state.uri.queryParameters['clientId']!,
+                            clientId: state.uri.queryParameters[_clientId]!,
                             selectedDate: state.uri.queryParameters['date']!,
                           ),
                         );
