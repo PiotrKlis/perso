@@ -121,10 +121,11 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
               width: Dimens.smallButtonWidth,
               title: 'Start',
               onTap: (context) {
-                context.pushNamed(
-                  ScreenNavigationKey.exerciseInProgress,
-                  extra: _exercises,
-                );
+                //TODO: Navigate to exercise in progress screen
+                // context.pushNamed(
+                //   ScreenNavigationKey.exerciseInProgress,
+                //   extra: _exercises,
+                // );
               },
             ),
           ],
