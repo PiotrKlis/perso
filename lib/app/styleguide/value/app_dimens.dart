@@ -8,6 +8,7 @@ class Dimens {
   static const double xlMargin = 32;
   static const double xxlMargin = 52;
   static const double xxxlMargin = 56;
+  static const double xxxxlMargin = 100;
 
   static const double accountIconSize = 40;
   static const double noElevation = 0;
@@ -51,9 +52,13 @@ class Dimens {
   static const double appBarElevation = 0;
   static const double placeholderIconSize = 120;
 
+  static const double xlPlaceholder = 280;
+
   static const double profileImageWidth = 200;
   static const double profileImageHeight = 200;
 
+
+  static const double sIconSize = 12;
   static const double iconSize = 24;
   static const double shortBioHeight = 140;
   static const double longBioHeight = 340;
@@ -62,6 +67,13 @@ class Dimens {
   static const double dividerThickness = 1;
   static const double iconSizeLarge = 160;
   static const double iconSizeMedium = 88;
+
+  static const double sRestIconWidth = 65;
+  static const double sRestIconHeight = 65;
+  static const double mRestIconWidth = 80;
+  static const double mRestIconHeight = 80;
+
+  static const double whiteBackground = 100;
 
   static const double videoPlayerHeight = 260;
 }

@@ -80,5 +80,8 @@
   "location": "Location",
   "rating": "Rating",
   "specialities": "Specialities",
-  "location_default_set": "By default it is set to My country"
+  "location_default_set": "By default it is set to My country",
+  "exercise_in_progress" : "Exercise in progress",
+  "break_header": "Break",
+  "rest": "Rest"
 }
