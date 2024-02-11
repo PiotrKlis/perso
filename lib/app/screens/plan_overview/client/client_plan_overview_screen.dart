@@ -3,13 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/plan_overview/client/bloc/client_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/client/perso_client_exercise_list.dart';
-import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
+import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
@@ -81,7 +80,7 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
         color: PersoColors.lightBlue,
         child: Column(
           children: [
-            _ExercisesHeaderRow(),
+            _ExercisesHeaderRow(widget.trainerId),
             PersoClientExerciseList(
               trainerId: widget.trainerId,
             ),
@@ -93,43 +92,49 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
 }
 
 class _ExercisesHeaderRow extends StatefulWidget {
+  const _ExercisesHeaderRow(this._trainerId);
+
+  final String _trainerId;
+
   @override
   State<_ExercisesHeaderRow> createState() => _ExercisesHeaderRowState();
 }
 
 class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
-  List<ExerciseEntity>? _exercises;
+  String _selectedDate = DateTime.now().toString();
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ClientExerciseListBloc, ClientExerciseListState>(
-      listener: (context, state) {
-        state.whenOrNull(exercises: (exercises) {
-          _exercises = exercises;
-        });
-      },
-      child: Container(
-        margin: const EdgeInsets.all(Dimens.mMargin),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Exercises',
-              style: ThemeText.largeTitleBold,
-            ),
-            PersoButton(
+    return Container(
+      margin: const EdgeInsets.all(Dimens.mMargin),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Exercises',
+            style: ThemeText.largeTitleBold,
+          ),
+          BlocListener<CalendarBloc, CalendarState>(
+            listener: (BuildContext context, CalendarState state) {
+              state.whenOrNull(selectedDate: (selectedDate) {
+                _selectedDate = selectedDate;
+              });
+            },
+            child: PersoButton(
               width: Dimens.smallButtonWidth,
               title: 'Start',
               onTap: (context) {
-                //TODO: Navigate to exercise in progress screen
-                // context.pushNamed(
-                //   ScreenNavigationKey.exerciseInProgress,
-                //   extra: _exercises,
-                // );
+                context.pushNamed(
+                  ScreenNavigationKey.training,
+                  queryParameters: {
+                    'trainerId': widget._trainerId,
+                    'date': _selectedDate,
+                  },
+                );
               },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

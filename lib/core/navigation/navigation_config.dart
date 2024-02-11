@@ -4,8 +4,6 @@ import 'package:perso/app/screens/chat/chat_channel_screen.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
-import 'package:perso/app/screens/exercise_break_screen/exercise_break_screen.dart';
-import 'package:perso/app/screens/exercise_in_progress/exercise_in_progress_screen.dart';
 import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
@@ -23,9 +21,9 @@ import 'package:perso/app/screens/sign_up_success/sign_up_success_screen.dart';
 import 'package:perso/app/screens/trainer_clients_list/trainer_clients_list_screen.dart';
 import 'package:perso/app/screens/trainer_details/trainer_details_screen.dart';
 import 'package:perso/app/screens/trainer_profile/trainer_profile_screen.dart';
+import 'package:perso/app/screens/training/training_screen.dart';
 import 'package:perso/app/screens/training_categories/training_categories_screen.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
-import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -41,6 +39,7 @@ final _userSessionModel = getIt.get<UserSessionModel>();
 const _clientId = 'clientId';
 const _trainerId = 'trainerId';
 const _input = 'input';
+const _date = 'date';
 
 final GoRouter goRouter = GoRouter(
   initialLocation: ScreenNavigationKey.home,
@@ -62,24 +61,6 @@ final GoRouter goRouter = GoRouter(
                 return const NoTransitionPage(child: HomeScreen());
               },
               routes: [
-                GoRoute(
-                  name: ScreenNavigationKey.exerciseInProgress,
-                  path: ScreenNavigationKey.exerciseInProgress,
-                  pageBuilder: (context, state) {
-                    return const NoTransitionPage(
-                      child: ExercisesInProgressScreen(),
-                    );
-                  },
-                ),
-                GoRoute(
-                  name: ScreenNavigationKey.exerciseBreak,
-                  path: ScreenNavigationKey.exerciseBreak,
-                  pageBuilder: (context, state) {
-                    return const NoTransitionPage(
-                      child: ExercisesBreakScreen(),
-                    );
-                  },
-                ),
                 GoRoute(
                   name: ScreenNavigationKey.clientProfile,
                   path: ScreenNavigationKey.clientProfile,
@@ -241,48 +222,49 @@ final GoRouter goRouter = GoRouter(
               },
             ),
             GoRoute(
-              name: ScreenNavigationKey.clientTrainings,
-              path: ScreenNavigationKey.clientTrainings,
-              pageBuilder: (BuildContext context, GoRouterState state) {
-                return const NoTransitionPage(child: ClientTrainingsScreen());
-              },
-              redirect: (context, state) {
-                if (_userSessionModel.isUserLoggedIn) {
-                  if (_userSessionModel.userType == UserType.trainer) {
+                name: ScreenNavigationKey.clientTrainings,
+                path: ScreenNavigationKey.clientTrainings,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return const NoTransitionPage(child: ClientTrainingsScreen());
+                },
+                redirect: (context, state) {
+                  if (_userSessionModel.isUserLoggedIn) {
+                    if (_userSessionModel.userType == UserType.trainer) {
                       return ScreenNavigationKey.trainerClientsList;
+                    }
+                  } else {
+                    return ScreenNavigationKey.loggedOutTrainings;
                   }
-                } else {
-                  return ScreenNavigationKey.loggedOutTrainings;
-                }
-                return null;
-              },
-              routes: [
-                GoRoute(
-                  name: ScreenNavigationKey.clientPlanOverview,
-                  path: ScreenNavigationKey.clientPlanOverview,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return NoTransitionPage(
-                      child: ClientPlanOverviewScreen(
-                        trainerId: state.uri.queryParameters[_trainerId]!,
+                  return null;
+                },
+                routes: [
+                  GoRoute(
+                    name: ScreenNavigationKey.clientPlanOverview,
+                    path: ScreenNavigationKey.clientPlanOverview,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return NoTransitionPage(
+                        child: ClientPlanOverviewScreen(
+                          trainerId: state.uri.queryParameters[_trainerId]!,
+                        ),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        name: ScreenNavigationKey.training,
+                        path: ScreenNavigationKey.training,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return NoTransitionPage(
+                            child: TrainingScreen(
+                              trainerId: state.uri.queryParameters[_trainerId]!,
+                              date: state.uri.queryParameters[_date]!,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                  routes: [
-                    // GoRoute(
-                    //   name: ScreenNavigationKey.exerciseInProgress,
-                    //   path: ScreenNavigationKey.exerciseInProgress,
-                    //   pageBuilder: (BuildContext context, GoRouterState state) {
-                    //     return NoTransitionPage(
-                    //       child: ExerciseInProgressScreen(
-                    //         exerciseEntities: state.extra! as List<ExerciseEntity>,
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
-                  ],
-                )
-              ]
-            ),
+                    ],
+                  )
+                ]),
             GoRoute(
               name: ScreenNavigationKey.trainerClientsList,
               path: ScreenNavigationKey.trainerClientsList,

@@ -120,18 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       isShortList: true,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      bottom: Dimens.mMargin,
-                      left: Dimens.xmMargin,
-                      right: Dimens.xmMargin,
-                    ),
-                    child: PersoButton(
-                      title: 'Exercises',
-                      onTap: (context) => context
-                          .pushNamed(ScreenNavigationKey.exerciseInProgress),
-                    ),
-                  ),
                   ColoredBox(
                     color: PersoColors.lightBlue,
                     child: Column(

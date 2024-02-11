@@ -74,6 +74,27 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
+  Future<List<ExerciseEntity>> getExercisesForClient({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  }) async {
+    final snapshots = await FirebaseFirestore.instance
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(CollectionName.trainers)
+        .doc(trainerId)
+        .collection(date)
+        .get();
+
+    return Future.wait(
+      snapshots.docs
+          .map((exercise) async => _exerciseEntityMapper.map(exercise))
+          .toList(),
+    );
+  }
+
+  @override
   Future<Map<DateTime, bool>> getMarkersForDates(
     String clientId,
     String trainerId,
@@ -112,26 +133,5 @@ class FirestoreExerciseProvider extends ExerciseSource {
       currentDate = currentDate.add(const Duration(days: 1));
     }
     return dateIds;
-  }
-
-  @override
-  Future<List<ExerciseEntity>> getExercisesForClient({
-    required String clientId,
-    required String trainerId,
-    required String date,
-  }) async {
-    final snapshots = await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
-        .doc(clientId)
-        .collection(CollectionName.trainers)
-        .doc(trainerId)
-        .collection(date)
-        .get();
-
-    return Future.wait(
-      snapshots.docs
-          .map((exercise) async => _exerciseEntityMapper.map(exercise))
-          .toList(),
-    );
   }
 }

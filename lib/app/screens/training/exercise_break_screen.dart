@@ -4,8 +4,8 @@ import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 
-class ExercisesBreakScreen extends StatelessWidget {
-  const ExercisesBreakScreen({super.key});
+class ExerciseBreakScreen extends StatelessWidget {
+  const ExerciseBreakScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +44,21 @@ class ExercisesBreakScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.xlMargin,
-                      left: Dimens.xxlMargin, right: Dimens.xxlMargin,),
+                  margin: const EdgeInsets.only(
+                    top: Dimens.xlMargin,
+                    left: Dimens.xxlMargin,
+                    right: Dimens.xxlMargin,
+                  ),
                   child: const PersoButton(
                     title: '+20 sec',
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimens.xmMargin,
-                      left: Dimens.xxlMargin, right: Dimens.xxlMargin,),
+                  margin: const EdgeInsets.only(
+                    top: Dimens.xmMargin,
+                    left: Dimens.xxlMargin,
+                    right: Dimens.xxlMargin,
+                  ),
                   child: const PersoButton(
                     title: 'Stop',
                     whiteBlackTheme: true,
