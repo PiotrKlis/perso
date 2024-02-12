@@ -24,6 +24,7 @@ import 'package:perso/app/screens/trainer_profile/trainer_profile_screen.dart';
 import 'package:perso/app/screens/training/training_screen.dart';
 import 'package:perso/app/screens/training_categories/training_categories_screen.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -256,8 +257,7 @@ final GoRouter goRouter = GoRouter(
                             (BuildContext context, GoRouterState state) {
                           return NoTransitionPage(
                             child: TrainingScreen(
-                              trainerId: state.uri.queryParameters[_trainerId]!,
-                              date: state.uri.queryParameters[_date]!,
+                              exercises: state.extra! as List<ExerciseEntity>,
                             ),
                           );
                         },

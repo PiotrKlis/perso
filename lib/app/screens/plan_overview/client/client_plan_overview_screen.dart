@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/plan_overview/client/bloc/client_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/client/perso_client_exercise_list.dart';
+import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
-import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
@@ -101,7 +102,7 @@ class _ExercisesHeaderRow extends StatefulWidget {
 }
 
 class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
-  String _selectedDate = DateTime.now().toString();
+  List<ExerciseEntity> _exercises = [];
 
   @override
   Widget build(BuildContext context) {
@@ -114,23 +115,26 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
             'Exercises',
             style: ThemeText.largeTitleBold,
           ),
-          BlocListener<CalendarBloc, CalendarState>(
-            listener: (BuildContext context, CalendarState state) {
-              state.whenOrNull(selectedDate: (selectedDate) {
-                _selectedDate = selectedDate;
-              });
+          BlocListener<ClientExerciseListBloc, ClientExerciseListState>(
+            listener: (BuildContext context, ClientExerciseListState state) {
+              state.whenOrNull(
+                exercises: (exercises) {
+                  setState(() {
+                    _exercises = exercises;
+                  });
+                },
+              );
             },
             child: PersoButton(
               width: Dimens.smallButtonWidth,
               title: 'Start',
               onTap: (context) {
-                context.pushNamed(
-                  ScreenNavigationKey.training,
-                  queryParameters: {
-                    'trainerId': widget._trainerId,
-                    'date': _selectedDate,
-                  },
-                );
+                if (_exercises.isNotEmpty) {
+                  context.pushNamed(
+                    ScreenNavigationKey.training,
+                    extra: _exercises,
+                  );
+                }
               },
             ),
           ),

@@ -13,7 +13,6 @@ import 'package:perso/data/utils/firestore_constants.dart';
 @injectable
 class FirestoreExerciseProvider extends ExerciseSource {
   final _exerciseEntityMapper = getIt.get<ExerciseEntityMapper>();
-  final _trainerEntityMapper = getIt.get<TrainerEntityMapper>();
 
   @override
   Future<List<ExerciseEntity>> getAllExercises() async {
