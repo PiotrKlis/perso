@@ -41,4 +41,5 @@ class UserDocumentFields {
   static const String titleEn = 'title-en';
   static const String exerciseType = 'exerciseType';
   static const String sentDate = 'sentDate';
+  static const String timeBreak = 'timeBreak';
 }

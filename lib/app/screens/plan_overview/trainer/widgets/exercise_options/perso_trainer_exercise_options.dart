@@ -59,6 +59,7 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
   final _repsController = TextEditingController();
   final _minutesController = TextEditingController();
   final _secondsController = TextEditingController();
+  final _timeBreakController = TextEditingController();
   final _key = GlobalKey<FormState>();
 
   @override
@@ -69,7 +70,17 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
       reps: widget._exerciseInTrainingEntity.exerciseEntity.reps,
       sets: widget._exerciseInTrainingEntity.exerciseEntity.sets,
       time: widget._exerciseInTrainingEntity.exerciseEntity.time,
+      timeBreak: widget._exerciseInTrainingEntity.exerciseEntity.timeBreak,
     );
+    final timeList = _optionsData.time.split(':');
+    final minutes = timeList[0];
+    final seconds = timeList[1];
+    _minutesController.text = minutes;
+    _secondsController.text = seconds;
+    _setsController.text = _optionsData.sets.toString();
+    _repsController.text = _optionsData.reps.toString();
+    _timeBreakController.text = _optionsData.timeBreak.toString();
+
     super.initState();
   }
 
@@ -123,17 +134,15 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
                 maintainState: true,
                 visible: _optionsData.exerciseType == ExerciseType.repsBased,
                 child: _RepsBasedExerciseOptions(
-                  reps: _optionsData.reps.toString(),
-                  sets: _optionsData.sets.toString(),
                   repsController: _repsController,
                   setsController: _setsController,
+                  timeBreakController: _timeBreakController,
                 ),
               ),
               Visibility(
                 maintainState: true,
                 visible: _optionsData.exerciseType == ExerciseType.timeBased,
                 child: _TimeBasedExerciseOptions(
-                  time: _optionsData.time,
                   minutesController: _minutesController,
                   secondsController: _secondsController,
                 ),
@@ -153,6 +162,7 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
                       _optionsData = _optionsData.copyWith(
                         reps: int.parse(_repsController.text),
                         sets: int.parse(_setsController.text),
+                        timeBreak: int.parse(_timeBreakController.text),
                       );
                     }
                   case ExerciseType.timeBased:
@@ -188,19 +198,16 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
 
 class _RepsBasedExerciseOptions extends StatefulWidget {
   const _RepsBasedExerciseOptions({
-    required String reps,
-    required String sets,
     required TextEditingController repsController,
     required TextEditingController setsController,
-  })  : _reps = reps,
-        _sets = sets,
-        _repsController = repsController,
-        _setsController = setsController;
+    required TextEditingController timeBreakController,
+  })  : _repsController = repsController,
+        _setsController = setsController,
+        _timeBreakController = timeBreakController;
 
-  final String _reps;
-  final String _sets;
   final TextEditingController _repsController;
   final TextEditingController _setsController;
+  final TextEditingController _timeBreakController;
 
   @override
   State<_RepsBasedExerciseOptions> createState() =>
@@ -208,38 +215,80 @@ class _RepsBasedExerciseOptions extends StatefulWidget {
 }
 
 class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
+  bool _shouldShowTimeBreak = true;
+
   @override
   Widget build(BuildContext context) {
-    widget._repsController.text = widget._reps;
-    widget._setsController.text = widget._sets;
     return Container(
       margin: const EdgeInsets.only(
         top: Dimens.sMargin,
-        left: Dimens.sMargin,
-        right: Dimens.sMargin,
+        left: Dimens.mMargin,
+        right: Dimens.mMargin,
         bottom: Dimens.mMargin,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
         children: [
-          Expanded(
-            child: PersoTextField(
-              textEditingController: widget._setsController,
-              textInputType: TextInputType.number,
-              title: 'Sets',
-              customValidator: TextFieldValidator.validateDigits,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: PersoTextField(
+                  textEditingController: widget._setsController,
+                  textInputType: TextInputType.number,
+                  title: 'Sets',
+                  customValidator: TextFieldValidator.validateDigits,
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: PersoTextField(
+                  textEditingController: widget._repsController,
+                  textInputType: TextInputType.number,
+                  title: 'Repetitions',
+                  customValidator: TextFieldValidator.validateDigits,
+                ),
+              ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.sMargin,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Time breaks between sets',
+                  style: ThemeText.bodyRegularBlackText,
+                ),
+                Switch(
+                  value: _shouldShowTimeBreak,
+                  onChanged: (value) {
+                    if (!value) {
+                      widget._timeBreakController.text = '0';
+                    }
+                    setState(() {
+                      _shouldShowTimeBreak = value;
+                    });
+                  },
+                ),
+              ],
             ),
           ),
-          const SizedBox(
-            width: 8,
-          ),
-          Expanded(
-            child: PersoTextField(
-              textEditingController: widget._repsController,
-              textInputType: TextInputType.number,
-              title: 'Repetitions',
-              customValidator: TextFieldValidator.validateDigits,
+          Visibility(
+            maintainState: true,
+            visible: _shouldShowTimeBreak,
+            child: Container(
+              margin: const EdgeInsets.only(top: Dimens.sMargin),
+              child: PersoTextField(
+                textEditingController: widget._timeBreakController,
+                textInputType: TextInputType.number,
+                title: 'Time break (seconds)',
+                customValidator: TextFieldValidator.validateDigits,
+              ),
             ),
           ),
         ],
@@ -250,24 +299,16 @@ class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
 
 class _TimeBasedExerciseOptions extends StatelessWidget {
   const _TimeBasedExerciseOptions({
-    required String time,
     required TextEditingController minutesController,
     required TextEditingController secondsController,
-  })  : _time = time,
-        _minutesController = minutesController,
+  })  : _minutesController = minutesController,
         _secondsController = secondsController;
 
   final TextEditingController _minutesController;
   final TextEditingController _secondsController;
-  final String _time;
 
   @override
   Widget build(BuildContext context) {
-    final timeList = _time.split(':');
-    final minutes = timeList[0];
-    final seconds = timeList[1];
-    _minutesController.text = minutes;
-    _secondsController.text = seconds;
     return Container(
       margin: const EdgeInsets.only(
         top: Dimens.sMargin,

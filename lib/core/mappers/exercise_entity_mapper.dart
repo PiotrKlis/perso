@@ -32,6 +32,7 @@ class ExerciseEntityMapper {
       title: _stringTranslationsMapper
           .mapFrom(exercise[UserDocumentFields.title] as Map<String, dynamic>),
       videoId: exercise[UserDocumentFields.videoId] as String,
+      timeBreak: exercise[UserDocumentFields.timeBreak] as int,
     );
   }
 
@@ -53,6 +54,7 @@ class ExerciseEntityMapper {
       title: _stringTranslationsMapper
           .mapFrom(exercise[UserDocumentFields.title] as Map<String, dynamic>),
       videoId: exercise[UserDocumentFields.videoId] as String,
+      timeBreak: exercise[UserDocumentFields.timeBreak] as int,
     );
   }
 }

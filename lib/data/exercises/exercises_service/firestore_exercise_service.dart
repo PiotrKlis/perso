@@ -50,6 +50,7 @@ class FirestoreExerciseService extends ExerciseService {
       ),
       UserDocumentFields.videoId: exerciseEntity.videoId,
       UserDocumentFields.exerciseType: exerciseEntity.exerciseType.name,
+      UserDocumentFields.timeBreak: exerciseEntity.timeBreak,
     });
   }
 
@@ -73,6 +74,7 @@ class FirestoreExerciseService extends ExerciseService {
       UserDocumentFields.sets: exerciseOptions.sets,
       UserDocumentFields.reps: exerciseOptions.reps,
       UserDocumentFields.time: exerciseOptions.time,
+      UserDocumentFields.timeBreak: exerciseOptions.timeBreak,
     });
   }
 

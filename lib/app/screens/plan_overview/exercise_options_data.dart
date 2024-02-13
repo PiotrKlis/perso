@@ -9,5 +9,6 @@ class ExerciseOptionsData with _$ExerciseOptionsData {
     required int reps,
     required int sets,
     required String time,
+    required int timeBreak,
   }) = _ExerciseOptionsData;
 }
