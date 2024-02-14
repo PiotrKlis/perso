@@ -241,7 +241,7 @@ class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
                 ),
               ),
               const SizedBox(
-                width: 8,
+                width: 16,
               ),
               Expanded(
                 child: PersoTextField(
@@ -312,8 +312,8 @@ class _TimeBasedExerciseOptions extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(
         top: Dimens.sMargin,
-        left: Dimens.sMargin,
-        right: Dimens.sMargin,
+        left: Dimens.mMargin,
+        right: Dimens.mMargin,
         bottom: Dimens.mMargin,
       ),
       child: Row(
@@ -329,7 +329,7 @@ class _TimeBasedExerciseOptions extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.symmetric(
-              horizontal: 8,
+              horizontal: 16,
             ),
             child: Text(
               ':',

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
+import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
@@ -33,9 +35,12 @@ class PersoTrainerExerciseList extends StatefulWidget {
 }
 
 class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
-  //Needed for reordering
   final _localExercises = <ExerciseInTrainingEntity>[];
   String _selectedDate = DateTime.now().yearMonthDayFormat;
+  bool _shouldShowSupersetCheckboxes = false;
+  final _exercisesSelectedForSuperset = <String>[];
+  String _superSetTitle = 'Superset';
+  final _superSets = <String, String>{};
 
   @override
   Widget build(BuildContext context) {
@@ -55,45 +60,106 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
       },
       child: BlocBuilder<TrainerExerciseListBloc, TrainerExerciseListState>(
         builder: (context, state) {
-          Container();
           return state.when(
             exercises: (exercises) {
               _localExercises
                 ..clear()
                 ..addAll(exercises);
-              return ReorderableListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                proxyDecorator: (child, index, animation) =>
-                    _ExercisesListDecorator(animation: animation, child: child),
-                children: _localExercises.map((exercise) {
-                  return BlocProvider(
-                    key: UniqueKey(),
-                    create: (context) => VideoPlayerBloc(),
-                    child: _Exercise(
-                      exerciseInTrainingEntityList: _localExercises,
-                      exerciseInTrainingEntity: exercise,
-                      clientId: widget.clientId,
-                      date: _selectedDate,
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  const PersoDivider(),
+                  Container(
+                    margin: const EdgeInsets.all(Dimens.mMargin),
+                    child: PersoButton(
+                      title: _superSetTitle,
+                      width: Dimens.smallButtonWidth,
+                      whiteBlackTheme: true,
+                      onTap: (context) {
+                        setState(() {
+                          _shouldShowSupersetCheckboxes =
+                              !_shouldShowSupersetCheckboxes;
+                          _superSetTitle = _shouldShowSupersetCheckboxes
+                              ? 'Create'
+                              : 'Superset';
+                          if (!_shouldShowSupersetCheckboxes) {
+                            _exercisesSelectedForSuperset
+                              ..forEachIndexed(
+                                (
+                                  index,
+                                  exercise,
+                                ) =>
+                                    _superSets[exercise] = 'Superset 1',
+                              )
+                              ..clear();
+                          }
+                        });
+                      },
                     ),
-                  );
-                }).toList(),
-                onReorder: (oldIndex, newIndex) {
-                  setState(() {
-                    if (newIndex > oldIndex) {
-                      newIndex -= 1;
-                    }
-                    final item = _localExercises.removeAt(oldIndex);
-                    _localExercises.insert(newIndex, item);
-                    context.read<TrainerExerciseListBloc>().add(
-                          TrainerExerciseListEvent.reorder(
-                            widget.clientId,
-                            _selectedDate,
-                            _localExercises,
-                          ),
-                        );
-                  });
-                },
+                  ),
+                  ReorderableListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    proxyDecorator: (child, index, animation) =>
+                        _ExercisesListDecorator(
+                      animation: animation,
+                      child: child,
+                    ),
+                    children: _localExercises.map((exercise) {
+                      return BlocProvider(
+                        key: UniqueKey(),
+                        create: (context) => VideoPlayerBloc(),
+                        child: Row(
+                          children: [
+                            Visibility(
+                              visible: _shouldShowSupersetCheckboxes,
+                              child: Checkbox(
+                                value: _exercisesSelectedForSuperset
+                                    .contains(exercise.id),
+                                onChanged: (value) {
+                                  setState(() {
+                                    if (value!) {
+                                      _exercisesSelectedForSuperset
+                                          .add(exercise.id);
+                                    } else {
+                                      _exercisesSelectedForSuperset
+                                          .remove(exercise.id);
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: _Exercise(
+                                exerciseInTrainingEntityList: _localExercises,
+                                exerciseInTrainingEntity: exercise,
+                                clientId: widget.clientId,
+                                date: _selectedDate,
+                                superSets: _superSets,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                    onReorder: (oldIndex, newIndex) {
+                      setState(() {
+                        if (newIndex > oldIndex) {
+                          newIndex -= 1;
+                        }
+                        final item = _localExercises.removeAt(oldIndex);
+                        _localExercises.insert(newIndex, item);
+                        context.read<TrainerExerciseListBloc>().add(
+                              TrainerExerciseListEvent.reorder(
+                                widget.clientId,
+                                _selectedDate,
+                                _localExercises,
+                              ),
+                            );
+                      });
+                    },
+                  ),
+                ],
               );
             },
             error: (error) {
@@ -142,15 +208,18 @@ class _Exercise extends StatefulWidget {
     required List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
     required String clientId,
     required String date,
+    required Map<String, String> superSets,
   })  : _date = date,
         _clientId = clientId,
         _exerciseInTrainingEntityList = exerciseInTrainingEntityList,
+        _superSets = superSets,
         _exerciseInTrainingEntity = exerciseInTrainingEntity;
 
   final ExerciseInTrainingEntity _exerciseInTrainingEntity;
   final List<ExerciseInTrainingEntity> _exerciseInTrainingEntityList;
   final String _clientId;
   final String _date;
+  final Map<String, String> _superSets;
 
   @override
   State<_Exercise> createState() => _ExerciseState();
@@ -188,6 +257,8 @@ class _ExerciseState extends State<_Exercise> {
                 isExpanded: _isExpanded,
                 headerBuilder: (context, isExpanded) => _ExerciseHeader(
                   exercise: widget._exerciseInTrainingEntity.exerciseEntity,
+                  superSets: widget._superSets,
+                  exerciseInTrainingId: widget._exerciseInTrainingEntity.id,
                 ),
                 body: _ExerciseExpansionPanel(
                   clientId: widget._clientId,
@@ -351,16 +422,28 @@ class _Categories extends StatelessWidget {
 
 class _ExerciseHeader extends StatelessWidget {
   const _ExerciseHeader({
-    required this.exercise,
-  });
+    required ExerciseEntity exercise,
+    required Map<String, String> superSets,
+    required String exerciseInTrainingId,
+  })  : _exercise = exercise,
+        _exerciseInTrainingId = exerciseInTrainingId,
+        _superSets = superSets;
 
-  final ExerciseEntity exercise;
+  final ExerciseEntity _exercise;
+  final Map<String, String> _superSets;
+  final String _exerciseInTrainingId;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: _getIconForTags(exercise.tags),
-      title: Text(exercise.title, style: ThemeText.bodyBoldBlackText),
+      leading: _getIconForTags(_exercise.tags),
+      subtitle: _superSets[_exerciseInTrainingId] != null
+          ? Text(
+              _superSets[_exerciseInTrainingId]!,
+              style: ThemeText.footnoteRegular,
+            )
+          : null,
+      title: Text(_exercise.title, style: ThemeText.bodyBoldBlackText),
       trailing: const Icon(Icons.reorder),
     );
   }
