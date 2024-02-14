@@ -126,7 +126,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
               );
             },
             child: PersoButton(
-              width: Dimens.smallButtonWidth,
+              width: Dimens.sButtonWidth,
               title: 'Start',
               onTap: (context) {
                 if (_exercises.isNotEmpty) {

@@ -121,7 +121,6 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
             _ExercisesHeaderRow(clientId: widget._clientId),
             Container(
               margin: const EdgeInsets.only(
-                top: Dimens.mMargin,
                 bottom: Dimens.mMargin,
               ),
               child: PersoTrainerExerciseList(

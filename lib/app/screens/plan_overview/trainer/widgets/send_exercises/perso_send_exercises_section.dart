@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/bloc/send_exercises_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/event/send_exercises_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/state/send_exercises_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
@@ -59,51 +57,53 @@ class _SendExerciseSectionContentState
           },
         );
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          PersoButton(
-            width: Dimens.smallButtonWidth,
-            title: 'Send',
-            onTap: (context) {
-              context.read<SendExerciseBloc>().add(
-                    SendExercisesEvent.sendExercises(
-                      widget._clientId,
-                      _selectedDate,
-                    ),
-                  );
-            },
-          ),
-          BlocBuilder<SendExerciseBloc, SendExercisesState>(
-            builder: (context, state) {
-              return state.when(
-                initial: Container.new,
-                exerciseSentDate: (date) {
-                  return Visibility(
-                    visible: date.isNotEmpty,
-                    child: Container(
+      child: Container(
+        margin: const EdgeInsets.only(left: Dimens.xlMargin),
+        child: Column(
+          children: [
+            PersoButton(
+              width: Dimens.xmButtonWidth,
+              title: 'Send training',
+              onTap: (context) {
+                context.read<SendExerciseBloc>().add(
+                      SendExercisesEvent.sendExercises(
+                        widget._clientId,
+                        _selectedDate,
+                      ),
+                    );
+              },
+            ),
+            BlocBuilder<SendExerciseBloc, SendExercisesState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: Container.new,
+                  exerciseSentDate: (date) {
+                    return Visibility(
+                      visible: date.isNotEmpty,
+                      child: Container(
+                        margin: const EdgeInsets.only(top: Dimens.sMargin),
+                        child: Text(
+                          'Sent on $date',
+                          style: ThemeText.footnoteRegular,
+                        ),
+                      ),
+                    );
+                  },
+                  sendingInProgress: () {
+                    return Container(
                       margin: const EdgeInsets.only(top: Dimens.sMargin),
                       child: Text(
-                        'Sent on $date',
+                        'Sending...',
                         style: ThemeText.footnoteRegular,
                       ),
-                    ),
-                  );
-                },
-                sendingInProgress: () {
-                  return Container(
-                    margin: const EdgeInsets.only(top: Dimens.sMargin),
-                    child: Text(
-                      'Sending...',
-                      style: ThemeText.footnoteRegular,
-                    ),
-                  );
-                },
-                error: Text.new,
-              );
-            },
-          )
-        ],
+                    );
+                  },
+                  error: Text.new,
+                );
+              },
+            )
+          ],
+        ),
       ),
     );
   }

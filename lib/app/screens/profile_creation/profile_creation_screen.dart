@@ -52,7 +52,7 @@ class ProfileCreationScreen extends StatelessWidget {
                       horizontal: Dimens.sMargin,
                     ),
                     child: PersoButton(
-                      width: Dimens.bigButtonWidth,
+                      width: Dimens.mButtonWidth,
                       title: context.strings.choose_trainer_user_type,
                       whiteBlackTheme: true,
                       onTap: _navigateTrainer,
@@ -63,7 +63,7 @@ class ProfileCreationScreen extends StatelessWidget {
                       horizontal: Dimens.sMargin,
                     ),
                     child: PersoButton(
-                      width: Dimens.bigButtonWidth,
+                      width: Dimens.mButtonWidth,
                       title: context.strings.choose_client_user_type,
                       onTap: _navigateClient,
                     ),

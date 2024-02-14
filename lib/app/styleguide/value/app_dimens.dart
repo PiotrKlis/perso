@@ -15,9 +15,10 @@ class Dimens {
 
   static const double buttonBorderRadius = 48;
   static const double buttonHeight = 50;
-  static const double smallButtonWidth = 128;
-  static const double bigButtonWidth = 160;
-  static const double largeButtonWidth = 280;
+  static const double sButtonWidth = 128;
+  static const double mButtonWidth = 160;
+  static const double xmButtonWidth = 200;
+  static const double lButtonWidth = 280;
 
   static const double searchHeight = 42;
   static const double searchRadius = 12;
@@ -62,7 +63,6 @@ class Dimens {
   static const double iconSize = 24;
   static const double shortBioHeight = 140;
   static const double longBioHeight = 340;
-  static const double persoButtonWidth = 160;
 
   static const double dividerThickness = 1;
   static const double iconSizeLarge = 160;

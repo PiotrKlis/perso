@@ -40,10 +40,12 @@ class PersoButton extends StatelessWidget {
       return const CircularProgressIndicator();
     } else {
       return Text(
+        overflow: TextOverflow.ellipsis,
         title,
         style: whiteBlackTheme
             ? ThemeText.calloutBoldBlackText
             : ThemeText.calloutBoldWhiteText,
+        maxLines: 1,
       );
     }
   }

@@ -7,6 +7,7 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bl
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/perso_trainer_exercise_options.dart';
+import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
@@ -39,8 +40,19 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
   String _selectedDate = DateTime.now().yearMonthDayFormat;
   bool _shouldShowSupersetCheckboxes = false;
   final _exercisesSelectedForSuperset = <String>[];
-  String _superSetTitle = 'Superset';
+  String _superSetTitle = 'Create superset';
   final _superSets = <String, String>{};
+  final listOfSupersets = <String>[
+    'Superset 1',
+    'Superset 2',
+    'Superset 3',
+    'Superset 4',
+    'Superset 5',
+    'Superset 6',
+    'Superset 7',
+    'Superset 8',
+    'Superset 9',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -66,35 +78,64 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                 ..clear()
                 ..addAll(exercises);
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const PersoDivider(),
+                  Container(
+                    margin: const EdgeInsets.only(top: Dimens.mMargin),
+                    child: const PersoDivider(),
+                  ),
                   Container(
                     margin: const EdgeInsets.all(Dimens.mMargin),
-                    child: PersoButton(
-                      title: _superSetTitle,
-                      width: Dimens.smallButtonWidth,
-                      whiteBlackTheme: true,
-                      onTap: (context) {
-                        setState(() {
-                          _shouldShowSupersetCheckboxes =
-                              !_shouldShowSupersetCheckboxes;
-                          _superSetTitle = _shouldShowSupersetCheckboxes
-                              ? 'Create'
-                              : 'Superset';
-                          if (!_shouldShowSupersetCheckboxes) {
-                            _exercisesSelectedForSuperset
-                              ..forEachIndexed(
-                                (
-                                  index,
-                                  exercise,
-                                ) =>
-                                    _superSets[exercise] = 'Superset 1',
-                              )
-                              ..clear();
-                          }
-                        });
-                      },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ColoredBox(
+                          color: PersoColors.lightWhite,
+                          child: DropdownMenu<String>(
+                            initialSelection: listOfSupersets.first,
+                            onSelected: (String? value) {
+                              setState(() {
+                                // dropdownValue = value!;
+                              });
+                            },
+                            dropdownMenuEntries: listOfSupersets
+                                .map<DropdownMenuEntry<String>>(
+                                    (String value) {
+                              return DropdownMenuEntry<String>(
+                                value: value,
+                                label: value,
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: Dimens.mMargin),
+                          child: PersoButton(
+                            width: Dimens.xmButtonWidth,
+                            title: _superSetTitle,
+                            whiteBlackTheme: true,
+                            onTap: (context) {
+                              setState(() {
+                                _shouldShowSupersetCheckboxes =
+                                    !_shouldShowSupersetCheckboxes;
+                                _superSetTitle = _shouldShowSupersetCheckboxes
+                                    ? 'Confirm'
+                                    : 'Create superset';
+                                if (!_shouldShowSupersetCheckboxes) {
+                                  _exercisesSelectedForSuperset
+                                    ..forEachIndexed(
+                                      (
+                                        index,
+                                        exercise,
+                                      ) =>
+                                          _superSets[exercise] = 'Superset 1',
+                                    )
+                                    ..clear();
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   ReorderableListView(

@@ -188,7 +188,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
       ),
       child: const PersoButton(
         title: 'Contact',
-        width: Dimens.largeButtonWidth,
+        width: Dimens.lButtonWidth,
         whiteBlackTheme: true,
       ),
     );
@@ -236,13 +236,13 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
   PersoButton _trainingRequestLoading() {
     return const PersoButton(
       isLoading: true,
-      width: Dimens.largeButtonWidth,
+      width: Dimens.lButtonWidth,
     );
   }
 
   PersoButton _trainingRequestSentButton() {
     return const PersoButton(
-      width: Dimens.largeButtonWidth,
+      width: Dimens.lButtonWidth,
       title: 'Request sent',
     );
   }
@@ -250,7 +250,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
   PersoButton _initialTrainingRequestButton() {
     return PersoButton(
       title: 'Request for training',
-      width: Dimens.largeButtonWidth,
+      width: Dimens.lButtonWidth,
       onTap: (context) {
         context.read<TrainingRequestBloc>().add(
               TrainingRequestEvent.trainingRequest(widget._trainerEntity.id),
