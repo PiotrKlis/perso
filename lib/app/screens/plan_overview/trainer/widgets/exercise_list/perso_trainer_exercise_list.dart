@@ -42,7 +42,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
   final _exercisesSelectedForSuperset = <String>[];
   String _superSetTitle = 'Create superset';
   final _superSets = <String, String>{};
-  final listOfSupersets = <String>[
+  final listOfSupersetNames = <String>[
     'Superset 1',
     'Superset 2',
     'Superset 3',
@@ -53,6 +53,8 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
     'Superset 8',
     'Superset 9',
   ];
+
+  String selectedSuperSetName = 'Superset 1';
 
   @override
   Widget build(BuildContext context) {
@@ -91,15 +93,14 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                         ColoredBox(
                           color: PersoColors.lightWhite,
                           child: DropdownMenu<String>(
-                            initialSelection: listOfSupersets.first,
+                            initialSelection: listOfSupersetNames.first,
                             onSelected: (String? value) {
                               setState(() {
-                                // dropdownValue = value!;
+                                selectedSuperSetName = value!;
                               });
                             },
-                            dropdownMenuEntries: listOfSupersets
-                                .map<DropdownMenuEntry<String>>(
-                                    (String value) {
+                            dropdownMenuEntries: listOfSupersetNames
+                                .map<DropdownMenuEntry<String>>((String value) {
                               return DropdownMenuEntry<String>(
                                 value: value,
                                 label: value,
@@ -107,32 +108,34 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                             }).toList(),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(left: Dimens.mMargin),
-                          child: PersoButton(
-                            width: Dimens.xmButtonWidth,
-                            title: _superSetTitle,
-                            whiteBlackTheme: true,
-                            onTap: (context) {
-                              setState(() {
-                                _shouldShowSupersetCheckboxes =
-                                    !_shouldShowSupersetCheckboxes;
-                                _superSetTitle = _shouldShowSupersetCheckboxes
-                                    ? 'Confirm'
-                                    : 'Create superset';
-                                if (!_shouldShowSupersetCheckboxes) {
-                                  _exercisesSelectedForSuperset
-                                    ..forEachIndexed(
-                                      (
-                                        index,
-                                        exercise,
-                                      ) =>
-                                          _superSets[exercise] = 'Superset 1',
-                                    )
-                                    ..clear();
-                                }
-                              });
-                            },
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.only(left: Dimens.mMargin),
+                            child: PersoButton(
+                              title: _superSetTitle,
+                              whiteBlackTheme: true,
+                              onTap: (context) {
+                                setState(() {
+                                  _shouldShowSupersetCheckboxes =
+                                      !_shouldShowSupersetCheckboxes;
+                                  _superSetTitle = _shouldShowSupersetCheckboxes
+                                      ? 'Confirm'
+                                      : 'Create superset';
+                                  if (!_shouldShowSupersetCheckboxes) {
+                                    _exercisesSelectedForSuperset
+                                      ..forEachIndexed(
+                                        (
+                                          index,
+                                          exercise,
+                                        ) =>
+                                            _superSets[exercise] =
+                                                selectedSuperSetName,
+                                      )
+                                      ..clear();
+                                  }
+                                });
+                              },
+                            ),
                           ),
                         ),
                       ],

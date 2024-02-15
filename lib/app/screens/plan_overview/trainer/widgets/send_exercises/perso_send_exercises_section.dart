@@ -101,7 +101,7 @@ class _SendExerciseSectionContentState
                   error: Text.new,
                 );
               },
-            )
+            ),
           ],
         ),
       ),
