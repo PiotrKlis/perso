@@ -1,20 +1,21 @@
 import 'dart:ui';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/perso_trainer_exercise_options.dart';
-import 'package:perso/app/styleguide/value/app_colors.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_checkbox/perso_superset_checkbox.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/bloc/superset_bloc.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/perso_superset_section.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/state/superset_state.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
-import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/event/video_player_event.dart';
@@ -38,23 +39,6 @@ class PersoTrainerExerciseList extends StatefulWidget {
 class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
   final _localExercises = <ExerciseInTrainingEntity>[];
   String _selectedDate = DateTime.now().yearMonthDayFormat;
-  bool _shouldShowSupersetCheckboxes = false;
-  final _exercisesSelectedForSuperset = <String>[];
-  String _superSetTitle = 'Create superset';
-  final _superSets = <String, String>{};
-  final listOfSupersetNames = <String>[
-    'Superset 1',
-    'Superset 2',
-    'Superset 3',
-    'Superset 4',
-    'Superset 5',
-    'Superset 6',
-    'Superset 7',
-    'Superset 8',
-    'Superset 9',
-  ];
-
-  String selectedSuperSetName = 'Superset 1';
 
   @override
   Widget build(BuildContext context) {
@@ -85,62 +69,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                     margin: const EdgeInsets.only(top: Dimens.mMargin),
                     child: const PersoDivider(),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(Dimens.mMargin),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ColoredBox(
-                          color: PersoColors.lightWhite,
-                          child: DropdownMenu<String>(
-                            initialSelection: listOfSupersetNames.first,
-                            onSelected: (String? value) {
-                              setState(() {
-                                selectedSuperSetName = value!;
-                              });
-                            },
-                            dropdownMenuEntries: listOfSupersetNames
-                                .map<DropdownMenuEntry<String>>((String value) {
-                              return DropdownMenuEntry<String>(
-                                value: value,
-                                label: value,
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.only(left: Dimens.mMargin),
-                            child: PersoButton(
-                              title: _superSetTitle,
-                              whiteBlackTheme: true,
-                              onTap: (context) {
-                                setState(() {
-                                  _shouldShowSupersetCheckboxes =
-                                      !_shouldShowSupersetCheckboxes;
-                                  _superSetTitle = _shouldShowSupersetCheckboxes
-                                      ? 'Confirm'
-                                      : 'Create superset';
-                                  if (!_shouldShowSupersetCheckboxes) {
-                                    _exercisesSelectedForSuperset
-                                      ..forEachIndexed(
-                                        (
-                                          index,
-                                          exercise,
-                                        ) =>
-                                            _superSets[exercise] =
-                                                selectedSuperSetName,
-                                      )
-                                      ..clear();
-                                  }
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  PersoSupersetSection(clientId: widget.clientId),
                   ReorderableListView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -149,37 +78,25 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                       animation: animation,
                       child: child,
                     ),
-                    children: _localExercises.map((exercise) {
-                      return BlocProvider(
+                    children: _localExercises.map((exerciseInTraining) {
+                      return MultiBlocProvider(
                         key: UniqueKey(),
-                        create: (context) => VideoPlayerBloc(),
+                        providers: [
+                          BlocProvider(
+                            create: (context) => VideoPlayerBloc(),
+                          ),
+                        ],
                         child: Row(
                           children: [
-                            Visibility(
-                              visible: _shouldShowSupersetCheckboxes,
-                              child: Checkbox(
-                                value: _exercisesSelectedForSuperset
-                                    .contains(exercise.id),
-                                onChanged: (value) {
-                                  setState(() {
-                                    if (value!) {
-                                      _exercisesSelectedForSuperset
-                                          .add(exercise.id);
-                                    } else {
-                                      _exercisesSelectedForSuperset
-                                          .remove(exercise.id);
-                                    }
-                                  });
-                                },
-                              ),
+                            PersoSupersetCheckbox(
+                              exerciseInTrainingId: exerciseInTraining.id,
                             ),
                             Expanded(
                               child: _Exercise(
                                 exerciseInTrainingEntityList: _localExercises,
-                                exerciseInTrainingEntity: exercise,
+                                exerciseInTrainingEntity: exerciseInTraining,
                                 clientId: widget.clientId,
                                 date: _selectedDate,
-                                superSets: _superSets,
                               ),
                             ),
                           ],
@@ -252,18 +169,15 @@ class _Exercise extends StatefulWidget {
     required List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
     required String clientId,
     required String date,
-    required Map<String, String> superSets,
   })  : _date = date,
         _clientId = clientId,
         _exerciseInTrainingEntityList = exerciseInTrainingEntityList,
-        _superSets = superSets,
         _exerciseInTrainingEntity = exerciseInTrainingEntity;
 
   final ExerciseInTrainingEntity _exerciseInTrainingEntity;
   final List<ExerciseInTrainingEntity> _exerciseInTrainingEntityList;
   final String _clientId;
   final String _date;
-  final Map<String, String> _superSets;
 
   @override
   State<_Exercise> createState() => _ExerciseState();
@@ -301,7 +215,6 @@ class _ExerciseState extends State<_Exercise> {
                 isExpanded: _isExpanded,
                 headerBuilder: (context, isExpanded) => _ExerciseHeader(
                   exercise: widget._exerciseInTrainingEntity.exerciseEntity,
-                  superSets: widget._superSets,
                   exerciseInTrainingId: widget._exerciseInTrainingEntity.id,
                 ),
                 body: _ExerciseExpansionPanel(
@@ -464,31 +377,47 @@ class _Categories extends StatelessWidget {
   }
 }
 
-class _ExerciseHeader extends StatelessWidget {
+class _ExerciseHeader extends StatefulWidget {
   const _ExerciseHeader({
     required ExerciseEntity exercise,
-    required Map<String, String> superSets,
     required String exerciseInTrainingId,
   })  : _exercise = exercise,
-        _exerciseInTrainingId = exerciseInTrainingId,
-        _superSets = superSets;
+        _exerciseInTrainingId = exerciseInTrainingId;
 
   final ExerciseEntity _exercise;
-  final Map<String, String> _superSets;
   final String _exerciseInTrainingId;
 
   @override
+  State<_ExerciseHeader> createState() => _ExerciseHeaderState();
+}
+
+class _ExerciseHeaderState extends State<_ExerciseHeader> {
+  // final Map<String, String> _supersetData = widget._exercise.supersetData;
+  final Map<String, String> _supersetData = {};
+
+  @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: _getIconForTags(_exercise.tags),
-      subtitle: _superSets[_exerciseInTrainingId] != null
-          ? Text(
-              _superSets[_exerciseInTrainingId]!,
-              style: ThemeText.footnoteRegular,
-            )
-          : null,
-      title: Text(_exercise.title, style: ThemeText.bodyBoldBlackText),
-      trailing: const Icon(Icons.reorder),
+    return BlocListener<SupersetBloc, SupersetState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          sendSuccess: (supersetData) {
+            setState(() {
+              _supersetData.addAll(supersetData);
+            });
+          },
+        );
+      },
+      child: ListTile(
+        leading: _getIconForTags(widget._exercise.tags),
+        subtitle: _supersetData[widget._exerciseInTrainingId] != null
+            ? Text(
+                _supersetData[widget._exerciseInTrainingId]!,
+                style: ThemeText.footnoteRegular,
+              )
+            : null,
+        title: Text(widget._exercise.title, style: ThemeText.bodyBoldBlackText),
+        trailing: const Icon(Icons.reorder),
+      ),
     );
   }
 

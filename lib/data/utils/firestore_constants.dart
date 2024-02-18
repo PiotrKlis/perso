@@ -42,4 +42,5 @@ class UserDocumentFields {
   static const String exerciseType = 'exerciseType';
   static const String sentDate = 'sentDate';
   static const String timeBreak = 'timeBreak';
+  static const String supersetName = 'supersetName';
 }

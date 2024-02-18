@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/bloc/trainer_exercise_list_options_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/event/trainer_exercise_list_options_event.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';

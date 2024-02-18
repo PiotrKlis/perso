@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:perso/app/screens/plan_overview/exercise_options_data.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/translations/string_list_mapper.dart';
@@ -186,5 +186,29 @@ class FirestoreExerciseService extends ExerciseService {
       await targetCollection.doc(document.id).set(document.data());
     }
     return sentDate;
+  }
+
+  @override
+  Future<void> sendSupersetData({
+    required String trainerId,
+    required String clientId,
+    required String date,
+    required Map<String, String> supersetData,
+  }) async {
+    final batch = FirebaseFirestore.instance.batch();
+    final collection = FirebaseFirestore.instance
+        .collection(CollectionName.trainers)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(date);
+
+    for (final superset in supersetData.entries) {
+      final docRef = collection.doc(superset.key);
+      batch.update(docRef, {
+        UserDocumentFields.supersetName: superset.value,
+      });
+    }
+    await batch.commit();
   }
 }
