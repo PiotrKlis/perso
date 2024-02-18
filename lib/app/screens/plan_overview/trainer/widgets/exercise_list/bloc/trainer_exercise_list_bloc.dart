@@ -26,7 +26,16 @@ class TrainerExerciseListBloc
           exercises.sort(
             (a, b) => a.exerciseEntity.index.compareTo(b.exerciseEntity.index),
           );
-          emitter(TrainerExerciseListState.exercises(exercises));
+          final updatedIndexesExercises = exercises
+              .mapIndexed(
+                (index, exercise) => exercise.copyWith(
+                  exerciseEntity: exercise.exerciseEntity.copyWith(
+                    index: index,
+                  ),
+                ),
+              )
+              .toList();
+          emitter(TrainerExerciseListState.exercises(updatedIndexesExercises));
         } catch (error) {
           emitter(TrainerExerciseListState.error(error.toString()));
         }
@@ -36,25 +45,11 @@ class TrainerExerciseListBloc
 
     on<RemoveExercise>((event, emitter) async {
       try {
-        final mutableList = <ExerciseInTrainingEntity>[
-          ...event.exerciseInTrainingEntityList,
-        ]..remove(event.exerciseInTrainingEntity);
-        final updatedIndexesList = mutableList
-            .mapIndexed(
-              (index, exercise) => exercise.copyWith(
-                exerciseEntity: exercise.exerciseEntity.copyWith(
-                  index: index,
-                ),
-              ),
-            )
-            .toList();
-        emitter(TrainerExerciseListState.exercises(updatedIndexesList));
         await _exercisesService.remove(
           clientId: event.clientId,
           trainerId: trainerId,
           date: event.date,
-          exerciseInTrainingEntity: event.exerciseInTrainingEntity,
-          exerciseInTrainingEntityList: updatedIndexesList,
+          exerciseInTrainingId: event.exerciseInTrainingId,
         );
       } catch (error) {
         emitter(TrainerExerciseListState.error(error.toString()));

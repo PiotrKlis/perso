@@ -5,7 +5,6 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bl
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/perso_trainer_exercise_list.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/perso_send_exercises_section.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/bloc/superset_bloc.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
@@ -31,9 +30,6 @@ class TrainerPlanOverviewScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => TrainerExerciseListBloc(),
-        ),
-        BlocProvider(
-          create: (context) => SupersetBloc(),
         ),
       ],
       child: _TrainerPlanOverviewScreenContent(clientId: _clientId),

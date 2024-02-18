@@ -124,40 +124,50 @@ class _ExerciseState extends State<_Exercise> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      margin: const EdgeInsets.only(
+        top: Dimens.sMargin,
+        left: Dimens.sMargin,
+        right: Dimens.sMargin,
+      ),
       //ExpansionPanelList needs to be wrapped in Column as it fixes
       //avoid RenderListBody must have unlimited space along its main axis error
-      child: ExpansionPanelList(
-        expansionCallback: (int index, bool isExpanded) {
-          setState(() {
-            _isExpanded = isExpanded;
-            if (_isExpanded) {
-              context
-                  .read<VideoPlayerBloc>()
-                  .add(const VideoPlayerEvent.initialize());
-            } else {
-              context
-                  .read<VideoPlayerBloc>()
-                  .add(const VideoPlayerEvent.dispose());
-            }
-          });
-        },
-        children: [
-          ExpansionPanel(
-            canTapOnHeader: true,
-            isExpanded: _isExpanded,
-            headerBuilder: (context, isExpanded) => _ExerciseHeader(
-              exercise: widget._exercise,
-            ),
-            body: _ExerciseExpansionPanel(
-              videoId: widget._exercise.videoId,
-              description: widget._exercise.description,
-              clientId: widget._clientId,
-              date: widget._date,
-              exerciseEntity: widget._exercise,
-            ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(Dimens.trainerCardBorderRadius),
+        child: ColoredBox(
+          color: Colors.white,
+          child: ExpansionPanelList(
+            expansionCallback: (int index, bool isExpanded) {
+              setState(() {
+                _isExpanded = isExpanded;
+                if (_isExpanded) {
+                  context
+                      .read<VideoPlayerBloc>()
+                      .add(const VideoPlayerEvent.initialize());
+                } else {
+                  context
+                      .read<VideoPlayerBloc>()
+                      .add(const VideoPlayerEvent.dispose());
+                }
+              });
+            },
+            children: [
+              ExpansionPanel(
+                canTapOnHeader: true,
+                isExpanded: _isExpanded,
+                headerBuilder: (context, isExpanded) => _ExerciseHeader(
+                  exercise: widget._exercise,
+                ),
+                body: _ExerciseExpansionPanel(
+                  videoId: widget._exercise.videoId,
+                  description: widget._exercise.description,
+                  clientId: widget._clientId,
+                  date: widget._date,
+                  exerciseEntity: widget._exercise,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

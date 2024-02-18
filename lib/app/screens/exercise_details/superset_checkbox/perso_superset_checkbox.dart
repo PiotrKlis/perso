@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/bloc/superset_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/event/superset_event.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/state/superset_state.dart';
+import 'package:perso/app/screens/exercise_details/superset_section/bloc/superset_bloc.dart';
+import 'package:perso/app/screens/exercise_details/superset_section/event/superset_event.dart';
+import 'package:perso/app/screens/exercise_details/superset_section/state/superset_state.dart';
 
 class PersoSupersetCheckbox extends StatefulWidget {
   const PersoSupersetCheckbox({

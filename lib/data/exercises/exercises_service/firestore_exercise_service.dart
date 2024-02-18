@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/model/exercise_options_data.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/translations/string_list_mapper.dart';
@@ -51,6 +51,7 @@ class FirestoreExerciseService extends ExerciseService {
       UserDocumentFields.videoId: exerciseEntity.videoId,
       UserDocumentFields.exerciseType: exerciseEntity.exerciseType.name,
       UserDocumentFields.timeBreak: exerciseEntity.timeBreak,
+      UserDocumentFields.supersetName: exerciseEntity.supersetName,
     });
   }
 
@@ -83,8 +84,7 @@ class FirestoreExerciseService extends ExerciseService {
     required String clientId,
     required String trainerId,
     required String date,
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-    required List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
+    required String exerciseInTrainingId,
   }) async {
     await FirebaseFirestore.instance
         .collection(CollectionName.trainers)
@@ -92,24 +92,8 @@ class FirestoreExerciseService extends ExerciseService {
         .collection(CollectionName.clients)
         .doc(clientId)
         .collection(date)
-        .doc(exerciseInTrainingEntity.id)
+        .doc(exerciseInTrainingId)
         .delete();
-
-    final batch = FirebaseFirestore.instance.batch();
-    final collection = FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
-        .doc(trainerId)
-        .collection(CollectionName.clients)
-        .doc(clientId)
-        .collection(date);
-
-    for (final exercise in exerciseInTrainingEntityList) {
-      final docRef = collection.doc(exercise.id);
-      batch.update(docRef, {
-        UserDocumentFields.index: exercise.exerciseEntity.index,
-      });
-    }
-    await batch.commit();
   }
 
   @override

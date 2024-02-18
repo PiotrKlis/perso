@@ -24,11 +24,10 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
   ) = AddExercise;
 
   const factory TrainerExerciseListEvent.removeExercise(
-          String clientId,
-          String date,
-          ExerciseInTrainingEntity exerciseInTrainingEntity,
-          List<ExerciseInTrainingEntity> exerciseInTrainingEntityList) =
-      RemoveExercise;
+    String clientId,
+    String date,
+    String exerciseInTrainingId,
+  ) = RemoveExercise;
 
   const factory TrainerExerciseListEvent.reorder(
     String clientId,
@@ -41,7 +40,6 @@ class TrainerExerciseListEvent with _$TrainerExerciseListEvent {
     String date,
   ) = GetNumberOfExercises;
 
-  const factory TrainerExerciseListEvent.panelExpansion(
-      String exerciseId
-      ) = PanelExpansion;
+  const factory TrainerExerciseListEvent.panelExpansion(String exerciseId) =
+      PanelExpansion;
 }

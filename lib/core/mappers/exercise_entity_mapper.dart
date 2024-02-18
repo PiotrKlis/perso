@@ -33,6 +33,7 @@ class ExerciseEntityMapper {
           .mapFrom(exercise[UserDocumentFields.title] as Map<String, dynamic>),
       videoId: exercise[UserDocumentFields.videoId] as String,
       timeBreak: exercise[UserDocumentFields.timeBreak] as int,
+      supersetName: exercise[UserDocumentFields.supersetName] as String,
     );
   }
 
@@ -55,6 +56,7 @@ class ExerciseEntityMapper {
           .mapFrom(exercise[UserDocumentFields.title] as Map<String, dynamic>),
       videoId: exercise[UserDocumentFields.videoId] as String,
       timeBreak: exercise[UserDocumentFields.timeBreak] as int,
+      supersetName: exercise[UserDocumentFields.supersetName] as String,
     );
   }
 }

@@ -17,5 +17,6 @@ class ExerciseEntity with _$ExerciseEntity {
     required String title,
     required String videoId,
     required int timeBreak,
+    required String supersetName,
   }) = _ExerciseEntity;
 }

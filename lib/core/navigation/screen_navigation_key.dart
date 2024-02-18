@@ -23,4 +23,5 @@ class ScreenNavigationKey {
   static const String exerciseLibrary = 'exercise_library';
   static const String chatChannel = 'chat_channel';
   static const String training = 'exercise_in_progress';
+  static const String exerciseDetails = 'exercise_details';
 }

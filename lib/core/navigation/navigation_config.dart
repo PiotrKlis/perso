@@ -4,6 +4,7 @@ import 'package:perso/app/screens/chat/chat_channel_screen.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_screen.dart';
 import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
@@ -25,6 +26,7 @@ import 'package:perso/app/screens/training/training_screen.dart';
 import 'package:perso/app/screens/training_categories/training_categories_screen.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -37,10 +39,14 @@ final _homeShellNavigatorKey = GlobalKey<NavigatorState>();
 final _trainingShellNavigatorKey = GlobalKey<NavigatorState>();
 final _chatShellNavigatorKey = GlobalKey<NavigatorState>();
 final _userSessionModel = getIt.get<UserSessionModel>();
-const _clientId = 'clientId';
-const _trainerId = 'trainerId';
-const _input = 'input';
-const _date = 'date';
+
+class NavigationConstants {
+  static const clientId = 'clientId';
+  static const trainerId = 'trainerId';
+  static const input = 'input';
+  static const date = 'date';
+  static const exerciseInTrainingEntity = 'exerciseInTrainingEntity';
+}
 
 final GoRouter goRouter = GoRouter(
   initialLocation: ScreenNavigationKey.home,
@@ -91,11 +97,12 @@ final GoRouter goRouter = GoRouter(
                 ),
                 GoRoute(
                   name: ScreenNavigationKey.searchResults,
-                  path: '${ScreenNavigationKey.searchResults}/:$_input',
+                  path:
+                      '${ScreenNavigationKey.searchResults}/:${NavigationConstants.input}',
                   pageBuilder: (context, state) {
                     return NoTransitionPage(
                       child: SearchResultsScreen(
-                        input: state.pathParameters[_input],
+                        input: state.pathParameters[NavigationConstants.input],
                       ),
                     );
                   },
@@ -245,7 +252,8 @@ final GoRouter goRouter = GoRouter(
                     pageBuilder: (BuildContext context, GoRouterState state) {
                       return NoTransitionPage(
                         child: ClientPlanOverviewScreen(
-                          trainerId: state.uri.queryParameters[_trainerId]!,
+                          trainerId: state.uri
+                              .queryParameters[NavigationConstants.trainerId]!,
                         ),
                       );
                     },
@@ -288,7 +296,8 @@ final GoRouter goRouter = GoRouter(
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return NoTransitionPage(
                       child: TrainerPlanOverviewScreen(
-                        clientId: state.uri.queryParameters[_clientId]!,
+                        clientId: state
+                            .uri.queryParameters[NavigationConstants.clientId]!,
                       ),
                     );
                   },
@@ -305,16 +314,28 @@ final GoRouter goRouter = GoRouter(
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
                           child: ExerciseLibraryScreen(
-                            clientId: state.uri.queryParameters[_clientId]!,
-                            selectedDate: state.uri.queryParameters['date']!,
+                            clientId: state.uri
+                                .queryParameters[NavigationConstants.clientId]!,
+                            selectedDate: state
+                                .uri.queryParameters[NavigationConstants.date]!,
                           ),
                         );
                       },
-                      redirect: (context, state) {
-                        if (!_userSessionModel.isUserLoggedIn) {
-                          return ScreenNavigationKey.loggedOutTrainings;
-                        }
-                        return null;
+                    ),
+                    GoRoute(
+                      name: ScreenNavigationKey.exerciseDetails,
+                      path: ScreenNavigationKey.exerciseDetails,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return NoTransitionPage(
+                          child: ExerciseDetailsScreen(
+                            clientId: state.uri
+                                .queryParameters[NavigationConstants.clientId]!,
+                            date: state
+                                .uri.queryParameters[NavigationConstants.date]!,
+                            exerciseInTrainingEntity:
+                                state.extra! as ExerciseInTrainingEntity,
+                          ),
+                        );
                       },
                     ),
                   ],

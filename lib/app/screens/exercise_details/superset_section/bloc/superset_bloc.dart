@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/event/superset_event.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/superset_section/state/superset_state.dart';
+import 'package:perso/app/screens/exercise_details/superset_section/event/superset_event.dart';
+import 'package:perso/app/screens/exercise_details/superset_section/state/superset_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';

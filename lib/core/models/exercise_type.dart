@@ -1,4 +1,10 @@
-enum ExerciseType { repsBased, timeBased }
+enum ExerciseType {
+  repsBased,
+  timeBased,
+  repsInReserve,
+  rateOfPerceivedExertion,
+  maxPercentage,
+}
 
 extension StringToUserType on String {
   ExerciseType? toExerciseType() {
@@ -7,6 +13,12 @@ extension StringToUserType on String {
         return ExerciseType.repsBased;
       case 'timeBased':
         return ExerciseType.timeBased;
+      case 'repsInReserve':
+        return ExerciseType.repsInReserve;
+      case 'rateOfPerceivedExertion':
+        return ExerciseType.rateOfPerceivedExertion;
+      case 'maxPercentage':
+        return ExerciseType.maxPercentage;
       default:
         return null;
     }

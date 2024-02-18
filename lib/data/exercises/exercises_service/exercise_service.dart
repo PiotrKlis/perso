@@ -1,4 +1,4 @@
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_options/model/exercise_options_data.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 
@@ -22,8 +22,7 @@ abstract class ExerciseService {
     required String clientId,
     required String trainerId,
     required String date,
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-    required List<ExerciseInTrainingEntity> exerciseInTrainingEntityList,
+    required String exerciseInTrainingId,
   });
 
   Future<void> reorder({
