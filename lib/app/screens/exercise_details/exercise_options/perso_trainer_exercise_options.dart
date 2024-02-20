@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_list_options_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_list_options_event.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_options_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
@@ -16,25 +16,23 @@ import 'package:perso/core/models/exercise_type.dart';
 import 'package:perso/core/string_extensions.dart';
 
 class PersoTrainerExerciseOptionsSection extends StatelessWidget {
-  const PersoTrainerExerciseOptionsSection(
-    this._clientId,
-    this._date,
-    this._exerciseInTrainingEntity, {
+  const PersoTrainerExerciseOptionsSection({
+    required ExerciseOptionsData exerciseOptionsData,
+    required Key formKey,
     super.key,
-  });
+  })  : _formKey = formKey,
+        _exerciseOptionsData = exerciseOptionsData;
 
-  final String _clientId;
-  final String _date;
-  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final ExerciseOptionsData _exerciseOptionsData;
+  final Key _formKey;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TrainerExerciseListOptionsBloc(),
+      create: (context) => TrainerExerciseOptionsBloc(),
       child: _OptionsSectionContent(
-        clientId: _clientId,
-        date: _date,
-        exerciseInTrainingEntity: _exerciseInTrainingEntity,
+        exerciseOptionsData: _exerciseOptionsData,
+        formKey: _formKey,
       ),
     );
   }
@@ -42,16 +40,13 @@ class PersoTrainerExerciseOptionsSection extends StatelessWidget {
 
 class _OptionsSectionContent extends StatefulWidget {
   const _OptionsSectionContent({
-    required String clientId,
-    required String date,
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-  })  : _exerciseInTrainingEntity = exerciseInTrainingEntity,
-        _date = date,
-        _clientId = clientId;
+    required ExerciseOptionsData exerciseOptionsData,
+    required Key formKey,
+  })  : _formKey = formKey,
+        _exerciseOptionsData = exerciseOptionsData;
 
-  final String _clientId;
-  final String _date;
-  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final ExerciseOptionsData _exerciseOptionsData;
+  final Key _formKey;
 
   @override
   State<_OptionsSectionContent> createState() => _OptionsSectionContentState();
@@ -59,33 +54,18 @@ class _OptionsSectionContent extends StatefulWidget {
 
 class _OptionsSectionContentState extends State<_OptionsSectionContent> {
   late ExerciseOptionsData _optionsData;
-  final _setsController = TextEditingController();
-  final _repsController = TextEditingController();
-  final _minutesController = TextEditingController();
-  final _secondsController = TextEditingController();
-  final _timeBreakController = TextEditingController();
+  final _setsFieldController = TextEditingController();
+  final _secondFieldController = TextEditingController();
+  final _thirdFieldController = TextEditingController();
   final _key = GlobalKey<FormState>();
-  bool _shouldShowTimeBreak = false;
+  var _selectedExerciseType = ExerciseType.repsBased;
 
   @override
   void initState() {
-    _optionsData = ExerciseOptionsData(
-      exerciseType:
-          widget._exerciseInTrainingEntity.exerciseEntity.exerciseType,
-      reps: widget._exerciseInTrainingEntity.exerciseEntity.reps,
-      sets: widget._exerciseInTrainingEntity.exerciseEntity.sets,
-      time: widget._exerciseInTrainingEntity.exerciseEntity.time,
-      timeBreak: widget._exerciseInTrainingEntity.exerciseEntity.timeBreak,
-    );
-    final timeList = _optionsData.time.split(':');
-    final minutes = timeList[0];
-    final seconds = timeList[1];
-    _minutesController.text = minutes;
-    _secondsController.text = seconds;
-    _setsController.text = _optionsData.sets.toString();
-    _repsController.text = _optionsData.reps.toString();
-    _timeBreakController.text = _optionsData.timeBreak.toString();
-
+    // final timeList = _optionsData.time?.split(':');
+    // final seconds = timeList[1];
+    _setsFieldController.text = _optionsData.sets.toString();
+    _secondFieldController.text = _optionsData.reps.toString();
     super.initState();
   }
 
@@ -94,160 +74,32 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          margin: const EdgeInsets.only(
-            left: Dimens.mMargin,
-            right: Dimens.sMargin,
-            top: Dimens.mMargin,
-          ),
-          child: Text(
-            'Options',
-            style: ThemeText.smallTitleBold,
-          ),
-        ),
-        RadioListTile(
-          title: const Text('Reps based'),
-          value: ExerciseType.repsBased,
-          groupValue: _optionsData.exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _optionsData.exerciseType) {
-              setState(() {
-                _optionsData =
-                    _optionsData.copyWith(exerciseType: exerciseType!);
-              });
-            }
-          },
-        ),
-        RadioListTile(
-          title: const Text('Time based'),
-          value: ExerciseType.timeBased,
-          groupValue: _optionsData.exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _optionsData.exerciseType) {
-              setState(() {
-                _optionsData =
-                    _optionsData.copyWith(exerciseType: exerciseType!);
-              });
-            }
-          },
-        ),
-        RadioListTile(
-          title: const Text('Reps in reserve'),
-          value: ExerciseType.timeBased,
-          groupValue: _optionsData.exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _optionsData.exerciseType) {
-              setState(() {
-                _optionsData =
-                    _optionsData.copyWith(exerciseType: exerciseType!);
-              });
-            }
-          },
-        ),
-        RadioListTile(
-          title: const Text('Rate of perceived exertion'),
-          value: ExerciseType.timeBased,
-          groupValue: _optionsData.exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _optionsData.exerciseType) {
-              setState(() {
-                _optionsData =
-                    _optionsData.copyWith(exerciseType: exerciseType!);
-              });
-            }
-          },
-        ),
-        RadioListTile(
-          title: const Text('Max %'),
-          value: ExerciseType.timeBased,
-          groupValue: _optionsData.exerciseType,
-          onChanged: (exerciseType) {
-            if (exerciseType != _optionsData.exerciseType) {
-              setState(() {
-                _optionsData =
-                    _optionsData.copyWith(exerciseType: exerciseType!);
-              });
-            }
-          },
+        const _Header(),
+        ListView(
+          children: ExerciseType.values
+              .map(
+                (exerciseType) => RadioListTile(
+                  title: Text(exerciseType.value),
+                  value: exerciseType,
+                  groupValue: exerciseType,
+                  onChanged: (exerciseType) {
+                    if (exerciseType != _selectedExerciseType) {
+                      setState(() {
+                        _selectedExerciseType = exerciseType!;
+                      });
+                    }
+                  },
+                ),
+              )
+              .toList(),
         ),
         Form(
           key: _key,
           child: Column(
             children: [
-              Visibility(
-                maintainState: true,
-                visible: _optionsData.exerciseType == ExerciseType.repsBased,
-                child: _RepsBasedExerciseOptions(
-                  repsController: _repsController,
-                  setsController: _setsController,
-                ),
-              ),
-              Visibility(
-                maintainState: true,
-                visible: _optionsData.exerciseType == ExerciseType.timeBased,
-                child: _TimeBasedExerciseOptions(
-                  minutesController: _minutesController,
-                  secondsController: _secondsController,
-                ),
-              ),
-              Visibility(
-                maintainState: true,
-                visible:
-                    _optionsData.exerciseType == ExerciseType.repsInReserve,
-                child: _RepsBasedExerciseOptions(
-                  repsController: _repsController,
-                  setsController: _setsController,
-                ),
-              ),
-              Visibility(
-                maintainState: true,
-                visible: _optionsData.exerciseType ==
-                    ExerciseType.rateOfPerceivedExertion,
-                child: _TimeBasedExerciseOptions(
-                  minutesController: _minutesController,
-                  secondsController: _secondsController,
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: Dimens.mMargin,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Time breaks between sets',
-                      style: ThemeText.bodyRegularBlackText,
-                    ),
-                    Switch(
-                      value: _shouldShowTimeBreak,
-                      onChanged: (value) {
-                        if (!value) {
-                          _timeBreakController.text = '0';
-                        }
-                        setState(() {
-                          _shouldShowTimeBreak = value;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Visibility(
-                maintainState: true,
-                visible: _shouldShowTimeBreak,
-                child: Container(
-                  margin: const EdgeInsets.only(
-                      top: Dimens.mMargin,
-                      left: Dimens.mMargin,
-                      right: Dimens.mMargin),
-                  child: PersoTextField(
-                    textEditingController: _timeBreakController,
-                    textInputType: TextInputType.number,
-                    title: 'Time break (seconds)',
-                    customValidator: TextFieldValidator.validateDigits,
-                  ),
-                ),
+              _ExerciseOptionsFields(
+                repsController: _secondFieldController,
+                setsController: _setsFieldController,
               ),
             ],
           ),
@@ -261,8 +113,29 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
   }
 }
 
-class _RepsBasedExerciseOptions extends StatefulWidget {
-  const _RepsBasedExerciseOptions({
+class _Header extends StatelessWidget {
+  const _Header({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        left: Dimens.mMargin,
+        right: Dimens.sMargin,
+        top: Dimens.mMargin,
+      ),
+      child: Text(
+        'Options',
+        style: ThemeText.smallTitleBold,
+      ),
+    );
+  }
+}
+
+class _ExerciseOptionsFields extends StatefulWidget {
+  const _ExerciseOptionsFields({
     required TextEditingController repsController,
     required TextEditingController setsController,
   })  : _repsController = repsController,
@@ -272,11 +145,10 @@ class _RepsBasedExerciseOptions extends StatefulWidget {
   final TextEditingController _setsController;
 
   @override
-  State<_RepsBasedExerciseOptions> createState() =>
-      _RepsBasedExerciseOptionsState();
+  State<_ExerciseOptionsFields> createState() => _ExerciseOptionsFieldsState();
 }
 
-class _RepsBasedExerciseOptionsState extends State<_RepsBasedExerciseOptions> {
+class _ExerciseOptionsFieldsState extends State<_ExerciseOptionsFields> {
   @override
   Widget build(BuildContext context) {
     return Container(

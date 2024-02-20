@@ -24,12 +24,12 @@ class ExercisesInProgressScreen extends StatelessWidget {
             style: ThemeText.bodyBoldBlackText,
           ),
         ),
-        Container(
-          margin: const EdgeInsets.only(
-            top: Dimens.sMargin,
-          ),
-          child: Text(exercise.reps.toString()),
-        ),
+        // Container(
+        //   margin: const EdgeInsets.only(
+        //     top: Dimens.sMargin,
+        //   ),
+        //   child: Text(exercise.reps.toString()),
+        // ),
         Container(
           margin: const EdgeInsets.only(
             top: Dimens.lMargin,

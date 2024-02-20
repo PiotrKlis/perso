@@ -43,4 +43,9 @@ class UserDocumentFields {
   static const String sentDate = 'sentDate';
   static const String timeBreak = 'timeBreak';
   static const String supersetName = 'supersetName';
+  static const String repsInReserve = 'repsInReserve';
+  static const String rateOfPerceivedExertion = 'rateOfPerceivedExertion';
+  static const String maxPercentage = 'maxPercentage';
+  static const String trainerNote = 'trainerNote';
+  static const String weight = 'weight';
 }

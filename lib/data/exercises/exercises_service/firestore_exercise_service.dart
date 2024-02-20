@@ -37,21 +37,25 @@ class FirestoreExerciseService extends ExerciseService {
         exerciseEntity.description,
       ),
       UserDocumentFields.index: exerciseEntity.index,
-      UserDocumentFields.reps: exerciseEntity.reps,
-      UserDocumentFields.sets: exerciseEntity.sets,
+      //TODO: Check what happens if null is sent
+      UserDocumentFields.reps: exerciseEntity.exerciseOptionsData.reps,
+      UserDocumentFields.sets: exerciseEntity.exerciseOptionsData.sets,
       UserDocumentFields.tags: _stringListTranslationsMapper.mapTo(
         UserDocumentFields.tags,
         exerciseEntity.tags,
       ),
-      UserDocumentFields.time: exerciseEntity.time,
+      UserDocumentFields.time: exerciseEntity.exerciseOptionsData.time,
       UserDocumentFields.title: _stringTranslationsMapper.mapTo(
         UserDocumentFields.title,
         exerciseEntity.title,
       ),
       UserDocumentFields.videoId: exerciseEntity.videoId,
-      UserDocumentFields.exerciseType: exerciseEntity.exerciseType.name,
-      UserDocumentFields.timeBreak: exerciseEntity.timeBreak,
-      UserDocumentFields.supersetName: exerciseEntity.supersetName,
+      UserDocumentFields.exerciseType:
+          exerciseEntity.exerciseOptionsData.exerciseType?.name,
+      UserDocumentFields.timeBreak:
+          exerciseEntity.exerciseOptionsData.timeBreak,
+      UserDocumentFields.supersetName:
+          exerciseEntity.exerciseOptionsData.supersetName,
     });
   }
 
@@ -71,7 +75,7 @@ class FirestoreExerciseService extends ExerciseService {
         .collection(date)
         .doc(exerciseId)
         .update({
-      UserDocumentFields.exerciseType: exerciseOptions.exerciseType.name,
+      UserDocumentFields.exerciseType: exerciseOptions.exerciseType?.name,
       UserDocumentFields.sets: exerciseOptions.sets,
       UserDocumentFields.reps: exerciseOptions.reps,
       UserDocumentFields.time: exerciseOptions.time,

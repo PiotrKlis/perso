@@ -1,14 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:perso/core/models/exercise_type.dart';
+
 part 'exercise_options_data.freezed.dart';
 
 @freezed
 class ExerciseOptionsData with _$ExerciseOptionsData {
   const factory ExerciseOptionsData({
-  required ExerciseType exerciseType,
-    required int reps,
-    required int sets,
-    required String time,
-    required int timeBreak,
+    ExerciseType? exerciseType,
+    int? reps,
+    int? sets,
+    String? time,
+    int? weight,
+    int? timeBreak,
+    int? repsInReserve,
+    int? rateOfPerceivedExertion,
+    int? maxPercentage,
+    String? trainerNote,
+    String? supersetName,
   }) = _ExerciseOptionsData;
 }

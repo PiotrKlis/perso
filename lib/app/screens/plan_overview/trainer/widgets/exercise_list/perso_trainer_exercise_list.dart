@@ -200,12 +200,12 @@ class _ExerciseHeader extends StatelessWidget {
           color: Colors.white,
           child: ListTile(
             leading: _getIconForTags(_exerciseInTraining.exerciseEntity.tags),
-            subtitle: _exerciseInTraining.exerciseEntity.supersetName.isNotEmpty
-                ? Text(
-                    _exerciseInTraining.exerciseEntity.supersetName,
-                    style: ThemeText.footnoteRegular,
-                  )
-                : null,
+            // subtitle: _exerciseInTraining.exerciseEntity.exerciseOptionsData.supersetName != null
+            //     ? Text(
+            //         _exerciseInTraining.exerciseEntity.supersetName,
+            //         style: ThemeText.footnoteRegular,
+            //       )
+            //     : null,
             title: Text(
               _exerciseInTraining.exerciseEntity.title,
               style: ThemeText.bodyBoldBlackText,

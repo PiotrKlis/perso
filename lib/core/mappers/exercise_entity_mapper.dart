@@ -2,15 +2,16 @@ import 'package:algoliasearch/algoliasearch_lite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/mappers/exercise_options_mapper.dart';
 import 'package:perso/core/mappers/translations/string_list_mapper.dart';
 import 'package:perso/core/mappers/translations/string_mapper.dart';
 import 'package:perso/core/models/exercise_entity.dart';
-import 'package:perso/core/models/exercise_type.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class ExerciseEntityMapper {
   final _stringTranslationsMapper = getIt.get<StringTranslationsMapper>();
+  final _exerciseOptionsMapper = getIt.get<ExerciseOptionsMapper>();
   final _stringListTranslationsMapper =
       getIt.get<StringListTranslationsMapper>();
 
@@ -21,19 +22,13 @@ class ExerciseEntityMapper {
         exercise[UserDocumentFields.description] as Map<String, dynamic>,
       ),
       index: exercise[UserDocumentFields.index] as int,
-      exerciseType: (exercise[UserDocumentFields.exerciseType] as String)
-          .toExerciseType()!,
-      reps: exercise[UserDocumentFields.reps] as int,
-      sets: exercise[UserDocumentFields.sets] as int,
       tags: _stringListTranslationsMapper.map(
         exercise[UserDocumentFields.tags] as Map<String, dynamic>,
       ),
-      time: exercise[UserDocumentFields.time] as String,
       title: _stringTranslationsMapper
           .mapFrom(exercise[UserDocumentFields.title] as Map<String, dynamic>),
       videoId: exercise[UserDocumentFields.videoId] as String,
-      timeBreak: exercise[UserDocumentFields.timeBreak] as int,
-      supersetName: exercise[UserDocumentFields.supersetName] as String,
+      exerciseOptionsData: _exerciseOptionsMapper.map(exercise),
     );
   }
 
@@ -44,19 +39,13 @@ class ExerciseEntityMapper {
         exercise[UserDocumentFields.description] as Map<String, dynamic>,
       ),
       index: exercise[UserDocumentFields.index] as int,
-      exerciseType: (exercise[UserDocumentFields.exerciseType] as String)
-          .toExerciseType()!,
-      reps: exercise[UserDocumentFields.reps] as int,
-      sets: exercise[UserDocumentFields.sets] as int,
       tags: _stringListTranslationsMapper.map(
         exercise[UserDocumentFields.tags] as Map<String, dynamic>,
       ),
-      time: exercise[UserDocumentFields.time] as String,
       title: _stringTranslationsMapper
           .mapFrom(exercise[UserDocumentFields.title] as Map<String, dynamic>),
       videoId: exercise[UserDocumentFields.videoId] as String,
-      timeBreak: exercise[UserDocumentFields.timeBreak] as int,
-      supersetName: exercise[UserDocumentFields.supersetName] as String,
+      exerciseOptionsData: _exerciseOptionsMapper.mapSearchResult(exercise),
     );
   }
 }

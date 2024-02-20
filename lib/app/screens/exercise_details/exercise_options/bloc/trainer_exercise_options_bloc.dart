@@ -1,14 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_list_options_event.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/state/trainer_exercise_list_options_state.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_options_event.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/state/trainer_exercise_options_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
 
-class TrainerExerciseListOptionsBloc extends Bloc<
-    TrainerExerciseListOptionsEvent, TrainerExerciseListOptionsState> {
-  TrainerExerciseListOptionsBloc()
-      : super(const TrainerExerciseListOptionsState.initial()) {
+class TrainerExerciseOptionsBloc extends Bloc<
+    TrainerExerciseOptionsEvent, TrainerExerciseOptionsState> {
+  TrainerExerciseOptionsBloc()
+      : super(const TrainerExerciseOptionsState.initial()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
 
     on<EditExerciseOptions>((event, emitter) async {

@@ -1,9 +1,13 @@
 enum ExerciseType {
-  repsBased,
-  timeBased,
-  repsInReserve,
-  rateOfPerceivedExertion,
-  maxPercentage,
+  repsBased('Reps based'),
+  timeBased('Time based'),
+  repsInReserve('Reps in reserve'),
+  rateOfPerceivedExertion('Rate of perceived exertion'),
+  maxPercentage('Max percentage');
+
+  const ExerciseType(this.value);
+
+  final String value;
 }
 
 extension StringToUserType on String {

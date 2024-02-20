@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_list_options_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_list_options_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/perso_trainer_exercise_options.dart';
+import 'package:perso/app/screens/exercise_details/save_options_button/perso_save_options_button.dart';
 import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
+import 'package:perso/app/screens/exercise_details/time_break/perso_time_break_section.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
-import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
-import 'package:perso/core/models/exercise_type.dart';
 
 class ExerciseDetailsScreen extends StatelessWidget {
   const ExerciseDetailsScreen({
@@ -50,7 +47,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
 }
 
 class _Exercise extends StatelessWidget {
-  const _Exercise({
+  _Exercise({
     required String clientId,
     required String date,
     required ExerciseInTrainingEntity exerciseInTrainingEntity,
@@ -61,6 +58,7 @@ class _Exercise extends StatelessWidget {
   final String _clientId;
   final String _date;
   final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +72,13 @@ class _Exercise extends StatelessWidget {
               videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
             ),
           ),
+          _Categories(
+            _exerciseInTrainingEntity.exerciseEntity.tags,
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.mMargin),
+            child: const PersoDivider(),
+          ),
           _DescriptionSection(
             clientId: _clientId,
             date: _date,
@@ -84,84 +89,39 @@ class _Exercise extends StatelessWidget {
             child: const PersoDivider(),
           ),
           PersoTrainerExerciseOptionsSection(
-            _clientId,
-            _date,
-            _exerciseInTrainingEntity,
+            formKey: _formKey,
+            exerciseOptionsData:
+                _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
+          ),
+          PersoTimeBreakSection(
+            timeBreak: _exerciseInTrainingEntity
+                .exerciseEntity.exerciseOptionsData.timeBreak,
           ),
           PersoSupersetSection(clientId: _clientId, date: _date),
-          _Categories(
-            _exerciseInTrainingEntity.exerciseEntity.tags,
-          ),
-          _SaveButton(
+          //TODO: Add note from trainer
+          // Expanded(
+          //   child: Container(
+          //     height: 140,
+          //     margin: const EdgeInsets.only(
+          //       left: Dimens.xmMargin,
+          //     ),
+          //     child: PersoTextField(
+          //       title: context.strings.short_bio,
+          //       isMultiLine: true,
+          //       maxLength: 150,
+          //       textEditingController: _trainerNoteController,
+          //     ),
+          //   ),
+          // ),
+          PersoSaveOptionsButton(
             clientId: _clientId,
             date: _date,
-            exerciseInTrainingEntity: _exerciseInTrainingEntity,
+            exerciseInTrainingId: _exerciseInTrainingEntity.id,
+            formKey: _formKey,
+            exerciseOptionsData:
+                _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SaveButton extends StatelessWidget {
-  const _SaveButton({
-    super.key,
-    required String clientId,
-    required String date,
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-  })  : _clientId = clientId,
-        _date = date,
-        _exerciseInTrainingEntity = exerciseInTrainingEntity;
-
-  final String _clientId;
-  final String _date;
-  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(Dimens.mMargin),
-      child: PersoButton(
-        title: 'Save',
-        onTap: (context) {
-          if (_key.currentState!.validate()) {
-            switch (_optionsData.exerciseType) {
-              case ExerciseType.repsBased:
-                {
-                  _optionsData = _optionsData.copyWith(
-                    reps: int.parse(_repsController.text),
-                    sets: int.parse(_setsController.text),
-                    timeBreak: int.parse(_timeBreakController.text),
-                  );
-                }
-              case ExerciseType.timeBased:
-                {
-                  final minutes = _minutesController.text.removeLeadingZeroes();
-                  final seconds = _secondsController.text
-                      .removeLeadingZeroes()
-                      .limitToTwoDigits();
-                  _optionsData = _optionsData.copyWith(
-                    time: '$minutes:$seconds',
-                  );
-                }
-              case ExerciseType.repsInReserve:
-              // TODO: Handle this case.
-              case ExerciseType.rateOfPerceivedExertion:
-              // TODO: Handle this case.
-              case ExerciseType.maxPercentage:
-              // TODO: Handle this case.
-            }
-            context.read<TrainerExerciseListOptionsBloc>().add(
-                  TrainerExerciseListOptionsEvent.editExerciseOptions(
-                    clientId: _clientId,
-                    date: _date,
-                    exerciseInTrainingId: _exerciseInTrainingEntity.id,
-                    exerciseOptionsData: _optionsData,
-                  ),
-                );
-            context.showSuccessfulSnackBar('Saving succeeded');
-          }
-        },
       ),
     );
   }
