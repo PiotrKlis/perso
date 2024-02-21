@@ -38,7 +38,7 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Breaks",
+            'Breaks',
             style: ThemeText.smallTitleBold,
           ),
           Row(

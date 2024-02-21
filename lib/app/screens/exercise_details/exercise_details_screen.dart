@@ -11,6 +11,7 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
@@ -102,21 +103,12 @@ class _Exercise extends StatelessWidget {
             child: const PersoDivider(),
           ),
           PersoSupersetSection(clientId: _clientId, date: _date),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.mMargin),
+            child: const PersoDivider(),
+          ),
           //TODO: Add note from trainer
-          // Expanded(
-          //   child: Container(
-          //     height: 140,
-          //     margin: const EdgeInsets.only(
-          //       left: Dimens.xmMargin,
-          //     ),
-          //     child: PersoTextField(
-          //       title: context.strings.short_bio,
-          //       isMultiLine: true,
-          //       maxLength: 150,
-          //       textEditingController: _trainerNoteController,
-          //     ),
-          //   ),
-          // ),
+          const _TrainerNote(),
           PersoSaveOptionsButton(
             clientId: _clientId,
             date: _date,
@@ -124,6 +116,37 @@ class _Exercise extends StatelessWidget {
             formKey: _formKey,
             exerciseOptionsData:
                 _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TrainerNote extends StatelessWidget {
+  const _TrainerNote();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        left: Dimens.mMargin,
+        right: Dimens.mMargin,
+        top: Dimens.mMargin,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Trainer note', style: ThemeText.smallTitleBold),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.mMargin),
+            height: 140,
+            child: const PersoTextField(
+              title: 'Write a note for the client on the exercise...',
+              isMultiLine: true,
+              maxLength: 150,
+              // textEditingController: _trainerNoteController,
+            ),
           ),
         ],
       ),
