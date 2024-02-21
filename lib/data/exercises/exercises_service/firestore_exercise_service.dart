@@ -56,6 +56,15 @@ class FirestoreExerciseService extends ExerciseService {
           exerciseEntity.exerciseOptionsData.timeBreak,
       UserDocumentFields.supersetName:
           exerciseEntity.exerciseOptionsData.supersetName,
+      UserDocumentFields.repsInReserve:
+          exerciseEntity.exerciseOptionsData.repsInReserve,
+      UserDocumentFields.rateOfPerceivedExertion:
+          exerciseEntity.exerciseOptionsData.rateOfPerceivedExertion,
+      UserDocumentFields.maxPercentage:
+          exerciseEntity.exerciseOptionsData.maxPercentage,
+      UserDocumentFields.trainerNote:
+          exerciseEntity.exerciseOptionsData.trainerNote,
+      UserDocumentFields.weight: exerciseEntity.exerciseOptionsData.weight,
     });
   }
 

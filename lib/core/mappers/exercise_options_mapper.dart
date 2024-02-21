@@ -8,39 +8,40 @@ import 'package:perso/data/utils/firestore_constants.dart';
 @injectable
 class ExerciseOptionsMapper {
   ExerciseOptionsData map(
-      QueryDocumentSnapshot<Map<String, dynamic>> exercise) {
+    QueryDocumentSnapshot<Map<String, dynamic>> exercise,
+  ) {
     return ExerciseOptionsData(
       exerciseType: (exercise[UserDocumentFields.exerciseType] as String)
-          .toExerciseType()!,
+          .toExerciseType(),
       reps: exercise[UserDocumentFields.reps] as int,
       sets: exercise[UserDocumentFields.sets] as int,
-      time: exercise[UserDocumentFields.time] as String,
+      time: exercise[UserDocumentFields.time] as int,
       timeBreak: exercise[UserDocumentFields.timeBreak] as int,
       supersetName: exercise[UserDocumentFields.supersetName] as String,
       repsInReserve: exercise[UserDocumentFields.repsInReserve] as int,
       rateOfPerceivedExertion:
           exercise[UserDocumentFields.rateOfPerceivedExertion] as int,
-      maxPercentage: exercise[UserDocumentFields.maxPercentage] as int,
+      maxPercentage: exercise[UserDocumentFields.maxPercentage] as String,
       trainerNote: exercise[UserDocumentFields.trainerNote] as String,
-      weight: exercise[UserDocumentFields.weight] as int,
+      weight: exercise[UserDocumentFields.weight] as String,
     );
   }
 
   ExerciseOptionsData mapSearchResult(Hit exercise) {
     return ExerciseOptionsData(
       exerciseType: (exercise[UserDocumentFields.exerciseType] as String)
-          .toExerciseType()!,
+          .toExerciseType(),
       reps: exercise[UserDocumentFields.reps] as int,
       sets: exercise[UserDocumentFields.sets] as int,
-      time: exercise[UserDocumentFields.time] as String,
+      time: exercise[UserDocumentFields.time] as int,
       timeBreak: exercise[UserDocumentFields.timeBreak] as int,
       supersetName: exercise[UserDocumentFields.supersetName] as String,
       repsInReserve: exercise[UserDocumentFields.repsInReserve] as int,
       rateOfPerceivedExertion:
-      exercise[UserDocumentFields.rateOfPerceivedExertion] as int,
-      maxPercentage: exercise[UserDocumentFields.maxPercentage] as int,
+          exercise[UserDocumentFields.rateOfPerceivedExertion] as int,
+      maxPercentage: exercise[UserDocumentFields.maxPercentage] as String,
       trainerNote: exercise[UserDocumentFields.trainerNote] as String,
-      weight: exercise[UserDocumentFields.weight] as int,
+      weight: exercise[UserDocumentFields.weight] as String,
     );
   }
 }

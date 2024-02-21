@@ -24,6 +24,12 @@ class TrainerExerciseOptionsBloc extends Bloc<
         print(error);
       }
     });
+    //
+    // on<ChangeExerciseType>((event, emitter) async {
+    //   emitter(TrainerExerciseOptionsState.exerciseOptionsDataUpdate(
+    //     event.exerciseType,
+    //   ));
+    // });
 
   }
 

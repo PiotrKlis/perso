@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_options_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
-import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/validators.dart';
-import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
-import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
-import 'package:perso/core/string_extensions.dart';
 
 class PersoTrainerExerciseOptionsSection extends StatelessWidget {
   const PersoTrainerExerciseOptionsSection({
@@ -53,20 +47,12 @@ class _OptionsSectionContent extends StatefulWidget {
 }
 
 class _OptionsSectionContentState extends State<_OptionsSectionContent> {
-  late ExerciseOptionsData _optionsData;
-  final _setsFieldController = TextEditingController();
-  final _secondFieldController = TextEditingController();
-  final _thirdFieldController = TextEditingController();
-  final _key = GlobalKey<FormState>();
-  var _selectedExerciseType = ExerciseType.repsBased;
+  late ExerciseOptionsData _localExerciseOptionsData;
 
   @override
   void initState() {
-    // final timeList = _optionsData.time?.split(':');
-    // final seconds = timeList[1];
-    _setsFieldController.text = _optionsData.sets.toString();
-    _secondFieldController.text = _optionsData.reps.toString();
     super.initState();
+    _localExerciseOptionsData = widget._exerciseOptionsData;
   }
 
   @override
@@ -76,16 +62,20 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
       children: [
         const _Header(),
         ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
           children: ExerciseType.values
               .map(
                 (exerciseType) => RadioListTile(
                   title: Text(exerciseType.value),
                   value: exerciseType,
-                  groupValue: exerciseType,
+                  groupValue: _localExerciseOptionsData.exerciseType,
                   onChanged: (exerciseType) {
-                    if (exerciseType != _selectedExerciseType) {
+                    if (exerciseType !=
+                        _localExerciseOptionsData.exerciseType) {
                       setState(() {
-                        _selectedExerciseType = exerciseType!;
+                        _localExerciseOptionsData = _localExerciseOptionsData
+                            .copyWith(exerciseType: exerciseType);
                       });
                     }
                   },
@@ -94,14 +84,9 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
               .toList(),
         ),
         Form(
-          key: _key,
-          child: Column(
-            children: [
-              _ExerciseOptionsFields(
-                repsController: _secondFieldController,
-                setsController: _setsFieldController,
-              ),
-            ],
+          key: widget._formKey,
+          child: _ExerciseOptionsFields(
+            exerciseOptionsData: _localExerciseOptionsData,
           ),
         ),
         Container(
@@ -114,9 +99,7 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    super.key,
-  });
+  const _Header();
 
   @override
   Widget build(BuildContext context) {
@@ -134,116 +117,114 @@ class _Header extends StatelessWidget {
   }
 }
 
-class _ExerciseOptionsFields extends StatefulWidget {
-  const _ExerciseOptionsFields({
-    required TextEditingController repsController,
-    required TextEditingController setsController,
-  })  : _repsController = repsController,
-        _setsController = setsController;
+class _ExerciseOptionsFields extends StatelessWidget {
+  _ExerciseOptionsFields({required ExerciseOptionsData exerciseOptionsData})
+      : _exerciseOptionsData = exerciseOptionsData;
 
-  final TextEditingController _repsController;
-  final TextEditingController _setsController;
-
-  @override
-  State<_ExerciseOptionsFields> createState() => _ExerciseOptionsFieldsState();
-}
-
-class _ExerciseOptionsFieldsState extends State<_ExerciseOptionsFields> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: Dimens.sMargin,
-        left: Dimens.mMargin,
-        right: Dimens.mMargin,
-        bottom: Dimens.mMargin,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: PersoTextField(
-                  textEditingController: widget._setsController,
-                  textInputType: TextInputType.number,
-                  title: 'Sets',
-                  customValidator: TextFieldValidator.validateDigits,
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: PersoTextField(
-                  textEditingController: widget._repsController,
-                  textInputType: TextInputType.number,
-                  title: 'Repetitions',
-                  customValidator: TextFieldValidator.validateDigits,
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: PersoTextField(
-                  //TODO: add weight controller
-                  // textEditingController: widget._repsController,
-                  textInputType: TextInputType.number,
-                  title: 'Weight (kg)',
-                  customValidator: TextFieldValidator.validateDigits,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TimeBasedExerciseOptions extends StatelessWidget {
-  const _TimeBasedExerciseOptions({
-    required TextEditingController minutesController,
-    required TextEditingController secondsController,
-  })  : _minutesController = minutesController,
-        _secondsController = secondsController;
-
-  final TextEditingController _minutesController;
-  final TextEditingController _secondsController;
+  final _setsController = TextEditingController();
+  final _secondController = TextEditingController();
+  final _thirdController = TextEditingController();
+  final ExerciseOptionsData _exerciseOptionsData;
 
   @override
   Widget build(BuildContext context) {
+    _updateTextControllers(_exerciseOptionsData);
     return Container(
-      margin: const EdgeInsets.all(Dimens.mMargin),
+      margin: const EdgeInsets.all(
+        Dimens.mMargin,
+      ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             child: PersoTextField(
-              //TODO: Change into sets controller
-              textEditingController: _minutesController,
+              textEditingController: _setsController,
               textInputType: TextInputType.number,
               title: 'Sets',
               customValidator: TextFieldValidator.validateDigits,
             ),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(
-              horizontal: Dimens.sMargin,
-            ),
+          const SizedBox(
+            width: 16,
           ),
           Expanded(
             child: PersoTextField(
-              textEditingController: _secondsController,
+              textEditingController: _secondController,
               textInputType: TextInputType.number,
-              title: 'Seconds',
+              title: _getSecondFieldTitle(_exerciseOptionsData.exerciseType),
               customValidator: TextFieldValidator.validateDigits,
+            ),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          Visibility(
+            visible:
+                _exerciseOptionsData.exerciseType != ExerciseType.repsInReserve,
+            child: Expanded(
+              child: PersoTextField(
+                textEditingController: _thirdController,
+                textInputType: TextInputType.number,
+                title: _getThirdFieldTitle(_exerciseOptionsData.exerciseType),
+                customValidator: TextFieldValidator.validateDigits,
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _updateTextControllers(ExerciseOptionsData optionsData) {
+    _setsController.text = optionsData.sets.toString();
+    switch (optionsData.exerciseType) {
+      case ExerciseType.timeBased:
+        _secondController.text = optionsData.time.toString();
+        _thirdController.text = optionsData.weight.toString();
+        break;
+      case ExerciseType.repsInReserve:
+        _secondController.text = optionsData.repsInReserve.toString();
+        break;
+      case ExerciseType.rateOfPerceivedExertion:
+        _secondController.text = optionsData.rateOfPerceivedExertion.toString();
+        _thirdController.text = optionsData.weight.toString();
+        break;
+      case ExerciseType.maxPercentage:
+        _secondController.text = optionsData.reps.toString();
+        _thirdController.text = optionsData.maxPercentage.toString();
+        break;
+      case null:
+      case ExerciseType.repsBased:
+        _secondController.text = optionsData.reps.toString();
+        _thirdController.text = optionsData.weight.toString();
+        break;
+    }
+  }
+
+  String _getSecondFieldTitle(ExerciseType? exerciseType) {
+    switch (exerciseType) {
+      case ExerciseType.timeBased:
+        return 'Time (seconds)';
+      case ExerciseType.repsInReserve:
+        return 'Reps in reserve';
+      case ExerciseType.rateOfPerceivedExertion:
+        return 'Rate of perceived exertion';
+      case ExerciseType.maxPercentage:
+      case ExerciseType.repsBased:
+      case null:
+        return 'Reps';
+    }
+  }
+
+  String _getThirdFieldTitle(ExerciseType? exerciseType) {
+    switch (exerciseType) {
+      case ExerciseType.maxPercentage:
+        return 'Max %';
+      case ExerciseType.timeBased:
+      case ExerciseType.repsInReserve:
+      case ExerciseType.rateOfPerceivedExertion:
+      case ExerciseType.repsBased:
+      case null:
+        return 'Weight';
+    }
   }
 }

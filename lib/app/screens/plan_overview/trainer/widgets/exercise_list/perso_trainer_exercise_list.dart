@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
@@ -11,7 +10,6 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
-import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
@@ -53,50 +51,61 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
         builder: (context, state) {
           return state.when(
             exercises: (exercises) {
-              _localExercises
-                ..clear()
-                ..addAll(exercises);
-              return Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: Dimens.mMargin),
-                    child: const PersoDivider(),
-                  ),
-                  ReorderableListView(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    proxyDecorator: (child, index, animation) =>
-                        _ExercisesListDecorator(
-                      animation: animation,
-                      child: child,
+              if (exercises.isEmpty) {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      top: Dimens.xlMargin,
                     ),
-                    children: _localExercises.map((exerciseInTraining) {
-                      return _Exercise(
-                        key: UniqueKey(),
-                        exerciseInTrainingEntity: exerciseInTraining,
-                        clientId: widget.clientId,
-                        date: _selectedDate,
-                      );
-                    }).toList(),
-                    onReorder: (oldIndex, newIndex) {
-                      setState(() {
-                        if (newIndex > oldIndex) {
-                          newIndex -= 1;
-                        }
-                        final item = _localExercises.removeAt(oldIndex);
-                        _localExercises.insert(newIndex, item);
-                        context.read<TrainerExerciseListBloc>().add(
-                              TrainerExerciseListEvent.reorder(
-                                widget.clientId,
-                                _selectedDate,
-                                _localExercises,
-                              ),
-                            );
-                      });
-                    },
+                    child: Text(
+                      'No exercises for this date',
+                      style: ThemeText.bodyRegularBlackText,
+                    ),
                   ),
-                ],
-              );
+                );
+              } else {
+                _localExercises
+                  ..clear()
+                  ..addAll(exercises);
+                return Column(
+                  children: [
+                    ReorderableListView(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      proxyDecorator: (child, index, animation) =>
+                          _ExercisesListDecorator(
+                        animation: animation,
+                        child: child,
+                      ),
+                      children: _localExercises.map((exerciseInTraining) {
+                        return _Exercise(
+                          key: UniqueKey(),
+                          exerciseInTrainingEntity: exerciseInTraining,
+                          clientId: widget.clientId,
+                          date: _selectedDate,
+                        );
+                      }).toList(),
+                      onReorder: (oldIndex, newIndex) {
+                        setState(() {
+                          if (newIndex > oldIndex) {
+                            newIndex -= 1;
+                          }
+                          final item = _localExercises.removeAt(oldIndex);
+                          _localExercises.insert(newIndex, item);
+                          context.read<TrainerExerciseListBloc>().add(
+                                TrainerExerciseListEvent.reorder(
+                                  widget.clientId,
+                                  _selectedDate,
+                                  _localExercises,
+                                ),
+                              );
+                        });
+                      },
+                    ),
+                  ],
+                );
+              }
             },
             error: (error) {
               return Center(
