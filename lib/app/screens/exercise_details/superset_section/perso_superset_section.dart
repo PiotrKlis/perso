@@ -43,38 +43,42 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Supersets', style: ThemeText.smallTitleBold,),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.mMargin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DropdownMenu<String>(
-                  enabled: _isEnabled,
-                  initialSelection: listOfSupersetNames.first,
-                  onSelected: (String? value) {
-                    setState(() {
-                      // _selectedSupersetName = value!;
-                    });
-                  },
-                  dropdownMenuEntries: listOfSupersetNames
-                      .map<DropdownMenuEntry<String>>((String value) {
-                    return DropdownMenuEntry<String>(
-                      value: value,
-                      label: value,
-                    );
-                  }).toList(),
-                ),
-                Switch(
-                  value: _isEnabled,
-                  onChanged: (value) {
-                    setState(() {
-                      _isEnabled = value;
-                    });
-                  },
-                ),
-              ],
-            ),
+          Text(
+            'Supersets',
+            style: ThemeText.smallTitleBold,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Add exercise into superset',
+                style: ThemeText.bodyRegularBlackText,
+              ),
+              Switch(
+                value: _isEnabled,
+                onChanged: (value) {
+                  setState(() {
+                    _isEnabled = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          DropdownMenu<String>(
+            enabled: _isEnabled,
+            initialSelection: listOfSupersetNames.first,
+            onSelected: (String? value) {
+              setState(() {
+                // _selectedSupersetName = value!;
+              });
+            },
+            dropdownMenuEntries: listOfSupersetNames
+                .map<DropdownMenuEntry<String>>((String value) {
+              return DropdownMenuEntry<String>(
+                value: value,
+                label: value,
+              );
+            }).toList(),
           ),
         ],
       ),

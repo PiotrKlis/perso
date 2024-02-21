@@ -29,26 +29,37 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: Dimens.mMargin,
+      margin: const EdgeInsets.only(
+        left: Dimens.mMargin,
+        top: Dimens.mMargin,
+        right: Dimens.mMargin,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Time breaks between sets',
-            style: ThemeText.bodyRegularBlackText,
+            "Breaks",
+            style: ThemeText.smallTitleBold,
           ),
-          Switch(
-            value: _shouldShowTimeBreak,
-            onChanged: (value) {
-              if (!value) {
-                _timeBreakController.text = '0';
-              }
-              setState(() {
-                _shouldShowTimeBreak = value;
-              });
-            },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Add time breaks between sets',
+                style: ThemeText.bodyRegularBlackText,
+              ),
+              Switch(
+                value: _shouldShowTimeBreak,
+                onChanged: (value) {
+                  if (!value) {
+                    _timeBreakController.text = '0';
+                  }
+                  setState(() {
+                    _shouldShowTimeBreak = value;
+                  });
+                },
+              ),
+            ],
           ),
           Container(
             margin: const EdgeInsets.only(

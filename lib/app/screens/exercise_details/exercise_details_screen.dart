@@ -93,10 +93,14 @@ class _Exercise extends StatelessWidget {
             exerciseOptionsData:
                 _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
           ),
-          // PersoTimeBreakSection(
-          //   timeBreak: _exerciseInTrainingEntity
-          //       .exerciseEntity.exerciseOptionsData.timeBreak,
-          // ),
+          PersoTimeBreakSection(
+            timeBreak: _exerciseInTrainingEntity
+                .exerciseEntity.exerciseOptionsData.timeBreak,
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.mMargin),
+            child: const PersoDivider(),
+          ),
           PersoSupersetSection(clientId: _clientId, date: _date),
           //TODO: Add note from trainer
           // Expanded(
