@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/perso_trainer_exercise_options.dart';
 import 'package:perso/app/screens/exercise_details/save_options_button/perso_save_options_button.dart';
 import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
@@ -33,8 +34,21 @@ class ExerciseDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          PersoAppBar(title: _exerciseInTrainingEntity.exerciseEntity.title),
+      appBar: PersoAppBar(
+        title: _exerciseInTrainingEntity.exerciseEntity.title,
+        actionIcon: Icons.delete_forever,
+        onActionIconClick: (context) {
+          //TODO: move providers into layer above
+          context.read<TrainerExerciseListBloc>().add(
+                TrainerExerciseListEvent.removeExercise(
+                  _clientId,
+                  _date,
+                  _exerciseInTrainingEntity.id,
+                ),
+              );
+          context.pop();
+        },
+      ),
       body: BlocProvider(
         create: (context) => VideoPlayerBloc(),
         child: _Exercise(
@@ -67,27 +81,14 @@ class _Exercise extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.sMargin),
-            child: PersoVideoPlayer(
-              videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
-            ),
+          PersoVideoPlayer(
+            videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
           ),
           _Categories(
             _exerciseInTrainingEntity.exerciseEntity.tags,
           ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.mMargin),
-            child: const PersoDivider(),
-          ),
           _DescriptionSection(
-            clientId: _clientId,
-            date: _date,
-            exerciseInTrainingEntity: _exerciseInTrainingEntity,
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.mMargin),
-            child: const PersoDivider(),
+            description: _exerciseInTrainingEntity.exerciseEntity.description,
           ),
           PersoTrainerExerciseOptionsSection(
             formKey: _formKey,
@@ -95,19 +96,11 @@ class _Exercise extends StatelessWidget {
                 _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
           ),
           PersoTimeBreakSection(
+            formKey: _formKey,
             timeBreak: _exerciseInTrainingEntity
                 .exerciseEntity.exerciseOptionsData.timeBreak,
           ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.mMargin),
-            child: const PersoDivider(),
-          ),
           PersoSupersetSection(clientId: _clientId, date: _date),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.mMargin),
-            child: const PersoDivider(),
-          ),
-          //TODO: Add note from trainer
           const _TrainerNote(),
           PersoSaveOptionsButton(
             clientId: _clientId,
@@ -129,10 +122,8 @@ class _TrainerNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        left: Dimens.mMargin,
-        right: Dimens.mMargin,
-        top: Dimens.mMargin,
+      margin: const EdgeInsets.all(
+        Dimens.mMargin,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,82 +147,31 @@ class _TrainerNote extends StatelessWidget {
 
 class _DescriptionSection extends StatelessWidget {
   const _DescriptionSection({
-    required String clientId,
-    required String date,
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-  })  : _exerciseInTrainingEntity = exerciseInTrainingEntity,
-        _date = date,
-        _clientId = clientId;
+    required String description,
+  }) : _description = description;
 
-  final String _clientId;
-  final String _date;
-  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final String _description;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.mMargin),
+      margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.sMargin,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Description',
-                  style: ThemeText.smallTitleBold,
-                ),
-                _ActionableIcon(
-                  clientId: _clientId,
-                  date: _date,
-                  exerciseInTrainingId: _exerciseInTrainingEntity.id,
-                ),
-              ],
-            ),
-          ),
           Text(
-            _exerciseInTrainingEntity.exerciseEntity.description,
-            style: ThemeText.bodyRegularBlackText,
+            'Description',
+            style: ThemeText.smallTitleBold,
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.mMargin),
+            child: Text(
+              _description,
+              style: ThemeText.bodyRegularBlackText,
+            ),
           ),
         ],
       ),
-    );
-  }
-}
-
-class _ActionableIcon extends StatelessWidget {
-  const _ActionableIcon({
-    required String clientId,
-    required String date,
-    required String exerciseInTrainingId,
-  })  : _exerciseInTrainingId = exerciseInTrainingId,
-        _date = date,
-        _clientId = clientId;
-
-  final String _clientId;
-  final String _date;
-  final String _exerciseInTrainingId;
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(
-        Icons.delete_forever,
-        size: 32,
-      ),
-      onPressed: () {
-        context.read<TrainerExerciseListBloc>().add(
-              TrainerExerciseListEvent.removeExercise(
-                _clientId,
-                _date,
-                _exerciseInTrainingId,
-              ),
-            );
-      },
     );
   }
 }

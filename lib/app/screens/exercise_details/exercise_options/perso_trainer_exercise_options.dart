@@ -5,7 +5,6 @@ import 'package:perso/app/screens/exercise_details/exercise_options/model/exerci
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
-import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
@@ -57,61 +56,44 @@ class _OptionsSectionContentState extends State<_OptionsSectionContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _Header(),
-        ListView(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          children: ExerciseType.values
-              .map(
-                (exerciseType) => RadioListTile(
-                  title: Text(exerciseType.value),
-                  value: exerciseType,
-                  groupValue: _localExerciseOptionsData.exerciseType,
-                  onChanged: (exerciseType) {
-                    if (exerciseType !=
-                        _localExerciseOptionsData.exerciseType) {
-                      setState(() {
-                        _localExerciseOptionsData = _localExerciseOptionsData
-                            .copyWith(exerciseType: exerciseType);
-                      });
-                    }
-                  },
-                ),
-              )
-              .toList(),
-        ),
-        Form(
-          key: widget._formKey,
-          child: _ExerciseOptionsFields(
-            exerciseOptionsData: _localExerciseOptionsData,
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: Dimens.mMargin),
-          child: const PersoDivider(),
-        ),
-      ],
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header();
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        left: Dimens.mMargin,
-        right: Dimens.sMargin,
-        top: Dimens.mMargin,
-      ),
-      child: Text(
-        'Options',
-        style: ThemeText.smallTitleBold,
+      margin: const EdgeInsets.all(Dimens.mMargin),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Options',
+            style: ThemeText.smallTitleBold,
+          ),
+          ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: ExerciseType.values
+                .map(
+                  (exerciseType) => RadioListTile(
+                    title: Text(exerciseType.value),
+                    value: exerciseType,
+                    groupValue: _localExerciseOptionsData.exerciseType,
+                    onChanged: (exerciseType) {
+                      if (exerciseType !=
+                          _localExerciseOptionsData.exerciseType) {
+                        setState(() {
+                          _localExerciseOptionsData = _localExerciseOptionsData
+                              .copyWith(exerciseType: exerciseType);
+                        });
+                      }
+                    },
+                  ),
+                )
+                .toList(),
+          ),
+          Form(
+            key: widget._formKey,
+            child: _ExerciseOptionsFields(
+              exerciseOptionsData: _localExerciseOptionsData,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -130,9 +112,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
   Widget build(BuildContext context) {
     _updateTextControllers(_exerciseOptionsData);
     return Container(
-      margin: const EdgeInsets.all(
-        Dimens.mMargin,
-      ),
+      margin: const EdgeInsets.only(top: Dimens.mMargin),
       child: Row(
         children: [
           Expanded(
@@ -224,7 +204,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
       case ExerciseType.rateOfPerceivedExertion:
       case ExerciseType.repsBased:
       case null:
-        return 'Weight';
+        return 'Weight (kg)';
     }
   }
 }

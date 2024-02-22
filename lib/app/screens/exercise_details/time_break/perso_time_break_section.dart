@@ -7,10 +7,13 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 class PersoTimeBreakSection extends StatefulWidget {
   const PersoTimeBreakSection({
     required int? timeBreak,
+    required GlobalKey<FormState> formKey,
     super.key,
-  }) : _timeBreak = timeBreak;
+  })  : _formKey = formKey,
+        _timeBreak = timeBreak;
 
   final int? _timeBreak;
+  final GlobalKey<FormState> _formKey;
 
   @override
   State<PersoTimeBreakSection> createState() => _PersoTimeBreakSectionState();
@@ -29,11 +32,7 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        left: Dimens.mMargin,
-        top: Dimens.mMargin,
-        right: Dimens.mMargin,
-      ),
+      margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -63,14 +62,16 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
           ),
           Container(
             margin: const EdgeInsets.only(
-                top: Dimens.mMargin,
-                left: Dimens.mMargin,
-                right: Dimens.mMargin),
-            child: PersoTextField(
-              textEditingController: _timeBreakController,
-              textInputType: TextInputType.number,
-              title: 'Time break (seconds)',
-              customValidator: TextFieldValidator.validateDigits,
+              top: Dimens.mMargin,
+            ),
+            child: Form(
+              key: widget._formKey,
+              child: PersoTextField(
+                textEditingController: _timeBreakController,
+                textInputType: TextInputType.number,
+                title: 'Time break (seconds)',
+                customValidator: TextFieldValidator.validateDigits,
+              ),
             ),
           )
         ],
