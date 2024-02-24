@@ -14,7 +14,8 @@ import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
-class PersoTrainerExerciseList extends StatefulWidget {
+class PersoTrainerExerciseList extends StatefulWidget
+    with WidgetsBindingObserver {
   const PersoTrainerExerciseList({
     required this.clientId,
     super.key,
@@ -81,7 +82,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                       children: _localExercises.map((exerciseInTraining) {
                         return _Exercise(
                           key: UniqueKey(),
-                          exerciseInTrainingEntity: exerciseInTraining,
+                          exerciseInTraining: exerciseInTraining,
                           clientId: widget.clientId,
                           date: _selectedDate,
                         );
@@ -147,53 +148,16 @@ class _ExercisesListDecorator extends StatelessWidget {
   }
 }
 
-class _Exercise extends StatefulWidget {
+class _Exercise extends StatelessWidget {
   const _Exercise({
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-    required String clientId,
-    required String date,
     required Key key,
-  })  : _date = date,
-        _clientId = clientId,
-        _exerciseInTrainingEntity = exerciseInTrainingEntity,
-        super(key: key);
-
-  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
-  final String _clientId;
-  final String _date;
-
-  @override
-  State<_Exercise> createState() => _ExerciseState();
-}
-
-class _ExerciseState extends State<_Exercise> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: Dimens.sMargin),
-      //ExpansionPanelList needs to be wrapped in Column as it fixes
-      //avoid RenderListBody must have unlimited space along its main axis error
-      child: Column(
-        children: [
-          _ExerciseHeader(
-            exerciseInTraining: widget._exerciseInTrainingEntity,
-            clientId: widget._clientId,
-            date: widget._date,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ExerciseHeader extends StatelessWidget {
-  const _ExerciseHeader({
     required ExerciseInTrainingEntity exerciseInTraining,
     required String clientId,
     required String date,
   })  : _date = date,
         _clientId = clientId,
-        _exerciseInTraining = exerciseInTraining;
+        _exerciseInTraining = exerciseInTraining,
+        super(key: key);
 
   final ExerciseInTrainingEntity _exerciseInTraining;
   final String _clientId;
@@ -202,33 +166,45 @@ class _ExerciseHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: Dimens.sMargin),
+      margin: const EdgeInsets.only(
+        left: Dimens.sMargin,
+        right: Dimens.sMargin,
+        top: Dimens.sMargin,
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimens.trainerCardBorderRadius),
         child: ColoredBox(
           color: Colors.white,
           child: ListTile(
             leading: _getIconForTags(_exerciseInTraining.exerciseEntity.tags),
-            // subtitle: _exerciseInTraining.exerciseEntity.exerciseOptionsData.supersetName != null
-            //     ? Text(
-            //         _exerciseInTraining.exerciseEntity.supersetName,
-            //         style: ThemeText.footnoteRegular,
-            //       )
-            //     : null,
             title: Text(
               _exerciseInTraining.exerciseEntity.title,
               style: ThemeText.bodyBoldBlackText,
             ),
+            subtitle: getSubtitle(
+              _exerciseInTraining
+                  .exerciseEntity.exerciseOptionsData.supersetName,
+            ),
             trailing: const Icon(Icons.reorder),
-            onTap: () {
-              context.pushNamed(
-                ScreenNavigationKey.exerciseDetails,
-                queryParameters: {
-                  NavigationConstants.clientId: _clientId,
-                  NavigationConstants.date: _date,
-                },
-                extra: _exerciseInTraining,
-              );
+            onTap: () async {
+              final bloc = context.read<TrainerExerciseListBloc>();
+              await context
+                  .pushNamed(
+                    ScreenNavigationKey.exerciseDetails,
+                    queryParameters: {
+                      NavigationConstants.clientId: _clientId,
+                      NavigationConstants.date: _date,
+                    },
+                    extra: _exerciseInTraining,
+                  )
+                  .then(
+                    (value) => bloc.add(
+                      TrainerExerciseListEvent.fetchExercises(
+                        _clientId,
+                        _date,
+                      ),
+                    ),
+                  );
             },
           ),
         ),
@@ -238,5 +214,16 @@ class _ExerciseHeader extends StatelessWidget {
 
   Icon _getIconForTags(List<String> tags) {
     return const Icon(Icons.fitness_center);
+  }
+
+  Widget? getSubtitle(String? supersetName) {
+    if (supersetName != null && supersetName.isNotEmpty) {
+      return Text(
+        supersetName,
+        style: ThemeText.footnoteRegular,
+      );
+    } else {
+      return null;
+    }
   }
 }

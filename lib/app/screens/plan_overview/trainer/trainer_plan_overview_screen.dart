@@ -11,7 +11,6 @@ import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
-import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class TrainerPlanOverviewScreen extends StatelessWidget {
@@ -121,12 +120,9 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
           children: [
             _ExercisesHeaderRow(clientId: widget._clientId),
             Container(
-              margin: const EdgeInsets.only(top: Dimens.mMargin),
-              child: const PersoDivider(),
-            ),
-            Container(
               margin: const EdgeInsets.only(
                 bottom: Dimens.mMargin,
+                top: Dimens.mMargin,
               ),
               child: PersoTrainerExerciseList(
                 clientId: widget._clientId,

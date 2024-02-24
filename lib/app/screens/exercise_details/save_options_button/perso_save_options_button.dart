@@ -14,19 +14,22 @@ class PersoSaveOptionsButton extends StatelessWidget {
     required String clientId,
     required String date,
     required String exerciseInTrainingId,
-    required GlobalKey<FormState> formKey,
+    required GlobalKey<FormState> optionsFormKey,
     required ExerciseOptionsData exerciseOptionsData,
-  })  : _exerciseOptionsData = exerciseOptionsData,
+    required GlobalKey<FormState> breaksFormKey,
+  })  : _breaksFormKey = breaksFormKey,
+        _exerciseOptionsData = exerciseOptionsData,
         _clientId = clientId,
         _date = date,
         _exerciseInTrainingId = exerciseInTrainingId,
-        _formKey = formKey;
+        _optionsFormKey = optionsFormKey;
 
   final String _clientId;
   final String _date;
   final String _exerciseInTrainingId;
   final ExerciseOptionsData _exerciseOptionsData;
-  final GlobalKey<FormState> _formKey;
+  final GlobalKey<FormState> _optionsFormKey;
+  final GlobalKey<FormState> _breaksFormKey;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,8 @@ class PersoSaveOptionsButton extends StatelessWidget {
       child: PersoButton(
         title: 'Save',
         onTap: (context) {
-          if (_formKey.currentState!.validate()) {
+          if (_optionsFormKey.currentState!.validate() &&
+              _breaksFormKey.currentState!.validate()) {
             switch (_exerciseOptionsData.exerciseType) {
               // case ExerciseType.repsBased:
               //   {
@@ -64,16 +68,16 @@ class PersoSaveOptionsButton extends StatelessWidget {
               case ExerciseType.repsBased:
               // TODO: Handle this case.
               case null:
-                // TODO: Handle this case.
+              // TODO: Handle this case.
             }
-            context.read<TrainerExerciseOptionsBloc>().add(
-                  TrainerExerciseOptionsEvent.editExerciseOptions(
-                    clientId: _clientId,
-                    date: _date,
-                    exerciseInTrainingId: _exerciseInTrainingId,
-                    exerciseOptionsData: _exerciseOptionsData,
-                  ),
-                );
+            // context.read<TrainerExerciseOptionsBloc>().add(
+            //       TrainerExerciseOptionsEvent.editExerciseOptions(
+            //         clientId: _clientId,
+            //         date: _date,
+            //         exerciseInTrainingId: _exerciseInTrainingId,
+            //         exerciseOptionsData: _exerciseOptionsData,
+            //       ),
+            //     );
             context.showSuccessfulSnackBar('Saving succeeded');
           }
         },

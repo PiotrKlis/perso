@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:perso/app/utils/extension/string_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/exercise_entity_mapper.dart';
-import 'package:perso/core/mappers/trainer_entity_mapper.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/data/exercises/exercises_source/exercise_source.dart';

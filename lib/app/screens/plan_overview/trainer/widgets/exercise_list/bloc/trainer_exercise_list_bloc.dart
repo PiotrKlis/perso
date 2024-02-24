@@ -60,12 +60,13 @@ class TrainerExerciseListBloc
       try {
         final reorderedExercises = event.exercises
             .mapIndexed(
-              (index, exercise) => exercise.copyWith(
+              (index, exercise) =>
+              exercise.copyWith(
                 exerciseEntity: exercise.exerciseEntity.copyWith(
                   index: index,
                 ),
               ),
-            )
+        )
             .toList();
 
         emitter(

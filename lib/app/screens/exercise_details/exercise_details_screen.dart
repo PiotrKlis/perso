@@ -11,7 +11,6 @@ import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
-import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
@@ -33,12 +32,45 @@ class ExerciseDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => VideoPlayerBloc(),
+        ),
+        //TODO: separate TrainerExerciseListBloc into two blocs, create exercise details bloc
+        BlocProvider(
+          create: (context) => TrainerExerciseListBloc(),
+        ),
+      ],
+      child: _ExerciseDetailsScreenContent(
+        exerciseInTrainingEntity: _exerciseInTrainingEntity,
+        clientId: _clientId,
+        date: _date,
+      ),
+    );
+  }
+}
+
+class _ExerciseDetailsScreenContent extends StatelessWidget {
+  const _ExerciseDetailsScreenContent({
+    required ExerciseInTrainingEntity exerciseInTrainingEntity,
+    required String clientId,
+    required String date,
+  })  : _exerciseInTrainingEntity = exerciseInTrainingEntity,
+        _clientId = clientId,
+        _date = date;
+
+  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final String _clientId;
+  final String _date;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: PersoAppBar(
         title: _exerciseInTrainingEntity.exerciseEntity.title,
         actionIcon: Icons.delete_forever,
         onActionIconClick: (context) {
-          //TODO: move providers into layer above
           context.read<TrainerExerciseListBloc>().add(
                 TrainerExerciseListEvent.removeExercise(
                   _clientId,
@@ -46,16 +78,19 @@ class ExerciseDetailsScreen extends StatelessWidget {
                   _exerciseInTrainingEntity.id,
                 ),
               );
+          context.read<TrainerExerciseListBloc>().add(
+            TrainerExerciseListEvent.fetchExercises(
+              _clientId,
+              _date,
+            ),
+          );
           context.pop();
         },
       ),
-      body: BlocProvider(
-        create: (context) => VideoPlayerBloc(),
-        child: _Exercise(
-          clientId: _clientId,
-          date: _date,
-          exerciseInTrainingEntity: _exerciseInTrainingEntity,
-        ),
+      body: _Exercise(
+        clientId: _clientId,
+        date: _date,
+        exerciseInTrainingEntity: _exerciseInTrainingEntity,
       ),
     );
   }
@@ -73,7 +108,8 @@ class _Exercise extends StatelessWidget {
   final String _clientId;
   final String _date;
   final ExerciseInTrainingEntity _exerciseInTrainingEntity;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _optionsFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _breaksFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +127,12 @@ class _Exercise extends StatelessWidget {
             description: _exerciseInTrainingEntity.exerciseEntity.description,
           ),
           PersoTrainerExerciseOptionsSection(
-            formKey: _formKey,
+            formKey: _optionsFormKey,
             exerciseOptionsData:
                 _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
           ),
           PersoTimeBreakSection(
-            formKey: _formKey,
+            formKey: _breaksFormKey,
             timeBreak: _exerciseInTrainingEntity
                 .exerciseEntity.exerciseOptionsData.timeBreak,
           ),
@@ -106,7 +142,8 @@ class _Exercise extends StatelessWidget {
             clientId: _clientId,
             date: _date,
             exerciseInTrainingId: _exerciseInTrainingEntity.id,
-            formKey: _formKey,
+            breaksFormKey: _breaksFormKey,
+            optionsFormKey: _optionsFormKey,
             exerciseOptionsData:
                 _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
           ),

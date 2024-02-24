@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
@@ -8,31 +6,9 @@ import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
-class PersoTrainerExerciseOptionsSection extends StatelessWidget {
+class PersoTrainerExerciseOptionsSection extends StatefulWidget {
   const PersoTrainerExerciseOptionsSection({
-    required ExerciseOptionsData exerciseOptionsData,
-    required Key formKey,
     super.key,
-  })  : _formKey = formKey,
-        _exerciseOptionsData = exerciseOptionsData;
-
-  final ExerciseOptionsData _exerciseOptionsData;
-  final Key _formKey;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TrainerExerciseOptionsBloc(),
-      child: _OptionsSectionContent(
-        exerciseOptionsData: _exerciseOptionsData,
-        formKey: _formKey,
-      ),
-    );
-  }
-}
-
-class _OptionsSectionContent extends StatefulWidget {
-  const _OptionsSectionContent({
     required ExerciseOptionsData exerciseOptionsData,
     required Key formKey,
   })  : _formKey = formKey,
@@ -42,10 +18,12 @@ class _OptionsSectionContent extends StatefulWidget {
   final Key _formKey;
 
   @override
-  State<_OptionsSectionContent> createState() => _OptionsSectionContentState();
+  State<PersoTrainerExerciseOptionsSection> createState() =>
+      PersoTrainerExerciseOptionsSectionState();
 }
 
-class _OptionsSectionContentState extends State<_OptionsSectionContent> {
+class PersoTrainerExerciseOptionsSectionState
+    extends State<PersoTrainerExerciseOptionsSection> {
   late ExerciseOptionsData _localExerciseOptionsData;
 
   @override
