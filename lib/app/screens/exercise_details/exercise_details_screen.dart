@@ -151,7 +151,10 @@ class _Exercise extends StatelessWidget {
                   .exerciseEntity.exerciseOptionsData.timeBreak,
             ),
             PersoSupersetSection(clientId: _clientId, date: _date),
-            _TrainerNote(),
+            _TrainerNote(
+              trainerNote: _exerciseInTrainingEntity
+                  .exerciseEntity.exerciseOptionsData.trainerNote,
+            ),
             PersoSaveOptionsButton(
               clientId: _clientId,
               date: _date,
@@ -169,9 +172,14 @@ class _Exercise extends StatelessWidget {
 }
 
 class _TrainerNote extends StatelessWidget {
+  const _TrainerNote({required this.trainerNote});
+
+  final String trainerNote;
+
   @override
   Widget build(BuildContext context) {
     final textEditControllers = ExerciseInheritedWidget.of(context);
+    textEditControllers.trainerNoteController.text = trainerNote;
     return Container(
       margin: const EdgeInsets.all(
         Dimens.mMargin,
