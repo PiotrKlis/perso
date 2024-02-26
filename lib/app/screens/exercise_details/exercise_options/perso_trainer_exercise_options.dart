@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
@@ -57,7 +58,7 @@ class PersoTrainerExerciseOptionsSectionState
                           _localExerciseOptionsData.exerciseType) {
                         setState(() {
                           _localExerciseOptionsData = _localExerciseOptionsData
-                              .copyWith(exerciseType: exerciseType);
+                              .copyWith(exerciseType: exerciseType!);
                         });
                       }
                     },
@@ -78,24 +79,23 @@ class PersoTrainerExerciseOptionsSectionState
 }
 
 class _ExerciseOptionsFields extends StatelessWidget {
-  _ExerciseOptionsFields({required ExerciseOptionsData exerciseOptionsData})
-      : _exerciseOptionsData = exerciseOptionsData;
+  const _ExerciseOptionsFields({
+    required ExerciseOptionsData exerciseOptionsData,
+  }) : _exerciseOptionsData = exerciseOptionsData;
 
-  final _setsController = TextEditingController();
-  final _secondController = TextEditingController();
-  final _thirdController = TextEditingController();
   final ExerciseOptionsData _exerciseOptionsData;
 
   @override
   Widget build(BuildContext context) {
-    _updateTextControllers(_exerciseOptionsData);
+    final textEditControllers = ExerciseInheritedWidget.of(context);
+    _updateTextControllers(_exerciseOptionsData, textEditControllers);
     return Container(
       margin: const EdgeInsets.only(top: Dimens.mMargin),
       child: Row(
         children: [
           Expanded(
             child: PersoTextField(
-              textEditingController: _setsController,
+              textEditingController: textEditControllers.setsController,
               textInputType: TextInputType.number,
               title: 'Sets',
               customValidator: TextFieldValidator.validateDigits,
@@ -106,9 +106,11 @@ class _ExerciseOptionsFields extends StatelessWidget {
           ),
           Expanded(
             child: PersoTextField(
-              textEditingController: _secondController,
+              textEditingController: textEditControllers.secondController,
               textInputType: TextInputType.number,
-              title: _getSecondFieldTitle(_exerciseOptionsData.exerciseType),
+              title: _getSecondFieldTitle(
+                _exerciseOptionsData.exerciseType,
+              ),
               customValidator: TextFieldValidator.validateDigits,
             ),
           ),
@@ -120,9 +122,11 @@ class _ExerciseOptionsFields extends StatelessWidget {
                 _exerciseOptionsData.exerciseType != ExerciseType.repsInReserve,
             child: Expanded(
               child: PersoTextField(
-                textEditingController: _thirdController,
+                textEditingController: textEditControllers.thirdController,
                 textInputType: TextInputType.number,
-                title: _getThirdFieldTitle(_exerciseOptionsData.exerciseType),
+                title: _getThirdFieldTitle(
+                  _exerciseOptionsData.exerciseType,
+                ),
                 customValidator: TextFieldValidator.validateDigits,
               ),
             ),
@@ -132,28 +136,35 @@ class _ExerciseOptionsFields extends StatelessWidget {
     );
   }
 
-  void _updateTextControllers(ExerciseOptionsData optionsData) {
-    _setsController.text = optionsData.sets.toString();
+  void _updateTextControllers(
+    ExerciseOptionsData optionsData,
+    ExerciseInheritedWidget textEditControllers,
+  ) {
+    textEditControllers.setsController.text = optionsData.sets.toString();
     switch (optionsData.exerciseType) {
       case ExerciseType.timeBased:
-        _secondController.text = optionsData.time.toString();
-        _thirdController.text = optionsData.weight.toString();
+        textEditControllers.thirdController.text =
+            optionsData.weight.toString();
         break;
       case ExerciseType.repsInReserve:
-        _secondController.text = optionsData.repsInReserve.toString();
+        textEditControllers.secondController.text =
+            optionsData.repsInReserve.toString();
         break;
       case ExerciseType.rateOfPerceivedExertion:
-        _secondController.text = optionsData.rateOfPerceivedExertion.toString();
-        _thirdController.text = optionsData.weight.toString();
+        textEditControllers.secondController.text =
+            optionsData.rateOfPerceivedExertion.toString();
+        textEditControllers.thirdController.text =
+            optionsData.weight.toString();
         break;
       case ExerciseType.maxPercentage:
-        _secondController.text = optionsData.reps.toString();
-        _thirdController.text = optionsData.maxPercentage.toString();
+        textEditControllers.secondController.text = optionsData.reps.toString();
+        textEditControllers.thirdController.text =
+            optionsData.maxPercentage.toString();
         break;
-      case null:
       case ExerciseType.repsBased:
-        _secondController.text = optionsData.reps.toString();
-        _thirdController.text = optionsData.weight.toString();
+        textEditControllers.secondController.text = optionsData.reps.toString();
+        textEditControllers.thirdController.text =
+            optionsData.weight.toString();
         break;
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
@@ -6,13 +7,13 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 
 class PersoTimeBreakSection extends StatefulWidget {
   const PersoTimeBreakSection({
-    required int? timeBreak,
+    required int timeBreak,
     required GlobalKey<FormState> formKey,
     super.key,
   })  : _formKey = formKey,
         _timeBreak = timeBreak;
 
-  final int? _timeBreak;
+  final int _timeBreak;
   final GlobalKey<FormState> _formKey;
 
   @override
@@ -21,16 +22,18 @@ class PersoTimeBreakSection extends StatefulWidget {
 
 class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
   bool _shouldShowTimeBreak = true;
-  final _timeBreakController = TextEditingController();
+  String _localTimeBreak = '60';
 
   @override
   void initState() {
     super.initState();
-    _timeBreakController.text = widget._timeBreak.toString();
+    _localTimeBreak = widget._timeBreak.toString();
   }
 
   @override
   Widget build(BuildContext context) {
+    final textEditControllers = ExerciseInheritedWidget.of(context);
+    textEditControllers.timeBreakController.text = _localTimeBreak;
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -50,11 +53,13 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
               Switch(
                 value: _shouldShowTimeBreak,
                 onChanged: (value) {
-                  if (!value) {
-                    _timeBreakController.text = '0';
-                  }
                   setState(() {
                     _shouldShowTimeBreak = value;
+                    if (!value) {
+                      _localTimeBreak = '0';
+                    } else {
+                      _localTimeBreak = '60';
+                    }
                   });
                 },
               ),
@@ -67,7 +72,8 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
             child: Form(
               key: widget._formKey,
               child: PersoTextField(
-                textEditingController: _timeBreakController,
+                isEnabled: _shouldShowTimeBreak,
+                textEditingController: textEditControllers.timeBreakController,
                 textInputType: TextInputType.number,
                 title: 'Time break (seconds)',
                 customValidator: TextFieldValidator.validateDigits,

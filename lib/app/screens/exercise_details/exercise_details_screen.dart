@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/perso_trainer_exercise_options.dart';
 import 'package:perso/app/screens/exercise_details/save_options_button/perso_save_options_button.dart';
 import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
@@ -41,6 +43,9 @@ class ExerciseDetailsScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => TrainerExerciseListBloc(),
         ),
+        BlocProvider(
+          create: (context) => TrainerExerciseOptionsBloc(),
+        ),
       ],
       child: _ExerciseDetailsScreenContent(
         exerciseInTrainingEntity: _exerciseInTrainingEntity,
@@ -79,11 +84,11 @@ class _ExerciseDetailsScreenContent extends StatelessWidget {
                 ),
               );
           context.read<TrainerExerciseListBloc>().add(
-            TrainerExerciseListEvent.fetchExercises(
-              _clientId,
-              _date,
-            ),
-          );
+                TrainerExerciseListEvent.fetchExercises(
+                  _clientId,
+                  _date,
+                ),
+              );
           context.pop();
         },
       ),
@@ -114,50 +119,59 @@ class _Exercise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          PersoVideoPlayer(
-            videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
-          ),
-          _Categories(
-            _exerciseInTrainingEntity.exerciseEntity.tags,
-          ),
-          _DescriptionSection(
-            description: _exerciseInTrainingEntity.exerciseEntity.description,
-          ),
-          PersoTrainerExerciseOptionsSection(
-            formKey: _optionsFormKey,
-            exerciseOptionsData:
-                _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
-          ),
-          PersoTimeBreakSection(
-            formKey: _breaksFormKey,
-            timeBreak: _exerciseInTrainingEntity
-                .exerciseEntity.exerciseOptionsData.timeBreak,
-          ),
-          PersoSupersetSection(clientId: _clientId, date: _date),
-          const _TrainerNote(),
-          PersoSaveOptionsButton(
-            clientId: _clientId,
-            date: _date,
-            exerciseInTrainingId: _exerciseInTrainingEntity.id,
-            breaksFormKey: _breaksFormKey,
-            optionsFormKey: _optionsFormKey,
-            exerciseOptionsData:
-                _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
-          ),
-        ],
+      child: ExerciseInheritedWidget(
+        setsController: TextEditingController(),
+        secondController: TextEditingController(),
+        thirdController: TextEditingController(),
+        trainerNoteController: TextEditingController(),
+        timeBreakController: TextEditingController(),
+        supersetController: TextEditingController(),
+        exerciseType: _exerciseInTrainingEntity
+            .exerciseEntity.exerciseOptionsData.exerciseType,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            PersoVideoPlayer(
+              videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
+            ),
+            _Categories(
+              _exerciseInTrainingEntity.exerciseEntity.tags,
+            ),
+            _DescriptionSection(
+              description: _exerciseInTrainingEntity.exerciseEntity.description,
+            ),
+            PersoTrainerExerciseOptionsSection(
+              formKey: _optionsFormKey,
+              exerciseOptionsData:
+                  _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
+            ),
+            PersoTimeBreakSection(
+              formKey: _breaksFormKey,
+              timeBreak: _exerciseInTrainingEntity
+                  .exerciseEntity.exerciseOptionsData.timeBreak,
+            ),
+            PersoSupersetSection(clientId: _clientId, date: _date),
+            _TrainerNote(),
+            PersoSaveOptionsButton(
+              clientId: _clientId,
+              date: _date,
+              exerciseInTrainingId: _exerciseInTrainingEntity.id,
+              breaksFormKey: _breaksFormKey,
+              optionsFormKey: _optionsFormKey,
+              exerciseOptionsData:
+                  _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class _TrainerNote extends StatelessWidget {
-  const _TrainerNote();
-
   @override
   Widget build(BuildContext context) {
+    final textEditControllers = ExerciseInheritedWidget.of(context);
     return Container(
       margin: const EdgeInsets.all(
         Dimens.mMargin,
@@ -169,11 +183,11 @@ class _TrainerNote extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: Dimens.mMargin),
             height: 140,
-            child: const PersoTextField(
+            child: PersoTextField(
               title: 'Write a note for the client on the exercise...',
               isMultiLine: true,
               maxLength: 150,
-              // textEditingController: _trainerNoteController,
+              textEditingController: textEditControllers.trainerNoteController,
             ),
           ),
         ],

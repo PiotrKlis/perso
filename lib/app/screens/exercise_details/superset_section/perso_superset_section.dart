@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/exercise_details/superset_section/bloc/superset_bloc.dart';
-import 'package:perso/app/screens/exercise_details/superset_section/event/superset_event.dart';
+import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/styleguide/value/app_colors.dart';
-import 'package:perso/app/styleguide/value/app_dimens.dart';
-import 'package:perso/app/widgets/perso_button.dart';
 
 class PersoSupersetSection extends StatefulWidget {
   PersoSupersetSection({
@@ -33,11 +28,18 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
     'Superset 8',
     'Superset 9',
   ];
-
   bool _isEnabled = false;
+  String _selectedSuperset = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedSuperset = listOfSupersetNames.first;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final textEditControllers = ExerciseInheritedWidget.of(context);
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -59,6 +61,12 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
                 onChanged: (value) {
                   setState(() {
                     _isEnabled = value;
+                    if (!value) {
+                      textEditControllers.supersetController.text = '';
+                    } else {
+                      textEditControllers.supersetController.text =
+                          _selectedSuperset;
+                    }
                   });
                 },
               ),
@@ -66,10 +74,11 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
           ),
           DropdownMenu<String>(
             enabled: _isEnabled,
-            initialSelection: listOfSupersetNames.first,
+            initialSelection: _selectedSuperset,
             onSelected: (String? value) {
               setState(() {
-                // _selectedSupersetName = value!;
+                textEditControllers.supersetController.text = value!;
+                _selectedSuperset = value;
               });
             },
             dropdownMenuEntries: listOfSupersetNames

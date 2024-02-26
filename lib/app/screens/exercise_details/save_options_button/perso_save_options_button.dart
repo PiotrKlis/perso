@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_options_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
@@ -33,6 +34,7 @@ class PersoSaveOptionsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: PersoButton(
@@ -40,44 +42,85 @@ class PersoSaveOptionsButton extends StatelessWidget {
         onTap: (context) {
           if (_optionsFormKey.currentState!.validate() &&
               _breaksFormKey.currentState!.validate()) {
-            switch (_exerciseOptionsData.exerciseType) {
-              // case ExerciseType.repsBased:
-              //   {
-              //     _optionsData = _optionsData.copyWith(
-              //       reps: int.parse(_repsController.text),
-              //       sets: int.parse(_setsController.text),
-              //       timeBreak: int.parse(_timeBreakController.text),
-              //     );
-              //   }
-              case ExerciseType.timeBased:
-              // {
-              //   final minutes = _minutesController.text.removeLeadingZeroes();
-              //   final seconds = _secondsController.text
-              //       .removeLeadingZeroes()
-              //       .limitToTwoDigits();
-              //   _optionsData = _optionsData.copyWith(
-              //     time: '$minutes:$seconds',
-              //   );
-              // }
-              case ExerciseType.repsInReserve:
-              // TODO: Handle this case.
-              case ExerciseType.rateOfPerceivedExertion:
-              // TODO: Handle this case.
-              case ExerciseType.maxPercentage:
-              // TODO: Handle this case.
-              case ExerciseType.repsBased:
-              // TODO: Handle this case.
-              case null:
-              // TODO: Handle this case.
-            }
-            // context.read<TrainerExerciseOptionsBloc>().add(
-            //       TrainerExerciseOptionsEvent.editExerciseOptions(
-            //         clientId: _clientId,
-            //         date: _date,
-            //         exerciseInTrainingId: _exerciseInTrainingId,
-            //         exerciseOptionsData: _exerciseOptionsData,
-            //       ),
-            //     );
+            final optionsData = switch (_exerciseOptionsData.exerciseType) {
+              ExerciseType.repsBased => _exerciseOptionsData.copyWith(
+                  exerciseType: exerciseInheritedWidget.exerciseType,
+                  sets: int.parse(exerciseInheritedWidget.setsController.text),
+                  reps:
+                      int.parse(exerciseInheritedWidget.secondController.text),
+                  weight:
+                      int.parse(exerciseInheritedWidget.thirdController.text),
+                  timeBreak: int.parse(
+                    exerciseInheritedWidget.timeBreakController.text,
+                  ),
+                  supersetName: exerciseInheritedWidget.supersetController.text,
+                  trainerNote:
+                      exerciseInheritedWidget.trainerNoteController.text,
+                ),
+              ExerciseType.timeBased => _exerciseOptionsData.copyWith(
+                  exerciseType: exerciseInheritedWidget.exerciseType,
+                  sets: int.parse(exerciseInheritedWidget.setsController.text),
+                  time:
+                      int.parse(exerciseInheritedWidget.secondController.text),
+                  weight:
+                      int.parse(exerciseInheritedWidget.thirdController.text),
+                  timeBreak: int.parse(
+                    exerciseInheritedWidget.timeBreakController.text,
+                  ),
+                  supersetName: exerciseInheritedWidget.supersetController.text,
+                  trainerNote:
+                      exerciseInheritedWidget.trainerNoteController.text,
+                ),
+              ExerciseType.repsInReserve => _exerciseOptionsData.copyWith(
+                  exerciseType: exerciseInheritedWidget.exerciseType,
+                  sets: int.parse(exerciseInheritedWidget.setsController.text),
+                  repsInReserve:
+                      int.parse(exerciseInheritedWidget.secondController.text),
+                  timeBreak: int.parse(
+                    exerciseInheritedWidget.timeBreakController.text,
+                  ),
+                  supersetName: exerciseInheritedWidget.supersetController.text,
+                  trainerNote:
+                      exerciseInheritedWidget.trainerNoteController.text,
+                ),
+              ExerciseType.rateOfPerceivedExertion =>
+                _exerciseOptionsData.copyWith(
+                  exerciseType: exerciseInheritedWidget.exerciseType,
+                  sets: int.parse(exerciseInheritedWidget.setsController.text),
+                  rateOfPerceivedExertion:
+                      int.parse(exerciseInheritedWidget.secondController.text),
+                  weight:
+                      int.parse(exerciseInheritedWidget.thirdController.text),
+                  timeBreak: int.parse(
+                    exerciseInheritedWidget.timeBreakController.text,
+                  ),
+                  supersetName: exerciseInheritedWidget.supersetController.text,
+                  trainerNote:
+                      exerciseInheritedWidget.trainerNoteController.text,
+                ),
+              ExerciseType.maxPercentage => _exerciseOptionsData.copyWith(
+                  exerciseType: exerciseInheritedWidget.exerciseType,
+                  sets: int.parse(exerciseInheritedWidget.setsController.text),
+                  reps:
+                      int.parse(exerciseInheritedWidget.secondController.text),
+                  maxPercentage:
+                      int.parse(exerciseInheritedWidget.thirdController.text),
+                  timeBreak: int.parse(
+                    exerciseInheritedWidget.timeBreakController.text,
+                  ),
+                  supersetName: exerciseInheritedWidget.supersetController.text,
+                  trainerNote:
+                      exerciseInheritedWidget.trainerNoteController.text,
+                ),
+            };
+            context.read<TrainerExerciseOptionsBloc>().add(
+                  TrainerExerciseOptionsEvent.editExerciseOptions(
+                    clientId: _clientId,
+                    date: _date,
+                    exerciseInTrainingId: _exerciseInTrainingId,
+                    exerciseOptionsData: optionsData,
+                  ),
+                );
             context.showSuccessfulSnackBar('Saving succeeded');
           }
         },

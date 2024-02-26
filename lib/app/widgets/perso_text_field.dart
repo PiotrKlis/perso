@@ -15,6 +15,7 @@ class PersoTextField extends StatefulWidget {
     TextEditingController? passwordController,
     TextEditingController? confirmPasswordController,
     TextEditingController? textEditingController,
+    bool isEnabled = true,
   })  : _maxLength = maxLength,
         _isMultiLine = isMultiLine,
         _textInputType = textInputType,
@@ -23,11 +24,13 @@ class PersoTextField extends StatefulWidget {
         _title = title,
         _textEditingController = textEditingController,
         _confirmPasswordController = confirmPasswordController,
+        _isEnabled = isEnabled,
         _passwordController = passwordController;
 
   final String _title;
   final String? Function(String value)? _customValidator;
   final bool _shouldObscureText;
+  final bool _isEnabled;
   final TextInputType _textInputType;
   final bool _isMultiLine;
   final int? _maxLength;
@@ -43,6 +46,7 @@ class _PersoTextFieldState extends State<PersoTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: widget._isEnabled,
       controller: widget._confirmPasswordController ??
           widget._passwordController ??
           widget._textEditingController,

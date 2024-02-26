@@ -6,16 +6,16 @@ part 'exercise_options_data.freezed.dart';
 @freezed
 class ExerciseOptionsData with _$ExerciseOptionsData {
   const factory ExerciseOptionsData({
-    ExerciseType? exerciseType,
-    int reps,
-    int? sets,
-    int? time,
-    String? weight,
-    int? timeBreak,
-    int? repsInReserve,
-    int? rateOfPerceivedExertion,
-    String? maxPercentage,
-    String? trainerNote,
-    String? supersetName,
+    @Default(ExerciseType.repsBased)ExerciseType exerciseType,
+    @Default(8)int reps,
+    @Default(3)int sets,
+    @Default(60)int time,
+    @Default(0)int weight,
+    @Default(60)int timeBreak,
+    @Default(3)int repsInReserve,
+    @Default(7)int rateOfPerceivedExertion,
+    @Default(70)int maxPercentage,
+    @Default('')String trainerNote,
+    @Default('')String supersetName,
   }) = _ExerciseOptionsData;
 }

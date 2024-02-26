@@ -84,11 +84,18 @@ class FirestoreExerciseService extends ExerciseService {
         .collection(date)
         .doc(exerciseId)
         .update({
-      UserDocumentFields.exerciseType: exerciseOptions.exerciseType?.name,
+      UserDocumentFields.exerciseType: exerciseOptions.exerciseType.name,
       UserDocumentFields.sets: exerciseOptions.sets,
       UserDocumentFields.reps: exerciseOptions.reps,
       UserDocumentFields.time: exerciseOptions.time,
       UserDocumentFields.timeBreak: exerciseOptions.timeBreak,
+      UserDocumentFields.supersetName: exerciseOptions.supersetName,
+      UserDocumentFields.repsInReserve: exerciseOptions.repsInReserve,
+      UserDocumentFields.rateOfPerceivedExertion:
+          exerciseOptions.rateOfPerceivedExertion,
+      UserDocumentFields.maxPercentage: exerciseOptions.maxPercentage,
+      UserDocumentFields.trainerNote: exerciseOptions.trainerNote,
+      UserDocumentFields.weight: exerciseOptions.weight,
     });
   }
 

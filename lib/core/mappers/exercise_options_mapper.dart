@@ -21,9 +21,9 @@ class ExerciseOptionsMapper {
       repsInReserve: exercise[UserDocumentFields.repsInReserve] as int,
       rateOfPerceivedExertion:
           exercise[UserDocumentFields.rateOfPerceivedExertion] as int,
-      maxPercentage: exercise[UserDocumentFields.maxPercentage] as String,
+      maxPercentage: exercise[UserDocumentFields.maxPercentage] as int,
       trainerNote: exercise[UserDocumentFields.trainerNote] as String,
-      weight: exercise[UserDocumentFields.weight] as String,
+      weight: exercise[UserDocumentFields.weight] as int,
     );
   }
 
@@ -39,9 +39,9 @@ class ExerciseOptionsMapper {
       repsInReserve: exercise[UserDocumentFields.repsInReserve] as int,
       rateOfPerceivedExertion:
           exercise[UserDocumentFields.rateOfPerceivedExertion] as int,
-      maxPercentage: exercise[UserDocumentFields.maxPercentage] as String,
+      maxPercentage: exercise[UserDocumentFields.maxPercentage] as int,
       trainerNote: exercise[UserDocumentFields.trainerNote] as String,
-      weight: exercise[UserDocumentFields.weight] as String,
+      weight: exercise[UserDocumentFields.weight] as int,
     );
   }
 }
