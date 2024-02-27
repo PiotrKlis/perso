@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/translations/string_list_mapper.dart';
@@ -37,7 +36,6 @@ class FirestoreExerciseService extends ExerciseService {
         exerciseEntity.description,
       ),
       UserDocumentFields.index: exerciseEntity.index,
-      //TODO: Check what happens if null is sent
       UserDocumentFields.reps: exerciseEntity.exerciseOptionsData.reps,
       UserDocumentFields.sets: exerciseEntity.exerciseOptionsData.sets,
       UserDocumentFields.tags: _stringListTranslationsMapper.mapTo(
@@ -72,30 +70,52 @@ class FirestoreExerciseService extends ExerciseService {
   Future<void> editExerciseOptions({
     required String clientId,
     required String trainerId,
-    required String exerciseId,
     required String date,
-    required ExerciseOptionsData exerciseOptions,
+    required ExerciseInTrainingEntity exerciseInTrainingEntity,
   }) async {
+    final exerciseEntity = exerciseInTrainingEntity.exerciseEntity;
+    final exerciseInTrainingId = exerciseInTrainingEntity.id;
     await FirebaseFirestore.instance
         .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
         .collection(date)
-        .doc(exerciseId)
-        .update({
-      UserDocumentFields.exerciseType: exerciseOptions.exerciseType.name,
-      UserDocumentFields.sets: exerciseOptions.sets,
-      UserDocumentFields.reps: exerciseOptions.reps,
-      UserDocumentFields.time: exerciseOptions.time,
-      UserDocumentFields.timeBreak: exerciseOptions.timeBreak,
-      UserDocumentFields.supersetName: exerciseOptions.supersetName,
-      UserDocumentFields.repsInReserve: exerciseOptions.repsInReserve,
+        .doc(exerciseInTrainingId)
+        .set({
+      UserDocumentFields.id: exerciseEntity.id,
+      UserDocumentFields.description: _stringTranslationsMapper.mapTo(
+        UserDocumentFields.description,
+        exerciseEntity.description,
+      ),
+      UserDocumentFields.index: exerciseEntity.index,
+      UserDocumentFields.reps: exerciseEntity.exerciseOptionsData.reps,
+      UserDocumentFields.sets: exerciseEntity.exerciseOptionsData.sets,
+      UserDocumentFields.tags: _stringListTranslationsMapper.mapTo(
+        UserDocumentFields.tags,
+        exerciseEntity.tags,
+      ),
+      UserDocumentFields.time: exerciseEntity.exerciseOptionsData.time,
+      UserDocumentFields.title: _stringTranslationsMapper.mapTo(
+        UserDocumentFields.title,
+        exerciseEntity.title,
+      ),
+      UserDocumentFields.videoId: exerciseEntity.videoId,
+      UserDocumentFields.exerciseType:
+          exerciseEntity.exerciseOptionsData.exerciseType?.name,
+      UserDocumentFields.timeBreak:
+          exerciseEntity.exerciseOptionsData.timeBreak,
+      UserDocumentFields.supersetName:
+          exerciseEntity.exerciseOptionsData.supersetName,
+      UserDocumentFields.repsInReserve:
+          exerciseEntity.exerciseOptionsData.repsInReserve,
       UserDocumentFields.rateOfPerceivedExertion:
-          exerciseOptions.rateOfPerceivedExertion,
-      UserDocumentFields.maxPercentage: exerciseOptions.maxPercentage,
-      UserDocumentFields.trainerNote: exerciseOptions.trainerNote,
-      UserDocumentFields.weight: exerciseOptions.weight,
+          exerciseEntity.exerciseOptionsData.rateOfPerceivedExertion,
+      UserDocumentFields.maxPercentage:
+          exerciseEntity.exerciseOptionsData.maxPercentage,
+      UserDocumentFields.trainerNote:
+          exerciseEntity.exerciseOptionsData.trainerNote,
+      UserDocumentFields.weight: exerciseEntity.exerciseOptionsData.weight,
     });
   }
 

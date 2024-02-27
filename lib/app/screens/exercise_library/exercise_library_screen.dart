@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/bloc/library_exercise_list_bloc.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/event/library_exercise_list_event.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/perso_library_exercise_list.dart';
+import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/search/exercises/bloc/search_exercises_bloc.dart';
@@ -22,14 +23,19 @@ class ExerciseLibraryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider<SearchExercisesBloc>(
+      BlocProvider(
         create: (BuildContext context) {
           return SearchExercisesBloc();
         },
       ),
-      BlocProvider<LibraryExerciseListBloc>(
+      BlocProvider(
         create: (BuildContext context) {
           return LibraryExerciseListBloc();
+        },
+      ),
+      BlocProvider(
+        create: (BuildContext context) {
+          return TrainerExerciseListBloc();
         },
       ),
     ], child: _ExerciseLibraryScreenContent(_clientId, _selectedDate));

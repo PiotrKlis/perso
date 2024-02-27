@@ -6,9 +6,8 @@ abstract class ExerciseService {
   Future<void> editExerciseOptions({
     required String clientId,
     required String trainerId,
-    required String exerciseId,
     required String date,
-    required ExerciseOptionsData exerciseOptions,
+    required ExerciseInTrainingEntity exerciseInTrainingEntity,
   });
 
   Future<void> add({

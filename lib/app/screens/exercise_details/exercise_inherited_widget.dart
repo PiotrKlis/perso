@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
 class ExerciseInheritedWidget extends InheritedWidget {
-  const ExerciseInheritedWidget({
+  ExerciseInheritedWidget({
     super.key,
     required this.setsController,
     required this.secondController,
@@ -20,7 +20,7 @@ class ExerciseInheritedWidget extends InheritedWidget {
   final TextEditingController trainerNoteController;
   final TextEditingController timeBreakController;
   final TextEditingController supersetController;
-  final ExerciseType exerciseType;
+  ExerciseType exerciseType;
 
   static ExerciseInheritedWidget of(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<

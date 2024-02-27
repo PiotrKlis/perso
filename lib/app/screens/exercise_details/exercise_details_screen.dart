@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
 import 'package:perso/app/screens/exercise_details/exercise_options/perso_trainer_exercise_options.dart';
@@ -8,7 +7,6 @@ import 'package:perso/app/screens/exercise_details/save_options_button/perso_sav
 import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
 import 'package:perso/app/screens/exercise_details/time_break/perso_time_break_section.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
@@ -74,23 +72,6 @@ class _ExerciseDetailsScreenContent extends StatelessWidget {
     return Scaffold(
       appBar: PersoAppBar(
         title: _exerciseInTrainingEntity.exerciseEntity.title,
-        actionIcon: Icons.delete_forever,
-        onActionIconClick: (context) {
-          context.read<TrainerExerciseListBloc>().add(
-                TrainerExerciseListEvent.removeExercise(
-                  _clientId,
-                  _date,
-                  _exerciseInTrainingEntity.id,
-                ),
-              );
-          context.read<TrainerExerciseListBloc>().add(
-                TrainerExerciseListEvent.fetchExercises(
-                  _clientId,
-                  _date,
-                ),
-              );
-          context.pop();
-        },
       ),
       body: _Exercise(
         clientId: _clientId,
@@ -158,11 +139,9 @@ class _Exercise extends StatelessWidget {
             PersoSaveOptionsButton(
               clientId: _clientId,
               date: _date,
-              exerciseInTrainingId: _exerciseInTrainingEntity.id,
               breaksFormKey: _breaksFormKey,
               optionsFormKey: _optionsFormKey,
-              exerciseOptionsData:
-                  _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
+              exerciseInTrainingEntity: _exerciseInTrainingEntity,
             ),
           ],
         ),

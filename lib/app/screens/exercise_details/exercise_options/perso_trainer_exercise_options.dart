@@ -35,6 +35,7 @@ class PersoTrainerExerciseOptionsSectionState
 
   @override
   Widget build(BuildContext context) {
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -56,9 +57,10 @@ class PersoTrainerExerciseOptionsSectionState
                     onChanged: (exerciseType) {
                       if (exerciseType !=
                           _localExerciseOptionsData.exerciseType) {
+                        exerciseInheritedWidget.exerciseType = exerciseType!;
                         setState(() {
                           _localExerciseOptionsData = _localExerciseOptionsData
-                              .copyWith(exerciseType: exerciseType!);
+                              .copyWith(exerciseType: exerciseType);
                         });
                       }
                     },
@@ -143,6 +145,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
     textEditControllers.setsController.text = optionsData.sets.toString();
     switch (optionsData.exerciseType) {
       case ExerciseType.timeBased:
+        textEditControllers.secondController.text = optionsData.time.toString();
         textEditControllers.thirdController.text =
             optionsData.weight.toString();
         break;

@@ -5,8 +5,8 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
 
-class TrainerExerciseOptionsBloc extends Bloc<
-    TrainerExerciseOptionsEvent, TrainerExerciseOptionsState> {
+class TrainerExerciseOptionsBloc
+    extends Bloc<TrainerExerciseOptionsEvent, TrainerExerciseOptionsState> {
   TrainerExerciseOptionsBloc()
       : super(const TrainerExerciseOptionsState.initial()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
@@ -16,21 +16,13 @@ class TrainerExerciseOptionsBloc extends Bloc<
         await _exercisesService.editExerciseOptions(
           clientId: event.clientId,
           trainerId: trainerId,
-          exerciseId: event.exerciseInTrainingId,
           date: event.date,
-          exerciseOptions: event.exerciseOptionsData,
+          exerciseInTrainingEntity: event.exerciseInTrainingEntity,
         );
       } catch (error) {
         print(error);
       }
     });
-    //
-    // on<ChangeExerciseType>((event, emitter) async {
-    //   emitter(TrainerExerciseOptionsState.exerciseOptionsDataUpdate(
-    //     event.exerciseType,
-    //   ));
-    // });
-
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();
