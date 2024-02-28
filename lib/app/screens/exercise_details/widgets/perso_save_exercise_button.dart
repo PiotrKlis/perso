@@ -33,7 +33,7 @@ class PersoSaveExerciseButton extends StatelessWidget {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
     final exerciseOptionsData =
         _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData;
-    treturn Container(
+    return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Row(
         children: [
