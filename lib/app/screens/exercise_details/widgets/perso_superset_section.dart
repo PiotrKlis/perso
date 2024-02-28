@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoSupersetSection extends StatefulWidget {
-  PersoSupersetSection({
-    required String clientId,
-    required String date,
-    super.key,
-  });
-
-  bool shouldShowSupersetCheckboxes = false;
-  final superSets = <String, String>{};
+  const PersoSupersetSection({super.key});
 
   @override
   State<PersoSupersetSection> createState() => _PersoSupersetSectionState();

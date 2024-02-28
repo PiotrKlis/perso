@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';

@@ -42,19 +42,6 @@ class TrainerExerciseListBloc
       transformer: restartable(),
     );
 
-    on<RemoveExercise>((event, emitter) async {
-      try {
-        await _exercisesService.remove(
-          clientId: event.clientId,
-          trainerId: trainerId,
-          date: event.date,
-          exerciseInTrainingId: event.exerciseInTrainingId,
-        );
-      } catch (error) {
-        emitter(TrainerExerciseListState.error(error.toString()));
-      }
-    });
-
     on<Reorder>((event, emitter) async {
       try {
         final reorderedExercises = event.exercises

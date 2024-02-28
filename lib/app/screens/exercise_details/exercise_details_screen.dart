@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/perso_trainer_exercise_options.dart';
-import 'package:perso/app/screens/exercise_details/save_options_button/perso_save_options_button.dart';
-import 'package:perso/app/screens/exercise_details/superset_section/perso_superset_section.dart';
-import 'package:perso/app/screens/exercise_details/time_break/perso_time_break_section.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
+import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_options.dart';
+import 'package:perso/app/screens/exercise_details/widgets/perso_save_exercise_button.dart';
+import 'package:perso/app/screens/exercise_details/widgets/perso_superset_section.dart';
+import 'package:perso/app/screens/exercise_details/widgets/perso_time_break_section.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
@@ -37,12 +36,8 @@ class ExerciseDetailsScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => VideoPlayerBloc(),
         ),
-        //TODO: separate TrainerExerciseListBloc into two blocs, create exercise details bloc
         BlocProvider(
-          create: (context) => TrainerExerciseListBloc(),
-        ),
-        BlocProvider(
-          create: (context) => TrainerExerciseOptionsBloc(),
+          create: (context) => ExerciseDetailsBloc(),
         ),
       ],
       child: _ExerciseDetailsScreenContent(
@@ -121,7 +116,7 @@ class _Exercise extends StatelessWidget {
             _DescriptionSection(
               description: _exerciseInTrainingEntity.exerciseEntity.description,
             ),
-            PersoTrainerExerciseOptionsSection(
+            PersoExerciseOptionsSection(
               formKey: _optionsFormKey,
               exerciseOptionsData:
                   _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
@@ -131,12 +126,12 @@ class _Exercise extends StatelessWidget {
               timeBreak: _exerciseInTrainingEntity
                   .exerciseEntity.exerciseOptionsData.timeBreak,
             ),
-            PersoSupersetSection(clientId: _clientId, date: _date),
+            const PersoSupersetSection(),
             _TrainerNote(
               trainerNote: _exerciseInTrainingEntity
                   .exerciseEntity.exerciseOptionsData.trainerNote,
             ),
-            PersoSaveOptionsButton(
+            PersoSaveExerciseButton(
               clientId: _clientId,
               date: _date,
               breaksFormKey: _breaksFormKey,

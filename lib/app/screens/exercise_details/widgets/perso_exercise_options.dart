@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/model/exercise_options_data.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/model/exercise_options_data.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
-class PersoTrainerExerciseOptionsSection extends StatefulWidget {
-  const PersoTrainerExerciseOptionsSection({
+class PersoExerciseOptionsSection extends StatefulWidget {
+  const PersoExerciseOptionsSection({
     super.key,
     required ExerciseOptionsData exerciseOptionsData,
     required Key formKey,
@@ -19,12 +19,12 @@ class PersoTrainerExerciseOptionsSection extends StatefulWidget {
   final Key _formKey;
 
   @override
-  State<PersoTrainerExerciseOptionsSection> createState() =>
-      PersoTrainerExerciseOptionsSectionState();
+  State<PersoExerciseOptionsSection> createState() =>
+      PersoExerciseOptionsSectionState();
 }
 
-class PersoTrainerExerciseOptionsSectionState
-    extends State<PersoTrainerExerciseOptionsSection> {
+class PersoExerciseOptionsSectionState
+    extends State<PersoExerciseOptionsSection> {
   late ExerciseOptionsData _localExerciseOptionsData;
 
   @override

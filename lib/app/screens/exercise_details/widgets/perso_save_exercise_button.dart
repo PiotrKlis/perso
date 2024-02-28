@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:perso/app/screens/exercise_details/exercise_inherited_widget.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/bloc/trainer_exercise_options_bloc.dart';
-import 'package:perso/app/screens/exercise_details/exercise_options/event/trainer_exercise_options_event.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
+import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.dart';
+import 'package:perso/app/screens/exercise_details/event/exercise_details_event.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
-class PersoSaveOptionsButton extends StatelessWidget {
-  const PersoSaveOptionsButton({
+class PersoSaveExerciseButton extends StatelessWidget {
+  const PersoSaveExerciseButton({
     super.key,
     required String clientId,
     required String date,
@@ -37,8 +33,7 @@ class PersoSaveOptionsButton extends StatelessWidget {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
     final exerciseOptionsData =
         _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData;
-
-    return Container(
+    treturn Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Row(
         children: [
@@ -47,14 +42,13 @@ class PersoSaveOptionsButton extends StatelessWidget {
               whiteBlackTheme: true,
               title: 'Delete',
               onTap: (context) {
-                context.read<TrainerExerciseListBloc>().add(
-                      TrainerExerciseListEvent.removeExercise(
-                        _clientId,
-                        _date,
-                        _exerciseInTrainingEntity.id,
+                context.read<ExerciseDetailsBloc>().add(
+                      ExerciseDetailsEvent.deleteExercise(
+                        clientId: _clientId,
+                        date: _date,
+                        exerciseInTrainingId: _exerciseInTrainingEntity.id,
                       ),
                     );
-                context.pop();
               },
             ),
           ),
@@ -161,22 +155,21 @@ class PersoSaveOptionsButton extends StatelessWidget {
                             exerciseInheritedWidget.trainerNoteController.text,
                       ),
                   };
-                  context.read<TrainerExerciseOptionsBloc>().add(
-                        TrainerExerciseOptionsEvent.editExerciseOptions(
-                            clientId: _clientId,
-                            date: _date,
-                            exerciseInTrainingEntity:
-                                _exerciseInTrainingEntity.copyWith(
-                              exerciseEntity: _exerciseInTrainingEntity
-                                  .exerciseEntity
-                                  .copyWith(
-                                exerciseOptionsData: optionsData,
-                              ),
-                            )),
+                  context.read<ExerciseDetailsBloc>().add(
+                        ExerciseDetailsEvent.saveExercise(
+                          clientId: _clientId,
+                          date: _date,
+                          exerciseInTrainingEntity:
+                              _exerciseInTrainingEntity.copyWith(
+                            exerciseEntity: _exerciseInTrainingEntity
+                                .exerciseEntity
+                                .copyWith(
+                              exerciseOptionsData: optionsData,
+                            ),
+                          ),
+                        ),
                       );
-                  context.showSuccessfulSnackBar('Saving succeeded');
                 }
-                context.pop();
               },
             ),
           ),
