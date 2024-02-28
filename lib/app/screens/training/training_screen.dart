@@ -9,7 +9,7 @@ import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
 class TrainingScreen extends StatelessWidget {
-  const TrainingScreen({super.key, required this.exercises});
+  const TrainingScreen({required this.exercises, super.key});
 
   final List<ExerciseEntity> exercises;
 

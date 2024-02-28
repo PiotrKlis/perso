@@ -6,7 +6,9 @@ import 'package:perso/core/models/exercise_entity.dart';
 class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
   TrainingBloc() : super(const TrainingState.initial()) {
     on<LoadTraining>((event, emitter) async {
+      //TODO: Create a new list with breaks inside in between exercises
       _exercises = event.exercises;
+
       emitter(
         TrainingState.exerciseInProgress(_exercises[currentExerciseIndex]),
       );
@@ -27,6 +29,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
         );
       }
     });
+    //TODO: Separate bloc - exercise in progress screen bloc
     // on<Stop>((event, emitter) async {});
     // on<Start>((event, emitter) async {});
   }
