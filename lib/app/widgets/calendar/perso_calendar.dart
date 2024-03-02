@@ -7,7 +7,7 @@ import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PersoCalendar extends StatefulWidget {
-  const PersoCalendar({required this.clientId, super.key, this.trainerId});
+  const PersoCalendar({this.clientId, super.key, this.trainerId});
 
   final String? clientId;
   final String? trainerId;

@@ -8,15 +8,9 @@ import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
 class PersoExerciseOptionsSection extends StatefulWidget {
-  const PersoExerciseOptionsSection({
-    super.key,
-    required ExerciseOptionsData exerciseOptionsData,
-    required Key formKey,
-  })  : _formKey = formKey,
-        _exerciseOptionsData = exerciseOptionsData;
+  const PersoExerciseOptionsSection({super.key});
 
-  final ExerciseOptionsData _exerciseOptionsData;
-  final Key _formKey;
+
 
   @override
   State<PersoExerciseOptionsSection> createState() =>

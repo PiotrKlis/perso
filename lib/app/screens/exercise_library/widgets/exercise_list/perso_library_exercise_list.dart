@@ -4,14 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/bloc/library_exercise_list_bloc.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/event/library_exercise_list_event.dart';
 import 'package:perso/app/screens/exercise_library/widgets/exercise_list/state/library_exercise_list_state.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
-import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/uuid_generator.dart';
 import 'package:perso/app/widgets/search/exercises/bloc/search_exercises_bloc.dart';
 import 'package:perso/app/widgets/search/exercises/state/search_exercises_state.dart';
-import 'package:perso/app/widgets/video_player/bloc/video_player_bloc.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
@@ -40,13 +37,10 @@ class LibraryExerciseList extends StatelessWidget {
               shrinkWrap: true,
               itemCount: exercises.length,
               itemBuilder: (context, index) {
-                return BlocProvider(
-                  create: (context) => VideoPlayerBloc(),
-                  child: _Exercise(
-                    exerciseEntity: exercises[index],
-                    clientId: _clientId,
-                    date: _selectedDate,
-                  ),
+                return _Exercise(
+                  exerciseEntity: exercises[index],
+                  clientId: _clientId,
+                  date: _selectedDate,
                 );
               },
             );
@@ -78,13 +72,10 @@ class LibraryExerciseList extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: exercises.length,
                       itemBuilder: (context, index) {
-                        return BlocProvider(
-                          create: (context) => VideoPlayerBloc(),
-                          child: _Exercise(
-                            exerciseEntity: exercises[index],
-                            clientId: _clientId,
-                            date: _selectedDate,
-                          ),
+                        return _Exercise(
+                          exerciseEntity: exercises[index],
+                          clientId: _clientId,
+                          date: _selectedDate,
                         );
                       },
                     );
@@ -139,28 +130,18 @@ class _Exercise extends StatelessWidget {
               _exerciseEntity.exerciseOptionsData.supersetName,
             ),
             trailing: const Icon(Icons.reorder),
-            onTap: () async {
-              final bloc = context.read<TrainerExerciseListBloc>();
-              await context
-                  .pushNamed(
-                    ScreenNavigationKey.exerciseDetails,
-                    queryParameters: {
-                      NavigationConstants.clientId: _clientId,
-                      NavigationConstants.date: _date,
-                    },
-                    extra: ExerciseInTrainingEntity(
-                      id: UuidGenerator.generateShortUuid(),
-                      exerciseEntity: _exerciseEntity,
-                    ),
-                  )
-                  .then(
-                    (value) => bloc.add(
-                      TrainerExerciseListEvent.fetchExercises(
-                        _clientId,
-                        _date,
-                      ),
-                    ),
-                  );
+            onTap: () {
+              context.pushNamed(
+                ScreenNavigationKey.exerciseDetails,
+                queryParameters: {
+                  NavigationConstants.clientId: _clientId,
+                  NavigationConstants.date: _date,
+                },
+                extra: ExerciseInTrainingEntity(
+                  id: UuidGenerator.generateShortUuid(),
+                  exerciseEntity: _exerciseEntity,
+                ),
+              );
             },
           ),
         ),

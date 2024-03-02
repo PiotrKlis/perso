@@ -32,7 +32,7 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
 
   @override
   Widget build(BuildContext context) {
-    final textEditControllers = ExerciseInheritedWidget.of(context);
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -55,9 +55,9 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
                   setState(() {
                     _isEnabled = value;
                     if (!value) {
-                      textEditControllers.supersetController.text = '';
+                      exerciseInheritedWidget.supersetController.text = '';
                     } else {
-                      textEditControllers.supersetController.text =
+                      exerciseInheritedWidget.supersetController.text =
                           _selectedSuperset;
                     }
                   });
@@ -70,7 +70,7 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
             initialSelection: _selectedSuperset,
             onSelected: (String? value) {
               setState(() {
-                textEditControllers.supersetController.text = value!;
+                exerciseInheritedWidget.supersetController.text = value!;
                 _selectedSuperset = value;
               });
             },

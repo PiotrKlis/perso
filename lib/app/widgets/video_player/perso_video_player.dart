@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:video_player/video_player.dart';
 
 class PersoVideoPlayer extends StatefulWidget {
-  const PersoVideoPlayer({required String videoId, super.key})
-      : _videoId = videoId;
-
-  final String _videoId;
+  const PersoVideoPlayer({super.key});
 
   @override
   State<PersoVideoPlayer> createState() => _PersoVideoPlayerState();
@@ -18,7 +16,7 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
   @override
   void initState() {
     super.initState();
-    initVideoPlayerController();
+    // initVideoPlayerController();
   }
 
   @override
@@ -29,6 +27,9 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
+    initVideoPlayerController(exerciseInheritedWidget
+        .exerciseInTrainingEntity.exerciseEntity.videoId);
     return SizedBox(
       height: Dimens.videoPlayerHeight,
       child: FutureBuilder(
@@ -55,10 +56,10 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
     );
   }
 
-  void initVideoPlayerController() {
+  void initVideoPlayerController(String videoId) {
     const muxStreamBaseUrl = 'https://stream.mux.com';
     const videoExtension = 'm3u8';
-    final path = '$muxStreamBaseUrl/${widget._videoId}.$videoExtension';
+    final path = '$muxStreamBaseUrl/$videoId.$videoExtension';
     _videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(
         path,

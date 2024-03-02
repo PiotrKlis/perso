@@ -55,11 +55,11 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<int> getNumberOfExercises(
-    String clientId,
-    String trainerId,
-    String date,
-  ) async {
+  Future<int> getNumberOfExercises({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  }) async {
     final snapshot = await FirebaseFirestore.instance
         .collection(CollectionName.trainers)
         .doc(trainerId)

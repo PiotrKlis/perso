@@ -29,13 +29,13 @@ class ClientPlanOverviewScreen extends StatelessWidget {
           create: (context) => CalendarBloc(),
         ),
       ],
-      child: _PlanOverviewScreenContent(_trainerId),
+      child: _ClientPlanOverviewScreenContent(_trainerId),
     );
   }
 }
 
-class _PlanOverviewScreenContent extends StatelessWidget {
-  const _PlanOverviewScreenContent(this._trainerId);
+class _ClientPlanOverviewScreenContent extends StatelessWidget {
+  const _ClientPlanOverviewScreenContent(this._trainerId);
 
   final String _trainerId;
 
@@ -50,7 +50,6 @@ class _PlanOverviewScreenContent extends StatelessWidget {
         child: Column(
           children: [
             PersoCalendar(
-              clientId: null,
               trainerId: _trainerId,
             ),
             _ExercisesOverview(

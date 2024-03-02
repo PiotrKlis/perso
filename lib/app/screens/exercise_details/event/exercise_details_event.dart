@@ -16,4 +16,9 @@ class ExerciseDetailsEvent with _$ExerciseDetailsEvent {
     required String date,
     required String exerciseInTrainingId,
   }) = DeleteExercise;
+
+  const factory ExerciseDetailsEvent.getNumberOfExercises({
+    required String clientId,
+    required String date,
+  }) = GetNumberOfExercises;
 }
