@@ -10,8 +10,6 @@ import 'package:perso/core/models/exercise_type.dart';
 class PersoExerciseOptionsSection extends StatefulWidget {
   const PersoExerciseOptionsSection({super.key});
 
-
-
   @override
   State<PersoExerciseOptionsSection> createState() =>
       PersoExerciseOptionsSectionState();
@@ -19,17 +17,16 @@ class PersoExerciseOptionsSection extends StatefulWidget {
 
 class PersoExerciseOptionsSectionState
     extends State<PersoExerciseOptionsSection> {
-  late ExerciseOptionsData _localExerciseOptionsData;
-
   @override
   void initState() {
     super.initState();
-    _localExerciseOptionsData = widget._exerciseOptionsData;
   }
 
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
+    final localExerciseType = exerciseInheritedWidget.exerciseInTrainingEntity
+        .exerciseEntity.exerciseOptionsData.exerciseType;
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -47,14 +44,26 @@ class PersoExerciseOptionsSectionState
                   (exerciseType) => RadioListTile(
                     title: Text(exerciseType.value),
                     value: exerciseType,
-                    groupValue: _localExerciseOptionsData.exerciseType,
+                    groupValue: localExerciseType,
                     onChanged: (exerciseType) {
-                      if (exerciseType !=
-                          _localExerciseOptionsData.exerciseType) {
-                        exerciseInheritedWidget.exerciseType = exerciseType!;
+                      if (exerciseType != exerciseType) {
                         setState(() {
-                          _localExerciseOptionsData = _localExerciseOptionsData
-                              .copyWith(exerciseType: exerciseType);
+                          final updatedExerciseEntity = exerciseInheritedWidget
+                              .exerciseInTrainingEntity.exerciseEntity
+                              .copyWith(
+                            exerciseOptionsData: exerciseInheritedWidget
+                                .exerciseInTrainingEntity
+                                .exerciseEntity
+                                .exerciseOptionsData
+                                .copyWith(
+                              exerciseType: exerciseType!,
+                            ),
+                          );
+                          exerciseInheritedWidget.exerciseInTrainingEntity =
+                              exerciseInheritedWidget.exerciseInTrainingEntity
+                                  .copyWith(
+                            exerciseEntity: updatedExerciseEntity,
+                          );
                         });
                       }
                     },
@@ -63,9 +72,10 @@ class PersoExerciseOptionsSectionState
                 .toList(),
           ),
           Form(
-            key: widget._formKey,
+            key: exerciseInheritedWidget.optionsFormKey,
             child: _ExerciseOptionsFields(
-              exerciseOptionsData: _localExerciseOptionsData,
+              exerciseOptionsData: exerciseInheritedWidget
+                  .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData,
             ),
           ),
         ],

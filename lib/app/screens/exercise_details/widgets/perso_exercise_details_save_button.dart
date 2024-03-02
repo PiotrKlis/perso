@@ -38,7 +38,7 @@ class PersoExerciseDetailsSaveButton extends StatelessWidget {
       onTap: (context) {
         if (_optionsFormKey.currentState!.validate() &&
             _breaksFormKey.currentState!.validate()) {
-          final optionsData = switch (exerciseInheritedWidget.exerciseType) {
+          final optionsData = switch (exerciseOptionsData.exerciseType) {
             ExerciseType.repsBased => exerciseOptionsData.copyWith(
                 exerciseType: ExerciseType.repsBased,
                 sets: int.parse(

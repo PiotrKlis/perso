@@ -7,7 +7,6 @@ class ExerciseInheritedWidget extends InheritedWidget {
   ExerciseInheritedWidget({
     required this.exerciseDetailScreenType,
     required this.exerciseInTrainingEntity,
-    required this.exerciseType,
     required super.child,
     super.key,
   });
@@ -20,9 +19,8 @@ class ExerciseInheritedWidget extends InheritedWidget {
   final TextEditingController supersetController = TextEditingController();
   final GlobalKey<FormState> breakFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> optionsFormKey = GlobalKey<FormState>();
-  final ExerciseInTrainingEntity exerciseInTrainingEntity;
   final ExerciseDetailScreenType exerciseDetailScreenType;
-  ExerciseType exerciseType;
+  ExerciseInTrainingEntity exerciseInTrainingEntity;
 
   static ExerciseInheritedWidget of(BuildContext context) {
     final result =
@@ -33,13 +31,7 @@ class ExerciseInheritedWidget extends InheritedWidget {
 
   @override
   bool updateShouldNotify(ExerciseInheritedWidget oldWidget) {
-    return setsController != oldWidget.setsController ||
-        secondController != oldWidget.secondController ||
-        thirdController != oldWidget.thirdController ||
-        trainerNoteController != oldWidget.trainerNoteController ||
-        supersetController != oldWidget.supersetController ||
-        exerciseType != oldWidget.exerciseType ||
-        exerciseDetailScreenType != oldWidget.exerciseDetailScreenType ||
-        timeBreakController != oldWidget.timeBreakController;
+    return exerciseInTrainingEntity != oldWidget.exerciseInTrainingEntity ||
+        exerciseDetailScreenType != oldWidget.exerciseDetailScreenType;
   }
 }

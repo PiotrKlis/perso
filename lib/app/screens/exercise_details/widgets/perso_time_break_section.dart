@@ -6,16 +6,6 @@ import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 
 class PersoTimeBreakSection extends StatefulWidget {
-  const PersoTimeBreakSection({
-    required int timeBreak,
-    required GlobalKey<FormState> formKey,
-    super.key,
-  })  : _formKey = formKey,
-        _timeBreak = timeBreak;
-
-  final int _timeBreak;
-  final GlobalKey<FormState> _formKey;
-
   @override
   State<PersoTimeBreakSection> createState() => _PersoTimeBreakSectionState();
 }
@@ -25,15 +15,9 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
   String _localTimeBreak = '60';
 
   @override
-  void initState() {
-    super.initState();
-    _localTimeBreak = widget._timeBreak.toString();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final textEditControllers = ExerciseInheritedWidget.of(context);
-    textEditControllers.timeBreakController.text = _localTimeBreak;
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
+    exerciseInheritedWidget.timeBreakController.text = _localTimeBreak;
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -70,10 +54,11 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
               top: Dimens.mMargin,
             ),
             child: Form(
-              key: widget._formKey,
+              key: exerciseInheritedWidget.breakFormKey,
               child: PersoTextField(
                 isEnabled: _shouldShowTimeBreak,
-                textEditingController: textEditControllers.timeBreakController,
+                textEditingController:
+                    exerciseInheritedWidget.timeBreakController,
                 textInputType: TextInputType.number,
                 title: 'Time break (seconds)',
                 customValidator: TextFieldValidator.validateDigits,

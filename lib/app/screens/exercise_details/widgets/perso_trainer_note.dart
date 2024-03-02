@@ -5,14 +5,14 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 
 class PersoTrainerNote extends StatelessWidget {
-  const PersoTrainerNote({required this.trainerNote, super.key});
-
-  final String trainerNote;
-
   @override
   Widget build(BuildContext context) {
     final textEditControllers = ExerciseInheritedWidget.of(context);
-    textEditControllers.trainerNoteController.text = trainerNote;
+    textEditControllers.trainerNoteController.text = textEditControllers
+        .exerciseInTrainingEntity
+        .exerciseEntity
+        .exerciseOptionsData
+        .trainerNote;
     return Container(
       margin: const EdgeInsets.all(
         Dimens.mMargin,

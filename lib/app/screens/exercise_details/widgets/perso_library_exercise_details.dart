@@ -34,21 +34,16 @@ class PersoLibraryExerciseDetails extends StatelessWidget {
       child: ExerciseInheritedWidget(
         exerciseInTrainingEntity: _exerciseInTrainingEntity,
         exerciseDetailScreenType: ExerciseDetailScreenType.library,
-        exerciseType: _exerciseInTrainingEntity
-            .exerciseEntity.exerciseOptionsData.exerciseType,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            PersoVideoPlayer(),
-            PersoExerciseCategories(),
-            PersoDescriptionSection(),
-            PersoExerciseOptionsSection(),
-            PersoTimeBreakSection(
-              formKey: _breaksFormKey,
-            ),
+            const PersoVideoPlayer(),
+            const PersoExerciseCategories(),
+            const PersoDescriptionSection(),
+            const PersoExerciseOptionsSection(),
+            PersoTimeBreakSection(),
             const PersoSupersetSection(),
-            PersoTrainerNote(
-            ),
+            PersoTrainerNote(),
             Container(
               margin: const EdgeInsets.all(Dimens.mMargin),
               child: PersoExerciseDetailsSaveButton(

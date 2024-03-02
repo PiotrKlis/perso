@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.dart';
-import 'package:perso/app/screens/exercise_details/widgets/perso_plan_overview_exercise_details.dart';
+import 'package:perso/app/screens/exercise_details/widgets/perso_trainer_plan_overview_exercise_details.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 
@@ -27,7 +27,7 @@ class PlanOverviewExerciseDetailsScreen extends StatelessWidget {
         appBar: PersoAppBar(
           title: _exerciseInTrainingEntity.exerciseEntity.title,
         ),
-        body: PersoPlanOverviewExerciseDetails(
+        body: PersoTrainerPlanOverviewExerciseDetails(
           clientId: _clientId,
           date: _date,
           exerciseInTrainingEntity: _exerciseInTrainingEntity,
