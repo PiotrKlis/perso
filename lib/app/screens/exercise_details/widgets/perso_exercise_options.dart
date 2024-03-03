@@ -18,15 +18,13 @@ class PersoExerciseOptionsSection extends StatefulWidget {
 class PersoExerciseOptionsSectionState
     extends State<PersoExerciseOptionsSection> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-    final localExerciseType = exerciseInheritedWidget.exerciseInTrainingEntity
-        .exerciseEntity.exerciseOptionsData.exerciseType;
+    final selectedExerciseType = exerciseInheritedWidget
+        .exerciseInTrainingEntity
+        .exerciseEntity
+        .exerciseOptionsData
+        .exerciseType;
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -44,26 +42,12 @@ class PersoExerciseOptionsSectionState
                   (exerciseType) => RadioListTile(
                     title: Text(exerciseType.value),
                     value: exerciseType,
-                    groupValue: localExerciseType,
-                    onChanged: (exerciseType) {
-                      if (exerciseType != exerciseType) {
+                    groupValue: selectedExerciseType,
+                    onChanged: (newExerciseType) {
+                      if (newExerciseType != selectedExerciseType) {
                         setState(() {
-                          final updatedExerciseEntity = exerciseInheritedWidget
-                              .exerciseInTrainingEntity.exerciseEntity
-                              .copyWith(
-                            exerciseOptionsData: exerciseInheritedWidget
-                                .exerciseInTrainingEntity
-                                .exerciseEntity
-                                .exerciseOptionsData
-                                .copyWith(
-                              exerciseType: exerciseType!,
-                            ),
-                          );
-                          exerciseInheritedWidget.exerciseInTrainingEntity =
-                              exerciseInheritedWidget.exerciseInTrainingEntity
-                                  .copyWith(
-                            exerciseEntity: updatedExerciseEntity,
-                          );
+                          exerciseInheritedWidget
+                              .updateExerciseType(newExerciseType!);
                         });
                       }
                     },

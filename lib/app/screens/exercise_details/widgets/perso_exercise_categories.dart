@@ -9,7 +9,6 @@ class PersoExerciseCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-
     return Container(
       margin: const EdgeInsets.symmetric(vertical: Dimens.sMargin),
       child: PersoCategoryChips(

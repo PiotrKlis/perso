@@ -14,12 +14,6 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
   late VideoPlayerController _videoPlayerController;
 
   @override
-  void initState() {
-    super.initState();
-    // initVideoPlayerController();
-  }
-
-  @override
   void dispose() {
     _videoPlayerController.dispose();
     super.dispose();
@@ -28,8 +22,9 @@ class _PersoVideoPlayerState extends State<PersoVideoPlayer> {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-    initVideoPlayerController(exerciseInheritedWidget
-        .exerciseInTrainingEntity.exerciseEntity.videoId);
+    initVideoPlayerController(
+      exerciseInheritedWidget.exerciseInTrainingEntity.exerciseEntity.videoId,
+    );
     return SizedBox(
       height: Dimens.videoPlayerHeight,
       child: FutureBuilder(

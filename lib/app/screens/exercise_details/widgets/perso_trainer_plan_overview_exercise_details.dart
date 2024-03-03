@@ -24,14 +24,15 @@ class PersoTrainerPlanOverviewExerciseDetails extends StatelessWidget {
   final String _clientId;
   final String _date;
   final ExerciseInTrainingEntity _exerciseInTrainingEntity;
-  final GlobalKey<FormState> _optionsFormKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> _breaksFormKey = GlobalKey<FormState>();
 
+//TODO: Ten przepisz na reużywalny widget
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ExerciseInheritedWidget(
-        exerciseDetailScreenType: ExerciseDetailScreenType.trainer,
+        clientId: _clientId,
+        date: _date,
+        exerciseDetailScreenType: ExerciseDetailsScreenType.trainer,
         exerciseInTrainingEntity: _exerciseInTrainingEntity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,13 +44,7 @@ class PersoTrainerPlanOverviewExerciseDetails extends StatelessWidget {
             PersoTimeBreakSection(),
             const PersoSupersetSection(),
             PersoTrainerNote(),
-            PersoExerciseDetailsButtonsSection(
-              clientId: _clientId,
-              date: _date,
-              breaksFormKey: _breaksFormKey,
-              optionsFormKey: _optionsFormKey,
-              exerciseInTrainingEntity: _exerciseInTrainingEntity,
-            ),
+            PersoExerciseDetailsButtonsSection(),
           ],
         ),
       ),

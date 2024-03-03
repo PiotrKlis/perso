@@ -9,7 +9,6 @@ class PersoDescriptionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(

@@ -4,7 +4,7 @@ import 'package:perso/app/screens/chat/chat_channel_screen.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_profile/client_profile_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
-import 'package:perso/app/screens/exercise_details/library_exercise_details_screen.dart';
+import 'package:perso/app/screens/exercise_details/exercise_details_screen.dart';
 import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:perso/app/screens/home/home_screen.dart';
@@ -46,6 +46,7 @@ class NavigationConstants {
   static const input = 'input';
   static const date = 'date';
   static const exerciseInTrainingEntity = 'exerciseInTrainingEntity';
+  static const exerciseDetailsScreenType = 'exerciseDetailsScreenType';
 }
 
 final GoRouter goRouter = GoRouter(
@@ -327,11 +328,13 @@ final GoRouter goRouter = GoRouter(
                       path: ScreenNavigationKey.exerciseDetails,
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
-                          child: LibraryExerciseDetailsScreen(
+                          child: ExerciseDetailsScreen(
                             clientId: state.uri
                                 .queryParameters[NavigationConstants.clientId]!,
                             date: state
                                 .uri.queryParameters[NavigationConstants.date]!,
+                            exerciseDetailScreenType: state.uri.queryParameters[
+                                NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
                                 state.extra! as ExerciseInTrainingEntity,
                           ),

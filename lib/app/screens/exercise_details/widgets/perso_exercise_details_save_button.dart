@@ -5,39 +5,21 @@ import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.da
 import 'package:perso/app/screens/exercise_details/event/exercise_details_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
 class PersoExerciseDetailsSaveButton extends StatelessWidget {
-  const PersoExerciseDetailsSaveButton({
-    required String clientId,
-    required String date,
-    required GlobalKey<FormState> optionsFormKey,
-    required GlobalKey<FormState> breaksFormKey,
-    required ExerciseInTrainingEntity exerciseInTrainingEntity,
-    super.key,
-  })  : _exerciseInTrainingEntity = exerciseInTrainingEntity,
-        _breaksFormKey = breaksFormKey,
-        _clientId = clientId,
-        _date = date,
-        _optionsFormKey = optionsFormKey;
-
-  final String _clientId;
-  final String _date;
-  final GlobalKey<FormState> _optionsFormKey;
-  final GlobalKey<FormState> _breaksFormKey;
-  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  const PersoExerciseDetailsSaveButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-    final exerciseOptionsData =
-        _exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData;
+    final exerciseOptionsData = exerciseInheritedWidget
+        .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData;
     return PersoButton(
       title: 'Save',
       onTap: (context) {
-        if (_optionsFormKey.currentState!.validate() &&
-            _breaksFormKey.currentState!.validate()) {
+        if (exerciseInheritedWidget.optionsFormKey.currentState!.validate() &&
+            exerciseInheritedWidget.breakFormKey.currentState!.validate()) {
           final optionsData = switch (exerciseOptionsData.exerciseType) {
             ExerciseType.repsBased => exerciseOptionsData.copyWith(
                 exerciseType: ExerciseType.repsBased,
@@ -125,14 +107,10 @@ class PersoExerciseDetailsSaveButton extends StatelessWidget {
           };
           context.read<ExerciseDetailsBloc>().add(
                 ExerciseDetailsEvent.saveExercise(
-                  clientId: _clientId,
-                  date: _date,
-                  exerciseInTrainingEntity: _exerciseInTrainingEntity.copyWith(
-                    exerciseEntity:
-                        _exerciseInTrainingEntity.exerciseEntity.copyWith(
-                      exerciseOptionsData: optionsData,
-                    ),
-                  ),
+                  clientId: exerciseInheritedWidget.clientId,
+                  date: exerciseInheritedWidget.date,
+                  exerciseInTrainingEntity:
+                      exerciseInheritedWidget.updateOptionsData(optionsData),
                 ),
               );
           context.pop();

@@ -6,18 +6,21 @@ import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 
 class PersoTimeBreakSection extends StatefulWidget {
+  const PersoTimeBreakSection({super.key});
+
   @override
   State<PersoTimeBreakSection> createState() => _PersoTimeBreakSectionState();
 }
 
 class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
   bool _shouldShowTimeBreak = true;
-  String _localTimeBreak = '60';
 
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-    exerciseInheritedWidget.timeBreakController.text = _localTimeBreak;
+    exerciseInheritedWidget.timeBreakController.text = exerciseInheritedWidget
+        .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData.timeBreak
+        .toString();
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -40,9 +43,9 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
                   setState(() {
                     _shouldShowTimeBreak = value;
                     if (!value) {
-                      _localTimeBreak = '0';
+                      exerciseInheritedWidget.updateTimeBreak(0);
                     } else {
-                      _localTimeBreak = '60';
+                      exerciseInheritedWidget.updateTimeBreak(60);
                     }
                   });
                 },

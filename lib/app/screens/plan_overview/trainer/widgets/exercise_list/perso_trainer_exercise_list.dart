@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bloc/trainer_exercise_list_bloc.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
@@ -194,6 +195,8 @@ class _Exercise extends StatelessWidget {
                     queryParameters: {
                       NavigationConstants.clientId: _clientId,
                       NavigationConstants.date: _date,
+                      NavigationConstants.exerciseDetailsScreenType:
+                          ExerciseDetailsScreenType.trainer.name,
                     },
                     extra: _exerciseInTraining,
                   )

@@ -5,6 +5,8 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 
 class PersoTrainerNote extends StatelessWidget {
+  const PersoTrainerNote({super.key});
+
   @override
   Widget build(BuildContext context) {
     final textEditControllers = ExerciseInheritedWidget.of(context);
