@@ -11,6 +11,7 @@ import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_option
 import 'package:perso/app/screens/exercise_details/widgets/perso_superset_section.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_time_break_section.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_trainer_note.dart';
+import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
@@ -57,7 +58,7 @@ class ExerciseDetailsScreen extends StatelessWidget {
                 PersoTimeBreakSection(),
                 PersoSupersetSection(),
                 PersoTrainerNote(),
-                _ButtonSection()
+                _ButtonSection(),
               ],
             ),
           ),
@@ -77,8 +78,10 @@ class _ButtonSection extends StatelessWidget {
       ExerciseDetailsScreenType.client => Container(),
       ExerciseDetailsScreenType.trainer =>
         const PersoExerciseDetailsButtonsSection(),
-      ExerciseDetailsScreenType.library =>
-        const PersoExerciseDetailsSaveButton(),
+      ExerciseDetailsScreenType.library => Container(
+          margin: const EdgeInsets.all(Dimens.mMargin),
+          child: const PersoExerciseDetailsSaveButton(),
+        ),
     };
   }
 }

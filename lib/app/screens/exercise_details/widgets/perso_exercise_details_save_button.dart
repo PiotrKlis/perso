@@ -13,7 +13,6 @@ class PersoExerciseDetailsSaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-
     return PersoButton(
       title: 'Save',
       onTap: (context) {
