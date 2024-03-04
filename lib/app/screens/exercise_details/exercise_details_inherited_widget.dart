@@ -64,6 +64,18 @@ class ExerciseInheritedWidget extends InheritedWidget {
     );
   }
 
+  void updateSuperset(String supersetName) {
+    exerciseInTrainingEntity = exerciseInTrainingEntity.copyWith(
+      exerciseEntity: exerciseInTrainingEntity.exerciseEntity.copyWith(
+        exerciseOptionsData: exerciseInTrainingEntity
+            .exerciseEntity.exerciseOptionsData
+            .copyWith(
+          supersetName: supersetName,
+        ),
+      ),
+    );
+  }
+
   ExerciseInTrainingEntity updateOptionsData(ExerciseOptionsData optionsData) {
     return exerciseInTrainingEntity.copyWith(
       exerciseEntity: exerciseInTrainingEntity.exerciseEntity.copyWith(

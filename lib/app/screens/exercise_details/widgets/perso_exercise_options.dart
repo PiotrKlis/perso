@@ -14,7 +14,7 @@ class PersoExerciseOptionsSection extends StatefulWidget {
   State<PersoExerciseOptionsSection> createState() =>
       PersoExerciseOptionsSectionState();
 }
-
+//TODO: Nie updatuje po zmianie checkboxa opcji
 class PersoExerciseOptionsSectionState
     extends State<PersoExerciseOptionsSection> {
   @override

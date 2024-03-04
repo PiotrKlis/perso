@@ -33,6 +33,12 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
+    final supersetName = exerciseInheritedWidget.exerciseInTrainingEntity
+        .exerciseEntity.exerciseOptionsData.supersetName;
+    if (supersetName.isNotEmpty) {
+      _isEnabled = true;
+      _selectedSuperset = supersetName;
+    }
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
@@ -56,9 +62,11 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
                     _isEnabled = value;
                     if (!value) {
                       exerciseInheritedWidget.supersetController.text = '';
+                      exerciseInheritedWidget.updateSuperset('');
                     } else {
                       exerciseInheritedWidget.supersetController.text =
                           _selectedSuperset;
+                      exerciseInheritedWidget.updateSuperset(_selectedSuperset);
                     }
                   });
                 },

@@ -13,13 +13,14 @@ class PersoExerciseDetailsSaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-    final exerciseOptionsData = exerciseInheritedWidget
-        .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData;
+
     return PersoButton(
       title: 'Save',
       onTap: (context) {
         if (exerciseInheritedWidget.optionsFormKey.currentState!.validate() &&
             exerciseInheritedWidget.breakFormKey.currentState!.validate()) {
+          final exerciseOptionsData = exerciseInheritedWidget
+              .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData;
           final optionsData = switch (exerciseOptionsData.exerciseType) {
             ExerciseType.repsBased => exerciseOptionsData.copyWith(
                 exerciseType: ExerciseType.repsBased,

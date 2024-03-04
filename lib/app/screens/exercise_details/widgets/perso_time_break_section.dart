@@ -18,9 +18,13 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
   @override
   Widget build(BuildContext context) {
     final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
-    exerciseInheritedWidget.timeBreakController.text = exerciseInheritedWidget
-        .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData.timeBreak
-        .toString();
+    final timeBreakValue = exerciseInheritedWidget
+        .exerciseInTrainingEntity.exerciseEntity.exerciseOptionsData.timeBreak;
+    exerciseInheritedWidget.timeBreakController.text =
+        timeBreakValue.toString();
+    if (timeBreakValue == 0) {
+      _shouldShowTimeBreak = false;
+    }
     return Container(
       margin: const EdgeInsets.all(Dimens.mMargin),
       child: Column(
