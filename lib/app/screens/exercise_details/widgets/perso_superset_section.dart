@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoSupersetSection extends StatefulWidget {
@@ -58,6 +59,10 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
               Switch(
                 value: _isEnabled,
                 onChanged: (value) {
+                  if (exerciseInheritedWidget.exerciseDetailScreenType ==
+                      ExerciseDetailsScreenType.client) {
+                    return;
+                  }
                   setState(() {
                     _isEnabled = value;
                     if (!value) {

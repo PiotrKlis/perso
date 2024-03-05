@@ -10,6 +10,7 @@ import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
@@ -80,7 +81,7 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
         color: PersoColors.lightBlue,
         child: Column(
           children: [
-            _ExercisesHeaderRow(widget.trainerId),
+            _ExercisesHeaderRow(),
             PersoClientExerciseList(
               trainerId: widget.trainerId,
             ),
@@ -92,16 +93,13 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
 }
 
 class _ExercisesHeaderRow extends StatefulWidget {
-  const _ExercisesHeaderRow(this._trainerId);
-
-  final String _trainerId;
 
   @override
   State<_ExercisesHeaderRow> createState() => _ExercisesHeaderRowState();
 }
 
 class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
-  List<ExerciseEntity> _exercises = [];
+  List<ExerciseInTrainingEntity> _exercises = [];
 
   @override
   Widget build(BuildContext context) {

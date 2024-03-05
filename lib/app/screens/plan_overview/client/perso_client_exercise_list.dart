@@ -8,10 +8,8 @@ import 'package:perso/app/screens/plan_overview/client/state/client_exercise_lis
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
-import 'package:perso/app/utils/uuid_generator.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
-import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
@@ -82,14 +80,14 @@ class _PersoClientExerciseListState extends State<PersoClientExerciseList> {
 
 class _Exercise extends StatelessWidget {
   const _Exercise({
-    required ExerciseEntity exerciseEntity,
+    required ExerciseInTrainingEntity exerciseEntity,
     required String clientId,
     required String date,
   })  : _date = date,
         _clientId = clientId,
-        _exerciseEntity = exerciseEntity;
+        _exerciseInTrainingEntity = exerciseEntity;
 
-  final ExerciseEntity _exerciseEntity;
+  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
   final String _clientId;
   final String _date;
 
@@ -106,25 +104,26 @@ class _Exercise extends StatelessWidget {
         child: ColoredBox(
           color: Colors.white,
           child: ListTile(
-            leading: _getIconForTags(_exerciseEntity.tags),
+            leading:
+                _getIconForTags(_exerciseInTrainingEntity.exerciseEntity.tags),
             title: Text(
-              _exerciseEntity.title,
+              _exerciseInTrainingEntity.exerciseEntity.title,
               style: ThemeText.bodyBoldBlackText,
             ),
             subtitle: getSubtitle(
-              _exerciseEntity.exerciseOptionsData.supersetName,
+              _exerciseInTrainingEntity
+                  .exerciseEntity.exerciseOptionsData.supersetName,
             ),
-            trailing: const Icon(Icons.reorder),
             onTap: () {
               context.pushNamed(
-                ScreenNavigationKey.exerciseDetails,
+                ScreenNavigationKey.exerciseDetailsClient,
                 queryParameters: {
                   NavigationConstants.clientId: _clientId,
                   NavigationConstants.date: _date,
                   NavigationConstants.exerciseDetailsScreenType:
-                  ExerciseDetailsScreenType.client.toString(),
+                      ExerciseDetailsScreenType.client.name,
                 },
-                // extra: _exerciseInTraining,
+                extra: _exerciseInTrainingEntity,
               );
             },
           ),

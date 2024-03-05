@@ -12,7 +12,10 @@ class ClientExerciseListBloc
 
     on<GetExercises>((event, emitter) async {
       final exercises = await _exercisesProvider.getExercisesForClient(
-          clientId: clientId, date: event.date, trainerId: event.trainerId);
+        clientId: clientId,
+        date: event.date,
+        trainerId: event.trainerId,
+      );
       emitter(ClientExerciseListState.exercises(exercises));
     });
   }

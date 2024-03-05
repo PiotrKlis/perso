@@ -72,7 +72,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<List<ExerciseEntity>> getExercisesForClient({
+  Future<List<ExerciseInTrainingEntity>> getExercisesForClient({
     required String clientId,
     required String trainerId,
     required String date,
@@ -87,7 +87,12 @@ class FirestoreExerciseProvider extends ExerciseSource {
 
     return Future.wait(
       snapshots.docs
-          .map((exercise) async => _exerciseEntityMapper.map(exercise))
+          .map(
+            (exercise) async => ExerciseInTrainingEntity(
+              id: exercise.id,
+              exerciseEntity: _exerciseEntityMapper.map(exercise),
+            ),
+          )
           .toList(),
     );
   }

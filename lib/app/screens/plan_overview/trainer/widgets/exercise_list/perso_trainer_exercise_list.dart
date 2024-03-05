@@ -191,7 +191,7 @@ class _Exercise extends StatelessWidget {
               final bloc = context.read<TrainerExerciseListBloc>();
               await context
                   .pushNamed(
-                    ScreenNavigationKey.exerciseDetails,
+                    ScreenNavigationKey.exerciseDetailsTrainer,
                     queryParameters: {
                       NavigationConstants.clientId: _clientId,
                       NavigationConstants.date: _date,

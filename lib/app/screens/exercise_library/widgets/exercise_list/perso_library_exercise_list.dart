@@ -130,15 +130,14 @@ class _Exercise extends StatelessWidget {
             subtitle: getSubtitle(
               _exerciseEntity.exerciseOptionsData.supersetName,
             ),
-            trailing: const Icon(Icons.reorder),
             onTap: () {
               context.pushNamed(
-                ScreenNavigationKey.exerciseDetails,
+                ScreenNavigationKey.exerciseDetailsLibrary,
                 queryParameters: {
                   NavigationConstants.clientId: _clientId,
                   NavigationConstants.date: _date,
                   NavigationConstants.exerciseDetailsScreenType:
-                  ExerciseDetailsScreenType.library.name,
+                      ExerciseDetailsScreenType.library.name,
                 },
                 extra: ExerciseInTrainingEntity(
                   id: UuidGenerator.generateShortUuid(),

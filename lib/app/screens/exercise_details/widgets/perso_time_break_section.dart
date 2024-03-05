@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
@@ -44,6 +45,10 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
               Switch(
                 value: _shouldShowTimeBreak,
                 onChanged: (value) {
+                  if (exerciseInheritedWidget.exerciseDetailScreenType ==
+                      ExerciseDetailsScreenType.client) {
+                    return;
+                  }
                   setState(() {
                     _shouldShowTimeBreak = value;
                     if (!value) {
@@ -63,7 +68,9 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
             child: Form(
               key: exerciseInheritedWidget.breakFormKey,
               child: PersoTextField(
-                isEnabled: _shouldShowTimeBreak,
+                isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
+                        ExerciseDetailsScreenType.client &&
+                    _shouldShowTimeBreak,
                 textEditingController:
                     exerciseInheritedWidget.timeBreakController,
                 textInputType: TextInputType.number,
@@ -71,7 +78,7 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
                 customValidator: TextFieldValidator.validateDigits,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

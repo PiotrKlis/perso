@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
@@ -9,8 +10,8 @@ class PersoTrainerNote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textEditControllers = ExerciseInheritedWidget.of(context);
-    textEditControllers.trainerNoteController.text = textEditControllers
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
+    exerciseInheritedWidget.trainerNoteController.text = exerciseInheritedWidget
         .exerciseInTrainingEntity
         .exerciseEntity
         .exerciseOptionsData
@@ -27,14 +28,32 @@ class PersoTrainerNote extends StatelessWidget {
             margin: const EdgeInsets.only(top: Dimens.mMargin),
             height: 140,
             child: PersoTextField(
-              title: 'Write a note for the client on the exercise...',
+              isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
+                  ExerciseDetailsScreenType.client,
+              title: _getTitle(
+                exerciseInheritedWidget.exerciseDetailScreenType,
+                exerciseInheritedWidget.trainerNoteController.text,
+              ),
               isMultiLine: true,
               maxLength: 150,
-              textEditingController: textEditControllers.trainerNoteController,
+              textEditingController:
+                  exerciseInheritedWidget.trainerNoteController,
             ),
           ),
         ],
       ),
     );
+  }
+
+  //TODO: Test if title works correctly, check why new trainings are not fetched on client plan overview
+  String _getTitle(
+    ExerciseDetailsScreenType exerciseDetailScreenType,
+    String text,
+  ) {
+    if (exerciseDetailScreenType == ExerciseDetailsScreenType.client) {
+      return text;
+    } else {
+      return 'Write a note for the client on the exercise...';
+    }
   }
 }

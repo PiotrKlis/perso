@@ -10,7 +10,7 @@ abstract class ExerciseSource {
     String date,
   );
 
-  Future<List<ExerciseEntity>> getExercisesForClient({
+  Future<List<ExerciseInTrainingEntity>> getExercisesForClient({
     required String clientId,
     required String trainerId,
     required String date,

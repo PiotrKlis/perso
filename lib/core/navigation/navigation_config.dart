@@ -231,49 +231,67 @@ final GoRouter goRouter = GoRouter(
               },
             ),
             GoRoute(
-                name: ScreenNavigationKey.clientTrainings,
-                path: ScreenNavigationKey.clientTrainings,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return const NoTransitionPage(child: ClientTrainingsScreen());
-                },
-                redirect: (context, state) {
-                  if (_userSessionModel.isUserLoggedIn) {
-                    if (_userSessionModel.userType == UserType.trainer) {
-                      return ScreenNavigationKey.trainerClientsList;
-                    }
-                  } else {
-                    return ScreenNavigationKey.loggedOutTrainings;
+              name: ScreenNavigationKey.clientTrainings,
+              path: ScreenNavigationKey.clientTrainings,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return const NoTransitionPage(child: ClientTrainingsScreen());
+              },
+              redirect: (context, state) {
+                if (_userSessionModel.isUserLoggedIn) {
+                  if (_userSessionModel.userType == UserType.trainer) {
+                    return ScreenNavigationKey.trainerClientsList;
                   }
-                  return null;
-                },
-                routes: [
-                  GoRoute(
-                    name: ScreenNavigationKey.clientPlanOverview,
-                    path: ScreenNavigationKey.clientPlanOverview,
-                    pageBuilder: (BuildContext context, GoRouterState state) {
-                      return NoTransitionPage(
-                        child: ClientPlanOverviewScreen(
-                          trainerId: state.uri
-                              .queryParameters[NavigationConstants.trainerId]!,
-                        ),
-                      );
-                    },
-                    routes: [
-                      GoRoute(
-                        name: ScreenNavigationKey.training,
-                        path: ScreenNavigationKey.training,
-                        pageBuilder:
-                            (BuildContext context, GoRouterState state) {
-                          return NoTransitionPage(
-                            child: TrainingScreen(
-                              exercises: state.extra! as List<ExerciseEntity>,
-                            ),
-                          );
-                        },
+                } else {
+                  return ScreenNavigationKey.loggedOutTrainings;
+                }
+                return null;
+              },
+              routes: [
+                GoRoute(
+                  name: ScreenNavigationKey.clientPlanOverview,
+                  path: ScreenNavigationKey.clientPlanOverview,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return NoTransitionPage(
+                      child: ClientPlanOverviewScreen(
+                        trainerId: state.uri
+                            .queryParameters[NavigationConstants.trainerId]!,
                       ),
-                    ],
-                  )
-                ]),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      name: ScreenNavigationKey.training,
+                      path: ScreenNavigationKey.training,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return NoTransitionPage(
+                          child: TrainingScreen(
+                            exercises: state.extra! as List<ExerciseEntity>,
+                          ),
+                        );
+                      },
+                    ),
+                    GoRoute(
+                      name: ScreenNavigationKey.exerciseDetailsClient,
+                      path: ScreenNavigationKey.exerciseDetails,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return NoTransitionPage(
+                          child: ExerciseDetailsScreen(
+                            clientId: state.uri
+                                .queryParameters[NavigationConstants.clientId]!,
+                            date: state
+                                .uri.queryParameters[NavigationConstants.date]!,
+                            exerciseDetailScreenType: state.uri.queryParameters[
+                                NavigationConstants.exerciseDetailsScreenType]!,
+                            exerciseInTrainingEntity:
+                                state.extra! as ExerciseInTrainingEntity,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
             GoRoute(
               name: ScreenNavigationKey.trainerClientsList,
               path: ScreenNavigationKey.trainerClientsList,
@@ -310,21 +328,7 @@ final GoRouter goRouter = GoRouter(
                   },
                   routes: [
                     GoRoute(
-                      name: ScreenNavigationKey.exerciseLibrary,
-                      path: ScreenNavigationKey.exerciseLibrary,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return NoTransitionPage(
-                          child: ExerciseLibraryScreen(
-                            clientId: state.uri
-                                .queryParameters[NavigationConstants.clientId]!,
-                            selectedDate: state
-                                .uri.queryParameters[NavigationConstants.date]!,
-                          ),
-                        );
-                      },
-                    ),
-                    GoRoute(
-                      name: ScreenNavigationKey.exerciseDetails,
+                      name: ScreenNavigationKey.exerciseDetailsTrainer,
                       path: ScreenNavigationKey.exerciseDetails,
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
@@ -340,6 +344,43 @@ final GoRouter goRouter = GoRouter(
                           ),
                         );
                       },
+                    ),
+                    GoRoute(
+                      name: ScreenNavigationKey.exerciseLibrary,
+                      path: ScreenNavigationKey.exerciseLibrary,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return NoTransitionPage(
+                          child: ExerciseLibraryScreen(
+                            clientId: state.uri
+                                .queryParameters[NavigationConstants.clientId]!,
+                            selectedDate: state
+                                .uri.queryParameters[NavigationConstants.date]!,
+                          ),
+                        );
+                      },
+                      routes: [
+                        GoRoute(
+                          name: ScreenNavigationKey.exerciseDetailsLibrary,
+                          path: ScreenNavigationKey.exerciseDetails,
+                          pageBuilder:
+                              (BuildContext context, GoRouterState state) {
+                            return NoTransitionPage(
+                              child: ExerciseDetailsScreen(
+                                clientId: state.uri.queryParameters[
+                                    NavigationConstants.clientId]!,
+                                date: state.uri
+                                    .queryParameters[NavigationConstants.date]!,
+                                exerciseDetailScreenType:
+                                    state.uri.queryParameters[
+                                        NavigationConstants
+                                            .exerciseDetailsScreenType]!,
+                                exerciseInTrainingEntity:
+                                    state.extra! as ExerciseInTrainingEntity,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),

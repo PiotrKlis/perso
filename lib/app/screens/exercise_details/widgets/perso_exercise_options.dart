@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
+import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/screens/exercise_details/model/exercise_options_data.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
@@ -14,7 +15,7 @@ class PersoExerciseOptionsSection extends StatefulWidget {
   State<PersoExerciseOptionsSection> createState() =>
       PersoExerciseOptionsSectionState();
 }
-//TODO: Nie updatuje po zmianie checkboxa opcji
+
 class PersoExerciseOptionsSectionState
     extends State<PersoExerciseOptionsSection> {
   @override
@@ -44,6 +45,10 @@ class PersoExerciseOptionsSectionState
                     value: exerciseType,
                     groupValue: selectedExerciseType,
                     onChanged: (newExerciseType) {
+                      if (exerciseInheritedWidget.exerciseDetailScreenType ==
+                          ExerciseDetailsScreenType.client) {
+                        return;
+                      }
                       if (newExerciseType != selectedExerciseType) {
                         setState(() {
                           exerciseInheritedWidget
@@ -77,15 +82,17 @@ class _ExerciseOptionsFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textEditControllers = ExerciseInheritedWidget.of(context);
-    _updateTextControllers(_exerciseOptionsData, textEditControllers);
+    final exerciseInheritedWidget = ExerciseInheritedWidget.of(context);
+    _updateTextControllers(_exerciseOptionsData, exerciseInheritedWidget);
     return Container(
       margin: const EdgeInsets.only(top: Dimens.mMargin),
       child: Row(
         children: [
           Expanded(
             child: PersoTextField(
-              textEditingController: textEditControllers.setsController,
+              isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
+                  ExerciseDetailsScreenType.client,
+              textEditingController: exerciseInheritedWidget.setsController,
               textInputType: TextInputType.number,
               title: 'Sets',
               customValidator: TextFieldValidator.validateDigits,
@@ -96,7 +103,9 @@ class _ExerciseOptionsFields extends StatelessWidget {
           ),
           Expanded(
             child: PersoTextField(
-              textEditingController: textEditControllers.secondController,
+              isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
+                  ExerciseDetailsScreenType.client,
+              textEditingController: exerciseInheritedWidget.secondController,
               textInputType: TextInputType.number,
               title: _getSecondFieldTitle(
                 _exerciseOptionsData.exerciseType,
@@ -112,7 +121,9 @@ class _ExerciseOptionsFields extends StatelessWidget {
                 _exerciseOptionsData.exerciseType != ExerciseType.repsInReserve,
             child: Expanded(
               child: PersoTextField(
-                textEditingController: textEditControllers.thirdController,
+                isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
+                    ExerciseDetailsScreenType.client,
+                textEditingController: exerciseInheritedWidget.thirdController,
                 textInputType: TextInputType.number,
                 title: _getThirdFieldTitle(
                   _exerciseOptionsData.exerciseType,
