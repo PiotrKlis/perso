@@ -374,7 +374,7 @@ class _SurnameSection extends StatelessWidget {
       ),
       child: PersoTextField(
         textEditingController: surnameController,
-        title: context.strings.surname,
+        hintText: context.strings.surname,
         customValidator: TextFieldValidator.validateIsEmpty,
       ),
     );
@@ -407,7 +407,7 @@ class _NameSection extends StatelessWidget {
                 right: Dimens.xmMargin,
               ),
               child: PersoTextField(
-                title: context.strings.name,
+                hintText: context.strings.name,
                 textEditingController: nameController,
                 customValidator: TextFieldValidator.validateIsEmpty,
               ),
@@ -501,7 +501,7 @@ class _TrainerOnlySection extends StatelessWidget {
                       left: Dimens.xmMargin,
                     ),
                     child: PersoTextField(
-                      title: context.strings.short_bio,
+                      hintText: context.strings.short_bio,
                       customValidator: TextFieldValidator.validateIsEmpty,
                       isMultiLine: true,
                       maxLength: 150,
@@ -520,7 +520,7 @@ class _TrainerOnlySection extends StatelessWidget {
               right: Dimens.xmMargin,
             ),
             child: PersoTextField(
-              title: context.strings.long_bio,
+              hintText: context.strings.long_bio,
               isMultiLine: true,
               maxLength: 500,
               customValidator: TextFieldValidator.validateIsEmpty,

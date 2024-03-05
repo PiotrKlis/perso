@@ -51,16 +51,19 @@ class _PersoClientExerciseListState extends State<PersoClientExerciseList> {
         builder: (context, state) {
           return state.when(
             exercises: (exercises) {
-              return ListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: exercises.map((exercise) {
-                  return _Exercise(
-                    exerciseEntity: exercise,
-                    clientId: widget.trainerId,
-                    date: _selectedDate,
-                  );
-                }).toList(),
+              return Container(
+                margin: const EdgeInsets.all(Dimens.sMargin),
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: exercises.map((exercise) {
+                    return _Exercise(
+                      exerciseEntity: exercise,
+                      clientId: widget.trainerId,
+                      date: _selectedDate,
+                    );
+                  }).toList(),
+                ),
               );
             },
             error: (error) {
@@ -95,8 +98,6 @@ class _Exercise extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        left: Dimens.sMargin,
-        right: Dimens.sMargin,
         top: Dimens.sMargin,
       ),
       child: ClipRRect(

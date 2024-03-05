@@ -67,7 +67,7 @@ class SignInScreen extends StatelessWidget {
                           right: Dimens.xmMargin,
                         ),
                         child: PersoTextField(
-                          title: context.strings.login,
+                          hintText: context.strings.login,
                           textEditingController: _loginController,
                           customValidator: TextFieldValidator.validateIsEmpty,
                         ),
@@ -79,7 +79,7 @@ class SignInScreen extends StatelessWidget {
                           right: Dimens.xmMargin,
                         ),
                         child: PersoTextField(
-                          title: context.strings.password,
+                          hintText: context.strings.password,
                           shouldObscureText: true,
                           textEditingController: _passwordController,
                           customValidator: TextFieldValidator.validateIsEmpty,

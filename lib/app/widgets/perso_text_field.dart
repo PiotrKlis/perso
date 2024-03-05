@@ -5,7 +5,7 @@ import 'package:perso/app/utils/validators.dart';
 
 class PersoTextField extends StatefulWidget {
   const PersoTextField({
-    required String title,
+    String? hintText,
     super.key,
     String? Function(String)? customValidator,
     bool shouldObscureText = false,
@@ -21,13 +21,13 @@ class PersoTextField extends StatefulWidget {
         _textInputType = textInputType,
         _shouldObscureText = shouldObscureText,
         _customValidator = customValidator,
-        _title = title,
+        _hintText = hintText,
         _textEditingController = textEditingController,
         _confirmPasswordController = confirmPasswordController,
         _isEnabled = isEnabled,
         _passwordController = passwordController;
 
-  final String _title;
+  final String? _hintText;
   final String? Function(String value)? _customValidator;
   final bool _shouldObscureText;
   final bool _isEnabled;
@@ -69,7 +69,7 @@ class _PersoTextFieldState extends State<PersoTextField> {
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
         ),
-        labelText: widget._title,
+        labelText: widget._hintText,
         labelStyle: ThemeText.bodyRegularGreyText,
       ),
     );

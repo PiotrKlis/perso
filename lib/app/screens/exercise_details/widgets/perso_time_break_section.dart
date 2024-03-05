@@ -74,7 +74,7 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
                 textEditingController:
                     exerciseInheritedWidget.timeBreakController,
                 textInputType: TextInputType.number,
-                title: 'Time break (seconds)',
+                hintText: 'Time break (seconds)',
                 customValidator: TextFieldValidator.validateDigits,
               ),
             ),

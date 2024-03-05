@@ -30,10 +30,6 @@ class PersoTrainerNote extends StatelessWidget {
             child: PersoTextField(
               isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
                   ExerciseDetailsScreenType.client,
-              title: _getTitle(
-                exerciseInheritedWidget.exerciseDetailScreenType,
-                exerciseInheritedWidget.trainerNoteController.text,
-              ),
               isMultiLine: true,
               maxLength: 150,
               textEditingController:

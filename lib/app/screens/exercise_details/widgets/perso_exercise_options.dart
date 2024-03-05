@@ -94,7 +94,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
                   ExerciseDetailsScreenType.client,
               textEditingController: exerciseInheritedWidget.setsController,
               textInputType: TextInputType.number,
-              title: 'Sets',
+              hintText: 'Sets',
               customValidator: TextFieldValidator.validateDigits,
             ),
           ),
@@ -107,7 +107,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
                   ExerciseDetailsScreenType.client,
               textEditingController: exerciseInheritedWidget.secondController,
               textInputType: TextInputType.number,
-              title: _getSecondFieldTitle(
+              hintText: _getSecondFieldTitle(
                 _exerciseOptionsData.exerciseType,
               ),
               customValidator: TextFieldValidator.validateDigits,
@@ -125,7 +125,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
                     ExerciseDetailsScreenType.client,
                 textEditingController: exerciseInheritedWidget.thirdController,
                 textInputType: TextInputType.number,
-                title: _getThirdFieldTitle(
+                hintText: _getThirdFieldTitle(
                   _exerciseOptionsData.exerciseType,
                 ),
                 customValidator: TextFieldValidator.validateDigits,

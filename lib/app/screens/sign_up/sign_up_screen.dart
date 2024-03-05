@@ -70,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
                             right: Dimens.xmMargin,
                           ),
                           child: PersoTextField(
-                            title: context.strings.email,
+                            hintText: context.strings.email,
                             textEditingController: _loginController,
                             customValidator: TextFieldValidator.validateEmail,
                           ),
@@ -106,7 +106,7 @@ class SignUpScreen extends StatelessWidget {
                             right: Dimens.xmMargin,
                           ),
                           child: PersoTextField(
-                            title: context.strings.password,
+                            hintText: context.strings.password,
                             customValidator:
                                 TextFieldValidator.validatePassword,
                             shouldObscureText: true,
@@ -128,7 +128,7 @@ class SignUpScreen extends StatelessWidget {
                             right: Dimens.xmMargin,
                           ),
                           child: PersoTextField(
-                            title: context.strings.confirm_password,
+                            hintText: context.strings.confirm_password,
                             passwordController: _passwordController,
                             confirmPasswordController:
                                 _confirmPasswordController,
