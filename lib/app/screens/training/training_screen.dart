@@ -37,7 +37,11 @@ class _TrainingScreenContent extends StatelessWidget {
             exerciseInProgress: (exerciseEntity) => ExercisesInProgressScreen(
               exercise: exerciseEntity,
             ),
-            trainingBreak: ExerciseBreakScreen.new,
+            trainingBreak: (breakEntity) {
+              return ExerciseBreakScreen(
+                breakEntity: breakEntity,
+              );
+            },
           );
         },
       ),

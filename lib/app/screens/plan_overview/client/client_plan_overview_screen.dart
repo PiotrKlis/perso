@@ -93,7 +93,6 @@ class _ExercisesOverviewState extends State<_ExercisesOverview> {
 }
 
 class _ExercisesHeaderRow extends StatefulWidget {
-
   @override
   State<_ExercisesHeaderRow> createState() => _ExercisesHeaderRowState();
 }
@@ -126,10 +125,12 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
               width: Dimens.sButtonWidth,
               title: 'Start',
               onTap: (context) {
-                if (_exercises.isNotEmpty) {
+                final exerciseEntityList =
+                    _exercises.map((e) => e.exerciseEntity).toList();
+                if (exerciseEntityList.isNotEmpty) {
                   context.pushNamed(
                     ScreenNavigationKey.training,
-                    extra: _exercises,
+                    extra: exerciseEntityList,
                   );
                 }
               },

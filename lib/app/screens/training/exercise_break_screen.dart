@@ -3,9 +3,12 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/models/break_entity.dart';
 
 class ExerciseBreakScreen extends StatelessWidget {
-  const ExerciseBreakScreen({super.key});
+  const ExerciseBreakScreen({required this.breakEntity, super.key});
+
+  final BreakEntity breakEntity;
 
   @override
   Widget build(BuildContext context) {

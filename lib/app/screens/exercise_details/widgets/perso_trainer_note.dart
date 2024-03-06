@@ -28,6 +28,9 @@ class PersoTrainerNote extends StatelessWidget {
             margin: const EdgeInsets.only(top: Dimens.mMargin),
             height: 140,
             child: PersoTextField(
+              hintText: _getTitle(
+                exerciseInheritedWidget.exerciseDetailScreenType,
+              ),
               isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
                   ExerciseDetailsScreenType.client,
               isMultiLine: true,
@@ -42,12 +45,11 @@ class PersoTrainerNote extends StatelessWidget {
   }
 
   //TODO: Test if title works correctly, check why new trainings are not fetched on client plan overview
-  String _getTitle(
+  String? _getTitle(
     ExerciseDetailsScreenType exerciseDetailScreenType,
-    String text,
   ) {
     if (exerciseDetailScreenType == ExerciseDetailsScreenType.client) {
-      return text;
+      return null;
     } else {
       return 'Write a note for the client on the exercise...';
     }
