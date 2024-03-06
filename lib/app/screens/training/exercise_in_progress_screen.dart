@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/training/bloc/training_bloc.dart';
+import 'package:perso/app/screens/training/event/training_event.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
@@ -73,7 +76,11 @@ class ExercisesInProgressScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<TrainingBloc>().add(
+                        const TrainingEvent.nextExercise(),
+                      );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   shape: const CircleBorder(),
