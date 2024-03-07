@@ -34,7 +34,7 @@ class PersoTrainerNote extends StatelessWidget {
               isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
                   ExerciseDetailsScreenType.client,
               isMultiLine: true,
-              maxLength: 150,
+              maxLength: 120,
               textEditingController:
                   exerciseInheritedWidget.trainerNoteController,
             ),
@@ -44,7 +44,6 @@ class PersoTrainerNote extends StatelessWidget {
     );
   }
 
-  //TODO: Test if title works correctly, check why new trainings are not fetched on client plan overview
   String? _getTitle(
     ExerciseDetailsScreenType exerciseDetailScreenType,
   ) {

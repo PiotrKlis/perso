@@ -48,17 +48,19 @@ class ExerciseDetailsScreen extends StatelessWidget {
             exerciseDetailScreenType:
                 _exerciseDetailScreenType.toExerciseDetailsScreenType(),
             exerciseInTrainingEntity: _exerciseInTrainingEntity,
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                PersoVideoPlayer(),
-                PersoExerciseCategories(),
-                PersoDescriptionSection(),
-                PersoExerciseOptionsSection(),
-                PersoTimeBreakSection(),
-                PersoSupersetSection(),
-                PersoTrainerNote(),
-                _ButtonSection(),
+                PersoVideoPlayer(
+                  videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
+                ),
+                const PersoExerciseCategories(),
+                const PersoDescriptionSection(),
+                const PersoExerciseOptionsSection(),
+                const PersoTimeBreakSection(),
+                const PersoSupersetSection(),
+                const PersoTrainerNote(),
+                const _ButtonSection(),
               ],
             ),
           ),
