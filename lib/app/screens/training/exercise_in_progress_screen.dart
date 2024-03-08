@@ -48,28 +48,32 @@ class _ButtonsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (_exerciseType == ExerciseType.timeBased) {
-      return Row(
-        children: [
-          PersoExerciseTimer(
-            time: _time,
-          ),
-        ],
+      return PersoExerciseTimer(
+        time: _time,
       );
     } else {
-      return ElevatedButton(
-        onPressed: () {
-          context.read<TrainingBloc>().add(
-                const TrainingEvent.nextExercise(),
-              );
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.black,
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(Dimens.lMargin),
-        ),
-        child: const Icon(
-          Icons.check_rounded,
-          color: Colors.white,
+      return Expanded(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: const EdgeInsets.only(bottom: Dimens.mMargin),
+            child: ElevatedButton(
+              onPressed: () {
+                context.read<TrainingBloc>().add(
+                      const TrainingEvent.nextExercise(),
+                    );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(Dimens.lMargin),
+              ),
+              child: const Icon(
+                Icons.check_rounded,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ),
       );
     }

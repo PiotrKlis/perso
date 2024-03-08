@@ -1,29 +1,87 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:perso/app/styleguide/value/app_dimens.dart';
+import 'package:perso/app/styleguide/styleguide.dart';
 
-class PersoExerciseTimer extends StatelessWidget {
+class PersoExerciseTimer extends StatefulWidget {
   const PersoExerciseTimer({
-    required int time,
+    required this.time,
     super.key,
-  }) : _time = time;
+  });
 
-  final int _time;
+  final int time;
+
+  @override
+  State<PersoExerciseTimer> createState() => _PersoExerciseTimerState();
+}
+
+class _PersoExerciseTimerState extends State<PersoExerciseTimer> {
+  Timer? _timer;
+  bool _isPlaying = false;
+  int _currentTime = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentTime = widget.time;
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        //TODO: Do timer magic
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.black,
-        shape: const CircleBorder(),
-        padding: const EdgeInsets.all(Dimens.lMargin),
-      ),
-      child: const Icon(
-        Icons.play_arrow,
-        color: Colors.white,
+    return Expanded(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: Dimens.mMargin),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: _toggleTimer,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(Dimens.lMargin),
+                ),
+                child: Icon(
+                  _isPlaying ? Icons.pause : Icons.play_arrow,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(width: Dimens.mMargin),
+              Text(
+                '$_currentTime',
+                style: ThemeText.largerTitle,
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  void _toggleTimer() {
+    if (_isPlaying) {
+      _timer?.cancel();
+    } else {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (_currentTime > 0) {
+          setState(() {
+            _currentTime--;
+          });
+        } else {
+          timer.cancel();
+        }
+      });
+    }
+    setState(() {
+      _isPlaying = !_isPlaying;
+    });
   }
 }
