@@ -51,10 +51,14 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
             ),
           );
         } else {
-          TrainingState.exerciseInProgress(
-            _training[currentTrainingIndex] as ExerciseEntity,
+          emitter(
+            TrainingState.exerciseInProgress(
+              _training[currentTrainingIndex] as ExerciseEntity,
+            ),
           );
         }
+      } else {
+        emitter(const TrainingState.finished());
       }
     });
 
@@ -74,9 +78,6 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
         }
       }
     });
-    //TODO: Separate bloc - exercise in progress screen bloc
-    // on<Stop>((event, emitter) async {});
-    // on<Start>((event, emitter) async {});
   }
 
   void _handleSuperset(
