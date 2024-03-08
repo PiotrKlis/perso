@@ -24,22 +24,21 @@ class ExercisesInProgressScreen extends StatelessWidget {
         PersoExerciseInstructions(
           exerciseOptionsData: exercise.exerciseOptionsData,
         ),
-        _Description(exercise: exercise),
-        _TrainerNote(trainerNote: exercise.exerciseOptionsData.trainerNote),
-        _ButtonsSection(
+        _TimerSection(
           exerciseType: exercise.exerciseOptionsData.exerciseType,
           time: exercise.exerciseOptionsData.time,
         ),
+        _Description(exercise: exercise),
+        _TrainerNote(trainerNote: exercise.exerciseOptionsData.trainerNote),
+        _ButtonsSection(),
       ],
     );
   }
 }
 
-class _ButtonsSection extends StatelessWidget {
-  const _ButtonsSection({
-    required ExerciseType exerciseType,
-    required int time,
-  })  : _time = time,
+class _TimerSection extends StatelessWidget {
+  const _TimerSection({required ExerciseType exerciseType, required int time})
+      : _time = time,
         _exerciseType = exerciseType;
 
   final ExerciseType _exerciseType;
@@ -52,31 +51,73 @@ class _ButtonsSection extends StatelessWidget {
         time: _time,
       );
     } else {
-      return Expanded(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            margin: const EdgeInsets.only(bottom: Dimens.mMargin),
-            child: ElevatedButton(
-              onPressed: () {
-                context.read<TrainingBloc>().add(
-                      const TrainingEvent.nextExercise(),
-                    );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(Dimens.lMargin),
+      return Container();
+    }
+  }
+}
+
+class _ButtonsSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: Dimens.mMargin),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  context.read<TrainingBloc>().add(
+                        const TrainingEvent.nextExercise(),
+                      );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: PersoColors.lighterGrey,
+                  shape: const CircleBorder(),
+                ),
+                child: const Icon(
+                  Icons.keyboard_arrow_left,
+                  color: Colors.black,
+                ),
               ),
-              child: const Icon(
-                Icons.check_rounded,
-                color: Colors.white,
+              ElevatedButton(
+                onPressed: () {
+                  context.read<TrainingBloc>().add(
+                        const TrainingEvent.nextExercise(),
+                      );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(Dimens.lMargin),
+                ),
+                child: const Icon(
+                  Icons.check_rounded,
+                  color: Colors.white,
+                ),
               ),
-            ),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<TrainingBloc>().add(
+                        const TrainingEvent.nextExercise(),
+                      );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: PersoColors.lighterGrey,
+                  shape: const CircleBorder(),
+                ),
+                child: const Icon(
+                  Icons.keyboard_arrow_right,
+                  color: Colors.black,
+                ),
+              ),
+            ],
           ),
         ),
-      );
-    }
+      ),
+    );
   }
 }
 
@@ -96,6 +137,7 @@ class _TrainerNote extends StatelessWidget {
         right: Dimens.mMargin,
       ),
       child: Visibility(
+        visible: _trainerNote.isNotEmpty,
         child: Column(
           children: [
             Text('Trainer note', style: ThemeText.bodyBoldBlackText),

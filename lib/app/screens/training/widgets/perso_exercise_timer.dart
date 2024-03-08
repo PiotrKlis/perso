@@ -34,36 +34,35 @@ class _PersoExerciseTimerState extends State<PersoExerciseTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          margin: const EdgeInsets.only(bottom: Dimens.mMargin),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: _toggleTimer,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(Dimens.lMargin),
-                ),
-                child: Icon(
-                  _isPlaying ? Icons.pause : Icons.play_arrow,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(width: Dimens.mMargin),
-              Text(
-                '$_currentTime',
-                style: ThemeText.largerTitle,
-              ),
-            ],
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.mMargin),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            onPressed: _toggleTimer,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              shape: const CircleBorder(),
+              padding: const EdgeInsets.all(Dimens.lMargin),
+            ),
+            child: Icon(
+              _isPlaying ? Icons.pause : Icons.play_arrow,
+              color: Colors.white,
+            ),
           ),
-        ),
+          const SizedBox(width: Dimens.mMargin),
+          Text(
+            _getParsedTime(),
+            style: ThemeText.largerTitle,
+          ),
+        ],
       ),
     );
+  }
+
+  String _getParsedTime() {
+    return '${Duration(seconds: _currentTime).inMinutes.toString().padLeft(2, '0')}:${(Duration(seconds: _currentTime).inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   void _toggleTimer() {
