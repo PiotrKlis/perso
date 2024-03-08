@@ -44,7 +44,7 @@ class _PersoExerciseTimerState extends State<PersoExerciseTimer> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black,
               shape: const CircleBorder(),
-              padding: const EdgeInsets.all(Dimens.lMargin),
+              padding: const EdgeInsets.all(Dimens.mMargin),
             ),
             child: Icon(
               _isPlaying ? Icons.pause : Icons.play_arrow,

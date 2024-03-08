@@ -12,12 +12,19 @@ class LoggedOutTrainingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SafeArea(
-      child: Column(
-        children: [
-          _Image(),
-          _Title(),
-          _Subtitle(),
-          _ConfirmButton(),
+      child: CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              children: [
+                _Image(),
+                _Title(),
+                _Subtitle(),
+                _ConfirmButton(),
+              ],
+            ),
+          ),
         ],
       ),
     );

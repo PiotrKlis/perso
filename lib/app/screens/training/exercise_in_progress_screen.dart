@@ -17,20 +17,28 @@ class ExercisesInProgressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PersoVideoPlayer(videoId: exercise.videoId),
-        _Title(exerciseTitle: exercise.title),
-        PersoExerciseInstructions(
-          exerciseOptionsData: exercise.exerciseOptionsData,
+    return CustomScrollView(
+      slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Column(
+            children: [
+              PersoVideoPlayer(videoId: exercise.videoId),
+              _Title(exerciseTitle: exercise.title),
+              PersoExerciseInstructions(
+                exerciseOptionsData: exercise.exerciseOptionsData,
+              ),
+              _TimerSection(
+                exerciseType: exercise.exerciseOptionsData.exerciseType,
+                time: exercise.exerciseOptionsData.time,
+              ),
+              _Description(exercise: exercise),
+              _TrainerNote(
+                  trainerNote: exercise.exerciseOptionsData.trainerNote),
+              _ButtonsSection(),
+            ],
+          ),
         ),
-        _TimerSection(
-          exerciseType: exercise.exerciseOptionsData.exerciseType,
-          time: exercise.exerciseOptionsData.time,
-        ),
-        _Description(exercise: exercise),
-        _TrainerNote(trainerNote: exercise.exerciseOptionsData.trainerNote),
-        _ButtonsSection(),
       ],
     );
   }
@@ -63,7 +71,10 @@ class _ButtonsSection extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          margin: const EdgeInsets.only(bottom: Dimens.mMargin),
+          margin: const EdgeInsets.only(
+            bottom: Dimens.mMargin,
+            top: Dimens.mMargin,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -91,7 +102,7 @@ class _ButtonsSection extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
                   shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(Dimens.lMargin),
+                  padding: const EdgeInsets.all(Dimens.mMargin),
                 ),
                 child: const Icon(
                   Icons.check_rounded,
