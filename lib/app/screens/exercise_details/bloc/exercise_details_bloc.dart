@@ -24,8 +24,6 @@ class ExerciseDetailsBloc
       }
     });
 
-    //TODO: This should not update index if its just edit
-    //TODO: Separate this into save & edit
     on<SaveExercise>((event, emitter) async {
       try {
         final updatedExerciseEntity =
@@ -36,7 +34,7 @@ class ExerciseDetailsBloc
             event.exerciseInTrainingEntity.copyWith(
           exerciseEntity: updatedExerciseEntity,
         );
-        await _exercisesService.editExerciseOptions(
+        await _exercisesService.add(
           clientId: event.clientId,
           trainerId: trainerId,
           date: event.date,

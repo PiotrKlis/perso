@@ -4,6 +4,7 @@ import 'package:perso/app/utils/locale_repository.dart';
 @injectable
 class StringTranslationsMapper {
   String mapFrom(Map<String, dynamic> value) {
+    //TODO: Fix me
     final key = value.keys.first.split('-').first;
     final input = value.map((key, value) => MapEntry(key, value.toString()));
     switch (LocaleRepository.languageCode) {

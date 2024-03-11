@@ -1,108 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
-import 'package:perso/core/dependency_injection/get_it.dart';
-import 'package:perso/core/mappers/translations/string_list_mapper.dart';
-import 'package:perso/core/mappers/translations/string_mapper.dart';
-import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/data/exercises/exercises_service/exercise_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class FirestoreExerciseService extends ExerciseService {
-  final _stringTranslationsMapper = getIt.get<StringTranslationsMapper>();
-  final _stringListTranslationsMapper =
-      getIt.get<StringListTranslationsMapper>();
-
   @override
   Future<void> add({
-    required String clientId,
-    required String trainerId,
-    required String date,
-    required ExerciseEntity exerciseEntity,
-  }) async {
-    await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
-        .doc(trainerId)
-        .collection(CollectionName.clients)
-        .doc(clientId)
-        .collection(date)
-        .doc()
-        .set({
-      UserDocumentFields.id: exerciseEntity.id,
-      UserDocumentFields.description: _stringTranslationsMapper.mapTo(
-        UserDocumentFields.description,
-        exerciseEntity.description,
-      ),
-      UserDocumentFields.index: exerciseEntity.index,
-      UserDocumentFields.reps: exerciseEntity.exerciseOptionsData.reps,
-      UserDocumentFields.sets: exerciseEntity.exerciseOptionsData.sets,
-      UserDocumentFields.tags: _stringListTranslationsMapper.mapTo(
-        UserDocumentFields.tags,
-        exerciseEntity.tags,
-      ),
-      UserDocumentFields.time: exerciseEntity.exerciseOptionsData.time,
-      UserDocumentFields.title: _stringTranslationsMapper.mapTo(
-        UserDocumentFields.title,
-        exerciseEntity.title,
-      ),
-      UserDocumentFields.videoId: exerciseEntity.videoId,
-      UserDocumentFields.exerciseType:
-          exerciseEntity.exerciseOptionsData.exerciseType?.name,
-      UserDocumentFields.timeBreak:
-          exerciseEntity.exerciseOptionsData.timeBreak,
-      UserDocumentFields.supersetName:
-          exerciseEntity.exerciseOptionsData.supersetName,
-      UserDocumentFields.repsInReserve:
-          exerciseEntity.exerciseOptionsData.repsInReserve,
-      UserDocumentFields.rateOfPerceivedExertion:
-          exerciseEntity.exerciseOptionsData.rateOfPerceivedExertion,
-      UserDocumentFields.maxPercentage:
-          exerciseEntity.exerciseOptionsData.maxPercentage,
-      UserDocumentFields.trainerNote:
-          exerciseEntity.exerciseOptionsData.trainerNote,
-      UserDocumentFields.weight: exerciseEntity.exerciseOptionsData.weight,
-    });
-  }
-
-  @override
-  Future<void> editExerciseOptions({
     required String clientId,
     required String trainerId,
     required String date,
     required ExerciseInTrainingEntity exerciseInTrainingEntity,
   }) async {
     final exerciseEntity = exerciseInTrainingEntity.exerciseEntity;
-    final exerciseInTrainingId = exerciseInTrainingEntity.id;
-    await FirebaseFirestore.instance
+    final exerciseToBeCopied = await FirebaseFirestore.instance
+        .collection(CollectionName.exercises)
+        .doc(exerciseEntity.id)
+        .get();
+
+    final path = FirebaseFirestore.instance
         .collection(CollectionName.trainers)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
         .collection(date)
-        .doc(exerciseInTrainingId)
-        .set({
-      UserDocumentFields.id: exerciseEntity.id,
-      UserDocumentFields.description: _stringTranslationsMapper.mapTo(
-        UserDocumentFields.description,
-        exerciseEntity.description,
-      ),
+        .doc(exerciseInTrainingEntity.id);
+    await path.set(exerciseToBeCopied.data()!);
+
+    await path.update({
       UserDocumentFields.index: exerciseEntity.index,
       UserDocumentFields.reps: exerciseEntity.exerciseOptionsData.reps,
       UserDocumentFields.sets: exerciseEntity.exerciseOptionsData.sets,
-      UserDocumentFields.tags: _stringListTranslationsMapper.mapTo(
-        UserDocumentFields.tags,
-        exerciseEntity.tags,
-      ),
       UserDocumentFields.time: exerciseEntity.exerciseOptionsData.time,
-      UserDocumentFields.title: _stringTranslationsMapper.mapTo(
-        UserDocumentFields.title,
-        exerciseEntity.title,
-      ),
-      UserDocumentFields.videoId: exerciseEntity.videoId,
       UserDocumentFields.exerciseType:
-          exerciseEntity.exerciseOptionsData.exerciseType?.name,
+          exerciseEntity.exerciseOptionsData.exerciseType.name,
       UserDocumentFields.timeBreak:
           exerciseEntity.exerciseOptionsData.timeBreak,
       UserDocumentFields.supersetName:
