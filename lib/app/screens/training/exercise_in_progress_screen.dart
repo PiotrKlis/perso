@@ -22,15 +22,21 @@ class ExercisesInProgressScreen extends StatelessWidget {
         SliverFillRemaining(
           hasScrollBody: false,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               PersoVideoPlayer(videoId: exercise.videoId),
               _Title(exerciseTitle: exercise.title),
-              PersoExerciseInstructions(
-                exerciseOptionsData: exercise.exerciseOptionsData,
-              ),
-              _TimerSection(
-                exerciseType: exercise.exerciseOptionsData.exerciseType,
-                time: exercise.exerciseOptionsData.time,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PersoExerciseInstructions(
+                    exerciseOptionsData: exercise.exerciseOptionsData,
+                  ),
+                  _TimerSection(
+                    exerciseType: exercise.exerciseOptionsData.exerciseType,
+                    time: exercise.exerciseOptionsData.time,
+                  ),
+                ],
               ),
               _Description(exercise: exercise),
               _TrainerNote(
@@ -73,7 +79,7 @@ class _ButtonsSection extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.only(
             bottom: Dimens.mMargin,
-            top: Dimens.mMargin,
+            top: Dimens.lMargin,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -198,13 +204,15 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: Dimens.sMargin,
-      ),
-      child: Text(
-        _exerciseTitle,
-        style: ThemeText.bodyBoldBlackText,
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.only(
+          top: Dimens.mMargin,
+        ),
+        child: Text(
+          _exerciseTitle,
+          style: ThemeText.bodyBoldBlackText,
+        ),
       ),
     );
   }

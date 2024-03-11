@@ -31,43 +31,49 @@ class PersoExerciseInstructions extends StatelessWidget {
               ),
               Visibility(
                 visible: _exerciseOptions.weight > 0,
-                child: Row(
-                  children: [
-                    Text('Weight: ', style: ThemeText.bodyRegularBlackText),
-                    Text(
-                      '${_exerciseOptions.weight} kg',
-                      style: ThemeText.bodyRegularBlackText,
-                    ),
-                  ],
+                child: Text(
+                  'Weight: ${_exerciseOptions.weight} kg',
+                  style: ThemeText.bodyRegularBlackText,
+                ),
+              ),
+              Visibility(
+                visible: _exerciseOptions.supersetName.isNotEmpty,
+                child: Text(
+                  'Superset: ${_exerciseOptions.supersetName}',
+                  style: ThemeText.bodyRegularBlackText,
                 ),
               ),
             ],
           ),
         ),
       ExerciseType.timeBased => Container(
-          margin: const EdgeInsets.only(top: Dimens.sMargin),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          margin:
+              const EdgeInsets.only(top: Dimens.sMargin, left: Dimens.mMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text('Time: ', style: ThemeText.bodyRegularBlackText),
-                  Text(
-                    '${_exerciseOptions.time} seconds',
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ],
+              Text(
+                'Time: ${_exerciseOptions.time} seconds',
+                style: ThemeText.bodyRegularBlackText,
               ),
               Visibility(
                 visible: _exerciseOptions.weight > 0,
-                child: Row(
-                  children: [
-                    Text('Weight: ', style: ThemeText.bodyRegularBlackText),
-                    Text(
-                      '${_exerciseOptions.weight} kg',
-                      style: ThemeText.bodyRegularBlackText,
-                    ),
-                  ],
+                child: Container(
+                  margin: const EdgeInsets.only(top: Dimens.sMargin),
+                  child: Text(
+                    'Weight: ${_exerciseOptions.weight} kg',
+                    style: ThemeText.bodyRegularBlackText,
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: _exerciseOptions.supersetName.isNotEmpty,
+                child: Container(
+                  margin: const EdgeInsets.only(top: Dimens.sMargin),
+                  child: Text(
+                    'Superset: ${_exerciseOptions.supersetName}',
+                    style: ThemeText.bodyRegularBlackText,
+                  ),
                 ),
               ),
             ],
@@ -78,28 +84,22 @@ class PersoExerciseInstructions extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                children: [
-                  Text(
-                    'Repetitions in reserve: ',
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                  Text(
-                    _exerciseOptions.repsInReserve.toString(),
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ],
+              Text(
+                'Repetitions in reserve: ${_exerciseOptions.repsInReserve}',
+                style: ThemeText.bodyRegularBlackText,
               ),
               Visibility(
                 visible: _exerciseOptions.weight > 0,
-                child: Row(
-                  children: [
-                    Text('Weight: ', style: ThemeText.bodyRegularBlackText),
-                    Text(
-                      '${_exerciseOptions.weight} kg',
-                      style: ThemeText.bodyRegularBlackText,
-                    ),
-                  ],
+                child: Text(
+                  'Weight: ${_exerciseOptions.weight} kg',
+                  style: ThemeText.bodyRegularBlackText,
+                ),
+              ),
+              Visibility(
+                visible: _exerciseOptions.supersetName.isNotEmpty,
+                child: Text(
+                  'Superset: ${_exerciseOptions.supersetName}',
+                  style: ThemeText.bodyRegularBlackText,
                 ),
               ),
             ],
@@ -110,58 +110,48 @@ class PersoExerciseInstructions extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Row(
-                children: [
-                  Text(
-                    'Rate of perceived exertion: ',
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                  Text(
-                    _exerciseOptions.rateOfPerceivedExertion.toString(),
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ],
+              Text(
+                'Rate of perceived exertion: ${_exerciseOptions.rateOfPerceivedExertion}',
+                style: ThemeText.bodyRegularBlackText,
               ),
               Visibility(
                 visible: _exerciseOptions.weight > 0,
-                child: Row(
-                  children: [
-                    Text('Weight: ', style: ThemeText.bodyRegularBlackText),
-                    Text(
-                      '${_exerciseOptions.weight} kg',
-                      style: ThemeText.bodyRegularBlackText,
-                    ),
-                  ],
+                child: Text(
+                  'Weight: ${_exerciseOptions.weight} kg',
+                  style: ThemeText.bodyRegularBlackText,
+                ),
+              ),
+              Visibility(
+                visible: _exerciseOptions.supersetName.isNotEmpty,
+                child: Text(
+                  'Superset: ${_exerciseOptions.supersetName}',
+                  style: ThemeText.bodyRegularBlackText,
                 ),
               ),
             ],
           ),
         ),
-      ExerciseType.maxPercentage => Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Repetitions: ', style: ThemeText.bodyRegularBlackText),
-                Text(
-                  _exerciseOptions.reps.toString(),
+      ExerciseType.maxPercentage => Container(
+          margin: const EdgeInsets.only(top: Dimens.sMargin),
+          child: Row(
+            children: [
+              Text(
+                'Repetitions: ${_exerciseOptions.reps}',
+                style: ThemeText.bodyRegularBlackText,
+              ),
+              Text(
+                'Max %: ${_exerciseOptions.maxPercentage}',
+                style: ThemeText.bodyRegularBlackText,
+              ),
+              Visibility(
+                visible: _exerciseOptions.supersetName.isNotEmpty,
+                child: Text(
+                  'Superset: ${_exerciseOptions.supersetName}',
                   style: ThemeText.bodyRegularBlackText,
                 ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: Dimens.sMargin),
-              child: Row(
-                children: [
-                  Text('Max %: ', style: ThemeText.bodyRegularBlackText),
-                  Text(
-                    _exerciseOptions.maxPercentage.toString(),
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
     };
   }

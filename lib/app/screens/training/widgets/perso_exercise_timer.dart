@@ -35,7 +35,7 @@ class _PersoExerciseTimerState extends State<PersoExerciseTimer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.mMargin),
+      margin: const EdgeInsets.only(top: Dimens.mMargin, right: Dimens.mMargin),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
