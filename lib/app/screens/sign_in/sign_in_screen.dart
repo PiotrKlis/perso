@@ -43,7 +43,7 @@ class SignInScreen extends StatelessWidget {
                     child: const Align(
                       heightFactor: 0.5,
                       child: Image(
-                        image: AssetImage("assets/icon/logo-black-white.png"),
+                        image: AssetImage("assets/icon/logo-white.png"),
                       ),
                     ),
                   ),
