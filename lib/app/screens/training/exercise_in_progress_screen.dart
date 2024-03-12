@@ -5,6 +5,8 @@ import 'package:perso/app/screens/training/event/training_event.dart';
 import 'package:perso/app/screens/training/widgets/perso_exercise_instructions.dart';
 import 'package:perso/app/screens/training/widgets/perso_exercise_timer.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
@@ -40,7 +42,8 @@ class ExercisesInProgressScreen extends StatelessWidget {
               ),
               _Description(exercise: exercise),
               _TrainerNote(
-                  trainerNote: exercise.exerciseOptionsData.trainerNote),
+                trainerNote: exercise.exerciseOptionsData.trainerNote,
+              ),
               _ButtonsSection(),
             ],
           ),
@@ -156,7 +159,10 @@ class _TrainerNote extends StatelessWidget {
       child: Visibility(
         visible: _trainerNote.isNotEmpty,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const PersoDivider(),
+            const SizedBox(height: Dimens.mMargin),
             Text('Trainer note', style: ThemeText.bodyBoldBlackText),
             Container(
               margin: const EdgeInsets.only(top: Dimens.sMargin),
@@ -204,15 +210,14 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: const EdgeInsets.only(
-          top: Dimens.mMargin,
-        ),
-        child: Text(
-          _exerciseTitle,
-          style: ThemeText.bodyBoldBlackText,
-        ),
+    return Container(
+      margin: const EdgeInsets.only(
+        left: Dimens.mMargin,
+        top: Dimens.mMargin,
+      ),
+      child: Text(
+        _exerciseTitle,
+        style: ThemeText.largerTitleBold,
       ),
     );
   }

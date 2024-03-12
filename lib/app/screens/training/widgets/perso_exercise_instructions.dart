@@ -16,33 +16,14 @@ class PersoExerciseInstructions extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (_exerciseOptions.exerciseType) {
       ExerciseType.repsBased => Container(
-          margin: const EdgeInsets.only(top: Dimens.mMargin),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          margin:
+              const EdgeInsets.only(top: Dimens.sMargin, left: Dimens.mMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text('Repetitions: ', style: ThemeText.bodyRegularBlackText),
-                  Text(
-                    _exerciseOptions.reps.toString(),
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ],
-              ),
-              Visibility(
-                visible: _exerciseOptions.weight > 0,
-                child: Text(
-                  'Weight: ${_exerciseOptions.weight} kg',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
-              Visibility(
-                visible: _exerciseOptions.supersetName.isNotEmpty,
-                child: Text(
-                  'Superset: ${_exerciseOptions.supersetName}',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
+              _Reps(exerciseOptions: _exerciseOptions),
+              _Weight(exerciseOptions: _exerciseOptions),
+              _Superset(exerciseOptions: _exerciseOptions),
             ],
           ),
         ),
@@ -52,107 +33,178 @@ class PersoExerciseInstructions extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Time: ${_exerciseOptions.time} seconds',
-                style: ThemeText.bodyRegularBlackText,
-              ),
-              Visibility(
-                visible: _exerciseOptions.weight > 0,
-                child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.sMargin),
-                  child: Text(
-                    'Weight: ${_exerciseOptions.weight} kg',
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ),
-              ),
-              Visibility(
-                visible: _exerciseOptions.supersetName.isNotEmpty,
-                child: Container(
-                  margin: const EdgeInsets.only(top: Dimens.sMargin),
-                  child: Text(
-                    'Superset: ${_exerciseOptions.supersetName}',
-                    style: ThemeText.bodyRegularBlackText,
-                  ),
-                ),
-              ),
+              _Time(exerciseOptions: _exerciseOptions),
+              _Weight(exerciseOptions: _exerciseOptions),
+              _Superset(exerciseOptions: _exerciseOptions),
             ],
           ),
         ),
       ExerciseType.repsInReserve => Container(
-          margin: const EdgeInsets.only(top: Dimens.sMargin),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          margin:
+              const EdgeInsets.only(top: Dimens.sMargin, left: Dimens.mMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Repetitions in reserve: ${_exerciseOptions.repsInReserve}',
-                style: ThemeText.bodyRegularBlackText,
-              ),
-              Visibility(
-                visible: _exerciseOptions.weight > 0,
-                child: Text(
-                  'Weight: ${_exerciseOptions.weight} kg',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
-              Visibility(
-                visible: _exerciseOptions.supersetName.isNotEmpty,
-                child: Text(
-                  'Superset: ${_exerciseOptions.supersetName}',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
+              _RepsInReserve(exerciseOptions: _exerciseOptions),
+              _Weight(exerciseOptions: _exerciseOptions),
+              _Superset(exerciseOptions: _exerciseOptions),
             ],
           ),
         ),
       ExerciseType.rateOfPerceivedExertion => Container(
-          margin: const EdgeInsets.only(top: Dimens.sMargin),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          margin:
+              const EdgeInsets.only(top: Dimens.sMargin, left: Dimens.mMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Rate of perceived exertion: ${_exerciseOptions.rateOfPerceivedExertion}',
-                style: ThemeText.bodyRegularBlackText,
-              ),
-              Visibility(
-                visible: _exerciseOptions.weight > 0,
-                child: Text(
-                  'Weight: ${_exerciseOptions.weight} kg',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
-              Visibility(
-                visible: _exerciseOptions.supersetName.isNotEmpty,
-                child: Text(
-                  'Superset: ${_exerciseOptions.supersetName}',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
+              _RateOfPerceivedExertion(exerciseOptions: _exerciseOptions),
+              _Weight(exerciseOptions: _exerciseOptions),
+              _Superset(exerciseOptions: _exerciseOptions),
             ],
           ),
         ),
       ExerciseType.maxPercentage => Container(
-          margin: const EdgeInsets.only(top: Dimens.sMargin),
-          child: Row(
+          margin:
+              const EdgeInsets.only(top: Dimens.sMargin, left: Dimens.mMargin),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Repetitions: ${_exerciseOptions.reps}',
-                style: ThemeText.bodyRegularBlackText,
-              ),
-              Text(
-                'Max %: ${_exerciseOptions.maxPercentage}',
-                style: ThemeText.bodyRegularBlackText,
-              ),
-              Visibility(
-                visible: _exerciseOptions.supersetName.isNotEmpty,
-                child: Text(
-                  'Superset: ${_exerciseOptions.supersetName}',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-              ),
+              _Reps(exerciseOptions: _exerciseOptions),
+              _MaxPercent(exerciseOptions: _exerciseOptions),
+              _Superset(exerciseOptions: _exerciseOptions),
             ],
           ),
         ),
     };
+  }
+}
+
+class _Time extends StatelessWidget {
+  const _Time({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Time: ${_exerciseOptions.time} seconds',
+      style: ThemeText.bodyRegularBlackText,
+    );
+  }
+}
+
+class _RepsInReserve extends StatelessWidget {
+  const _RepsInReserve({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Repetitions in reserve: ${_exerciseOptions.repsInReserve}',
+      style: ThemeText.bodyRegularBlackText,
+    );
+  }
+}
+
+class _RateOfPerceivedExertion extends StatelessWidget {
+  const _RateOfPerceivedExertion({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Rate of perceived exertion: ${_exerciseOptions.rateOfPerceivedExertion}',
+      style: ThemeText.bodyRegularBlackText,
+    );
+  }
+}
+
+class _Weight extends StatelessWidget {
+  const _Weight({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: _exerciseOptions.weight > 0,
+      child: Container(
+        margin: const EdgeInsets.only(top: Dimens.sMargin),
+        child: Text(
+          'Weight: ${_exerciseOptions.weight} kg',
+          style: ThemeText.bodyRegularBlackText,
+        ),
+      ),
+    );
+  }
+}
+
+class _Superset extends StatelessWidget {
+  const _Superset({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: _exerciseOptions.supersetName.isNotEmpty,
+      child: Container(
+        margin: const EdgeInsets.only(top: Dimens.sMargin),
+        child: Text(
+          'Superset: ${_exerciseOptions.supersetName}',
+          style: ThemeText.bodyRegularBlackText,
+        ),
+      ),
+    );
+  }
+}
+
+class _MaxPercent extends StatelessWidget {
+  const _MaxPercent({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: _exerciseOptions.weight > 0,
+      child: Container(
+        margin: const EdgeInsets.only(top: Dimens.sMargin),
+        child: Text(
+          'Max %: ${_exerciseOptions.maxPercentage}',
+          style: ThemeText.bodyRegularBlackText,
+        ),
+      ),
+    );
+  }
+}
+
+class _Reps extends StatelessWidget {
+  const _Reps({
+    required ExerciseOptionsData exerciseOptions,
+  }) : _exerciseOptions = exerciseOptions;
+
+  final ExerciseOptionsData _exerciseOptions;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Repetitions: ${_exerciseOptions.reps}',
+      style: ThemeText.bodyRegularBlackText,
+    );
   }
 }

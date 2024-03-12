@@ -75,5 +75,5 @@ class Dimens {
 
   static const double whiteBackground = 100;
 
-  static const double videoPlayerHeight = 320;
+  static const double videoPlayerHeight = 260;
 }

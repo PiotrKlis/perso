@@ -6,6 +6,7 @@ import 'package:perso/app/utils/chat_client.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/locale_repository.dart';
 import 'package:perso/app/utils/localisation_keys.dart';
+import 'package:perso/app/widgets/internet_connection.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/data/shared_prefs/perso_shared_prefs.dart';
@@ -14,7 +15,7 @@ import 'package:perso/data/user_info/user_info_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // await ChatClient.initializeClient();
+  await ChatClient.initializeClient();
   configureDependencies(Environment.dev);
   LocaleRepository.init();
   runApp(MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
     //TODO: Move these into "build before" component
     _userInfoProvider.listenForFirebaseUserChange();
     _persoSharedPrefs.init();
+    const InternetConnection();
     return Theme(
       data: ThemeData(
         primaryColor: Colors.white,
