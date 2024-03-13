@@ -21,7 +21,7 @@ class FirestoreTrainersService implements TrainersService {
       final serverImagePath = await _uploadImage(trainerData.imagePath);
       final id = _userSessionModel.user?.uid;
       await FirebaseFirestore.instance
-          .collection(CollectionName.trainers)
+          .collection(CollectionName.users)
           .doc(id)
           .set({
         UserDocumentFields.fullBio: trainerData.fullBio,
@@ -48,7 +48,7 @@ class FirestoreTrainersService implements TrainersService {
       final serverImagePath = await _uploadImage(trainerEntity.imagePath);
       final id = _userSessionModel.user?.uid;
       await FirebaseFirestore.instance
-          .collection(CollectionName.trainers)
+          .collection(CollectionName.users)
           .doc(id)
           .set({
         UserDocumentFields.fullBio: trainerEntity.fullBio,
@@ -70,7 +70,6 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.imagePath: serverImagePath,
         UserDocumentFields.latLng: trainerEntity.latLng.toJson(),
       });
-      return Future.value();
     } catch (error) {
       //TODO: Add error handling
       return Future.error(error);
@@ -109,7 +108,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> activateClient(String clientId) async {
     final trainerId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(trainerId)
         .update({
       UserDocumentFields.pendingClients: FieldValue.arrayRemove([clientId]),
@@ -118,7 +117,7 @@ class FirestoreTrainersService implements TrainersService {
     });
 
     await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+        .collection(CollectionName.users)
         .doc(clientId)
         .update({
       UserDocumentFields.pendingTrainers: FieldValue.arrayRemove([trainerId]),
@@ -131,7 +130,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> deactivateClient(String clientId) async {
     final trainerId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(trainerId)
         .update({
       UserDocumentFields.inactiveClients: FieldValue.arrayUnion([clientId]),
@@ -139,7 +138,7 @@ class FirestoreTrainersService implements TrainersService {
     });
 
     await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+        .collection(CollectionName.users)
         .doc(clientId)
         .update({
       UserDocumentFields.inactiveTrainers: FieldValue.arrayUnion([trainerId]),
@@ -151,7 +150,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> removeClient(String clientId) async {
     final trainerId = _userSessionModel.user?.uid;
     await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(trainerId)
         .update({
       UserDocumentFields.pendingClients: FieldValue.arrayRemove([clientId]),
@@ -159,7 +158,7 @@ class FirestoreTrainersService implements TrainersService {
     });
 
     await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+        .collection(CollectionName.users)
         .doc(clientId)
         .update({
       UserDocumentFields.pendingTrainers: FieldValue.arrayRemove([trainerId]),

@@ -4,6 +4,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/mappers/trainer_entity_mapper.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/string_extensions.dart';
 import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
@@ -15,7 +16,8 @@ class FirestoreTrainersProvider implements TrainersSource {
   @override
   Future<List<TrainerEntity>> getAllTrainersData() async {
     final QuerySnapshot trainersSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.userType, isEqualTo: UserType.trainer.name)
         .get();
 
     return trainersSnapshot.docs
@@ -26,7 +28,7 @@ class FirestoreTrainersProvider implements TrainersSource {
   @override
   Stream<TrainerEntity> getTrainerData(String id) async* {
     final snapshots = FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(id)
         .snapshots();
 
@@ -39,7 +41,7 @@ class FirestoreTrainersProvider implements TrainersSource {
   @override
   Future<List<String>> getSpecialities(String id) async {
     final QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .where(UserDocumentFields.id, isEqualTo: id)
         .get();
 
@@ -55,7 +57,7 @@ class FirestoreTrainersProvider implements TrainersSource {
     String clientId,
   ) async {
     final trainersSnapshots = await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+        .collection(CollectionName.users)
         .doc(clientId)
         .get();
 
@@ -68,7 +70,7 @@ class FirestoreTrainersProvider implements TrainersSource {
       trainersIds.map(
         (trainerId) async {
           final trainerSnapshot = await FirebaseFirestore.instance
-              .collection(CollectionName.trainers)
+              .collection(CollectionName.users)
               .doc(trainerId)
               .get();
 

@@ -5,19 +5,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_client_data.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
+import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/clients/clients_service/clients_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
 class FirestoreClientsService implements ClientsService {
+  final _userSessionModel = getIt.get<UserSessionModel>();
   @override
   Future<void> uploadFullClientData(ClientEntity clientEntity) async {
+    final id = _userSessionModel.user?.uid;
     final serverImagePath = await _uploadImage(clientEntity.imagePath);
     await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
-        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection(CollectionName.users)
+        .doc(id)
         .set({
       UserDocumentFields.name: clientEntity.name,
       UserDocumentFields.nickname: clientEntity.nickname,
@@ -33,10 +37,11 @@ class FirestoreClientsService implements ClientsService {
 
   @override
   Future<void> updateData(EditableClientData editableClientData) async {
+    final id = _userSessionModel.user?.uid;
     final serverImagePath = await _uploadImage(editableClientData.imagePath);
     await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
-        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection(CollectionName.users)
+        .doc(id)
         .update({
       UserDocumentFields.name: editableClientData.name,
       UserDocumentFields.nickname: editableClientData.nickname,

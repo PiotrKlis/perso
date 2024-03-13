@@ -1,4 +1,3 @@
-import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 
 abstract class ExerciseService {

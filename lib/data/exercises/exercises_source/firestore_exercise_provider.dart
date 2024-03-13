@@ -35,7 +35,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
     String date,
   ) async {
     final snapshots = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
@@ -61,7 +61,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
     required String date,
   }) async {
     final snapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
@@ -78,7 +78,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
     required String date,
   }) async {
     final snapshots = await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+        .collection(CollectionName.users)
         .doc(clientId)
         .collection(CollectionName.trainers)
         .doc(trainerId)
@@ -105,7 +105,7 @@ class FirestoreExerciseProvider extends ExerciseSource {
     DateTime endDate,
   ) async {
     final docRef = FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
+        .collection(CollectionName.users)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId);

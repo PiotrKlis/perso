@@ -12,10 +12,9 @@ class UserInfoProvider {
 
   Future<void> updateSessionModel(User user) async {
     final userType = await _getUserType(user.uid);
-    final isProfileCreated = await _isProfileCreated(user.uid, userType);
     await userSessionModel.update(
       user: user,
-      isProfileCreated: isProfileCreated,
+      isProfileCreated: userType != null,
       userType: userType,
       isEmailVerified: user.emailVerified,
     );
@@ -28,52 +27,35 @@ class UserInfoProvider {
       } else {
         userSessionModel.reset();
       }
-      //update session model
     });
   }
 
-  Future<bool> _isProfileCreated(String uid, UserType? userType) async {
-    if (userType == null) {
-      return false;
-    } else {
-      final DocumentSnapshot snapshot = await FirebaseFirestore.instance
-          .collection(userType.toCollectionName())
-          .doc(uid)
-          .get();
-      return snapshot.exists;
-    }
+  Future<bool> isNicknameUnique(String nickname) async {
+    final QuerySnapshot userSnapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .where(UserDocumentFields.nickname, isEqualTo: nickname)
+        .get();
+
+    return userSnapshot.docs.isEmpty;
   }
 
   Future<UserType?> _getUserType(String uid) async {
-    final DocumentSnapshot clientsSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.clients)
+    final DocumentSnapshot usersSnapshot = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
         .doc(uid)
         .get();
 
-    final DocumentSnapshot trainersSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
-        .doc(uid)
-        .get();
-
-    if (clientsSnapshot.exists) {
-      return UserType.client;
-    } else if (trainersSnapshot.exists) {
-      return UserType.trainer;
+    if (usersSnapshot.exists) {
+      final userType =
+          (usersSnapshot[UserDocumentFields.userType] as String).toUserType();
+      switch (userType) {
+        case UserType.trainer:
+          return UserType.trainer;
+        case UserType.client:
+          return UserType.client;
+      }
     } else {
       return null;
     }
-  }
-
-  Future<bool> isNicknameUnique(String nickname) async {
-    final QuerySnapshot trainerSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
-        .where(UserDocumentFields.nickname, isEqualTo: nickname)
-        .get();
-
-    final QuerySnapshot clientSnapshot = await FirebaseFirestore.instance
-        .collection(CollectionName.trainers)
-        .where(UserDocumentFields.nickname, isEqualTo: nickname)
-        .get();
-    return trainerSnapshot.docs.isEmpty && clientSnapshot.docs.isEmpty;
   }
 }

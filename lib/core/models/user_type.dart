@@ -3,14 +3,14 @@ import 'package:perso/data/utils/firestore_constants.dart';
 enum UserType { trainer, client }
 
 extension StringToUserType on String {
-  UserType? toUserType() {
+  UserType toUserType() {
     switch (this) {
       case 'trainer':
         return UserType.trainer;
       case 'client':
         return UserType.client;
       default:
-        return null;
+        throw Exception('Unknown user type');
     }
   }
 }

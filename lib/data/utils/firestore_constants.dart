@@ -3,6 +3,7 @@ class CollectionName {
   static String exercises = 'exercises';
   static String clients = 'clients';
   static String trainers = 'trainers';
+  static String users = 'users';
   static String tags = 'tags';
 }
 

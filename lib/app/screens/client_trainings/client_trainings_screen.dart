@@ -9,7 +9,6 @@ import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
-import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
@@ -136,6 +135,8 @@ class _TrainersView extends StatelessWidget {
                             Container(
                               margin: const EdgeInsets.only(
                                 top: Dimens.mMargin,
+                                left: Dimens.mMargin,
+                                right: Dimens.mMargin,
                               ),
                               child: Text(
                                 '${trainerIdentity.name} ${trainerIdentity.surname}',
@@ -144,7 +145,7 @@ class _TrainersView extends StatelessWidget {
                             ),
                             Container(
                               margin: const EdgeInsets.only(
-                                top: Dimens.xsMargin,
+                                top: Dimens.sMargin,
                               ),
                               child: Text(
                                 '@${trainerIdentity.nickname}',
