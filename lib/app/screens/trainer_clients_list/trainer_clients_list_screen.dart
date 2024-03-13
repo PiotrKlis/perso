@@ -47,24 +47,89 @@ class _TrainerClientsListView extends StatelessWidget {
   }
 }
 
-class _ClientsList extends StatelessWidget {
+class _ClientsList extends StatefulWidget {
   const _ClientsList(this.clientsData);
 
   final List<ClientSectionData> clientsData;
 
   @override
+  State<_ClientsList> createState() => _ClientsListState();
+}
+
+class _ClientsListState extends State<_ClientsList> {
+  Set<String> _segmentSelected = Set.from({_Segments.clients.name});
+
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: clientsData.length,
-      itemBuilder: (context, index) {
-        return StickyHeader(
-          header: _Header(sectionType: clientsData[index].sectionType),
-          content: _Clients(section: clientsData[index]),
-        );
-      },
+    return Column(
+      children: [
+        _segmentedButton(),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: widget.clientsData.length,
+          itemBuilder: (context, index) {
+            return StickyHeader(
+              header: _Header(sectionType: widget.clientsData[index].sectionType),
+              content: _Clients(section: widget.clientsData[index]),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _segmentedButton() {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.all(Dimens.sMargin),
+      child: SegmentedButton(
+        style: ButtonStyle(
+          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
+                  (Set<MaterialState> states) {
+                return ThemeText.bodyBoldBlackText;
+              }),
+          foregroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return Colors.white;
+              } else {
+                return Colors.black;
+              }
+            },
+          ),
+          backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+              if (states.contains(MaterialState.selected)) {
+                return Colors.black;
+              } else {
+                return Colors.white;
+              }
+            },
+          ),
+        ),
+        showSelectedIcon: false,
+        selected: _segmentSelected,
+        segments: [
+          ButtonSegment<String>(
+            value: _Segments.clients.name,
+            label: const Text('Clients'),
+          ),
+          ButtonSegment<String>(
+            value: _Segments.trainers.name,
+            label: const Text('Trainers'),
+          ),
+        ],
+        onSelectionChanged: (selectedSet) {
+          setState(() {
+            _segmentSelected = selectedSet;
+          });
+        },
+      ),
     );
   }
 }
+
+
 
 class _Header extends StatelessWidget {
   const _Header({required this.sectionType});
@@ -159,6 +224,8 @@ class _Client extends StatelessWidget {
     );
   }
 }
+
+
 
 class _Title extends StatelessWidget {
   const _Title({
@@ -365,3 +432,5 @@ class _Error extends StatelessWidget {
     );
   }
 }
+
+enum _Segments { trainers, clients }

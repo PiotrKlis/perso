@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
@@ -73,8 +74,9 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   Future<void> _handleTrainerProfileCreation(
     UploadTrainerData event,
   ) async {
+    final id = _userSessionModel.user?.uid ?? '';
     final trainerEntity = TrainerEntity(
-      id: _userSessionModel.user?.uid ?? '',
+      id: id,
       name: event.trainerData.name,
       surname: event.trainerData.surname,
       nickname: event.trainerData.nickname,
@@ -86,7 +88,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       location: event.trainerData.location,
       categories: event.trainerData.categories,
       reviews: List.empty(),
-      pendingClients: List.empty(),
+      pendingClients: [id],
       activeClients: List.empty(),
       inactiveClients: List.empty(),
       imagePath: event.trainerData.imagePath,

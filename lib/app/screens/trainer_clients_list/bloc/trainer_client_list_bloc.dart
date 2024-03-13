@@ -15,6 +15,8 @@ import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.
 class TrainerClientsListBloc
     extends Bloc<TrainerClientsListEvent, TrainerClientsListState> {
   TrainerClientsListBloc() : super(const TrainerClientsListState.initial()) {
+    //TODO: Add Load trainers data
+
     on<LoadData>(
       (event, emitter) async {
         try {

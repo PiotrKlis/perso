@@ -122,7 +122,7 @@ class FirestoreTrainersService implements TrainersService {
         .update({
       UserDocumentFields.pendingTrainers: FieldValue.arrayRemove([trainerId]),
       UserDocumentFields.activeTrainers: FieldValue.arrayUnion([trainerId]),
-      UserDocumentFields.inactiveTrainers: FieldValue.arrayUnion([trainerId]),
+      UserDocumentFields.inactiveTrainers: FieldValue.arrayRemove([trainerId]),
     });
   }
 
