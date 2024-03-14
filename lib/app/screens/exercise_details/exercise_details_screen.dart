@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.dart';
+import 'package:perso/app/screens/exercise_details/event/exercise_details_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_description_section.dart';
@@ -21,9 +22,9 @@ class ExerciseDetailsScreen extends StatelessWidget {
     required String clientId,
     required String date,
     required ExerciseInTrainingEntity exerciseInTrainingEntity,
-    required String exerciseDetailScreenType,
+    required String exerciseDetailsScreenType,
     super.key,
-  })  : _exerciseDetailScreenType = exerciseDetailScreenType,
+  })  : _exerciseDetailScreenType = exerciseDetailsScreenType,
         _exerciseInTrainingEntity = exerciseInTrainingEntity,
         _date = date,
         _clientId = clientId;

@@ -15,9 +15,22 @@ import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.
 class TrainerClientsListBloc
     extends Bloc<TrainerClientsListEvent, TrainerClientsListState> {
   TrainerClientsListBloc() : super(const TrainerClientsListState.initial()) {
-    //TODO: Add Load trainers data
 
-    on<LoadData>(
+    on<LoadTrainerData>((event, emitter) async {
+      try {
+        final id = _userSessionModel.user?.uid ?? '';
+        final trainerIdentities = await _trainersProvider.getTrainersForClient(
+          id,
+        );
+        emitter(
+          TrainerClientsListState.trainersData(trainerIdentities),
+        );
+      } catch (error) {
+        emitter(TrainerClientsListState.error(error.toString()));
+      }
+    });
+
+    on<LoadClientData>(
       (event, emitter) async {
         try {
           final trainerId = _userSessionModel.user?.uid ?? '';
@@ -98,4 +111,6 @@ class TrainerClientsListBloc
     }
     return clientsList;
   }
+
+  final _trainersProvider = getIt.get<FirestoreTrainersProvider>();
 }

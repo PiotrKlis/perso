@@ -71,8 +71,8 @@ class _TrainersView extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(
-            left: Dimens.xmMargin,
-            right: Dimens.xmMargin,
+            left: Dimens.mMargin,
+            right: Dimens.mMargin,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,11 +84,11 @@ class _TrainersView extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.only(
-            left: Dimens.xmMargin,
+            left: Dimens.mMargin,
             top: Dimens.lMargin,
           ),
           child: Text(
-            'My plans',
+            'My trainers',
             style: ThemeText.mediumTitleBold,
           ),
         ),

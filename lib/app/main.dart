@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
     //TODO: Move these into "build before" component
     _userInfoProvider.listenForFirebaseUserChange();
     _persoSharedPrefs.init();
+    // TODO: Fix InternetConnection widget
     const InternetConnection();
     return Theme(
       data: ThemeData(

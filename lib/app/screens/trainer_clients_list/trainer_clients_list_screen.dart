@@ -7,8 +7,10 @@ import 'package:perso/app/screens/trainer_clients_list/event/trainer_client_list
 import 'package:perso/app/screens/trainer_clients_list/section_type.dart';
 import 'package:perso/app/screens/trainer_clients_list/state/trainer_client_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/perso_client_trainers_list.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/models/client_entity.dart';
+import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/core/string_extensions.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
@@ -25,71 +27,55 @@ class TrainerClientsScreen extends StatelessWidget {
   }
 }
 
-class _TrainerClientsListView extends StatelessWidget {
+class _TrainerClientsListView extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocBuilder<TrainerClientsListBloc, TrainerClientsListState>(
-        builder: (context, state) {
-          return state.when(
-            initial: () {
-              context.read<TrainerClientsListBloc>().add(
-                    const TrainerClientsListEvent.loadData(),
-                  );
-              return const Center(child: CircularProgressIndicator());
-            },
-            clientsData: _ClientsList.new,
-            error: _Error.new,
-          );
-        },
-      ),
-    );
-  }
+  State<_TrainerClientsListView> createState() =>
+      _TrainerClientsListViewState();
 }
 
-class _ClientsList extends StatefulWidget {
-  const _ClientsList(this.clientsData);
-
-  final List<ClientSectionData> clientsData;
-
-  @override
-  State<_ClientsList> createState() => _ClientsListState();
-}
-
-class _ClientsListState extends State<_ClientsList> {
+class _TrainerClientsListViewState extends State<_TrainerClientsListView> {
   Set<String> _segmentSelected = Set.from({_Segments.clients.name});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        _segmentedButton(),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: widget.clientsData.length,
-          itemBuilder: (context, index) {
-            return StickyHeader(
-              header: _Header(sectionType: widget.clientsData[index].sectionType),
-              content: _Clients(section: widget.clientsData[index]),
-            );
-          },
-        ),
-      ],
+    return SafeArea(
+      child: Column(
+        children: [
+          _segmentedButton(),
+          BlocBuilder<TrainerClientsListBloc, TrainerClientsListState>(
+            builder: (context, state) {
+              return state.when(
+                initial: () {
+                  context.read<TrainerClientsListBloc>().add(
+                        const TrainerClientsListEvent.loadClientData(),
+                      );
+                  return const Center(child: CircularProgressIndicator());
+                },
+                clientsData: _ClientsList.new,
+                error: _Error.new,
+                trainersData: (List<TrainerIdentity> trainersData) {
+                  return PersoClientTrainersList(trainersData);
+                },
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 
   Widget _segmentedButton() {
     return Container(
+      margin: EdgeInsets.all(Dimens.mMargin),
       width: double.infinity,
-      margin: const EdgeInsets.all(Dimens.sMargin),
       child: SegmentedButton(
         style: ButtonStyle(
           textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-                  (Set<MaterialState> states) {
-                return ThemeText.bodyBoldBlackText;
-              }),
+              (Set<MaterialState> states) {
+            return ThemeText.bodyBoldBlackText;
+          }),
           foregroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
+            (Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
                 return Colors.white;
               } else {
@@ -98,7 +84,7 @@ class _ClientsListState extends State<_ClientsList> {
             },
           ),
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
+            (Set<MaterialState> states) {
               if (states.contains(MaterialState.selected)) {
                 return Colors.black;
               } else {
@@ -120,6 +106,7 @@ class _ClientsListState extends State<_ClientsList> {
           ),
         ],
         onSelectionChanged: (selectedSet) {
+          _reloadScreenContent(selectedSet);
           setState(() {
             _segmentSelected = selectedSet;
           });
@@ -127,9 +114,74 @@ class _ClientsListState extends State<_ClientsList> {
       ),
     );
   }
+
+  void _reloadScreenContent(Set<String> selectedSet) {
+    if (selectedSet.contains(_Segments.trainers.name)) {
+      context
+          .read<TrainerClientsListBloc>()
+          .add(const TrainerClientsListEvent.loadTrainerData());
+    } else {
+      context
+          .read<TrainerClientsListBloc>()
+          .add(const TrainerClientsListEvent.loadClientData());
+    }
+  }
 }
 
+class _ClientsList extends StatefulWidget {
+  const _ClientsList(this.clientsData);
 
+  final List<ClientSectionData> clientsData;
+
+  @override
+  State<_ClientsList> createState() => _ClientsListState();
+}
+
+class _ClientsListState extends State<_ClientsList> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.xmMargin,
+            right: Dimens.xmMargin,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Trainings', style: ThemeText.largerTitleBold),
+              const Icon(Icons.notifications_off),
+            ],
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            left: Dimens.xmMargin,
+            top: Dimens.lMargin,
+            bottom: Dimens.mMargin,
+          ),
+          child: Text(
+            'My clients',
+            style: ThemeText.mediumTitleBold,
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: widget.clientsData.length,
+          itemBuilder: (context, index) {
+            return StickyHeader(
+              header:
+                  _Header(sectionType: widget.clientsData[index].sectionType),
+              content: _Clients(section: widget.clientsData[index]),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
 
 class _Header extends StatelessWidget {
   const _Header({required this.sectionType});
@@ -224,8 +276,6 @@ class _Client extends StatelessWidget {
     );
   }
 }
-
-
 
 class _Title extends StatelessWidget {
   const _Title({

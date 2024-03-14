@@ -280,7 +280,7 @@ final GoRouter goRouter = GoRouter(
                                 .queryParameters[NavigationConstants.clientId]!,
                             date: state
                                 .uri.queryParameters[NavigationConstants.date]!,
-                            exerciseDetailScreenType: state.uri.queryParameters[
+                            exerciseDetailsScreenType: state.uri.queryParameters[
                                 NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
                                 state.extra! as ExerciseInTrainingEntity,
@@ -310,6 +310,49 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
+                  name: "${ScreenNavigationKey.clientPlanOverview}sss",
+                  path: ScreenNavigationKey.clientPlanOverview,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return NoTransitionPage(
+                      child: ClientPlanOverviewScreen(
+                        trainerId: state.uri
+                            .queryParameters[NavigationConstants.trainerId]!,
+                      ),
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      name: "${ScreenNavigationKey.training}sss",
+                      path: ScreenNavigationKey.training,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return NoTransitionPage(
+                          child: TrainingScreen(
+                            exercises: state.extra! as List<ExerciseEntity>,
+                          ),
+                        );
+                      },
+                    ),
+                    GoRoute(
+                      name: "${ScreenNavigationKey.exerciseDetailsClient}sss",
+                      path: ScreenNavigationKey.exerciseDetails,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return NoTransitionPage(
+                          child: ExerciseDetailsScreen(
+                            clientId: state.uri
+                                .queryParameters[NavigationConstants.clientId]!,
+                            date: state
+                                .uri.queryParameters[NavigationConstants.date]!,
+                            exerciseDetailsScreenType: state.uri.queryParameters[
+                            NavigationConstants.exerciseDetailsScreenType]!,
+                            exerciseInTrainingEntity:
+                            state.extra! as ExerciseInTrainingEntity,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                GoRoute(
                   name: ScreenNavigationKey.trainerPlanOverview,
                   path: ScreenNavigationKey.trainerPlanOverview,
                   pageBuilder: (BuildContext context, GoRouterState state) {
@@ -337,7 +380,7 @@ final GoRouter goRouter = GoRouter(
                                 .queryParameters[NavigationConstants.clientId]!,
                             date: state
                                 .uri.queryParameters[NavigationConstants.date]!,
-                            exerciseDetailScreenType: state.uri.queryParameters[
+                            exerciseDetailsScreenType: state.uri.queryParameters[
                                 NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
                                 state.extra! as ExerciseInTrainingEntity,
@@ -370,7 +413,7 @@ final GoRouter goRouter = GoRouter(
                                     NavigationConstants.clientId]!,
                                 date: state.uri
                                     .queryParameters[NavigationConstants.date]!,
-                                exerciseDetailScreenType:
+                                exerciseDetailsScreenType:
                                     state.uri.queryParameters[
                                         NavigationConstants
                                             .exerciseDetailsScreenType]!,

@@ -11,24 +11,17 @@ class ExerciseDetailsBloc
   ExerciseDetailsBloc() : super(const ExerciseDetailsState.initial()) {
     final trainerId = _userSessionModel.user?.uid ?? '';
 
-    on<GetNumberOfExercises>((event, emitter) async {
+    on<SaveExercise>((event, emitter) async {
       try {
-        final numberOfExercises = await _exerciseProvider.getNumberOfExercises(
+        final nextIndex = await _exerciseProvider.getNumberOfExercises(
           clientId: event.clientId,
           trainerId: trainerId,
           date: event.date,
         );
-        _nextExerciseIndex = numberOfExercises;
-      } catch (error) {
-        //TODO: Add error handling
-      }
-    });
 
-    on<SaveExercise>((event, emitter) async {
-      try {
         final updatedExerciseEntity =
             event.exerciseInTrainingEntity.exerciseEntity.copyWith(
-          index: _nextExerciseIndex,
+          index: nextIndex,
         );
         final updatedExerciseInTrainingEntity =
             event.exerciseInTrainingEntity.copyWith(
@@ -40,7 +33,6 @@ class ExerciseDetailsBloc
           date: event.date,
           exerciseInTrainingEntity: updatedExerciseInTrainingEntity,
         );
-        _nextExerciseIndex++;
       } catch (error) {
         //TODO: Add error handling
       }
@@ -54,14 +46,12 @@ class ExerciseDetailsBloc
           date: event.date,
           exerciseInTrainingId: event.exerciseInTrainingId,
         );
-        _nextExerciseIndex--;
       } catch (error) {
         //TODO: Add error handling
       }
     });
   }
 
-  int _nextExerciseIndex = 0;
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _exercisesService = getIt.get<FirestoreExerciseService>();
   final _exerciseProvider = getIt.get<FirestoreExerciseProvider>();
