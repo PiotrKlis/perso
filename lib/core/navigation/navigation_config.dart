@@ -280,7 +280,8 @@ final GoRouter goRouter = GoRouter(
                                 .queryParameters[NavigationConstants.clientId]!,
                             date: state
                                 .uri.queryParameters[NavigationConstants.date]!,
-                            exerciseDetailsScreenType: state.uri.queryParameters[
+                            exerciseDetailsScreenType: state
+                                    .uri.queryParameters[
                                 NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
                                 state.extra! as ExerciseInTrainingEntity,
@@ -310,13 +311,16 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
-                  name: "${ScreenNavigationKey.clientPlanOverview}sss",
-                  path: ScreenNavigationKey.clientPlanOverview,
+                  // name: "${ScreenNavigationKey.clientPlanOverview}sss",
+                  path:
+                      '${ScreenNavigationKey.clientPlanOverview}/:${NavigationConstants.trainerId}',
                   pageBuilder: (BuildContext context, GoRouterState state) {
                     return NoTransitionPage(
                       child: ClientPlanOverviewScreen(
-                        trainerId: state.uri
-                            .queryParameters[NavigationConstants.trainerId]!,
+                        trainerId: state
+                            .pathParameters[NavigationConstants.trainerId]!,
+                        // trainerId: state.uri
+                        //     .queryParameters[NavigationConstants.trainerId]!,
                       ),
                     );
                   },
@@ -342,10 +346,11 @@ final GoRouter goRouter = GoRouter(
                                 .queryParameters[NavigationConstants.clientId]!,
                             date: state
                                 .uri.queryParameters[NavigationConstants.date]!,
-                            exerciseDetailsScreenType: state.uri.queryParameters[
-                            NavigationConstants.exerciseDetailsScreenType]!,
+                            exerciseDetailsScreenType: state
+                                    .uri.queryParameters[
+                                NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
-                            state.extra! as ExerciseInTrainingEntity,
+                                state.extra! as ExerciseInTrainingEntity,
                           ),
                         );
                       },
@@ -380,7 +385,8 @@ final GoRouter goRouter = GoRouter(
                                 .queryParameters[NavigationConstants.clientId]!,
                             date: state
                                 .uri.queryParameters[NavigationConstants.date]!,
-                            exerciseDetailsScreenType: state.uri.queryParameters[
+                            exerciseDetailsScreenType: state
+                                    .uri.queryParameters[
                                 NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
                                 state.extra! as ExerciseInTrainingEntity,

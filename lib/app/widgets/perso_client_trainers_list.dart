@@ -4,7 +4,9 @@ import 'package:perso/app/styleguide/value/app_assets.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/app/utils/extension/go_router_extensions.dart';
 import 'package:perso/core/models/trainer_identity.dart';
+import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoClientTrainersList extends StatelessWidget {
@@ -53,12 +55,15 @@ class PersoClientTrainersList extends StatelessWidget {
                 .map(
                   (trainerIdentity) => GestureDetector(
                     onTap: () {
-                      context.pushNamed(
-                        ScreenNavigationKey.clientPlanOverview,
-                        queryParameters: {
-                          'trainerId': trainerIdentity.id,
-                        },
-                      );
+                      final location = goRouter.location;
+                      context.push(
+                          '$location/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}');
+                      // context.pushNamed(
+                      //   ScreenNavigationKey.clientPlanOverview,
+                      //   queryParameters: {
+                      //     'trainerId': trainerIdentity.id,
+                      //   },
+                      // );
                     },
                     child: Container(
                       margin: const EdgeInsets.all(Dimens.xmMargin),
