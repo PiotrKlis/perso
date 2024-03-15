@@ -311,7 +311,6 @@ final GoRouter goRouter = GoRouter(
               },
               routes: [
                 GoRoute(
-                  // name: "${ScreenNavigationKey.clientPlanOverview}sss",
                   path:
                       '${ScreenNavigationKey.clientPlanOverview}/:${NavigationConstants.trainerId}',
                   pageBuilder: (BuildContext context, GoRouterState state) {
@@ -319,14 +318,11 @@ final GoRouter goRouter = GoRouter(
                       child: ClientPlanOverviewScreen(
                         trainerId: state
                             .pathParameters[NavigationConstants.trainerId]!,
-                        // trainerId: state.uri
-                        //     .queryParameters[NavigationConstants.trainerId]!,
                       ),
                     );
                   },
                   routes: [
                     GoRoute(
-                      name: "${ScreenNavigationKey.training}sss",
                       path: ScreenNavigationKey.training,
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
@@ -337,17 +333,16 @@ final GoRouter goRouter = GoRouter(
                       },
                     ),
                     GoRoute(
-                      name: "${ScreenNavigationKey.exerciseDetailsClient}sss",
-                      path: ScreenNavigationKey.exerciseDetails,
+                      path:
+                          '${ScreenNavigationKey.exerciseDetails}/:${NavigationConstants.clientId}/:${NavigationConstants.date}/:${NavigationConstants.exerciseDetailsScreenType}',
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return NoTransitionPage(
                           child: ExerciseDetailsScreen(
-                            clientId: state.uri
-                                .queryParameters[NavigationConstants.clientId]!,
-                            date: state
-                                .uri.queryParameters[NavigationConstants.date]!,
-                            exerciseDetailsScreenType: state
-                                    .uri.queryParameters[
+                            clientId: state
+                                .pathParameters[NavigationConstants.clientId]!,
+                            date:
+                                state.pathParameters[NavigationConstants.date]!,
+                            exerciseDetailsScreenType: state.pathParameters[
                                 NavigationConstants.exerciseDetailsScreenType]!,
                             exerciseInTrainingEntity:
                                 state.extra! as ExerciseInTrainingEntity,

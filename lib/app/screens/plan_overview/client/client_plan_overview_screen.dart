@@ -5,12 +5,13 @@ import 'package:perso/app/screens/plan_overview/client/bloc/client_exercise_list
 import 'package:perso/app/screens/plan_overview/client/perso_client_exercise_list.dart';
 import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/extension/go_router_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
+import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ClientPlanOverviewScreen extends StatelessWidget {
@@ -126,11 +127,11 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
               title: 'Start',
               onTap: (context) {
                 final exerciseEntityList =
-                    _exercises.map((e) => e.exerciseEntity).toList();
+                _exercises.map((e) => e.exerciseEntity).toList();
                 if (exerciseEntityList.isNotEmpty) {
-                  context.pushNamed(
-                    ScreenNavigationKey.training,
-                    extra: exerciseEntityList,
+                  context.push(
+                    '${goRouter.location}/${ScreenNavigationKey.training}',
+                    extra: _exercises.map((e) => e.exerciseEntity).toList(),
                   );
                 }
               },

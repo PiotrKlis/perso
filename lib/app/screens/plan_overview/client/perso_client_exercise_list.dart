@@ -8,6 +8,7 @@ import 'package:perso/app/screens/plan_overview/client/state/client_exercise_lis
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/extension/date_time_extensions.dart';
+import 'package:perso/app/utils/extension/go_router_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
@@ -116,14 +117,8 @@ class _Exercise extends StatelessWidget {
                   .exerciseEntity.exerciseOptionsData.supersetName,
             ),
             onTap: () {
-              context.pushNamed(
-                ScreenNavigationKey.exerciseDetailsClient,
-                queryParameters: {
-                  NavigationConstants.clientId: _clientId,
-                  NavigationConstants.date: _date,
-                  NavigationConstants.exerciseDetailsScreenType:
-                      ExerciseDetailsScreenType.client.name,
-                },
+              context.push(
+                '${goRouter.location}/${ScreenNavigationKey.exerciseDetails}/$_clientId/$_date/${ExerciseDetailsScreenType.client.name}',
                 extra: _exerciseInTrainingEntity,
               );
             },

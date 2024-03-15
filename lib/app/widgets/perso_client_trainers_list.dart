@@ -55,15 +55,9 @@ class PersoClientTrainersList extends StatelessWidget {
                 .map(
                   (trainerIdentity) => GestureDetector(
                     onTap: () {
-                      final location = goRouter.location;
                       context.push(
-                          '$location/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}');
-                      // context.pushNamed(
-                      //   ScreenNavigationKey.clientPlanOverview,
-                      //   queryParameters: {
-                      //     'trainerId': trainerIdentity.id,
-                      //   },
-                      // );
+                        '${goRouter.location}/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}',
+                      );
                     },
                     child: Container(
                       margin: const EdgeInsets.all(Dimens.xmMargin),
