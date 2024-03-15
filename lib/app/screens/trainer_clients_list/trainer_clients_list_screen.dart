@@ -66,7 +66,7 @@ class _TrainerClientsListViewState extends State<_TrainerClientsListView> {
 
   Widget _segmentedButton() {
     return Container(
-      margin: EdgeInsets.all(Dimens.mMargin),
+      margin: const EdgeInsets.all(Dimens.mMargin),
       width: double.infinity,
       child: SegmentedButton(
         style: ButtonStyle(
@@ -349,38 +349,28 @@ class _Actions extends StatelessWidget {
   }
 }
 
-class _InactiveActions extends StatefulWidget {
+class _InactiveActions extends StatelessWidget {
   const _InactiveActions(this.clientId);
 
   final String clientId;
 
   @override
-  State<_InactiveActions> createState() => _InactiveActionsState();
-}
-
-class _InactiveActionsState extends State<_InactiveActions> {
-  bool switchValue = false;
-
-  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Switch(
-          value: switchValue,
+          value: false,
           onChanged: (value) {
             context
                 .read<TrainerClientsListBloc>()
-                .add(TrainerClientsListEvent.activateClient(widget.clientId));
-            setState(() {
-              switchValue = value;
-            });
+                .add(TrainerClientsListEvent.activateClient(clientId));
           },
         ),
         GestureDetector(
           onTap: () {
             context
                 .read<TrainerClientsListBloc>()
-                .add(TrainerClientsListEvent.removeClient(widget.clientId));
+                .add(TrainerClientsListEvent.removeClient(clientId));
           },
           child: const Icon(
             Icons.delete_forever,
@@ -391,40 +381,30 @@ class _InactiveActionsState extends State<_InactiveActions> {
   }
 }
 
-class _PendingActions extends StatefulWidget {
+class _PendingActions extends StatelessWidget {
   const _PendingActions(this.clientId);
 
   final String clientId;
 
   @override
-  State<_PendingActions> createState() => _PendingActionsState();
-}
-
-class _PendingActionsState extends State<_PendingActions> {
-  bool switchValue = false;
-
-  @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Switch(
-          value: switchValue,
+          value: false,
           onChanged: (value) {
             if (value) {
               context
                   .read<TrainerClientsListBloc>()
-                  .add(TrainerClientsListEvent.activateClient(widget.clientId));
+                  .add(TrainerClientsListEvent.activateClient(clientId));
             }
-            setState(() {
-              switchValue = value;
-            });
           },
         ),
         GestureDetector(
           onTap: () {
             context
                 .read<TrainerClientsListBloc>()
-                .add(TrainerClientsListEvent.removeClient(widget.clientId));
+                .add(TrainerClientsListEvent.removeClient(clientId));
           },
           child: const Icon(
             Icons.delete_forever,
@@ -435,34 +415,20 @@ class _PendingActionsState extends State<_PendingActions> {
   }
 }
 
-class _ActiveActions extends StatefulWidget {
+class _ActiveActions extends StatelessWidget {
   const _ActiveActions(this.clientId);
 
   final String clientId;
 
   @override
-  State<_ActiveActions> createState() => _ActiveActionsState();
-}
-
-class _ActiveActionsState extends State<_ActiveActions> {
-  bool switchValue = true;
-
-  @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Switch(
-          value: switchValue,
-          onChanged: (value) {
-            context
-                .read<TrainerClientsListBloc>()
-                .add(TrainerClientsListEvent.deactivateClient(widget.clientId));
-            setState(() {
-              switchValue = value;
-            });
-          },
-        ),
-      ],
+    return Switch(
+      value: true,
+      onChanged: (value) {
+        context
+            .read<TrainerClientsListBloc>()
+            .add(TrainerClientsListEvent.deactivateClient(clientId));
+      },
     );
   }
 }

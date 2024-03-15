@@ -90,33 +90,11 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     ],
                   ),
                 ),
-                BlocProvider(
-                  create: (context) => ActionSectionBloc(),
-                  child: BlocBuilder<ActionSectionBloc, ActionSectionState>(
-                    builder: (context, state) {
-                      return state.when(
-                        initial: () {
-                          context.read<ActionSectionBloc>().add(
-                                const ActionSectionEvent
-                                    .shouldSectionBeVisible(),
-                              );
-                          return Container();
-                        },
-                        sectionVisibility: (shouldSectionBeVisible) {
-                          if (shouldSectionBeVisible) {
-                            return Column(
-                              children: [
-                                _requestForTrainingButton(),
-                                _contactButton(),
-                              ],
-                            );
-                          } else {
-                            return Container();
-                          }
-                        },
-                      );
-                    },
-                  ),
+                Column(
+                  children: [
+                    _requestForTrainingButton(),
+                    _contactButton(),
+                  ],
                 ),
                 Visibility(
                   visible: _segmentSelected.contains(_Segments.about.name),
