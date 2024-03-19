@@ -120,7 +120,7 @@ class _ButtonsSection extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   context.read<TrainingBloc>().add(
-                        const TrainingEvent.nextExercise(),
+                        const TrainingEvent.previousExercise(),
                       );
                 },
                 style: ElevatedButton.styleFrom(
@@ -135,7 +135,7 @@ class _ButtonsSection extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   context.read<TrainingBloc>().add(
-                        const TrainingEvent.nextExercise(),
+                        const TrainingEvent.exerciseDone(),
                       );
                 },
                 style: ElevatedButton.styleFrom(

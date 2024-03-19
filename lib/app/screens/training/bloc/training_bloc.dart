@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/training/event/training_event.dart';
 import 'package:perso/app/screens/training/state/training_state.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/break_entity.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/training_entity.dart';
+import 'package:perso/data/chat/chat_service.dart';
+import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
 
 class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
   TrainingBloc() : super(const TrainingState.initial()) {
@@ -42,42 +45,55 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     });
 
     on<NextExercise>((event, emitter) async {
-      if (currentTrainingIndex < _training.length - 1) {
-        currentTrainingIndex++;
-        if (_training[currentTrainingIndex] is BreakEntity) {
-          emitter(
-            TrainingState.trainingBreak(
-              _training[currentTrainingIndex] as BreakEntity,
-            ),
-          );
-        } else {
-          emitter(
-            TrainingState.exerciseInProgress(
-              _training[currentTrainingIndex] as ExerciseEntity,
-            ),
-          );
-        }
-      } else {
-        emitter(const TrainingState.finished());
-      }
+      _navigateToNext(emitter);
     });
 
     on<PreviousExercise>((event, emitter) async {
-      if (currentTrainingIndex > 0) {
-        currentTrainingIndex--;
-        if (_training[currentTrainingIndex] is BreakEntity) {
-          emitter(
-            TrainingState.trainingBreak(
-              _training[currentTrainingIndex] as BreakEntity,
-            ),
-          );
-        } else {
+      _navigateToPrevious(emitter);
+    });
+
+    on<ExerciseDone>((event, emitter) async {
+      //TODO: Implement below
+      _chatService.sendClientNote();
+      _exerciseService.markAsDone();
+      _navigateToNext(emitter);
+    });
+  }
+
+  void _navigateToPrevious(Emitter<TrainingState> emitter) {
+    if (currentTrainingIndex > 0) {
+      currentTrainingIndex--;
+      if (_training[currentTrainingIndex] is BreakEntity) {
+        _navigateToPrevious(emitter);
+      } else {
+        emitter(
           TrainingState.exerciseInProgress(
             _training[currentTrainingIndex] as ExerciseEntity,
-          );
-        }
+          ),
+        );
       }
-    });
+    }
+  }
+
+  void _navigateToNext(Emitter<TrainingState> emitter) {
+    if (currentTrainingIndex < _training.length - 1) {
+      currentTrainingIndex++;
+      if (_training[currentTrainingIndex] is BreakEntity) {
+        emitter(
+          TrainingState.trainingBreak(
+            _training[currentTrainingIndex] as BreakEntity,
+          ),
+        );
+      } else {
+        emitter(
+          TrainingState.exerciseInProgress(
+            _training[currentTrainingIndex] as ExerciseEntity,
+          ),
+        );
+      }
+    } else {
+      emitter(const TrainingState.finished());
+    }
   }
 
   void _handleSuperset(
@@ -116,4 +132,6 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
 
   final List<TrainingEntity> _training = [];
   int currentTrainingIndex = 0;
+  final _chatService = getIt.get<ChatService>();
+  final _exerciseService = getIt.get<FirestoreExerciseService>();
 }

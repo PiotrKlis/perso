@@ -155,4 +155,8 @@ class FirestoreExerciseService extends ExerciseService {
     }
     await batch.commit();
   }
+
+  void markAsDone() {
+    //TODO: implement
+  }
 }
