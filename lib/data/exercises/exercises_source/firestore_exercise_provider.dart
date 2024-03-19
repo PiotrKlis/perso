@@ -29,29 +29,41 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<List<ExerciseInTrainingEntity>> getExercisesForTrainer(
-    String clientId,
-    String trainerId,
-    String date,
-  ) async {
-    final snapshots = await FirebaseFirestore.instance
+  Future<List<ExerciseInTrainingEntity>> getExercises({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  }) async {
+    final docSnapshot = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
         .collection(CollectionName.clients)
         .doc(clientId)
-        .collection(date)
         .get();
 
-    return Future.wait(
-      snapshots.docs
-          .map(
-            (exercise) async => ExerciseInTrainingEntity(
-              id: exercise.id,
-              exerciseEntity: _exerciseEntityMapper.map(exercise),
-            ),
-          )
-          .toList(),
-    );
+    final data = docSnapshot.data();
+
+    if (data != null && data.containsKey(date)) {
+      final snapshots = await FirebaseFirestore.instance
+          .collection(CollectionName.users)
+          .doc(trainerId)
+          .collection(CollectionName.clients)
+          .doc(clientId)
+          .collection(date)
+          .get();
+      return Future.wait(
+        snapshots.docs
+            .map(
+              (exercise) async => ExerciseInTrainingEntity(
+                id: exercise.id,
+                exerciseEntity: _exerciseEntityMapper.map(exercise),
+              ),
+            )
+            .toList(),
+      );
+    } else {
+      return [];
+    }
   }
 
   @override
@@ -69,32 +81,6 @@ class FirestoreExerciseProvider extends ExerciseSource {
         .get();
 
     return snapshot.docs.length;
-  }
-
-  @override
-  Future<List<ExerciseInTrainingEntity>> getExercisesForClient({
-    required String clientId,
-    required String trainerId,
-    required String date,
-  }) async {
-    final snapshots = await FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(clientId)
-        .collection(CollectionName.trainers)
-        .doc(trainerId)
-        .collection(date)
-        .get();
-
-    return Future.wait(
-      snapshots.docs
-          .map(
-            (exercise) async => ExerciseInTrainingEntity(
-              id: exercise.id,
-              exerciseEntity: _exerciseEntityMapper.map(exercise),
-            ),
-          )
-          .toList(),
-    );
   }
 
   @override

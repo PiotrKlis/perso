@@ -129,19 +129,6 @@ class FirestoreExerciseService extends ExerciseService {
     final sentDate = DateTime.now().yearMonthDayHourMinuteSecondsFormat;
     await sourceDocument.set({date: sentDate}, SetOptions(merge: true));
 
-    final sourceCollection = sourceDocument.collection(date);
-
-    final targetCollection = FirebaseFirestore.instance
-        .collection(CollectionName.users)
-        .doc(clientId)
-        .collection(CollectionName.trainers)
-        .doc(trainerId)
-        .collection(date);
-
-    final querySnapshot = await sourceCollection.get();
-    for (final document in querySnapshot.docs) {
-      await targetCollection.doc(document.id).set(document.data());
-    }
     return sentDate;
   }
 

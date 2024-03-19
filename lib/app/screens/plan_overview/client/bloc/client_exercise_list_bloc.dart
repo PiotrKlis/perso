@@ -1,3 +1,5 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/plan_overview/client/event/client_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
@@ -10,14 +12,34 @@ class ClientExerciseListBloc
   ClientExerciseListBloc() : super(const ClientExerciseListState.loading()) {
     final clientId = _userSessionModel.user?.uid ?? '';
 
-    on<GetExercises>((event, emitter) async {
-      final exercises = await _exercisesProvider.getExercisesForClient(
-        clientId: clientId,
-        date: event.date,
-        trainerId: event.trainerId,
-      );
-      emitter(ClientExerciseListState.exercises(exercises));
-    });
+    on<GetExercises>(
+      (event, emitter) async {
+        try {
+          emitter(const ClientExerciseListState.loading());
+          final exercises = await _exercisesProvider.getExercises(
+            clientId: clientId,
+            trainerId: event.trainerId,
+            date: event.date,
+          );
+          exercises.sort(
+            (a, b) => a.exerciseEntity.index.compareTo(b.exerciseEntity.index),
+          );
+          final updatedIndexesExercises = exercises
+              .mapIndexed(
+                (index, exercise) => exercise.copyWith(
+                  exerciseEntity: exercise.exerciseEntity.copyWith(
+                    index: index,
+                  ),
+                ),
+              )
+              .toList();
+          emitter(ClientExerciseListState.exercises(updatedIndexesExercises));
+        } catch (error) {
+          emitter(ClientExerciseListState.error(error.toString()));
+        }
+      },
+      transformer: restartable(),
+    );
   }
 
   final _userSessionModel = getIt.get<UserSessionModel>();

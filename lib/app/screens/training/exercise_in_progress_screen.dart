@@ -6,7 +6,7 @@ import 'package:perso/app/screens/training/widgets/perso_exercise_instructions.d
 import 'package:perso/app/screens/training/widgets/perso_exercise_timer.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
-import 'package:perso/app/widgets/perso_indented_divider.dart';
+import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
@@ -44,11 +44,41 @@ class ExercisesInProgressScreen extends StatelessWidget {
               _TrainerNote(
                 trainerNote: exercise.exerciseOptionsData.trainerNote,
               ),
+              const _ClientNote(),
               _ButtonsSection(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ClientNote extends StatelessWidget {
+  const _ClientNote();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: Dimens.mMargin,
+        left: Dimens.mMargin,
+        right: Dimens.mMargin,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const PersoDivider(),
+          const SizedBox(height: Dimens.mMargin),
+          Text('Client note', style: ThemeText.bodyBoldBlackText),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.mMargin),
+            child: const PersoTextField(
+              hintText: 'Raise problem on the exercise',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

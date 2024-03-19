@@ -127,7 +127,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
               title: 'Start',
               onTap: (context) {
                 final exerciseEntityList =
-                _exercises.map((e) => e.exerciseEntity).toList();
+                    _exercises.map((e) => e.exerciseEntity).toList();
                 if (exerciseEntityList.isNotEmpty) {
                   context.push(
                     '${goRouter.location}/${ScreenNavigationKey.training}',

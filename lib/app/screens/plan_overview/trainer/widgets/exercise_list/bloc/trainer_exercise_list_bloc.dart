@@ -17,10 +17,10 @@ class TrainerExerciseListBloc
       (event, emitter) async {
         try {
           emitter(const TrainerExerciseListState.loading());
-          final exercises = await _exercisesProvider.getExercisesForTrainer(
-            event.clientId,
-            trainerId,
-            event.date,
+          final exercises = await _exercisesProvider.getExercises(
+            clientId: event.clientId,
+            trainerId: trainerId,
+            date: event.date,
           );
           exercises.sort(
             (a, b) => a.exerciseEntity.index.compareTo(b.exerciseEntity.index),
