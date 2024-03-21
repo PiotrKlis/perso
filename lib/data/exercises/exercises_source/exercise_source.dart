@@ -4,7 +4,13 @@ import 'package:perso/core/models/exercise_in_training_entity.dart';
 abstract class ExerciseSource {
   Future<List<ExerciseEntity>> getAllExercises();
 
-  Future<List<ExerciseInTrainingEntity>> getExercises({
+  Future<List<ExerciseInTrainingEntity>> getExercisesForClient({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  });
+
+  Future<List<ExerciseInTrainingEntity>> getExercisesForTrainer({
     required String clientId,
     required String trainerId,
     required String date,
@@ -16,7 +22,7 @@ abstract class ExerciseSource {
     required String date,
   });
 
-  Future<Map<DateTime, bool>> getMarkersForDates(
+  Future<List<DateTime>>  getMarkersForDates(
     String clientId,
     String trainerId,
     DateTime startDate,

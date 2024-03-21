@@ -17,7 +17,7 @@ class TrainerExerciseListBloc
       (event, emitter) async {
         try {
           emitter(const TrainerExerciseListState.loading());
-          final exercises = await _exercisesProvider.getExercises(
+          final exercises = await _exercisesProvider.getExercisesForTrainer(
             clientId: event.clientId,
             trainerId: trainerId,
             date: event.date,
@@ -46,13 +46,12 @@ class TrainerExerciseListBloc
       try {
         final reorderedExercises = event.exercises
             .mapIndexed(
-              (index, exercise) =>
-              exercise.copyWith(
+              (index, exercise) => exercise.copyWith(
                 exerciseEntity: exercise.exerciseEntity.copyWith(
                   index: index,
                 ),
               ),
-        )
+            )
             .toList();
 
         emitter(

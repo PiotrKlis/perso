@@ -29,7 +29,32 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<List<ExerciseInTrainingEntity>> getExercises({
+  Future<List<ExerciseInTrainingEntity>> getExercisesForTrainer({
+    required String clientId,
+    required String trainerId,
+    required String date,
+  }) async {
+    final snapshots = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .collection(CollectionName.clients)
+        .doc(clientId)
+        .collection(date)
+        .get();
+    return Future.wait(
+      snapshots.docs
+          .map(
+            (exercise) async => ExerciseInTrainingEntity(
+              id: exercise.id,
+              exerciseEntity: _exerciseEntityMapper.map(exercise),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  @override
+  Future<List<ExerciseInTrainingEntity>> getExercisesForClient({
     required String clientId,
     required String trainerId,
     required String date,
@@ -84,32 +109,28 @@ class FirestoreExerciseProvider extends ExerciseSource {
   }
 
   @override
-  Future<Map<DateTime, bool>> getMarkersForDates(
+  Future<List<DateTime>> getMarkersForDates(
     String clientId,
     String trainerId,
     DateTime startDate,
     DateTime endDate,
   ) async {
-    final docRef = FirebaseFirestore.instance
+    final document = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
         .collection(CollectionName.clients)
-        .doc(clientId);
+        .doc(clientId)
+        .get();
 
-    final collectionList = <Future<QuerySnapshot>>[];
+    final markers = <DateTime>[];
     final collectionIds = _getDateIds(startDate, endDate);
     for (final id in collectionIds) {
-      final colRef = docRef.collection(id);
-      collectionList.add(colRef.get());
+      final data = document.data();
+      if (data != null && data.containsKey(id)) {
+        markers.add(id.yearMonthDayFormat);
+      }
     }
-    final collection = await Future.wait(collectionList);
-
-    return collection.asMap().map<DateTime, bool>((index, collection) {
-      return MapEntry(
-        collectionIds[index].yearMonthDayFormat,
-        collection.docs.isNotEmpty,
-      );
-    });
+    return markers;
   }
 
   List<String> _getDateIds(DateTime startDate, DateTime endDate) {

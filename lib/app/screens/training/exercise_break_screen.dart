@@ -113,40 +113,14 @@ class _ExerciseBreakScreenState extends State<ExerciseBreakScreen> {
             ],
           ),
         ),
-        // Container(
-        //   color: Colors.white,
-        //   height: Dimens.whiteBackground,
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       Container(
-        //         margin: const EdgeInsets.only(left: Dimens.mMargin),
-        //         child: Column(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           crossAxisAlignment: CrossAxisAlignment.start,
-        //           children: [
-        //             Text(
-        //               'Next 4/12',
-        //               style: ThemeText.calloutBoldBlueText,
-        //             ),
-        //             Text(
-        //               'Jumping Jacks x30',
-        //               style: ThemeText.bodyBoldBlackText,
-        //             ),
-        //           ],
-        //         ),
-        //       ),
-        //       Container(
-        //         margin: const EdgeInsets.only(right: Dimens.mMargin),
-        //         child: Image.asset(
-        //           AppImages.dummyPic1,
-        //           width: Dimens.mRestIconWidth,
-        //           height: Dimens.mRestIconHeight,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
+        Container(
+          color: Colors.white,
+          height: Dimens.whiteBackground,
+          child: Text(
+            widget.breakEntity.nextExerciseTitle,
+            style: ThemeText.bodyBoldBlackText,
+          ),
+        ),
       ],
     );
   }

@@ -16,7 +16,7 @@ class ClientExerciseListBloc
       (event, emitter) async {
         try {
           emitter(const ClientExerciseListState.loading());
-          final exercises = await _exercisesProvider.getExercises(
+          final exercises = await _exercisesProvider.getExercisesForClient(
             clientId: clientId,
             trainerId: event.trainerId,
             date: event.date,

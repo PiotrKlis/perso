@@ -7,8 +7,6 @@ part 'break_entity.freezed.dart';
 class BreakEntity extends TrainingEntity with _$BreakEntity {
   const factory BreakEntity({
     required int breakTime,
-    // required int nextExerciseNumber,
-    // required int totalExercises,
-    // required String nextExerciseTitle,
+    required String nextExerciseTitle,
   }) = _BreakEntity;
 }

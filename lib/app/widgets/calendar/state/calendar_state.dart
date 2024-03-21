@@ -8,6 +8,6 @@ class CalendarState with _$CalendarState {
 
   const factory CalendarState.selectedDate(String selectedDate) = SelectedDate;
 
-  const factory CalendarState.markersData(Map<DateTime, bool> selectedDate) =
-      MarkersData;
+  const factory CalendarState.markersData(List<DateTime> markers) =
+  MarkersData;
 }

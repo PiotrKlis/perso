@@ -19,7 +19,7 @@ class PersoCalendar extends StatefulWidget {
 class _PersoCalendarState extends State<PersoCalendar> {
   final _calendarFormat = CalendarFormat.week;
   DateTime _selectedDate = DateTime.now();
-  Map<DateTime, bool> _markers = {};
+  List<DateTime> _markers = [];
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _PersoCalendarState extends State<PersoCalendar> {
         calendarBuilders: CalendarBuilders(
           markerBuilder: (context, day, events) {
             final formattedDay = day.yearMonthDayHourMinuteSecondsMillisecondsFormat;
-            if (_markers.containsKey(formattedDay) && _markers[formattedDay]!) {
+            if (_markers.contains(formattedDay)) {
               return Container(
                 width: 4,
                 height: 4,
