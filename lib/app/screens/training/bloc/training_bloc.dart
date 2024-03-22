@@ -11,28 +11,31 @@ import 'package:perso/data/exercises/exercises_service/firestore_exercise_servic
 class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
   TrainingBloc() : super(const TrainingState.initial()) {
     on<LoadTraining>((event, emitter) async {
-      final addedSupersets = <String>[];
-      final exercises = event.exercises;
-      for (final currentExercise in exercises) {
-        final numberOfSets = currentExercise.exerciseOptionsData.sets;
-        final supersetName = currentExercise.exerciseOptionsData.supersetName;
-        final shouldAddSuperset =
-            supersetName.isNotEmpty && !addedSupersets.contains(supersetName);
-        if (shouldAddSuperset) {
-          _handleSuperset(
-            addedSupersets,
-            supersetName,
+      final addedSupersetNames = <String>[];
+      for (final currentExercise in event.exercises) {
+        final currentSupersetName =
+            currentExercise.exerciseOptionsData.supersetName;
+        if (!addedSupersetNames.contains(currentSupersetName) &&
+            currentSupersetName.isNotEmpty) {
+          _addSuperset(
+            addedSupersetNames,
+            currentSupersetName,
             event.exercises,
           );
-          break;
+          continue;
         }
+        if (addedSupersetNames.contains(currentSupersetName) &&
+            currentSupersetName.isNotEmpty) {
+          continue;
+        }
+        final numberOfSets = currentExercise.exerciseOptionsData.sets;
         for (var index = 0; index < numberOfSets; index++) {
           //TODO: add new class - ExerciseSetEntity with currentSet
           _training.add(currentExercise);
           final nextExerciseTitle = _getNextExerciseTitle(
             index,
             currentExercise,
-            exercises,
+            event.exercises,
           );
           _training.add(
             BreakEntity(
@@ -85,7 +88,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     }
   }
 
-  void _handleSuperset(
+  void _addSuperset(
     List<String> addedSupersets,
     String supersetName,
     List<ExerciseEntity> exercises,
@@ -107,12 +110,31 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
           _training.add(exercise);
         }
       }
-      _training.add(
-        BreakEntity(
-          breakTime: supersetList.first.exerciseOptionsData.timeBreak,
-          nextExerciseTitle: 'Next superset round',
-        ),
-      );
+      if (index < highestNumberOfSets - 1) {
+        _training.add(
+          BreakEntity(
+            breakTime: supersetList.first.exerciseOptionsData.timeBreak,
+            nextExerciseTitle: 'Next superset round',
+          ),
+        );
+      }
+      final isLastRoundInSuperset = index == highestNumberOfSets - 1;
+      final isLastExerciseInTraining = exercises.indexOf(
+            supersetList.last,
+          ) ==
+          exercises.length - 1;
+      final shouldShowBreakWithNextExerciseName =
+          isLastRoundInSuperset && !isLastExerciseInTraining;
+      if (shouldShowBreakWithNextExerciseName) {
+        final nextExerciseAfterSuperset = exercises[exercises.indexOf(
+                  supersetList.last,) + 1].title;
+        _training.add(
+          BreakEntity(
+            breakTime: supersetList.first.exerciseOptionsData.timeBreak,
+            nextExerciseTitle: nextExerciseAfterSuperset,
+          ),
+        );
+      }
     }
   }
 
