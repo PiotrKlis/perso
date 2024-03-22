@@ -73,7 +73,7 @@ class Dimens {
   static const double mRestIconWidth = 80;
   static const double mRestIconHeight = 80;
 
-  static const double whiteBackground = 100;
+  static const double nextExerciseBackground = 80;
 
   static const double videoPlayerHeight = 260;
 }
