@@ -35,8 +35,9 @@ class _TrainingScreenContent extends StatelessWidget {
         builder: (context, state) {
           return state.when(
             initial: Container.new,
-            exerciseInProgress: (exerciseEntity) => ExercisesInProgressScreen(
-              exercise: exerciseEntity,
+            exerciseInProgress: (exerciseInProgressEntity) =>
+                ExercisesInProgressScreen(
+              exercise: exerciseInProgressEntity,
             ),
             trainingBreak: (breakEntity) {
               return ExerciseBreakScreen(

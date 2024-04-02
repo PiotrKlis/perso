@@ -5,7 +5,7 @@ import 'package:perso/core/models/training_entity.dart';
 part 'exercise_entity.freezed.dart';
 
 @freezed
-class ExerciseEntity extends TrainingEntity with _$ExerciseEntity  {
+class ExerciseEntity  with _$ExerciseEntity  {
   const factory ExerciseEntity({
     required String id,
     required String description,

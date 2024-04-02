@@ -8,14 +8,13 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
-import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_progress_entity.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
-//TODO: Make me great plz, then breakz screen
 class ExercisesInProgressScreen extends StatelessWidget {
   const ExercisesInProgressScreen({required this.exercise, super.key});
 
-  final ExerciseEntity exercise;
+  final ExerciseInProgressEntity exercise;
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +25,27 @@ class ExercisesInProgressScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PersoVideoPlayer(videoId: exercise.videoId),
-              _Title(exerciseTitle: exercise.title),
+              PersoVideoPlayer(videoId: exercise.exerciseEntity.videoId),
+              _Title(exerciseTitle: exercise.exerciseEntity.title),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   PersoExerciseInstructions(
-                    exerciseOptionsData: exercise.exerciseOptionsData,
+                    setsRemaining: exercise.setsRemaining,
+                    exerciseOptionsData:
+                        exercise.exerciseEntity.exerciseOptionsData,
                   ),
                   _TimerSection(
-                    exerciseType: exercise.exerciseOptionsData.exerciseType,
-                    time: exercise.exerciseOptionsData.time,
+                    exerciseType: exercise
+                        .exerciseEntity.exerciseOptionsData.exerciseType,
+                    time: exercise.exerciseEntity.exerciseOptionsData.time,
                   ),
                 ],
               ),
-              _Description(exercise: exercise),
+              _Description(description: exercise.exerciseEntity.description),
               _TrainerNote(
-                trainerNote: exercise.exerciseOptionsData.trainerNote,
+                trainerNote:
+                    exercise.exerciseEntity.exerciseOptionsData.trainerNote,
               ),
               const _ClientNote(),
               _ButtonsSection(),
@@ -210,10 +213,10 @@ class _TrainerNote extends StatelessWidget {
 
 class _Description extends StatelessWidget {
   const _Description({
-    required this.exercise,
+    required this.description,
   });
 
-  final ExerciseEntity exercise;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +227,7 @@ class _Description extends StatelessWidget {
         right: Dimens.mMargin,
       ),
       child: Text(
-        exercise.description,
+        description,
         style: ThemeText.bodyRegularBlackText,
       ),
     );

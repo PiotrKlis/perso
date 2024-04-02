@@ -7,10 +7,13 @@ import 'package:perso/core/models/exercise_type.dart';
 class PersoExerciseInstructions extends StatelessWidget {
   const PersoExerciseInstructions({
     required ExerciseOptionsData exerciseOptionsData,
+    required String setsRemaining,
     super.key,
-  }) : _exerciseOptions = exerciseOptionsData;
+  })  : _setsRemaining = setsRemaining,
+        _exerciseOptions = exerciseOptionsData;
 
   final ExerciseOptionsData _exerciseOptions;
+  final String _setsRemaining;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class PersoExerciseInstructions extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _Reps(exerciseOptions: _exerciseOptions),
+              _Sets(setsRemaining: _setsRemaining),
               _Weight(exerciseOptions: _exerciseOptions),
               _Superset(exerciseOptions: _exerciseOptions),
             ],
@@ -76,6 +80,23 @@ class PersoExerciseInstructions extends StatelessWidget {
           ),
         ),
     };
+  }
+}
+
+class _Sets extends StatelessWidget {
+  const _Sets({required String setsRemaining}) : _setsRemaining = setsRemaining;
+
+  final String _setsRemaining;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      child: Text(
+        'Sets: $_setsRemaining',
+        style: ThemeText.bodyRegularBlackText,
+      ),
+    );
   }
 }
 

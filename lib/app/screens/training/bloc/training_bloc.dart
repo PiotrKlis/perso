@@ -4,6 +4,7 @@ import 'package:perso/app/screens/training/state/training_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/break_entity.dart';
 import 'package:perso/core/models/exercise_entity.dart';
+import 'package:perso/core/models/exercise_in_progress_entity.dart';
 import 'package:perso/core/models/training_entity.dart';
 import 'package:perso/data/chat/chat_service.dart';
 import 'package:perso/data/exercises/exercises_service/firestore_exercise_service.dart';
@@ -30,8 +31,11 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
         }
         final numberOfSets = currentExercise.exerciseOptionsData.sets;
         for (var index = 0; index < numberOfSets; index++) {
-          //TODO: add new class - ExerciseSetEntity with currentSet
-          _training.add(currentExercise);
+          final exerciseInProgressEntity = ExerciseInProgressEntity(
+            setsRemaining: '${index + 1}/$numberOfSets',
+            exerciseEntity: currentExercise,
+          );
+          _training.add(exerciseInProgressEntity);
           final nextExerciseTitle = _getNextExerciseTitle(
             index,
             currentExercise,
@@ -47,7 +51,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       }
       emitter(
         TrainingState.exerciseInProgress(
-          _training[currentTrainingIndex] as ExerciseEntity,
+          _training[currentTrainingIndex] as ExerciseInProgressEntity,
         ),
       );
     });
@@ -107,7 +111,11 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     for (var index = 0; index < highestNumberOfSets; index++) {
       for (final exercise in supersetList) {
         if (index < exercise.exerciseOptionsData.sets) {
-          _training.add(exercise);
+          final exerciseInProgressEntity = ExerciseInProgressEntity(
+            setsRemaining: '${index + 1}/$highestNumberOfSets',
+            exerciseEntity: exercise,
+          );
+          _training.add(exerciseInProgressEntity);
         }
       }
       if (index < highestNumberOfSets - 1) {
@@ -127,7 +135,10 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
           isLastRoundInSuperset && !isLastExerciseInTraining;
       if (shouldShowBreakWithNextExerciseName) {
         final nextExerciseAfterSuperset = exercises[exercises.indexOf(
-                  supersetList.last,) + 1].title;
+                  supersetList.last,
+                ) +
+                1]
+            .title;
         _training.add(
           BreakEntity(
             breakTime: supersetList.first.exerciseOptionsData.timeBreak,
@@ -146,7 +157,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       } else {
         emitter(
           TrainingState.exerciseInProgress(
-            _training[currentTrainingIndex] as ExerciseEntity,
+            _training[currentTrainingIndex] as ExerciseInProgressEntity,
           ),
         );
       }
@@ -165,7 +176,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       } else {
         emitter(
           TrainingState.exerciseInProgress(
-            _training[currentTrainingIndex] as ExerciseEntity,
+            _training[currentTrainingIndex] as ExerciseInProgressEntity,
           ),
         );
       }
