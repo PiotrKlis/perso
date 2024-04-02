@@ -13,7 +13,7 @@ class ChatChannelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamChat(
-      client: chatClient,
+      client: chatClient!,
       child: StreamChannel(
         channel: channel,
         child: const Scaffold(

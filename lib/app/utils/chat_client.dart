@@ -1,6 +1,6 @@
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
-late StreamChatClient chatClient;
+StreamChatClient? chatClient;
 late Channel chatChannel;
 
 class ChatClient {
@@ -16,18 +16,13 @@ class ChatClient {
       // logLevel: Level.INFO,
     );
 
-    /// Set the current user and connect the websocket.
-    /// In a production scenario, this should be done using a backend to generate
-    /// a user token using our server SDK.
-    /// Please see the following for more information:
-    /// https://getstream.io/chat/docs/ios_user_setup_and_tokens/
-    await chatClient.connectUser(
+    await chatClient!.connectUser(
       User(
         id: 'peterParker',
       ),
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiUGV0ZXIgUGFya2VyIn0.f7VZ48pPeW5zE7C-fL39pQ7hwMlayLwhYyEHuXaKbX0',
     );
-    final channel = chatClient.channel('messaging', id: 'flutter_devs');
+    final channel = chatClient!.channel('messaging', id: 'flutter_devs');
     await channel.create();
     await channel.watch();
 

@@ -14,11 +14,21 @@ class ChatScreen extends StatelessWidget {
       appBar: const PersoAppBar(
         title: 'Chat screen',
       ),
-      body: StreamChat(
-        client: chatClient,
-        child: const ChannelListPage(),
-      ),
+      body: _buildStreamChat(),
     );
+  }
+
+  Widget _buildStreamChat() {
+    if (chatClient == null) {
+      return const Center(
+        child: Text('No internet connection.'),
+      );
+    } else {
+      return StreamChat(
+        client: chatClient!,
+        child: const ChannelListPage(),
+      );
+    }
   }
 }
 
@@ -31,7 +41,7 @@ class ChannelListPage extends StatefulWidget {
 
 class _ChannelListPageState extends State<ChannelListPage> {
   final _controller = StreamChannelListController(
-    client: chatClient,
+    client: chatClient!,
     // filter: Filter.in_(
     //   'members',
     //   [StreamChat.of(context).currentUser!.id],

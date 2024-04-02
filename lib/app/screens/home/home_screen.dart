@@ -8,6 +8,7 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
 import 'package:perso/app/widgets/address_and_map/google_map.dart';
+import 'package:perso/app/widgets/internet_connection_service.dart';
 import 'package:perso/app/widgets/perso_big_header.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_clickable_text.dart';
