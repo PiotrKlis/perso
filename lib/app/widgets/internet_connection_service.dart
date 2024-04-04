@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 @singleton
 class InternetConnectionService {
   final connectivityResultController = StreamController<ConnectivityResult>();
-  late final StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
 
   void init() {
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen(
@@ -18,7 +18,7 @@ class InternetConnectionService {
       connectivityResultController.stream;
 
   void dispose() {
-    _connectivitySubscription.cancel();
+    _connectivitySubscription?.cancel();
     connectivityResultController.close();
   }
 }

@@ -13,6 +13,7 @@ class ExerciseDetailsBloc
 
     on<SaveExercise>((event, emitter) async {
       try {
+        emitter(const ExerciseDetailsState.saveLoading());
         final nextIndex = await _exerciseProvider.getNumberOfExercises(
           clientId: event.clientId,
           trainerId: trainerId,
@@ -33,6 +34,7 @@ class ExerciseDetailsBloc
           date: event.date,
           exerciseInTrainingEntity: updatedExerciseInTrainingEntity,
         );
+        emitter(const ExerciseDetailsState.updated());
       } catch (error) {
         //TODO: Add error handling
       }
@@ -40,12 +42,14 @@ class ExerciseDetailsBloc
 
     on<DeleteExercise>((event, emitter) async {
       try {
+        emitter(const ExerciseDetailsState.deleteLoading());
         await _exercisesService.remove(
           clientId: event.clientId,
           trainerId: trainerId,
           date: event.date,
           exerciseInTrainingId: event.exerciseInTrainingId,
         );
+        emitter(const ExerciseDetailsState.updated());
       } catch (error) {
         //TODO: Add error handling
       }

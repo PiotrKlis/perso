@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.dart';
-import 'package:perso/app/screens/exercise_details/event/exercise_details_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
+import 'package:perso/app/screens/exercise_details/state/exercise_details_state.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_description_section.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_categories.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_details_buttons_section.dart';
@@ -38,6 +39,40 @@ class ExerciseDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ExerciseDetailsBloc(),
+      child: _ExerciseDetailsScreenContent(
+        exerciseInTrainingEntity: _exerciseInTrainingEntity,
+        clientId: _clientId,
+        date: _date,
+        exerciseDetailScreenType: _exerciseDetailScreenType,
+      ),
+    );
+  }
+}
+
+class _ExerciseDetailsScreenContent extends StatelessWidget {
+  const _ExerciseDetailsScreenContent({
+    required ExerciseInTrainingEntity exerciseInTrainingEntity,
+    required String clientId,
+    required String date,
+    required String exerciseDetailScreenType,
+  })  : _exerciseInTrainingEntity = exerciseInTrainingEntity,
+        _clientId = clientId,
+        _date = date,
+        _exerciseDetailScreenType = exerciseDetailScreenType;
+
+  final ExerciseInTrainingEntity _exerciseInTrainingEntity;
+  final String _clientId;
+  final String _date;
+  final String _exerciseDetailScreenType;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<ExerciseDetailsBloc, ExerciseDetailsState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          updated: () => context.pop(),
+        );
+      },
       child: Scaffold(
         appBar: PersoAppBar(
           title: _exerciseInTrainingEntity.exerciseEntity.title,
