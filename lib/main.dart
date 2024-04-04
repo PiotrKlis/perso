@@ -62,13 +62,15 @@ class MyApp extends StatelessWidget {
   }
 
   void _initializeChat() {
-    _internetConnectionService.connectivityResultStream.listen((
-      connectivityResult,
-    ) async {
-      if (connectivityResult != ConnectivityResult.none) {
-        await ChatClient.initializeClient();
-        _internetConnectionService.dispose();
-      }
-    });
+    if (!_internetConnectionService.connectivityResultController.hasListener) {
+      _internetConnectionService.connectivityResultStream.listen((
+        connectivityResult,
+      ) async {
+        if (connectivityResult != ConnectivityResult.none) {
+          await ChatClient.initializeClient();
+          _internetConnectionService.dispose();
+        }
+      });
+    }
   }
 }
