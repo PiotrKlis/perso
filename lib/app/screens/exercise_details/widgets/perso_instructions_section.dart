@@ -3,8 +3,8 @@ import 'package:perso/app/screens/exercise_details/exercise_details_inherited_wi
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 
-class PersoDescriptionSection extends StatelessWidget {
-  const PersoDescriptionSection({super.key});
+class PersoInstructionsSection extends StatelessWidget {
+  const PersoInstructionsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,14 @@ class PersoDescriptionSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Description',
+            'Instructions',
             style: ThemeText.smallTitleBold,
           ),
           Container(
             margin: const EdgeInsets.only(top: Dimens.mMargin),
             child: Text(
               exerciseInheritedWidget
-                  .exerciseInTrainingEntity.exerciseEntity.description,
+                  .exerciseInTrainingEntity.exerciseEntity.instructions,
               style: ThemeText.bodyRegularBlackText,
             ),
           ),

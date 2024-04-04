@@ -30,7 +30,7 @@ class ExercisesInProgressScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  PersoExerciseInstructions(
+                  PersoExerciseData(
                     setsRemaining: exercise.setsRemaining,
                     exerciseOptionsData:
                         exercise.exerciseEntity.exerciseOptionsData,
@@ -42,13 +42,13 @@ class ExercisesInProgressScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              _Description(description: exercise.exerciseEntity.description),
+              _Instructions(instructions: exercise.exerciseEntity.instructions),
               _TrainerNote(
                 trainerNote:
                     exercise.exerciseEntity.exerciseOptionsData.trainerNote,
               ),
               const _ClientNote(),
-              _ButtonsSection(),
+              const _ButtonsSection(),
             ],
           ),
         ),
@@ -107,6 +107,8 @@ class _TimerSection extends StatelessWidget {
 }
 
 class _ButtonsSection extends StatelessWidget {
+  const _ButtonsSection();
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -211,12 +213,12 @@ class _TrainerNote extends StatelessWidget {
   }
 }
 
-class _Description extends StatelessWidget {
-  const _Description({
-    required this.description,
+class _Instructions extends StatelessWidget {
+  const _Instructions({
+    required this.instructions,
   });
 
-  final String description;
+  final String instructions;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +229,7 @@ class _Description extends StatelessWidget {
         right: Dimens.mMargin,
       ),
       child: Text(
-        description,
+        instructions,
         style: ThemeText.bodyRegularBlackText,
       ),
     );

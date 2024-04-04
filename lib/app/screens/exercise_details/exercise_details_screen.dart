@@ -5,7 +5,7 @@ import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.da
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';
 import 'package:perso/app/screens/exercise_details/model/exercise_details_screen_type.dart';
 import 'package:perso/app/screens/exercise_details/state/exercise_details_state.dart';
-import 'package:perso/app/screens/exercise_details/widgets/perso_description_section.dart';
+import 'package:perso/app/screens/exercise_details/widgets/perso_instructions_section.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_categories.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_details_buttons_section.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_exercise_details_save_button.dart';
@@ -91,7 +91,7 @@ class _ExerciseDetailsScreenContent extends StatelessWidget {
                   videoId: _exerciseInTrainingEntity.exerciseEntity.videoId,
                 ),
                 const PersoExerciseCategories(),
-                const PersoDescriptionSection(),
+                const PersoInstructionsSection(),
                 const PersoExerciseOptionsSection(),
                 const PersoTimeBreakSection(),
                 const PersoSupersetSection(),

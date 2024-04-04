@@ -65,10 +65,29 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     });
 
     on<ExerciseDone>((event, emitter) async {
-      //TODO: Implement below
-      _chatService.sendClientNote();
-      _exerciseService.markAsDone();
-      _navigateToNext(emitter);
+      if (currentTrainingIndex < _training.length - 1) {
+        currentTrainingIndex++;
+
+        //TODO: Implement below
+        _chatService.sendClientNote();
+        _exerciseService.markAsDone();
+
+        if (_training[currentTrainingIndex] is BreakEntity) {
+          emitter(
+            TrainingState.trainingBreak(
+              _training[currentTrainingIndex] as BreakEntity,
+            ),
+          );
+        } else {
+          emitter(
+            TrainingState.exerciseInProgress(
+              _training[currentTrainingIndex] as ExerciseInProgressEntity,
+            ),
+          );
+        }
+      } else {
+        emitter(const TrainingState.finished());
+      }
     });
   }
 
@@ -168,11 +187,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     if (currentTrainingIndex < _training.length - 1) {
       currentTrainingIndex++;
       if (_training[currentTrainingIndex] is BreakEntity) {
-        emitter(
-          TrainingState.trainingBreak(
-            _training[currentTrainingIndex] as BreakEntity,
-          ),
-        );
+        _navigateToNext(emitter);
       } else {
         emitter(
           TrainingState.exerciseInProgress(

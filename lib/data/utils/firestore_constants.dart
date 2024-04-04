@@ -20,6 +20,7 @@ class UserDocumentFields {
   static const String votesNumber = 'votesNumber';
   static const String image = 'image';
   static const String id = 'id';
+  static const String instructions = 'instructions';
   static const String description = 'description';
   static const String categories = 'categories';
   static const String userType = 'userType';

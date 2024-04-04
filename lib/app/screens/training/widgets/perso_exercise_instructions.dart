@@ -4,8 +4,8 @@ import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/core/models/exercise_type.dart';
 
-class PersoExerciseInstructions extends StatelessWidget {
-  const PersoExerciseInstructions({
+class PersoExerciseData extends StatelessWidget {
+  const PersoExerciseData({
     required ExerciseOptionsData exerciseOptionsData,
     required String setsRemaining,
     super.key,

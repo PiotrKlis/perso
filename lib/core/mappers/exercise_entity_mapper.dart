@@ -18,8 +18,8 @@ class ExerciseEntityMapper {
   ExerciseEntity map(QueryDocumentSnapshot<Map<String, dynamic>> exercise) {
     return ExerciseEntity(
       id: exercise[UserDocumentFields.id] as String,
-      description: _stringTranslationsMapper.mapFrom(
-        exercise[UserDocumentFields.description] as Map<String, dynamic>,
+      instructions: _stringTranslationsMapper.mapFrom(
+        exercise[UserDocumentFields.instructions] as Map<String, dynamic>,
       ),
       index: exercise[UserDocumentFields.index] as int,
       tags: _stringListTranslationsMapper.map(
@@ -35,8 +35,8 @@ class ExerciseEntityMapper {
   ExerciseEntity mapSearchResult(Hit exercise) {
     return ExerciseEntity(
       id: exercise[UserDocumentFields.id] as String,
-      description: _stringTranslationsMapper.mapFrom(
-        exercise[UserDocumentFields.description] as Map<String, dynamic>,
+      instructions: _stringTranslationsMapper.mapFrom(
+        exercise[UserDocumentFields.instructions] as Map<String, dynamic>,
       ),
       index: exercise[UserDocumentFields.index] as int,
       tags: _stringListTranslationsMapper.map(
