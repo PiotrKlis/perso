@@ -36,20 +36,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
             exerciseEntity: currentExercise,
           );
           _training.add(exerciseInProgressEntity);
-          final nextExerciseTitle = _getNextExerciseTitle(
-            index,
-            currentExercise,
-            event.exercises,
-          );
-          final timeBreak = currentExercise.exerciseOptionsData.timeBreak;
-          if (timeBreak != 0) {
-            _training.add(
-              BreakEntity(
-                breakTime: timeBreak,
-                nextExerciseTitle: nextExerciseTitle,
-              ),
-            );
-          }
+          _handleBreak(index, currentExercise, event.exercises);
         }
       }
       emitter(
@@ -94,32 +81,64 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     });
   }
 
-  String _getNextExerciseTitle(int index,
-      ExerciseEntity exerciseEntity,
-      List<ExerciseEntity> exercises,) {
+  void _handleBreak(
+    int index,
+    ExerciseEntity currentExercise,
+    List<ExerciseEntity> exercises,
+  ) {
+    final isLastSet = index == currentExercise.exerciseOptionsData.sets - 1;
+    final isLastExercise =
+        exercises.indexOf(currentExercise) == exercises.length - 1;
+    final timeBreak = currentExercise.exerciseOptionsData.timeBreak;
+    final shouldNotShowBreak = (isLastSet && isLastExercise) || timeBreak == 0;
+    if (!shouldNotShowBreak) {
+      _addBreak(index, currentExercise, exercises, timeBreak);
+    }
+  }
+
+  void _addBreak(
+    int index,
+    ExerciseEntity currentExercise,
+    List<ExerciseEntity> exercises,
+    int timeBreak,
+  ) {
+    final nextExerciseTitle = _getNextExerciseTitle(
+      index,
+      currentExercise,
+      exercises,
+    );
+    _training.add(
+      BreakEntity(
+        breakTime: timeBreak,
+        nextExerciseTitle: nextExerciseTitle,
+      ),
+    );
+  }
+
+  String _getNextExerciseTitle(
+    int index,
+    ExerciseEntity exerciseEntity,
+    List<ExerciseEntity> exercises,
+  ) {
     final isNextExerciseFromTheSameSet =
         index < exerciseEntity.exerciseOptionsData.sets - 1;
     if (isNextExerciseFromTheSameSet) {
       return exerciseEntity.title;
     } else {
-      final isLastExercise =
-          exercises.indexOf(exerciseEntity) == exercises.length - 1;
-      if (isLastExercise) {
-        return '';
-      } else {
-        return exercises[exercises.indexOf(exerciseEntity) + 1].title;
-      }
+      return exercises[exercises.indexOf(exerciseEntity) + 1].title;
     }
   }
 
-  void _addSuperset(List<String> addedSupersets,
-      String supersetName,
-      List<ExerciseEntity> exercises,) {
+  void _addSuperset(
+    List<String> addedSupersets,
+    String supersetName,
+    List<ExerciseEntity> exercises,
+  ) {
     addedSupersets.add(supersetName);
     final supersetList = exercises
         .where(
           (element) => element.exerciseOptionsData.supersetName == supersetName,
-    )
+        )
         .toList();
 
     final highestNumberOfSets = supersetList
@@ -146,16 +165,16 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       }
       final isLastRoundInSuperset = index == highestNumberOfSets - 1;
       final isLastExerciseInTraining = exercises.indexOf(
-        supersetList.last,
-      ) ==
+            supersetList.last,
+          ) ==
           exercises.length - 1;
       final shouldShowBreakWithNextExerciseName =
           isLastRoundInSuperset && !isLastExerciseInTraining;
       if (shouldShowBreakWithNextExerciseName) {
         final nextExerciseAfterSuperset = exercises[exercises.indexOf(
-          supersetList.last,
-        ) +
-            1]
+                  supersetList.last,
+                ) +
+                1]
             .title;
         _training.add(
           BreakEntity(
