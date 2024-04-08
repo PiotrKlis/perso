@@ -69,4 +69,17 @@ class TextFieldValidator {
 
     return null;
   }
+
+  static String? validateNonZeroDigits(String value) {
+    if (value == '0') {
+      return 'Value cannot be 0';
+    }
+
+    final digitsRegex = RegExp(r'^[0-9]+$');
+    if (!digitsRegex.hasMatch(value)) {
+      return 'Only digits are allowed';
+    }
+
+    return null;
+  }
 }

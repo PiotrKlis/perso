@@ -41,12 +41,15 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
             currentExercise,
             event.exercises,
           );
-          _training.add(
-            BreakEntity(
-              breakTime: currentExercise.exerciseOptionsData.timeBreak,
-              nextExerciseTitle: nextExerciseTitle,
-            ),
-          );
+          final timeBreak = currentExercise.exerciseOptionsData.timeBreak;
+          if (timeBreak != 0) {
+            _training.add(
+              BreakEntity(
+                breakTime: timeBreak,
+                nextExerciseTitle: nextExerciseTitle,
+              ),
+            );
+          }
         }
       }
       emitter(
@@ -69,8 +72,8 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
         currentTrainingIndex++;
 
         //TODO: Implement below
-        _chatService.sendClientNote();
-        _exerciseService.markAsDone();
+        // _chatService.sendClientNote();
+        // _exerciseService.markAsDone();
 
         if (_training[currentTrainingIndex] is BreakEntity) {
           emitter(
@@ -91,11 +94,9 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     });
   }
 
-  String _getNextExerciseTitle(
-    int index,
-    ExerciseEntity exerciseEntity,
-    List<ExerciseEntity> exercises,
-  ) {
+  String _getNextExerciseTitle(int index,
+      ExerciseEntity exerciseEntity,
+      List<ExerciseEntity> exercises,) {
     final isNextExerciseFromTheSameSet =
         index < exerciseEntity.exerciseOptionsData.sets - 1;
     if (isNextExerciseFromTheSameSet) {
@@ -111,16 +112,14 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     }
   }
 
-  void _addSuperset(
-    List<String> addedSupersets,
-    String supersetName,
-    List<ExerciseEntity> exercises,
-  ) {
+  void _addSuperset(List<String> addedSupersets,
+      String supersetName,
+      List<ExerciseEntity> exercises,) {
     addedSupersets.add(supersetName);
     final supersetList = exercises
         .where(
           (element) => element.exerciseOptionsData.supersetName == supersetName,
-        )
+    )
         .toList();
 
     final highestNumberOfSets = supersetList
@@ -147,16 +146,16 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       }
       final isLastRoundInSuperset = index == highestNumberOfSets - 1;
       final isLastExerciseInTraining = exercises.indexOf(
-            supersetList.last,
-          ) ==
+        supersetList.last,
+      ) ==
           exercises.length - 1;
       final shouldShowBreakWithNextExerciseName =
           isLastRoundInSuperset && !isLastExerciseInTraining;
       if (shouldShowBreakWithNextExerciseName) {
         final nextExerciseAfterSuperset = exercises[exercises.indexOf(
-                  supersetList.last,
-                ) +
-                1]
+          supersetList.last,
+        ) +
+            1]
             .title;
         _training.add(
           BreakEntity(

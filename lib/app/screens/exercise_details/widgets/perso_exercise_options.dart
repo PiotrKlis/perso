@@ -40,7 +40,8 @@ class PersoExerciseOptionsSectionState
             shrinkWrap: true,
             children: ExerciseType.values
                 .map(
-                  (exerciseType) => RadioListTile(
+                  (exerciseType) =>
+                  RadioListTile(
                     title: Text(exerciseType.value),
                     value: exerciseType,
                     groupValue: selectedExerciseType,
@@ -57,7 +58,7 @@ class PersoExerciseOptionsSectionState
                       }
                     },
                   ),
-                )
+            )
                 .toList(),
           ),
           Form(
@@ -95,7 +96,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
               textEditingController: exerciseInheritedWidget.setsController,
               textInputType: TextInputType.number,
               hintText: 'Sets',
-              customValidator: TextFieldValidator.validateDigits,
+              customValidator: TextFieldValidator.validateNonZeroDigits,
             ),
           ),
           const SizedBox(
@@ -110,7 +111,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
               hintText: _getSecondFieldTitle(
                 _exerciseOptionsData.exerciseType,
               ),
-              customValidator: TextFieldValidator.validateDigits,
+              customValidator: TextFieldValidator.validateNonZeroDigits,
             ),
           ),
           const SizedBox(
@@ -118,7 +119,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
           ),
           Visibility(
             visible:
-                _exerciseOptionsData.exerciseType != ExerciseType.repsInReserve,
+            _exerciseOptionsData.exerciseType != ExerciseType.repsInReserve,
             child: Expanded(
               child: PersoTextField(
                 isEnabled: exerciseInheritedWidget.exerciseDetailScreenType !=
@@ -128,7 +129,7 @@ class _ExerciseOptionsFields extends StatelessWidget {
                 hintText: _getThirdFieldTitle(
                   _exerciseOptionsData.exerciseType,
                 ),
-                customValidator: TextFieldValidator.validateDigits,
+                customValidator: _getCustomValidator(),
               ),
             ),
           ),
@@ -137,10 +138,16 @@ class _ExerciseOptionsFields extends StatelessWidget {
     );
   }
 
-  void _updateTextControllers(
-    ExerciseOptionsData optionsData,
-    ExerciseInheritedWidget textEditControllers,
-  ) {
+  String? Function(String)? _getCustomValidator() {
+    if (_exerciseOptionsData.exerciseType == ExerciseType.maxPercentage) {
+      return TextFieldValidator.validateNonZeroDigits;
+    } else {
+      return TextFieldValidator.validateDigits;
+    }
+  }
+
+  void _updateTextControllers(ExerciseOptionsData optionsData,
+      ExerciseInheritedWidget textEditControllers,) {
     textEditControllers.setsController.text = optionsData.sets.toString();
     switch (optionsData.exerciseType) {
       case ExerciseType.timeBased:

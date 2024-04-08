@@ -39,7 +39,7 @@ class PersoClientTrainersList extends StatelessWidget {
             top: Dimens.lMargin,
           ),
           child: Text(
-            'My plans',
+            'My trainers',
             style: ThemeText.mediumTitleBold,
           ),
         ),
