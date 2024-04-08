@@ -24,8 +24,8 @@ class PersoExerciseData extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _Reps(exerciseOptions: _exerciseOptions),
               _Sets(setsRemaining: _setsRemaining),
+              _Reps(exerciseOptions: _exerciseOptions),
               _Weight(exerciseOptions: _exerciseOptions),
               _Superset(exerciseOptions: _exerciseOptions),
             ],
@@ -37,6 +37,7 @@ class PersoExerciseData extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _Sets(setsRemaining: _setsRemaining),
               _Time(exerciseOptions: _exerciseOptions),
               _Weight(exerciseOptions: _exerciseOptions),
               _Superset(exerciseOptions: _exerciseOptions),
@@ -49,6 +50,7 @@ class PersoExerciseData extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _Sets(setsRemaining: _setsRemaining),
               _RepsInReserve(exerciseOptions: _exerciseOptions),
               _Weight(exerciseOptions: _exerciseOptions),
               _Superset(exerciseOptions: _exerciseOptions),
@@ -61,6 +63,7 @@ class PersoExerciseData extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _Sets(setsRemaining: _setsRemaining),
               _RateOfPerceivedExertion(exerciseOptions: _exerciseOptions),
               _Weight(exerciseOptions: _exerciseOptions),
               _Superset(exerciseOptions: _exerciseOptions),
@@ -73,6 +76,7 @@ class PersoExerciseData extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _Sets(setsRemaining: _setsRemaining),
               _Reps(exerciseOptions: _exerciseOptions),
               _MaxPercent(exerciseOptions: _exerciseOptions),
               _Superset(exerciseOptions: _exerciseOptions),
@@ -109,9 +113,12 @@ class _Time extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Time: ${_exerciseOptions.time} seconds',
-      style: ThemeText.bodyRegularBlackText,
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      child: Text(
+        'Time: ${_exerciseOptions.time} seconds',
+        style: ThemeText.bodyRegularBlackText,
+      ),
     );
   }
 }
@@ -125,9 +132,12 @@ class _RepsInReserve extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Repetitions in reserve: ${_exerciseOptions.repsInReserve}',
-      style: ThemeText.bodyRegularBlackText,
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      child: Text(
+        'Repetitions in reserve: ${_exerciseOptions.repsInReserve}',
+        style: ThemeText.bodyRegularBlackText,
+      ),
     );
   }
 }
@@ -141,9 +151,12 @@ class _RateOfPerceivedExertion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Rate of perceived exertion: ${_exerciseOptions.rateOfPerceivedExertion}',
-      style: ThemeText.bodyRegularBlackText,
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      child: Text(
+        'Rate of perceived exertion: ${_exerciseOptions.rateOfPerceivedExertion}',
+        style: ThemeText.bodyRegularBlackText,
+      ),
     );
   }
 }
@@ -201,14 +214,11 @@ class _MaxPercent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: _exerciseOptions.weight > 0,
-      child: Container(
-        margin: const EdgeInsets.only(top: Dimens.sMargin),
-        child: Text(
-          'Max %: ${_exerciseOptions.maxPercentage}',
-          style: ThemeText.bodyRegularBlackText,
-        ),
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      child: Text(
+        'Max %: ${_exerciseOptions.maxPercentage}',
+        style: ThemeText.bodyRegularBlackText,
       ),
     );
   }
@@ -223,9 +233,12 @@ class _Reps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Repetitions: ${_exerciseOptions.reps}',
-      style: ThemeText.bodyRegularBlackText,
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.sMargin),
+      child: Text(
+        'Repetitions: ${_exerciseOptions.reps}',
+        style: ThemeText.bodyRegularBlackText,
+      ),
     );
   }
 }
