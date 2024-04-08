@@ -99,6 +99,7 @@ class _TimerSection extends StatelessWidget {
     if (_exerciseType == ExerciseType.timeBased) {
       return PersoExerciseTimer(
         time: _time,
+        key: UniqueKey(),
       );
     } else {
       return Container();
