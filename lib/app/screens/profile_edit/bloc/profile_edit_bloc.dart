@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';

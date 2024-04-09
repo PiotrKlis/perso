@@ -1,11 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/review_entity.dart';
 
 part 'trainer_entity.freezed.dart';
 
 @freezed
-class TrainerEntity with _$TrainerEntity {
+class TrainerEntity extends ProfileEntity with _$TrainerEntity {
   const factory TrainerEntity({
     required String id,
     required String name,

@@ -72,7 +72,7 @@ class TestTrainersRepository implements TrainersSource {
   ];
 
   @override
-  Stream<TrainerEntity> getTrainerData(String id) async* {
+  Stream<TrainerEntity> getTrainers(String id) async* {
     yield const TrainerEntity(
       id: '1',
       name: 'Son goku',
@@ -117,6 +117,12 @@ class TestTrainersRepository implements TrainersSource {
   @override
   Future<List<TrainerIdentity>> getTrainersForClient(String clientId) {
     // TODO: implement getTrainersForClient
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<TrainerEntity> getTrainer(String id) {
+    // TODO: implement getTrainer
     throw UnimplementedError();
   }
 }

@@ -34,7 +34,7 @@ class TrainerClientsListBloc
       (event, emitter) async {
         try {
           final trainerId = _userSessionModel.user?.uid ?? '';
-          final trainerData = _trainersSource.getTrainerData(trainerId);
+          final trainerData = _trainersSource.getTrainers(trainerId);
 
           await for (final trainerEntity in trainerData) {
             final activeClients =

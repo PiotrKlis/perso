@@ -1,9 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:perso/core/models/profile_entity.dart';
 
 part 'client_entity.freezed.dart';
 
 @freezed
-class ClientEntity with _$ClientEntity {
+class ClientEntity extends ProfileEntity with _$ClientEntity {
   const factory ClientEntity({
     required String id,
     required String name,

@@ -26,7 +26,7 @@ class FirestoreTrainersProvider implements TrainersSource {
   }
 
   @override
-  Stream<TrainerEntity> getTrainerData(String id) async* {
+  Stream<TrainerEntity> getTrainers(String id) async* {
     final snapshots = FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(id)
@@ -83,5 +83,15 @@ class FirestoreTrainersProvider implements TrainersSource {
         },
       ),
     );
+  }
+
+  @override
+  Future<TrainerEntity> getTrainer(String id) async {
+    final trainersSnapshots = await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(id)
+        .get();
+
+    return _trainerEntityMapper.mapDocumentSnapshot(trainersSnapshots);
   }
 }
