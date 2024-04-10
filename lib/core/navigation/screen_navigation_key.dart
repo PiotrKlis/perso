@@ -27,4 +27,5 @@ class ScreenNavigationKey {
   static const String exerciseDetailsTrainer = 'exercise_details_trainer';
   static const String exerciseDetailsClient = 'exercise_details_client';
   static const String exerciseDetailsLibrary = 'exercise_details_library';
+  static const String exerciseCreation = 'exercise_creation';
 }

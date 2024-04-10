@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/chat/chat_channel_screen.dart';
 import 'package:perso/app/screens/chat/chat_screen.dart';
 import 'package:perso/app/screens/client_trainings/client_trainings_screen.dart';
+import 'package:perso/app/screens/exercise_creation/exercise_creation_screen.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_screen.dart';
 import 'package:perso/app/screens/exercise_library/exercise_library_screen.dart';
 import 'package:perso/app/screens/forgot_password/forgot_password_screen.dart';
@@ -423,6 +424,20 @@ final GoRouter goRouter = GoRouter(
                               ),
                             );
                           },
+                          routes: [
+                            GoRoute(
+                              name: ScreenNavigationKey.exerciseCreation,
+                              path: ScreenNavigationKey.exerciseCreation,
+                              pageBuilder: (
+                                BuildContext context,
+                                GoRouterState state,
+                              ) {
+                                return const NoTransitionPage(
+                                  child: ExerciseCreationScreen(),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       ],
                     ),
