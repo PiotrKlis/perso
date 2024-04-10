@@ -30,29 +30,21 @@ class _PersoSelectableCategoryChipsState
           return state.when(
             initial: Container.new,
             content: (List<String> categories) {
-              return Container(
-                margin: const EdgeInsets.only(
-                  left: Dimens.xsMargin,
-                  right: Dimens.xsMargin,
-                ),
-                child: Wrap(
-                  // spacing: Dimens.xsMargin,
-                  children: categories.map((String title) {
-                    return Container(
-                      margin: const EdgeInsets.only(
-                        left: Dimens.xsMargin,
-                        // right: Dimens.xsMargin,
-                      ),
-                      child: FilterChip(
-                        label: Text(title),
-                        selected: widget.selectedCategories.contains(title),
-                        onSelected: (value) {
-                          handleFilterSelection(title);
-                        },
-                      ),
-                    );
-                  }).toList(),
-                ),
+              return Wrap(
+                children: categories.map((String title) {
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      left: Dimens.xsMargin,
+                    ),
+                    child: FilterChip(
+                      label: Text(title),
+                      selected: widget.selectedCategories.contains(title),
+                      onSelected: (value) {
+                        handleFilterSelection(title);
+                      },
+                    ),
+                  );
+                }).toList(),
               );
             },
           );

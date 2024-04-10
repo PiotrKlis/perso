@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoSmallButton extends StatelessWidget {
-  const PersoSmallButton(
-      {required this.text, required this.addLanguage, required this.customValidator, super.key,});
+  const PersoSmallButton({
+    required this.text,
+    required this.addLanguage,
+    required this.customValidator,
+    super.key,
+  });
 
   final String text;
   final void Function(String value) addLanguage;
@@ -26,8 +30,9 @@ class PersoSmallButton extends StatelessWidget {
           hintText: text,
           hintStyle: ThemeText.bodyRegularBlue,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),
-              borderSide: BorderSide.none,),
+            borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),
+            borderSide: BorderSide.none,
+          ),
         ),
         onTap: () {
           showCountryPicker(
