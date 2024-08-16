@@ -3,34 +3,38 @@ import 'package:perso/app/models/account_type.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 
 class PersoRegisterButton extends StatelessWidget {
-  const PersoRegisterButton(
-      {super.key, AccountType registerType = AccountType.client,})
-      : _registerType = registerType;
+  const PersoRegisterButton({
+    super.key,
+    AccountType registerType = AccountType.client,
+  }) : _registerType = registerType;
 
   final AccountType _registerType;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: Dimens.loginButtonHeight,
-        child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: PersoColors.lightWhite,
-                shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(Dimens.buttonBorderRadius),),),
-            onPressed: () {},
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // getIcon(_registerType),
-                getTitle(_registerType),
-                // Container(
-                //     margin: const EdgeInsets.only(left: Dimens.normalMargin),
-                //     child: getIcon(_registerType)),
-              ],
-            ),),);
+      height: Dimens.loginButtonHeight,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          backgroundColor: PersoColors.lightWhite,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Dimens.buttonBorderRadius),
+          ),
+        ),
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // getIcon(_registerType),
+            getTitle(_registerType),
+            // Container(
+            //     margin: const EdgeInsets.only(left: Dimens.normalMargin),
+            //     child: getIcon(_registerType)),
+          ],
+        ),
+      ),
+    );
   }
 
   Icon getIcon(AccountType loginType) {

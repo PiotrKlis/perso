@@ -1,9 +1,7 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
-import 'package:perso/app/utils/chat_client.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/locale_repository.dart';
 import 'package:perso/app/utils/localisation_keys.dart';

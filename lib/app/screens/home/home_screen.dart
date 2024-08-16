@@ -8,9 +8,7 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
 import 'package:perso/app/widgets/address_and_map/google_map.dart';
-import 'package:perso/app/widgets/internet_connection_service.dart';
 import 'package:perso/app/widgets/perso_big_header.dart';
-import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_clickable_text.dart';
 import 'package:perso/app/widgets/perso_header.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
@@ -76,19 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       right: Dimens.xmMargin,
                     ),
                     child: SearchBar(
-                    padding: const MaterialStatePropertyAll<EdgeInsets>(
-                      EdgeInsets.symmetric(
-                        horizontal: 16,
+                      padding: const MaterialStatePropertyAll<EdgeInsets>(
+                        EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ),
                       ),
-                    ),
-
-                    hintText: 'Search trainers',
-                    leading: const Icon(Icons.search),
+                      hintText: 'Search trainers',
+                      leading: const Icon(Icons.search),
                       onTap: () => context.pushNamed(
-                          ScreenNavigationKey.searchResults,
-                          pathParameters: {
-                            'input': ' '},
-                          ),
+                        ScreenNavigationKey.searchResults,
+                        pathParameters: {'input': ' '},
+                      ),
                     ),
                   ),
                   Container(

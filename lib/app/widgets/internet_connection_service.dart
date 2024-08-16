@@ -6,12 +6,13 @@ import 'package:injectable/injectable.dart';
 @singleton
 class InternetConnectionService {
   final connectivityResultController = StreamController<ConnectivityResult>();
-  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySubscription;
 
   void init() {
-    _connectivitySubscription = Connectivity().onConnectivityChanged.listen(
-          connectivityResultController.add,
-        );
+    _connectivitySubscription =
+        Connectivity().onConnectivityChanged.listen((event) {
+      connectivityResultController.add(event.first);
+    });
   }
 
   Stream<ConnectivityResult> get connectivityResultStream =>
