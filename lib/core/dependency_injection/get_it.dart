@@ -5,6 +5,6 @@ import 'package:perso/core/dependency_injection/get_it.config.dart';
 final getIt = GetIt.instance;
 
 @InjectableInit()
-void configureDependencies(String environment) {
+void initializeDependencyInjection(String environment) {
   getIt.init(environment: environment);
 }

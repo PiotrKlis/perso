@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/app/utils/chat_client.dart';
 import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/locale_repository.dart';
 import 'package:perso/app/utils/localisation_keys.dart';
@@ -10,28 +11,30 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
+import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  configureDependencies(Environment.dev);
-  LocaleRepository.init();
+  await _appSetup();
   runApp(MyApp());
+}
+
+Future<void> _appSetup() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  initializeDependencyInjection(Environment.dev);
+  await Firebase.initializeApp();
+  await getIt.get<PersoSharedPrefs>().init();
+  getIt.get<UserInfoProvider>().listenForFirebaseUserChange();
+  getIt.get<InternetConnectionService>().init();
+  LocaleRepository.init();
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
-  final PersoSharedPrefs _persoSharedPrefs = getIt.get<PersoSharedPrefs>();
   final _internetConnectionService = getIt.get<InternetConnectionService>();
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Move these into "build before" component
-    _userInfoProvider.listenForFirebaseUserChange();
-    _persoSharedPrefs.init();
-    _internetConnectionService.init();
     _initializeChat();
     return Theme(
       data: ThemeData(
@@ -59,16 +62,17 @@ class MyApp extends StatelessWidget {
     );
   }
 
+  //TODO: Fix me
   void _initializeChat() {
     if (!_internetConnectionService.connectivityResultController.hasListener) {
-      // _internetConnectionService.connectivityResultStream.listen((
-      //   connectivityResult,
-      // ) async {
-      //   if (connectivityResult != ConnectivityResult.none) {
-      //     await ChatClient.initializeClient();
-      //     _internetConnectionService.dispose();
-      //   }
-      // });
+      _internetConnectionService.connectivityResultStream.listen((
+        connectivityResult,
+      ) async {
+        if (connectivityResult != ConnectivityResult.none) {
+          await ChatClient.initializeClient();
+          _internetConnectionService.dispose();
+        }
+      });
     }
   }
 }
