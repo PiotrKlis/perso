@@ -6,11 +6,11 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/ev
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/perso_trainer_exercise_list.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/perso_send_exercises_section.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class TrainerPlanOverviewScreen extends StatelessWidget {
@@ -155,7 +155,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'Exercises',
             style: ThemeText.largeTitleBold,
           ),

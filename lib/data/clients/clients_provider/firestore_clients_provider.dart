@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/models/client_entity.dart';
-import 'package:perso/core/string_extensions.dart';
+import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/data/clients/clients_provider/clients_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 

@@ -7,10 +7,10 @@ import 'package:perso/app/screens/plan_overview/client/event/client_exercise_lis
 import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
-import 'package:perso/app/utils/extension/go_router_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
+import 'package:perso/core/extensions/go_router_extensions.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';

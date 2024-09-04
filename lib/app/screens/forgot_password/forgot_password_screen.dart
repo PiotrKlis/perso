@@ -4,9 +4,9 @@ import 'package:perso/app/screens/forgot_password/bloc/forgot_password_bloc.dart
 import 'package:perso/app/screens/forgot_password/event/forgot_password_event.dart';
 import 'package:perso/app/screens/forgot_password/state/forgot_password_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});

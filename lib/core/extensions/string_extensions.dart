@@ -20,4 +20,7 @@ extension StringExtension on String {
   String limitToTwoDigits() {
     return length > 2 ? substring(0, 2) : this;
   }
+
+  DateTime get yearMonthDayFormat => DateTime.parse(this);
+
 }

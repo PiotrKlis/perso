@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SearchResultsScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class SearchResultsScreen extends StatelessWidget {
               ),
               //TODO: Implement search users
               child: const SearchBar(
-                padding: MaterialStatePropertyAll<EdgeInsets>(
+                padding: WidgetStatePropertyAll<EdgeInsets>(
                   EdgeInsets.symmetric(
                     horizontal: 16,
                   ),

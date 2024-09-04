@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/data/exercises/exercises_service/exercise_service.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
@@ -97,7 +97,7 @@ class FirestoreExerciseService extends ExerciseService {
   Future<String> getSentDate(
       {required String clientId,
       required String trainerId,
-      required String date}) async {
+      required String date,}) async {
     final client = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)

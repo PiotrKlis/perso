@@ -73,7 +73,7 @@ class _ClientNote extends StatelessWidget {
         children: [
           const PersoDivider(),
           const SizedBox(height: Dimens.mMargin),
-          Text('Client note', style: ThemeText.bodyBoldBlackText),
+          const Text('Client note', style: ThemeText.bodyBoldBlackText),
           Container(
             margin: const EdgeInsets.only(top: Dimens.mMargin),
             child: const PersoTextField(
@@ -199,7 +199,7 @@ class _TrainerNote extends StatelessWidget {
           children: [
             const PersoDivider(),
             const SizedBox(height: Dimens.mMargin),
-            Text('Trainer note', style: ThemeText.bodyBoldBlackText),
+            const Text('Trainer note', style: ThemeText.bodyBoldBlackText),
             Container(
               margin: const EdgeInsets.only(top: Dimens.sMargin),
               child: Text(

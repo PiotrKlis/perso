@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 
 class ExerciseCreationScreen extends StatelessWidget {
   const ExerciseCreationScreen({super.key});
@@ -64,7 +64,7 @@ class ExerciseCreationScreen extends StatelessWidget {
                 left: Dimens.mMargin,
                 right: Dimens.mMargin,
               ),
-              child: Text(
+              child: const Text(
                 'Categories',
                 style: ThemeText.smallTitleBold,
               ),

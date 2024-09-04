@@ -14,7 +14,7 @@ class PersoInstructionsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Instructions',
             style: ThemeText.smallTitleBold,
           ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class PersoCalendar extends StatefulWidget {

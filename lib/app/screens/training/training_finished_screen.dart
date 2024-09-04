@@ -11,13 +11,13 @@ class TrainingFinishedScreen extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text(
+        const Text(
           'Congratulations on finishing your training!',
           style: ThemeText.largerTitleBold,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
-        Text(
+        const Text(
           'Good job! Keep up the good work!',
           style: ThemeText.largeTitleRegular,
           textAlign: TextAlign.center,

@@ -58,7 +58,6 @@ class Dimens {
   static const double profileImageWidth = 200;
   static const double profileImageHeight = 200;
 
-
   static const double sIconSize = 12;
   static const double iconSize = 24;
   static const double shortBioHeight = 140;

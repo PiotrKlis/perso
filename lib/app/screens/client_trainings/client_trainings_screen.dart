@@ -8,8 +8,8 @@ import 'package:perso/app/styleguide/value/app_assets.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/go_router_extensions.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
+import 'package:perso/core/extensions/go_router_extensions.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
@@ -76,11 +76,11 @@ class _TrainersView extends StatelessWidget {
             left: Dimens.mMargin,
             right: Dimens.mMargin,
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Trainings', style: ThemeText.largerTitleBold),
-              const Icon(Icons.notifications_off),
+              Icon(Icons.notifications_off),
             ],
           ),
         ),
@@ -89,7 +89,7 @@ class _TrainersView extends StatelessWidget {
             left: Dimens.mMargin,
             top: Dimens.lMargin,
           ),
-          child: Text(
+          child: const Text(
             'My trainers',
             style: ThemeText.mediumTitleBold,
           ),
@@ -108,7 +108,7 @@ class _TrainersView extends StatelessWidget {
                       onTap: () {
                         final location = goRouter.location;
                         context.push(
-                            '$location/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}');
+                            '$location/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}',);
                         // context.pushNamed(
                         //   ScreenNavigationKey.clientPlanOverview,
                         //   queryParameters: {
@@ -220,7 +220,7 @@ class _Title extends StatelessWidget {
         top: Dimens.lMargin,
         right: Dimens.xmMargin,
       ),
-      child: Text(
+      child: const Text(
         "You have no trainers so far. Let's change that.",
         style: ThemeText.largeTitleBold,
       ),

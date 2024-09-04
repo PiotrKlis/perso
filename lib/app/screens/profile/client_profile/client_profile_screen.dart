@@ -7,14 +7,14 @@ import 'package:perso/app/screens/profile/event/profile_event.dart';
 import 'package:perso/app/screens/profile/state/profile_state.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/string_extensions.dart';
+import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class ClientProfileScreen extends StatelessWidget {
@@ -107,7 +107,7 @@ class _ClientProfileScreenContentState
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         '4.5',
                         style: ThemeText.subHeadingBold,
                       ),
@@ -118,7 +118,7 @@ class _ClientProfileScreenContentState
                         ),
                         child: const Icon(Icons.star),
                       ),
-                      Text(
+                      const Text(
                         '(66})',
                         style: ThemeText.subHeadingRegular,
                       ),
@@ -144,22 +144,22 @@ class _ClientProfileScreenContentState
   SegmentedButton<String> _segmentedButton() {
     return SegmentedButton(
       style: ButtonStyle(
-        textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-            (Set<MaterialState> states) {
+        textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+            (Set<WidgetState> states) {
           return ThemeText.bodyBoldBlackText;
         }),
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.selected)) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.selected)) {
               return Colors.white;
             } else {
               return Colors.black;
             }
           },
         ),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.selected)) {
+        backgroundColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.selected)) {
               return Colors.black;
             } else {
               return Colors.white;
@@ -209,7 +209,7 @@ class _ClientProfileScreenContentState
               top: Dimens.lMargin,
               left: Dimens.xmMargin,
             ),
-            child: Text(
+            child: const Text(
               'Biography',
               style: ThemeText.bodyBoldBlackText,
             ),
@@ -220,7 +220,7 @@ class _ClientProfileScreenContentState
               left: Dimens.xmMargin,
               right: Dimens.xmMargin,
             ),
-            child: Text(
+            child: const Text(
               'Location',
               style: ThemeText.bodyBoldBlackText,
             ),
@@ -230,7 +230,7 @@ class _ClientProfileScreenContentState
               top: Dimens.lMargin,
               left: Dimens.xmMargin,
             ),
-            child: Text(
+            child: const Text(
               'Specialities',
               style: ThemeText.bodyBoldBlackText,
             ),
@@ -240,7 +240,7 @@ class _ClientProfileScreenContentState
               top: Dimens.lMargin,
               left: Dimens.xmMargin,
             ),
-            child: Text(
+            child: const Text(
               'Languages',
               style: ThemeText.bodyBoldBlackText,
             ),
@@ -294,7 +294,7 @@ class _ClientProfileScreenContentState
               top: Dimens.mMargin,
               left: Dimens.mMargin,
             ),
-            child: Text('Rating', style: ThemeText.bodyBoldBlackText),
+            child: const Text('Rating', style: ThemeText.bodyBoldBlackText),
           ),
           Container(
             margin: const EdgeInsets.only(
@@ -304,7 +304,7 @@ class _ClientProfileScreenContentState
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Based on 142 reviews',
                   style: ThemeText.bodyRegularBlackText,
                 ),
@@ -320,7 +320,7 @@ class _ClientProfileScreenContentState
                         left: Dimens.xsMargin,
                         right: Dimens.xmMargin,
                       ),
-                      child: Text(
+                      child: const Text(
                         '5.0',
                         style: ThemeText.largerTitleBold,
                       ),
@@ -340,7 +340,7 @@ class _ClientProfileScreenContentState
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Tap to rate',
                   style: ThemeText.bodyBoldBlackText,
                 ),
@@ -372,7 +372,7 @@ class _ClientProfileScreenContentState
                 ),
                 Container(
                   margin: const EdgeInsets.only(left: Dimens.xsMargin),
-                  child: Text(
+                  child: const Text(
                     'Write review',
                     style: ThemeText.calloutRegularGrey,
                   ),
@@ -386,7 +386,7 @@ class _ClientProfileScreenContentState
               top: Dimens.mMargin,
               left: Dimens.mMargin,
             ),
-            child: Text(
+            child: const Text(
               'Reviews',
               style: ThemeText.bodyBoldBlackText,
             ),
@@ -412,7 +412,7 @@ class _ClientProfileScreenContentState
                     margin: const EdgeInsets.only(left: Dimens.xsMargin),
                     child: Column(
                       children: [
-                        Text('John Wick', style: ThemeText.bodyBoldBlackText),
+                        const Text('John Wick', style: ThemeText.bodyBoldBlackText),
                         RatingBar(
                           itemSize: 20,
                           allowHalfRating: true,
@@ -436,12 +436,12 @@ class _ClientProfileScreenContentState
                   ),
                 ],
               ),
-              Text('1 month ago', style: ThemeText.bodyRegularBlackText),
+              const Text('1 month ago', style: ThemeText.bodyRegularBlackText),
             ],
           ),
           Container(
             margin: const EdgeInsets.only(top: Dimens.xsMargin),
-            child: Text(
+            child: const Text(
               'Let me put it this way! Andrew went out of his way to in our journey together. I wasn’t sure about things in the beginning, Lol.',
               style: ThemeText.bodyRegularBlackText,
             ),

@@ -6,16 +6,16 @@ part 'editable_trainer_data.freezed.dart';
 @freezed
 class EditableTrainerData with _$EditableTrainerData {
   const factory EditableTrainerData({
-    required final String imagePath,
-    required final List<String> languages,
-    required final String name,
-    required final String surname,
-    required final String nickname,
-    required final String location,
-    required final String phoneNumber,
-    required final String shortBio,
-    required final String fullBio,
-    required final List<String> categories,
-    required final LatLng latLng,
+    required String imagePath,
+    required List<String> languages,
+    required String name,
+    required String surname,
+    required String nickname,
+    required String location,
+    required String phoneNumber,
+    required String shortBio,
+    required String fullBio,
+    required List<String> categories,
+    required LatLng latLng,
   }) = _EditableTrainerData;
 }

@@ -5,12 +5,12 @@ import 'package:perso/app/screens/sign_in/bloc/sign_in_bloc.dart';
 import 'package:perso/app/screens/sign_in/event/sign_in_event.dart';
 import 'package:perso/app/screens/sign_in/state/sign_in_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -43,7 +43,7 @@ class SignInScreen extends StatelessWidget {
                     child: const Align(
                       heightFactor: 0.5,
                       child: Image(
-                        image: AssetImage("assets/icon/logo-white.png"),
+                        image: AssetImage('assets/icon/logo-white.png'),
                       ),
                     ),
                   ),

@@ -8,9 +8,9 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/bl
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/event/trainer_exercise_list_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/exercise_list/state/trainer_exercise_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
@@ -60,7 +60,7 @@ class _PersoTrainerExerciseListState extends State<PersoTrainerExerciseList> {
                     margin: const EdgeInsets.only(
                       top: Dimens.xlMargin,
                     ),
-                    child: Text(
+                    child: const Text(
                       'No exercises for this date',
                       style: ThemeText.bodyRegularBlackText,
                     ),

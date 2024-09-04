@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/core/navigation/screen_navigation_key.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/user_type.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class ProfileCreationScreen extends StatelessWidget {
   const ProfileCreationScreen({super.key});

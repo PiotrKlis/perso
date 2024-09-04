@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/training/bloc/training_bloc.dart';
 import 'package:perso/app/screens/training/event/training_event.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/break_entity.dart';
 
 class ExerciseBreakScreen extends StatefulWidget {

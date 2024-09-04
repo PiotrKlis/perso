@@ -31,14 +31,14 @@ class _PersoTimeBreakSectionState extends State<PersoTimeBreakSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Breaks',
             style: ThemeText.smallTitleBold,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Add time breaks between sets',
                 style: ThemeText.bodyRegularBlackText,
               ),

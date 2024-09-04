@@ -5,11 +5,11 @@ import 'package:perso/app/screens/plan_overview/client/bloc/client_exercise_list
 import 'package:perso/app/screens/plan_overview/client/perso_client_exercise_list.dart';
 import 'package:perso/app/screens/plan_overview/client/state/client_exercise_list_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/go_router_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/extensions/go_router_extensions.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
@@ -108,7 +108,7 @@ class _ExercisesHeaderRowState extends State<_ExercisesHeaderRow> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             'Exercises',
             style: ThemeText.largeTitleBold,
           ),

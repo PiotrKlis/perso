@@ -5,7 +5,8 @@ part 'training_category.freezed.dart';
 
 @freezed
 class TrainingCategory with _$TrainingCategory {
-  const factory TrainingCategory(
-      {required TrainingCategoryIcon trainingCategoryIcon,
-      required String name,}) = _TrainingCategory;
+  const factory TrainingCategory({
+    required TrainingCategoryIcon trainingCategoryIcon,
+    required String name,
+  }) = _TrainingCategory;
 }

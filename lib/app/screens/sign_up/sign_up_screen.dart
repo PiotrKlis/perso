@@ -5,12 +5,12 @@ import 'package:perso/app/screens/sign_up/bloc/sign_up_bloc.dart';
 import 'package:perso/app/screens/sign_up/event/sign_up_event.dart';
 import 'package:perso/app/screens/sign_up/state/sign_up_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SignUpScreen extends StatelessWidget {

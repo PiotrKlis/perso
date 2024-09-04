@@ -49,9 +49,9 @@ class PersoRegisterButton extends StatelessWidget {
   Text getTitle(AccountType loginType) {
     switch (loginType) {
       case AccountType.client:
-        return Text('Sign Up', style: ThemeText.bodyBoldGreyText);
+        return const Text('Sign Up', style: ThemeText.bodyBoldGreyText);
       case AccountType.trainer:
-        return Text('Register', style: ThemeText.bodyBoldGreyText);
+        return const Text('Register', style: ThemeText.bodyBoldGreyText);
     }
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/exercise_details/bloc/exercise_details_bloc.dart';
 import 'package:perso/app/screens/exercise_details/event/exercise_details_event.dart';
 import 'package:perso/app/screens/exercise_details/exercise_details_inherited_widget.dart';

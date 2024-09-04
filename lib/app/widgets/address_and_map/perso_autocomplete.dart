@@ -29,15 +29,15 @@ class PersoAutocomplete extends StatelessWidget {
           return TextFormField(
             controller: autocompleteController,
             focusNode: focusNode,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               filled: true,
               fillColor: Colors.white,
               errorMaxLines: 2,
-              focusedBorder: const OutlineInputBorder(
+              focusedBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(width: 0.5, color: PersoColors.lightGrey),
               ),
-              enabledBorder: const OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderSide:
                     BorderSide(width: 0.5, color: PersoColors.lightGrey),
               ),

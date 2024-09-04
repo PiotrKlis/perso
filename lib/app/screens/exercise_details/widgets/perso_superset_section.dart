@@ -45,14 +45,14 @@ class _PersoSupersetSectionState extends State<PersoSupersetSection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Supersets',
             style: ThemeText.smallTitleBold,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 'Add exercise into superset',
                 style: ThemeText.bodyRegularBlackText,
               ),

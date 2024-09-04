@@ -12,7 +12,7 @@ import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/string_extensions.dart';
+import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class TrainerClientsScreen extends StatelessWidget {
@@ -70,22 +70,22 @@ class _TrainerClientsListViewState extends State<_TrainerClientsListView> {
       width: double.infinity,
       child: SegmentedButton(
         style: ButtonStyle(
-          textStyle: MaterialStateProperty.resolveWith<TextStyle>(
-              (Set<MaterialState> states) {
+          textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+              (Set<WidgetState> states) {
             return ThemeText.bodyBoldBlackText;
           }),
-          foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+          foregroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 return Colors.white;
               } else {
                 return Colors.black;
               }
             },
           ),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.selected)) {
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (Set<WidgetState> states) {
+              if (states.contains(WidgetState.selected)) {
                 return Colors.black;
               } else {
                 return Colors.white;
@@ -148,11 +148,11 @@ class _ClientsListState extends State<_ClientsList> {
             left: Dimens.xmMargin,
             right: Dimens.xmMargin,
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Trainings', style: ThemeText.largerTitleBold),
-              const Icon(Icons.notifications_off),
+              Icon(Icons.notifications_off),
             ],
           ),
         ),
@@ -162,7 +162,7 @@ class _ClientsListState extends State<_ClientsList> {
             top: Dimens.lMargin,
             bottom: Dimens.mMargin,
           ),
-          child: Text(
+          child: const Text(
             'My clients',
             style: ThemeText.mediumTitleBold,
           ),

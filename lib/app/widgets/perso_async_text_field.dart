@@ -73,6 +73,6 @@ class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
   }
 
   Future<bool> validate(String text) async {
-    return await widget.validator(text);
+    return widget.validator(text);
   }
 }

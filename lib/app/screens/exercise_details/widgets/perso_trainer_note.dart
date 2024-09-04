@@ -23,7 +23,7 @@ class PersoTrainerNote extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Trainer note', style: ThemeText.smallTitleBold),
+          const Text('Trainer note', style: ThemeText.smallTitleBold),
           Container(
             margin: const EdgeInsets.only(top: Dimens.mMargin),
             height: 140,

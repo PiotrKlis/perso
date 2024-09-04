@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 
 part 'client_trainings_state.freezed.dart';

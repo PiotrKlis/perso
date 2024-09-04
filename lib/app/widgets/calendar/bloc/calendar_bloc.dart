@@ -1,10 +1,10 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/event/calendar_event.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/data/exercises/exercises_source/firestore_exercise_provider.dart';
 

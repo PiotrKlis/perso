@@ -4,10 +4,10 @@ import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/b
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/event/send_exercises_event.dart';
 import 'package:perso/app/screens/plan_overview/trainer/widgets/send_exercises/state/send_exercises_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/utils/extension/date_time_extensions.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 
 class PersoSendExercisesSection extends StatelessWidget {
   const PersoSendExercisesSection({
@@ -92,7 +92,7 @@ class _SendExerciseSectionContentState
                   sendingInProgress: () {
                     return Container(
                       margin: const EdgeInsets.only(top: Dimens.sMargin),
-                      child: Text(
+                      child: const Text(
                         'Sending...',
                         style: ThemeText.footnoteRegular,
                       ),

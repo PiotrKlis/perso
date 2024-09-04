@@ -31,7 +31,7 @@ class PersoExerciseOptionsSectionState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Options',
             style: ThemeText.smallTitleBold,
           ),

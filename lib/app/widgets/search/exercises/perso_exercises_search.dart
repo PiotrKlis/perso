@@ -25,11 +25,11 @@ class _PersoExercisesSearchState extends State<PersoExercisesSearch> {
     return SearchAnchor(
       builder: (BuildContext context, SearchController controller) {
         return SearchBar(
-          backgroundColor: const MaterialStatePropertyAll<Color>(
+          backgroundColor: const WidgetStatePropertyAll<Color>(
             PersoColors.lighterGrey,
           ),
           controller: controller,
-          padding: const MaterialStatePropertyAll<EdgeInsets>(
+          padding: const WidgetStatePropertyAll<EdgeInsets>(
             EdgeInsets.symmetric(
               horizontal: 16,
             ),

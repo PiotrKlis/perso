@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/utils/extension/context_extensions.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class LoggedOutTrainingScreen extends StatelessWidget {
@@ -63,7 +63,7 @@ class _Subtitle extends StatelessWidget {
         left: Dimens.xmMargin,
         top: Dimens.lMargin,
       ),
-      child: Align(
+      child: const Align(
         alignment: Alignment.bottomLeft,
         child: Text(
           'Your dream is one step away...',
@@ -85,7 +85,7 @@ class _Title extends StatelessWidget {
         top: Dimens.lMargin,
         right: Dimens.xmMargin,
       ),
-      child: Text(
+      child: const Text(
         'Find the best trainers and your ideal personal plan',
         style: ThemeText.largeTitleBold,
       ),

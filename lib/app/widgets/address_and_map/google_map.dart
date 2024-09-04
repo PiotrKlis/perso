@@ -120,6 +120,6 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
       }
     }
 
-    return await location.getLocation();
+    return location.getLocation();
   }
 }
