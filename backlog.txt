@@ -1,0 +1,27 @@
+0. Napraw iOS
+1. Wyszukiwarka trenerów
+  - User management; logowanie, rejestracja itd.
+    - TODO: Dodaj inne metody rejestracji i logowania
+    - TODO: Dokończ upload imidżu
+    - TODO: Napraw przyciski na SignUpSuccessScreen - test na obu wersjach językówych
+    - TODO: Edytuj trainer profil, nie pozwalaj na spacje, headline polska wersja
+    - TODO: Ogranicz liczbę znaków
+    - TODO: polska wersja errorów przy fieldach
+    - TODO: możliwość poruszania pinezką na mapie
+    - TODO: pierwsze odpalenie apki, mapa, brak kropki i mozliwosci wycentrowania. Zapewne trzeba zresetować mapę po akceptacji lokalizacji
+    - TODO: Edytuj swoje dane na ekranie zalogowanego profilu (ikona edycji)
+    - TODO: Dodaj ikonę settingsów, dodaj ekran settingoswy; notyfikacje, wersja apki, costam bedzie dochodzic z czasem
+    - TODO: Dodaj mapkę na profilu
+
+  - Wyszukiwanie trenerów
+  	- wyświetlanie trenerów na liście
+  	- detale trenerów
+  	- szukanie po kategoriach
+  	- szukanie po boxach z tekstam
+  	- szukanie po tekście
+
+2. Opieka trenerska - czat
+
+3. Treningi video
+
+4. Moduł treningowy

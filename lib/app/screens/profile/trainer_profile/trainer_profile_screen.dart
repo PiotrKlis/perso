@@ -13,9 +13,9 @@ import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
+import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class TrainerProfileScreen extends StatelessWidget {

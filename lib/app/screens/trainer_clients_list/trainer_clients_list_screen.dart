@@ -9,10 +9,10 @@ import 'package:perso/app/screens/trainer_clients_list/state/trainer_client_list
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/perso_client_trainers_list.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
-import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 
 class TrainerClientsScreen extends StatelessWidget {

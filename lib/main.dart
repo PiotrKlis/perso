@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/utils/chat_client.dart';
@@ -7,7 +8,6 @@ import 'package:perso/app/utils/locale_repository.dart';
 import 'package:perso/app/utils/localisation_keys.dart';
 import 'package:perso/app/widgets/internet_connection_service.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
-import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/navigation_config.dart';
 import 'package:perso/data/shared_prefs/perso_shared_prefs.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';

@@ -26,17 +26,26 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
   @override
   Widget build(BuildContext context) {
     const initialCameraPosition = CameraPosition(
-        target: LatLng(52.06923300336246, 19.479766023156003), zoom: 5.5,);
+      target: LatLng(52.06923300336246, 19.479766023156003),
+      zoom: 5.5,
+    );
     return BlocConsumer<AddressAndMapBloc, AddressAndMapState>(
       listener: (context, state) {
         state.whenOrNull(
           mapUpdate: (latLng) {
-            mapController?.animateCamera(CameraUpdate.newCameraPosition(
-                CameraPosition(target: latLng, zoom: 15),),);
+            mapController?.animateCamera(
+              CameraUpdate.newCameraPosition(
+                CameraPosition(target: latLng, zoom: 15),
+              ),
+            );
             SchedulerBinding.instance.addPostFrameCallback((_) {
               setState(() {
-                _markers.add(Marker(
-                    markerId: MarkerId(hashCode.toString()), position: latLng,),);
+                _markers.add(
+                  Marker(
+                    markerId: MarkerId(hashCode.toString()),
+                    position: latLng,
+                  ),
+                );
               });
             });
           },
@@ -44,33 +53,37 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
       },
       builder: (context, state) =>
           BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
-              builder: (context, state) {
-        state.whenOrNull(
-          initial: () {
-            print('init');
-          },
-        );
-        return Container(
-          margin: const EdgeInsets.only(
-              left: Dimens.mMargin, right: Dimens.mMargin,),
-          child: SizedBox(
-            height: 300,
-            width: double.infinity,
-            child: GoogleMap(
-              myLocationEnabled: true,
-              markers: _markers,
-              gestureRecognizers: const {
-                Factory<OneSequenceGestureRecognizer>(
-                    EagerGestureRecognizer.new,),
-              },
-              initialCameraPosition: initialCameraPosition,
-              onMapCreated: (GoogleMapController controller) {
-                mapController = controller;
-              },
+        builder: (context, state) {
+          state.whenOrNull(
+            initial: () {
+              print('init');
+            },
+          );
+          return Container(
+            margin: const EdgeInsets.only(
+              left: Dimens.mMargin,
+              right: Dimens.mMargin,
             ),
-          ),
-        );
-      },),
+            child: SizedBox(
+              height: 300,
+              width: double.infinity,
+              child: GoogleMap(
+                myLocationEnabled: true,
+                markers: _markers,
+                gestureRecognizers: const {
+                  Factory<OneSequenceGestureRecognizer>(
+                    EagerGestureRecognizer.new,
+                  ),
+                },
+                initialCameraPosition: initialCameraPosition,
+                onMapCreated: (GoogleMapController controller) {
+                  mapController = controller;
+                },
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -86,8 +99,11 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
       final latitude = double.parse(location.latitude.toString());
       final longitude = double.parse(location.longitude.toString());
       setState(() {
-        mapController?.animateCamera(CameraUpdate.newCameraPosition(
-            CameraPosition(target: LatLng(latitude, longitude), zoom: 11),),);
+        mapController?.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(target: LatLng(latitude, longitude), zoom: 11),
+          ),
+        );
       });
     }).onError((error, stackTrace) {
       //TODO: Add error handling

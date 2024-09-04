@@ -492,7 +492,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     child: Column(
                       children: [
                         const Text('John Wick',
-                            style: ThemeText.bodyBoldBlackText),
+                            style: ThemeText.bodyBoldBlackText,),
                         RatingBar(
                           itemSize: 20,
                           allowHalfRating: true,

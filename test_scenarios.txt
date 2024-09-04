@@ -1,0 +1,18 @@
+Sign Up
+- Valid email
+- Valid password
+  - 8 chars, uppercase and number
+- Valid confirm password
+    - 8 chars, uppercase and number, matches password
+- Valid email has reached provided email address
+- Email already in use error if email already provided
+
+Sign In
+- Valid email
+- User not found error if not a proper email provided
+- User not found error if not verified email
+- Invalid password error if wrong password
+-
+
+Forgot password
+-

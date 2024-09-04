@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/review_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
-import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable

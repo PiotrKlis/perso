@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/mappers/trainer_entity_mapper.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
 import 'package:perso/core/models/user_type.dart';
-import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
