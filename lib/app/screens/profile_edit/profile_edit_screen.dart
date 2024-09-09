@@ -51,11 +51,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final fullBioController = TextEditingController();
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final persoChipsList = PersoSelectableCategoryChips();
-  final imagePicker = ImagePicker();
   final googleMap = const PersoGoogleMap();
   final PersoAutocomplete addressWidget = PersoAutocomplete();
   XFile? image;
   LatLng? latLng;
+  final imagePicker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
@@ -120,6 +120,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           onTap: (context) async {
                             final pickedImage = await imagePicker.pickImage(
                               source: ImageSource.gallery,
+                              maxHeight: 640,
+                              maxWidth: 640,
                             );
                             setState(() {
                               image = pickedImage;

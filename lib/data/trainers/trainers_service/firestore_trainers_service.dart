@@ -76,7 +76,6 @@ class FirestoreTrainersService implements TrainersService {
     }
   }
 
-  //TODO: Restrict weight of the photo on the firebase storage side
   Future<String> _uploadImage(String path) async {
     try {
       if (path.isNotEmpty) {
@@ -86,8 +85,7 @@ class FirestoreTrainersService implements TrainersService {
             .child('${CollectionName.images}/$id/}');
         await _deleteAlreadyPresentImage(storageReference);
         await storageReference.putFile(File(path));
-        final files = await storageReference.list();
-        return files.items.first.fullPath;
+        return path;
       } else {
         return '';
       }
