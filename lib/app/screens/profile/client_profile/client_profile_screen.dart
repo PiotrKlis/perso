@@ -10,6 +10,7 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/extensions/string_extensions.dart';
@@ -90,7 +91,7 @@ class _ClientProfileScreenContentState
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: _image(widget._clientEntity.imagePath),
+                  child: const ProfileImage(),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.mMargin),
@@ -412,7 +413,8 @@ class _ClientProfileScreenContentState
                     margin: const EdgeInsets.only(left: Dimens.xsMargin),
                     child: Column(
                       children: [
-                        const Text('John Wick', style: ThemeText.bodyBoldBlackText),
+                        const Text('John Wick',
+                            style: ThemeText.bodyBoldBlackText),
                         RatingBar(
                           itemSize: 20,
                           allowHalfRating: true,

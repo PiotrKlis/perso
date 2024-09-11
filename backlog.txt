@@ -1,7 +1,6 @@
 0. Napraw iOS
 1. Wyszukiwarka trenerów
   - User management; logowanie, rejestracja itd.
-    - TODO: Dodaj inne metody rejestracji i logowania
     - TODO: Dokończ upload imidżu
     - TODO: Napraw przyciski na SignUpSuccessScreen - test na obu wersjach językówych
     - TODO: Edytuj trainer profil, nie pozwalaj na spacje, headline polska wersja
@@ -12,6 +11,7 @@
     - TODO: Edytuj swoje dane na ekranie zalogowanego profilu (ikona edycji)
     - TODO: Dodaj ikonę settingsów, dodaj ekran settingoswy; notyfikacje, wersja apki, costam bedzie dochodzic z czasem
     - TODO: Dodaj mapkę na profilu
+    - TODO: Dodaj inne metody rejestracji i logowania
 
   - Wyszukiwanie trenerów
   	- wyświetlanie trenerów na liście
