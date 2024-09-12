@@ -10,6 +10,7 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
@@ -25,8 +26,16 @@ class ClientProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileBloc()..add(const ProfileEvent.loadData()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+          ProfileBloc()..add(const ProfileEvent.loadData()),
+        ),
+        BlocProvider(
+          create: (context) => ImageCubit()..getImageUrl(),
+        )
+      ],
       child: const _ClientProfileScreenBuilder(),
     );
   }

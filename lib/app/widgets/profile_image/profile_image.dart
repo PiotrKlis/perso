@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/profile/bloc/image_cubit.dart';
-import 'package:perso/app/styleguide/value/app_dimens.dart';
+import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key});
@@ -19,7 +18,6 @@ class ProfileImage extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.black,
               ),
-              margin: const EdgeInsets.only(top: Dimens.lMargin),
               child: ClipOval(
                 child: Image.network(
                   url,
@@ -31,7 +29,7 @@ class ProfileImage extends StatelessWidget {
         } else {
           return const Icon(
             Icons.account_circle,
-            size: 120,
+            size: 200,
           );
         }
       },

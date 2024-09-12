@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perso/app/screens/profile/bloc/image_cubit.dart';
 import 'package:perso/app/screens/profile/bloc/profile_bloc.dart';
 import 'package:perso/app/screens/profile/event/profile_event.dart';
 import 'package:perso/app/screens/profile/state/profile_state.dart';
@@ -12,6 +11,7 @@ import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
@@ -32,7 +32,6 @@ class TrainerProfileScreen extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               ProfileBloc()..add(const ProfileEvent.loadData()),
-          child: const _TrainerProfileScreenBuilder(),
         ),
         BlocProvider(
           create: (context) => ImageCubit()..getImageUrl(),
