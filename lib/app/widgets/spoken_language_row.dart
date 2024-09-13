@@ -6,7 +6,7 @@ import 'package:perso/app/widgets/perso_small_button.dart';
 class SpokenLanguageRowWidget extends StatefulWidget {
   SpokenLanguageRowWidget({super.key});
 
-  final List<Map<String, Widget>> listOfLanguages = [];
+  List<Map<String, Widget>> listOfLanguages = [];
 
   @override
   State<SpokenLanguageRowWidget> createState() =>

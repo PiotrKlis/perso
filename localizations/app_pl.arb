@@ -81,5 +81,6 @@
   "location_default_set": "Domyślnie ustawiony jest Twój kraj",
   "exercise_in_progress" : "Ćwiczeniu w toku",
   "break_header": "Przerwa",
-  "rest": "Odpoczynek"
+  "rest": "Odpoczynek",
+  "done": "Zrobione"
 }

@@ -156,8 +156,10 @@ class _TrainerProfileScreenContentState
   }
 
   void _navigateToProfileEdit(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.profileEditTrainer,
-        extra: UserType.trainer);
+    context.pushNamed(
+      ScreenNavigationKey.profileEditClient,
+      extra: (UserType.trainer, widget._trainerEntity),
+    );
   }
 
   SegmentedButton<String> _segmentedButton() {

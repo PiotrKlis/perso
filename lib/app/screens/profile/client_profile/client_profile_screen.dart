@@ -35,7 +35,7 @@ class ClientProfileScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ImageCubit()..getImageUrl(),
-        )
+        ),
       ],
       child: const _ClientProfileScreenBuilder(),
     );
@@ -201,8 +201,10 @@ class _ClientProfileScreenContentState
   }
 
   void _navigateToProfileEdit(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.profileEditClient,
-        extra: UserType.trainer);
+    context.pushNamed(
+      ScreenNavigationKey.profileEditClient,
+      extra: (UserType.trainer, widget._clientEntity),
+    );
   }
 
   Container _aboutSection(ClientEntity clientEntity) {
@@ -419,8 +421,10 @@ class _ClientProfileScreenContentState
                     margin: const EdgeInsets.only(left: Dimens.xsMargin),
                     child: Column(
                       children: [
-                        const Text('John Wick',
-                            style: ThemeText.bodyBoldBlackText),
+                        const Text(
+                          'John Wick',
+                          style: ThemeText.bodyBoldBlackText,
+                        ),
                         RatingBar(
                           itemSize: 20,
                           allowHalfRating: true,

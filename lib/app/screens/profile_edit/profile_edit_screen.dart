@@ -22,18 +22,27 @@ import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/app/widgets/profile_image/image_cubit.dart';
+import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/app/widgets/spoken_language_row.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
+import 'package:perso/core/models/profile_entity.dart';
+import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class ProfileEditScreen extends StatefulWidget {
-  ProfileEditScreen({required UserType userType, super.key})
-      : _userType = userType;
+  ProfileEditScreen({
+    required (
+      UserType userType,
+      ProfileEntity? profileEntity,
+    ) userTypeProfileEntityPair,
+    super.key,
+  }) : _userTypeProfileEntityPair = userTypeProfileEntityPair;
 
-  final UserType _userType;
+  final (UserType, ProfileEntity?) _userTypeProfileEntityPair;
   final UserInfoProvider _userInfoProvider = getIt.get<UserInfoProvider>();
 
   @override
@@ -59,10 +68,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userType = widget._userTypeProfileEntityPair.$1;
+    final profileEntity = widget._userTypeProfileEntityPair.$2;
+    updateControllersData(profileEntity, userType, nameController,
+        surnameController, nicknameController, addressWidget);
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfileEditBloc()),
         BlocProvider(create: (context) => AddressAndMapBloc()),
+        BlocProvider(create: (context) => ImageCubit()..getImageUrl()),
       ],
       child: BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
         builder: (context, state) {
@@ -74,7 +88,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           return Scaffold(
             backgroundColor: PersoColors.lightBlue,
             appBar: PersoAppBar(
-              title: context.strings.edit_profile(widget._userType.name),
+              title: context.strings.edit_profile(userType.name),
             ),
             body: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -92,20 +106,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           color: Colors.black,
                         ),
                         margin: const EdgeInsets.only(top: Dimens.lMargin),
-                        child: image == null
-                            ? const Icon(
-                                Icons.camera_alt,
-                                color: Colors.white,
-                                size: 120,
-                              )
-                            : ClipOval(
-                                child: Image.file(
-                                  File(image!.path),
-                                  width: 200,
-                                  height: 200,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                        child: _getImage(profileEntity),
                       ),
                     ),
                     Container(
@@ -130,7 +131,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         ),
                       ),
                     ),
-                    _NameSection(nameController: nameController),
+                    _NameSection(
+                      nameController: nameController,
+                    ),
                     _SurnameSection(surnameController: surnameController),
                     _NicknameSection(
                       widget: widget,
@@ -147,6 +150,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       shortBioController: shortBioController,
                       fullBioController: fullBioController,
                       persoChipsList: persoChipsList,
+                      userType: userType,
                     ),
                     _ConfirmButton(
                       formKey: formKey,
@@ -162,6 +166,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       fullBioController: fullBioController,
                       persoChipsList: persoChipsList,
                       latLng: latLng,
+                      userType: userType,
                     ),
                     const _ErrorText(),
                   ],
@@ -172,6 +177,69 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         },
       ),
     );
+  }
+
+  Widget _getImage(ProfileEntity? profileEntity) {
+    if (profileEntity == null) {
+      return image == null
+          ? const Icon(
+              Icons.camera_alt,
+              color: Colors.white,
+              size: 200,
+            )
+          : ClipOval(
+              child: Image.file(
+                File(image!.path),
+                width: 200,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+            );
+    } else {
+      return const ProfileImage();
+    }
+  }
+
+  void updateControllersData(
+    ProfileEntity? profileEntity,
+    UserType userType,
+    TextEditingController nameController,
+    TextEditingController surnameController,
+    TextEditingController nicknameController,
+    PersoAutocomplete addressWidget,
+  ) {
+    // final TextEditingController autoCompleteController =
+    //     TextEditingController();
+    // final formKey = GlobalKey<FormState>();
+    // final nameController = TextEditingController();
+    // final surnameController = TextEditingController();
+    // final nicknameController = TextEditingController();
+    // final phoneNumberController = TextEditingController();
+    // final shortBioController = TextEditingController();
+    // final fullBioController = TextEditingController();
+    // final spokenLanguageRowWidget = SpokenLanguageRowWidget();
+    // final persoChipsList = PersoSelectableCategoryChips();
+    // final googleMap = const PersoGoogleMap();
+    // final PersoAutocomplete addressWidget = PersoAutocomplete();
+    // XFile? image;
+    // LatLng? latLng;
+    // final imagePicker = ImagePicker();
+
+    if (profileEntity != null) {
+      nameController.text = profileEntity.name;
+      surnameController.text = profileEntity.surname;
+      nicknameController.text = profileEntity.nickname;
+      // spokenLanguageRowWidget.listOfLanguages = profileEntity.languages
+      //     .map((map) => map.values.toList())
+      //     .expand((list) => list)
+      //     .toList();
+      if (userType == UserType.trainer) {
+        final trainerProfile = profileEntity as TrainerEntity;
+        addressWidget.autocompleteController?.text = trainerProfile.location;
+        // persoChipsList.selectedCategories = trainerProfile.categories;
+        latLng = trainerProfile.latLng;
+      }
+    }
   }
 }
 
@@ -190,6 +258,7 @@ class _ConfirmButton extends StatelessWidget {
     required this.fullBioController,
     required this.persoChipsList,
     required this.latLng,
+    required this.userType,
   });
 
   final GlobalKey<FormState> formKey;
@@ -205,6 +274,7 @@ class _ConfirmButton extends StatelessWidget {
   final TextEditingController fullBioController;
   final PersoSelectableCategoryChips persoChipsList;
   final LatLng? latLng;
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
@@ -229,14 +299,14 @@ class _ConfirmButton extends StatelessWidget {
                   ),
                 ) ??
                 PersoButton(
-                  title: context.strings.next,
+                  title: context.strings.done,
                   onTap: (context) {
                     if (formKey.currentState?.validate() == true) {
                       final languages = spokenLanguageRowWidget.listOfLanguages
                           .map((element) => element.keys)
                           .expand((element) => element)
                           .toList();
-                      if (widget._userType == UserType.trainer) {
+                      if (userType == UserType.trainer) {
                         final trainerData = EditableTrainerData(
                           imagePath: image?.path ?? '',
                           languages: languages,
@@ -419,6 +489,7 @@ class _TrainerOnlySection extends StatelessWidget {
     required this.shortBioController,
     required this.fullBioController,
     required this.persoChipsList,
+    required this.userType,
   });
 
   final ProfileEditScreen widget;
@@ -427,11 +498,12 @@ class _TrainerOnlySection extends StatelessWidget {
   final TextEditingController shortBioController;
   final TextEditingController fullBioController;
   final PersoSelectableCategoryChips persoChipsList;
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: widget._userType == UserType.trainer,
+      visible: userType == UserType.trainer,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

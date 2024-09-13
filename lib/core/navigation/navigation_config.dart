@@ -28,6 +28,7 @@ import 'package:perso/app/screens/training_categories/training_categories_screen
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
+import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -48,6 +49,8 @@ class NavigationConstants {
   static const date = 'date';
   static const exerciseInTrainingEntity = 'exerciseInTrainingEntity';
   static const exerciseDetailsScreenType = 'exerciseDetailsScreenType';
+  static const profileEntity = 'profileEntity';
+  static const userType = 'userType';
 }
 
 final GoRouter goRouter = GoRouter(
@@ -82,7 +85,10 @@ final GoRouter goRouter = GoRouter(
                       path: ScreenNavigationKey.profileEditClient,
                       pageBuilder: (context, state) => NoTransitionPage(
                         child: ProfileEditScreen(
-                          userType: state.extra! as UserType,
+                          userTypeProfileEntityPair: state.extra! as (
+                            UserType userType,
+                            ProfileEntity? profileEntity,
+                          ),
                         ),
                       ),
                     ),
@@ -102,7 +108,12 @@ final GoRouter goRouter = GoRouter(
                       path: ScreenNavigationKey.profileEditTrainer,
                       pageBuilder: (context, state) => NoTransitionPage(
                         child: ProfileEditScreen(
-                          userType: state.extra! as UserType,
+                            userTypeProfileEntityPair: state.extra! as (
+                              UserType userType,
+                              ProfileEntity? profileEntity,
+                            ),
+                          // userType: state.extra! as UserType,
+                          // profileEntity: state.extra! as ProfileEntity,
                         ),
                       ),
                     ),
@@ -209,7 +220,10 @@ final GoRouter goRouter = GoRouter(
                           name: ScreenNavigationKey.profileEditAccountCreation,
                           pageBuilder: (context, state) => NoTransitionPage(
                             child: ProfileEditScreen(
-                              userType: state.extra! as UserType,
+                              userTypeProfileEntityPair: state.extra! as (
+                                UserType userType,
+                                ProfileEntity? profileEntity,
+                              ),
                             ),
                           ),
                         ),
