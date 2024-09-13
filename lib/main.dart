@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _initializeChat();
+    // _initializeChat();
     return Theme(
       data: ThemeData(
         primaryColor: Colors.white,

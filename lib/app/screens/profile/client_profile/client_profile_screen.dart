@@ -16,6 +16,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/client_entity.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
@@ -30,7 +31,7 @@ class ClientProfileScreen extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) =>
-          ProfileBloc()..add(const ProfileEvent.loadData()),
+              ProfileBloc()..add(const ProfileEvent.loadData()),
         ),
         BlocProvider(
           create: (context) => ImageCubit()..getImageUrl(),
@@ -82,6 +83,8 @@ class _ClientProfileScreenContentState
       appBar: PersoAppBar(
         isTitleCentered: true,
         title: '@${widget._clientEntity.nickname}',
+        actionIcon: Icons.edit,
+        onActionIconClick: _navigateToProfileEdit,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -197,15 +200,9 @@ class _ClientProfileScreenContentState
     );
   }
 
-  Widget _image(String imagePath) {
-    if (imagePath.isNotEmpty) {
-      return Image.network(imagePath);
-    } else {
-      return const Icon(
-        Icons.account_circle,
-        size: 88,
-      );
-    }
+  void _navigateToProfileEdit(BuildContext context) {
+    context.pushNamed(ScreenNavigationKey.profileEditClient,
+        extra: UserType.trainer);
   }
 
   Container _aboutSection(ClientEntity clientEntity) {

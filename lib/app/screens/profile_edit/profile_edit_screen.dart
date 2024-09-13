@@ -232,13 +232,11 @@ class _ConfirmButton extends StatelessWidget {
                   title: context.strings.next,
                   onTap: (context) {
                     if (formKey.currentState?.validate() == true) {
+                      final languages = spokenLanguageRowWidget.listOfLanguages
+                          .map((element) => element.keys)
+                          .expand((element) => element)
+                          .toList();
                       if (widget._userType == UserType.trainer) {
-                        final languages = spokenLanguageRowWidget
-                            .listOfLanguages
-                            .map((element) => element.keys)
-                            .expand((element) => element)
-                            .toList();
-
                         final trainerData = EditableTrainerData(
                           imagePath: image?.path ?? '',
                           languages: languages,
@@ -253,19 +251,12 @@ class _ConfirmButton extends StatelessWidget {
                           categories: persoChipsList.selectedCategories,
                           latLng: latLng ?? const LatLng(0, 0),
                         );
-
                         context.read<ProfileEditBloc>().add(
                               ProfileEditEvent.uploadTrainerData(
                                 trainerData,
                               ),
                             );
                       } else {
-                        final languages = spokenLanguageRowWidget
-                            .listOfLanguages
-                            .map((element) => element.keys)
-                            .expand((element) => element)
-                            .toList();
-
                         final clientData = EditableClientData(
                           imagePath: image?.path ?? '',
                           name: nameController.text,
@@ -273,7 +264,6 @@ class _ConfirmButton extends StatelessWidget {
                           nickname: nicknameController.text,
                           languages: languages,
                         );
-
                         context.read<ProfileEditBloc>().add(
                               ProfileEditEvent.uploadClientData(
                                 clientData,

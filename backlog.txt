@@ -2,7 +2,7 @@
 1. Wyszukiwarka trenerów
   - User management; logowanie, rejestracja itd.
     - TODO: Dokończ upload imidżu // Zrobione
-    - TODO: Napraw przyciski na SignUpSuccessScreen - test na obu wersjach językówych
+    - TODO: Napraw przyciski na SignUpSuccessScreen - test na obu wersjach językówych // Zrobione
     - TODO: Edytuj trainer profil, nie pozwalaj na spacje, headline polska wersja
     - TODO: Ogranicz liczbę znaków
     - TODO: polska wersja errorów przy fieldach

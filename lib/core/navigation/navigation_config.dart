@@ -76,6 +76,17 @@ final GoRouter goRouter = GoRouter(
                   pageBuilder: (context, state) {
                     return NoTransitionPage(child: ClientProfileScreen());
                   },
+                  routes: [
+                    GoRoute(
+                      name: ScreenNavigationKey.profileEditClient,
+                      path: ScreenNavigationKey.profileEditClient,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        child: ProfileEditScreen(
+                          userType: state.extra! as UserType,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 GoRoute(
                   name: ScreenNavigationKey.trainerProfile,
@@ -85,6 +96,17 @@ final GoRouter goRouter = GoRouter(
                       child: TrainerProfileScreen(),
                     );
                   },
+                  routes: [
+                    GoRoute(
+                      name: ScreenNavigationKey.profileEditTrainer,
+                      path: ScreenNavigationKey.profileEditTrainer,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        child: ProfileEditScreen(
+                          userType: state.extra! as UserType,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 GoRoute(
                   name: ScreenNavigationKey.trainerDetails,
@@ -183,8 +205,8 @@ final GoRouter goRouter = GoRouter(
                       ),
                       routes: [
                         GoRoute(
-                          path: ScreenNavigationKey.profileEdit,
-                          name: ScreenNavigationKey.profileEdit,
+                          path: ScreenNavigationKey.profileEditAccountCreation,
+                          name: ScreenNavigationKey.profileEditAccountCreation,
                           pageBuilder: (context, state) => NoTransitionPage(
                             child: ProfileEditScreen(
                               userType: state.extra! as UserType,

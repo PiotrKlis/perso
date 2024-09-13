@@ -17,6 +17,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
@@ -83,6 +84,8 @@ class _TrainerProfileScreenContentState
       appBar: PersoAppBar(
         isTitleCentered: true,
         title: '@${widget._trainerEntity.nickname}',
+        actionIcon: Icons.edit,
+        onActionIconClick: _navigateToProfileEdit,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -150,6 +153,11 @@ class _TrainerProfileScreenContentState
         ),
       ),
     );
+  }
+
+  void _navigateToProfileEdit(BuildContext context) {
+    context.pushNamed(ScreenNavigationKey.profileEditTrainer,
+        extra: UserType.trainer);
   }
 
   SegmentedButton<String> _segmentedButton() {

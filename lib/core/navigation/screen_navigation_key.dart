@@ -15,7 +15,9 @@ class ScreenNavigationKey {
   static const String search = 'search';
   static const String trainerDetails = 'trainer_details';
   static const String searchFilter = 'search_filter';
-  static const String profileEdit = 'profile_edit';
+  static const String profileEditAccountCreation = 'profile_edit_account_creation';
+  static const String profileEditClient = 'profile_edit_client';
+  static const String profileEditTrainer = 'profile_edit_trainer';
   static const String profileCreation = 'profile_creation';
   static const String profileCreationSuccess = 'profile_creation_success';
   static const String trainerPlanOverview = 'trainer_plan_overview';

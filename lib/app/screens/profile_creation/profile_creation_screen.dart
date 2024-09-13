@@ -44,28 +44,32 @@ class ProfileCreationScreen extends StatelessWidget {
               margin: const EdgeInsets.only(
                 top: Dimens.xxxlMargin,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
                 children: [
                   Container(
                     margin: const EdgeInsets.symmetric(
                       horizontal: Dimens.sMargin,
                     ),
                     child: PersoButton(
-                      width: Dimens.mButtonWidth,
+                      width: Dimens.lButtonWidth,
                       title: context.strings.choose_trainer_user_type,
                       whiteBlackTheme: true,
                       onTap: _navigateTrainer,
                     ),
                   ),
+                  const SizedBox(
+                    height: Dimens.mMargin,
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(
                       horizontal: Dimens.sMargin,
                     ),
-                    child: PersoButton(
-                      width: Dimens.mButtonWidth,
-                      title: context.strings.choose_client_user_type,
-                      onTap: _navigateClient,
+                    child: Expanded(
+                      child: PersoButton(
+                        width: Dimens.lButtonWidth,
+                        title: context.strings.choose_client_user_type,
+                        onTap: _navigateClient,
+                      ),
                     ),
                   ),
                 ],
@@ -78,10 +82,16 @@ class ProfileCreationScreen extends StatelessWidget {
   }
 
   void _navigateClient(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.profileEdit, extra: UserType.client);
+    context.pushNamed(
+      ScreenNavigationKey.profileEditAccountCreation,
+      extra: UserType.client,
+    );
   }
 
   void _navigateTrainer(BuildContext context) {
-    context.pushNamed(ScreenNavigationKey.profileEdit, extra: UserType.trainer);
+    context.pushNamed(
+      ScreenNavigationKey.profileEditAccountCreation,
+      extra: UserType.trainer,
+    );
   }
 }
