@@ -7,13 +7,17 @@ import 'package:perso/app/widgets/category_chips/state/category_chips_state.dart
 
 //TODO: Ogarnij kategorie -> subkategorie
 class PersoSelectableCategoryChips extends StatefulWidget {
-  PersoSelectableCategoryChips({super.key});
+  PersoSelectableCategoryChips({super.key, this.selectedCategories = const []});
 
-  final List<String> selectedCategories = [];
+  List<String> selectedCategories;
 
   @override
   State<PersoSelectableCategoryChips> createState() =>
       _PersoSelectableCategoryChipsState();
+
+  void updateData(List<String> selectedCategories) {
+    this.selectedCategories = selectedCategories;
+  }
 }
 
 class _PersoSelectableCategoryChipsState

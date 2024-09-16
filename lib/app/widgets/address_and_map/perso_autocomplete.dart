@@ -14,16 +14,18 @@ import 'package:perso/data/address_provider/address_provider.dart';
 import 'package:perso/data/address_provider/google_address_provider.dart';
 
 class PersoAutocomplete extends StatelessWidget {
-  PersoAutocomplete({super.key});
+  PersoAutocomplete({super.key, this.initialAddress});
 
   final AddressProvider _addressProvider = getIt.get<GoogleAddressProvider>();
   TextEditingController? autocompleteController;
   Timer? _debounce;
+  final String? initialAddress;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
       builder: (context, state) => Autocomplete<String>(
+        initialValue: TextEditingValue(text: initialAddress ?? ''),
         fieldViewBuilder: (context, controller, focusNode, onFieldSubmitted) {
           autocompleteController = controller;
           return TextFormField(

@@ -1,7 +1,7 @@
 class TextFieldValidator {
   static String? validateEmail(String value) {
     final emailRegex = RegExp(
-      r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$',
+      r'^\S+@\S+\.[a-zA-Z]{2,7}$',
     );
 
     if (value.isEmpty) {
@@ -15,9 +15,9 @@ class TextFieldValidator {
 
   static String? validatePassword(String value) {
     const minLength = 8;
-    final hasUppercase = RegExp('[A-Z]').hasMatch(value);
-    final hasLowercase = RegExp('[a-z]').hasMatch(value);
-    final hasDigit = RegExp(r'\d').hasMatch(value);
+    final hasUppercase = RegExp(r'\S*[A-Z]\S*').hasMatch(value);
+    final hasLowercase = RegExp(r'\S*[a-z]\S*').hasMatch(value);
+    final hasDigit = RegExp(r'\S*\d\S*').hasMatch(value);
 
     if (value.isEmpty) {
       return 'Required Field';
@@ -42,14 +42,7 @@ class TextFieldValidator {
   }
 
   static String? validateIsEmpty(String value) {
-    if (value.isEmpty) {
-      return 'Required Field';
-    } else {
-      return null;
-    }
-  }
-
-  static String? validateNickname(String value) {
+    value.trim();
     if (value.isEmpty) {
       return 'Required Field';
     } else {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -27,6 +28,7 @@ import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/app/widgets/spoken_language_row.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
+import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -50,28 +52,25 @@ class ProfileEditScreen extends StatefulWidget {
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
-  final TextEditingController autoCompleteController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
   final nicknameController = TextEditingController();
-  final phoneNumberController = TextEditingController();
   final shortBioController = TextEditingController();
   final fullBioController = TextEditingController();
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final persoChipsList = PersoSelectableCategoryChips();
   final googleMap = const PersoGoogleMap();
-  final PersoAutocomplete addressWidget = PersoAutocomplete();
+  final imagePicker = ImagePicker();
+  final addressWidget = PersoAutocomplete();
   XFile? image;
   LatLng? latLng;
-  final imagePicker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
     final userType = widget._userTypeProfileEntityPair.$1;
     final profileEntity = widget._userTypeProfileEntityPair.$2;
-    updateControllersData(profileEntity, userType, nameController,
-        surnameController, nicknameController, addressWidget);
+    preUpdateFields(profileEntity, userType);
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => ProfileEditBloc()),
@@ -161,7 +160,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       surnameController: surnameController,
                       nicknameController: nicknameController,
                       addressWidget: addressWidget,
-                      phoneNumberController: phoneNumberController,
                       shortBioController: shortBioController,
                       fullBioController: fullBioController,
                       persoChipsList: persoChipsList,
@@ -177,6 +175,29 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         },
       ),
     );
+  }
+
+  void preUpdateFields(ProfileEntity? profileEntity, UserType userType) {
+    if (profileEntity != null) {
+      nameController.text = profileEntity.name;
+      surnameController.text = profileEntity.surname;
+      nicknameController.text = profileEntity.nickname;
+      // spokenLanguageRowWidget.listOfLanguages = profileEntity.languages
+      //     .map((map) => map.values.toList())
+      //     .expand((list) => list)
+      //     .toList();
+    }
+    if (profileEntity is TrainerEntity) {
+      fullBioController.text = profileEntity.fullBio;
+      shortBioController.text = profileEntity.shortBio;
+      latLng = profileEntity.latLng;
+      persoChipsList.selectedCategories = profileEntity.categories;
+      //addressWidget
+      // spokenLanguageRowWidget.listOfLanguages = profileEntity.languages
+      //     .map((map) => map.values.toList())
+      //     .expand((list) => list)
+      //     .toList();
+    }
   }
 
   Widget _getImage(ProfileEntity? profileEntity) {
@@ -200,32 +221,30 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     }
   }
 
-  void updateControllersData(
+  void updateTrainerFields(
     ProfileEntity? profileEntity,
     UserType userType,
     TextEditingController nameController,
     TextEditingController surnameController,
     TextEditingController nicknameController,
-    PersoAutocomplete addressWidget,
+    TextEditingController shortBioController,
+    TextEditingController fullBioController,
   ) {
-    // final TextEditingController autoCompleteController =
-    //     TextEditingController();
-    // final formKey = GlobalKey<FormState>();
-    // final nameController = TextEditingController();
-    // final surnameController = TextEditingController();
-    // final nicknameController = TextEditingController();
-    // final phoneNumberController = TextEditingController();
-    // final shortBioController = TextEditingController();
-    // final fullBioController = TextEditingController();
-    // final spokenLanguageRowWidget = SpokenLanguageRowWidget();
-    // final persoChipsList = PersoSelectableCategoryChips();
-    // final googleMap = const PersoGoogleMap();
-    // final PersoAutocomplete addressWidget = PersoAutocomplete();
-    // XFile? image;
-    // LatLng? latLng;
-    // final imagePicker = ImagePicker();
+    if (profileEntity != null && profileEntity is TrainerEntity) {
+      nameController.text = profileEntity.name;
+      surnameController.text = profileEntity.surname;
+      nicknameController.text = profileEntity.nickname;
 
-    if (profileEntity != null) {
+    }
+  }
+
+  void updateClientFields(
+    ProfileEntity? profileEntity,
+    TextEditingController nameController,
+    TextEditingController surnameController,
+    TextEditingController nicknameController,
+  ) {
+    if (profileEntity != null && profileEntity is ClientEntity) {
       nameController.text = profileEntity.name;
       surnameController.text = profileEntity.surname;
       nicknameController.text = profileEntity.nickname;
@@ -233,12 +252,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       //     .map((map) => map.values.toList())
       //     .expand((list) => list)
       //     .toList();
-      if (userType == UserType.trainer) {
-        final trainerProfile = profileEntity as TrainerEntity;
-        addressWidget.autocompleteController?.text = trainerProfile.location;
-        // persoChipsList.selectedCategories = trainerProfile.categories;
-        latLng = trainerProfile.latLng;
-      }
     }
   }
 }
@@ -253,7 +266,6 @@ class _ConfirmButton extends StatelessWidget {
     required this.surnameController,
     required this.nicknameController,
     required this.addressWidget,
-    required this.phoneNumberController,
     required this.shortBioController,
     required this.fullBioController,
     required this.persoChipsList,
@@ -269,7 +281,6 @@ class _ConfirmButton extends StatelessWidget {
   final TextEditingController surnameController;
   final TextEditingController nicknameController;
   final PersoAutocomplete addressWidget;
-  final TextEditingController phoneNumberController;
   final TextEditingController shortBioController;
   final TextEditingController fullBioController;
   final PersoSelectableCategoryChips persoChipsList;
@@ -315,7 +326,6 @@ class _ConfirmButton extends StatelessWidget {
                           nickname: nicknameController.text,
                           location:
                               addressWidget.autocompleteController?.text ?? '',
-                          phoneNumber: phoneNumberController.text,
                           shortBio: shortBioController.text,
                           fullBio: fullBioController.text,
                           categories: persoChipsList.selectedCategories,
