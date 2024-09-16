@@ -3,8 +3,8 @@
   - User management; logowanie, rejestracja itd.
     - TODO: Dokończ upload imidżu // Zrobione
     - TODO: Napraw przyciski na SignUpSuccessScreen - test na obu wersjach językówych // Zrobione
-    - TODO: Edytuj trainer profil, nie pozwalaj na spacje, headline polska wersja
-    - TODO: Ogranicz liczbę znaków
+    - TODO: Nie pozwalaj na spacje, headline polska wersja // Zrobione
+    - TODO: Ogranicz liczbę znaków // Zrobione
     - TODO: polska wersja errorów przy fieldach
     - TODO: możliwość poruszania pinezką na mapie
     - TODO: pierwsze odpalenie apki, mapa, brak kropki i mozliwosci wycentrowania. Zapewne trzeba zresetować mapę po akceptacji lokalizacji
@@ -14,6 +14,7 @@
     - TODO: Dodaj inne metody rejestracji i logowania
     - TODO: usun wymagany jezyk dla rejestracji klienta
     - TODO: Rejestracja klienta, imie i nazwisko nie powinno byc obowiazkowe, tylko unikalny nickname
+    - TODO: Edytuj trainer profil - languages widget, potrzebny mały refaktor do pre-fillowania danych
 
 
   - Wyszukiwanie trenerów

@@ -87,7 +87,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           return Scaffold(
             backgroundColor: PersoColors.lightBlue,
             appBar: PersoAppBar(
-              title: context.strings.edit_profile(userType.name),
+              title: context.strings.edit_profile,
             ),
             body: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -192,11 +192,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       shortBioController.text = profileEntity.shortBio;
       latLng = profileEntity.latLng;
       persoChipsList.selectedCategories = profileEntity.categories;
-      //addressWidget
-      // spokenLanguageRowWidget.listOfLanguages = profileEntity.languages
-      //     .map((map) => map.values.toList())
-      //     .expand((list) => list)
-      //     .toList();
+      addressWidget.initialAddress = profileEntity.location;
+      spokenLanguageRowWidget.addLanguage(profileEntity.languages);
     }
   }
 
@@ -420,6 +417,7 @@ class _NicknameSection extends StatelessWidget {
       ),
       //TODO: Find different, non-hacky way of async validation way
       child: PersoAsyncTextFormField(
+        maxLength: 20,
         hintText: context.strings.nickname,
         validator: widget._userInfoProvider.isNicknameUnique,
         validationDebounce: const Duration(milliseconds: 500),
@@ -445,6 +443,7 @@ class _SurnameSection extends StatelessWidget {
         right: Dimens.xmMargin,
       ),
       child: PersoTextField(
+        maxLength: 20,
         textEditingController: surnameController,
         hintText: context.strings.surname,
         customValidator: TextFieldValidator.validateIsEmpty,
@@ -479,6 +478,7 @@ class _NameSection extends StatelessWidget {
                 right: Dimens.xmMargin,
               ),
               child: PersoTextField(
+                maxLength: 20,
                 hintText: context.strings.name,
                 textEditingController: nameController,
                 customValidator: TextFieldValidator.validateIsEmpty,

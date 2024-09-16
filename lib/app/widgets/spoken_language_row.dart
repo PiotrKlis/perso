@@ -6,7 +6,31 @@ import 'package:perso/app/widgets/perso_small_button.dart';
 class SpokenLanguageRowWidget extends StatefulWidget {
   SpokenLanguageRowWidget({super.key});
 
+  //TODO: Rozbij widget na dwa, jeden z listą języków, drugi z przyciskiem widgetem
+  //TODO: Jeden internalowy, drugi widoczny na zewnątrz
   List<Map<String, Widget>> listOfLanguages = [];
+
+  void addLanguage(List<String> languageEmoji) {
+    for (final language in languageEmoji) {
+      _addSpokenLanguage(language);
+    }
+  }
+
+  void _addSpokenLanguage(String languageEmoji) {
+    final Widget languageChip = Container(
+      margin: const EdgeInsets.only(left: Dimens.xmMargin),
+      child: PersoFlagButton(
+        flagEmoji: languageEmoji,
+        onRemoveTap: _removeSpokenLanguage,
+      ),
+    );
+    listOfLanguages.add({languageEmoji: languageChip});
+  }
+
+  void _removeSpokenLanguage(String languageEmoji) {
+    listOfLanguages
+        .removeWhere((element) => element.containsKey(languageEmoji));
+  }
 
   @override
   State<SpokenLanguageRowWidget> createState() =>

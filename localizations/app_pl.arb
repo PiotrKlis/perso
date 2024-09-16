@@ -67,12 +67,7 @@
   "languages": "Języki",
   "training_categories": "Kategorie treningów",
   "categories": "Kategorie",
-  "edit_profile": "Edytuj {userType} profil",
-  "@edit_profile": {
-      "placeholders": {
-          "userType": {
-              "type": "String"
-          }}},
+  "edit_profile": "Edytuj profil",
   "logout": "Wyloguj",
   "filters": "Filtry",
   "location" : "Lokalizacja",

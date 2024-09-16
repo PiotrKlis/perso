@@ -19,7 +19,7 @@ class PersoAutocomplete extends StatelessWidget {
   final AddressProvider _addressProvider = getIt.get<GoogleAddressProvider>();
   TextEditingController? autocompleteController;
   Timer? _debounce;
-  final String? initialAddress;
+  String? initialAddress;
 
   @override
   Widget build(BuildContext context) {
