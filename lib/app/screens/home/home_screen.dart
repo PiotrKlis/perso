@@ -6,13 +6,15 @@ import 'package:perso/app/screens/home/state/home_state.dart';
 import 'package:perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:perso/app/widgets/address_and_map/google_map.dart';
+import 'package:perso/app/widgets/map/map_cubit.dart';
+import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_big_header.dart';
 import 'package:perso/app/widgets/perso_clickable_text.dart';
 import 'package:perso/app/widgets/perso_header.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:perso/app/widgets/training_category_list/perso_training_category_list.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
@@ -26,13 +28,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    setupStringProvider(context);
     return MultiBlocProvider(
       providers: [
         BlocProvider<HomeBloc>(
           create: (context) => HomeBloc(),
         ),
-        BlocProvider<AddressAndMapBloc>(
-          create: (context) => AddressAndMapBloc(),
+        BlocProvider<MapCubit>(
+          create: (context) => MapCubit(),
         ),
       ],
       child: BlocBuilder<HomeBloc, HomeState>(
@@ -156,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: const EdgeInsets.only(
                             top: Dimens.xsMargin,
                           ),
-                          child: const PersoGoogleMap(),
+                          child: PersoGoogleMap(),
                         ),
                         Container(
                           margin: const EdgeInsets.only(

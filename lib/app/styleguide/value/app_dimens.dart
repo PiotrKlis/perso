@@ -75,4 +75,6 @@ class Dimens {
   static const double nextExerciseBackground = 80;
 
   static const double videoPlayerHeight = 260;
+
+  static const double googleMapContainerHeight = 300;
 }

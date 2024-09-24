@@ -5,10 +5,10 @@
     - TODO: Napraw przyciski na SignUpSuccessScreen - test na obu wersjach językówych // Zrobione
     - TODO: Nie pozwalaj na spacje, headline polska wersja // Zrobione
     - TODO: Ogranicz liczbę znaków // Zrobione
-    - TODO: polska wersja errorów przy fieldach
+    - TODO: polska wersja errorów przy fieldach // Zrobione
+    - TODO: Edytuj swoje dane na ekranie zalogowanego profilu (ikona edycji) // Zrobione
     - TODO: możliwość poruszania pinezką na mapie
     - TODO: pierwsze odpalenie apki, mapa, brak kropki i mozliwosci wycentrowania. Zapewne trzeba zresetować mapę po akceptacji lokalizacji
-    - TODO: Edytuj swoje dane na ekranie zalogowanego profilu (ikona edycji)
     - TODO: Dodaj ikonę settingsów, dodaj ekran settingoswy; notyfikacje, wersja apki, costam bedzie dochodzic z czasem
     - TODO: Dodaj mapkę na profilu
     - TODO: Dodaj inne metody rejestracji i logowania

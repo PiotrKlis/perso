@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,8 +13,8 @@ import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:perso/app/widgets/address_and_map/google_map.dart';
-import 'package:perso/app/widgets/address_and_map/perso_autocomplete.dart';
+import 'package:perso/app/widgets/address/perso_autocomplete.dart';
+import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
@@ -60,7 +59,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final fullBioController = TextEditingController();
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final persoChipsList = PersoSelectableCategoryChips();
-  final googleMap = const PersoGoogleMap();
+  final googleMap = PersoGoogleMap();
   final imagePicker = ImagePicker();
   final addressWidget = PersoAutocomplete();
   XFile? image;
@@ -203,7 +202,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           ? const Icon(
               Icons.camera_alt,
               color: Colors.white,
-              size: 200,
+              size: 120,
             )
           : ClipOval(
               child: Image.file(
@@ -231,7 +230,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       nameController.text = profileEntity.name;
       surnameController.text = profileEntity.surname;
       nicknameController.text = profileEntity.nickname;
-
     }
   }
 
@@ -462,7 +460,7 @@ class _NameSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: Dimens.xmMargin),
+      margin: const EdgeInsets.only(top: Dimens.lMargin),
       child: Row(
         children: [
           Container(

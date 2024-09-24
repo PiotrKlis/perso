@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:google_maps_flutter_platform_interface/src/types/location.dart';
 import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/data/address_provider/address_provider.dart';
@@ -13,7 +14,7 @@ class GoogleAddressProvider implements AddressProvider {
   final String apiKey = 'AIzaSyAFu6Z8q4klRZddcUjXZSAqluMZW8hcP1Q';
 
   @override
-  Future<List<String>> fetchSuggestions(String input) async {
+  Future<List<String>> fetchAddressSuggestions(String input) async {
     final request = Uri.parse(
         'https://maps.googleapis.com/maps/api/place/autocomplete/json?'
         'input=$input&types=address&components=country:pl&'
@@ -32,6 +33,21 @@ class GoogleAddressProvider implements AddressProvider {
         return [];
       }
       throw Exception(result['error_message']);
+    } else {
+      throw Exception('Failed to fetch suggestion');
+    }
+  }
+
+  @override
+  Future<String> fetchAddress(LatLng latlng) async {
+    final request = Uri.parse(
+      'https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=$apiKey',
+    );
+    final response = await client.get(request);
+
+    if (response.statusCode == 200) {
+      print(response);
+      return "Przyjaźni 20a/2a, Wrocław";
     } else {
       throw Exception('Failed to fetch suggestion');
     }

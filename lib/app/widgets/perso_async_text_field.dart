@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/providers/string_provider.dart';
 
 class PersoAsyncTextFormField extends StatefulWidget {
   const PersoAsyncTextFormField({
@@ -28,15 +30,16 @@ class PersoAsyncTextFormField extends StatefulWidget {
 class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
   Timer? _debounce;
   bool isValid = false;
+  static final stringProvider = getIt.get<StringProvider>();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (value) {
         if (value?.isEmpty ?? false) {
-          return 'Required Field';
+          return stringProvider.strings.required_field;
         } else if (!isValid) {
-          return 'This nickname is already taken';
+          return stringProvider.strings.nickname_already_taken;
         } else {
           return null;
         }

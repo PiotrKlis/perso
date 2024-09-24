@@ -6,4 +6,5 @@ part 'address_and_map_state.freezed.dart';
 class AddressAndMapState with _$AddressAndMapState {
   const factory AddressAndMapState.initial() = Initial;
   const factory AddressAndMapState.mapUpdate(LatLng latLng) = MapUpdate;
+  const factory AddressAndMapState.addressUpdate(String address) = AddressUpdate;
 }

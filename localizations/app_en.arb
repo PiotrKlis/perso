@@ -71,11 +71,19 @@
   "edit_profile": "Edit profile",
   "logout": "Logout",
   "filters": "Filters",
-  "location": "Location",
+  "location": "Address",
   "rating": "Rating",
   "specialities": "Specialities",
   "location_default_set": "By default it is set to My country",
   "exercise_in_progress" : "Exercise in progress",
   "break_header": "Break",
-  "rest": "Rest"
+  "rest": "Rest",
+  "required_field": "Reguired field",
+  "enter_valid_email": "Enter valid email",
+  "passwords_not_match": "Passwords do not match",
+  "password_not_valid":  "Password needs to be at least 8 characters, with an uppercase and a number",
+  "digits_only": "Only digits are allowed",
+  "value_cannot_be_0": "Value cannot be 0",
+  "nickname_already_taken": "Nickname already taken"
+
 }
