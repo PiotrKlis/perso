@@ -12,8 +12,9 @@ import 'package:perso/app/widgets/map/map_state.dart';
 class PersoGoogleMap extends StatelessWidget {
   PersoGoogleMap({super.key});
 
-  static const _zoomOnMap = 11.0;
-  final _mapWidget = _Map();
+  static const _zoomOnMap = 15.0;
+
+  final _mapWidget = _MapWidget();
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +42,14 @@ class PersoGoogleMap extends StatelessWidget {
   }
 }
 
-class _Map extends StatefulWidget {
+class _MapWidget extends StatefulWidget {
   GoogleMapController? mapController;
 
   @override
-  State<_Map> createState() => _MapState();
+  State<_MapWidget> createState() => _MapWidgetState();
 }
 
-class _MapState extends State<_Map> {
+class _MapWidgetState extends State<_MapWidget> {
   static const _initialCameraPosition = CameraPosition(
     target: Constants.initialLatLng,
     zoom: Constants.initialMapZoom,

@@ -12,11 +12,11 @@ import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/validators.dart';
+import 'package:perso/app/widgets/address/perso_address.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
-import 'package:perso/app/widgets/address/perso_autocomplete.dart';
-import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
+import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
@@ -61,7 +61,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final persoChipsList = PersoSelectableCategoryChips();
   final googleMap = PersoGoogleMap();
   final imagePicker = ImagePicker();
-  final addressWidget = PersoAutocomplete();
+  final addressWidget = PersoAddress();
   XFile? image;
   LatLng? latLng;
 
@@ -275,7 +275,7 @@ class _ConfirmButton extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController surnameController;
   final TextEditingController nicknameController;
-  final PersoAutocomplete addressWidget;
+  final PersoAddress addressWidget;
   final TextEditingController shortBioController;
   final TextEditingController fullBioController;
   final PersoSelectableCategoryChips persoChipsList;
@@ -501,7 +501,7 @@ class _TrainerOnlySection extends StatelessWidget {
   });
 
   final ProfileEditScreen widget;
-  final PersoAutocomplete addressWidget;
+  final PersoAddress addressWidget;
   final PersoGoogleMap googleMap;
   final TextEditingController shortBioController;
   final TextEditingController fullBioController;

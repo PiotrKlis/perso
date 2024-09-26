@@ -5,7 +5,6 @@ import 'package:perso/app/screens/home/bloc/home_bloc.dart';
 import 'package:perso/app/screens/home/state/home_state.dart';
 import 'package:perso/app/screens/home/widgets/perso_account_icon.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_big_header.dart';
