@@ -7,8 +7,10 @@ import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart'
 import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
 
 class PersoAddress extends StatelessWidget {
-  PersoAddress({super.key, String initialAddress = ''})
-      : initialAddress = initialAddress;
+  PersoAddress({
+    super.key,
+    this.initialAddress = '',
+  });
 
   String initialAddress;
   TextEditingController? autocompleteController;

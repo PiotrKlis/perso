@@ -10,14 +10,17 @@ import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/map_state.dart';
 
 class PersoGoogleMap extends StatelessWidget {
-  PersoGoogleMap({super.key});
+  PersoGoogleMap({super.key, bool shouldShowMarkerAtTheCenter = false})
+      : _shouldShowMarkerAtTheCenter = shouldShowMarkerAtTheCenter;
 
   static const _zoomOnMap = 15.0;
-
-  final _mapWidget = _MapWidget();
+  final bool _shouldShowMarkerAtTheCenter;
+  late _MapWidget _mapWidget;
 
   @override
   Widget build(BuildContext context) {
+    _mapWidget =
+        _MapWidget(shouldShowMarkerAtTheCenter: _shouldShowMarkerAtTheCenter);
     return BlocBuilder<MapCubit, MapState>(
       builder: (context, state) {
         state.when(
@@ -43,7 +46,10 @@ class PersoGoogleMap extends StatelessWidget {
 }
 
 class _MapWidget extends StatefulWidget {
+  _MapWidget({required this.shouldShowMarkerAtTheCenter});
+
   GoogleMapController? mapController;
+  final bool shouldShowMarkerAtTheCenter;
 
   @override
   State<_MapWidget> createState() => _MapWidgetState();
@@ -79,7 +85,9 @@ class _MapWidgetState extends State<_MapWidget> {
             widget.mapController = controller;
           },
           onCameraMove: (position) {
-            _updateMarker(position.target);
+            if (widget.shouldShowMarkerAtTheCenter) {
+              _updateMarker(position.target);
+            }
           },
         ),
       ),

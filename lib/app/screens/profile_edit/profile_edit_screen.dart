@@ -12,10 +12,12 @@ import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/validators.dart';
+import 'package:perso/app/widgets/address/address_cubit.dart';
 import 'package:perso/app/widgets/address/perso_address.dart';
 import 'package:perso/app/widgets/address_and_map/bloc/addres_and_map_bloc.dart';
 import 'package:perso/app/widgets/address_and_map/state/address_and_map_state.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
+import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
@@ -59,7 +61,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final fullBioController = TextEditingController();
   final spokenLanguageRowWidget = SpokenLanguageRowWidget();
   final persoChipsList = PersoSelectableCategoryChips();
-  final googleMap = PersoGoogleMap();
+  final googleMap = PersoGoogleMap(
+    shouldShowMarkerAtTheCenter: true,
+  );
   final imagePicker = ImagePicker();
   final addressWidget = PersoAddress();
   XFile? image;
@@ -75,6 +79,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         BlocProvider(create: (context) => ProfileEditBloc()),
         BlocProvider(create: (context) => AddressAndMapBloc()),
         BlocProvider(create: (context) => ImageCubit()..getImageUrl()),
+        BlocProvider(create: (context) => MapCubit()),
+        BlocProvider(create: (context) => AddressCubit()),
       ],
       child: BlocBuilder<AddressAndMapBloc, AddressAndMapState>(
         builder: (context, state) {
@@ -539,10 +545,10 @@ class _TrainerOnlySection extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.xmMargin),
-            child: googleMap,
-          ),
+          // Container(
+          //   margin: const EdgeInsets.only(top: Dimens.xmMargin),
+          //   child: googleMap,
+          // ),
           Container(
             margin: const EdgeInsets.only(
               top: Dimens.xmMargin,
