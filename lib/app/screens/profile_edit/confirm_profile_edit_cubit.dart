@@ -3,13 +3,13 @@ import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_client_data.dart';
 import 'package:perso/app/screens/profile_edit/confirm_profile_edit_state.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
+import 'package:perso/app/utils/logger.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/clients/clients_service/firestore_clients_service.dart';
-import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.dart';
 
 @injectable
 class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
@@ -17,12 +17,12 @@ class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _clientsService = getIt.get<FirestoreClientsService>();
-  final _trainersService = getIt.get<FirestoreTrainersService>();
   var _editableClientData = const EditableClientData();
+  late UserType userType;
 
-  void confirm() {
+  void confirm(UserType userType) {
+    this.userType = userType;
     emit(const ConfirmProfileEditState.sendData());
-    emit(const ConfirmProfileEditState.loading());
   }
 
   void preFillData((UserType, ProfileEntity) userTypeProfileEntityPair) {
@@ -40,18 +40,24 @@ class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
   }
 
   void updateNickname(String nickname) {
-    _editableClientData = _editableClientData.copyWith(surname: nickname);
+    _editableClientData = _editableClientData.copyWith(nickname: nickname);
     _tryToSendData();
   }
 
   Future<void> _tryToSendData() async {
     if (_editableClientData.isObjectComplete()) {
-      await _sendData();
+      try {
+        await _sendData(userType);
+        await _handleStateEmit(userType);
+      } catch (error, stackTrace) {
+        emit(ConfirmProfileEditState.error(error.toString()));
+        Logger.error(error, stackTrace);
+      }
     }
   }
 
-  Future<void> _sendData() async {
-    if (_userSessionModel.userType == UserType.trainer) {
+  Future<void> _sendData(UserType userType) async {
+    if (userType == UserType.trainer) {
       await _handleTrainerDataUpload();
     } else {
       await _handleClientDataUpload();
@@ -114,5 +120,27 @@ class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
     //   latLng: event.trainerData.latLng,
     // );
     // await _trainersService.uploadFullTrainerData(trainerEntity);
+  }
+
+  Future<void> _handleStateEmit(
+    UserType userType,
+  ) async {
+    if (_userSessionModel.isProfileCreated) {
+      emit(const ConfirmProfileEditState.editSuccess());
+    } else {
+      await _updateUserSession(userType);
+      emit(const ConfirmProfileEditState.profileCreated());
+    }
+  }
+
+  Future<void> _updateUserSession(
+    UserType userType,
+  ) async {
+    await _userSessionModel.update(
+      user: _userSessionModel.user!,
+      isProfileCreated: true,
+      userType: userType,
+      isEmailVerified: _userSessionModel.isEmailVerified,
+    );
   }
 }

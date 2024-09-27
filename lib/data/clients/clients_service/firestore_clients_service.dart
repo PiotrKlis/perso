@@ -28,7 +28,6 @@ class FirestoreClientsService implements ClientsService {
       UserDocumentFields.surname: clientEntity.surname,
       UserDocumentFields.userType: UserType.client.name,
       UserDocumentFields.imagePath: serverImagePath,
-      UserDocumentFields.languages: clientEntity.languages,
       UserDocumentFields.activeTrainers: clientEntity.activeTrainers,
       UserDocumentFields.pendingTrainers: clientEntity.pendingTrainers,
       UserDocumentFields.inactiveTrainers: clientEntity.inactiveTrainers,

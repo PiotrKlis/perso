@@ -5,7 +5,6 @@ abstract class ProfileEntity {
     required this.surname,
     required this.nickname,
     required this.imagePath,
-    required this.languages,
   });
 
   final String id;
@@ -13,5 +12,4 @@ abstract class ProfileEntity {
   final String surname;
   final String nickname;
   final String imagePath;
-  final List<String> languages;
 }

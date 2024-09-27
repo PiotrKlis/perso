@@ -21,10 +21,6 @@ class FirestoreClientsProvider implements ClientsSource {
       surname: data[UserDocumentFields.surname] as String,
       nickname: data[UserDocumentFields.nickname] as String,
       imagePath: data[UserDocumentFields.imagePath] as String,
-      languages: data[UserDocumentFields.languages]
-          .toString()
-          .removeBrackets()
-          .split(', '),
       pendingTrainers: data[UserDocumentFields.pendingTrainers]
           .toString()
           .removeBrackets()

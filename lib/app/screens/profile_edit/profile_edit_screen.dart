@@ -343,7 +343,7 @@ class _ConfirmButton extends StatelessWidget {
                           name: nameController.text,
                           surname: surnameController.text,
                           nickname: nicknameController.text,
-                          languages: languages,
+                          // languages: languages,
                         );
                         context.read<ProfileEditBloc>().add(
                               ProfileEditEvent.uploadClientData(

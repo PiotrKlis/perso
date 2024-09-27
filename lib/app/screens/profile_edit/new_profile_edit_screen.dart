@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/profile_edit/confirm_profile_edit_cubit.dart';
 import 'package:perso/app/screens/profile_edit/confirm_profile_edit_state.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
@@ -13,6 +14,7 @@ import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/user_type.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
 
 class NewProfileEditScreen extends StatelessWidget {
@@ -43,23 +45,36 @@ class _EditProfileScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: PersoColors.lightBlue,
-      appBar: PersoAppBar(
-        title: context.strings.edit_profile,
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Form(
-                key: formKey,
-                child: _FieldSections(userTypeProfileEntityPair),
+    return BlocListener<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          editSuccess: () => context.replaceNamed(
+            ScreenNavigationKey.home,
+          ),
+          profileCreated: () => context.clearAndNavigate(
+            ScreenNavigationKey.profileCreationSuccess,
+          ),
+        );
+      },
+      child: Scaffold(
+        backgroundColor: PersoColors.lightBlue,
+        appBar: PersoAppBar(
+          title: context.strings.edit_profile,
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formKey,
+                  child: _FieldSections(userTypeProfileEntityPair),
+                ),
               ),
             ),
-          ),
-          _ConfirmButtonSection(formKey),
-        ],
+            _ConfirmButtonSection(
+                formKey: formKey, userType: userTypeProfileEntityPair.$1),
+          ],
+        ),
       ),
     );
   }
@@ -99,9 +114,13 @@ class _FieldSections extends StatelessWidget {
 }
 
 class _ConfirmButtonSection extends StatelessWidget {
-  const _ConfirmButtonSection(this.formKey);
+  const _ConfirmButtonSection({
+    required this.formKey,
+    required this.userType,
+  });
 
   final GlobalKey<FormState> formKey;
+  final UserType userType;
 
   @override
   Widget build(BuildContext context) {
@@ -109,16 +128,16 @@ class _ConfirmButtonSection extends StatelessWidget {
       margin: const EdgeInsets.all(Dimens.xmMargin),
       child: BlocBuilder<ConfirmProfileEditCubit, ConfirmProfileEditState>(
         builder: (context, state) {
-          if (state == const ConfirmProfileEditState.loading()) {
+          if (state == const ConfirmProfileEditState.sendData()) {
             return const PersoButton(
               isLoading: true,
             );
           } else {
             return PersoButton(
-              title: 'Confirm',
+              title: context.strings.confirm,
               onTap: (context) {
                 if (formKey.currentState?.validate() ?? false) {
-                  context.read<ConfirmProfileEditCubit>().confirm();
+                  context.read<ConfirmProfileEditCubit>().confirm(userType);
                 }
               },
             );
@@ -228,8 +247,14 @@ class _SurnameSectionState extends State<_SurnameSection> {
   }
 }
 
-class _NicknameSection extends StatelessWidget {
+class _NicknameSection extends StatefulWidget {
+  @override
+  State<_NicknameSection> createState() => _NicknameSectionState();
+}
+
+class _NicknameSectionState extends State<_NicknameSection> {
   final userInfoProvider = getIt.get<UserInfoProvider>();
+
   final nicknameController = TextEditingController();
 
   @override
@@ -241,12 +266,28 @@ class _NicknameSection extends StatelessWidget {
         right: Dimens.xmMargin,
       ),
       //TODO: Find different, non-hacky way of async validation way
-      child: PersoAsyncTextFormField(
-        maxLength: 20,
-        hintText: context.strings.nickname,
-        validator: userInfoProvider.isNicknameUnique,
-        validationDebounce: const Duration(milliseconds: 500),
-        controller: nicknameController,
+      child: BlocBuilder<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+        builder: (context, state) {
+          state.whenOrNull(
+            sendData: () {
+              context
+                  .read<ConfirmProfileEditCubit>()
+                  .updateNickname(nicknameController.text);
+            },
+            preFillData: (userTypeProfileEntityPair) {
+              setState(() {
+                nicknameController.text = userTypeProfileEntityPair.$2.nickname;
+              });
+            },
+          );
+          return PersoAsyncTextFormField(
+            maxLength: 20,
+            hintText: context.strings.nickname,
+            validator: userInfoProvider.isNicknameUnique,
+            validationDebounce: const Duration(milliseconds: 500),
+            controller: nicknameController,
+          );
+        },
       ),
     );
   }

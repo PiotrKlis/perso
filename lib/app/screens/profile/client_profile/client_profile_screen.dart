@@ -255,15 +255,6 @@ class _ClientProfileScreenContentState
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.mMargin,
-              left: Dimens.xsMargin,
-              right: Dimens.xmMargin,
-              bottom: Dimens.xmMargin,
-            ),
-            child: _getLanguages(clientEntity.languages),
-          ),
-          Container(
             margin: const EdgeInsets.all(Dimens.mMargin),
             child: PersoButton(
               title: context.strings.logout,

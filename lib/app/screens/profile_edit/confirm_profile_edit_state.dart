@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:perso/app/models/editable_client_data.dart';
 import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/user_type.dart';
 
@@ -11,10 +10,6 @@ class ConfirmProfileEditState with _$ConfirmProfileEditState {
 
   const factory ConfirmProfileEditState.sendData() = SendData;
 
-  const factory ConfirmProfileEditState.aggregatedData(
-    EditableClientData editableClientData,
-  ) = AggregatedData;
-
   const factory ConfirmProfileEditState.preFillData(
     (
       UserType userType,
@@ -22,5 +17,8 @@ class ConfirmProfileEditState with _$ConfirmProfileEditState {
     ) userTypeProfileEntityPair,
   ) = PreFillData;
 
-  const factory ConfirmProfileEditState.loading() = Loading;
+  const factory ConfirmProfileEditState.error(String error) = Error;
+
+  const factory ConfirmProfileEditState.editSuccess() = EditSuccess;
+  const factory ConfirmProfileEditState.profileCreated() = ProfileCreated;
 }

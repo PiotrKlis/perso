@@ -4,6 +4,9 @@ part 'editable_client_data.freezed.dart';
 
 @freezed
 class EditableClientData with _$EditableClientData {
+
+  const EditableClientData._();
+
   const factory EditableClientData({
     String? imagePath,
     String? name,
