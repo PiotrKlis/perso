@@ -38,7 +38,7 @@ class FirestoreClientsService implements ClientsService {
   @override
   Future<void> updateData(EditableClientData editableClientData) async {
     final id = _userSessionModel.user?.uid;
-    final serverImagePath = await _uploadImage(editableClientData.imagePath);
+    // final serverImagePath = await _uploadImage(editableClientData.imagePath);
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(id)
@@ -47,8 +47,7 @@ class FirestoreClientsService implements ClientsService {
       UserDocumentFields.nickname: editableClientData.nickname,
       UserDocumentFields.surname: editableClientData.surname,
       UserDocumentFields.userType: UserType.client.name,
-      UserDocumentFields.imagePath: serverImagePath,
-      UserDocumentFields.languages: editableClientData.languages,
+      // UserDocumentFields.imagePath: serverImagePath,
     });
   }
 

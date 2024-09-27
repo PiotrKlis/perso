@@ -11,7 +11,6 @@ class ClientEntity extends ProfileEntity with _$ClientEntity {
     required String surname,
     required String nickname,
     required String imagePath,
-    required List<String> languages,
     required List<String> pendingTrainers,
     required List<String> activeTrainers,
     required List<String> inactiveTrainers,

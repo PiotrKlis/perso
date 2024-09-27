@@ -107,11 +107,10 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   Future<void> _handleClientProfileCreation(UploadClientData event) async {
     final clientEntity = ClientEntity(
       id: _userSessionModel.user?.uid ?? '',
-      name: event.clientData.name,
-      surname: event.clientData.surname,
-      nickname: event.clientData.nickname,
-      languages: event.clientData.languages,
-      imagePath: event.clientData.imagePath,
+      name: event.clientData.name!,
+      surname: event.clientData.surname!,
+      nickname: event.clientData.nickname!,
+      imagePath: event.clientData.imagePath!,
       pendingTrainers: List.empty(),
       activeTrainers: List.empty(),
       inactiveTrainers: List.empty(),
