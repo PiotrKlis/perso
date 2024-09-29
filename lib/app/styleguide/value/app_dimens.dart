@@ -47,9 +47,6 @@ class Dimens {
   static const double smallButtonHeight = 40;
   static const double smallerButtonWidth = 60;
 
-  static const double imagePlaceholderBackgroundWidth = 200;
-  static const double imagePlaceholderBackgroundHeight = 200;
-
   static const double appBarElevation = 0;
   static const double placeholderIconSize = 120;
 
@@ -57,6 +54,9 @@ class Dimens {
 
   static const double profileImageWidth = 200;
   static const double profileImageHeight = 200;
+  static const double profileImageSize = 200;
+  static const double profileImageResolutionHeight = 640;
+  static const double profileImageResolutionWidth = 640;
 
   static const double sIconSize = 12;
   static const double iconSize = 24;

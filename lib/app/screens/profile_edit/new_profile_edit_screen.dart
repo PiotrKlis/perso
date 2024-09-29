@@ -10,6 +10,8 @@ import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
+import 'package:perso/app/widgets/profile_image/image_cubit.dart';
+import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/profile_entity.dart';
@@ -30,8 +32,15 @@ class NewProfileEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => ConfirmProfileEditCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => ConfirmProfileEditCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ImageCubit(),
+        ),
+      ],
       child: _EditProfileScreenContent(_userTypeProfileEntityPair),
     );
   }
@@ -72,7 +81,9 @@ class _EditProfileScreenContent extends StatelessWidget {
               ),
             ),
             _ConfirmButtonSection(
-                formKey: formKey, userType: userTypeProfileEntityPair.$1),
+              formKey: formKey,
+              userType: userTypeProfileEntityPair.$1,
+            ),
           ],
         ),
       ),
@@ -91,6 +102,7 @@ class _FieldSections extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const _ImageSection(),
         _NameSection(),
         _SurnameSection(),
         _NicknameSection(),
@@ -113,6 +125,43 @@ class _FieldSections extends StatelessWidget {
   }
 }
 
+class _ImageSection extends StatelessWidget {
+  const _ImageSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: Dimens.profileImageWidth,
+          height: Dimens.profileImageHeight,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.black,
+          ),
+          margin: const EdgeInsets.only(top: Dimens.lMargin),
+          child: const ProfileImage(),
+        ),
+        Container(
+          margin: const EdgeInsets.only(
+            top: Dimens.lMargin,
+            left: Dimens.lMargin,
+            right: Dimens.lMargin,
+          ),
+          child: Center(
+            child: PersoButton(
+              title: context.strings.upload_image,
+              onTap: (context) {
+                context.read<ImageCubit>().chooseImage();
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _ConfirmButtonSection extends StatelessWidget {
   const _ConfirmButtonSection({
     required this.formKey,
@@ -121,7 +170,7 @@ class _ConfirmButtonSection extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final UserType userType;
-
+  //TODO: Dodaj wysyłkę image path
   @override
   Widget build(BuildContext context) {
     return Container(
