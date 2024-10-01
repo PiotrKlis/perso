@@ -104,7 +104,7 @@ class _TrainerProfileScreenContentState
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: const ProfileImage(),
+                  child: ProfileImage(),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.mMargin),

@@ -2,15 +2,24 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/image_state.dart';
 
-class ProfileImage extends StatelessWidget {
+class ProfileImage extends StatefulWidget {
   const ProfileImage({super.key});
 
   @override
+  State<ProfileImage> createState() => _ProfileImageState();
+}
+
+class _ProfileImageState extends State<ProfileImage> {
+  String chosenImagePath = '';
+
+  @override
   Widget build(BuildContext context) {
+    _profileEditCubitListener(context);
     return BlocBuilder<ImageCubit, ImageState>(
       builder: (context, state) {
         return state.when(
@@ -25,12 +34,13 @@ class ProfileImage extends StatelessWidget {
             );
           },
           imageChosen: (path) {
+            chosenImagePath = path;
             return ClipOval(
               child: Image.file(
                 File(path),
                 width: Dimens.profileImageWidth,
                 height: Dimens.profileImageHeight,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             );
           },
@@ -38,18 +48,25 @@ class ProfileImage extends StatelessWidget {
             return ClipOval(
               child: Image.network(
                 url,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             );
           },
           imageNotFound: () {
             return const Icon(
               Icons.account_circle,
-              color: Colors.white,
               size: Dimens.profileImageSize,
             );
           },
         );
+      },
+    );
+  }
+
+  void _profileEditCubitListener(BuildContext context) {
+    context.watch<ProfileEditCubit>().state.whenOrNull(
+      sendData: () {
+        context.read<ProfileEditCubit>().updateImageUrl(chosenImagePath);
       },
     );
   }

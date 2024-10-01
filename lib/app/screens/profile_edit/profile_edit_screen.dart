@@ -9,7 +9,7 @@ import 'package:perso/app/models/editable_client_data.dart';
 import 'package:perso/app/models/editable_trainer_data.dart';
 import 'package:perso/app/screens/profile_edit/bloc/profile_edit_bloc.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
-import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/address/address_cubit.dart';
@@ -219,7 +219,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               ),
             );
     } else {
-      return const ProfileImage();
+      return ProfileImage();
     }
   }
 
@@ -300,17 +300,17 @@ class _ConfirmButton extends StatelessWidget {
         ),
         child: BlocConsumer<ProfileEditBloc, ProfileEditState>(
           builder: (context, state) {
-            return state.whenOrNull(
-                  loading: () => Center(
-                    child: Container(
-                      margin: const EdgeInsets.only(
-                        bottom: Dimens.xmMargin,
-                      ),
-                      child: const CircularProgressIndicator(),
-                    ),
-                  ),
-                ) ??
-                PersoButton(
+            // return state.whenOrNull(
+            //       loading: () => Center(
+            //         child: Container(
+            //           margin: const EdgeInsets.only(
+            //             bottom: Dimens.xmMargin,
+            //           ),
+            //           child: const CircularProgressIndicator(),
+            //         ),
+            //       ),
+            //     ) ??
+                return PersoButton(
                   title: context.strings.done,
                   onTap: (context) {
                     if (formKey.currentState?.validate() == true) {

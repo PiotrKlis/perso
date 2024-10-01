@@ -54,7 +54,7 @@ class Dimens {
 
   static const double profileImageWidth = 200;
   static const double profileImageHeight = 200;
-  static const double profileImageSize = 200;
+  static const double profileImageSize = 240;
   static const double profileImageResolutionHeight = 640;
   static const double profileImageResolutionWidth = 640;
 

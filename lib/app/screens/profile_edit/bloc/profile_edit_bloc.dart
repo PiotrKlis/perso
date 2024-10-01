@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
-import 'package:perso/app/screens/profile_edit/state/profile_edit_state.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
@@ -13,7 +13,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
   ProfileEditBloc() : super(const ProfileEditState.initial()) {
     on<UploadTrainerData>((event, emitter) async {
       try {
-        emitter(const ProfileEditState.loading());
+        // emitter(const ProfileEditState.loading());
         await _handleTrainerDataUpload(event);
         await _handleStateEmit(emitter, UserType.trainer);
       } catch (error) {
@@ -23,7 +23,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
 
     on<UploadClientData>((event, emitter) async {
       try {
-        emitter(const ProfileEditState.loading());
+        // emitter(const ProfileEditState.loading());
         await _handleClientDataUpload(event);
         await _handleStateEmit(emitter, UserType.client);
       } catch (error) {

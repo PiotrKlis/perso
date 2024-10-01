@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_client_data.dart';
-import 'package:perso/app/screens/profile_edit/confirm_profile_edit_state.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/utils/logger.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
@@ -12,21 +12,21 @@ import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/clients/clients_service/firestore_clients_service.dart';
 
 @injectable
-class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
-  ConfirmProfileEditCubit() : super(const ConfirmProfileEditState.initial());
+class ProfileEditCubit extends Cubit<ProfileEditState> {
+  ProfileEditCubit() : super(const ProfileEditState.initial());
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _clientsService = getIt.get<FirestoreClientsService>();
   var _editableClientData = const EditableClientData();
-  late UserType userType;
+  late UserType _userType;
 
   void confirm(UserType userType) {
-    this.userType = userType;
-    emit(const ConfirmProfileEditState.sendData());
+    _userType = userType;
+    emit(const ProfileEditState.sendData());
   }
 
   void preFillData((UserType, ProfileEntity) userTypeProfileEntityPair) {
-    emit(ConfirmProfileEditState.preFillData(userTypeProfileEntityPair));
+    emit(ProfileEditState.preFillData(userTypeProfileEntityPair));
   }
 
   void updateName(String name) {
@@ -44,13 +44,18 @@ class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
     _tryToSendData();
   }
 
+  void updateImageUrl(String url) {
+    _editableClientData =_editableClientData.copyWith(imagePath: url);
+    _tryToSendData();
+  }
+
   Future<void> _tryToSendData() async {
     if (_editableClientData.isObjectComplete()) {
       try {
-        await _sendData(userType);
-        await _handleStateEmit(userType);
+        await _sendData(_userType);
+        await _handleStateEmit(_userType);
       } catch (error, stackTrace) {
-        emit(ConfirmProfileEditState.error(error.toString()));
+        emit(ProfileEditState.error(error.toString()));
         Logger.error(error, stackTrace);
       }
     }
@@ -80,7 +85,7 @@ class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
       name: editableClientData.name!,
       surname: editableClientData.surname!,
       nickname: editableClientData.nickname!,
-      imagePath: '',
+      imagePath: editableClientData.imagePath ?? '',
       pendingTrainers: List.empty(),
       activeTrainers: List.empty(),
       inactiveTrainers: List.empty(),
@@ -126,10 +131,10 @@ class ConfirmProfileEditCubit extends Cubit<ConfirmProfileEditState> {
     UserType userType,
   ) async {
     if (_userSessionModel.isProfileCreated) {
-      emit(const ConfirmProfileEditState.editSuccess());
+      emit(const ProfileEditState.editSuccess());
     } else {
       await _updateUserSession(userType);
-      emit(const ConfirmProfileEditState.profileCreated());
+      emit(const ProfileEditState.profileCreated());
     }
   }
 

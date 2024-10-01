@@ -15,5 +15,5 @@ class EditableClientData with _$EditableClientData {
   }) = _EditableClientData;
 
   bool isObjectComplete() =>
-      name != null && surname != null && nickname != null;
+      name != null && surname != null && nickname != null && imagePath != null;
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:perso/app/screens/profile_edit/confirm_profile_edit_cubit.dart';
-import 'package:perso/app/screens/profile_edit/confirm_profile_edit_state.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/utils/validators.dart';
@@ -35,7 +35,7 @@ class NewProfileEditScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => ConfirmProfileEditCubit(),
+          create: (context) => ProfileEditCubit(),
         ),
         BlocProvider(
           create: (context) => ImageCubit(),
@@ -54,7 +54,7 @@ class _EditProfileScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+    return BlocListener<ProfileEditCubit, ProfileEditState>(
       listener: (context, state) {
         state.whenOrNull(
           editSuccess: () => context.replaceNamed(
@@ -118,9 +118,7 @@ class _FieldSections extends StatelessWidget {
     final profileEntity = userTypeProfileEntityPair.$2;
     if (profileEntity != null) {
       final userTypeProfileEntityPair = (userType, profileEntity);
-      context
-          .read<ConfirmProfileEditCubit>()
-          .preFillData(userTypeProfileEntityPair);
+      context.read<ProfileEditCubit>().preFillData(userTypeProfileEntityPair);
     }
   }
 }
@@ -133,18 +131,12 @@ class _ImageSection extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: Dimens.profileImageWidth,
-          height: Dimens.profileImageHeight,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.black,
-          ),
-          margin: const EdgeInsets.only(top: Dimens.lMargin),
+          margin: const EdgeInsets.only(top: Dimens.mMargin),
           child: const ProfileImage(),
         ),
         Container(
           margin: const EdgeInsets.only(
-            top: Dimens.lMargin,
+            top: Dimens.mMargin,
             left: Dimens.lMargin,
             right: Dimens.lMargin,
           ),
@@ -170,14 +162,14 @@ class _ConfirmButtonSection extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final UserType userType;
-  //TODO: Dodaj wysyłkę image path
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(Dimens.xmMargin),
-      child: BlocBuilder<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+      child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
         builder: (context, state) {
-          if (state == const ConfirmProfileEditState.sendData()) {
+          if (state == const ProfileEditState.sendData()) {
             return const PersoButton(
               isLoading: true,
             );
@@ -186,7 +178,7 @@ class _ConfirmButtonSection extends StatelessWidget {
               title: context.strings.confirm,
               onTap: (context) {
                 if (formKey.currentState?.validate() ?? false) {
-                  context.read<ConfirmProfileEditCubit>().confirm(userType);
+                  context.read<ProfileEditCubit>().confirm(userType);
                 }
               },
             );
@@ -223,13 +215,12 @@ class _NameSectionState extends State<_NameSection> {
                 left: Dimens.xmMargin,
                 right: Dimens.xmMargin,
               ),
-              child:
-                  BlocBuilder<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+              child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
                 builder: (context, state) {
                   state.whenOrNull(
                     sendData: () {
                       context
-                          .read<ConfirmProfileEditCubit>()
+                          .read<ProfileEditCubit>()
                           .updateName(nameController.text);
                     },
                     preFillData: (userTypeProfileEntityPair) {
@@ -270,12 +261,12 @@ class _SurnameSectionState extends State<_SurnameSection> {
         top: Dimens.lMargin,
         right: Dimens.xmMargin,
       ),
-      child: BlocBuilder<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+      child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
         builder: (context, state) {
           state.whenOrNull(
             sendData: () {
               context
-                  .read<ConfirmProfileEditCubit>()
+                  .read<ProfileEditCubit>()
                   .updateSurname(surnameController.text);
             },
             preFillData: (userTypeProfileEntityPair) {
@@ -315,12 +306,12 @@ class _NicknameSectionState extends State<_NicknameSection> {
         right: Dimens.xmMargin,
       ),
       //TODO: Find different, non-hacky way of async validation way
-      child: BlocBuilder<ConfirmProfileEditCubit, ConfirmProfileEditState>(
+      child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
         builder: (context, state) {
           state.whenOrNull(
             sendData: () {
               context
-                  .read<ConfirmProfileEditCubit>()
+                  .read<ProfileEditCubit>()
                   .updateNickname(nicknameController.text);
             },
             preFillData: (userTypeProfileEntityPair) {
