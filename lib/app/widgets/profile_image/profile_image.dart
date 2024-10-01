@@ -56,6 +56,7 @@ class _ProfileImageState extends State<ProfileImage> {
             return const Icon(
               Icons.account_circle,
               size: Dimens.profileImageSize,
+              color: Colors.black,
             );
           },
         );
