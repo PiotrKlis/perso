@@ -5,10 +5,15 @@ import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
+import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
+import 'package:perso/app/widgets/address/perso_address.dart';
+import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
+import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
+import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/profile_image.dart';
@@ -98,6 +103,7 @@ class _FieldSections extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userType = userTypeProfileEntityPair.$1;
     _preFillSections(context, userTypeProfileEntityPair);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,6 +112,9 @@ class _FieldSections extends StatelessWidget {
         _NameSection(),
         _SurnameSection(),
         _NicknameSection(),
+        _TrainerOnlySection(
+          userType: userType,
+        ),
       ],
     );
   }
@@ -328,6 +337,129 @@ class _NicknameSectionState extends State<_NicknameSection> {
             controller: nicknameController,
           );
         },
+      ),
+    );
+  }
+}
+
+class _TrainerOnlySection extends StatelessWidget {
+  const _TrainerOnlySection({required this.userType});
+
+  final UserType userType;
+  //TODO: Make me great again
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: userType == UserType.trainer,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
+            ),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: Dimens.xmMargin,
+                  ),
+                  child: const Icon(Icons.pin_drop, size: 24),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      left: Dimens.xmMargin,
+                    ),
+                    child: PersoAddress(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.xmMargin),
+            child: PersoGoogleMap(),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
+            ),
+            child: const PersoIndentedDivider(),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
+            ),
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(
+                    left: Dimens.xmMargin,
+                  ),
+                  child: const Icon(
+                    Icons.text_snippet,
+                    size: 24,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 140,
+                    margin: const EdgeInsets.only(
+                      left: Dimens.xmMargin,
+                    ),
+                    child: PersoTextField(
+                      hintText: context.strings.short_bio,
+                      customValidator: TextFieldValidator.validateIsEmpty,
+                      isMultiLine: true,
+                      maxLength: 150,
+                      textEditingController: TextEditingController(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 340,
+            margin: const EdgeInsets.only(
+              left: Dimens.xxxlMargin,
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
+            ),
+            child: PersoTextField(
+              hintText: context.strings.long_bio,
+              isMultiLine: true,
+              maxLength: 500,
+              customValidator: TextFieldValidator.validateIsEmpty,
+              textEditingController: TextEditingController(),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.xmMargin,
+              right: Dimens.xmMargin,
+            ),
+            child: const PersoIndentedDivider(),
+          ),
+          Container(
+            margin: const EdgeInsets.only(
+              top: Dimens.xmMargin,
+              left: Dimens.xmMargin,
+            ),
+            child: Text(
+              context.strings.select_your_specialities,
+              style: ThemeText.bodyBoldBlackText,
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: Dimens.xsMargin),
+            child: PersoSelectableCategoryChips(),
+          ),
+        ],
       ),
     );
   }
