@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/profile/bloc/profile_bloc.dart';
 import 'package:perso/app/screens/profile/event/profile_event.dart';
 import 'package:perso/app/screens/profile/state/profile_state.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
-import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
-import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
@@ -34,7 +32,10 @@ class ClientProfileScreen extends StatelessWidget {
               ProfileBloc()..add(const ProfileEvent.loadData()),
         ),
         BlocProvider(
-          create: (context) => ImageCubit()..getImageUrl(),
+          create: (context) => ImageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ProfileEditCubit(),
         ),
       ],
       child: const _ClientProfileScreenBuilder(),
@@ -62,196 +63,40 @@ class _ClientProfileScreenBuilder extends StatelessWidget {
   }
 }
 
-class _ClientProfileScreenContent extends StatefulWidget {
+class _ClientProfileScreenContent extends StatelessWidget {
   const _ClientProfileScreenContent({required ClientEntity clientEntity})
       : _clientEntity = clientEntity;
 
   final ClientEntity _clientEntity;
 
   @override
-  State<_ClientProfileScreenContent> createState() =>
-      _ClientProfileScreenContentState();
-}
-
-class _ClientProfileScreenContentState
-    extends State<_ClientProfileScreenContent> {
-  Set<String> _segmentSelected = Set.from({_Segments.about.name});
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PersoAppBar(
         isTitleCentered: true,
-        title: '@${widget._clientEntity.nickname}',
+        title: '@${_clientEntity.nickname}',
         actionIcon: Icons.edit,
         onActionIconClick: _navigateToProfileEdit,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: Dimens.xmMargin,
-                    left: Dimens.xxlMargin,
-                    right: Dimens.xxlMargin,
-                  ),
-                  child: Row(
-                    children: [Expanded(child: _segmentedButton())],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: ProfileImage(),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: Dimens.mMargin),
-                  child: Text(
-                    '${widget._clientEntity.name} ${widget._clientEntity.surname}',
-                    style: ThemeText.mediumTitleBold,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: Dimens.sMargin,
-                    bottom: Dimens.mMargin,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        '4.5',
-                        style: ThemeText.subHeadingBold,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: Dimens.sMargin,
-                          right: Dimens.sMargin,
-                        ),
-                        child: const Icon(Icons.star),
-                      ),
-                      const Text(
-                        '(66})',
-                        style: ThemeText.subHeadingRegular,
-                      ),
-                    ],
-                  ),
-                ),
-                Visibility(
-                  visible: _segmentSelected.contains(_Segments.about.name),
-                  child: _aboutSection(widget._clientEntity),
-                ),
-                Visibility(
-                  visible: _segmentSelected.contains(_Segments.reviews.name),
-                  child: _reviewsSection(widget._clientEntity),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  SegmentedButton<String> _segmentedButton() {
-    return SegmentedButton(
-      style: ButtonStyle(
-        textStyle: WidgetStateProperty.resolveWith<TextStyle>(
-            (Set<WidgetState> states) {
-          return ThemeText.bodyBoldBlackText;
-        }),
-        foregroundColor: WidgetStateProperty.resolveWith<Color>(
-          (Set<WidgetState> states) {
-            if (states.contains(WidgetState.selected)) {
-              return Colors.white;
-            } else {
-              return Colors.black;
-            }
-          },
-        ),
-        backgroundColor: WidgetStateProperty.resolveWith<Color>(
-          (Set<WidgetState> states) {
-            if (states.contains(WidgetState.selected)) {
-              return Colors.black;
-            } else {
-              return Colors.white;
-            }
-          },
-        ),
-      ),
-      showSelectedIcon: false,
-      selected: _segmentSelected,
-      segments: [
-        ButtonSegment<String>(
-          value: _Segments.about.name,
-          label: const Text('About'),
-        ),
-        ButtonSegment<String>(
-          value: _Segments.reviews.name,
-          label: const Text('Reviews'),
-        ),
-      ],
-      onSelectionChanged: (selectedSet) {
-        setState(() {
-          _segmentSelected = selectedSet;
-        });
-      },
-    );
-  }
-
-  void _navigateToProfileEdit(BuildContext context) {
-    context.pushNamed(
-      ScreenNavigationKey.profileEditClient,
-      extra: (UserType.trainer, widget._clientEntity),
-    );
-  }
-
-  Container _aboutSection(ClientEntity clientEntity) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
         children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.lMargin,
-              left: Dimens.xmMargin,
-            ),
-            child: const Text(
-              'Biography',
-              style: ThemeText.bodyBoldBlackText,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.lMargin,
-              left: Dimens.xmMargin,
-              right: Dimens.xmMargin,
-            ),
-            child: const Text(
-              'Location',
-              style: ThemeText.bodyBoldBlackText,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.lMargin,
-              left: Dimens.xmMargin,
-            ),
-            child: const Text(
-              'Specialities',
-              style: ThemeText.bodyBoldBlackText,
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.lMargin,
-              left: Dimens.xmMargin,
-            ),
-            child: const Text(
-              'Languages',
-              style: ThemeText.bodyBoldBlackText,
+          Expanded(
+            child: Center(
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: Dimens.xlMargin),
+                    child: const ProfileImage(),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: Dimens.mMargin),
+                    child: Text(
+                      '${_clientEntity.name} ${_clientEntity.surname}',
+                      style: ThemeText.mediumTitleBold,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Container(
@@ -269,190 +114,10 @@ class _ClientProfileScreenContentState
     );
   }
 
-  Row _getLanguages(List<String> languages) {
-    final languageWidgets = languages.map((element) {
-      final language = element.removeBrackets();
-      return Container(
-        margin: const EdgeInsets.only(left: Dimens.xsMargin),
-        child: Text(
-          language,
-          style: const TextStyle(fontSize: 24),
-        ),
-      );
-    }).toList();
-    return Row(children: languageWidgets);
-  }
-
-  Container _reviewsSection(ClientEntity clientEntity) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.mMargin,
-              left: Dimens.mMargin,
-            ),
-            child: const Text('Rating', style: ThemeText.bodyBoldBlackText),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              left: Dimens.mMargin,
-              bottom: Dimens.mMargin,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Based on 142 reviews',
-                  style: ThemeText.bodyRegularBlackText,
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 40,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        left: Dimens.xsMargin,
-                        right: Dimens.xmMargin,
-                      ),
-                      child: const Text(
-                        '5.0',
-                        style: ThemeText.largerTitleBold,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const PersoDivider(),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.mMargin,
-              left: Dimens.mMargin,
-              right: Dimens.mMargin,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Tap to rate',
-                  style: ThemeText.bodyBoldBlackText,
-                ),
-                RatingBar(
-                  allowHalfRating: true,
-                  ratingWidget: RatingWidget(
-                    full: const Icon(Icons.star, color: Colors.yellow),
-                    half: const Icon(Icons.star_half, color: Colors.yellow),
-                    empty: const Icon(Icons.star_border, color: Colors.yellow),
-                  ),
-                  onRatingUpdate: (value) {
-                    //no-op
-                  },
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              left: Dimens.mMargin,
-              right: Dimens.mMargin,
-              bottom: Dimens.mMargin,
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.account_circle,
-                  size: 48,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: Dimens.xsMargin),
-                  child: const Text(
-                    'Write review',
-                    style: ThemeText.calloutRegularGrey,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const PersoDivider(),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.mMargin,
-              left: Dimens.mMargin,
-            ),
-            child: const Text(
-              'Reviews',
-              style: ThemeText.bodyBoldBlackText,
-            ),
-          ),
-          _review(),
-        ],
-      ),
-    );
-  }
-
-  Container _review() {
-    return Container(
-      margin: const EdgeInsets.all(Dimens.mMargin),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  const Icon(Icons.account_circle, size: 48),
-                  Container(
-                    margin: const EdgeInsets.only(left: Dimens.xsMargin),
-                    child: Column(
-                      children: [
-                        const Text(
-                          'John Wick',
-                          style: ThemeText.bodyBoldBlackText,
-                        ),
-                        RatingBar(
-                          itemSize: 20,
-                          allowHalfRating: true,
-                          ratingWidget: RatingWidget(
-                            full: const Icon(Icons.star, color: Colors.yellow),
-                            half: const Icon(
-                              Icons.star_half,
-                              color: Colors.yellow,
-                            ),
-                            empty: const Icon(
-                              Icons.star_border,
-                              color: Colors.yellow,
-                            ),
-                          ),
-                          onRatingUpdate: (value) {
-                            //no-op
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const Text('1 month ago', style: ThemeText.bodyRegularBlackText),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.xsMargin),
-            child: const Text(
-              'Let me put it this way! Andrew went out of his way to in our journey together. I wasn’t sure about things in the beginning, Lol.',
-              style: ThemeText.bodyRegularBlackText,
-            ),
-          ),
-        ],
-      ),
+  void _navigateToProfileEdit(BuildContext context) {
+    context.pushNamed(
+      ScreenNavigationKey.profileEditClient,
+      extra: (UserType.client, _clientEntity),
     );
   }
 }
-
-enum _Segments { about, reviews }

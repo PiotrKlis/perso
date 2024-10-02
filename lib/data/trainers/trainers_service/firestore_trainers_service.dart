@@ -26,7 +26,7 @@ class FirestoreTrainersService implements TrainersService {
           .set({
         UserDocumentFields.fullBio: trainerData.fullBio,
         UserDocumentFields.languages: trainerData.languages,
-        UserDocumentFields.location: trainerData.location,
+        UserDocumentFields.address: trainerData.address,
         UserDocumentFields.name: trainerData.name,
         UserDocumentFields.nickname: trainerData.nickname,
         UserDocumentFields.shortBio: trainerData.shortBio,
@@ -53,7 +53,7 @@ class FirestoreTrainersService implements TrainersService {
           .set({
         UserDocumentFields.fullBio: trainerEntity.fullBio,
         UserDocumentFields.languages: trainerEntity.languages,
-        UserDocumentFields.location: trainerEntity.location,
+        UserDocumentFields.address: trainerEntity.address,
         UserDocumentFields.name: trainerEntity.name,
         UserDocumentFields.nickname: trainerEntity.nickname,
         UserDocumentFields.shortBio: trainerEntity.shortBio,

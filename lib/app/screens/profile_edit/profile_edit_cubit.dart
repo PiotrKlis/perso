@@ -26,7 +26,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
   }
 
   void preFillData((UserType, ProfileEntity) userTypeProfileEntityPair) {
-    emit(ProfileEditState.preFillData(userTypeProfileEntityPair));
+    emit(ProfileEditState.preFillData(userTypeProfileEntityPair.$2));
   }
 
   void updateName(String name) {

@@ -262,7 +262,7 @@ class _TrainerProfileScreenContentState
                       right: Dimens.xmMargin,
                     ),
                     child: Text(
-                      trainerEntity.location,
+                      trainerEntity.address,
                       style: ThemeText.bodyRegularBlackText,
                       softWrap: true,
                     ),

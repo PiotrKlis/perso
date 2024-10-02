@@ -197,7 +197,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       shortBioController.text = profileEntity.shortBio;
       latLng = profileEntity.latLng;
       persoChipsList.selectedCategories = profileEntity.categories;
-      addressWidget.initialAddress = profileEntity.location;
       spokenLanguageRowWidget.addLanguage(profileEntity.languages);
     }
   }
@@ -325,8 +324,7 @@ class _ConfirmButton extends StatelessWidget {
                           name: nameController.text,
                           surname: surnameController.text,
                           nickname: nicknameController.text,
-                          location:
-                              addressWidget.autocompleteController?.text ?? '',
+                          address: '',
                           shortBio: shortBioController.text,
                           fullBio: fullBioController.text,
                           categories: persoChipsList.selectedCategories,

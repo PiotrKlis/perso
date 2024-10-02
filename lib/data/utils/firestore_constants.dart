@@ -10,7 +10,7 @@ class CollectionName {
 class UserDocumentFields {
   static const String fullBio = 'fullBio';
   static const String languages = 'languages';
-  static const String location = 'location';
+  static const String address = 'address';
   static const String name = 'name';
   static const String surname = 'surname';
   static const String nickname = 'nickname';

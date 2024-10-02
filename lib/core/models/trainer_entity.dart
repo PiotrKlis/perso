@@ -18,7 +18,7 @@ class TrainerEntity extends ProfileEntity with _$TrainerEntity {
     required String imagePath,
     required List<String> languages,
     required double rating,
-    required String location,
+    required String address,
     required List<ReviewEntity> reviews,
     required List<String> categories,
     required List<String> pendingClients,

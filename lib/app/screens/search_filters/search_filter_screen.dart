@@ -47,7 +47,7 @@ class SearchFilterScreen extends StatelessWidget {
               left: Dimens.lMargin,
             ),
             child: Text(
-              AppLocalizations.of(context)!.location,
+              AppLocalizations.of(context)!.address,
               style: ThemeText.bodyBoldBlackText,
             ),
           ),

@@ -299,7 +299,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                       right: Dimens.xmMargin,
                     ),
                     child: Text(
-                      trainerEntity.location,
+                      trainerEntity.address,
                       style: ThemeText.bodyRegularBlackText,
                       softWrap: true,
                     ),

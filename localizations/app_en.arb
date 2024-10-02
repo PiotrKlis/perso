@@ -71,7 +71,7 @@
   "edit_profile": "Edit profile",
   "logout": "Logout",
   "filters": "Filters",
-  "location": "Address",
+  "address": "Address",
   "rating": "Rating",
   "specialities": "Specialities",
   "location_default_set": "By default it is set to My country",

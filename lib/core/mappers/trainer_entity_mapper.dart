@@ -18,7 +18,7 @@ class TrainerEntityMapper {
       fullBio: data[UserDocumentFields.fullBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: data[UserDocumentFields.rating] as double,
-      location: data[UserDocumentFields.location] as String,
+      address: data[UserDocumentFields.address] as String,
       reviews: _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
       languages: data[UserDocumentFields.languages]
           .toString()
@@ -56,7 +56,7 @@ class TrainerEntityMapper {
       fullBio: data[UserDocumentFields.fullBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: data[UserDocumentFields.rating] as double,
-      location: data[UserDocumentFields.location] as String,
+      address: data[UserDocumentFields.address] as String,
       reviews: _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
       languages: data[UserDocumentFields.languages]
           .toString()
@@ -94,7 +94,7 @@ class TrainerEntityMapper {
       fullBio: data[UserDocumentFields.fullBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: data[UserDocumentFields.rating] as double,
-      location: data[UserDocumentFields.location] as String,
+      address: data[UserDocumentFields.address] as String,
       reviews: _getReviews(data[UserDocumentFields.reviews] as List<dynamic>),
       languages: data[UserDocumentFields.languages]
           .toString()

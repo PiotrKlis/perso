@@ -112,8 +112,9 @@ class _FieldSections extends StatelessWidget {
         _NameSection(),
         _SurnameSection(),
         _NicknameSection(),
-        _TrainerOnlySection(
-          userType: userType,
+        Visibility(
+          visible: userType == UserType.trainer,
+          child: const _TrainerOnlySection(),
         ),
       ],
     );
@@ -198,12 +199,7 @@ class _ConfirmButtonSection extends StatelessWidget {
   }
 }
 
-class _NameSection extends StatefulWidget {
-  @override
-  State<_NameSection> createState() => _NameSectionState();
-}
-
-class _NameSectionState extends State<_NameSection> {
+class _NameSection extends StatelessWidget {
   final nameController = TextEditingController();
 
   @override
@@ -232,10 +228,8 @@ class _NameSectionState extends State<_NameSection> {
                           .read<ProfileEditCubit>()
                           .updateName(nameController.text);
                     },
-                    preFillData: (userTypeProfileEntityPair) {
-                      setState(() {
-                        nameController.text = userTypeProfileEntityPair.$2.name;
-                      });
+                    preFillData: (profileEntity) {
+                      nameController.text = profileEntity.name;
                     },
                   );
                   return PersoTextField(
@@ -254,12 +248,7 @@ class _NameSectionState extends State<_NameSection> {
   }
 }
 
-class _SurnameSection extends StatefulWidget {
-  @override
-  State<_SurnameSection> createState() => _SurnameSectionState();
-}
-
-class _SurnameSectionState extends State<_SurnameSection> {
+class _SurnameSection extends StatelessWidget {
   final surnameController = TextEditingController();
 
   @override
@@ -278,10 +267,8 @@ class _SurnameSectionState extends State<_SurnameSection> {
                   .read<ProfileEditCubit>()
                   .updateSurname(surnameController.text);
             },
-            preFillData: (userTypeProfileEntityPair) {
-              setState(() {
-                surnameController.text = userTypeProfileEntityPair.$2.surname;
-              });
+            preFillData: (profileEntity) {
+              surnameController.text = profileEntity.surname;
             },
           );
           return PersoTextField(
@@ -296,12 +283,7 @@ class _SurnameSectionState extends State<_SurnameSection> {
   }
 }
 
-class _NicknameSection extends StatefulWidget {
-  @override
-  State<_NicknameSection> createState() => _NicknameSectionState();
-}
-
-class _NicknameSectionState extends State<_NicknameSection> {
+class _NicknameSection extends StatelessWidget {
   final userInfoProvider = getIt.get<UserInfoProvider>();
 
   final nicknameController = TextEditingController();
@@ -323,10 +305,8 @@ class _NicknameSectionState extends State<_NicknameSection> {
                   .read<ProfileEditCubit>()
                   .updateNickname(nicknameController.text);
             },
-            preFillData: (userTypeProfileEntityPair) {
-              setState(() {
-                nicknameController.text = userTypeProfileEntityPair.$2.nickname;
-              });
+            preFillData: (profileEntity) {
+              nicknameController.text = profileEntity.nickname;
             },
           );
           return PersoAsyncTextFormField(
@@ -343,124 +323,176 @@ class _NicknameSectionState extends State<_NicknameSection> {
 }
 
 class _TrainerOnlySection extends StatelessWidget {
-  const _TrainerOnlySection({required this.userType});
+  const _TrainerOnlySection();
 
-  final UserType userType;
   //TODO: Make me great again
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: userType == UserType.trainer,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _AddressSection(),
+        _MapSection(),
+        _Divider(),
+        _ShortBioSection(),
+        _LongBioSection(),
+        _Divider(),
+        _SelectableCategories(),
+      ],
+    );
+  }
+}
+
+class _SelectableCategories extends StatelessWidget {
+  const _SelectableCategories();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            top: Dimens.xmMargin,
+            left: Dimens.xmMargin,
+          ),
+          child: Text(
+            context.strings.select_your_specialities,
+            style: ThemeText.bodyBoldBlackText,
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(top: Dimens.xsMargin),
+          child: PersoSelectableCategoryChips(),
+        ),
+      ],
+    );
+  }
+}
+
+class _LongBioSection extends StatelessWidget {
+  const _LongBioSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 340,
+      margin: const EdgeInsets.only(
+        left: Dimens.xxxlMargin,
+        top: Dimens.xmMargin,
+        right: Dimens.xmMargin,
+      ),
+      child: PersoTextField(
+        hintText: context.strings.long_bio,
+        isMultiLine: true,
+        maxLength: 500,
+        customValidator: TextFieldValidator.validateIsEmpty,
+        textEditingController: TextEditingController(),
+      ),
+    );
+  }
+}
+
+class _ShortBioSection extends StatelessWidget {
+  const _ShortBioSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: Dimens.xmMargin,
+        right: Dimens.xmMargin,
+      ),
+      child: Row(
         children: [
           Container(
             margin: const EdgeInsets.only(
-              top: Dimens.xmMargin,
-              right: Dimens.xmMargin,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: Dimens.xmMargin,
-                  ),
-                  child: const Icon(Icons.pin_drop, size: 24),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.only(
-                      left: Dimens.xmMargin,
-                    ),
-                    child: PersoAddress(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.xmMargin),
-            child: PersoGoogleMap(),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.xmMargin,
-              right: Dimens.xmMargin,
-            ),
-            child: const PersoIndentedDivider(),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.xmMargin,
-              right: Dimens.xmMargin,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: Dimens.xmMargin,
-                  ),
-                  child: const Icon(
-                    Icons.text_snippet,
-                    size: 24,
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 140,
-                    margin: const EdgeInsets.only(
-                      left: Dimens.xmMargin,
-                    ),
-                    child: PersoTextField(
-                      hintText: context.strings.short_bio,
-                      customValidator: TextFieldValidator.validateIsEmpty,
-                      isMultiLine: true,
-                      maxLength: 150,
-                      textEditingController: TextEditingController(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 340,
-            margin: const EdgeInsets.only(
-              left: Dimens.xxxlMargin,
-              top: Dimens.xmMargin,
-              right: Dimens.xmMargin,
-            ),
-            child: PersoTextField(
-              hintText: context.strings.long_bio,
-              isMultiLine: true,
-              maxLength: 500,
-              customValidator: TextFieldValidator.validateIsEmpty,
-              textEditingController: TextEditingController(),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.xmMargin,
-              right: Dimens.xmMargin,
-            ),
-            child: const PersoIndentedDivider(),
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              top: Dimens.xmMargin,
               left: Dimens.xmMargin,
             ),
-            child: Text(
-              context.strings.select_your_specialities,
-              style: ThemeText.bodyBoldBlackText,
+            child: const Icon(
+              Icons.text_snippet,
+              size: 24,
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: Dimens.xsMargin),
-            child: PersoSelectableCategoryChips(),
+          Expanded(
+            child: Container(
+              height: 140,
+              margin: const EdgeInsets.only(
+                left: Dimens.xmMargin,
+              ),
+              child: PersoTextField(
+                hintText: context.strings.short_bio,
+                customValidator: TextFieldValidator.validateIsEmpty,
+                isMultiLine: true,
+                maxLength: 150,
+                textEditingController: TextEditingController(),
+              ),
+            ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: Dimens.xmMargin,
+        right: Dimens.xmMargin,
+      ),
+      child: const PersoIndentedDivider(),
+    );
+  }
+}
+
+class _MapSection extends StatelessWidget {
+  const _MapSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(top: Dimens.xmMargin),
+      child: PersoGoogleMap(),
+    );
+  }
+}
+
+class _AddressSection extends StatelessWidget {
+  const _AddressSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            top: Dimens.xmMargin,
+            right: Dimens.xmMargin,
+          ),
+          child: Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(
+                  left: Dimens.xmMargin,
+                ),
+                child: const Icon(Icons.pin_drop, size: 24),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                    left: Dimens.xmMargin,
+                  ),
+                  child: PersoAddress(),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

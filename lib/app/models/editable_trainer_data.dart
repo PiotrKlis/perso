@@ -11,7 +11,7 @@ class EditableTrainerData with _$EditableTrainerData {
     required String name,
     required String surname,
     required String nickname,
-    required String location,
+    required String address,
     required String shortBio,
     required String fullBio,
     required List<String> categories,

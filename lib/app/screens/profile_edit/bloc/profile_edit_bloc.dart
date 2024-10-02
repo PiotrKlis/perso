@@ -84,7 +84,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       shortBio: event.trainerData.shortBio,
       languages: event.trainerData.languages,
       rating: 0,
-      location: event.trainerData.location,
+      address: event.trainerData.address,
       categories: event.trainerData.categories,
       reviews: List.empty(),
       pendingClients: [id],

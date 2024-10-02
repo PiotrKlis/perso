@@ -40,7 +40,7 @@ class _ProfileImageState extends State<ProfileImage> {
                 File(path),
                 width: Dimens.profileImageWidth,
                 height: Dimens.profileImageHeight,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             );
           },
@@ -49,6 +49,8 @@ class _ProfileImageState extends State<ProfileImage> {
               child: Image.network(
                 url,
                 fit: BoxFit.cover,
+                width: Dimens.profileImageWidth,
+                height: Dimens.profileImageHeight,
               ),
             );
           },
