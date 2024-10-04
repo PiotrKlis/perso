@@ -15,7 +15,6 @@ import 'package:perso/app/screens/profile/client_profile/client_profile_screen.d
 import 'package:perso/app/screens/profile/trainer_profile/trainer_profile_screen.dart';
 import 'package:perso/app/screens/profile_creation/profile_creation_screen.dart';
 import 'package:perso/app/screens/profile_creation_success/profile_creation_success_screen.dart';
-import 'package:perso/app/screens/profile_edit/new_profile_edit_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:perso/app/screens/search_filters/search_filter_screen.dart';
 import 'package:perso/app/screens/search_results/search_results_screen.dart';
@@ -85,7 +84,7 @@ final GoRouter goRouter = GoRouter(
                       name: ScreenNavigationKey.profileEditClient,
                       path: ScreenNavigationKey.profileEditClient,
                       pageBuilder: (context, state) => NoTransitionPage(
-                        child: NewProfileEditScreen(
+                        child: ProfileEditScreen(
                           userTypeProfileEntityPair: state.extra! as (
                             UserType userType,
                             ProfileEntity? profileEntity,
@@ -108,11 +107,11 @@ final GoRouter goRouter = GoRouter(
                       name: ScreenNavigationKey.profileEditTrainer,
                       path: ScreenNavigationKey.profileEditTrainer,
                       pageBuilder: (context, state) => NoTransitionPage(
-                        child: NewProfileEditScreen(
-                            userTypeProfileEntityPair: state.extra! as (
-                              UserType userType,
-                              ProfileEntity? profileEntity,
-                            ),
+                        child: ProfileEditScreen(
+                          userTypeProfileEntityPair: state.extra! as (
+                            UserType userType,
+                            ProfileEntity? profileEntity,
+                          ),
                           // userType: state.extra! as UserType,
                           // profileEntity: state.extra! as ProfileEntity,
                         ),
@@ -220,7 +219,7 @@ final GoRouter goRouter = GoRouter(
                           path: ScreenNavigationKey.profileEditAccountCreation,
                           name: ScreenNavigationKey.profileEditAccountCreation,
                           pageBuilder: (context, state) => NoTransitionPage(
-                            child: NewProfileEditScreen(
+                            child: ProfileEditScreen(
                               userTypeProfileEntityPair: state.extra! as (
                                 UserType userType,
                                 ProfileEntity? profileEntity,

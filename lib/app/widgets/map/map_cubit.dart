@@ -8,7 +8,7 @@ import 'package:perso/app/widgets/map/map_state.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/handlers/permission_handler.dart';
 
-@injectable
+@singleton
 class MapCubit extends Cubit<MapState> {
   MapCubit() : super(const MapState.initial());
   final _permissionHandler = getIt.get<PermissionHandler>();

@@ -57,12 +57,15 @@ class _PersoAddressState extends State<PersoAddress> {
             if (input.isEmpty) {
               return const [];
             } else {
-              context.read<AddressCubit>().fetchAddressSuggestions(input);
-              return context.watch<AddressCubit>().state;
+              //TODO: Add debounce
+              final suggestions =
+                  context.read<AddressCubit>().fetchAddressSuggestions(input);
+              return suggestions;
             }
           },
           onSelected: (String address) {
             autocompleteController?.text = address;
+            context.read<AddressCubit>().updateMap(address);
           },
         );
       },

@@ -14,8 +14,8 @@ class AddressCubit extends Cubit<List<String>> {
     _mapCubit.updateMap(address);
   }
 
-  Future<void> fetchAddressSuggestions(String input) async {
+  Future<List<String>> fetchAddressSuggestions(String input) async {
     final suggestions = await _addressProvider.fetchAddressSuggestions(input);
-    emit(suggestions);
+    return suggestions;
   }
 }
