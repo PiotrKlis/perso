@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_client_data.dart';
+import 'package:perso/app/models/editable_trainer_data.dart';
 import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/utils/logger.dart';
@@ -18,6 +20,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _clientsService = getIt.get<FirestoreClientsService>();
   var _editableClientData = const EditableClientData();
+  var _editableTrainerData = const EditableTrainerData();
   late UserType _userType;
 
   void confirm(UserType userType) {
@@ -30,22 +33,63 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
   }
 
   void updateName(String name) {
-    _editableClientData = _editableClientData.copyWith(name: name);
+    if (_userType == UserType.trainer) {
+      _editableTrainerData = _editableTrainerData.copyWith(name: name);
+    } else {
+      _editableClientData = _editableClientData.copyWith(name: name);
+    }
     _tryToSendData();
   }
 
   void updateSurname(String surname) {
-    _editableClientData = _editableClientData.copyWith(surname: surname);
+    if (_userType == UserType.trainer) {
+      _editableTrainerData = _editableTrainerData.copyWith(surname: surname);
+    } else {
+      _editableClientData = _editableClientData.copyWith(surname: surname);
+    }
     _tryToSendData();
   }
 
   void updateNickname(String nickname) {
-    _editableClientData = _editableClientData.copyWith(nickname: nickname);
+    if (_userType == UserType.trainer) {
+      _editableTrainerData = _editableTrainerData.copyWith(nickname: nickname);
+    } else {
+      _editableClientData = _editableClientData.copyWith(nickname: nickname);
+    }
     _tryToSendData();
   }
 
   void updateImageUrl(String url) {
-    _editableClientData =_editableClientData.copyWith(imagePath: url);
+    if (_userType == UserType.trainer) {
+      _editableTrainerData = _editableTrainerData.copyWith(imagePath: url);
+    } else {
+      _editableClientData = _editableClientData.copyWith(imagePath: url);
+    }
+    _tryToSendData();
+  }
+
+  void updateShortBio(String shortBio) {
+    _editableTrainerData = _editableTrainerData.copyWith(shortBio: shortBio);
+    _tryToSendData();
+  }
+
+  void updateLongBio(String longBio) {
+    _editableTrainerData = _editableTrainerData.copyWith(fullBio: longBio);
+    _tryToSendData();
+  }
+
+  void updateAddress(String address) {
+    _editableTrainerData = _editableTrainerData.copyWith(address: address);
+    _tryToSendData();
+  }
+
+  void updateLatLng(LatLng latLng) {
+    _editableTrainerData = _editableTrainerData.copyWith(latLng: latLng);
+    _tryToSendData();
+  }
+
+  void updateLanguages(List<String> languages) {
+    _editableTrainerData = _editableTrainerData.copyWith(languages: languages);
     _tryToSendData();
   }
 

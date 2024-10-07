@@ -83,5 +83,7 @@
   "passwords_not_match": "Hasła nie pasują do siebie",
   "password_not_valid":  "Hasło musi składać się z co najmniej 8 znaków, zawierać wielką literę i cyfrę",
   "digits_only": "Dozwolone są tylko cyfry",
-  "value_cannot_be_0": "Wartość nie może wynosić 0"
+  "value_cannot_be_0": "Wartość nie może wynosić 0",
+  "add_language": "Dodaj język",
+  "add_language_validator": "Dodaj co najmniej jeden język"
 }

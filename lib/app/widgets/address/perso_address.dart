@@ -5,6 +5,7 @@ import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/address/address_cubit.dart';
+import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 
 class PersoAddress extends StatefulWidget {
@@ -24,8 +25,14 @@ class _PersoAddressState extends State<PersoAddress> {
       builder: (context, state) {
         state.whenOrNull(
           preFillData: (profileEntity) {
-            final trainerEntity = profileEntity as TrainerEntity;
-            autocompleteController?.text = trainerEntity.address;
+            final address = (profileEntity as TrainerEntity).address;
+            autocompleteController?.text = address;
+            context.read<MapCubit>().updateMap(address);
+          },
+          sendData: () {
+            context
+                .read<ProfileEditCubit>()
+                .updateAddress(autocompleteController?.text ?? '');
           },
         );
         return Autocomplete<String>(
@@ -65,7 +72,7 @@ class _PersoAddressState extends State<PersoAddress> {
           },
           onSelected: (String address) {
             autocompleteController?.text = address;
-            context.read<AddressCubit>().updateMap(address);
+            context.read<MapCubit>().updateMap(address);
           },
         );
       },

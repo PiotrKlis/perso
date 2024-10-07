@@ -12,6 +12,7 @@ import 'package:perso/app/widgets/address/perso_address.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/perso_google_map.dart';
+import 'package:perso/app/widgets/perso_add_spoken_language.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
@@ -336,7 +337,7 @@ class _TrainerOnlySection extends StatelessWidget {
   //TODO: Make me great again
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _AddressSection(),
@@ -344,6 +345,7 @@ class _TrainerOnlySection extends StatelessWidget {
         _Divider(),
         _ShortBioSection(),
         _LongBioSection(),
+        PersoAddSpokenLanguage(),
         _Divider(),
         _SelectableCategories(),
       ],
@@ -378,7 +380,7 @@ class _SelectableCategories extends StatelessWidget {
 }
 
 class _LongBioSection extends StatelessWidget {
-  const _LongBioSection();
+  final longBioController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -389,19 +391,32 @@ class _LongBioSection extends StatelessWidget {
         top: Dimens.xmMargin,
         right: Dimens.xmMargin,
       ),
-      child: PersoTextField(
-        hintText: context.strings.long_bio,
-        isMultiLine: true,
-        maxLength: 500,
-        customValidator: TextFieldValidator.validateIsEmpty,
-        textEditingController: TextEditingController(),
-      ),
+      child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
+          builder: (context, state) {
+        state.whenOrNull(
+          sendData: () {
+            context
+                .read<ProfileEditCubit>()
+                .updateLongBio(longBioController.text);
+          },
+          preFillData: (profileEntity) {
+            longBioController.text = profileEntity.name;
+          },
+        );
+        return PersoTextField(
+          hintText: context.strings.long_bio,
+          isMultiLine: true,
+          maxLength: 500,
+          customValidator: TextFieldValidator.validateIsEmpty,
+          textEditingController: TextEditingController(),
+        );
+      }),
     );
   }
 }
 
 class _ShortBioSection extends StatelessWidget {
-  const _ShortBioSection();
+  final shortBioController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -427,12 +442,26 @@ class _ShortBioSection extends StatelessWidget {
               margin: const EdgeInsets.only(
                 left: Dimens.xmMargin,
               ),
-              child: PersoTextField(
-                hintText: context.strings.short_bio,
-                customValidator: TextFieldValidator.validateIsEmpty,
-                isMultiLine: true,
-                maxLength: 150,
-                textEditingController: TextEditingController(),
+              child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
+                builder: (context, state) {
+                  state.whenOrNull(
+                    sendData: () {
+                      context
+                          .read<ProfileEditCubit>()
+                          .updateShortBio(shortBioController.text);
+                    },
+                    preFillData: (profileEntity) {
+                      shortBioController.text = profileEntity.name;
+                    },
+                  );
+                  return PersoTextField(
+                    hintText: context.strings.short_bio,
+                    customValidator: TextFieldValidator.validateIsEmpty,
+                    isMultiLine: true,
+                    maxLength: 150,
+                    textEditingController: TextEditingController(),
+                  );
+                },
               ),
             ),
           ),
@@ -464,7 +493,9 @@ class _MapSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: Dimens.xmMargin),
-      child: PersoGoogleMap(),
+      child: const PersoGoogleMap(
+        shouldShowMarkerAtTheCenter: true,
+      ),
     );
   }
 }

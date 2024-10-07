@@ -6,15 +6,29 @@ part 'editable_trainer_data.freezed.dart';
 @freezed
 class EditableTrainerData with _$EditableTrainerData {
   const factory EditableTrainerData({
-    required String imagePath,
-    required List<String> languages,
-    required String name,
-    required String surname,
-    required String nickname,
-    required String address,
-    required String shortBio,
-    required String fullBio,
-    required List<String> categories,
-    required LatLng latLng,
+    String? imagePath,
+    List<String>? languages,
+    String? name,
+    String? surname,
+    String? nickname,
+    String? address,
+    String? shortBio,
+    String? fullBio,
+    List<String>? categories,
+    LatLng? latLng,
   }) = _EditableTrainerData;
+
+  const EditableTrainerData._();
+
+  bool isObjectComplete() =>
+      imagePath != null &&
+      languages != null &&
+      name != null &&
+      surname != null &&
+      nickname != null &&
+      address != null &&
+      shortBio != null &&
+      fullBio != null &&
+      categories != null &&
+      latLng != null;
 }

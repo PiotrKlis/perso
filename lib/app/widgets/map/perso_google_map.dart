@@ -4,23 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/constants.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/map_state.dart';
 
-class PersoGoogleMap extends StatelessWidget {
-  PersoGoogleMap({super.key, bool shouldShowMarkerAtTheCenter = false})
+class PersoGoogleMap extends StatefulWidget {
+  const PersoGoogleMap({super.key, bool shouldShowMarkerAtTheCenter = false})
       : _shouldShowMarkerAtTheCenter = shouldShowMarkerAtTheCenter;
 
   static const _zoomOnMap = 15.0;
   final bool _shouldShowMarkerAtTheCenter;
+
+  @override
+  State<PersoGoogleMap> createState() => _PersoGoogleMapState();
+}
+
+class _PersoGoogleMapState extends State<PersoGoogleMap> {
   late _MapWidget _mapWidget;
 
   @override
   Widget build(BuildContext context) {
-    _mapWidget =
-        _MapWidget(shouldShowMarkerAtTheCenter: _shouldShowMarkerAtTheCenter);
+    _mapWidget = _MapWidget(
+        shouldShowMarkerAtTheCenter: widget._shouldShowMarkerAtTheCenter);
     return BlocBuilder<MapCubit, MapState>(
       builder: (context, state) {
         state.when(
@@ -39,7 +47,7 @@ class PersoGoogleMap extends StatelessWidget {
   void _updateCamera(LatLng latLng) {
     _mapWidget.mapController?.animateCamera(
       CameraUpdate.newCameraPosition(
-        CameraPosition(target: latLng, zoom: _zoomOnMap),
+        CameraPosition(target: latLng, zoom: PersoGoogleMap._zoomOnMap),
       ),
     );
   }
@@ -64,6 +72,15 @@ class _MapWidgetState extends State<_MapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.shouldShowMarkerAtTheCenter) {
+      context.watch<ProfileEditCubit>().state.whenOrNull(
+        sendData: () {
+          context
+              .read<ProfileEditCubit>()
+              .updateLatLng(_markers.first.position);
+        },
+      );
+    }
     return Container(
       margin: const EdgeInsets.only(
         left: Dimens.mMargin,

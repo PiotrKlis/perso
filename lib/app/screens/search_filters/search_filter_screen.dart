@@ -4,10 +4,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
+import 'package:perso/app/widgets/perso_add_spoken_language.dart';
 import 'package:perso/app/widgets/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
-import 'package:perso/app/widgets/spoken_language_row.dart';
 
 class SearchFilterScreen extends StatelessWidget {
   const SearchFilterScreen({super.key});
@@ -38,7 +38,7 @@ class SearchFilterScreen extends StatelessWidget {
               top: Dimens.xsMargin,
               left: Dimens.xmMargin,
             ),
-            child: SpokenLanguageRowWidget(),
+            child: const PersoAddSpokenLanguage(),
           ),
           const PersoDivider(),
           Container(

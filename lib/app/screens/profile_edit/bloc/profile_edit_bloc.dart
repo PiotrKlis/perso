@@ -76,22 +76,22 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
     final id = _userSessionModel.user?.uid ?? '';
     final trainerEntity = TrainerEntity(
       id: id,
-      name: event.trainerData.name,
-      surname: event.trainerData.surname,
-      nickname: event.trainerData.nickname,
+      name: event.trainerData.name!,
+      surname: event.trainerData.surname!,
+      nickname: event.trainerData.nickname!,
       votesNumber: 0,
-      fullBio: event.trainerData.fullBio,
-      shortBio: event.trainerData.shortBio,
-      languages: event.trainerData.languages,
+      fullBio: event.trainerData.fullBio!,
+      shortBio: event.trainerData.shortBio!,
+      languages: event.trainerData.languages!,
       rating: 0,
-      address: event.trainerData.address,
-      categories: event.trainerData.categories,
+      address: event.trainerData.address!,
+      categories: event.trainerData.categories!,
       reviews: List.empty(),
       pendingClients: [id],
       activeClients: List.empty(),
       inactiveClients: List.empty(),
-      imagePath: event.trainerData.imagePath,
-      latLng: event.trainerData.latLng,
+      imagePath: event.trainerData.imagePath!,
+      latLng: event.trainerData.latLng!,
     );
     await _trainersService.uploadFullTrainerData(trainerEntity);
   }

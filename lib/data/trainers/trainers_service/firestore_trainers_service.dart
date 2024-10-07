@@ -18,7 +18,7 @@ class FirestoreTrainersService implements TrainersService {
   @override
   Future<void> updateData(EditableTrainerData trainerData) async {
     try {
-      final serverImagePath = await _uploadImage(trainerData.imagePath);
+      final serverImagePath = await _uploadImage(trainerData.imagePath ?? '');
       final id = _userSessionModel.user?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)

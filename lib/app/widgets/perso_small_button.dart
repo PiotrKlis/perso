@@ -2,8 +2,8 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 
-class PersoSmallButton extends StatelessWidget {
-  const PersoSmallButton({
+class PersoLanguageButton extends StatelessWidget {
+  const PersoLanguageButton({
     required this.text,
     required this.addLanguage,
     required this.customValidator,
@@ -22,7 +22,7 @@ class PersoSmallButton extends StatelessWidget {
         validator: (_) => customValidator.call(),
         readOnly: true,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(0),
+          contentPadding: EdgeInsets.zero,
           prefixIcon: const Icon(Icons.add),
           prefixIconColor: PersoColors.blue,
           filled: true,

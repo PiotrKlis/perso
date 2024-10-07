@@ -84,6 +84,7 @@
   "password_not_valid":  "Password needs to be at least 8 characters, with an uppercase and a number",
   "digits_only": "Only digits are allowed",
   "value_cannot_be_0": "Value cannot be 0",
-  "nickname_already_taken": "Nickname already taken"
-
+  "nickname_already_taken": "Nickname already taken",
+  "add_language": "Add language",
+  "add_language_validator": "Add at least one language"
 }
