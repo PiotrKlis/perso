@@ -3,15 +3,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_client_data.dart';
 import 'package:perso/app/models/editable_trainer_data.dart';
-import 'package:perso/app/screens/profile_edit/event/profile_edit_event.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/utils/logger.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
 import 'package:perso/core/models/profile_entity.dart';
+import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/clients/clients_service/firestore_clients_service.dart';
+import 'package:perso/data/trainers/trainers_service/firestore_trainers_service.dart';
 
 @injectable
 class ProfileEditCubit extends Cubit<ProfileEditState> {
@@ -19,6 +20,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
 
   final _userSessionModel = getIt.get<UserSessionModel>();
   final _clientsService = getIt.get<FirestoreClientsService>();
+  final _trainersService = getIt.get<FirestoreTrainersService>();
   var _editableClientData = const EditableClientData();
   var _editableTrainerData = const EditableTrainerData();
   late UserType _userType;
@@ -93,10 +95,24 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
     _tryToSendData();
   }
 
+  void updateCategories(List<String> categories) {
+    _editableTrainerData =
+        _editableTrainerData.copyWith(categories: categories);
+    _tryToSendData();
+  }
+
   Future<void> _tryToSendData() async {
+    if (_userType == UserType.trainer) {
+      await _tryToSendTrainerData();
+    } else {
+      await _tryToSendClientData();
+    }
+  }
+
+  Future<void> _tryToSendClientData() async {
     if (_editableClientData.isObjectComplete()) {
       try {
-        await _sendData(_userType);
+        await _handleClientDataUpload();
         await _handleStateEmit(_userType);
       } catch (error, stackTrace) {
         emit(ProfileEditState.error(error.toString()));
@@ -105,11 +121,15 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
     }
   }
 
-  Future<void> _sendData(UserType userType) async {
-    if (userType == UserType.trainer) {
-      await _handleTrainerDataUpload();
-    } else {
-      await _handleClientDataUpload();
+  Future<void> _tryToSendTrainerData() async {
+    if (_editableTrainerData.isObjectComplete()) {
+      try {
+        await _handleTrainerDataUpload();
+        await _handleStateEmit(_userType);
+      } catch (error, stackTrace) {
+        emit(ProfileEditState.error(error.toString()));
+        Logger.error(error, stackTrace);
+      }
     }
   }
 
@@ -117,19 +137,17 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
     if (_userSessionModel.isProfileCreated) {
       await _clientsService.updateData(_editableClientData);
     } else {
-      await _handleClientProfileCreation(_editableClientData);
+      await _handleClientProfileCreation();
     }
   }
 
-  Future<void> _handleClientProfileCreation(
-    EditableClientData editableClientData,
-  ) async {
+  Future<void> _handleClientProfileCreation() async {
     final clientEntity = ClientEntity(
       id: _userSessionModel.user?.uid ?? '',
-      name: editableClientData.name!,
-      surname: editableClientData.surname!,
-      nickname: editableClientData.nickname!,
-      imagePath: editableClientData.imagePath ?? '',
+      name: _editableClientData.name!,
+      surname: _editableClientData.surname!,
+      nickname: _editableClientData.nickname!,
+      imagePath: _editableClientData.imagePath ?? '',
       pendingTrainers: List.empty(),
       activeTrainers: List.empty(),
       inactiveTrainers: List.empty(),
@@ -139,36 +157,34 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
 
   Future<void> _handleTrainerDataUpload() async {
     if (_userSessionModel.isProfileCreated) {
-      // await _trainersService.updateData(event.trainerData);
+      await _trainersService.updateData(_editableTrainerData);
     } else {
-      // await _handleTrainerProfileCreation(event);
+      await _handleTrainerProfileCreation();
     }
   }
 
-  Future<void> _handleTrainerProfileCreation(
-    UploadTrainerData event,
-  ) async {
+  Future<void> _handleTrainerProfileCreation() async {
     final id = _userSessionModel.user?.uid ?? '';
-    // final trainerEntity = TrainerEntity(
-    //   id: id,
-    //   name: event.trainerData.name,
-    //   surname: event.trainerData.surname,
-    //   nickname: event.trainerData.nickname,
-    //   votesNumber: 0,
-    //   fullBio: event.trainerData.fullBio,
-    //   shortBio: event.trainerData.shortBio,
-    //   languages: event.trainerData.languages,
-    //   rating: 0,
-    //   location: event.trainerData.location,
-    //   categories: event.trainerData.categories,
-    //   reviews: List.empty(),
-    //   pendingClients: [id],
-    //   activeClients: List.empty(),
-    //   inactiveClients: List.empty(),
-    //   imagePath: event.trainerData.imagePath,
-    //   latLng: event.trainerData.latLng,
-    // );
-    // await _trainersService.uploadFullTrainerData(trainerEntity);
+    final trainerEntity = TrainerEntity(
+      id: id,
+      name: _editableTrainerData.name!,
+      surname: _editableTrainerData.surname!,
+      nickname: _editableTrainerData.nickname!,
+      votesNumber: 0,
+      fullBio: _editableTrainerData.fullBio!,
+      shortBio: _editableTrainerData.shortBio!,
+      languages: _editableTrainerData.languages!,
+      rating: 0,
+      address: _editableTrainerData.address!,
+      categories: _editableTrainerData.categories!,
+      reviews: List.empty(),
+      pendingClients: [id],
+      activeClients: List.empty(),
+      inactiveClients: List.empty(),
+      imagePath: _editableTrainerData.imagePath!,
+      latLng: _editableTrainerData.latLng!,
+    );
+    await _trainersService.uploadFullTrainerData(trainerEntity);
   }
 
   Future<void> _handleStateEmit(

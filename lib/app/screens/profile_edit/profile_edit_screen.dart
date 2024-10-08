@@ -408,7 +408,7 @@ class _LongBioSection extends StatelessWidget {
           isMultiLine: true,
           maxLength: 500,
           customValidator: TextFieldValidator.validateIsEmpty,
-          textEditingController: TextEditingController(),
+          textEditingController: longBioController,
         );
       }),
     );
@@ -459,7 +459,7 @@ class _ShortBioSection extends StatelessWidget {
                     customValidator: TextFieldValidator.validateIsEmpty,
                     isMultiLine: true,
                     maxLength: 150,
-                    textEditingController: TextEditingController(),
+                    textEditingController: shortBioController,
                   );
                 },
               ),
