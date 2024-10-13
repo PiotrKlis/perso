@@ -2,13 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/image_state.dart';
 
 class ProfileImage extends StatefulWidget {
-  const ProfileImage({super.key});
+  const ProfileImage({
+    super.key,
+    String imagePath = '',
+  }) : _imagePath = imagePath;
+
+  final String _imagePath;
 
   @override
   State<ProfileImage> createState() => _ProfileImageState();
@@ -19,19 +23,22 @@ class _ProfileImageState extends State<ProfileImage> {
 
   @override
   Widget build(BuildContext context) {
-    _profileEditCubitListener(context);
     return BlocBuilder<ImageCubit, ImageState>(
       builder: (context, state) {
         return state.when(
           initial: () {
-            context.read<ImageCubit>().getImageUrl();
-            return const ColoredBox(
-              color: Colors.transparent,
-              child: SizedBox(
-                width: Dimens.profileImageWidth,
-                height: Dimens.profileImageHeight,
-              ),
-            );
+            if (widget._imagePath.isEmpty) {
+              context.read<ImageCubit>().getImageUrl();
+              return const ColoredBox(
+                color: Colors.transparent,
+                child: SizedBox(
+                  width: Dimens.profileImageWidth,
+                  height: Dimens.profileImageHeight,
+                ),
+              );
+            } else {
+              return networkImage(widget._imagePath);
+            }
           },
           imageChosen: (path) {
             chosenImagePath = path;
@@ -44,16 +51,7 @@ class _ProfileImageState extends State<ProfileImage> {
               ),
             );
           },
-          imageFound: (String url) {
-            return ClipOval(
-              child: Image.network(
-                url,
-                fit: BoxFit.cover,
-                width: Dimens.profileImageWidth,
-                height: Dimens.profileImageHeight,
-              ),
-            );
-          },
+          imageFound: networkImage,
           imageNotFound: () {
             return const Icon(
               Icons.account_circle,
@@ -66,11 +64,14 @@ class _ProfileImageState extends State<ProfileImage> {
     );
   }
 
-  void _profileEditCubitListener(BuildContext context) {
-    context.watch<ProfileEditCubit>().state.whenOrNull(
-      sendData: () {
-        context.read<ProfileEditCubit>().updateImageUrl(chosenImagePath);
-      },
+  ClipOval networkImage(String url) {
+    return ClipOval(
+      child: Image.network(
+        url,
+        fit: BoxFit.cover,
+        width: Dimens.profileImageWidth,
+        height: Dimens.profileImageHeight,
+      ),
     );
   }
 }

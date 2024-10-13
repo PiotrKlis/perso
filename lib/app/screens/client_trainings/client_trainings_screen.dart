@@ -108,7 +108,8 @@ class _TrainersView extends StatelessWidget {
                       onTap: () {
                         final location = goRouter.location;
                         context.push(
-                            '$location/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}',);
+                          '$location/${ScreenNavigationKey.clientPlanOverview}/${trainerIdentity.id}',
+                        );
                         // context.pushNamed(
                         //   ScreenNavigationKey.clientPlanOverview,
                         //   queryParameters: {
@@ -144,7 +145,8 @@ class _TrainersView extends StatelessWidget {
                                 right: Dimens.mMargin,
                               ),
                               child: Text(
-                                '${trainerIdentity.name} ${trainerIdentity.surname}',
+                                '${trainerIdentity.name} '
+                                    '${trainerIdentity.surname}',
                                 style: ThemeText.largeTitleBold,
                               ),
                             ),

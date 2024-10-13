@@ -13,7 +13,7 @@ class TrainerEntity extends ProfileEntity with _$TrainerEntity {
     required String surname,
     required String nickname,
     required int votesNumber,
-    required String fullBio,
+    required String longBio,
     required String shortBio,
     required String imagePath,
     required List<String> languages,

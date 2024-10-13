@@ -23,7 +23,7 @@ class FirestoreTrainersService implements TrainersService {
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
-          .set({
+          .update({
         UserDocumentFields.fullBio: trainerData.fullBio,
         UserDocumentFields.languages: trainerData.languages,
         UserDocumentFields.address: trainerData.address,
@@ -51,7 +51,7 @@ class FirestoreTrainersService implements TrainersService {
           .collection(CollectionName.users)
           .doc(id)
           .set({
-        UserDocumentFields.fullBio: trainerEntity.fullBio,
+        UserDocumentFields.fullBio: trainerEntity.longBio,
         UserDocumentFields.languages: trainerEntity.languages,
         UserDocumentFields.address: trainerEntity.address,
         UserDocumentFields.name: trainerEntity.name,

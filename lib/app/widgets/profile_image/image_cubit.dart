@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/utils/logger.dart';
 import 'package:perso/app/widgets/profile_image/image_state.dart';

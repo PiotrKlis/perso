@@ -6,10 +6,15 @@ import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/address/address_cubit.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
-import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 
 class PersoAddress extends StatefulWidget {
-  const PersoAddress({super.key});
+  const PersoAddress({
+    super.key,
+    String address = '',
+  }) : _address = address;
+
+  final String _address;
 
   @override
   State<PersoAddress> createState() => _PersoAddressState();
@@ -20,15 +25,16 @@ class _PersoAddressState extends State<PersoAddress> {
   TextEditingValue initialValue = TextEditingValue.empty;
 
   @override
+  void initState() {
+    initialValue = TextEditingValue(text: widget._address);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileEditCubit, ProfileEditState>(
       builder: (context, state) {
         state.whenOrNull(
-          preFillData: (profileEntity) {
-            final address = (profileEntity as TrainerEntity).address;
-            autocompleteController?.text = address;
-            context.read<MapCubit>().updateMap(address);
-          },
           sendData: () {
             context
                 .read<ProfileEditCubit>()
@@ -42,19 +48,19 @@ class _PersoAddressState extends State<PersoAddress> {
             return TextFormField(
               controller: autocompleteController,
               focusNode: focusNode,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 errorMaxLines: 2,
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(width: 0.5, color: PersoColors.lightGrey),
                 ),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                   borderSide:
                       BorderSide(width: 0.5, color: PersoColors.lightGrey),
                 ),
-                labelText: 'Address',
+                labelText: context.strings.address,
                 labelStyle: ThemeText.bodyRegularGreyText,
               ),
             );

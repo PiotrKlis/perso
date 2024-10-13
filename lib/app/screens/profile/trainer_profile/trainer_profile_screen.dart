@@ -36,7 +36,7 @@ class TrainerProfileScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ImageCubit()..getImageUrl(),
-        )
+        ),
       ],
       child: const _TrainerProfileScreenBuilder(),
     );
@@ -104,12 +104,13 @@ class _TrainerProfileScreenContentState
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: ProfileImage(),
+                  child: const ProfileImage(),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.mMargin),
                   child: Text(
-                    '${widget._trainerEntity.name} ${widget._trainerEntity.surname}',
+                    '${widget._trainerEntity.name} '
+                        '${widget._trainerEntity.surname}',
                     style: ThemeText.mediumTitleBold,
                   ),
                 ),
@@ -231,7 +232,7 @@ class _TrainerProfileScreenContentState
               right: Dimens.xmMargin,
             ),
             child: Text(
-              trainerEntity.fullBio,
+              trainerEntity.longBio,
               style: ThemeText.subHeadingRegularGrey,
             ),
           ),
@@ -464,8 +465,10 @@ class _TrainerProfileScreenContentState
                     margin: const EdgeInsets.only(left: Dimens.xsMargin),
                     child: Column(
                       children: [
-                        const Text('John Wick',
-                            style: ThemeText.bodyBoldBlackText),
+                        const Text(
+                          'John Wick',
+                          style: ThemeText.bodyBoldBlackText,
+                        ),
                         RatingBar(
                           itemSize: 20,
                           allowHalfRating: true,

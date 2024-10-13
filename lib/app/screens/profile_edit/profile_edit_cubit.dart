@@ -7,7 +7,6 @@ import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/utils/logger.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
-import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -28,10 +27,6 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
   void confirm(UserType userType) {
     _userType = userType;
     emit(const ProfileEditState.sendData());
-  }
-
-  void preFillData((UserType, ProfileEntity) userTypeProfileEntityPair) {
-    emit(ProfileEditState.preFillData(userTypeProfileEntityPair.$2));
   }
 
   void updateName(String name) {
@@ -171,7 +166,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
       surname: _editableTrainerData.surname!,
       nickname: _editableTrainerData.nickname!,
       votesNumber: 0,
-      fullBio: _editableTrainerData.fullBio!,
+      longBio: _editableTrainerData.fullBio!,
       shortBio: _editableTrainerData.shortBio!,
       languages: _editableTrainerData.languages!,
       rating: 0,

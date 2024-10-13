@@ -5,7 +5,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
-import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/constants.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';

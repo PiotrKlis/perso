@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: const EdgeInsets.only(
                             top: Dimens.xsMargin,
                           ),
-                          child: PersoGoogleMap(),
+                          child: const PersoGoogleMap(),
                         ),
                         Container(
                           margin: const EdgeInsets.only(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
+import 'package:perso/app/screens/profile_edit/profile_edit_profile_image.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/styleguide/value/app_colors.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
@@ -19,10 +20,10 @@ import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
-import 'package:perso/app/widgets/profile_image/profile_image.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/profile_entity.dart';
+import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_type.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:perso/data/user_info/user_info_provider.dart';
@@ -113,37 +114,74 @@ class _FieldSections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userType = userTypeProfileEntityPair.$1;
-    _preFillSections(context, userTypeProfileEntityPair);
+    final profileEntity = userTypeProfileEntityPair.$2;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const _ImageSection(),
-        _NameSection(),
-        _SurnameSection(),
-        _NicknameSection(),
-        Visibility(
-          visible: userType == UserType.trainer,
-          child: const _TrainerOnlySection(),
-        ),
-      ],
+      children: _getSections(profileEntity, userType),
     );
   }
 
-  void _preFillSections(
-    BuildContext context,
-    (UserType, ProfileEntity?) userTypeProfileEntityPair,
-  ) {
-    final userType = userTypeProfileEntityPair.$1;
-    final profileEntity = userTypeProfileEntityPair.$2;
+  List<Widget> _getSections(ProfileEntity? profileEntity, UserType userType) {
     if (profileEntity != null) {
-      final userTypeProfileEntityPair = (userType, profileEntity);
-      context.read<ProfileEditCubit>().preFillData(userTypeProfileEntityPair);
+      return _getPrefilledSections(profileEntity, userType);
+    } else {
+      return _getEmptySections(userType);
+    }
+  }
+
+  List<Widget> _getEmptySections(UserType userType) {
+    return [
+      const _ImageSection(),
+      const _NameSection(),
+      const _SurnameSection(),
+      const _NicknameSection(),
+      _maybeGetEmptyTrainerSection(userType),
+    ];
+  }
+
+  Widget _maybeGetEmptyTrainerSection(UserType userType) {
+    if (userType == UserType.trainer) {
+      return const _TrainerOnlySection();
+    } else {
+      return Container();
+    }
+  }
+
+  List<Widget> _getPrefilledSections(
+    ProfileEntity profileEntity,
+    UserType userType,
+  ) {
+    return [
+      _ImageSection(imagePath: profileEntity.imagePath),
+      _NameSection(name: profileEntity.name),
+      _SurnameSection(surname: profileEntity.surname),
+      _NicknameSection(
+        nickname: profileEntity.nickname,
+      ),
+      _maybeGetPrefilledTrainerSection(userType, profileEntity),
+    ];
+  }
+
+  Widget _maybeGetPrefilledTrainerSection(
+    UserType userType,
+    ProfileEntity profileEntity,
+  ) {
+    if (userType == UserType.trainer) {
+      return _TrainerOnlySection(
+        trainerEntity: profileEntity as TrainerEntity,
+      );
+    } else {
+      return Container();
     }
   }
 }
 
 class _ImageSection extends StatelessWidget {
-  const _ImageSection();
+  const _ImageSection({
+    String imagePath = '',
+  }) : _imagePath = imagePath;
+
+  final String _imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -151,7 +189,7 @@ class _ImageSection extends StatelessWidget {
       children: [
         Container(
           margin: const EdgeInsets.only(top: Dimens.mMargin),
-          child: const ProfileImage(),
+          child: ProfileEditProfileImage(_imagePath),
         ),
         Container(
           margin: const EdgeInsets.only(
@@ -208,8 +246,25 @@ class _ConfirmButtonSection extends StatelessWidget {
   }
 }
 
-class _NameSection extends StatelessWidget {
-  final nameController = TextEditingController();
+class _NameSection extends StatefulWidget {
+  const _NameSection({
+    String name = '',
+  }) : _name = name;
+
+  final String _name;
+
+  @override
+  State<_NameSection> createState() => _NameSectionState();
+}
+
+class _NameSectionState extends State<_NameSection> {
+  final _nameController = TextEditingController();
+
+  @override
+  void initState() {
+    _nameController.text = widget._name;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -235,16 +290,13 @@ class _NameSection extends StatelessWidget {
                     sendData: () {
                       context
                           .read<ProfileEditCubit>()
-                          .updateName(nameController.text);
-                    },
-                    preFillData: (profileEntity) {
-                      nameController.text = profileEntity.name;
+                          .updateName(_nameController.text);
                     },
                   );
                   return PersoTextField(
                     maxLength: 20,
                     hintText: context.strings.name,
-                    textEditingController: nameController,
+                    textEditingController: _nameController,
                     customValidator: TextFieldValidator.validateIsEmpty,
                   );
                 },
@@ -257,8 +309,25 @@ class _NameSection extends StatelessWidget {
   }
 }
 
-class _SurnameSection extends StatelessWidget {
+class _SurnameSection extends StatefulWidget {
+  const _SurnameSection({
+    String surname = '',
+  }) : _surname = surname;
+
+  final String _surname;
+
+  @override
+  State<_SurnameSection> createState() => _SurnameSectionState();
+}
+
+class _SurnameSectionState extends State<_SurnameSection> {
   final surnameController = TextEditingController();
+
+  @override
+  void initState() {
+    surnameController.text = widget._surname;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -276,9 +345,6 @@ class _SurnameSection extends StatelessWidget {
                   .read<ProfileEditCubit>()
                   .updateSurname(surnameController.text);
             },
-            preFillData: (profileEntity) {
-              surnameController.text = profileEntity.surname;
-            },
           );
           return PersoTextField(
             maxLength: 20,
@@ -292,10 +358,26 @@ class _SurnameSection extends StatelessWidget {
   }
 }
 
-class _NicknameSection extends StatelessWidget {
-  final userInfoProvider = getIt.get<UserInfoProvider>();
+class _NicknameSection extends StatefulWidget {
+  const _NicknameSection({
+    String nickname = '',
+  }) : _nickname = nickname;
 
+  final String _nickname;
+
+  @override
+  State<_NicknameSection> createState() => _NicknameSectionState();
+}
+
+class _NicknameSectionState extends State<_NicknameSection> {
+  final userInfoProvider = getIt.get<UserInfoProvider>();
   final nicknameController = TextEditingController();
+
+  @override
+  void initState() {
+    nicknameController.text = widget._nickname;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -314,14 +396,12 @@ class _NicknameSection extends StatelessWidget {
                   .read<ProfileEditCubit>()
                   .updateNickname(nicknameController.text);
             },
-            preFillData: (profileEntity) {
-              nicknameController.text = profileEntity.nickname;
-            },
           );
           return PersoAsyncTextFormField(
+            isReadOnly: widget._nickname.isNotEmpty,
             maxLength: 20,
             hintText: context.strings.nickname,
-            validator: userInfoProvider.isNicknameUnique,
+            validator: _getValidator(),
             validationDebounce: const Duration(milliseconds: 500),
             controller: nicknameController,
           );
@@ -329,32 +409,72 @@ class _NicknameSection extends StatelessWidget {
       ),
     );
   }
+
+  Future<bool> Function(String) _getValidator() {
+    final isReadOnly = widget._nickname.isNotEmpty;
+    if (isReadOnly) {
+      return (_) => Future.value(true);
+    } else {
+      return userInfoProvider.isNicknameUnique;
+    }
+  }
 }
 
 class _TrainerOnlySection extends StatelessWidget {
-  const _TrainerOnlySection();
+  const _TrainerOnlySection({TrainerEntity? trainerEntity})
+      : _trainerEntity = trainerEntity;
 
-  //TODO: Make me great again
+  final TrainerEntity? _trainerEntity;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _AddressSection(),
-        _MapSection(),
-        _Divider(),
-        _ShortBioSection(),
-        _LongBioSection(),
-        PersoAddSpokenLanguage(),
-        _Divider(),
-        _SelectableCategories(),
-      ],
+      children: _getTrainerSections(_trainerEntity),
     );
+  }
+
+  List<Widget> _getTrainerSections(TrainerEntity? trainerEntity) {
+    if (trainerEntity != null) {
+      return _getPrefilledTrainerSections(trainerEntity);
+    } else {
+      return _getEmptyTrainerSections();
+    }
+  }
+
+  List<Widget> _getPrefilledTrainerSections(TrainerEntity trainerEntity) {
+    return [
+      _AddressSection(address: trainerEntity.address),
+      const _MapSection(),
+      const _Divider(),
+      _ShortBioSection(shortBio: trainerEntity.shortBio),
+      _LongBioSection(longBio: trainerEntity.longBio),
+      PersoAddSpokenLanguage(selectedLanguages: trainerEntity.languages),
+      const _Divider(),
+      _SelectableCategories(categories: trainerEntity.categories),
+    ];
+  }
+
+  List<Widget> _getEmptyTrainerSections() {
+    return [
+      const _AddressSection(),
+      const _MapSection(),
+      const _Divider(),
+      const _ShortBioSection(),
+      const _LongBioSection(),
+      const PersoAddSpokenLanguage(),
+      const _Divider(),
+      const _SelectableCategories(),
+    ];
   }
 }
 
 class _SelectableCategories extends StatelessWidget {
-  const _SelectableCategories();
+  const _SelectableCategories({
+    List<String> categories = const [],
+  }) : _categories = categories;
+
+  final List<String> _categories;
 
   @override
   Widget build(BuildContext context) {
@@ -372,15 +492,34 @@ class _SelectableCategories extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.only(top: Dimens.xsMargin),
-          child: PersoSelectableCategoryChips(),
+          child: PersoSelectableCategoryChips(
+            selectedCategories: _categories,
+          ),
         ),
       ],
     );
   }
 }
 
-class _LongBioSection extends StatelessWidget {
+class _LongBioSection extends StatefulWidget {
+  const _LongBioSection({
+    String longBio = '',
+  }) : _longBio = longBio;
+
+  final String _longBio;
+
+  @override
+  State<_LongBioSection> createState() => _LongBioSectionState();
+}
+
+class _LongBioSectionState extends State<_LongBioSection> {
   final longBioController = TextEditingController();
+
+  @override
+  void initState() {
+    longBioController.text = widget._longBio;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -392,31 +531,46 @@ class _LongBioSection extends StatelessWidget {
         right: Dimens.xmMargin,
       ),
       child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
-          builder: (context, state) {
-        state.whenOrNull(
-          sendData: () {
-            context
-                .read<ProfileEditCubit>()
-                .updateLongBio(longBioController.text);
-          },
-          preFillData: (profileEntity) {
-            longBioController.text = profileEntity.name;
-          },
-        );
-        return PersoTextField(
-          hintText: context.strings.long_bio,
-          isMultiLine: true,
-          maxLength: 500,
-          customValidator: TextFieldValidator.validateIsEmpty,
-          textEditingController: longBioController,
-        );
-      }),
+        builder: (context, state) {
+          state.whenOrNull(
+            sendData: () {
+              context
+                  .read<ProfileEditCubit>()
+                  .updateLongBio(longBioController.text);
+            },
+          );
+          return PersoTextField(
+            hintText: context.strings.long_bio,
+            isMultiLine: true,
+            maxLength: 500,
+            customValidator: TextFieldValidator.validateIsEmpty,
+            textEditingController: longBioController,
+          );
+        },
+      ),
     );
   }
 }
 
-class _ShortBioSection extends StatelessWidget {
+class _ShortBioSection extends StatefulWidget {
+  const _ShortBioSection({
+    String shortBio = '',
+  }) : _shortBio = shortBio;
+
+  final String _shortBio;
+
+  @override
+  State<_ShortBioSection> createState() => _ShortBioSectionState();
+}
+
+class _ShortBioSectionState extends State<_ShortBioSection> {
   final shortBioController = TextEditingController();
+
+  @override
+  void initState() {
+    shortBioController.text = widget._shortBio;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -449,9 +603,6 @@ class _ShortBioSection extends StatelessWidget {
                       context
                           .read<ProfileEditCubit>()
                           .updateShortBio(shortBioController.text);
-                    },
-                    preFillData: (profileEntity) {
-                      shortBioController.text = profileEntity.name;
                     },
                   );
                   return PersoTextField(
@@ -501,7 +652,11 @@ class _MapSection extends StatelessWidget {
 }
 
 class _AddressSection extends StatelessWidget {
-  const _AddressSection();
+  const _AddressSection({
+    String address = '',
+  }) : _address = address;
+
+  final String _address;
 
   @override
   Widget build(BuildContext context) {
@@ -525,7 +680,9 @@ class _AddressSection extends StatelessWidget {
                   margin: const EdgeInsets.only(
                     left: Dimens.xmMargin,
                   ),
-                  child: const PersoAddress(),
+                  child: PersoAddress(
+                    address: _address,
+                  ),
                 ),
               ),
             ],

@@ -80,7 +80,7 @@ class ProfileEditBloc extends Bloc<ProfileEditEvent, ProfileEditState> {
       surname: event.trainerData.surname!,
       nickname: event.trainerData.nickname!,
       votesNumber: 0,
-      fullBio: event.trainerData.fullBio!,
+      longBio: event.trainerData.fullBio!,
       shortBio: event.trainerData.shortBio!,
       languages: event.trainerData.languages!,
       rating: 0,

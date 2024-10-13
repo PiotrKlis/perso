@@ -9,10 +9,6 @@ class ProfileEditState with _$ProfileEditState {
 
   const factory ProfileEditState.sendData() = SendData;
 
-  const factory ProfileEditState.preFillData(
-    ProfileEntity profileEntity,
-  ) = PreFillData;
-
   const factory ProfileEditState.error(String error) = Error;
 
   const factory ProfileEditState.editSuccess() = EditSuccess;

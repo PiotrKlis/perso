@@ -8,19 +8,26 @@ import 'package:perso/core/providers/string_provider.dart';
 
 class PersoAsyncTextFormField extends StatefulWidget {
   const PersoAsyncTextFormField({
-    required this.validator,
-    required this.validationDebounce,
-    required this.controller,
+    required Future<bool> Function(String) validator,
+    required Duration validationDebounce,
+    required TextEditingController controller,
     super.key,
-    this.hintText = '',
-    this.maxLength = 60,
-  });
+    String hintText = '',
+    int maxLength = 60,
+    bool isReadOnly = false,
+  })  : _validationDebounce = validationDebounce,
+        _validator = validator,
+        _controller = controller,
+        _hintText = hintText,
+        _isReadOnly = isReadOnly,
+        _maxLength = maxLength;
 
-  final Future<bool> Function(String) validator;
-  final Duration validationDebounce;
-  final TextEditingController controller;
-  final String hintText;
-  final int maxLength;
+  final Future<bool> Function(String) _validator;
+  final Duration _validationDebounce;
+  final TextEditingController _controller;
+  final String _hintText;
+  final int _maxLength;
+  final bool _isReadOnly;
 
   @override
   _PersoAsyncTextFormFieldState createState() =>
@@ -29,12 +36,13 @@ class PersoAsyncTextFormField extends StatefulWidget {
 
 class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
   Timer? _debounce;
-  bool isValid = false;
+  bool isValid = true;
   static final stringProvider = getIt.get<StringProvider>();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget._isReadOnly,
       validator: (value) {
         if (value?.isEmpty ?? false) {
           return stringProvider.strings.required_field;
@@ -49,13 +57,13 @@ class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
           cancelTimer();
           return;
         }
-        _debounce = Timer(widget.validationDebounce, () async {
+        _debounce = Timer(widget._validationDebounce, () async {
           isValid = await validate(text);
         });
       },
-      controller: widget.controller,
+      controller: widget._controller,
       textInputAction: TextInputAction.next,
-      maxLength: widget.maxLength,
+      maxLength: widget._maxLength,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
@@ -66,7 +74,7 @@ class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(width: 0.5, color: PersoColors.lightGrey),
         ),
-        labelText: widget.hintText,
+        labelText: widget._hintText,
         labelStyle: ThemeText.bodyRegularGreyText,
       ),
     );
@@ -85,6 +93,6 @@ class _PersoAsyncTextFormFieldState extends State<PersoAsyncTextFormField> {
   }
 
   Future<bool> validate(String text) async {
-    return widget.validator(text);
+    return widget._validator(text);
   }
 }

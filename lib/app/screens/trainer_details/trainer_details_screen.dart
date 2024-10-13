@@ -268,7 +268,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
               right: Dimens.xmMargin,
             ),
             child: Text(
-              trainerEntity.fullBio,
+              trainerEntity.longBio,
               style: ThemeText.subHeadingRegularGrey,
             ),
           ),

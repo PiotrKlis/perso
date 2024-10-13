@@ -75,7 +75,7 @@ class ExerciseCreationScreen extends StatelessWidget {
                 left: Dimens.mMargin,
                 right: Dimens.mMargin,
               ),
-              child: PersoSelectableCategoryChips(),
+              child: const PersoSelectableCategoryChips(),
             ),
             Align(
               alignment: Alignment.bottomCenter,

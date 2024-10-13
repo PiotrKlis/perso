@@ -113,7 +113,7 @@ class SearchFilterScreen extends StatelessWidget {
               left: Dimens.lMargin,
               bottom: Dimens.lMargin,
             ),
-            child: PersoSelectableCategoryChips(),
+            child: const PersoSelectableCategoryChips(),
           ),
           Expanded(
             child: Align(

@@ -47,7 +47,7 @@ class GoogleAddressProvider implements AddressProvider {
 
     if (response.statusCode == 200) {
       print(response);
-      return "Przyjaźni 20a/2a, Wrocław";
+      return 'Przyjaźni 20a/2a, Wrocław';
     } else {
       throw Exception('Failed to fetch suggestion');
     }

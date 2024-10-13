@@ -89,7 +89,8 @@ class _ExerciseBreakScreenState extends State<ExerciseBreakScreen> {
                     title: '+20 sec',
                     onTap: (context) {
                       setState(() {
-                        _breakTime = Duration(seconds: _breakTime.inSeconds + 20);
+                        _breakTime =
+                            Duration(seconds: _breakTime.inSeconds + 20);
                       });
                     },
                   ),

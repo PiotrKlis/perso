@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/screens/exercise_creation/exercise_creation_screen.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
@@ -10,21 +11,34 @@ import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 
 class PersoAddSpokenLanguage extends StatefulWidget {
-  const PersoAddSpokenLanguage({super.key});
+  const PersoAddSpokenLanguage({
+    super.key,
+    List<String> selectedLanguages = const [],
+  }) : _selectedLanguages = selectedLanguages;
+
+  final List<String> _selectedLanguages;
 
   @override
-  State<PersoAddSpokenLanguage> createState() =>
-      _PersoAddSpokenLanguageState();
+  State<PersoAddSpokenLanguage> createState() => _PersoAddSpokenLanguageState();
 }
 
-class _PersoAddSpokenLanguageState
-    extends State<PersoAddSpokenLanguage> {
-  Map<String, Widget> languageMap = {};
+class _PersoAddSpokenLanguageState extends State<PersoAddSpokenLanguage> {
+  Map<String, Widget> mutableSelectedLanguages = {};
+
+  @override
+  void initState() {
+    final selectedLanguages = widget._selectedLanguages;
+    if (selectedLanguages != null) {
+      for (final language in selectedLanguages) {
+        _addSpokenLanguage(language);
+        super.initState();
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final languageWidgets = languageMap.values.toList();
-
+    final languageWidgets = mutableSelectedLanguages.values.toList();
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -42,16 +56,10 @@ class _PersoAddSpokenLanguageState
             child: BlocBuilder<ProfileEditCubit, ProfileEditState>(
                 builder: (context, state) {
               state.whenOrNull(
-                preFillData: (profileEntity) {
-                  final languages = (profileEntity as TrainerEntity).languages;
-                  for (final language in languages) {
-                    _addSpokenLanguage(language);
-                  }
-                },
                 sendData: () {
                   context
                       .read<ProfileEditCubit>()
-                      .updateLanguages(languageMap.keys.toList());
+                      .updateLanguages(mutableSelectedLanguages.keys.toList());
                 },
               );
               return PersoLanguageButton(
@@ -67,8 +75,9 @@ class _PersoAddSpokenLanguageState
     );
   }
 
-  String? _validateNumberOfLanguages() =>
-      languageMap.isEmpty ? context.strings.add_language_validator : null;
+  String? _validateNumberOfLanguages() => mutableSelectedLanguages.isEmpty
+      ? context.strings.add_language_validator
+      : null;
 
   void _addSpokenLanguage(String languageEmoji) {
     final Widget languageChip = Container(
@@ -79,13 +88,13 @@ class _PersoAddSpokenLanguageState
       ),
     );
     setState(() {
-      languageMap.addAll({languageEmoji: languageChip});
+      mutableSelectedLanguages.addAll({languageEmoji: languageChip});
     });
   }
 
   void _removeSpokenLanguage(String languageEmoji) {
     setState(() {
-      languageMap.removeWhere(
+      mutableSelectedLanguages.removeWhere(
         (key, value) {
           return key == languageEmoji;
         },
