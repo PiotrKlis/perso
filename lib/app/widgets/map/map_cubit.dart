@@ -23,7 +23,7 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> navigateToCurrentLocation() async {
-    await _permissionHandler.handleLocationPermission();
+    await _permissionHandler.requestLocationPermission();
     final location = await Location().getLocation();
     final latitude = location.latitude ?? Constants.initialLat;
     final longitude = location.longitude ?? Constants.initialLng;

@@ -14,7 +14,7 @@ import 'package:perso/app/screens/exercise_details/widgets/perso_superset_sectio
 import 'package:perso/app/screens/exercise_details/widgets/perso_time_break_section.dart';
 import 'package:perso/app/screens/exercise_details/widgets/perso_trainer_note.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/video_player/perso_video_player.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';
 

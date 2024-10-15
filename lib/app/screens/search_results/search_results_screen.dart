@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/icon_action.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
@@ -17,8 +18,12 @@ class SearchResultsScreen extends StatelessWidget {
       backgroundColor: PersoColors.lightBlue,
       appBar: PersoAppBar(
         title: context.strings.search_results,
-        actionIcon: Icons.filter_list,
-        onActionIconClick: onActionClick,
+        iconActions: [
+          IconAction(
+            iconData: Icons.filter_list,
+            onActionIconClick: onActionClick,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

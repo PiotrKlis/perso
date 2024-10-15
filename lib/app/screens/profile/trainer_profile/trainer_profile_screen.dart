@@ -7,8 +7,9 @@ import 'package:perso/app/screens/profile/event/profile_event.dart';
 import 'package:perso/app/screens/profile/state/profile_state.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
+import 'package:perso/app/widgets/app_bar/icon_action.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
@@ -84,8 +85,16 @@ class _TrainerProfileScreenContentState
       appBar: PersoAppBar(
         isTitleCentered: true,
         title: '@${widget._trainerEntity.nickname}',
-        actionIcon: Icons.edit,
-        onActionIconClick: _navigateToProfileEdit,
+        iconActions: [
+          IconAction(
+            iconData: Icons.edit,
+            onActionIconClick: _navigateToProfileEdit,
+          ),
+          IconAction(
+            iconData: Icons.settings,
+            onActionIconClick: _navigateToSettings,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -110,7 +119,7 @@ class _TrainerProfileScreenContentState
                   margin: const EdgeInsets.only(top: Dimens.mMargin),
                   child: Text(
                     '${widget._trainerEntity.name} '
-                        '${widget._trainerEntity.surname}',
+                    '${widget._trainerEntity.surname}',
                     style: ThemeText.mediumTitleBold,
                   ),
                 ),
@@ -160,6 +169,12 @@ class _TrainerProfileScreenContentState
     context.pushNamed(
       ScreenNavigationKey.profileEditClient,
       extra: (UserType.trainer, widget._trainerEntity),
+    );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    context.pushNamed(
+      ScreenNavigationKey.settings,
     );
   }
 

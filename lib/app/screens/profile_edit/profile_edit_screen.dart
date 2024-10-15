@@ -14,7 +14,7 @@ import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips
 import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_add_spoken_language.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';

@@ -7,7 +7,7 @@ import 'package:perso/app/screens/plan_overview/client/state/client_exercise_lis
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/core/extensions/go_router_extensions.dart';
 import 'package:perso/core/models/exercise_in_training_entity.dart';

@@ -6,7 +6,7 @@ import 'package:perso/app/screens/training/exercise_break_screen.dart';
 import 'package:perso/app/screens/training/exercise_in_progress_screen.dart';
 import 'package:perso/app/screens/training/state/training_state.dart';
 import 'package:perso/app/screens/training/training_finished_screen.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/core/models/exercise_entity.dart';
 
 class TrainingScreen extends StatelessWidget {

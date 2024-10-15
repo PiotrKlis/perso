@@ -3,7 +3,7 @@ import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';
 import 'package:perso/core/extensions/context_extensions.dart';

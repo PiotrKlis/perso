@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/widgets/app_bar/icon_action.dart';
 
 class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PersoAppBar({
     required String title,
     super.key,
-    IconData? actionIcon,
     bool isTitleCentered = false,
-    void Function(BuildContext context)? onActionIconClick,
+    List<IconAction>? iconActions,
   })  : _title = title,
         _isTitleCentered = isTitleCentered,
-        _onActionIconClick = onActionIconClick,
-        _actionIcon = actionIcon;
+        _iconActions = iconActions;
 
   final String _title;
   final bool _isTitleCentered;
-  final IconData? _actionIcon;
-  final void Function(BuildContext context)? _onActionIconClick;
+  final List<IconAction>? _iconActions;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       actions: _getActionIcon(
-        actionIcon: _actionIcon,
-        onActionIconClick: _onActionIconClick,
+        iconActions: _iconActions,
         context: context,
       ),
       centerTitle: _isTitleCentered,
@@ -41,17 +38,16 @@ class PersoAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   List<IconButton> _getActionIcon({
-    required IconData? actionIcon,
-    required Function(BuildContext context)? onActionIconClick,
+    required List<IconAction>? iconActions,
     required BuildContext context,
   }) {
-    if (actionIcon != null) {
-      return [
-        IconButton(
-          icon: Icon(actionIcon),
-          onPressed: () => onActionIconClick?.call(context),
-        ),
-      ];
+    if (iconActions != null) {
+      return iconActions.map((iconAction) {
+        return IconButton(
+          icon: Icon(iconAction.iconData),
+          onPressed: () => iconAction.onActionIconClick.call(context),
+        );
+      }).toList();
     } else {
       return [];
     }

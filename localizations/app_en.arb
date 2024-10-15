@@ -86,5 +86,6 @@
   "value_cannot_be_0": "Value cannot be 0",
   "nickname_already_taken": "Nickname already taken",
   "add_language": "Add language",
-  "add_language_validator": "Add at least one language"
+  "add_language_validator": "Add at least one language",
+  "settings": "Settings"
 }

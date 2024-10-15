@@ -9,7 +9,7 @@ import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/calendar/bloc/calendar_bloc.dart';
 import 'package:perso/app/widgets/calendar/perso_calendar.dart';
 import 'package:perso/app/widgets/calendar/state/calendar_state.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 

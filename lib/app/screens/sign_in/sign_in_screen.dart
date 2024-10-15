@@ -6,7 +6,7 @@ import 'package:perso/app/screens/sign_in/event/sign_in_event.dart';
 import 'package:perso/app/screens/sign_in/state/sign_in_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/validators.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';
 import 'package:perso/app/widgets/perso_text_field.dart';

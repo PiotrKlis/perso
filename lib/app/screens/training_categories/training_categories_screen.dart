@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/training_category_list/perso_training_category_list.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
 

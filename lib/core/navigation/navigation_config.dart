@@ -18,6 +18,7 @@ import 'package:perso/app/screens/profile_creation_success/profile_creation_succ
 import 'package:perso/app/screens/profile_edit/profile_edit_screen.dart';
 import 'package:perso/app/screens/search_filters/search_filter_screen.dart';
 import 'package:perso/app/screens/search_results/search_results_screen.dart';
+import 'package:perso/app/screens/settings/settings_screen.dart';
 import 'package:perso/app/screens/sign_in/sign_in_screen.dart';
 import 'package:perso/app/screens/sign_up/sign_up_screen.dart';
 import 'package:perso/app/screens/sign_up_success/sign_up_success_screen.dart';
@@ -92,6 +93,13 @@ final GoRouter goRouter = GoRouter(
                         ),
                       ),
                     ),
+                    GoRoute(
+                      name: ScreenNavigationKey.settings,
+                      path: ScreenNavigationKey.settings,
+                      pageBuilder: (context, state) => const NoTransitionPage(
+                        child: SettingsScreen(),
+                      ),
+                    ),
                   ],
                 ),
                 GoRoute(
@@ -112,8 +120,6 @@ final GoRouter goRouter = GoRouter(
                             UserType userType,
                             ProfileEntity? profileEntity,
                           ),
-                          // userType: state.extra! as UserType,
-                          // profileEntity: state.extra! as ProfileEntity,
                         ),
                       ),
                     ),

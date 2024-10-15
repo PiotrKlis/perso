@@ -7,7 +7,8 @@ import 'package:perso/app/screens/profile/state/profile_state.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/value/app_dimens.dart';
 import 'package:perso/app/styleguide/value/app_typography.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/icon_action.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
 import 'package:perso/app/widgets/profile_image/profile_image.dart';
@@ -75,8 +76,16 @@ class _ClientProfileScreenContent extends StatelessWidget {
       appBar: PersoAppBar(
         isTitleCentered: true,
         title: '@${_clientEntity.nickname}',
-        actionIcon: Icons.edit,
-        onActionIconClick: _navigateToProfileEdit,
+        iconActions: [
+          IconAction(
+            iconData: Icons.edit,
+            onActionIconClick: _navigateToProfileEdit,
+          ),
+          IconAction(
+            iconData: Icons.settings,
+            onActionIconClick: _navigateToSettings,
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -118,6 +127,12 @@ class _ClientProfileScreenContent extends StatelessWidget {
     context.pushNamed(
       ScreenNavigationKey.profileEditClient,
       extra: (UserType.client, _clientEntity),
+    );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    context.pushNamed(
+      ScreenNavigationKey.settings,
     );
   }
 }

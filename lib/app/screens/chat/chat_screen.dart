@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/utils/chat_client.dart';
-import 'package:perso/app/widgets/perso_app_bar.dart';
+import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
 
