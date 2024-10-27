@@ -10,6 +10,8 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/widgets/app_bar/icon_action.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
+import 'package:perso/app/widgets/map/map_cubit.dart';
+import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/app/widgets/profile_image/image_cubit.dart';
@@ -38,6 +40,9 @@ class TrainerProfileScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => ImageCubit()..getImageUrl(),
         ),
+        BlocProvider(
+          create: (context) => MapCubit(),
+        )
       ],
       child: const _TrainerProfileScreenBuilder(),
     );
@@ -257,8 +262,8 @@ class _TrainerProfileScreenContentState
               left: Dimens.xmMargin,
               right: Dimens.xmMargin,
             ),
-            child: const Text(
-              'Location',
+            child: Text(
+              context.strings.address,
               style: ThemeText.bodyBoldBlackText,
             ),
           ),

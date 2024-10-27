@@ -12,8 +12,8 @@
     - TODO: usun wymagany jezyk dla rejestracji klienta // Zrobione
     - TODO: Rejestracja klienta, imie i nazwisko nie powinno byc obowiazkowe, tylko unikalny nickname // Nie trzeba
     - TODO: Edytuj trainer profil - languages widget, potrzebny mały refaktor do pre-fillowania danych // Zrobione
-    - TODO: Dodaj ikonę settingsów, dodaj ekran settingowy; notyfikacje, wersja apki, costam bedzie dochodzic z czasem
-    - TODO: Dodaj mapkę na profilu
+    - TODO: Dodaj ikonę settingsów, dodaj ekran settingowy; notyfikacje, wersja apki, costam bedzie dochodzic z czasem // Zrobione
+    - TODO: Dodaj piny do mapki
     - TODO: Dodaj inne metody rejestracji i logowania
 
   - Wyszukiwanie trenerów
