@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
@@ -9,7 +10,7 @@ import 'package:perso/app/utils/constants.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/map_state.dart';
 import 'package:perso/core/models/trainer_entity.dart';
-import 'package:uuid/uuid.dart';
+import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoGoogleMap extends StatefulWidget {
   const PersoGoogleMap({super.key, bool shouldShowMarkerAtTheCenter = false})
@@ -40,7 +41,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
           },
           mapUpdate: (mapData) {
             _updateCamera(mapData.mapTarget);
-            _updateMarkers(mapData.coordinates);
+            _updateMarkers(mapData.coordinates, mapData.mapTarget);
           },
         );
         if (widget._shouldShowMarkerAtTheCenter) {
@@ -48,7 +49,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
             sendData: () {
               context
                   .read<ProfileEditCubit>()
-                  .updateLatLng(_markers.first.position);
+                  .updateLatLng(_markers.last.position);
             },
           );
         }
@@ -92,17 +93,33 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
     );
   }
 
-  void _updateMarkers(List<TrainerEntity> trainers) {
-    _markers = trainers.map<Marker>((trainer) {
+  void _updateMarkers(List<TrainerEntity> trainers, LatLng mapTarget) {
+    final markers = trainers.map<Marker>((trainer) {
       return Marker(
         markerId: MarkerId(trainer.id),
         position: trainer.latLng,
         infoWindow: InfoWindow(
           title: '${trainer.name} ${trainer.surname}',
-          // snippet: 'Bardzo dlugi tekst ojezusmaria jaki dlugi Bardzo dlugi ',
           snippet: trainer.nickname,
+          onTap: () {
+            context.pushNamed(
+              ScreenNavigationKey.trainerDetails,
+              extra: trainer,
+            );
+          },
         ),
       );
     }).toSet();
+    if (widget._shouldShowMarkerAtTheCenter) {
+      markers.add(
+        Marker(
+          draggable: true,
+          position: mapTarget,
+          markerId: const MarkerId("my marker"),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+        ),
+      );
+    }
+    _markers = markers;
   }
 }
