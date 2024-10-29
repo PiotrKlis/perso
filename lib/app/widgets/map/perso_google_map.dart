@@ -117,6 +117,10 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
           position: mapTarget,
           markerId: const MarkerId("my marker"),
           icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          infoWindow: InfoWindow(
+            title: 'Your pin',
+            snippet: 'Long press to move',
+          ),
         ),
       );
     }
