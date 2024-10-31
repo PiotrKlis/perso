@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/constants.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
@@ -13,11 +12,9 @@ import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoGoogleMap extends StatefulWidget {
-  const PersoGoogleMap({super.key, bool shouldShowMarkerAtTheCenter = false})
-      : _shouldShowMarkerAtTheCenter = shouldShowMarkerAtTheCenter;
+  const PersoGoogleMap({super.key});
 
   static const _zoomOnMap = 15.0;
-  final bool _shouldShowMarkerAtTheCenter;
 
   @override
   State<PersoGoogleMap> createState() => _PersoGoogleMapState();
@@ -44,15 +41,6 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
             _updateMarkers(mapData.coordinates, mapData.mapTarget);
           },
         );
-        if (widget._shouldShowMarkerAtTheCenter) {
-          context.watch<ProfileEditCubit>().state.whenOrNull(
-            sendData: () {
-              context
-                  .read<ProfileEditCubit>()
-                  .updateLatLng(_markers.last.position);
-            },
-          );
-        }
         return Container(
           margin: const EdgeInsets.only(
             left: Dimens.mMargin,
@@ -73,11 +61,6 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
               onMapCreated: (GoogleMapController controller) {
                 mapController = controller;
               },
-              onCameraMove: (position) {
-                if (widget._shouldShowMarkerAtTheCenter) {
-                  // mapController(position.target);
-                }
-              },
             ),
           ),
         );
@@ -94,7 +77,7 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
   }
 
   void _updateMarkers(List<TrainerEntity> trainers, LatLng mapTarget) {
-    final markers = trainers.map<Marker>((trainer) {
+    _markers = trainers.map<Marker>((trainer) {
       return Marker(
         markerId: MarkerId(trainer.id),
         position: trainer.latLng,
@@ -110,20 +93,5 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
         ),
       );
     }).toSet();
-    if (widget._shouldShowMarkerAtTheCenter) {
-      markers.add(
-        Marker(
-          draggable: true,
-          position: mapTarget,
-          markerId: const MarkerId("my marker"),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-          infoWindow: InfoWindow(
-            title: 'Your pin',
-            snippet: 'Long press to move',
-          ),
-        ),
-      );
-    }
-    _markers = markers;
   }
 }

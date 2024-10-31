@@ -34,6 +34,7 @@ class FirestoreTrainersService implements TrainersService {
         UserDocumentFields.categories: trainerData.categories,
         UserDocumentFields.userType: UserType.trainer.name,
         UserDocumentFields.imagePath: serverImagePath,
+        UserDocumentFields.latLng: trainerData.latLng?.toJson(),
       });
       return Future.value();
     } catch (error) {

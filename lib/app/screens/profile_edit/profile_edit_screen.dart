@@ -10,11 +10,11 @@ import 'package:perso/app/styleguide/value/app_typography.dart';
 import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/address/address_cubit.dart';
 import 'package:perso/app/widgets/address/perso_address.dart';
-import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
-import 'package:perso/app/widgets/map/map_cubit.dart';
-import 'package:perso/app/widgets/map/perso_google_map.dart';
-import 'package:perso/app/widgets/perso_add_spoken_language.dart';
 import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
+import 'package:perso/app/widgets/category_chips/perso_selectable_category_chips.dart';
+import 'package:perso/app/widgets/map/editable_perso_google_map.dart';
+import 'package:perso/app/widgets/map/map_cubit.dart';
+import 'package:perso/app/widgets/perso_add_spoken_language.dart';
 import 'package:perso/app/widgets/perso_async_text_field.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_indented_divider.dart';
@@ -644,9 +644,7 @@ class _MapSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: Dimens.xmMargin),
-      child: const PersoGoogleMap(
-        shouldShowMarkerAtTheCenter: true,
-      ),
+      child: const EditablePersoGoogleMap(),
     );
   }
 }
