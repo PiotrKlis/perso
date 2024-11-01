@@ -12,9 +12,10 @@ import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class PersoGoogleMap extends StatefulWidget {
-  const PersoGoogleMap({super.key});
+  const PersoGoogleMap({super.key, this.trainerEntity});
 
   static const _zoomOnMap = 15.0;
+  final TrainerEntity? trainerEntity;
 
   @override
   State<PersoGoogleMap> createState() => _PersoGoogleMapState();
@@ -37,8 +38,13 @@ class _PersoGoogleMapState extends State<PersoGoogleMap> {
             context.read<MapCubit>().navigateToCurrentLocation();
           },
           mapUpdate: (mapData) {
-            _updateCamera(mapData.mapTarget);
-            _updateMarkers(mapData.coordinates, mapData.mapTarget);
+            if (widget.trainerEntity != null) {
+              _updateCamera(widget.trainerEntity!.latLng);
+              _updateMarkers([widget.trainerEntity!], mapData.mapTarget);
+            } else {
+              _updateCamera(mapData.mapTarget);
+              _updateMarkers(mapData.trainers, mapData.mapTarget);
+            }
           },
         );
         return Container(

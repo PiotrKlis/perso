@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter_platform_interface/src/types/location.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_cubit.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_profile_image.dart';
 import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
@@ -445,7 +446,7 @@ class _TrainerOnlySection extends StatelessWidget {
   List<Widget> _getPrefilledTrainerSections(TrainerEntity trainerEntity) {
     return [
       _AddressSection(address: trainerEntity.address),
-      const _MapSection(),
+      _MapSection(navigateToLocation: trainerEntity.latLng),
       const _Divider(),
       _ShortBioSection(shortBio: trainerEntity.shortBio),
       _LongBioSection(longBio: trainerEntity.longBio),
@@ -638,13 +639,16 @@ class _Divider extends StatelessWidget {
 }
 
 class _MapSection extends StatelessWidget {
-  const _MapSection();
+  const _MapSection({LatLng? navigateToLocation})
+      : _navigateToLocation = navigateToLocation;
+
+  final LatLng? _navigateToLocation;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: Dimens.xmMargin),
-      child: const EditablePersoGoogleMap(),
+      child: EditablePersoGoogleMap(navigateToLocation: _navigateToLocation),
     );
   }
 }

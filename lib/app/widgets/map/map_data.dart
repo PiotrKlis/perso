@@ -8,6 +8,6 @@ part 'map_data.freezed.dart';
 class MapData with _$MapData {
   const factory MapData({
     required LatLng mapTarget,
-    required List<TrainerEntity> coordinates,
+    required List<TrainerEntity> trainers,
 }) = _MapData;
 }

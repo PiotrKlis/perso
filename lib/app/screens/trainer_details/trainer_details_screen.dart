@@ -6,8 +6,10 @@ import 'package:perso/app/screens/trainer_details/bloc/training_request_bloc.dar
 import 'package:perso/app/screens/trainer_details/event/training_request_event.dart';
 import 'package:perso/app/screens/trainer_details/state/training_request_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
+import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
+import 'package:perso/app/widgets/map/map_cubit.dart';
+import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
 import 'package:perso/core/extensions/string_extensions.dart';
@@ -30,80 +32,83 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PersoAppBar(
-        isTitleCentered: true,
-        title: '@${widget._trainerEntity.nickname}',
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: Dimens.xmMargin,
-                    left: Dimens.xxlMargin,
-                    right: Dimens.xxlMargin,
+    return BlocProvider<MapCubit>(
+      create: (context) => MapCubit(),
+      child: Scaffold(
+        appBar: PersoAppBar(
+          isTitleCentered: true,
+          title: '@${widget._trainerEntity.nickname}',
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: Dimens.xmMargin,
+                      left: Dimens.xxlMargin,
+                      right: Dimens.xxlMargin,
+                    ),
+                    child: Row(
+                      children: [Expanded(child: _segmentedButton())],
+                    ),
                   ),
-                  child: Row(
-                    children: [Expanded(child: _segmentedButton())],
+                  Container(
+                    margin: const EdgeInsets.only(top: Dimens.xlMargin),
+                    child: _image(widget._trainerEntity.imagePath),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: _image(widget._trainerEntity.imagePath),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: Dimens.mMargin),
-                  child: Text(
-                    '${widget._trainerEntity.name} ${widget._trainerEntity.surname}',
-                    style: ThemeText.mediumTitleBold,
+                  Container(
+                    margin: const EdgeInsets.only(top: Dimens.mMargin),
+                    child: Text(
+                      '${widget._trainerEntity.name} ${widget._trainerEntity.surname}',
+                      style: ThemeText.mediumTitleBold,
+                    ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: Dimens.sMargin,
-                    bottom: Dimens.mMargin,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget._trainerEntity.rating.toString(),
-                        style: ThemeText.subHeadingBold,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: Dimens.sMargin,
-                          right: Dimens.sMargin,
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: Dimens.sMargin,
+                      bottom: Dimens.mMargin,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget._trainerEntity.rating.toString(),
+                          style: ThemeText.subHeadingBold,
                         ),
-                        child: const Icon(Icons.star),
-                      ),
-                      Text(
-                        '(${widget._trainerEntity.votesNumber})',
-                        style: ThemeText.subHeadingRegular,
-                      ),
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: Dimens.sMargin,
+                            right: Dimens.sMargin,
+                          ),
+                          child: const Icon(Icons.star),
+                        ),
+                        Text(
+                          '(${widget._trainerEntity.votesNumber})',
+                          style: ThemeText.subHeadingRegular,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      _requestForTrainingButton(),
+                      _contactButton(),
                     ],
                   ),
-                ),
-                Column(
-                  children: [
-                    _requestForTrainingButton(),
-                    _contactButton(),
-                  ],
-                ),
-                Visibility(
-                  visible: _segmentSelected.contains(_Segments.about.name),
-                  child: _aboutSection(widget._trainerEntity),
-                ),
-                Visibility(
-                  visible: _segmentSelected.contains(_Segments.reviews.name),
-                  child: _reviewsSection(widget._trainerEntity),
-                ),
-              ],
-            ),
-          ],
+                  Visibility(
+                    visible: _segmentSelected.contains(_Segments.about.name),
+                    child: _aboutSection(widget._trainerEntity),
+                  ),
+                  Visibility(
+                    visible: _segmentSelected.contains(_Segments.reviews.name),
+                    child: _reviewsSection(widget._trainerEntity),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -309,6 +314,10 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
             ),
           ),
           Container(
+            margin: const EdgeInsets.only(top: Dimens.xsMargin),
+            child: PersoGoogleMap(trainerEntity: trainerEntity),
+          ),
+          Container(
             margin: const EdgeInsets.only(
               top: Dimens.lMargin,
               left: Dimens.xmMargin,
@@ -491,8 +500,10 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     margin: const EdgeInsets.only(left: Dimens.xsMargin),
                     child: Column(
                       children: [
-                        const Text('John Wick',
-                            style: ThemeText.bodyBoldBlackText,),
+                        const Text(
+                          'John Wick',
+                          style: ThemeText.bodyBoldBlackText,
+                        ),
                         RatingBar(
                           itemSize: 20,
                           allowHalfRating: true,

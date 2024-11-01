@@ -25,7 +25,7 @@ class MapCubit extends Cubit<MapState> {
       final latLng = LatLng(location.latitude, location.longitude);
       emit(
         MapState.mapUpdate(
-          MapData(mapTarget: latLng, coordinates: _trainers),
+          MapData(mapTarget: latLng, trainers: _trainers),
         ),
       );
     }
@@ -41,7 +41,18 @@ class MapCubit extends Cubit<MapState> {
       MapState.mapUpdate(
         MapData(
           mapTarget: LatLng(latitude, longitude),
-          coordinates: _trainers,
+          trainers: _trainers,
+        ),
+      ),
+    );
+  }
+
+  Future<void> navigateToLocation(LatLng latLng) async {
+    emit(
+      MapState.mapUpdate(
+        MapData(
+          mapTarget: LatLng(latLng.latitude, latLng.longitude),
+          trainers: _trainers,
         ),
       ),
     );

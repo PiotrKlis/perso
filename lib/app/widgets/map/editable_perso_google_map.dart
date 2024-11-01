@@ -14,9 +14,11 @@ import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class EditablePersoGoogleMap extends StatefulWidget {
-  const EditablePersoGoogleMap({super.key});
+  const EditablePersoGoogleMap({LatLng? navigateToLocation, super.key})
+      : _navigateToLocation = navigateToLocation;
 
-  static const _zoomOnMap = 15.0;
+  static const _zoomOnMap = 45.0;
+  final LatLng? _navigateToLocation;
 
   @override
   State<EditablePersoGoogleMap> createState() => _EditablePersoGoogleMapState();
@@ -36,11 +38,16 @@ class _EditablePersoGoogleMapState extends State<EditablePersoGoogleMap> {
       builder: (context, state) {
         state.when(
           initial: () {
-            context.read<MapCubit>().navigateToCurrentLocation();
+            if (widget._navigateToLocation != null) {
+              _updateCamera(widget._navigateToLocation!);
+              _updateMarkers([], widget._navigateToLocation!);
+            } else {
+              context.read<MapCubit>().navigateToCurrentLocation();
+            }
           },
           mapUpdate: (mapData) {
             _updateCamera(mapData.mapTarget);
-            _updateMarkers(mapData.coordinates, mapData.mapTarget);
+            _updateMarkers(mapData.trainers, mapData.mapTarget);
           },
         );
         return BlocListener<ProfileEditCubit, ProfileEditState>(
