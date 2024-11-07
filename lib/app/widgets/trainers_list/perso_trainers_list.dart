@@ -20,10 +20,10 @@ class PersoTrainersList extends StatelessWidget {
         builder: (context, state) {
           return state.when(
             initial: () {
-              context
-                  .read<TrainersListBloc>()
-                  .add(const TrainersListEvent.loadData());
               return Container();
+            },
+            loading: () {
+              return const CircularProgressIndicator();
             },
             content: (trainers) {
               return _getTrainersList(trainers, context);

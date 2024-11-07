@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/widgets/app_bar/icon_action.dart';
 import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
+import 'package:perso/app/widgets/search/trainers/bloc/search_trainers_bloc.dart';
+import 'package:perso/app/widgets/search/trainers/perso_trainers_search.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:perso/core/extensions/context_extensions.dart';
@@ -10,6 +13,21 @@ import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SearchResultsScreen extends StatelessWidget {
   const SearchResultsScreen({super.key, String? input = ''}) : _input = input;
+  final String? _input;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<SearchTrainersBloc>(
+      create: (context) => SearchTrainersBloc(),
+      child: _SearchResultsScreenContent(
+        input: _input,
+      ),
+    );
+  }
+}
+
+class _SearchResultsScreenContent extends StatelessWidget {
+  const _SearchResultsScreenContent({String? input = ''}) : _input = input;
   final String? _input;
 
   @override
@@ -36,16 +54,7 @@ class SearchResultsScreen extends StatelessWidget {
                 left: Dimens.mMargin,
                 right: Dimens.mMargin,
               ),
-              //TODO: Implement search users
-              child: const SearchBar(
-                padding: WidgetStatePropertyAll<EdgeInsets>(
-                  EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                ),
-                hintText: 'Search trainers',
-                leading: Icon(Icons.search),
-              ),
+              child: const PersoTrainersSearch(),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.xmMargin),

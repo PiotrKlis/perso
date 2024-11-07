@@ -12,7 +12,8 @@ class SearchExercisesBloc
       (event, emitter) async {
         try {
           emitter(const SearchExercisesState.loading());
-          final exercises = await _searchService.getSuggestions(event.input);
+          final exercises =
+              await _searchService.getExerciseSuggestions(event.input);
           emitter(SearchExercisesState.exercises(exercises));
         } catch (error) {
           emitter(SearchExercisesState.error(error.toString()));

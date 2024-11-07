@@ -7,6 +7,8 @@ part 'trainers_list_state.freezed.dart';
 class TrainersListState with _$TrainersListState {
   const factory TrainersListState.initial() = Initial;
 
+  const factory TrainersListState.loading() = Loading;
+
   const factory TrainersListState.content(
       {required List<TrainerEntity> trainers,}) = Content;
 

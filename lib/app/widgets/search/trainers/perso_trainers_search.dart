@@ -1,24 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/search/exercises/bloc/search_exercises_bloc.dart';
-import 'package:perso/app/widgets/search/exercises/event/search_exercises_event.dart';
+import 'package:perso/app/widgets/search/trainers/bloc/search_trainers_bloc.dart';
+import 'package:perso/app/widgets/search/trainers/event/search_trainers_event.dart';
 
-class PersoExercisesSearch extends StatefulWidget {
-  const PersoExercisesSearch({super.key});
-
-  @override
-  State<PersoExercisesSearch> createState() => _PersoExercisesSearchState();
-}
-
-class _PersoExercisesSearchState extends State<PersoExercisesSearch> {
-  @override
-  void initState() {
-    context.read<SearchExercisesBloc>().add(
-          const SearchExercisesEvent.emptySearch(),
-        );
-    super.initState();
-  }
+class PersoTrainersSearch extends StatelessWidget {
+  const PersoTrainersSearch({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +24,11 @@ class _PersoExercisesSearchState extends State<PersoExercisesSearch> {
           onChanged: (input) {
             if (input.isEmpty) {
               context
-                  .read<SearchExercisesBloc>()
-                  .add(const SearchExercisesEvent.emptySearch());
+                  .read<SearchTrainersBloc>()
+                  .add(const SearchTrainersEvent.emptyTrainersSearch());
             } else {
-              context.read<SearchExercisesBloc>().add(
-                    SearchExercisesEvent.searchInput(
+              context.read<SearchTrainersBloc>().add(
+                    SearchTrainersEvent.searchTrainersInput(
                       controller.text,
                     ),
                   );

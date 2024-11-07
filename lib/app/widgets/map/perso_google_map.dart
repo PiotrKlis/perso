@@ -14,7 +14,7 @@ import 'package:perso/core/navigation/screen_navigation_key.dart';
 class PersoGoogleMap extends StatefulWidget {
   const PersoGoogleMap({super.key, this.trainerEntity});
 
-  static const _zoomOnMap = 15.0;
+  static const _zoomOnMap = 9.0;
   final TrainerEntity? trainerEntity;
 
   @override
