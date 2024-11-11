@@ -6,8 +6,8 @@ part 'search_trainers_state.freezed.dart';
 
 @freezed
 class SearchTrainersState with _$SearchTrainersState {
-  const factory SearchTrainersState.exercises(List<TrainerEntity> trainers) =
-      Exercises;
+  const factory SearchTrainersState.trainers(List<TrainerEntity> trainers) =
+      Trainers;
 
   const factory SearchTrainersState.empty() = Empty;
   const factory SearchTrainersState.error(String error) = Error;

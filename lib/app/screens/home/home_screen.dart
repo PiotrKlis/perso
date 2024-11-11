@@ -10,6 +10,9 @@ import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_big_header.dart';
 import 'package:perso/app/widgets/perso_clickable_text.dart';
 import 'package:perso/app/widgets/perso_header.dart';
+import 'package:perso/app/widgets/search/trainers/bloc/search_trainers_bloc.dart';
+import 'package:perso/app/widgets/search/trainers/event/search_trainers_event.dart';
+import 'package:perso/app/widgets/trainers_list/bloc/trainers_list_bloc.dart';
 import 'package:perso/app/widgets/trainers_list/perso_trainers_list.dart';
 import 'package:perso/app/widgets/trainers_search_carousel/perso_trainers_search_carousel.dart';
 import 'package:perso/app/widgets/training_category_list/perso_training_category_list.dart';
@@ -35,6 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider<MapCubit>(
           create: (context) => MapCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SearchTrainersBloc()
+            ..add(
+              const SearchTrainersEvent.searchTrainersInput(
+                'trainers',
+              ),
+            ),
         ),
       ],
       child: BlocBuilder<HomeBloc, HomeState>(
@@ -83,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       hintText: 'Search trainers',
                       leading: const Icon(Icons.search),
+                      keyboardType: TextInputType.none,
                       onTap: () => context.pushNamed(
                         ScreenNavigationKey.searchResults,
                         pathParameters: {'input': ' '},
@@ -143,8 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onTap: () => context.pushNamed(
                                   ScreenNavigationKey.searchResults,
                                   pathParameters: {
-                                    'input':
-                                        'see all trainers near my location',
+                                    'input': 'all trainers near my location',
                                   },
                                 ),
                                 child: PersoClickableText(

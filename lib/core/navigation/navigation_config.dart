@@ -143,7 +143,7 @@ final GoRouter goRouter = GoRouter(
                   pageBuilder: (context, state) {
                     return NoTransitionPage(
                       child: SearchResultsScreen(
-                        input: state.pathParameters[NavigationConstants.input],
+                        input: state.pathParameters[NavigationConstants.input]!,
                       ),
                     );
                   },

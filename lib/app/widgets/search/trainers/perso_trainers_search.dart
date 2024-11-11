@@ -5,13 +5,20 @@ import 'package:perso/app/widgets/search/trainers/bloc/search_trainers_bloc.dart
 import 'package:perso/app/widgets/search/trainers/event/search_trainers_event.dart';
 
 class PersoTrainersSearch extends StatelessWidget {
-  const PersoTrainersSearch({super.key});
+  const PersoTrainersSearch({required String initialText, super.key})
+      : _initialText = initialText;
+
+  final String _initialText;
 
   @override
   Widget build(BuildContext context) {
     return SearchAnchor(
       builder: (BuildContext context, SearchController controller) {
+        _handleInitialInput(controller, context);
         return SearchBar(
+          onTapOutside: (event) {
+            FocusScope.of(context).unfocus();
+          },
           backgroundColor: const WidgetStatePropertyAll<Color>(
             PersoColors.lighterGrey,
           ),
@@ -27,11 +34,7 @@ class PersoTrainersSearch extends StatelessWidget {
                   .read<SearchTrainersBloc>()
                   .add(const SearchTrainersEvent.emptyTrainersSearch());
             } else {
-              context.read<SearchTrainersBloc>().add(
-                    SearchTrainersEvent.searchTrainersInput(
-                      controller.text,
-                    ),
-                  );
+              _searchTrainers(context, controller.text);
             }
           },
           leading: const Icon(Icons.search),
@@ -41,5 +44,20 @@ class PersoTrainersSearch extends StatelessWidget {
         return [];
       },
     );
+  }
+
+  void _handleInitialInput(SearchController controller, BuildContext context) {
+    if (_initialText.trim().isNotEmpty) {
+      controller.text = _initialText ?? '';
+      _searchTrainers(context, controller.text);
+    }
+  }
+
+  void _searchTrainers(BuildContext context, String input) {
+    context.read<SearchTrainersBloc>().add(
+          SearchTrainersEvent.searchTrainersInput(
+            input,
+          ),
+        );
   }
 }

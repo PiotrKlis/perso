@@ -17,7 +17,7 @@ class EditablePersoGoogleMap extends StatefulWidget {
   const EditablePersoGoogleMap({LatLng? navigateToLocation, super.key})
       : _navigateToLocation = navigateToLocation;
 
-  static const _zoomOnMap = 45.0;
+  static const _zoomOnMap = 15.0;
   final LatLng? _navigateToLocation;
 
   @override

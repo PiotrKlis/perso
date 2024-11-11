@@ -12,8 +12,9 @@ import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
 class SearchResultsScreen extends StatelessWidget {
-  const SearchResultsScreen({super.key, String? input = ''}) : _input = input;
-  final String? _input;
+  const SearchResultsScreen({required String input, super.key})
+      : _input = input;
+  final String _input;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,8 @@ class SearchResultsScreen extends StatelessWidget {
 }
 
 class _SearchResultsScreenContent extends StatelessWidget {
-  const _SearchResultsScreenContent({String? input = ''}) : _input = input;
-  final String? _input;
+  const _SearchResultsScreenContent({required String input}) : _input = input;
+  final String _input;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class _SearchResultsScreenContent extends StatelessWidget {
                 left: Dimens.mMargin,
                 right: Dimens.mMargin,
               ),
-              child: const PersoTrainersSearch(),
+              child: PersoTrainersSearch(initialText: _input),
             ),
             Container(
               margin: const EdgeInsets.only(top: Dimens.xmMargin),

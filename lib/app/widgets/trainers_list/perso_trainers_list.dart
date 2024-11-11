@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
-import 'package:perso/app/widgets/trainers_list/bloc/trainers_list_bloc.dart';
-import 'package:perso/app/widgets/trainers_list/event/trainers_list_event.dart';
-import 'package:perso/app/widgets/trainers_list/state/trainers_list_state.dart';
+import 'package:perso/app/widgets/search/trainers/bloc/search_trainers_bloc.dart';
+import 'package:perso/app/widgets/search/trainers/state/search_trainers_state.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
 
@@ -14,32 +13,49 @@ class PersoTrainersList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TrainersListBloc(const TrainersListState.initial()),
-      child: BlocBuilder<TrainersListBloc, TrainersListState>(
-        builder: (context, state) {
-          return state.when(
-            initial: () {
-              return Container();
-            },
-            loading: () {
-              return const CircularProgressIndicator();
-            },
-            content: (trainers) {
-              return _getTrainersList(trainers, context);
-            },
-            error: (error) {
-              return Text(error);
-            },
-          );
-        },
-      ),
+    return BlocBuilder<SearchTrainersBloc, SearchTrainersState>(
+      builder: (context, state) {
+        return state.when(
+          trainers: (trainers) {
+            if (trainers.isNotEmpty) {
+              return _TrainersList(trainers: trainers);
+            } else {
+              return const Center(
+                child: Text('No trainers found for input'),
+              );
+            }
+          },
+          empty: () {
+            //TODO: Add empty list
+            return const _TrainersList(trainers: []);
+          },
+          error: (error) {
+            return const Center(
+              child: Text(
+                'Something went wrong :(',
+                style: TextStyle(color: Colors.red),
+              ),
+            );
+          },
+          loading: () {
+            return const Center(child: CircularProgressIndicator());
+          },
+        );
+      },
     );
   }
+}
 
-  Widget _getTrainersList(List<TrainerEntity> trainers, BuildContext context) {
+class _TrainersList extends StatelessWidget {
+  const _TrainersList({required List<TrainerEntity> trainers})
+      : _trainers = trainers;
+
+  final List<TrainerEntity> _trainers;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
-      children: trainers
+      children: _trainers
           .map(
             (trainerData) => Row(
               mainAxisAlignment: MainAxisAlignment.center,

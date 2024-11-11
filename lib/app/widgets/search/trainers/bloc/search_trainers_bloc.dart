@@ -7,14 +7,14 @@ import 'package:perso/data/search/search_service.dart';
 
 class SearchTrainersBloc
     extends Bloc<SearchTrainersEvent, SearchTrainersState> {
-  SearchTrainersBloc() : super(const SearchTrainersState.loading()) {
+  SearchTrainersBloc() : super(const SearchTrainersState.empty()) {
     on<SearchTrainersInput>(
       (event, emitter) async {
         try {
           emitter(const SearchTrainersState.loading());
           final trainers =
               await _searchService.getTrainerSuggestions(event.input);
-          emitter(SearchTrainersState.exercises(trainers));
+          emitter(SearchTrainersState.trainers(trainers));
         } catch (error) {
           emitter(SearchTrainersState.error(error.toString()));
         }
@@ -26,7 +26,11 @@ class SearchTrainersBloc
 
     on<EmptyTrainersSearch>((event, emitter) async {
       emitter(const SearchTrainersState.empty());
-    });
+    },
+      transformer: debounce(
+        const Duration(milliseconds: 500),
+      ),
+    );
   }
 
   final _searchService = getIt.get<SearchService>();

@@ -46,6 +46,5 @@ class SearchService {
     return searchResponse.hits
         .map(_trainerEntityMapper.mapSearchResult)
         .toList();
-    // return Future.value();
   }
 }
