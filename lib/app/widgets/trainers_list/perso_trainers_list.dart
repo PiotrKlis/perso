@@ -85,11 +85,7 @@ class _TrainersList extends StatelessWidget {
                             ),
                             child: Column(
                               children: [
-                                Image.asset(
-                                  AppImages.trainer1,
-                                  width: Dimens.trainerImageWidth,
-                                  height: Dimens.trainerImageHeight,
-                                ),
+                                _getImage(trainerData.imagePath),
                               ],
                             ),
                           ),
@@ -187,5 +183,23 @@ class _TrainersList extends StatelessWidget {
           )
           .toList(),
     );
+  }
+
+  Widget _getImage(String imagePath) {
+    if (imagePath.isNotEmpty) {
+      return ClipOval(
+        child: Image.network(
+          imagePath,
+          fit: BoxFit.cover,
+          width: 80,
+          height: 80,
+        ),
+      );
+    } else {
+      return const Icon(
+        Icons.account_circle_rounded,
+        size: 80,
+      );
+    }
   }
 }

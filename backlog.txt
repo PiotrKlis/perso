@@ -23,6 +23,11 @@
   	- szukanie po boxach z tekstam
   	- szukanie po tekście
 
+  	//TODO: Zrób audyt całej jedyneczki
+
+  	Reviews
+  	Filtry - generalny fine tune searcha
+
 2. Opieka trenerska - czat
 
 3. Treningi video

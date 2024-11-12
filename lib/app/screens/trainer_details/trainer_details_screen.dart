@@ -241,7 +241,14 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
 
   Widget _image(String imagePath) {
     if (imagePath.isNotEmpty) {
-      return Image.network(imagePath);
+      return ClipOval(
+        child: Image.network(
+          imagePath,
+          fit: BoxFit.cover,
+          width: Dimens.profileImageHeight,
+          height: Dimens.profileImageWidth,
+        ),
+      );
     } else {
       return const Icon(
         Icons.account_circle,

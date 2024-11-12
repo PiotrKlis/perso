@@ -118,7 +118,7 @@ class _TrainerProfileScreenContentState
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                  child: const ProfileImage(),
+                  child: _image(widget._trainerEntity.imagePath),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimens.mMargin),
@@ -168,6 +168,24 @@ class _TrainerProfileScreenContentState
         ),
       ),
     );
+  }
+
+  Widget _image(String imagePath) {
+    if (imagePath.isNotEmpty) {
+      return ClipOval(
+        child: Image.network(
+          imagePath,
+          fit: BoxFit.cover,
+          width: Dimens.profileImageHeight,
+          height: Dimens.profileImageWidth,
+        ),
+      );
+    } else {
+      return const Icon(
+        Icons.account_circle,
+        size: 88,
+      );
+    }
   }
 
   void _navigateToProfileEdit(BuildContext context) {

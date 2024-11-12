@@ -86,7 +86,7 @@ class FirestoreTrainersService implements TrainersService {
             .child('${CollectionName.images}/$id/}');
         await _deleteAlreadyPresentImage(storageReference);
         await storageReference.putFile(File(path));
-        return path;
+        return storageReference.getDownloadURL();
       } else {
         return '';
       }
