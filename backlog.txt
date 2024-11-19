@@ -23,7 +23,8 @@
   	- szukanie po boxach z tekstam
   	- szukanie po tekście
 
-  	//TODO: Zrób audyt całej jedyneczki
+  	//TODO: reviews
+  	//TODO: fine-tune searcha i filtry
 
   	Reviews
   	Filtry - generalny fine tune searcha

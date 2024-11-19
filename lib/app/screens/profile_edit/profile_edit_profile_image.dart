@@ -16,7 +16,7 @@ class ProfileEditProfileImage extends StatelessWidget {
   }
 
   void _profileEditListener(BuildContext context) {
-    var imagePath = '';
+    var imagePath = _imagePath;
     context.watch<ImageCubit>().state.whenOrNull(
       imageChosen: (path) {
         imagePath = path;
