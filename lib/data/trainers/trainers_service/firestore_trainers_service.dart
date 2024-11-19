@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/app/models/editable_trainer_data.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
+import 'package:perso/core/extensions/date_time_extensions.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -162,6 +163,19 @@ class FirestoreTrainersService implements TrainersService {
         .update({
       UserDocumentFields.pendingTrainers: FieldValue.arrayRemove([trainerId]),
       UserDocumentFields.inactiveTrainers: FieldValue.arrayRemove([trainerId]),
+    });
+  }
+
+  Future<void> addReview(String review, String trainerId, double rating) async {
+    final userId = _userSessionModel.user!.uid;
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(trainerId)
+        .collection(userId)
+        .add({
+      UserDocumentFields.sentDate: DateTime.now().yearMonthDayFormat,
+      UserDocumentFields.review: review,
+      UserDocumentFields.rating: rating,
     });
   }
 }

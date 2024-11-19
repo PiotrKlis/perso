@@ -6,15 +6,19 @@ import 'package:perso/app/screens/trainer_details/bloc/training_request_bloc.dar
 import 'package:perso/app/screens/trainer_details/event/training_request_event.dart';
 import 'package:perso/app/screens/trainer_details/state/training_request_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
+import 'package:perso/app/utils/validators.dart';
 import 'package:perso/app/widgets/app_bar/perso_app_bar.dart';
 import 'package:perso/app/widgets/category_chips/perso_category_chips.dart';
 import 'package:perso/app/widgets/map/map_cubit.dart';
 import 'package:perso/app/widgets/map/perso_google_map.dart';
 import 'package:perso/app/widgets/perso_button.dart';
 import 'package:perso/app/widgets/perso_divider.dart';
+import 'package:perso/core/extensions/context_extensions.dart';
 import 'package:perso/core/models/review_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/navigation/screen_navigation_key.dart';
+
+import '../../widgets/perso_text_field.dart';
 
 part 'about_section.dart';
 

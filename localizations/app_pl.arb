@@ -87,5 +87,6 @@
   "nickname_already_taken": "Nickname jest już zajęty",
   "add_language": "Dodaj język",
   "add_language_validator": "Dodaj co najmniej jeden język",
-  "settings": "Ustawienia"
+  "settings": "Ustawienia",
+  "write_review": "Napisz recenzję"
 }

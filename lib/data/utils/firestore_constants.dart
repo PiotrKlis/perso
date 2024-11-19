@@ -50,4 +50,5 @@ class UserDocumentFields {
   static const String maxPercentage = 'maxPercentage';
   static const String trainerNote = 'trainerNote';
   static const String weight = 'weight';
+  static const String review = 'review';
 }

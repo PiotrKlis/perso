@@ -48,8 +48,8 @@ class _ReviewsSection extends StatelessWidget {
                         left: Dimens.xsMargin,
                         right: Dimens.xmMargin,
                       ),
-                      child: const Text(
-                        '5.0',
+                      child: Text(
+                        _rating.toString(),
                         style: ThemeText.largerTitleBold,
                       ),
                     ),
@@ -98,14 +98,28 @@ class _ReviewsSection extends StatelessWidget {
                   Icons.account_circle,
                   size: 48,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: Dimens.xsMargin),
-                  child: const Text(
-                    'Write review',
-                    style: ThemeText.calloutRegularGrey,
+                Expanded(
+                  child: Container(
+                    height: 140,
+                    margin: const EdgeInsets.only(
+                      top: Dimens.xmMargin,
+                      left: Dimens.xmMargin,
+                    ),
+                    child: PersoTextField(
+                      hintText: context.strings.write_review,
+                      customValidator: TextFieldValidator.validateIsEmpty,
+                      isMultiLine: true,
+                      maxLength: 150,
+                    ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(Dimens.xmMargin),
+            child: PersoButton(
+              title: context.strings.confirm,
             ),
           ),
           const PersoDivider(),

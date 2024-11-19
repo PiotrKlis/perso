@@ -247,8 +247,8 @@ class _TrainerProfileScreenContentState
     );
   }
 
-  Container _aboutSection(TrainerEntity trainerEntity) {
-    return Container(
+  Widget _aboutSection(TrainerEntity trainerEntity) {
+    return ColoredBox(
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

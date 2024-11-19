@@ -87,5 +87,6 @@
   "nickname_already_taken": "Nickname already taken",
   "add_language": "Add language",
   "add_language_validator": "Add at least one language",
-  "settings": "Settings"
+  "settings": "Settings",
+  "write_review": "Write review"
 }
