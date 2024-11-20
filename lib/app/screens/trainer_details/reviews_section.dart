@@ -4,14 +4,20 @@ class _ReviewsSection extends StatelessWidget {
   const _ReviewsSection({
     required List<ReviewEntity> reviews,
     required double rating,
+    required String trainerId,
   })  : _rating = rating,
-        _reviews = reviews;
+        _reviews = reviews,
+        _trainerId = trainerId;
 
   final List<ReviewEntity> _reviews;
   final double _rating;
+  final String _trainerId;
 
   @override
   Widget build(BuildContext context) {
+    final reviewTextEditingController = TextEditingController();
+    var tappedRating = 0.0;
+
     return ColoredBox(
       color: Colors.white,
       child: Column(
@@ -80,7 +86,7 @@ class _ReviewsSection extends StatelessWidget {
                     empty: const Icon(Icons.star_border, color: Colors.yellow),
                   ),
                   onRatingUpdate: (value) {
-                    //no-op
+                    tappedRating = value;
                   },
                 ),
               ],
@@ -110,6 +116,7 @@ class _ReviewsSection extends StatelessWidget {
                       customValidator: TextFieldValidator.validateIsEmpty,
                       isMultiLine: true,
                       maxLength: 150,
+                      textEditingController: reviewTextEditingController,
                     ),
                   ),
                 ),
@@ -118,8 +125,45 @@ class _ReviewsSection extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.all(Dimens.xmMargin),
-            child: PersoButton(
-              title: context.strings.confirm,
+            child: BlocBuilder<ConfirmReviewCubit, ConfirmReviewState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () {
+                    return PersoButton(
+                      title: context.strings.confirm,
+                      onTap: (context) {
+                        context.read<ConfirmReviewCubit>().addReview(
+                              reviewTextEditingController.text,
+                              _trainerId,
+                              tappedRating,
+                            );
+                      },
+                    );
+                  },
+                  loading: () {
+                    return const PersoButton(
+                      isLoading: true,
+                    );
+                  },
+                  added: () {
+                    return const PersoButton(
+                      title: 'Review sent',
+                    );
+                  },
+                  error: (error) {
+                    return PersoButton(
+                      title: 'Something went wrong, try again',
+                      onTap: (context) {
+                        context.read<ConfirmReviewCubit>().addReview(
+                              reviewTextEditingController.text,
+                              _trainerId,
+                              tappedRating,
+                            );
+                      },
+                    );
+                  },
+                );
+              },
             ),
           ),
           const PersoDivider(),

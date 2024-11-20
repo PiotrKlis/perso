@@ -8,8 +8,8 @@ class ConfirmReviewCubit extends Cubit<ConfirmReviewState> {
   final _trainersService = getIt.get<FirestoreTrainersService>();
 
   Future<void> addReview(String review, String trainerId, double rating) async {
-    emit(const ConfirmReviewState.loading());
     try {
+      emit(const ConfirmReviewState.loading());
       await _trainersService.addReview(review, trainerId, rating);
       emit(const ConfirmReviewState.added());
     } catch (error) {

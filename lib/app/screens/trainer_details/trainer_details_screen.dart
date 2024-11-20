@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:perso/app/screens/trainer_details/bloc/confirm_review_cubit.dart';
 import 'package:perso/app/screens/trainer_details/bloc/training_request_bloc.dart';
 import 'package:perso/app/screens/trainer_details/event/training_request_event.dart';
+import 'package:perso/app/screens/trainer_details/state/confirm_review_state.dart';
 import 'package:perso/app/screens/trainer_details/state/training_request_state.dart';
 import 'package:perso/app/styleguide/styleguide.dart';
 import 'package:perso/app/utils/validators.dart';
@@ -114,6 +116,7 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
                     child: _ReviewsSection(
                       reviews: widget._trainerEntity.reviews,
                       rating: widget._trainerEntity.rating,
+                      trainerId: widget._trainerEntity.id,
                     ),
                   ),
                 ],
