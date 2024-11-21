@@ -176,7 +176,7 @@ final GoRouter goRouter = GoRouter(
                   },
                   redirect: (context, state) {
                     if (_userSessionModel.isUserLoggedIn) {
-                      switch (_userSessionModel.userType) {
+                      switch (_userSessionModel.profileEntity?.userType) {
                         case UserType.trainer:
                           return '${ScreenNavigationKey.home}/${ScreenNavigationKey.trainerProfile}';
                         case UserType.client:
@@ -261,7 +261,7 @@ final GoRouter goRouter = GoRouter(
               },
               redirect: (context, state) {
                 if (_userSessionModel.isUserLoggedIn) {
-                  switch (_userSessionModel.userType) {
+                  switch (_userSessionModel.profileEntity?.userType) {
                     case UserType.trainer:
                       return ScreenNavigationKey.trainerClientsList;
                     case UserType.client:
@@ -281,7 +281,7 @@ final GoRouter goRouter = GoRouter(
               },
               redirect: (context, state) {
                 if (_userSessionModel.isUserLoggedIn) {
-                  if (_userSessionModel.userType == UserType.trainer) {
+                  if (_userSessionModel.profileEntity?.userType == UserType.trainer) {
                     return ScreenNavigationKey.trainerClientsList;
                   }
                 } else {
@@ -344,7 +344,7 @@ final GoRouter goRouter = GoRouter(
               },
               redirect: (context, state) {
                 if (_userSessionModel.isUserLoggedIn) {
-                  if (_userSessionModel.userType == UserType.client) {
+                  if (_userSessionModel.profileEntity?.userType == UserType.client) {
                     return ScreenNavigationKey.clientTrainings;
                   }
                 } else {

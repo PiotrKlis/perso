@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:perso/core/extensions/string_extensions.dart';
 import 'package:perso/core/models/review_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/utils/firestore_constants.dart';
 
 @injectable
@@ -16,7 +17,7 @@ class TrainerEntityMapper {
       surname: data[UserDocumentFields.surname] as String,
       nickname: data[UserDocumentFields.nickname] as String,
       votesNumber: data[UserDocumentFields.votesNumber] as int,
-      longBio: data[UserDocumentFields.fullBio] as String,
+      longBio: data[UserDocumentFields.longBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: _mapRating(data[UserDocumentFields.rating]),
       address: data[UserDocumentFields.address] as String,
@@ -44,6 +45,7 @@ class TrainerEntityMapper {
       imagePath: data[UserDocumentFields.imagePath] as String,
       latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
           const LatLng(0, 0),
+      userType: UserType.trainer,
     );
   }
 
@@ -54,7 +56,7 @@ class TrainerEntityMapper {
       surname: data[UserDocumentFields.surname] as String,
       nickname: data[UserDocumentFields.nickname] as String,
       votesNumber: data[UserDocumentFields.votesNumber] as int,
-      longBio: data[UserDocumentFields.fullBio] as String,
+      longBio: data[UserDocumentFields.longBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: _mapRating(data[UserDocumentFields.rating]),
       address: data[UserDocumentFields.address] as String,
@@ -82,6 +84,7 @@ class TrainerEntityMapper {
       imagePath: data[UserDocumentFields.imagePath] as String,
       latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
           const LatLng(0, 0),
+      userType: UserType.trainer,
     );
   }
 
@@ -92,7 +95,7 @@ class TrainerEntityMapper {
       surname: data[UserDocumentFields.surname] as String,
       nickname: data[UserDocumentFields.nickname] as String,
       votesNumber: data[UserDocumentFields.votesNumber] as int,
-      longBio: data[UserDocumentFields.fullBio] as String,
+      longBio: data[UserDocumentFields.longBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: _mapRating(data[UserDocumentFields.rating]),
       address: data[UserDocumentFields.address] as String,
@@ -120,6 +123,7 @@ class TrainerEntityMapper {
       imagePath: data[UserDocumentFields.imagePath] as String,
       latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
           const LatLng(0, 0),
+      userType: UserType.trainer,
     );
   }
 
@@ -139,7 +143,7 @@ class TrainerEntityMapper {
       surname: data[UserDocumentFields.surname] as String,
       nickname: data[UserDocumentFields.nickname] as String,
       votesNumber: data[UserDocumentFields.votesNumber] as int,
-      longBio: data[UserDocumentFields.fullBio] as String,
+      longBio: data[UserDocumentFields.longBio] as String,
       shortBio: data[UserDocumentFields.shortBio] as String,
       rating: _mapRating(data[UserDocumentFields.rating]),
       address: data[UserDocumentFields.address] as String,
@@ -167,6 +171,7 @@ class TrainerEntityMapper {
       imagePath: data[UserDocumentFields.imagePath] as String,
       latLng: LatLng.fromJson(data[UserDocumentFields.latLng]) ??
           const LatLng(0, 0),
+      userType: UserType.trainer,
     );
   }
 

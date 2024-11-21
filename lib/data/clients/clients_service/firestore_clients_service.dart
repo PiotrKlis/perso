@@ -17,7 +17,7 @@ class FirestoreClientsService implements ClientsService {
   final _userSessionModel = getIt.get<UserSessionModel>();
   @override
   Future<void> uploadFullClientData(ClientEntity clientEntity) async {
-    final id = _userSessionModel.user?.uid;
+    final id = _userSessionModel.firebaseUser?.uid;
     final serverImagePath = await _uploadImage(clientEntity.imagePath);
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
@@ -36,7 +36,7 @@ class FirestoreClientsService implements ClientsService {
 
   @override
   Future<void> updateData(EditableClientData editableClientData) async {
-    final id = _userSessionModel.user?.uid;
+    final id = _userSessionModel.firebaseUser?.uid;
     final serverImagePath = await _uploadImage(editableClientData.imagePath);
     await FirebaseFirestore.instance
         .collection(CollectionName.users)

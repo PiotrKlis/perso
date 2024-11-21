@@ -7,6 +7,7 @@ import 'package:perso/app/screens/profile_edit/profile_edit_state.dart';
 import 'package:perso/app/utils/logger.dart';
 import 'package:perso/core/dependency_injection/get_it.dart';
 import 'package:perso/core/models/client_entity.dart';
+import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/user_session_model.dart';
 import 'package:perso/core/models/user_type.dart';
@@ -71,7 +72,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
   }
 
   void updateLongBio(String longBio) {
-    _editableTrainerData = _editableTrainerData.copyWith(fullBio: longBio);
+    _editableTrainerData = _editableTrainerData.copyWith(longBio: longBio);
     _tryToSendData();
   }
 
@@ -108,7 +109,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
     if (_editableClientData.isObjectComplete()) {
       try {
         await _handleClientDataUpload();
-        await _handleStateEmit(_userType);
+        await _handleClientStateEmit();
       } catch (error, stackTrace) {
         emit(ProfileEditState.error(error.toString()));
         Logger.error(error, stackTrace);
@@ -120,7 +121,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
     if (_editableTrainerData.isObjectComplete()) {
       try {
         await _handleTrainerDataUpload();
-        await _handleStateEmit(_userType);
+        await _handleTrainerStateEmit();
       } catch (error, stackTrace) {
         emit(ProfileEditState.error(error.toString()));
         Logger.error(error, stackTrace);
@@ -138,7 +139,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
 
   Future<void> _handleClientProfileCreation() async {
     final clientEntity = ClientEntity(
-      id: _userSessionModel.user?.uid ?? '',
+      id: _userSessionModel.firebaseUser?.uid ?? '',
       name: _editableClientData.name!,
       surname: _editableClientData.surname!,
       nickname: _editableClientData.nickname!,
@@ -146,6 +147,7 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
       pendingTrainers: List.empty(),
       activeTrainers: List.empty(),
       inactiveTrainers: List.empty(),
+      userType: UserType.client,
     );
     await _clientsService.uploadFullClientData(clientEntity);
   }
@@ -159,14 +161,14 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
   }
 
   Future<void> _handleTrainerProfileCreation() async {
-    final id = _userSessionModel.user?.uid ?? '';
+    final id = _userSessionModel.firebaseUser?.uid ?? '';
     final trainerEntity = TrainerEntity(
       id: id,
       name: _editableTrainerData.name!,
       surname: _editableTrainerData.surname!,
       nickname: _editableTrainerData.nickname!,
       votesNumber: 0,
-      longBio: _editableTrainerData.fullBio!,
+      longBio: _editableTrainerData.longBio!,
       shortBio: _editableTrainerData.shortBio!,
       languages: _editableTrainerData.languages!,
       rating: 0,
@@ -178,29 +180,59 @@ class ProfileEditCubit extends Cubit<ProfileEditState> {
       inactiveClients: List.empty(),
       imagePath: _editableTrainerData.imagePath!,
       latLng: _editableTrainerData.latLng!,
+      userType: UserType.trainer,
     );
     await _trainersService.uploadFullTrainerData(trainerEntity);
   }
 
-  Future<void> _handleStateEmit(
-    UserType userType,
-  ) async {
+  Future<void> _handleClientStateEmit() async {
     if (_userSessionModel.isProfileCreated) {
       emit(const ProfileEditState.editSuccess());
     } else {
-      await _updateUserSession(userType);
+      final clientEntity = _userSessionModel.profileEntity! as ClientEntity;
+      final updatedClientEntity = clientEntity.copyWith(
+        imagePath: _editableTrainerData.imagePath!,
+        name: _editableTrainerData.name!,
+        surname: _editableTrainerData.surname!,
+        nickname: _editableTrainerData.nickname!,
+      );
+      await _updateUserSession(_userType, updatedClientEntity);
+      emit(const ProfileEditState.profileCreated());
+    }
+  }
+
+  Future<void> _handleTrainerStateEmit() async {
+    if (_userSessionModel.isProfileCreated) {
+      emit(const ProfileEditState.editSuccess());
+    } else {
+      final trainerEntity = _userSessionModel.profileEntity! as TrainerEntity;
+      final updatedTrainerEntity = trainerEntity.copyWith(
+        imagePath: _editableTrainerData.imagePath!,
+        languages: _editableTrainerData.languages!,
+        name: _editableTrainerData.name!,
+        surname: _editableTrainerData.surname!,
+        nickname: _editableTrainerData.nickname!,
+        address: _editableTrainerData.address!,
+        shortBio: _editableTrainerData.shortBio!,
+        longBio: _editableTrainerData.longBio!,
+        categories: _editableTrainerData.categories!,
+        latLng: _editableTrainerData.latLng!,
+      );
+      await _updateUserSession(_userType, updatedTrainerEntity);
       emit(const ProfileEditState.profileCreated());
     }
   }
 
   Future<void> _updateUserSession(
     UserType userType,
+    ProfileEntity profileEntity,
   ) async {
     await _userSessionModel.update(
-      user: _userSessionModel.user!,
+      firebaseUser: _userSessionModel.firebaseUser!,
       isProfileCreated: true,
       userType: userType,
       isEmailVerified: _userSessionModel.isEmailVerified,
+      profileEntity: profileEntity,
     );
   }
 }

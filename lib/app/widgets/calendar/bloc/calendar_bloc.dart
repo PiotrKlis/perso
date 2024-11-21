@@ -22,8 +22,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       (event, emitter) async {
         try {
           final markers = await _exercisesProvider.getMarkersForDates(
-            event.clientId ?? _userSessionModel.user?.uid ?? '',
-            event.trainerId ?? _userSessionModel.user?.uid ?? '',
+            event.clientId ?? _userSessionModel.firebaseUser?.uid ?? '',
+            event.trainerId ?? _userSessionModel.firebaseUser?.uid ?? '',
             event.startDate,
             event.endDate,
           );

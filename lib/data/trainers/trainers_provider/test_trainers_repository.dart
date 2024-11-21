@@ -2,6 +2,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:perso/core/models/trainer_entity.dart';
 import 'package:perso/core/models/trainer_identity.dart';
+import 'package:perso/core/models/user_type.dart';
 import 'package:perso/data/trainers/trainers_provider/trainers_source.dart';
 
 @injectable
@@ -30,6 +31,7 @@ class TestTrainersRepository implements TrainersSource {
       activeClients: [],
       inactiveClients: [],
       latLng: LatLng(0, 0),
+      userType: UserType.trainer,
     ),
     const TrainerEntity(
       id: '2',
@@ -49,6 +51,7 @@ class TestTrainersRepository implements TrainersSource {
       activeClients: [],
       inactiveClients: [],
       latLng: LatLng(0, 0),
+      userType: UserType.trainer,
     ),
     const TrainerEntity(
       id: '3',
@@ -68,6 +71,7 @@ class TestTrainersRepository implements TrainersSource {
       activeClients: [],
       inactiveClients: [],
       latLng: LatLng(0, 0),
+      userType: UserType.trainer,
     ),
   ];
 
@@ -91,6 +95,7 @@ class TestTrainersRepository implements TrainersSource {
       activeClients: [],
       inactiveClients: [],
       latLng: LatLng(0, 0),
+      userType: UserType.trainer,
     );
   }
 

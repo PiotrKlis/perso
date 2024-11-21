@@ -42,86 +42,99 @@ class _TrainerDetailsScreenState extends State<TrainerDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MapCubit>(
-      create: (context) => MapCubit(),
-      child: Scaffold(
-        appBar: PersoAppBar(
-          isTitleCentered: true,
-          title: '@${widget._trainerEntity.nickname}',
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<MapCubit>(
+          create: (context) => MapCubit(),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: Dimens.xmMargin,
-                      left: Dimens.xxlMargin,
-                      right: Dimens.xxlMargin,
+        BlocProvider<ConfirmReviewCubit>(
+          create: (context) => ConfirmReviewCubit(),
+        ),
+      ],
+      child: BlocProvider<MapCubit>(
+        create: (context) => MapCubit(),
+        child: Scaffold(
+          appBar: PersoAppBar(
+            isTitleCentered: true,
+            title: '@${widget._trainerEntity.nickname}',
+          ),
+          body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: Dimens.xmMargin,
+                        left: Dimens.xxlMargin,
+                        right: Dimens.xxlMargin,
+                      ),
+                      child: Row(
+                        children: [Expanded(child: _segmentedButton())],
+                      ),
                     ),
-                    child: Row(
-                      children: [Expanded(child: _segmentedButton())],
+                    Container(
+                      margin: const EdgeInsets.only(top: Dimens.xlMargin),
+                      child: _image(widget._trainerEntity.imagePath),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: Dimens.xlMargin),
-                    child: _image(widget._trainerEntity.imagePath),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: Dimens.mMargin),
-                    child: Text(
-                      '${widget._trainerEntity.name} ${widget._trainerEntity.surname}',
-                      style: ThemeText.mediumTitleBold,
+                    Container(
+                      margin: const EdgeInsets.only(top: Dimens.mMargin),
+                      child: Text(
+                        '${widget._trainerEntity.name} ${widget._trainerEntity.surname}',
+                        style: ThemeText.mediumTitleBold,
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: Dimens.sMargin,
-                      bottom: Dimens.mMargin,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget._trainerEntity.rating.toString(),
-                          style: ThemeText.subHeadingBold,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(
-                            left: Dimens.sMargin,
-                            right: Dimens.sMargin,
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: Dimens.sMargin,
+                        bottom: Dimens.mMargin,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget._trainerEntity.rating.toString(),
+                            style: ThemeText.subHeadingBold,
                           ),
-                          child: const Icon(Icons.star),
-                        ),
-                        Text(
-                          '(${widget._trainerEntity.votesNumber})',
-                          style: ThemeText.subHeadingRegular,
-                        ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                              left: Dimens.sMargin,
+                              right: Dimens.sMargin,
+                            ),
+                            child: const Icon(Icons.star),
+                          ),
+                          Text(
+                            '(${widget._trainerEntity.votesNumber})',
+                            style: ThemeText.subHeadingRegular,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        _requestForTrainingButton(),
+                        _contactButton(),
                       ],
                     ),
-                  ),
-                  Column(
-                    children: [
-                      _requestForTrainingButton(),
-                      _contactButton(),
-                    ],
-                  ),
-                  Visibility(
-                    visible: _segmentSelected.contains(_Segments.about.name),
-                    child: _AboutSection(trainerEntity: widget._trainerEntity),
-                  ),
-                  Visibility(
-                    visible: _segmentSelected.contains(_Segments.reviews.name),
-                    child: _ReviewsSection(
-                      reviews: widget._trainerEntity.reviews,
-                      rating: widget._trainerEntity.rating,
-                      trainerId: widget._trainerEntity.id,
+                    Visibility(
+                      visible: _segmentSelected.contains(_Segments.about.name),
+                      child:
+                          _AboutSection(trainerEntity: widget._trainerEntity),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Visibility(
+                      visible:
+                          _segmentSelected.contains(_Segments.reviews.name),
+                      child: _ReviewsSection(
+                        reviews: widget._trainerEntity.reviews,
+                        rating: widget._trainerEntity.rating,
+                        trainerId: widget._trainerEntity.id,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

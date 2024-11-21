@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:perso/core/models/profile_entity.dart';
+import 'package:perso/core/models/user_type.dart';
 
 part 'client_entity.freezed.dart';
 
@@ -14,5 +15,6 @@ class ClientEntity extends ProfileEntity with _$ClientEntity {
     required List<String> pendingTrainers,
     required List<String> activeTrainers,
     required List<String> inactiveTrainers,
+    required UserType userType,
   }) = _ClientEntity;
 }

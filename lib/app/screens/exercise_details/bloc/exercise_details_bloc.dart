@@ -9,7 +9,7 @@ import 'package:perso/data/exercises/exercises_source/firestore_exercise_provide
 class ExerciseDetailsBloc
     extends Bloc<ExerciseDetailsEvent, ExerciseDetailsState> {
   ExerciseDetailsBloc() : super(const ExerciseDetailsState.initial()) {
-    final trainerId = _userSessionModel.user?.uid ?? '';
+    final trainerId = _userSessionModel.firebaseUser?.uid ?? '';
 
     on<SaveExercise>((event, emitter) async {
       try {

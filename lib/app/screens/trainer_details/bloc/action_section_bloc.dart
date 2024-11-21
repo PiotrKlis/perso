@@ -9,7 +9,7 @@ class ActionSectionBloc extends Bloc<ActionSectionEvent, ActionSectionState> {
 
   ActionSectionBloc() : super(const ActionSectionState.initial()) {
     on<ShouldSectionBeVisible>((event, emitter) async {
-      switch (_userSessionModel.userType) {
+      switch (_userSessionModel.profileEntity?.userType) {
         case UserType.trainer:
           emitter(const ActionSectionState.sectionVisibility(false));
           break;

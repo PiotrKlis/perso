@@ -5,10 +5,11 @@ class CollectionName {
   static String trainers = 'trainers';
   static String users = 'users';
   static String tags = 'tags';
+  static String reviews = 'reviews';
 }
 
 class UserDocumentFields {
-  static const String fullBio = 'fullBio';
+  static const String longBio = 'longBio';
   static const String languages = 'languages';
   static const String address = 'address';
   static const String name = 'name';

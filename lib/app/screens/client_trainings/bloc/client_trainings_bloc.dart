@@ -8,7 +8,7 @@ import 'package:perso/data/trainers/trainers_provider/firestore_trainers_provide
 class ClientTrainingBloc
     extends Bloc<ClientTrainingEvent, ClientTrainingState> {
   ClientTrainingBloc() : super(const ClientTrainingState.initial()) {
-    final clientId = _userSessionModel.user?.uid ?? '';
+    final clientId = _userSessionModel.firebaseUser?.uid ?? '';
     on<LoadTrainings>((event, emitter) async {
       final trainerIdentities = await _trainersProvider.getTrainersForClient(
         clientId,

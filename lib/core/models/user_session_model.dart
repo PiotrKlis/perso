@@ -1,33 +1,38 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
+import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/user_type.dart';
 
 @Singleton(order: -1)
 class UserSessionModel {
-  User? user;
+  User? firebaseUser;
   bool isProfileCreated = false;
-  UserType? userType;
+  ProfileEntity? profileEntity;
   bool isEmailVerified = false;
 
   bool get isUserLoggedIn =>
-      user != null && userType != null && isProfileCreated && isEmailVerified;
+      firebaseUser != null &&
+      profileEntity != null &&
+      isProfileCreated &&
+      isEmailVerified;
 
   Future<void> update({
-    required User user,
+    required User firebaseUser,
     required UserType? userType,
     required bool isProfileCreated,
     required bool isEmailVerified,
+    required ProfileEntity? profileEntity,
   }) async {
-    this.user = user;
-    this.userType = userType;
+    this.firebaseUser = firebaseUser;
     this.isProfileCreated = isProfileCreated;
     this.isEmailVerified = isEmailVerified;
+    this.profileEntity = profileEntity;
   }
 
   void reset() {
-    user = null;
-    userType = null;
+    firebaseUser = null;
     isProfileCreated = false;
     isEmailVerified = false;
+    profileEntity = null;
   }
 }

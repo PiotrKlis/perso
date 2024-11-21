@@ -13,7 +13,7 @@ class EditableTrainerData with _$EditableTrainerData {
     String? nickname,
     String? address,
     String? shortBio,
-    String? fullBio,
+    String? longBio,
     List<String>? categories,
     LatLng? latLng,
   }) = _EditableTrainerData;
@@ -28,7 +28,7 @@ class EditableTrainerData with _$EditableTrainerData {
       nickname != null &&
       address != null &&
       shortBio != null &&
-      fullBio != null &&
+      longBio != null &&
       categories != null &&
       latLng != null;
 }

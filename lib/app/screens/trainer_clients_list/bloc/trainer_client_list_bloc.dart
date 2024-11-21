@@ -18,7 +18,7 @@ class TrainerClientsListBloc
 
     on<LoadTrainerData>((event, emitter) async {
       try {
-        final id = _userSessionModel.user?.uid ?? '';
+        final id = _userSessionModel.firebaseUser?.uid ?? '';
         final trainerIdentities = await _trainersProvider.getTrainersForClient(
           id,
         );
@@ -33,7 +33,7 @@ class TrainerClientsListBloc
     on<LoadClientData>(
       (event, emitter) async {
         try {
-          final trainerId = _userSessionModel.user?.uid ?? '';
+          final trainerId = _userSessionModel.firebaseUser?.uid ?? '';
           final trainerData = _trainersSource.getTrainers(trainerId);
 
           await for (final trainerEntity in trainerData) {

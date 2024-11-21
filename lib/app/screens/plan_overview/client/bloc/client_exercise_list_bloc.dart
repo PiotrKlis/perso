@@ -10,7 +10,7 @@ import 'package:perso/data/exercises/exercises_source/firestore_exercise_provide
 class ClientExerciseListBloc
     extends Bloc<ClientExerciseListEvent, ClientExerciseListState> {
   ClientExerciseListBloc() : super(const ClientExerciseListState.loading()) {
-    final clientId = _userSessionModel.user?.uid ?? '';
+    final clientId = _userSessionModel.firebaseUser?.uid ?? '';
 
     on<GetExercises>(
       (event, emitter) async {

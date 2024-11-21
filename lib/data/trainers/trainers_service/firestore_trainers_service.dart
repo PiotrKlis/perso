@@ -20,12 +20,12 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> updateData(EditableTrainerData trainerData) async {
     try {
       final serverImagePath = await _uploadImage(trainerData.imagePath ?? '');
-      final id = _userSessionModel.user?.uid;
+      final id = _userSessionModel.firebaseUser?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
           .update({
-        UserDocumentFields.fullBio: trainerData.fullBio,
+        UserDocumentFields.longBio: trainerData.longBio,
         UserDocumentFields.languages: trainerData.languages,
         UserDocumentFields.address: trainerData.address,
         UserDocumentFields.name: trainerData.name,
@@ -48,12 +48,12 @@ class FirestoreTrainersService implements TrainersService {
   Future<void> uploadFullTrainerData(TrainerEntity trainerEntity) async {
     try {
       final serverImagePath = await _uploadImage(trainerEntity.imagePath);
-      final id = _userSessionModel.user?.uid;
+      final id = _userSessionModel.firebaseUser?.uid;
       await FirebaseFirestore.instance
           .collection(CollectionName.users)
           .doc(id)
           .set({
-        UserDocumentFields.fullBio: trainerEntity.longBio,
+        UserDocumentFields.longBio: trainerEntity.longBio,
         UserDocumentFields.languages: trainerEntity.languages,
         UserDocumentFields.address: trainerEntity.address,
         UserDocumentFields.name: trainerEntity.name,
@@ -81,7 +81,7 @@ class FirestoreTrainersService implements TrainersService {
   Future<String> _uploadImage(String path) async {
     try {
       if (path.isNotEmpty) {
-        final id = _userSessionModel.user?.uid;
+        final id = _userSessionModel.firebaseUser?.uid;
         final storageReference = FirebaseStorage.instance
             .ref()
             .child('${CollectionName.images}/$id/}');
@@ -106,7 +106,7 @@ class FirestoreTrainersService implements TrainersService {
 
   @override
   Future<void> activateClient(String clientId) async {
-    final trainerId = _userSessionModel.user?.uid;
+    final trainerId = _userSessionModel.firebaseUser?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -128,7 +128,7 @@ class FirestoreTrainersService implements TrainersService {
 
   @override
   Future<void> deactivateClient(String clientId) async {
-    final trainerId = _userSessionModel.user?.uid;
+    final trainerId = _userSessionModel.firebaseUser?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -148,7 +148,7 @@ class FirestoreTrainersService implements TrainersService {
 
   @override
   Future<void> removeClient(String clientId) async {
-    final trainerId = _userSessionModel.user?.uid;
+    final trainerId = _userSessionModel.firebaseUser?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
@@ -167,12 +167,13 @@ class FirestoreTrainersService implements TrainersService {
   }
 
   Future<void> addReview(String review, String trainerId, double rating) async {
-    final userId = _userSessionModel.user!.uid;
+    final userId = _userSessionModel.firebaseUser!.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(trainerId)
-        .collection(userId)
-        .add({
+        .collection(CollectionName.reviews)
+        .doc(userId)
+        .set({
       UserDocumentFields.sentDate: DateTime.now().yearMonthDayFormat,
       UserDocumentFields.review: review,
       UserDocumentFields.rating: rating,

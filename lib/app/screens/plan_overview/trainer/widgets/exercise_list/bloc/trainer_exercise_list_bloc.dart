@@ -11,7 +11,7 @@ import 'package:perso/data/exercises/exercises_source/firestore_exercise_provide
 class TrainerExerciseListBloc
     extends Bloc<TrainerExerciseListEvent, TrainerExerciseListState> {
   TrainerExerciseListBloc() : super(const TrainerExerciseListState.loading()) {
-    final trainerId = _userSessionModel.user?.uid ?? '';
+    final trainerId = _userSessionModel.firebaseUser?.uid ?? '';
 
     on<FetchExercises>(
       (event, emitter) async {

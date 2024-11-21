@@ -13,7 +13,7 @@ class ImageCubit extends Cubit<ImageState> {
   final _userSessionModel = getIt.get<UserSessionModel>();
 
   Future<void> getImageUrl() async {
-    final userId = _userSessionModel.user?.uid ?? '';
+    final userId = _userSessionModel.firebaseUser?.uid ?? '';
     try {
       final imageUrl = await _imageRepository.getImageUrl(userId);
       if (imageUrl.isNotEmpty) {

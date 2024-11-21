@@ -9,7 +9,7 @@ class TrainingRequestService {
   final _userSessionModel = getIt.get<UserSessionModel>();
 
   Future<void> sendTrainingRequest(String trainerId) async {
-    final clientId = _userSessionModel.user?.uid;
+    final clientId = _userSessionModel.firebaseUser?.uid;
     await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(clientId)
@@ -25,7 +25,7 @@ class TrainingRequestService {
   }
 
   Future<bool> checkIfUserHasAlreadySentRequest(String trainerId) async {
-    final clientId = _userSessionModel.user?.uid;
+    final clientId = _userSessionModel.firebaseUser?.uid;
     final document = await FirebaseFirestore.instance
         .collection(CollectionName.users)
         .doc(clientId)

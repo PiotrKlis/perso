@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:perso/core/models/profile_entity.dart';
 import 'package:perso/core/models/review_entity.dart';
+import 'package:perso/core/models/user_type.dart';
 
 part 'trainer_entity.freezed.dart';
 
@@ -25,5 +26,6 @@ class TrainerEntity extends ProfileEntity with _$TrainerEntity {
     required List<String> activeClients,
     required List<String> inactiveClients,
     required LatLng latLng,
+    required UserType userType,
   }) = _TrainerEntity;
 }

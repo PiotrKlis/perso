@@ -13,7 +13,7 @@ class SendExerciseBloc extends Bloc<SendExercisesEvent, SendExercisesState> {
         final sentDate = await _exerciseService.sendToClient(
           clientId: event.clientId,
           date: event.date,
-          trainerId: _userSessionModel.user?.uid ?? '',
+          trainerId: _userSessionModel.firebaseUser?.uid ?? '',
         );
         emitter(SendExercisesState.exerciseSentDate(sentDate));
         //TODO: reload markers
@@ -26,7 +26,7 @@ class SendExerciseBloc extends Bloc<SendExercisesEvent, SendExercisesState> {
         final sentDate = await _exerciseService.getSentDate(
           clientId: event.clientId,
           date: event.date,
-          trainerId: _userSessionModel.user?.uid ?? '',
+          trainerId: _userSessionModel.firebaseUser?.uid ?? '',
         );
         emitter(SendExercisesState.exerciseSentDate(sentDate));
       } catch (error) {
