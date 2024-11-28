@@ -16,7 +16,7 @@ class _ReviewsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reviewTextEditingController = TextEditingController();
-    var tappedRating = 0.0;
+    var tappedRating = _rating;
 
     return ColoredBox(
       color: Colors.white,
@@ -55,7 +55,7 @@ class _ReviewsSection extends StatelessWidget {
                         right: Dimens.xmMargin,
                       ),
                       child: Text(
-                        _rating.toString(),
+                        tappedRating.toString(),
                         style: ThemeText.largerTitleBold,
                       ),
                     ),

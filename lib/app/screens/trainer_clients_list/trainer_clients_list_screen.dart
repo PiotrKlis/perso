@@ -260,7 +260,7 @@ class _Client extends StatelessWidget {
             child: Row(
               children: [
                 //TODO: Add navigation to client profile on image click
-                _Image(imagePath: client.imagePath),
+                // _Image(imagePath: client.imagePath),
                 _Title(
                   name: client.name,
                   surname: client.surname,
